@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>How to use RStudio – Communication Science R Book</title>
+<title>Causal models – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-</style>
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -64,8 +50,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../0_getting-started/2_r-in-action.html" rel="next">
-<link href="../0_getting-started/0_install-r-and-rstudio.html" rel="prev">
+<link href="../2_statistics/2_tests/0_selecting-the-right-test.html" rel="next">
+<link href="../2_statistics/0_general-concepts/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../0_getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../0_getting-started/1_using-rstudio.html">How to use RStudio</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../2_statistics/0_causal_models.html">Causal models</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -159,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../0_getting-started/1_using-rstudio.html" class="sidebar-item-text sidebar-link active">
+  <a href="../0_getting-started/1_using-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">How to use RStudio</span></a>
   </div>
 </li>
@@ -206,7 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/0_causal_models.html" class="sidebar-item-text sidebar-link">
+  <a href="../2_statistics/0_causal_models.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Causal models</span></a>
   </div>
 </li>
@@ -344,17 +330,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#running-code-from-the-r-script" id="toc-running-code-from-the-r-script" class="nav-link active" data-scroll-target="#running-code-from-the-r-script">Running code from the R script</a></li>
-  <li><a href="#using-rstudio-projects" id="toc-using-rstudio-projects" class="nav-link" data-scroll-target="#using-rstudio-projects">Using RStudio projects</a></li>
+  <li><a href="#deriving-hypotheses-from-theory" id="toc-deriving-hypotheses-from-theory" class="nav-link active" data-scroll-target="#deriving-hypotheses-from-theory">Deriving hypotheses from theory</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../0_getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../0_getting-started/1_using-rstudio.html">How to use RStudio</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../2_statistics/0_causal_models.html">Causal models</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">How to use RStudio</h1>
+<h1 class="title">Causal models</h1>
 </div>
 
 
@@ -371,44 +356,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Once you have <a href="../0_getting-started/0_install-r-and-rstudio.html">installed R and RStudio</a>, you can start by launching RStudio. If everything was installed correctly, RStudio will automatically launch R as well.</p>
-<p>The first time you open RStudio, you will likely see three separate windows. The first thing you want to do is <strong>open an R Script (!!)</strong> to work in. To do so, go to the toolbar and select <strong>File -&gt; New File -&gt; R Script</strong>.</p>
-<p>You will now see four windows split evenly over the four corners of your screen:</p>
+<p>In <strong>explanatory research</strong>, we are often concerned with <strong>causal relations</strong>. Why do certain social phenomena occur? What might have been their causes?</p>
+<p>Here are some examples of <strong>communication science theories</strong> about causal relations</p>
 <ul>
-<li>In the <strong>top-left</strong> you have the text editor for the file that you are working in. This will most of the time be an R script or RMarkdown file.</li>
-<li>In the <strong>top-right</strong> you can see the data and values that you are currently working with (environment) or view your history of input.</li>
-<li>In the <strong>bottom-left</strong> you have the console, which is where you can enter and run code, and view the output. If you run code from your R script, it will also be executed in this console.</li>
-<li>In the <strong>bottom-right</strong> you can browse through files on your computer, view help for functions, or view visualizations.</li>
+<li>The <em>two-step flow</em> theory posits that media can influence voting behavior, but rather than a direct causal effect of media exposure, the effect could be mediated by opinion leaders who interpret and pass on the information (<span class="citation" data-cites="lazarsfeld48">Lazarsfeld, Berelson, and Gaudet (<a href="#ref-lazarsfeld48" role="doc-biblioref">1948</a>)</span>).</li>
+<li><em>Agenda setting</em> theory describes how news media influence what topics people think about (<span class="citation" data-cites="mccombs72">Mccombs and Shaw (<a href="#ref-mccombs72" role="doc-biblioref">1972</a>)</span>).</li>
+<li><span class="citation" data-cites="twenge09">(<a href="#ref-twenge09" role="doc-biblioref"><strong>twenge09?</strong></a>)</span> argue that screen time among children and adolescents is associated with lower psychological well-being.</li>
 </ul>
-<p>While you can directly enter code into your console (bottom-left), you should always work with R scripts (top-left). This allows you to keep track of what you are doing and save every step.</p>
-<section id="running-code-from-the-r-script" class="level2">
-<h2 class="anchored" data-anchor-id="running-code-from-the-r-script">Running code from the R script</h2>
-<p>Copy and paste the following example code into your R Script. For now, don’t bother understanding the syntax itself. Just focus on running it.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">5</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">"some text"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">"some more text"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So how do we know whether these theories are correct? The core of the scientific method lies in systematically testing these theories by *<strong>deriving hypotheses</strong>, and using <strong>statistical tests</strong> to confirm or challenge them based on empirical data.</p>
+<section id="deriving-hypotheses-from-theory" class="level2">
+<h2 class="anchored" data-anchor-id="deriving-hypotheses-from-theory">Deriving hypotheses from theory</h2>
+<p>The first step in testing a theory is to derive a <strong>hypothesis</strong> from it. A hypothesis is a <strong>testable statement</strong> that predicts the relationship between two or more variables. for example,</p>
+<p>Let’s consider the theory that increased social media use leads to lower life satisfaction. This theory suggests that the more time individuals spend on social media, the more likely they are to experience negative emotions, such as envy or loneliness, which can ultimately reduce their overall life satisfaction.</p>
+<p>To explore this theory, we could derive the following hypothesis: “Individuals who spend more time on social media platforms will report lower levels of life satisfaction compared to those who spend less time on social media.”</p>
+<p>Once we have this hypothesis, the next step is to statistically test it. This could involve collecting data on the amount of time participants spend on social media and their self-reported life satisfaction levels. By analyzing the data, we can assess whether there is a statistically significant relationship between social media use and life satisfaction. If the results confirm the hypothesis, it would provide evidence in support of the theory; if not, the theory may need further examination or adjustment.</p>
+<p>Deriving and testing such hypotheses allows us to empirically evaluate the validity of communication theories, offering insights into the potential impacts of social media on well-being.</p>
+
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-lazarsfeld48" class="csl-entry" role="listitem">
+Lazarsfeld, P. F., B. Berelson, and H. Gaudet. 1948. <em>The People’s Choice: How the Voter Makes up His Mind in a Presidential Campaign</em>. Columbia University Press. <a href="https://books.google.nl/books?id=S-lnIFR02FIC">https://books.google.nl/books?id=S-lnIFR02FIC</a>.
 </div>
-<p>You can <strong>run</strong> code by selecting the code and clicking on the <strong>Run</strong> button in the toolbar. However, we highly recommend getting used to using the keyboard shortcut, because this will greatly speed up your process. On Windows (and Linux) the shortcut is <strong>Ctrl + Enter</strong>. On Mac it’s <strong>Command + Enter</strong>.</p>
-<p>There are two ways to run code:</p>
-<ul>
-<li>If you select a specific piece of code (so that it is highlighted) you can run this specific selection. For example, select the first three lines (the three mathematical operations) and press Ctrl + Enter. This should then print the results for these three mathematical expressions. Note that you can also select a specific part on a line. Try selecting just the second <code>3</code> on the first line. This should just print the number 3.</li>
-<li>If you haven’t made a selection, but your text cursor is somewhere on a line in your editor, you can press Ctrl + Enter to run the line where the cursor is at. This will also move the cursor to the next line, so you can <em>walk</em> through the code from top to bottom, running each line. Try starting on the first line, and pressing Ctrl + Enter six times, to run each line separately.</li>
-</ul>
-</section>
-<section id="using-rstudio-projects" class="level2">
-<h2 class="anchored" data-anchor-id="using-rstudio-projects">Using RStudio projects</h2>
-<p>It is best to put all your code in an RStudio <em>project</em>. This is essentially a folder on your computer in which you can store the R files and data for a project that you are working on. While you do not necessarily need a project to work with R, they are very convenient, and we strongly recommend using them.</p>
-<p>To create a new project, go to the top-right corner of your RStudio window. Look for the button labeled <strong>Project: (None)</strong>. Click on this button, and select New Project. Follow the instructions to create a new directory with a new project. Name the project “R introduction”.</p>
-<p>Now, open a new R script and immediately save it (select File -&gt; Save in the toolbar, or press ctrl-s). Name the file <strong>my_first_r_script.r</strong>. In the bottom-right corner, under the <strong>Files</strong> tab, you’ll now see the file added to the project. The extension <strong>.r</strong> indicates that the file is an R script.</p>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<div id="ref-mccombs72" class="csl-entry" role="listitem">
+Mccombs, Maxwell, and Donald Shaw. 1972. <span>“The Agenda-Setting Function of Mass Media.”</span> <em>Public Opinion Quarterly</em> 36 (June): 176–87. <a href="https://doi.org/10.1086/267990">https://doi.org/10.1086/267990</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -831,13 +806,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../0_getting-started/0_install-r-and-rstudio.html" class="pagination-link" aria-label="Install R and RStudio">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Install R and RStudio</span>
+      <a href="../2_statistics/0_general-concepts/index.html" class="pagination-link" aria-label="General Concepts">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">General Concepts</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../0_getting-started/2_r-in-action.html" class="pagination-link" aria-label="R in Action (demo)">
-        <span class="nav-page-text">R in Action (demo)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../2_statistics/2_tests/0_selecting-the-right-test.html" class="pagination-link" aria-label="Selecting the right test">
+        <span class="nav-page-text">Selecting the right test</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

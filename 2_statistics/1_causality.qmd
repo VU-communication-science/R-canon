@@ -1,0 +1,83 @@
+---
+title: Causality
+subtitle: Does A cause B?
+---
+
+
+![xkcd: correlation](https://imgs.xkcd.com/comics/correlation.png)
+
+
+# Testing causal relations
+
+In communication science we are often concerned with **causal relations**. 
+Consider the following two examples:
+
+- When news media focus heavily on certain issues, it enhances the public's perception of their importance [@mccombs72].
+- More screen time among children and adolescents is associated with lower psychological well-being [@twenge18].
+
+Research into such causal relations is important, because by understanding causal mechanisms, we can develop strategies to change the outcomes for the better.
+If more screen time is indeed associated with lower psychological well-being, we should advice parents to limit children's screen time.
+
+But before we incurr the wrath of our children by trying to take away their smartphones, we should first make sure that our theory is correct.
+As usual, we can **derive hypotheses** that predict relationships between variables, and then test these hypotheses with **statistical methods**.
+
+However, when testing causal relations, we need to be particularly careful, because **correlation does not imply causation**!
+
+
+## Correlation versus causation
+
+
+### Causation 
+
+Causation implies a cause-and-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). 
+If we were to somehow manipulate the cause (which we could do in an experiment), we would expect to see a corresponding change in the effect.
+
+For instance, if we could somehow make the news media talk more about climate change, we would expect the public to think and talk about it more, too. 
+Basically, this is why PR exists, and why politicians try to get media to talk about the issues they care about.
+
+### Correlation
+
+Correlation, on the other hand, merely indicates an association or relationship between two variables.
+When two variables are correlated, they tend to change together.
+This can be due to a causal relationship in either or both directions, but it could also be due to a third variable that causes both of them to change.
+This is known as a **confounding variable**, and a correlation that results from a confounding variable is called a **spurious correlation**.
+
+A [famous example](http://www.brixtonhealth.com/storksBabies.pdf) is that across European countries the number of storks is quite strongly correlated ($\r = 0.62$) with the number of newborn babies. The confounder in this case is the size of the country: larger countries have more storks and more babies. So the correlation is not evidence for the folk theory that storks deliver babies.
+
+
+In the case of screen time and psychological well-being study, the authors did observe an "association", but were not able to establish which variable causes the other.
+Based on their data, "it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both" [@twenge18, p. 281].
+Indeed, it could be that children who are already unhappy end up spending more time on screens, which would mean that taking away their phone might not help (and might even make things worse).
+Furthermore, possible confounders could be that parents who are more involved in their children's lives might both limit screen time and help develop better psychological well-being.
+
+
+## How to establish causality
+
+So when we observe a correlation between two variables, how can we determine whether there is a causal relationship between them?
+
+### The gold standard: controlled experiments
+
+The gold standard for establishing causation is the **randomized controlled experiment**, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant.
+Since the treatment group and the control group are statistically identical before the treatment is applied, any difference in the outcome can be attributed to the treatment.
+Where possible, this is the best way to establish causation.
+
+However, this is often not possible or feasible in communication science.
+In those cases, where we only have **observational data** (e.g., surveys, interviews, content analysis), we therefore have to rely on **special statistical methods** to control for confounding variables and establish causation.
+
+### The next best thing: controlling for confounders
+
+Using **statistical methods**, we can try to control for confounding variables.
+This is not perfect, because there can always be other confounders, but it does allow us to build evidence to support or refute our theories.
+In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion [@mccombs72].
+And even common knowledge like "smoking causes cancer" relies heavily on evidence from statistical methods that control for confounders.
+This makes statistical modeling of confounding variables an essential part of the communication scientist's toolkit.
+
+
+# Confounders, and how to control for them
+
+We have established that confounders can lead to spurious correlations, and that controlling for them is essential when we want to establish causality.
+Here we will discuss some common types of confounders, and how we can control for them in our statistical models.
+
+
+Use age as an example of a confounder in the relationship between screen time and psychological well-being.
+Also note that if the correlation is explained by age, it doesn't necessarily mean that there is not causal relation. It just means that now we have to consider that there are many other factors that could be related to age and psychological well being. 

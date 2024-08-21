@@ -4,12 +4,20 @@ project:
 website:
   title: "Communication Science R Book"
   navbar:
-    search: true
+    title: "Communication Science R Book"
+    logo: "data/logo.png"
+    background: "primary"
   sidebar:
     style: "docked"
     contents: auto
+  page-footer:
+    left: "VU University, Department of Communication Science"
   back-to-top-navigation: true
   page-navigation: true
+  
+bibliography: references/references.bib
+cls: references/apa7.cls
+
     
 format:
   html:

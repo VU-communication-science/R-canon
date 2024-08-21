@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>How to use RStudio – Communication Science R Book</title>
+<title>Causality – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-</style>
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -64,8 +50,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../0_getting-started/2_r-in-action.html" rel="next">
-<link href="../0_getting-started/0_install-r-and-rstudio.html" rel="prev">
+<link href="../2_statistics/2_tests/0_selecting-the-right-test.html" rel="next">
+<link href="../2_statistics/0_hypotheses.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,6 +89,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -130,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../0_getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../0_getting-started/1_using-rstudio.html">How to use RStudio</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../2_statistics/1_causality.html">Causality</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -159,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../0_getting-started/1_using-rstudio.html" class="sidebar-item-text sidebar-link active">
+  <a href="../0_getting-started/1_using-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">How to use RStudio</span></a>
   </div>
 </li>
@@ -206,8 +221,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/0_causal_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causal models</span></a>
+  <a href="../2_statistics/0_hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypotheses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../2_statistics/1_causality.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Causality</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
@@ -344,17 +365,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#running-code-from-the-r-script" id="toc-running-code-from-the-r-script" class="nav-link active" data-scroll-target="#running-code-from-the-r-script">Running code from the R script</a></li>
-  <li><a href="#using-rstudio-projects" id="toc-using-rstudio-projects" class="nav-link" data-scroll-target="#using-rstudio-projects">Using RStudio projects</a></li>
+  <li><a href="#testing-causal-relations" id="toc-testing-causal-relations" class="nav-link active" data-scroll-target="#testing-causal-relations">Testing causal relations</a>
+  <ul class="collapse">
+  <li><a href="#correlation-versus-causation" id="toc-correlation-versus-causation" class="nav-link" data-scroll-target="#correlation-versus-causation">Correlation versus causation</a>
+  <ul class="collapse">
+  <li><a href="#causation" id="toc-causation" class="nav-link" data-scroll-target="#causation">Causation</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a></li>
+  </ul></li>
+  <li><a href="#how-to-establish-causality" id="toc-how-to-establish-causality" class="nav-link" data-scroll-target="#how-to-establish-causality">How to establish causality</a>
+  <ul class="collapse">
+  <li><a href="#the-gold-standard-controlled-experiments" id="toc-the-gold-standard-controlled-experiments" class="nav-link" data-scroll-target="#the-gold-standard-controlled-experiments">The gold standard: controlled experiments</a></li>
+  <li><a href="#the-next-best-thing-controlling-for-confounders" id="toc-the-next-best-thing-controlling-for-confounders" class="nav-link" data-scroll-target="#the-next-best-thing-controlling-for-confounders">The next best thing: controlling for confounders</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#confounders-and-how-to-control-for-them" id="toc-confounders-and-how-to-control-for-them" class="nav-link" data-scroll-target="#confounders-and-how-to-control-for-them">Confounders, and how to control for them</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../0_getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../0_getting-started/1_using-rstudio.html">How to use RStudio</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../2_statistics/1_causality.html">Causality</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">How to use RStudio</h1>
+<h1 class="title">Causality</h1>
+<p class="subtitle lead">Does A cause B?</p>
 </div>
 
 
@@ -371,44 +405,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Once you have <a href="../0_getting-started/0_install-r-and-rstudio.html">installed R and RStudio</a>, you can start by launching RStudio. If everything was installed correctly, RStudio will automatically launch R as well.</p>
-<p>The first time you open RStudio, you will likely see three separate windows. The first thing you want to do is <strong>open an R Script (!!)</strong> to work in. To do so, go to the toolbar and select <strong>File -&gt; New File -&gt; R Script</strong>.</p>
-<p>You will now see four windows split evenly over the four corners of your screen:</p>
-<ul>
-<li>In the <strong>top-left</strong> you have the text editor for the file that you are working in. This will most of the time be an R script or RMarkdown file.</li>
-<li>In the <strong>top-right</strong> you can see the data and values that you are currently working with (environment) or view your history of input.</li>
-<li>In the <strong>bottom-left</strong> you have the console, which is where you can enter and run code, and view the output. If you run code from your R script, it will also be executed in this console.</li>
-<li>In the <strong>bottom-right</strong> you can browse through files on your computer, view help for functions, or view visualizations.</li>
-</ul>
-<p>While you can directly enter code into your console (bottom-left), you should always work with R scripts (top-left). This allows you to keep track of what you are doing and save every step.</p>
-<section id="running-code-from-the-r-script" class="level2">
-<h2 class="anchored" data-anchor-id="running-code-from-the-r-script">Running code from the R script</h2>
-<p>Copy and paste the following example code into your R Script. For now, don’t bother understanding the syntax itself. Just focus on running it.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">5</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">"some text"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">"some more text"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://imgs.xkcd.com/comics/correlation.png" class="img-fluid figure-img"></p>
+<figcaption>xkcd: correlation</figcaption>
+</figure>
 </div>
-<p>You can <strong>run</strong> code by selecting the code and clicking on the <strong>Run</strong> button in the toolbar. However, we highly recommend getting used to using the keyboard shortcut, because this will greatly speed up your process. On Windows (and Linux) the shortcut is <strong>Ctrl + Enter</strong>. On Mac it’s <strong>Command + Enter</strong>.</p>
-<p>There are two ways to run code:</p>
+<section id="testing-causal-relations" class="level1">
+<h1>Testing causal relations</h1>
+<p>In communication science we are often concerned with <strong>causal relations</strong>. Consider the following two examples:</p>
 <ul>
-<li>If you select a specific piece of code (so that it is highlighted) you can run this specific selection. For example, select the first three lines (the three mathematical operations) and press Ctrl + Enter. This should then print the results for these three mathematical expressions. Note that you can also select a specific part on a line. Try selecting just the second <code>3</code> on the first line. This should just print the number 3.</li>
-<li>If you haven’t made a selection, but your text cursor is somewhere on a line in your editor, you can press Ctrl + Enter to run the line where the cursor is at. This will also move the cursor to the next line, so you can <em>walk</em> through the code from top to bottom, running each line. Try starting on the first line, and pressing Ctrl + Enter six times, to run each line separately.</li>
+<li>When news media focus heavily on certain issues, it enhances the public’s perception of their importance <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>.</li>
+<li>More screen time among children and adolescents is associated with lower psychological well-being <span class="citation" data-cites="twenge18">(<a href="#ref-twenge18" role="doc-biblioref">Twenge and Campbell 2018</a>)</span>.</li>
 </ul>
+<p>Research into such causal relations is important, because by understanding causal mechanisms, we can develop strategies to change the outcomes for the better. If more screen time is indeed associated with lower psychological well-being, we should advice parents to limit children’s screen time.</p>
+<p>But before we incurr the wrath of our children by trying to take away their smartphones, we should first make sure that our theory is correct. As usual, we can <strong>derive hypotheses</strong> that predict relationships between variables, and then test these hypotheses with <strong>statistical methods</strong>.</p>
+<p>However, when testing causal relations, we need to be particularly careful, because <strong>correlation does not imply causation</strong>!</p>
+<section id="correlation-versus-causation" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-versus-causation">Correlation versus causation</h2>
+<section id="causation" class="level3">
+<h3 class="anchored" data-anchor-id="causation">Causation</h3>
+<p>Causation implies a cause-and-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). If we were to somehow manipulate the cause (which we could do in an experiment), we would expect to see a corresponding change in the effect.</p>
+<p>For instance, if we could somehow make the news media talk more about climate change, we would expect the public to think and talk about it more, too. Basically, this is why PR exists, and why politicians try to get media to talk about the issues they care about.</p>
 </section>
-<section id="using-rstudio-projects" class="level2">
-<h2 class="anchored" data-anchor-id="using-rstudio-projects">Using RStudio projects</h2>
-<p>It is best to put all your code in an RStudio <em>project</em>. This is essentially a folder on your computer in which you can store the R files and data for a project that you are working on. While you do not necessarily need a project to work with R, they are very convenient, and we strongly recommend using them.</p>
-<p>To create a new project, go to the top-right corner of your RStudio window. Look for the button labeled <strong>Project: (None)</strong>. Click on this button, and select New Project. Follow the instructions to create a new directory with a new project. Name the project “R introduction”.</p>
-<p>Now, open a new R script and immediately save it (select File -&gt; Save in the toolbar, or press ctrl-s). Name the file <strong>my_first_r_script.r</strong>. In the bottom-right corner, under the <strong>Files</strong> tab, you’ll now see the file added to the project. The extension <strong>.r</strong> indicates that the file is an R script.</p>
+<section id="correlation" class="level3">
+<h3 class="anchored" data-anchor-id="correlation">Correlation</h3>
+<p>Correlation, on the other hand, merely indicates an association or relationship between two variables. When two variables are correlated, they tend to change together. This can be due to a causal relationship in either or both directions, but it could also be due to a third variable that causes both of them to change. This is known as a <strong>confounding variable</strong>, and a correlation that results from a confounding variable is called a <strong>spurious correlation</strong>.</p>
+<p>A <a href="http://www.brixtonhealth.com/storksBabies.pdf">famous example</a> is that across European countries the number of storks is quite strongly correlated (<span class="math inline">\(\r = 0.62\)</span>) with the number of newborn babies. The confounder in this case is the size of the country: larger countries have more storks and more babies. So the correlation is not evidence for the folk theory that storks deliver babies.</p>
+<p>In the case of screen time and psychological well-being study, the authors did observe an “association”, but were not able to establish which variable causes the other. Based on their data, “it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both” <span class="citation" data-cites="twenge18">(<a href="#ref-twenge18" role="doc-biblioref">Twenge and Campbell 2018, 281</a>)</span>. Indeed, it could be that children who are already unhappy end up spending more time on screens, which would mean that taking away their phone might not help (and might even make things worse). Furthermore, possible confounders could be that parents who are more involved in their children’s lives might both limit screen time and help develop better psychological well-being.</p>
+</section>
+</section>
+<section id="how-to-establish-causality" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-establish-causality">How to establish causality</h2>
+<p>So when we observe a correlation between two variables, how can we determine whether there is a causal relationship between them?</p>
+<section id="the-gold-standard-controlled-experiments" class="level3">
+<h3 class="anchored" data-anchor-id="the-gold-standard-controlled-experiments">The gold standard: controlled experiments</h3>
+<p>The gold standard for establishing causation is the <strong>randomized controlled experiment</strong>, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant. Since the treatment group and the control group are statistically identical before the treatment is applied, any difference in the outcome can be attributed to the treatment. Where possible, this is the best way to establish causation.</p>
+<p>However, this is often not possible or feasible in communication science. In those cases, where we only have <strong>observational data</strong> (e.g., surveys, interviews, content analysis), we therefore have to rely on <strong>special statistical methods</strong> to control for confounding variables and establish causation.</p>
+</section>
+<section id="the-next-best-thing-controlling-for-confounders" class="level3">
+<h3 class="anchored" data-anchor-id="the-next-best-thing-controlling-for-confounders">The next best thing: controlling for confounders</h3>
+<p>Using <strong>statistical methods</strong>, we can try to control for confounding variables. This is not perfect, because there can always be other confounders, but it does allow us to build evidence to support or refute our theories. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>. And even common knowledge like “smoking causes cancer” relies heavily on evidence from statistical methods that control for confounders. This makes statistical modeling of confounding variables an essential part of the communication scientist’s toolkit.</p>
+</section>
+</section>
+</section>
+<section id="confounders-and-how-to-control-for-them" class="level1">
+<h1>Confounders, and how to control for them</h1>
+<p>A <strong>confounding variable</strong> is a variable that influences both the dependent and independent variable, leading to a spurious association between them.</p>
+
 
 
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-mccombs72" class="csl-entry" role="listitem">
+Mccombs, Maxwell, and Donald Shaw. 1972. <span>“The Agenda-Setting Function of Mass Media.”</span> <em>Public Opinion Quarterly</em> 36 (June): 176–87. <a href="https://doi.org/10.1086/267990">https://doi.org/10.1086/267990</a>.
+</div>
+<div id="ref-twenge18" class="csl-entry" role="listitem">
+Twenge, Jean M., and W. Keith Campbell. 2018. <span>“Associations Between Screen Time and Lower Psychological Well-Being Among Children and Adolescents: Evidence from a Population-Based Study.”</span> <em>Preventive Medicine Reports</em> 12: 271–83. https://doi.org/<a href="https://doi.org/10.1016/j.pmedr.2018.10.003">https://doi.org/10.1016/j.pmedr.2018.10.003</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -831,13 +887,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../0_getting-started/0_install-r-and-rstudio.html" class="pagination-link" aria-label="Install R and RStudio">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Install R and RStudio</span>
+      <a href="../2_statistics/0_hypotheses.html" class="pagination-link" aria-label="Hypotheses">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Hypotheses</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../0_getting-started/2_r-in-action.html" class="pagination-link" aria-label="R in Action (demo)">
-        <span class="nav-page-text">R in Action (demo)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../2_statistics/2_tests/0_selecting-the-right-test.html" class="pagination-link" aria-label="Selecting the right test">
+        <span class="nav-page-text">Selecting the right test</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

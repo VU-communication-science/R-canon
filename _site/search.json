@@ -281,7 +281,7 @@
     "href": "0_getting-started/index.html",
     "title": "Getting Started",
     "section": "",
-    "text": "Back to top",
+    "text": "In the VU Communication Science track, you’ll be using the R statistical software as a key tool for learning quantitative methods and data analysis techniques. R is a powerful, open-source programming language that is widely used in academia and industry for statistical analysis, visualization, text analysis, and more.\nThrough our courses, you’ll get hands-on experience with R, allowing you to analyze real-world data, perform statistical tests, create insightful visualizations, and develop reproducible research workflows. These skills will be invaluable as you move forward in your studies and future career, where data-driven decision-making plays a crucial role.\nR is also open-source, and therefore free to use for both academic and commercial purposes. This means you can continue to use R beyond your studies without any licensing costs, giving you the flexibility to apply your skills in various professional settings. The open-source nature of R also fosters a vibrant community of users and contributors who regularly share packages, tutorials, and resources. This community support makes it easier to find help, learn new techniques, and stay updated with the latest developments in data science and statistical analysis.\nIn this Getting started section, we’ll walk you through your first steps. We will cover how to install R, how to install and use the RStudio software for working with R, and the basics of the R syntax.\n\n\n\n Back to top",
     "crumbs": [
       "Getting Started"
     ]
@@ -622,7 +622,7 @@
     "href": "1_data-management/0_tidyverse/index.html",
     "title": "The Tidyverse Toolkit",
     "section": "",
-    "text": "The tidyverse versus base R\n\n\n\n\n\nMany of the things that the tidyverse allows you to do are also possible in base R (i.e. the basic installation of R). Base R also provides functions for importing, managing and visualizing data. So why do we need the tidyverse?\nThe tidyverse is an opinionated framework, which means that it doesn’t just enable you to do things, but also suggests how you should do things. The authors have thought long and hard about how to make data management easy, effective and intuitive (they have even written papers about it). This not only makes the tidyverse much easier and intuitive to learn, but also makes sure everyone writes their code in the same way, which improves transparency and shareability.\nThis is different from base R, which is designed to be a highly flexible programming language, that allows you to do almost anything. Accordingly, it is still worthwhile to learn base R at some point if you want to specialize more in computational research methods. But for our Communication Science program, and for many data science applications in general, you can do all your data management in the tidyverse.\nThe tidyverse is collection of R packages that makes it much easier to import, manage and visualize data. To use the tidyverse, you only need to open the tidyverse package, and it will automatically open all of the tidyverse R packages.\nLike any normal package, you need to first install it once:\ninstall.packages('tidyverse')\nThen in every script that you use the package, you open it with library:\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
+    "text": "The tidyverse versus base R\n\n\n\n\n\nMany of the things that the tidyverse allows you to do are also possible in base R (i.e. the basic installation of R). Base R also provides functions for importing, managing and visualizing data. So why do we need the tidyverse?\nThe tidyverse is an opinionated framework, which means that it doesn’t just enable you to do things, but also suggests how you should do things. The authors have thought long and hard about how to make data management easy, effective and intuitive (they have even written papers about it). This not only makes the tidyverse much easier and intuitive to learn, but also makes sure everyone writes their code in the same way, which improves transparency and shareability.\nThis is different from base R, which is designed to be a highly flexible programming language, that allows you to do almost anything. Accordingly, it is still worthwhile to learn base R at some point if you want to specialize more in computational research methods. But for our Communication Science program, and for many data science applications in general, you can do all your data management in the tidyverse.\nThe tidyverse is collection of R packages that makes it much easier to import, manage and visualize data. To use the tidyverse, you only need to open the tidyverse package, and it will automatically open all of the tidyverse R packages.\nLike any normal package, you need to first install it once:\ninstall.packages('tidyverse')\nThen in every script that you use the package, you open it with library:\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
     "crumbs": [
       "Data management",
       "The Tidyverse Toolkit"
@@ -789,6 +789,204 @@
     "text": "Back to top",
     "crumbs": [
       "Statistics"
+    ]
+  },
+  {
+    "objectID": "2_statistics/0_causal_models.html",
+    "href": "2_statistics/0_causal_models.html",
+    "title": "Causal models",
+    "section": "",
+    "text": "In explanatory research, we are often concerned with causal relations. Why do certain social phenomena occur? What might have been their causes?\nHere are some examples of communication science theories about causal relations\nSo how do we know whether these theories are correct? The core of the scientific method lies in systematically testing these theories by *deriving hypotheses, and using statistical tests to confirm or challenge them based on empirical data.",
+    "crumbs": [
+      "Statistics",
+      "Causal models"
+    ]
+  },
+  {
+    "objectID": "2_statistics/0_causal_models.html#deriving-hypotheses-from-theory",
+    "href": "2_statistics/0_causal_models.html#deriving-hypotheses-from-theory",
+    "title": "Causal models",
+    "section": "Deriving hypotheses from theory",
+    "text": "Deriving hypotheses from theory\nThe first step in testing a theory is to derive a hypothesis from it. A hypothesis is a testable statement that predicts the relationship between two or more variables. for example,\nLet’s consider the theory that increased social media use leads to lower life satisfaction. This theory suggests that the more time individuals spend on social media, the more likely they are to experience negative emotions, such as envy or loneliness, which can ultimately reduce their overall life satisfaction.\nTo explore this theory, we could derive the following hypothesis: “Individuals who spend more time on social media platforms will report lower levels of life satisfaction compared to those who spend less time on social media.”\nOnce we have this hypothesis, the next step is to statistically test it. This could involve collecting data on the amount of time participants spend on social media and their self-reported life satisfaction levels. By analyzing the data, we can assess whether there is a statistically significant relationship between social media use and life satisfaction. If the results confirm the hypothesis, it would provide evidence in support of the theory; if not, the theory may need further examination or adjustment.\nDeriving and testing such hypotheses allows us to empirically evaluate the validity of communication theories, offering insights into the potential impacts of social media on well-being.",
+    "crumbs": [
+      "Statistics",
+      "Causal models"
+    ]
+  },
+  {
+    "objectID": "2_statistics/0_deriving_hypotheses.html",
+    "href": "2_statistics/0_deriving_hypotheses.html",
+    "title": "Deriving hypotheses",
+    "section": "",
+    "text": "In order to use statistical methods to test theories, we first need to derive hypotheses from them. A hypothesis is a testable statement, that when proven true or false, provides evidence for or against the theory.\nFor example, consider the theory that playing violent video games leads to increased aggression in children. There is much disagreement about whether this theory is correct (Griffiths 1999), so it’s important to test it empirically. In order to do so, we need to derive hypotheses that we can conduct to rigorous statistical tests. Some examples of hypotheses are:\n\nThere is a relation “between arcade game use and teachers’ ratings of impulsiveness and aggresiveness”. (Lin and Lepper 1987, 81)\nPlaying violent video games leads to higher levels of heart rate and blood pressure compared to playing non-violent video games. (Lynch 1994)\nThere will be a “linear increase in aggressive affect after playing nonaggressive, moderately aggresive, and highly aggressive games”. (Scott 1995, 125)\n\nNotice that these hypotheses are more specific than the theory they are derived from. There are multiple ways to define and measure “playing violent video games” and “increased aggression”, and it could also be that the relation only holds for certain groups of people, or only for short periods of time. Hypotheses help us make (different aspects of) the theory more explicit, so that we can conduct empirical tests.\n\n\nIf an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory. For example, if we find that children who play violent video games are more aggressive, it does not prove that the games caused the aggression. Perhaps people who are already aggressive are more likely to play violent video games, or there is a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
+    "crumbs": [
+      "Statistics",
+      "Deriving hypotheses"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causal_models.html",
+    "href": "2_statistics/1_causal_models.html",
+    "title": "Causal relations",
+    "section": "",
+    "text": "In communication science we are often concerned with causal relations. Consider the following two examples:\n\nWhen news media focus heavily on certain issues, it enhances the public’s perception of their importance (Mccombs and Shaw 1972).\nMore screen time among children and adolescents is associated with lower psychological well-being (Twenge and Campbell 2018).\n\nResearch into such causal relations is important, because by understanding causal mechanisms, we can develop strategies to change the outcomes for the better. If more screen time is indeed associated with lower psychological well-being, we should advice parents to limit children’s screen time.\nBut before we incurr the wrath of our children by trying to take away their smartphones, we should first make sure that our theory is correct. As usual, we can derive hypotheses that predict relationships between variables, and then test these hypotheses with statistical methods.\nHowever, when testing causal relations, we need to be particularly careful, because correlation does not imply causation!\n\n\nCausation implies a cause-and-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). If we were to somehow manipulate the cause, we would expect to see a corresponding change in the effect.\nFor instance, if we could somehow make the news media talk more about climate change, we would expect the public to think and talk about it more, too. Basically, this is why PR exists, and why politicians try to get media to talk about the issues they care about.\nCorrelation, on the other hand, indicates an association or relationship between two variables without establishing a direct cause-and-effect link. Perhaps there is a causal effect, but we don’t know which variable is the cause and which is the effect. But it could also be that there is a third variable that causes both of them to change. This is known as a confounding variable.\nIn the case of screen time and psychological well-being study, the authors did observe an “association”, but were not able to establish which variable causes the other. Based on their data, “it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both” (Twenge and Campbell 2018, 281). Indeed, it could be that children who are already unhappy end up spending more time on screens, which would mean that taking away their phone might not help (and might even make things worse). Furthermore, possible confounders could be that parents who are more involved in their children’s lives might both limit screen time and help develop better psychological well-being.\n\n\n\nSo when we observe a correlation between two variables, how can we determine whether there is a causal relationship between them? The gold standard for establishing causation is the controlled experiment, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant.\nSadly, it’s often not possible to conduct a controlled experiment in communication science.\nWhen it is not possible to conduct a controlled experiment, there is still hope. Using statistical methods, we can try to control for confounding variables, and establish whether the relationship between the variables is consistent with a causal model. This does not immediately prove causation, because there can always be other confounders, but it can support our confidence in the theory. In fact, many important causal relations in communication science have only been ‘supported’ this way, such as the relationship between media coverage and public opinion (Mccombs and Shaw 1972). And even common knowledge like “smoking causes cancer” relies heavily on evidence from statistical methods that control for confounders.\nSome researchers argue that causation should not be treated as a binary concept, but rather a matter of degree (pearl09?).\nk\nSo how can we test causal relations in communication science? The answer is that it’s very difficult to establish causation with certainty.",
+    "crumbs": [
+      "Statistics",
+      "Causal relations"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causal_models.html#correlation-versus-causation",
+    "href": "2_statistics/1_causal_models.html#correlation-versus-causation",
+    "title": "Causal relations",
+    "section": "",
+    "text": "Causation implies a cause-and-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). If we were to somehow manipulate the cause, we would expect to see a corresponding change in the effect.\nFor instance, if we could somehow make the news media talk more about climate change, we would expect the public to think and talk about it more, too. Basically, this is why PR exists, and why politicians try to get media to talk about the issues they care about.\nCorrelation, on the other hand, indicates an association or relationship between two variables without establishing a direct cause-and-effect link. Perhaps there is a causal effect, but we don’t know which variable is the cause and which is the effect. But it could also be that there is a third variable that causes both of them to change. This is known as a confounding variable.\nIn the case of screen time and psychological well-being study, the authors did observe an “association”, but were not able to establish which variable causes the other. Based on their data, “it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both” (Twenge and Campbell 2018, 281). Indeed, it could be that children who are already unhappy end up spending more time on screens, which would mean that taking away their phone might not help (and might even make things worse). Furthermore, possible confounders could be that parents who are more involved in their children’s lives might both limit screen time and help develop better psychological well-being.",
+    "crumbs": [
+      "Statistics",
+      "Causal relations"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causal_models.html#deriving-hypotheses-from-theory",
+    "href": "2_statistics/1_causal_models.html#deriving-hypotheses-from-theory",
+    "title": "Testing causal relations",
+    "section": "Deriving hypotheses from theory",
+    "text": "Deriving hypotheses from theory\nThe first step in testing a theory is to derive a hypothesis from it. A hypothesis is a testable statement that predicts the relationship between two or more variables. for example,\nLet’s consider the theory that increased social media use leads to lower life satisfaction. This theory suggests that the more time individuals spend on social media, the more likely they are to experience negative emotions, such as envy or loneliness, which can ultimately reduce their overall life satisfaction.\nTo explore this theory, we could derive the following hypothesis: “Individuals who spend more time on social media platforms will report lower levels of life satisfaction compared to those who spend less time on social media.”\nOnce we have this hypothesis, the next step is to statistically test it. This could involve collecting data on the amount of time participants spend on social media and their self-reported life satisfaction levels. By analyzing the data, we can assess whether there is a statistically significant relationship between social media use and life satisfaction. If the results confirm the hypothesis, it would provide evidence in support of the theory; if not, the theory may need further examination or adjustment.\nDeriving and testing such hypotheses allows us to empirically evaluate the validity of communication theories, offering insights into the potential impacts of social media on well-being.",
+    "crumbs": [
+      "Statistics",
+      "Testing causal relations"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causal_models.html#correlation-versus-causation-1",
+    "href": "2_statistics/1_causal_models.html#correlation-versus-causation-1",
+    "title": "Testing causal relations",
+    "section": "Correlation versus causation",
+    "text": "Correlation versus causation\nWhen examining the relationship between variables, it is essential to distinguish between correlation and causation.",
+    "crumbs": [
+      "Statistics",
+      "Testing causal relations"
+    ]
+  },
+  {
+    "objectID": "2_statistics/0_deriving_hypotheses.html#evidence-proof",
+    "href": "2_statistics/0_deriving_hypotheses.html#evidence-proof",
+    "title": "Deriving hypotheses",
+    "section": "Evidence != proof",
+    "text": "Evidence != proof\nIf an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory. For example, if we find that children who play violent video games are more aggressive, it does not prove that the games caused the aggression. Perhaps people who are already aggressive are more likely to play violent video games, or there is a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
+    "crumbs": [
+      "Statistics",
+      "Deriving hypotheses"
+    ]
+  },
+  {
+    "objectID": "2_statistics/0_deriving_hypotheses.html#evidence-neq-proof",
+    "href": "2_statistics/0_deriving_hypotheses.html#evidence-neq-proof",
+    "title": "Deriving hypotheses",
+    "section": "",
+    "text": "If an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory. For example, if we find that children who play violent video games are more aggressive, it does not prove that the games caused the aggression. Perhaps people who are already aggressive are more likely to play violent video games, or there is a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
+    "crumbs": [
+      "Statistics",
+      "Deriving hypotheses"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causal_models.html#testing",
+    "href": "2_statistics/1_causal_models.html#testing",
+    "title": "Communication Science R Book",
+    "section": "",
+    "text": "In communication science we are often concerned with causal relations. Consider the following two examples:\n\nWhen news media focus heavily on certain issues, it enhances the public’s perception of their importance (Mccombs and Shaw 1972).\nMore screen time among children and adolescents is associated with lower psychological well-being (Twenge and Campbell 2018).\n\nResearch into such causal relations is important, because by understanding causal mechanisms, we can develop strategies to change the outcomes for the better. If more screen time is indeed associated with lower psychological well-being, we should advice parents to limit children’s screen time.\nBut before we incurr the wrath of our children by trying to take away their smartphones, we should first make sure that our theory is correct. As usual, we can derive hypotheses that predict relationships between variables, and then test these hypotheses with statistical methods.\nHowever, when testing causal relations, we need to be particularly careful, because correlation does not imply causation!",
+    "crumbs": [
+      "Statistics",
+      "Testing"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causal_models.html#testing-causal-relations",
+    "href": "2_statistics/1_causal_models.html#testing-causal-relations",
+    "title": "Testing",
+    "section": "",
+    "text": "So when we observe a correlation between two variables, how can we determine whether there is a causal relationship between them? The gold standard for establishing causation is the controlled experiment, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant.\nSadly, it’s often not possible to conduct a controlled experiment in communication science.\nWhen it is not possible to conduct a controlled experiment, there is still hope. Using statistical methods, we can try to control for confounding variables, and establish whether the relationship between the variables is consistent with a causal model. This does not immediately prove causation, because there can always be other confounders, but it can support our confidence in the theory. In fact, many important causal relations in communication science have only been ‘supported’ this way, such as the relationship between media coverage and public opinion (Mccombs and Shaw 1972). And even common knowledge like “smoking causes cancer” relies heavily on evidence from statistical methods that control for confounders.\nSome researchers argue that causation should not be treated as a binary concept, but rather a matter of degree (pearl09?).\nk\nSo how can we test causal relations in communication science? The answer is that it’s very difficult to establish causation with certainty.",
+    "crumbs": [
+      "Statistics",
+      "Testing"
+    ]
+  },
+  {
+    "objectID": "2_statistics/0_hypotheses.html",
+    "href": "2_statistics/0_hypotheses.html",
+    "title": "Hypotheses",
+    "section": "",
+    "text": "In order to use statistical methods to test theories, we first need to derive hypotheses from them. A hypothesis is a testable statement, that when proven true or false, provides evidence for or against the theory.\nFor example, consider the theory that playing violent video games leads to increased aggression in children. There is much disagreement about whether this theory is correct (Griffiths 1999), so it’s important to test it empirically. In order to do so, we need to derive hypotheses that we can conduct to rigorous statistical tests. Some examples of hypotheses are:\n\nThere is a relation “between arcade game use and teachers’ ratings of impulsiveness and aggresiveness”. (Lin and Lepper 1987, 81)\nPlaying violent video games leads to higher levels of heart rate and blood pressure compared to playing non-violent video games. (Lynch 1994)\nThere will be a “linear increase in aggressive affect after playing nonaggressive, moderately aggresive, and highly aggressive games”. (Scott 1995, 125)\n\nNotice that these hypotheses are more specific than the theory they are derived from. There are multiple ways to define and measure “playing violent video games” and “increased aggression”, and it could also be that the relation only holds for certain groups of people, or only for short periods of time. Hypotheses help us make (different aspects of) the theory more explicit, so that we can conduct empirical tests.\n\n\nIf an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory. For example, if we find that children who play violent video games are more aggressive, it does not prove that the games caused the aggression. Perhaps people who are already aggressive are more likely to play violent video games, or there is a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
+    "crumbs": [
+      "Statistics",
+      "Hypotheses"
+    ]
+  },
+  {
+    "objectID": "2_statistics/0_hypotheses.html#evidence-neq-proof",
+    "href": "2_statistics/0_hypotheses.html#evidence-neq-proof",
+    "title": "Hypotheses",
+    "section": "",
+    "text": "If an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory. For example, if we find that children who play violent video games are more aggressive, it does not prove that the games caused the aggression. Perhaps people who are already aggressive are more likely to play violent video games, or there is a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
+    "crumbs": [
+      "Statistics",
+      "Hypotheses"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causal_models.html#testing-causal-relations-1",
+    "href": "2_statistics/1_causal_models.html#testing-causal-relations-1",
+    "title": "Causal relations",
+    "section": "",
+    "text": "So when we observe a correlation between two variables, how can we determine whether there is a causal relationship between them? The gold standard for establishing causation is the controlled experiment, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant.\nSadly, it’s often not possible to conduct a controlled experiment in communication science.\nWhen it is not possible to conduct a controlled experiment, there is still hope. Using statistical methods, we can try to control for confounding variables, and establish whether the relationship between the variables is consistent with a causal model. This does not immediately prove causation, because there can always be other confounders, but it can support our confidence in the theory. In fact, many important causal relations in communication science have only been ‘supported’ this way, such as the relationship between media coverage and public opinion (Mccombs and Shaw 1972). And even common knowledge like “smoking causes cancer” relies heavily on evidence from statistical methods that control for confounders.\nSome researchers argue that causation should not be treated as a binary concept, but rather a matter of degree (pearl09?).\nk\nSo how can we test causal relations in communication science? The answer is that it’s very difficult to establish causation with certainty.",
+    "crumbs": [
+      "Statistics",
+      "Causal relations"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causality.html",
+    "href": "2_statistics/1_causality.html",
+    "title": "Causality",
+    "section": "",
+    "text": "xkcd: correlation",
+    "crumbs": [
+      "Statistics",
+      "Causality"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causality.html#correlation-versus-causation",
+    "href": "2_statistics/1_causality.html#correlation-versus-causation",
+    "title": "Causality",
+    "section": "Correlation versus causation",
+    "text": "Correlation versus causation\n\nCausation\nCausation implies a cause-and-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). If we were to somehow manipulate the cause (which we could do in an experiment), we would expect to see a corresponding change in the effect.\nFor instance, if we could somehow make the news media talk more about climate change, we would expect the public to think and talk about it more, too. Basically, this is why PR exists, and why politicians try to get media to talk about the issues they care about.\n\n\nCorrelation\nCorrelation, on the other hand, merely indicates an association or relationship between two variables. When two variables are correlated, they tend to change together. This can be due to a causal relationship in either or both directions, but it could also be due to a third variable that causes both of them to change. This is known as a confounding variable, and a correlation that results from a confounding variable is called a spurious correlation.\nA famous example is that across European countries the number of storks is quite strongly correlated (\\(\\r = 0.62\\)) with the number of newborn babies. The confounder in this case is the size of the country: larger countries have more storks and more babies. So the correlation is not evidence for the folk theory that storks deliver babies.\nIn the case of screen time and psychological well-being study, the authors did observe an “association”, but were not able to establish which variable causes the other. Based on their data, “it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both” (Twenge and Campbell 2018, 281). Indeed, it could be that children who are already unhappy end up spending more time on screens, which would mean that taking away their phone might not help (and might even make things worse). Furthermore, possible confounders could be that parents who are more involved in their children’s lives might both limit screen time and help develop better psychological well-being.",
+    "crumbs": [
+      "Statistics",
+      "Causality"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causality.html#testing-causal-relations-1",
+    "href": "2_statistics/1_causality.html#testing-causal-relations-1",
+    "title": "Causality",
+    "section": "",
+    "text": "So when we observe a correlation between two variables, how can we determine whether there is a causal relationship between them? The gold standard for establishing causation is the controlled experiment, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant.\nSadly, it’s often not possible to conduct a controlled experiment in communication science.\nWhen it is not possible to conduct a controlled experiment, there is still hope. Using statistical methods, we can try to control for confounding variables, and establish whether the relationship between the variables is consistent with a causal model. This does not immediately prove causation, because there can always be other confounders, but it can support our confidence in the theory. In fact, many important causal relations in communication science have only been ‘supported’ this way, such as the relationship between media coverage and public opinion (Mccombs and Shaw 1972). And even common knowledge like “smoking causes cancer” relies heavily on evidence from statistical methods that control for confounders.\nSome researchers argue that causation should not be treated as a binary concept, but rather a matter of degree (pearl09?).\nk\nSo how can we test causal relations in communication science? The answer is that it’s very difficult to establish causation with certainty.",
+    "crumbs": [
+      "Statistics",
+      "Causality"
+    ]
+  },
+  {
+    "objectID": "2_statistics/1_causality.html#how-to-establish-causality",
+    "href": "2_statistics/1_causality.html#how-to-establish-causality",
+    "title": "Causality",
+    "section": "How to establish causality",
+    "text": "How to establish causality\nSo when we observe a correlation between two variables, how can we determine whether there is a causal relationship between them?\n\nThe gold standard: controlled experiments\nThe gold standard for establishing causation is the randomized controlled experiment, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant. Since the treatment group and the control group are statistically identical before the treatment is applied, any difference in the outcome can be attributed to the treatment. Where possible, this is the best way to establish causation.\nHowever, this is often not possible or feasible in communication science. In those cases, where we only have observational data (e.g., surveys, interviews, content analysis), we therefore have to rely on special statistical methods to control for confounding variables and establish causation.\n\n\nThe next best thing: controlling for confounders\nUsing statistical methods, we can try to control for confounding variables. This is not perfect, because there can always be other confounders, but it does allow us to build evidence to support or refute our theories. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion (Mccombs and Shaw 1972). And even common knowledge like “smoking causes cancer” relies heavily on evidence from statistical methods that control for confounders. This makes statistical modeling of confounding variables an essential part of the communication scientist’s toolkit.",
+    "crumbs": [
+      "Statistics",
+      "Causality"
     ]
   }
 ]

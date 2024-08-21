@@ -1,0 +1,32 @@
+---
+title: Hypotheses
+subtitle: From theories to testable statements
+---
+
+# Deriving hypotheses from theories
+
+In order to use statistical methods to test theories, we first need to **derive hypotheses** from them.
+A hypothesis is a **testable statement**, that when proven true or false, provides evidence for or against the theory.
+
+For example, consider the theory that playing violent video games leads to increased aggression in children.
+There is much disagreement about whether this theory is correct [@griffiths99], so it's important to test it empirically.
+In order to do so, we need to derive hypotheses that we can conduct to rigorous statistical tests.
+Some examples of hypotheses are:
+
+- There is a relation "between arcade game use and teachers' ratings of impulsiveness and aggresiveness". [@lin87, p. 81]
+- Playing violent video games leads to higher levels of heart rate and blood pressure compared to playing non-violent video games. [@lynch94]
+- There will be a "linear increase in aggressive affect after playing nonaggressive, moderately aggresive, and highly aggressive games". [@scott95, p. 125]
+
+Notice that these hypotheses are more specific than the theory they are derived from.
+There are multiple ways to define and measure "playing violent video games" and "increased aggression", and it could also be that the relation only holds for certain groups of people, or only for short periods of time.
+Hypotheses help us make (different aspects of) the theory more explicit, so that we can conduct empirical tests.
+
+## Evidence $\neq$ proof
+
+If an hypothesis is confirmed, it **provides evidence** in support of the theory.
+However, note that it does **not necessarily prove** the theory.
+For example, if we find that children who play violent video games are more aggressive, it does not prove that the games caused the aggression.
+Perhaps people who are already aggressive are more likely to play violent video games, or there is a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).
+
+Hypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.
+

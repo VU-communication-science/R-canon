@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>How to use RStudio – Communication Science R Book</title>
+<title>Hypotheses – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-</style>
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -64,8 +50,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../0_getting-started/2_r-in-action.html" rel="next">
-<link href="../0_getting-started/0_install-r-and-rstudio.html" rel="prev">
+<link href="../2_statistics/1_causality.html" rel="next">
+<link href="../2_statistics/0_general-concepts/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,6 +89,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -130,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../0_getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../0_getting-started/1_using-rstudio.html">How to use RStudio</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../2_statistics/0_hypotheses.html">Hypotheses</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -159,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../0_getting-started/1_using-rstudio.html" class="sidebar-item-text sidebar-link active">
+  <a href="../0_getting-started/1_using-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">How to use RStudio</span></a>
   </div>
 </li>
@@ -206,8 +221,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/0_causal_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causal models</span></a>
+  <a href="../2_statistics/0_hypotheses.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Hypotheses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../2_statistics/1_causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
@@ -344,17 +365,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#running-code-from-the-r-script" id="toc-running-code-from-the-r-script" class="nav-link active" data-scroll-target="#running-code-from-the-r-script">Running code from the R script</a></li>
-  <li><a href="#using-rstudio-projects" id="toc-using-rstudio-projects" class="nav-link" data-scroll-target="#using-rstudio-projects">Using RStudio projects</a></li>
+  <li><a href="#deriving-hypotheses-from-theories" id="toc-deriving-hypotheses-from-theories" class="nav-link active" data-scroll-target="#deriving-hypotheses-from-theories">Deriving hypotheses from theories</a>
+  <ul class="collapse">
+  <li><a href="#evidence-neq-proof" id="toc-evidence-neq-proof" class="nav-link" data-scroll-target="#evidence-neq-proof">Evidence <span class="math inline">\(\neq\)</span> proof</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../0_getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../0_getting-started/1_using-rstudio.html">How to use RStudio</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../2_statistics/0_hypotheses.html">Hypotheses</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">How to use RStudio</h1>
+<h1 class="title">Hypotheses</h1>
+<p class="subtitle lead">From theories to testable statements</p>
 </div>
 
 
@@ -371,44 +395,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Once you have <a href="../0_getting-started/0_install-r-and-rstudio.html">installed R and RStudio</a>, you can start by launching RStudio. If everything was installed correctly, RStudio will automatically launch R as well.</p>
-<p>The first time you open RStudio, you will likely see three separate windows. The first thing you want to do is <strong>open an R Script (!!)</strong> to work in. To do so, go to the toolbar and select <strong>File -&gt; New File -&gt; R Script</strong>.</p>
-<p>You will now see four windows split evenly over the four corners of your screen:</p>
+<section id="deriving-hypotheses-from-theories" class="level1">
+<h1>Deriving hypotheses from theories</h1>
+<p>In order to use statistical methods to test theories, we first need to <strong>derive hypotheses</strong> from them. A hypothesis is a <strong>testable statement</strong>, that when proven true or false, provides evidence for or against the theory.</p>
+<p>For example, consider the theory that playing violent video games leads to increased aggression in children. There is much disagreement about whether this theory is correct <span class="citation" data-cites="griffiths99">(<a href="#ref-griffiths99" role="doc-biblioref">Griffiths 1999</a>)</span>, so it’s important to test it empirically. In order to do so, we need to derive hypotheses that we can conduct to rigorous statistical tests. Some examples of hypotheses are:</p>
 <ul>
-<li>In the <strong>top-left</strong> you have the text editor for the file that you are working in. This will most of the time be an R script or RMarkdown file.</li>
-<li>In the <strong>top-right</strong> you can see the data and values that you are currently working with (environment) or view your history of input.</li>
-<li>In the <strong>bottom-left</strong> you have the console, which is where you can enter and run code, and view the output. If you run code from your R script, it will also be executed in this console.</li>
-<li>In the <strong>bottom-right</strong> you can browse through files on your computer, view help for functions, or view visualizations.</li>
+<li>There is a relation “between arcade game use and teachers’ ratings of impulsiveness and aggresiveness”. <span class="citation" data-cites="lin87">(<a href="#ref-lin87" role="doc-biblioref">Lin and Lepper 1987, 81</a>)</span></li>
+<li>Playing violent video games leads to higher levels of heart rate and blood pressure compared to playing non-violent video games. <span class="citation" data-cites="lynch94">(<a href="#ref-lynch94" role="doc-biblioref">Lynch 1994</a>)</span></li>
+<li>There will be a “linear increase in aggressive affect after playing nonaggressive, moderately aggresive, and highly aggressive games”. <span class="citation" data-cites="scott95">(<a href="#ref-scott95" role="doc-biblioref">Scott 1995, 125</a>)</span></li>
 </ul>
-<p>While you can directly enter code into your console (bottom-left), you should always work with R scripts (top-left). This allows you to keep track of what you are doing and save every step.</p>
-<section id="running-code-from-the-r-script" class="level2">
-<h2 class="anchored" data-anchor-id="running-code-from-the-r-script">Running code from the R script</h2>
-<p>Copy and paste the following example code into your R Script. For now, don’t bother understanding the syntax itself. Just focus on running it.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">5</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">"some text"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">"some more text"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notice that these hypotheses are more specific than the theory they are derived from. There are multiple ways to define and measure “playing violent video games” and “increased aggression”, and it could also be that the relation only holds for certain groups of people, or only for short periods of time. Hypotheses help us make (different aspects of) the theory more explicit, so that we can conduct empirical tests.</p>
+<section id="evidence-neq-proof" class="level2">
+<h2 class="anchored" data-anchor-id="evidence-neq-proof">Evidence <span class="math inline">\(\neq\)</span> proof</h2>
+<p>If an hypothesis is confirmed, it <strong>provides evidence</strong> in support of the theory. However, note that it does <strong>not necessarily prove</strong> the theory. For example, if we find that children who play violent video games are more aggressive, it does not prove that the games caused the aggression. Perhaps people who are already aggressive are more likely to play violent video games, or there is a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).</p>
+<p>Hypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.</p>
+
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-griffiths99" class="csl-entry" role="listitem">
+Griffiths, Mark. 1999. <span>“Violent Video Games and Aggression: A Review of the Literature.”</span> <em>Aggression and Violent Behavior</em> 4 (2): 203–12. https://doi.org/<a href="https://doi.org/10.1016/S1359-1789(97)00055-4">https://doi.org/10.1016/S1359-1789(97)00055-4</a>.
 </div>
-<p>You can <strong>run</strong> code by selecting the code and clicking on the <strong>Run</strong> button in the toolbar. However, we highly recommend getting used to using the keyboard shortcut, because this will greatly speed up your process. On Windows (and Linux) the shortcut is <strong>Ctrl + Enter</strong>. On Mac it’s <strong>Command + Enter</strong>.</p>
-<p>There are two ways to run code:</p>
-<ul>
-<li>If you select a specific piece of code (so that it is highlighted) you can run this specific selection. For example, select the first three lines (the three mathematical operations) and press Ctrl + Enter. This should then print the results for these three mathematical expressions. Note that you can also select a specific part on a line. Try selecting just the second <code>3</code> on the first line. This should just print the number 3.</li>
-<li>If you haven’t made a selection, but your text cursor is somewhere on a line in your editor, you can press Ctrl + Enter to run the line where the cursor is at. This will also move the cursor to the next line, so you can <em>walk</em> through the code from top to bottom, running each line. Try starting on the first line, and pressing Ctrl + Enter six times, to run each line separately.</li>
-</ul>
-</section>
-<section id="using-rstudio-projects" class="level2">
-<h2 class="anchored" data-anchor-id="using-rstudio-projects">Using RStudio projects</h2>
-<p>It is best to put all your code in an RStudio <em>project</em>. This is essentially a folder on your computer in which you can store the R files and data for a project that you are working on. While you do not necessarily need a project to work with R, they are very convenient, and we strongly recommend using them.</p>
-<p>To create a new project, go to the top-right corner of your RStudio window. Look for the button labeled <strong>Project: (None)</strong>. Click on this button, and select New Project. Follow the instructions to create a new directory with a new project. Name the project “R introduction”.</p>
-<p>Now, open a new R script and immediately save it (select File -&gt; Save in the toolbar, or press ctrl-s). Name the file <strong>my_first_r_script.r</strong>. In the bottom-right corner, under the <strong>Files</strong> tab, you’ll now see the file added to the project. The extension <strong>.r</strong> indicates that the file is an R script.</p>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<div id="ref-lin87" class="csl-entry" role="listitem">
+Lin, Sabrina, and Mark R Lepper. 1987. <span>“Correlates of Children’s Usage of Videogames and Computers.”</span> <em>Journal of Applied Social Psychology</em> 17 (1): 72–93.
+</div>
+<div id="ref-lynch94" class="csl-entry" role="listitem">
+Lynch, P. 1994. <span>“Type-a Behavior, Hostility, and Cardiovascular Function at Rest and After Playing Video Games in Teenagers.”</span> In <em>Psychosomatic Medicine</em>, 56:152–52. 2. WILLIAMS &amp; WILKINS 351 WEST CAMDEN ST, BALTIMORE, MD 21201-2436.
+</div>
+<div id="ref-scott95" class="csl-entry" role="listitem">
+Scott, Derek. 1995. <span>“The Effect of Video Games on Feelings of Aggression.”</span> <em>The Journal of Psychology</em> 129 (2): 121–32.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -831,13 +851,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../0_getting-started/0_install-r-and-rstudio.html" class="pagination-link" aria-label="Install R and RStudio">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Install R and RStudio</span>
+      <a href="../2_statistics/0_general-concepts/index.html" class="pagination-link" aria-label="General Concepts">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">General Concepts</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../0_getting-started/2_r-in-action.html" class="pagination-link" aria-label="R in Action (demo)">
-        <span class="nav-page-text">R in Action (demo)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../2_statistics/1_causality.html" class="pagination-link" aria-label="Causality">
+        <span class="nav-page-text">Causality</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,9 +1,14 @@
 /*-- scss:defaults --*/
 
-$primary: #0077B3;
+$primary: #0080c9;
 
 .continue {
   @extend .btn;
   @extend .btn-outline-primary;
   margin-top: 2rem;
+}
+
+.navbar-logo {
+  height: 100px;
+  width: 100px;
 }
