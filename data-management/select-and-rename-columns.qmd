@@ -1,0 +1,50 @@
+---
+title: 'Select and rename columns'
+order: 1
+---
+
+
+Open the tidyverse package, and read the data from the URL.
+
+```{r, eval=T}
+library(tidyverse)
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"
+d <- read_csv(url)
+```
+
+## Selecting certain columns
+
+Where `filter` selects specific rows, `select` allows you to select specific columns. 
+Most simply, we can simply name the columns that we want to retrieve them in that particular order. 
+
+```{r}
+select(d, Population, Support, Pollster)
+```
+
+You can also specify a range of columns, for example all columns from Support to Democratic Support:
+
+```{r}
+select(d, Support:`Democratic Support`)
+```
+
+Note the use of 'backticks' (reverse quotes) to specify the column name, as R does not normally allow spaces in names. 
+
+Select can also be used to rename columns when selecting them, for example to get rid of the spaces:
+
+```{r}
+select(d, Pollster, rep = `Republican Support`, dem = `Democratic Support`)
+```
+
+Note that `select` drops all columns not selected. If you only want to rename columns, you can use the `rename` function:
+
+```{r}
+rename(d, start_date = Start, end_date = End)
+```
+
+Finally, you can drop a variable by adding a minus sign in front of a name:
+
+```{r}
+select(d, -Question, -URL)
+```
+
+

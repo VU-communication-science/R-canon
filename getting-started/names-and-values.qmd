@@ -1,0 +1,80 @@
+---
+title: Names and Values
+order: 3
+---
+
+In R, and in computer programming in general, the most essential operation is to assign **values** to **names**.
+By **value**, we then simply mean a piece of information. This can be a anything: a single number, a string (i.e. piece of text), a list of numbers, and even an entire data set. 
+**Assigning** such values to names is essential, because it allows us to more easily refer to the values. 
+
+In plain terms, **assignment** is how you make R remember things by assigning them to a name. To assign a value to a name, we use the **arrow notation**: `name <- value`. For example:
+
+```{r}
+x <- 2
+```
+
+::: {.callout-note title="Good to know: you can also use `x = 2`" collapse="true"}
+Instead of using the **arrow** notation, you can also use the **equal sign** notation: `name = value`.
+
+```{r}
+x = 2
+```
+
+We will in general always use the **arrow** notation. But if you encounter the **equal sign** notation, just remember that it's the same thing.
+:::
+
+By **running** the code `x <- 2`, you are saying: **Assign the value `2` to the name `x`**. 
+Any values that you assigned to names are stored in your **Environment**. You can see this environment in the top-right window, under the **Environment** tab.
+If you assigned `2` to `x`, you should see a table called **Values**, with in the left column the names (`x`) and in the right column the values (`2`).
+
+From hereon, when you use the name `x` in your code, it will **refer** to the value `2`. So when we run the code `x * 5` (x times 5) it will print the number `10`
+
+```{r}
+x * 5
+```
+
+
+
+::: {.callout-note title="Why does R print a [1] before the result?" collapse="true"}
+When running `x * 5`, R correctly prints the value 10. But why does it say `[1] 10`?
+The reason is that R always thinks of a number (or string) as a **vector** (i.e. list of values), that can have 1 or multiple values. 
+The `[1]` indicates that 10 is the first (and only) value.
+
+If you print a longer **vector**, you can see that R prints `[...]` at the start of each line, just to help you see the position of individual values.
+The following code generates a vector with numbers from 1 to 50
+
+```{r}
+1:50
+```
+:::
+
+
+## Assigning different types of values
+
+You can assign any type of value to a name, and you can use any name, as long as it starts with a letter and doesn't contain spaces or symbols (but underscores are OK)
+
+```{r}
+a_number = 5
+my_cats_name = "Hobbes"
+```
+
+If you run this code and check you **Environment** (top-right), you should now see these name-value pairs added.
+
+
+## Assigning results 
+
+Till now we only directly assigned values to names. This is convenient, but the power of assignment really shines when you use it to store **results**. 
+For example, we can also do this.
+
+```{r}
+x = 5 + 10
+```
+
+This a very simple example, but just think for a second what this allows us to do. 
+Since we can assign anything to a name, we can break down any complicated procedure into multiple steps! 
+For now, the key lesson is just to wrap your head around the syntax for assigning values to names. 
+This is fundamental to everything you will be doing in R (and in programming in general). 
+
+
+
+

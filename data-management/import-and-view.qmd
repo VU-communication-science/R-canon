@@ -1,0 +1,79 @@
+---
+title: Import and view
+order: 1
+subtitle: How to get your data into R, and how to view it
+---
+
+# Data in a tibble format {#tibble}
+
+In this tutorial we will use the `tidyverse` package to import a **data set** into R as a `tibble`.
+We'll start by opening the `tidyverse` package.
+
+```{r}
+library(tidyverse)
+```
+
+
+With a data set we mean a rectangular data frame consisting of rows and columns (e.g., a spreadsheet in *Excel* or *Numbers*).
+In general, the rows represent the units in your data (e.g., respondents, participants, documents) and the columns represent the variables (e.g., age, gender).
+In R this type of data is called a `data.frame`, but the tidyverse has its own version of data frames called `tibble` (a "tidy table"), which makes it easier to work with. 
+
+As a simply example, the following code creates a tibble containing respondents, their gender, and their height:
+
+```{r}
+tibble(resp = c(1,2,3), 
+       gender = c("M","M","F"), 
+       height = c(176, 165, 172))
+```
+
+## Reading data: read_csv {#read_csv}
+
+The example above manually created a data set, but in most cases you will start with data that you get from elsewhere,
+such as a csv file (e.g. downloaded from an online dataset or exported from excel) or an SPSS or Stata data file.
+
+Tidyverse contains a function `read_csv` that allows you to read a csv file directly into a data frame.
+You specify the location of the file, either on your local drive or directly from the Internet!
+
+The example below downloads an overview of gun polls from the [data analytics site 538](https://fivethirtyeight.com/),
+and reads it into a tibble using the read_csv function:
+
+```{r}
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"
+d <- read_csv(url)
+d
+```
+
+(Note that you can safely ignore the (red) message, they simply tell you how each column was parsed)
+
+The shows the first ten rows of the data set, and if the columns don't fit they are not printed. The remaining rows and columns are printed at the bottom. For each column the data type is also mentioned (<int> stands for integer, which is a *numeric* value; <chr> is textual or *character* data). If you want to browse through your data, you can also click on the name of the data.frame (d) in the top-right window "Environment" tab 
+or call `View(d)`. 
+
+
+# Convert data.frame to tibble {#as-tibble}
+
+Sometimes you already have a data.frame in R, and you just want to convert it to a tibble.
+For this you can use the `as_tibble` function.
+
+For example, R comes with several built-in data.frames, that are usefull if you want to quickly test something. 
+One of these is the `iris` data set, which contains measurements of flowers.
+If you want to convert this to a tibble, you can use the `as_tibble` function:
+
+```{r}
+as_tibble(iris)
+```
+
+## The iris dataset {#iris}
+
+We'll be using this `iris` dataset in some of the next tutorials, so let's see what data it contains. 
+From the previous output we see that there are five columns:
+
+- `Sepal.Length`: the length of the sepal (the green leaf-like part of the flower)
+- `Sepal.Width`: the width of the sepal
+- `Petal.Length`: the length of the petal (the colored part of the flower)
+- `Petal.Width`: the width of the petal
+- `Species`: the species of the flower
+
+The data has 150 rows, so it contains measurements of 150 flowers.
+The sepal and petal columns are numeric, and measured in centimeters.
+The species column is a factor with three levels: `setosa`, `versicolor`, and `virginica`.
+

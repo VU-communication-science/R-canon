@@ -1,0 +1,133 @@
+---
+title: "Filter and Arrange rows"
+subtitle: Filter rows and arrange them in a specific order
+order: 2
+---
+
+For the examples in this tutorial we'll use the `iris` dataset, like we [explained here](./import-and-view.qmd#iris).
+
+
+
+```{r, message=FALSE}
+library(tidyverse)
+d <- as_tibble(iris)
+```
+
+
+# Subsetting rows with filter() {#filter} 
+
+The `filter` function can be used to select a subset of rows. 
+For example, the following code selects only the rows where the `Species` column is equal to `setosa`.
+The first argument of the `filter` function is the tibble you want to filter.
+The second argument is the condition that should be met for a row to be included in the result.
+Here we use the `==` operator to say that the value in the `Species` column should be equal to `setosa`.
+
+```{r}
+filter(d, Species == 'setosa')
+```
+
+Note that we now get 50 out of the 150 rows in the `iris` dataset.
+
+We can use other common operators as well, such as `>`, `<`, `>=`, `<=`, and `!=` (not equal).
+And we can also combine multiple conditions with the `&` (and) and `|` (or) operators. 
+
+For example, here we select all rows where the `Species` is `setosa` and the `Sepal.Length` is greater than 5.
+
+```{r, output=FALSE}
+filter(d, Species == 'setosa' & Sepal.Length > 5)
+```
+
+A less common operator that is usefull to know about is `%in%`, which is used to check if a value is in a list of values.
+For example, to select all rows where the `Species` is either `setosa` or `versicolor`:
+
+```{r, output=FALSE}
+filter(d, Species %in% c('setosa', 'versicolor'))
+```
+
+::: {.callout-note title="A deeper understanding of the filter condition" collapse="true"}
+
+Based on the examples given you probably already have a good enough understanding of how the `filter` function works to use it in your own code.
+In this optional information block we'll go a bit deeper into how the filter condition works, and what operators you can use.
+
+## The condition is a logical expression
+
+The condition in `filter` can be any **logical expression**.
+A logical expression is simply a statement that is either `TRUE` or `FALSE`.
+When we use a logical expression in the `filter` function, we are asking R to evaluate this expression for each row in the tibble. 
+Each row for which the expression evaluates to `TRUE` is then included in the subset.
+
+If you know a bit about how logical expressions work, you will have great control over what rows are included in your subset.
+Here is an overview of the most important operators for logical expressions.
+
+### Comparison operators
+
+Comparison operators are used to compare two values.
+
+- `==`   equal to
+- `!=`   not equal to
+- `>`    greater than
+- `>=`   greater than or equal to
+- `<`    less than
+- `<=`   less than or equal to
+- `%in%` is in a list of values (second value must be a list or vector) 
+
+Example: 
+
+```{r}
+5 > 1    # TRUE:  5 is greater than 1
+5 < 1    # FALSE: 5 is less than 1
+"setosa" %in% c("setosa", "versicolor")  # TRUE: "setosa" is in the list
+```
+
+### Logical operators
+
+Logical operators are used to combine multiple conditions.
+
+- `&` and
+- `|` or
+- `!` not
+
+Example:
+```{r}
+5 > 1 | 5 < 1   # TRUE: 5 is greater than 1 OR 5 is less than 1
+5 > 1 & 5 < 1   # FALSE: 5 is greater than 1 AND 5 is less than 1
+!5 < 1          # TRUE: it is not the case that 5 is smaller than 1
+```
+
+### Parentheses
+
+For complex conditions, you can use parentheses to group conditions, similar to how you would in a mathematical expression.
+Say you want to select big flowers, but you want to take into account that some species are generally smaller.
+So the minimum Sepal.Length for `setosa` should be 5, but for `versicolor` it should be 6.
+You could then write the following condition:
+
+
+```{r, output=FALSE}
+filter(d, (Species == 'setosa' & Sepal.Length > 5) | 
+          (Species == 'versicolor' & Sepal.Length > 6)
+      )
+```
+:::
+
+# Sorting rows with arrange() {#arrange}
+
+The `arrange` function can be used to sort the rows of a tibble.
+For example, if we want to sort the `iris` dataset by the `Sepal.Length` column:
+
+```{r}
+arrange(d, Sepal.Length)
+```
+
+By default, the rows are sorted in ascending order.
+If you want to sort in descending order, you can put a minus in front of the variable name.
+
+```{r, output=FALSE}
+arrange(d, -Sepal.Length)
+```
+
+If you want to sort on multiple columns, you can simply add them to the `arrange` function.
+For example, to sort by `Species` and then by `Sepal.Length`:
+
+```{r, output=FALSE}
+arrange(d, Species, Sepal.Length)
+```

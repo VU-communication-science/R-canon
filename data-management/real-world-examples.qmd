@@ -1,0 +1,12 @@
+---
+title: Real world examples
+subtitle: Examples of working with real communication science data
+order: 9
+---
+
+In the previous tutorials we've mostly worked with the `iris` dataset, which is a very clean and simple dataset.
+However, in the real world you'll often work with datasets that are much larger and more complex.
+Here we'll show you some examples of how you can use the techniques you just learned to work with real world data from the field of communication science.
+
+
+

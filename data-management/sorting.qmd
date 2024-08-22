@@ -1,0 +1,36 @@
+
+---
+title: 'Ordering rows'
+order: 3
+---
+
+
+Open the tidyverse package, and read the data from the URL.
+
+```{r}
+library(tidyverse)
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"
+d <- read_csv(url)
+```
+
+
+
+
+## Sorting with arrange()
+
+You can easily sort a data set with `arrange`: you first specify the data, and then the column(s) to sort on.
+To sort in descending order, put a minus in front of a variable.
+For example, the following orders by population and then by support (descending):
+
+```{r}
+d <- arrange(d, Population, -Support)
+d
+```
+
+Note that we assigned the result of arranging to the `d` object again, i.e. we replace the object by its sorted version. 
+If we wouldn't assign it to anything, it would display it on screen but not remember the sorting.
+Assigning a result to the same name means I don't create a new object, preventing the environment from being cluttered
+(and saving me from the bother of thinking up yet another object name).
+For sorting, this should generally be fine as the sorted data should contain the same data as before.
+For subsetting, this means that the rows or columns are actually deleted from the dataset (in memory),
+so you will have to read the file again (or start from an earlier object) if you need those rows or columns later. 

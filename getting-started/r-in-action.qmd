@@ -1,0 +1,42 @@
+---
+title: R in Action (demo)
+order: 2
+---
+
+R is a very powerful tool, but it takes some time to learn how to use it before you get to fully appreciate what you can use it for.
+On this page we show you a **quick example of some of the things you will learn here**.
+
+All the code that you see here will be explained in the rest of this online book. 
+**For now, don't worry about understanding the code**, and focus on thinking how the techniques we'll be using fit into your tool belt as a communication scientist.
+
+## Loading the packages we'll use
+
+One of the things that makes R so versatile, is that anyone can extend it by writing new *packages*. 
+You can think of packages kind of like apps in an app-store. 
+For this demo, we'll need two packages, that you'll first need to install.
+
+```{r, eval=F}
+install.packages('tidyverse')
+install.packages('sjPlot')
+```
+
+You only need to install packages once, just like apps on you mobile phone.
+Once downloaded, they are stored in your R *library*.
+When you then use the packages in an R script, you just *open* them like this:
+
+```{r, message=F}
+library(tidyverse)
+library(sjPlot)
+```
+
+## Import data
+
+The first step for any analysis is to import your data. 
+Using the `read_csv` function from the `tidyverse` package, we can directly download this information from the internet and import it into R.
+
+
+
+
+# TO DO
+
+We'll show a nice example here of how tidyverse allows us to import and clean a data set nice and quick, how we can visualize it, perform a statistical test, and create an APA ready table and visualizations

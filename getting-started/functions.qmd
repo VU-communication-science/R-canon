@@ -1,0 +1,122 @@
+---
+title: Functions
+order: 4
+---
+
+99% of what you do in R will involve using functions. 
+A function in R is like a mini-program that you can use to perform specific tasks. 
+It takes *input*, processes it, and gives you an *output*. 
+For example, there are functions for:
+
+* importing data 
+* computing descriptive statistics
+* performing statistical tests
+* visualizing data
+
+A function in R has the form: `output = function_name(argument1, argument2, ...)`
+
+* **function_name** is a name to indicate which function you want to use. It is followed by parentheses.
+* **arguments** are the input of the function, and are inserted within the parentheses. 
+* **output** is anything that is returned by the function. 
+
+For example, the function `c` *c*ombines multiple values into a *vector*.
+
+```{r}
+x = c(1,2,3,4)
+```
+
+Now, we can use the `mean` function to calculate the mean of these numbers:
+
+```{r}
+m = mean(x)
+```
+
+The calculated mean, `2.5`, is now assigned to the name `m`:
+
+```{r}
+m
+```
+
+## Optional arguments
+
+In the `c` and `mean` functions above, all the arguments were **required**. 
+To **c**ombine numbers into a vector, we *needed* to provide a list of numbers.
+To calculate a **mean**, we *needed* to provide a numeric vector.
+
+In addition to the **required** arguments, a function can also have **optional** arguments, that give you more control over what a function does.
+For example, suppose we have a range of numbers that also contains a missing value. In R a missing value is called `NA`, which stands for `Not Available`:
+
+```{r}
+x_with_missing = c(1, 2, 3, NA, 4)
+```
+
+Now, if we call the `mean` function, R will say that the mean is unknown, since the third value is unknown:
+
+```{r}
+mean(x_with_missing)
+```
+
+This is statistically a very correct answer.
+But often, if some values happen to be missing in your data, you want to be able to calculate the mean just for the numbers that are not missing.
+Fortunately, the mean function has an **optional argument** `na.rm` (remove NAs) that you can set to `TRUE` (or to `T`, which is short for `TRUE`) to ignore the NAs:
+
+```{r}
+mean(x, na.rm=TRUE)
+```
+
+Notice that for the **required** argument, we directly provide the input `x`, but for the **optional** argument we include the argument name `na.rm = TRUE`.
+The reason is simply that there are other optional arguments, so we need to specify which one we're using.
+
+::: {.callout-note title="How do I know what arguments a function has?" collapse="true"}
+
+To learn more about what a function does and what arguments it has, you can look it up in the 'Help' pane in the bottom right, 
+or run `?function_name` in R. 
+
+```{r, eval=F}
+?mean
+```
+
+Here you can learn about the `na.rm` argument that we just used!
+
+If you are just getting to know R, we recommend first finishing the rest of the `Getting Started` section. 
+Then once you get the hang of things, have a look at the [Use ?function help page](99_tips-and-best-practises/0_use-help-pages.qmd) tutorial.
+:::
+
+
+## Using pipes
+
+There are two ways for using functions.
+
+* The first is the one shown above, where we **put all the arguments between the parentheses**: `function_name(argument1, argument2, ...)`.
+* The second way is to **pipe the first argument into the function**: `argument1 |> function_name(argument2, ...)`
+
+If this is your first time seeing pipes, you're probably wondering why you would want to do this?
+Why bother having two ways to do the exact same thing?
+The reason is that when writing code, you shouldn't just think about **what the code does**, but also about **how easy the code is to read**.
+This not only helps you prevent mistakes, but also makes your analysis **transparent**.
+
+As you'll see later, you'll encounter many cases where your analysis requires you to string together multiple functions.
+In these cases, pipes make your code much easier to read.
+let's rewrite our code from above using the **pipe** notation:
+
+```{r results=F}
+x_with_missing |> mean(na.rm=T)
+```
+Notice how our first argument, the **required** argument `x_with_missing`, is *piped* into the mean function.
+Inside the mean function, we only specify the second argument, the **optional** argument `na.rm`.
+
+Now imagine we would want to round the result (`2.5`) up to a round number (`3`). 
+We can do this without pipe notation, but it would be quite ugly and hard to read:
+
+```{r results=F}
+round(mean(x_with_missing, na.rm=T))
+```
+The pipe notation allows us to break this down into a nice pipeline:
+
+```{r results=F}
+x_with_missing |> 
+  mean(na.rm=T) |> 
+  round()
+```
+
+

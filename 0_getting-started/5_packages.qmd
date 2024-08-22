@@ -1,5 +1,0 @@
----
-title: Packages
----
-
-Tutorial about how to install and load packages
