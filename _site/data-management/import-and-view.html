@@ -187,6 +187,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Packages</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/files-and-projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Files and projects</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -357,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Tips and Best Practices</span></a>
+ <span class="menu-text">Good to Know</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -365,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tips-and-best-practices/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
+  <a href="../good-to-know/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Function Help Pages</span></a>
   </div>
 </li>
@@ -381,13 +387,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-in-a-tibble-format" id="toc-data-in-a-tibble-format" class="nav-link active" data-scroll-target="#data-in-a-tibble-format">Data in a tibble format</a>
+  <li><a href="#tibble" id="toc-tibble" class="nav-link active" data-scroll-target="#tibble">Data in a tibble format</a>
   <ul class="collapse">
-  <li><a href="#reading-data-read_csv" id="toc-reading-data-read_csv" class="nav-link" data-scroll-target="#reading-data-read_csv">Reading data: read_csv</a></li>
+  <li><a href="#printing-the-tibble" id="toc-printing-the-tibble" class="nav-link" data-scroll-target="#printing-the-tibble">Printing the tibble</a></li>
+  <li><a href="#functions-for-showing-parts-of-the-tibble" id="toc-functions-for-showing-parts-of-the-tibble" class="nav-link" data-scroll-target="#functions-for-showing-parts-of-the-tibble">Functions for showing parts of the tibble</a></li>
+  <li><a href="#viewing-the-entire-tibble" id="toc-viewing-the-entire-tibble" class="nav-link" data-scroll-target="#viewing-the-entire-tibble">Viewing the entire tibble</a></li>
   </ul></li>
-  <li><a href="#convert-data.frame-to-tibble" id="toc-convert-data.frame-to-tibble" class="nav-link" data-scroll-target="#convert-data.frame-to-tibble">Convert data.frame to tibble</a>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing data</a>
   <ul class="collapse">
-  <li><a href="#iris" id="toc-iris" class="nav-link" data-scroll-target="#iris">The iris dataset</a></li>
+  <li><a href="#csv-files" id="toc-csv-files" class="nav-link" data-scroll-target="#csv-files">CSV files</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -415,47 +423,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="data-in-a-tibble-format" class="level1">
+<section id="tibble" class="level1">
 <h1>Data in a tibble format</h1>
-<p>In this tutorial we will use the <code>tidyverse</code> package to import a <strong>data set</strong> into R as a <code>tibble</code>. We’ll start by opening the <code>tidyverse</code> package.</p>
+<p>In this tutorial we will use the <code>tidyverse</code> package to import a <strong>data frame</strong> into R as a <code>tibble</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-</div>
-<p>With a data set we mean a rectangular data frame consisting of rows and columns (e.g., a spreadsheet in <em>Excel</em> or <em>Numbers</em>). In general, the rows represent the units in your data (e.g., respondents, participants, documents) and the columns represent the variables (e.g., age, gender). In R this type of data is called a <code>data.frame</code>, but the tidyverse has its own version of data frames called <code>tibble</code> (a “tidy table”), which makes it easier to work with.</p>
-<p>As a simply example, the following code creates a tibble containing respondents, their gender, and their height:</p>
+<p>By <strong>data frame</strong> we mean data consisting of rows and columns (e.g., a spreadsheet in <em>Excel</em> or <em>Numbers</em>). In the most typical use case, rows represent cases in your data (e.g., respondents, participants) and columns represent variables (e.g., age, gender). In R this type of data is called a <code>data.frame</code>. The tidyverse has its own special version of a data.frame called a <code>tibble</code> (a “tidy table”). This is the core data structure that we’ll be using in this book, and it will form the basis of all your data management, analysis, and visualization.</p>
+<p>Let’s start simpe. The following code creates a tibble containing respondents, their gender, and their height. We’ll call our tibble <strong>d</strong> (short for data).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">resp =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"M"</span>,<span class="st">"M"</span>,<span class="st">"F"</span>), </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="fu">c</span>(<span class="dv">176</span>, <span class="dv">165</span>, <span class="dv">172</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">resp_id =</span> <span class="fu">c</span>(  <span class="dv">1</span>,   <span class="dv">2</span>,   <span class="dv">3</span>,   <span class="dv">4</span>), </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">gender  =</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>), </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">height  =</span> <span class="fu">c</span>(<span class="dv">176</span>, <span class="dv">165</span>, <span class="dv">172</span>, <span class="dv">160</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The name <code>d</code> now refers to the entire tibble. Compared to spreadsheet software like Excel, we do not automatically see the data. This is actually a benefit, because it means working with large data sets won’t slow down your computer. Instead, we have several ways to view only the parts of the data that we’re interested in.</p>
+<section id="printing-the-tibble" class="level2">
+<h2 class="anchored" data-anchor-id="printing-the-tibble">Printing the tibble</h2>
+<p>The simplest way to view the data is to just print the tibble by typing <code>d</code> and running the code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-   resp gender height
-  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
-1     1 M         176
-2     2 M         165
-3     3 F         172</code></pre>
+<pre><code># A tibble: 4 × 3
+  resp_id gender height
+    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+1       1 M         176
+2       2 M         165
+3       3 F         172
+4       4 F         160</code></pre>
 </div>
 </div>
-<section id="reading-data-read_csv" class="level2">
-<h2 class="anchored" data-anchor-id="reading-data-read_csv">Reading data: read_csv</h2>
-<p>The example above manually created a data set, but in most cases you will start with data that you get from elsewhere, such as a csv file (e.g.&nbsp;downloaded from an online dataset or exported from excel) or an SPSS or Stata data file.</p>
-<p>Tidyverse contains a function <code>read_csv</code> that allows you to read a csv file directly into a data frame. You specify the location of the file, either on your local drive or directly from the Internet!</p>
-<p>The example below downloads an overview of gun polls from the <a href="https://fivethirtyeight.com/">data analytics site 538</a>, and reads it into a tibble using the read_csv function:</p>
+<p>This will print a textual representation of the tibble in the console. If the tibble is too large to fit on the screen, R will only print the first few rows and columns, so you don’t have to worry about blowing up your computer. Note that the tibble also reports the number of rows and columns <code>(4 x 3)</code>, and below the names of the columns it shows the data type. <code>&lt;dbl&gt;</code> stands for double, which is a numeric value, and <code>&lt;chr&gt;</code> stands for character, which is a textual value.</p>
+</section>
+<section id="functions-for-showing-parts-of-the-tibble" class="level2">
+<h2 class="anchored" data-anchor-id="functions-for-showing-parts-of-the-tibble">Functions for showing parts of the tibble</h2>
+<p>There are several functions that allow you to show specific parts of the tibble.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)      <span class="co"># Show the first few rows</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(d)      <span class="co"># Show the last few rows</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(d)  <span class="co"># Show the column names</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(d)  <span class="co"># Show the row names (if they exist)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(d)      <span class="co"># Show the number of columns</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(d)      <span class="co"># Show the number of rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="viewing-the-entire-tibble" class="level2">
+<h2 class="anchored" data-anchor-id="viewing-the-entire-tibble">Viewing the entire tibble</h2>
+<p>If you want, you can ask R to show the entire tibble. You can do this in two ways:</p>
+<ul>
+<li>In the top-right window in RStudio, open the Environment tab. Here you see all the objects you’ve created, including the tibble <code>d</code>. Click on <code>d</code> to view the entire tibble.</li>
+<li>You can also do this using code, by running <code>View(d)</code>.</li>
+</ul>
+<p>This opens up a convenient window with a spreadsheet, where you can scroll through the data. Note that in the top-bar there is also a <em>Filter</em> button, and a <em>Search</em> bar, which can be very useful for exploring your data.</p>
+</section>
+</section>
+<section id="importing-data" class="level1">
+<h1>Importing data</h1>
+<p>The first step for any data analysis is to get your data into R. Accordingly, you’ll need to learn how to import data from the most common file formats. The most important one to know about is the <strong>csv</strong> file, but you can also import data from <strong>Excel</strong>, <strong>SPSS</strong>, <strong>Stata</strong>, and many other formats.</p>
+<section id="csv-files" class="level2">
+<h2 class="anchored" data-anchor-id="csv-files">CSV files</h2>
+<p>One of the most common formats for storing and sharing rectangular data is the <code>csv</code> format. <code>CSV</code> stands for Comma Separated Values, meaning that the columns in the data are separated by commas. The benefit of CSV files is that they are so simple that any respectable statistical software can read them. Formats such as Excel or SPSS files are specifically designed for their respective software (you can’t open an SPSS file in Excel).</p>
+<p>Tidyverse contains a function <code>read_csv</code> that allows you to read a csv file directly into a data frame. You just specify the location of the file, which can either be a filepath your own device, or a URL to download the data directly from the Internet! Here we download a data set about gun polls from the <a href="https://fivethirtyeight.com/">data analytics site 538</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gunpolls <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 57 Columns: 9
 ── Column specification ────────────────────────────────────────────────────────
@@ -466,35 +496,58 @@ dbl (3): Support, Republican Support, Democratic Support
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 57 × 9
-   Question     Start   End     Pollster Population Support `Republican Support`
-   &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;                &lt;dbl&gt;
- 1 age-21       2/20/18 2/23/18 CNN/SSRS Registere…      72                   61
- 2 age-21       2/27/18 2/28/18 NPR/Ips… Adults          82                   72
- 3 age-21       3/1/18  3/4/18  Rasmuss… Adults          67                   59
- 4 age-21       2/22/18 2/26/18 Harris … Registere…      84                   77
- 5 age-21       3/3/18  3/5/18  Quinnip… Registere…      78                   63
- 6 age-21       3/4/18  3/6/18  YouGov   Registere…      72                   65
- 7 age-21       3/1/18  3/5/18  Morning… Registere…      76                   72
- 8 arm-teachers 2/23/18 2/25/18 YouGov/… Registere…      41                   69
- 9 arm-teachers 2/20/18 2/23/18 CBS News Adults          44                   68
-10 arm-teachers 2/27/18 2/28/18 Rasmuss… Adults          43                   71
-# ℹ 47 more rows
-# ℹ 2 more variables: `Democratic Support` &lt;dbl&gt;, URL &lt;chr&gt;</code></pre>
+</div>
+<p>When you import the CSV, R will print some information about the number of rows and columns, and the names of the columns. Always check this information to make sure that the data was imported correctly.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="How do I know the location of the file on my computer?">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+How do I know the location of the file on my computer?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If you’ve never worked with file paths before, you might be wondering how to know the location of the file on your computer. There are several easy ways to find it. Just pick one or two that you find most convenient.</p>
+<ul>
+<li><strong>Using RStudio</strong>. In the bottom-right window, you can go to the <code>Files</code> tab. Here you can browse to the file on your computer. Then when you click on the file, RStudio will understand that it’s a CSV file, and give you the <code>Import Dataset</code> option. This will open a visual interface for importing the data. Note that it also gives you the code that you can use to import the data.</li>
+<li><strong>From the file explorer</strong>: Open the file explorer on your computer, and navigate to the file. You can then right-click on the file and select <em>Properties</em> (or some similar term). Here you’ll find the <em>Location</em> of the file. <strong>Even better</strong>: you can right-click on the file and copy it, and when you then paste it into RStudio, it will give you the file path.</li>
+<li><strong>run file.choose</strong>. If you run the code <code>file.choose()</code>, R will open a file explorer window. Here you can browse to the file, and when you select it, R will print the file path in the console window.</li>
+<li><strong>Using relative paths</strong>: A file path can be both an <em>absolute path</em> (e.g., <code>C:/Users/username/Documents/data.csv</code>) or a <em>relative path</em> (e.g., <code>data.csv</code>). The relative path is relative to your <a href="../getting-started/working-directory.qmd#working-directory">working directory</a>. You can always check your working directory by running <code>getwd()</code>. If a file is in your current working directory, you can just specify the name of the file (e.g., <code>data.csv</code>). If the file is in a subfolder, you can specify this by using a forward slash (e.g., <code>subfolder/data.csv</code>).</li>
+</ul>
+<p>If you click “Import Dataset”, then you’ll get a window for importing the data.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="?">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>There are two important pitfalls to avoid when working with CSV files:</p>
+<section id="pitfall-1-corrupting-the-file-by-opening-it-in-excel" class="level3">
+<h3 class="anchored" data-anchor-id="pitfall-1-corrupting-the-file-by-opening-it-in-excel">Pitfall 1: Corrupting the file by opening it in Excel</h3>
+<p>When you download a CSV file from the internet, some computers might immediately ask you whether you want to open it in your default spreadsheet program (e.g., Excel, Numbers). Do not do this, but instead download the file directly to your computer. If you open the file and accidentally save it, it can overwrite the CSV file with a different format. Excel in particular has a habit of breaking CSV files this way.</p>
+</section>
+<section id="pitfall-2-different-flavours-of-csv-files" class="level3">
+<h3 class="anchored" data-anchor-id="pitfall-2-different-flavours-of-csv-files">Pitfall 2: Different flavours of CSV files</h3>
+<p>There are different flavours of CSV files (for historic reasons). Even though we call them “comma separated values”, the separator is sometimes a semicolon or a tab. And depending on language, the decimal separator can be a comma or a dot. In particular, there are two most common versions of the CSV file. This is why tidyverse has two <code>read_csv</code> functions: <code>read_csv</code> and <code>read_csv2</code>. In general, you can just try <code>read_csv</code> first, and if it doesn’t work, try <code>read_csv2</code>.</p>
+</section>
 </div>
 </div>
-<p>(Note that you can safely ignore the (red) message, they simply tell you how each column was parsed)</p>
-<p>The shows the first ten rows of the data set, and if the columns don’t fit they are not printed. The remaining rows and columns are printed at the bottom. For each column the data type is also mentioned (<int> stands for integer, which is a <em>numeric</em> value; <chr> is textual or <em>character</em> data). If you want to browse through your data, you can also click on the name of the data.frame (d) in the top-right window “Environment” tab or call <code>View(d)</code>.</chr></int></p>
-</section>
-</section>
-<section id="convert-data.frame-to-tibble" class="level1">
+</div>
+<section id="as-tibble" class="level1">
 <h1>Convert data.frame to tibble</h1>
 <p>Sometimes you already have a data.frame in R, and you just want to convert it to a tibble. For this you can use the <code>as_tibble</code> function.</p>
 <p>For example, R comes with several built-in data.frames, that are usefull if you want to quickly test something. One of these is the <code>iris</code> data set, which contains measurements of flowers. If you want to convert this to a tibble, you can use the <code>as_tibble</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 150 × 5
    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -525,6 +578,11 @@ dbl (3): Support, Republican Support, Democratic Support
 <p>The data has 150 rows, so it contains measurements of 150 flowers. The sepal and petal columns are numeric, and measured in centimeters. The species column is a factor with three levels: <code>setosa</code>, <code>versicolor</code>, and <code>virginica</code>.</p>
 
 
+</section>
+</section>
+</div>
+</div>
+</div>
 </section>
 </section>
 

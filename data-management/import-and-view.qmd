@@ -6,48 +6,131 @@ subtitle: How to get your data into R, and how to view it
 
 # Data in a tibble format {#tibble}
 
-In this tutorial we will use the `tidyverse` package to import a **data set** into R as a `tibble`.
-We'll start by opening the `tidyverse` package.
+In this tutorial we will use the `tidyverse` package to import a **data frame** into R as a `tibble`.
 
-```{r}
+```{r, message=FALSE}
 library(tidyverse)
 ```
 
 
-With a data set we mean a rectangular data frame consisting of rows and columns (e.g., a spreadsheet in *Excel* or *Numbers*).
-In general, the rows represent the units in your data (e.g., respondents, participants, documents) and the columns represent the variables (e.g., age, gender).
-In R this type of data is called a `data.frame`, but the tidyverse has its own version of data frames called `tibble` (a "tidy table"), which makes it easier to work with. 
+By **data frame** we mean data consisting of rows and columns (e.g., a spreadsheet in *Excel* or *Numbers*).
+In the most typical use case, rows represent cases in your data (e.g., respondents, participants) and columns represent variables (e.g., age, gender).
+In R this type of data is called a `data.frame`.
+The tidyverse has its own special version of a data.frame called a `tibble` (a "tidy table").
+This is the core data structure that we'll be using in this book, and it will form the basis of all your data management, analysis, and visualization.
 
-As a simply example, the following code creates a tibble containing respondents, their gender, and their height:
+Let's start simpe.
+The following code creates a tibble containing respondents, their gender, and their height.
+We'll call our tibble **d** (short for data).
 
 ```{r}
-tibble(resp = c(1,2,3), 
-       gender = c("M","M","F"), 
-       height = c(176, 165, 172))
+d <- tibble(resp_id = c(  1,   2,   3,   4), 
+            gender  = c("M", "M", "F", "F"), 
+            height  = c(176, 165, 172, 160))
 ```
 
-## Reading data: read_csv {#read_csv}
+The name `d` now refers to the entire tibble. 
+Compared to spreadsheet software like Excel, we do not automatically see the data. 
+This is actually a benefit, because it means working with large data sets won't slow down your computer.
+Instead, we have several ways to view only the parts of the data that we're interested in.
 
-The example above manually created a data set, but in most cases you will start with data that you get from elsewhere,
-such as a csv file (e.g. downloaded from an online dataset or exported from excel) or an SPSS or Stata data file.
+## Printing the tibble
 
-Tidyverse contains a function `read_csv` that allows you to read a csv file directly into a data frame.
-You specify the location of the file, either on your local drive or directly from the Internet!
-
-The example below downloads an overview of gun polls from the [data analytics site 538](https://fivethirtyeight.com/),
-and reads it into a tibble using the read_csv function:
+The simplest way to view the data is to just print the tibble by typing `d` and running the code:
 
 ```{r}
-url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"
-d <- read_csv(url)
 d
 ```
 
-(Note that you can safely ignore the (red) message, they simply tell you how each column was parsed)
+This will print a textual representation of the tibble in the console.
+If the tibble is too large to fit on the screen, R will only print the first few rows and columns, so you don't have to worry about blowing up your computer.
+Note that the tibble also reports the number of rows and columns `(4 x 3)`, and below the names of the columns it shows the data type.
+`<dbl>` stands for double, which is a numeric value, and `<chr>` stands for character, which is a textual value.
 
-The shows the first ten rows of the data set, and if the columns don't fit they are not printed. The remaining rows and columns are printed at the bottom. For each column the data type is also mentioned (<int> stands for integer, which is a *numeric* value; <chr> is textual or *character* data). If you want to browse through your data, you can also click on the name of the data.frame (d) in the top-right window "Environment" tab 
-or call `View(d)`. 
+## Functions for showing parts of the tibble
 
+There are several functions that allow you to show specific parts of the tibble.
+
+```{r, output=FALSE}
+head(d)      # Show the first few rows
+tail(d)      # Show the last few rows
+colnames(d)  # Show the column names
+rownames(d)  # Show the row names (if they exist)
+ncol(d)      # Show the number of columns
+nrow(d)      # Show the number of rows
+```
+
+
+## Viewing the entire tibble
+
+If you want, you can ask R to show the entire tibble.
+You can do this in two ways:
+
+* In the top-right window in RStudio, open the Environment tab. Here you see all the objects you've created, including the tibble `d`. Click on `d` to view the entire tibble.
+* You can also do this using code, by running `View(d)`.
+
+This opens up a convenient window with a spreadsheet, where you can scroll through the data.
+Note that in the top-bar there is also a *Filter* button, and a *Search* bar, which can be very useful for exploring your data.
+
+
+
+# Importing data {#importing-data}
+
+The first step for any data analysis is to get your data into R.
+Accordingly, you'll need to learn how to import data from the most common file formats.
+The most important one to know about is the **csv** file, but you can also import data from **Excel**, **SPSS**, **Stata**, and many other formats.
+
+## CSV files
+
+One of the most common formats for storing and sharing rectangular data is the `csv` format.
+`CSV` stands for Comma Separated Values, meaning that the columns in the data are separated by commas.
+The benefit of CSV files is that they are so simple that any respectable statistical software can read them.
+Formats such as Excel or SPSS files are specifically designed for their respective software (you can't open an SPSS file in Excel).
+
+Tidyverse contains a function `read_csv` that allows you to read a csv file directly into a data frame.
+You just specify the location of the file, which can either be a filepath your own device, or a URL to download the data directly from the Internet!
+Here we download a data set about gun polls from the [data analytics site 538](https://fivethirtyeight.com/).
+
+```{r}
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"
+gunpolls <- read_csv(url)
+```
+
+When you import the CSV, R will print some information about the number of rows and columns, and the names of the columns.
+Always check this information to make sure that the data was imported correctly.
+
+
+
+::: {.callout-note title="How do I know the location of the file on my computer?" collapse="true"}
+
+If you've never worked with file paths before, you might be wondering how to know the location of the file on your computer.
+There are several easy ways to find it.
+Just pick one or two that you find most convenient.
+
+* **Using RStudio**. In the bottom-right window, you can go to the `Files` tab. Here you can browse to the file on your computer. Then when you click on the file, RStudio will understand that it's a CSV file, and give you the `Import Dataset` option. This will open a visual interface for importing the data. Note that it also gives you the code that you can use to import the data.
+* **From the file explorer**: Open the file explorer on your computer, and navigate to the file. You can then right-click on the file and select *Properties* (or some similar term). Here you'll find the *Location* of the file. **Even better**: you can right-click on the file and copy it, and when you then paste it into RStudio, it will give you the file path.
+* **run file.choose**. If you run the code `file.choose()`, R will open a file explorer window. Here you can browse to the file, and when you select it, R will print the file path in the console window.
+* **Using relative paths**: A file path can be both an *absolute path* (e.g., `C:/Users/username/Documents/data.csv`) or a *relative path* (e.g., `data.csv`). The relative path is relative to your [working directory](../getting-started/working-directory.qmd#working-directory). You can always check your working directory by running `getwd()`. If a file is in your current working directory, you can just specify the name of the file (e.g., `data.csv`). If the file is in a subfolder, you can specify this by using a forward slash (e.g., `subfolder/data.csv`).
+
+
+If you click "Import Dataset", then you'll get a window for importing the data.
+
+::: {.callout-warning title="?" collapse="true"}
+There are two important pitfalls to avoid when working with CSV files:
+
+### Pitfall 1: Corrupting the file by opening it in Excel
+
+When you download a CSV file from the internet, some computers might immediately ask you whether you want to open it in your default spreadsheet program (e.g., Excel, Numbers). 
+Do not do this, but instead download the file directly to your computer. If you open the file and accidentally save it, it can overwrite the CSV file with a different format. 
+Excel in particular has a habit of breaking CSV files this way. 
+
+### Pitfall 2: Different flavours of CSV files
+
+There are different flavours of CSV files (for historic reasons). 
+Even though we call them "comma separated values", the separator is sometimes a semicolon or a tab. 
+And depending on language, the decimal separator can be a comma or a dot. In particular, there are two most common versions of the CSV file. 
+This is why tidyverse has two `read_csv` functions: `read_csv` and `read_csv2`. In general, you can just try `read_csv` first, and if it doesn't work, try `read_csv2`.
+:::
 
 # Convert data.frame to tibble {#as-tibble}
 

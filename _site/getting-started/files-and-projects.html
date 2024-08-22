@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Basic data – Communication Science R Book</title>
+<title>Files and projects – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../data-management/filter-and-arrange-rows.html" rel="next">
-<link href="../data-management/select-and-rename-columns.html" rel="prev">
+<link href="../data-management/index.html" rel="next">
+<link href="../getting-started/packages.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/cleaning-data.html">Basic data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/files-and-projects.html">Files and projects</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -155,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/files-and-projects.html" class="sidebar-item-text sidebar-link">
+  <a href="../getting-started/files-and-projects.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Files and projects</span></a>
   </div>
 </li>
@@ -190,7 +224,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/cleaning-data.html" class="sidebar-item-text sidebar-link active">
+  <a href="../data-management/cleaning-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basic data</span></a>
   </div>
 </li>
@@ -348,15 +382,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#filesystem" id="toc-filesystem" class="nav-link active" data-scroll-target="#filesystem">A quick introduction to your file system</a>
+  <ul class="collapse">
+  <li><a href="#absolute-path" id="toc-absolute-path" class="nav-link" data-scroll-target="#absolute-path">Absolute path</a></li>
+  <li><a href="#relative-path" id="toc-relative-path" class="nav-link" data-scroll-target="#relative-path">Relative path</a></li>
+  </ul></li>
+  <li><a href="#projects" id="toc-projects" class="nav-link" data-scroll-target="#projects">Projects</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/cleaning-data.html">Basic data</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/files-and-projects.html">Files and projects</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Basic data</h1>
+<h1 class="title">Files and projects</h1>
+<p class="subtitle lead">Reading and writing files, and the convenience of projects</p>
 </div>
 
 
@@ -373,8 +419,55 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="filesystem" class="level1">
+<h1>A quick introduction to your file system</h1>
+<p>When working in R, you will often need to read and save files on your computer. Moreover, when you work with sensive data, such as survey responses, you really need to understand where your data is stored and how to access it. Here we provide a basic introduction to the file system on your computer.</p>
+<p>Computers organize files and directories (or folders) in a hierarchical structure that resembles a tree. This tree-like structure starts from a single <strong>root directory</strong> and branches out into subdirectories, which can contain more subdirectories or files. On windows the root directory is often <code>C:\</code>, while on macOS and Linux it’s simply <code>/</code>. Also It kind of looks like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span> (Root Directory) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>├── Documents</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>│   ├── Work</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>│   │   ├── survey.csv</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>│   │   └──  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>│   └── Personal</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>│       ├── Resume.pdf</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>│       └── Budget.xlsx</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>├── Downloads</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>│   ├── Report.docx</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>│   └── image.jpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Because of this structure, any file on your computer has a unique <strong>path</strong> that describes its location in the file system. For example, the path to the <code>Report.docx</code> file in the <code>Work</code> directory would be <code>/Documents/Work/survey.csv</code> (or <code>C:\Documents\Work\survey.csv</code> on Windows). In reality there are more layers, such as your user directory, but you get the gist.</p>
+<p>To write or read a file in R, you can specify the file path in two ways: using an <strong>absolute path</strong> (starting from the root directory) or a <strong>relative path</strong> (starting from the current working directory).</p>
+<section id="absolute-path" class="level2">
+<h2 class="anchored" data-anchor-id="absolute-path">Absolute path</h2>
+<p>An absolute path specifies the full path to a file or directory from the root directory. There are several ways to find out the absolute path of a file on your computer:</p>
+<ul>
+<li><strong>From the file explorer</strong>: Open the file explorer on your computer, and navigate to the file. You can then right-click on the file and select <em>Properties</em> (or some similar term). Here you’ll find the <em>Location</em> of the file. <strong>Even easier</strong>: you can right-click on the file and copy it, and when you then paste it into RStudio, it will paste the file path.</li>
+<li><strong>Using file.choose()</strong>: If you run the code <code>file.choose()</code>, R will open a file explorer window. Here you can browse to the file, and when you select it, R will print the file path in the console window.</li>
+<li><strong>Using RStudio</strong>: For some types of files, you can use the RStudio <em>data importer</em> interface. In the bottom-right window, you can go to the <code>Files</code> tab. Here you can browse to the file on your computer. If the file is something that you can read into R (e.g., a CSV file), RStudio will give you the <code>Import Dataset</code> option. This will open a visual interface for importing the data, that also shows the file path.</li>
+</ul>
+</section>
+<section id="relative-path" class="level2">
+<h2 class="anchored" data-anchor-id="relative-path">Relative path</h2>
+<p>Whenever you are working in R, you are always working in a specific directory on your computer. This directory is called the <strong>working directory</strong>. You can check the current working directory with the <code>getwd()</code> function: This prints the current working directory in your console.</p>
+<p>For example, say that our current working directory is <code>/Documents/Work</code> (in the example file system above). This allows us to access the <code>survey.csv</code> file with a relative path: <code>survey.csv</code>. Also, if we would now create a new file in R called <code>my_analysis.r</code>, it would be saved as <code>/Documents/Work/my_analysis.r</code>.</p>
+<p>In other words, by setting our working directory, we can avoid having to write out the full path to a file every time we want to read or write. There are two easy ways to set the working directory in R:</p>
+<ul>
+<li><strong>Manually</strong>: You can set the working directory with the <code>setwd()</code> function. For example, to set the working directory to <code>/Documents/Work</code>, you can run <code>setwd("/Documents/Work")</code>.</li>
+<li><strong>Using RStudio</strong>: In RStudio, you can set the working directory by clicking on <code>Session</code> in the menu bar, then <code>Set Working Directory</code>, and then <code>Choose Directory</code>. This will open a file explorer window where you can select the directory you want to set as the working directory.</li>
+</ul>
+</section>
+</section>
+<section id="projects" class="level1">
+<h1>Projects</h1>
+<p>Setting your working directory can be a good way to manage files on your on computer. However, if you are working on a project, it can be even more convenient to start an actual <strong>project</strong> in RStudio.</p>
+<p>In the top-right corner of your RStudio window, you can see a button labeled <strong>Project: (None)</strong>. If you click it, you can create a new project. You can create this project in a new or existing directory on your computer. This will mark the directory as a project, and in the top-right corner you will see the name of the project instead of <strong>Project: (None)</strong>.</p>
+<p>Projects are very convenient because they allow you to store all your files and data for a project in a single directory. The working directory is automatically set to the project directory, and you can easily access all files in the project from the RStudio interface. Moreover, if you share the project with others, they can easily open the project in RStudio and start working on it. As long as you make sure to save all files in the project directory, and use relative paths to access files, your code will work on any computer.</p>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -799,13 +892,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../data-management/select-and-rename-columns.html" class="pagination-link" aria-label="Select and rename columns">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Select and rename columns</span>
+      <a href="../getting-started/packages.html" class="pagination-link" aria-label="Packages">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Packages</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../data-management/filter-and-arrange-rows.html" class="pagination-link" aria-label="Filter and Arrange rows">
-        <span class="nav-page-text">Filter and Arrange rows</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../data-management/index.html" class="pagination-link" aria-label="Data management">
+        <span class="nav-page-text">Data management</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

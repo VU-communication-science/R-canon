@@ -3,19 +3,6 @@ title: Welcome to the tidyverse
 subtitle: A swiss army knife for data management
 order: 0
 ---
-::: {.callout-note title="The tidyverse versus base R" collapse="true"}
-Many of the things that the tidyverse allows you to do are also possible in *base R* (i.e. the basic installation of R).
-Base R also provides functions for importing, managing and visualizing data.
-So why do we need the tidyverse?
-
-The tidyverse is an *opinionated* framework, which means that it doesn't just *enable* you to do things, but also suggests how you *should* do things.
-The authors have thought long and hard about how to make data management easy, effective and intuitive (they have even [written papers](https://www.jstatsoft.org/article/view/v059i10) about it).
-This not only makes the tidyverse much easier and intuitive to learn, but also makes sure everyone writes their code in the same way, which improves transparency and shareability.
-
-This is different from base R, which is designed to be a highly flexible programming language, that allows you to do almost anything.
-Accordingly, it is still worthwhile to learn base R at some point if you want to specialize more in computational research methods.
-But for our Communication Science program, and for many data science applications in general, you can do all your data management in the tidyverse.
-:::
 
 # Installing the tidyverse {#installing-the-tidyverse}
 
@@ -68,4 +55,18 @@ In the following code, we use this notation to specifically open the help page f
 ?stats::filter()
 ```
 
+:::
+
+::: {.callout-note title="The tidyverse versus base R" collapse="true"}
+Many of the things that the tidyverse allows you to do are also possible in *base R* (i.e. the basic installation of R).
+Base R also provides functions for importing, managing and visualizing data.
+So why do we need the tidyverse?
+
+The tidyverse is an *opinionated* framework, which means that it doesn't just *enable* you to do things, but also suggests how you *should* do things.
+The authors have thought long and hard about how to make data management easy, effective and intuitive (they have even [written papers](https://www.jstatsoft.org/article/view/v059i10) about it).
+This not only makes the tidyverse much easier and intuitive to learn, but also makes sure everyone writes their code in the same way, which improves transparency and shareability.
+
+This is different from base R, which is designed to be a highly flexible programming language, that allows you to do almost anything.
+Accordingly, it is still worthwhile to learn base R at some point if you want to specialize more in computational research methods.
+But for our Communication Science program, and for many data science applications in general, you can do all your data management in the tidyverse.
 :::

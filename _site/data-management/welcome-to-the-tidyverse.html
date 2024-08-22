@@ -187,6 +187,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Packages</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/files-and-projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Files and projects</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -212,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/select-and-rename.html" class="sidebar-item-text sidebar-link">
+  <a href="../data-management/select-and-rename-columns.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Select and rename columns</span></a>
   </div>
 </li>
@@ -224,8 +230,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Select and filter</span></a>
+  <a href="../data-management/filter-and-arrange-rows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter and Arrange rows</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -357,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Tips and Best Practices</span></a>
+ <span class="menu-text">Good to Know</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -365,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tips-and-best-practices/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
+  <a href="../good-to-know/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Function Help Pages</span></a>
   </div>
 </li>
@@ -381,7 +387,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-packages-does-the-tidyverse-contain" id="toc-what-packages-does-the-tidyverse-contain" class="nav-link active" data-scroll-target="#what-packages-does-the-tidyverse-contain">What packages does the tidyverse contain?</a></li>
+  <li><a href="#installing-the-tidyverse" id="toc-installing-the-tidyverse" class="nav-link active" data-scroll-target="#installing-the-tidyverse">Installing the tidyverse</a>
+  <ul class="collapse">
+  <li><a href="#what-packages-does-the-tidyverse-contain" id="toc-what-packages-does-the-tidyverse-contain" class="nav-link" data-scroll-target="#what-packages-does-the-tidyverse-contain">What packages does the tidyverse contain?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -391,6 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/welcome-to-the-tidyverse.html">Welcome to the tidyverse</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Welcome to the tidyverse</h1>
+<p class="subtitle lead">A swiss army knife for data management</p>
 </div>
 
 
@@ -407,24 +417,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="The tidyverse versus base R">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-The tidyverse versus base R
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Many of the things that the tidyverse allows you to do are also possible in <em>base R</em> (i.e.&nbsp;the basic installation of R). Base R also provides functions for importing, managing and visualizing data. So why do we need the tidyverse?</p>
-<p>The tidyverse is an <em>opinionated</em> framework, which means that it doesn’t just <em>enable</em> you to do things, but also suggests how you <em>should</em> do things. The authors have thought long and hard about how to make data management easy, effective and intuitive (they have even <a href="https://www.jstatsoft.org/article/view/v059i10">written papers</a> about it). This not only makes the tidyverse much easier and intuitive to learn, but also makes sure everyone writes their code in the same way, which improves transparency and shareability.</p>
-<p>This is different from base R, which is designed to be a highly flexible programming language, that allows you to do almost anything. Accordingly, it is still worthwhile to learn base R at some point if you want to specialize more in computational research methods. But for our Communication Science program, and for many data science applications in general, you can do all your data management in the tidyverse.</p>
-</div>
-</div>
-</div>
+<section id="installing-the-tidyverse" class="level1">
+<h1>Installing the tidyverse</h1>
 <p>The <a href="https://www.tidyverse.org">tidyverse</a> is collection of R packages that makes it much easier to import, manage and visualize data. To use the tidyverse, you only need to open the <code>tidyverse</code> package, and it will automatically open all of the tidyverse R packages.</p>
 <p>Like any normal package, you need to first install it once:</p>
 <div class="cell">
@@ -456,7 +450,7 @@ The tidyverse versus base R
 <li><a href="https://ggplot2.tidyverse.org/">ggplot2</a>. One of the best visualization tools out there. Check out the <a href="https://r-graph-gallery.com/">gallery</a></li>
 </ul>
 <div class="callout callout-style-default callout-warning callout-titled" title="What about the 'Conflicts'?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -465,7 +459,7 @@ What about the ‘Conflicts’?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>When opening the tidyverse, and when opening packages in general, you can get a <code>Conflicts</code> warning. A very common warning for the tidyverse is:</p>
 <pre><code>✖ dplyr::filter() masks stats::filter()
@@ -480,8 +474,27 @@ What about the ‘Conflicts’?
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="The tidyverse versus base R">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The tidyverse versus base R
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Many of the things that the tidyverse allows you to do are also possible in <em>base R</em> (i.e.&nbsp;the basic installation of R). Base R also provides functions for importing, managing and visualizing data. So why do we need the tidyverse?</p>
+<p>The tidyverse is an <em>opinionated</em> framework, which means that it doesn’t just <em>enable</em> you to do things, but also suggests how you <em>should</em> do things. The authors have thought long and hard about how to make data management easy, effective and intuitive (they have even <a href="https://www.jstatsoft.org/article/view/v059i10">written papers</a> about it). This not only makes the tidyverse much easier and intuitive to learn, but also makes sure everyone writes their code in the same way, which improves transparency and shareability.</p>
+<p>This is different from base R, which is designed to be a highly flexible programming language, that allows you to do almost anything. Accordingly, it is still worthwhile to learn base R at some point if you want to specialize more in computational research methods. But for our Communication Science program, and for many data science applications in general, you can do all your data management in the tidyverse.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->

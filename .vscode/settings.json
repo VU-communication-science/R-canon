@@ -1,5 +1,5 @@
 {
-    "search.exclude": {
-        "**.html"
-    }
+  "search.exclude": {
+    "**.html": true
+  }
 }

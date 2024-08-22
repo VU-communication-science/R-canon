@@ -187,6 +187,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Packages</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/files-and-projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Files and projects</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -357,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Tips and Best Practices</span></a>
+ <span class="menu-text">Good to Know</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -365,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tips-and-best-practices/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
+  <a href="../good-to-know/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Function Help Pages</span></a>
   </div>
 </li>
@@ -381,8 +387,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#subsetting-rows-with-filter" id="toc-subsetting-rows-with-filter" class="nav-link active" data-scroll-target="#subsetting-rows-with-filter">Subsetting rows with filter()</a></li>
-  <li><a href="#sorting-rows-with-arrange" id="toc-sorting-rows-with-arrange" class="nav-link" data-scroll-target="#sorting-rows-with-arrange">Sorting rows with arrange()</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link active" data-scroll-target="#filter">Subsetting rows with filter()</a></li>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange">Sorting rows with arrange()</a></li>
   </ul>
 </nav>
     </div>
@@ -414,7 +420,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="subsetting-rows-with-filter" class="level1">
+<section id="filter" class="level1">
 <h1>Subsetting rows with filter()</h1>
 <p>The <code>filter</code> function can be used to select a subset of rows. For example, the following code selects only the rows where the <code>Species</code> column is equal to <code>setosa</code>. The first argument of the <code>filter</code> function is the tibble you want to filter. The second argument is the condition that should be met for a row to be included in the result. Here we use the <code>==</code> operator to say that the value in the <code>Species</code> column should be equal to <code>setosa</code>.</p>
 <div class="cell">
@@ -529,7 +535,7 @@ A deeper understanding of the filter condition
 </div>
 </div>
 </section>
-<section id="sorting-rows-with-arrange" class="level1">
+<section id="arrange" class="level1">
 <h1>Sorting rows with arrange()</h1>
 <p>The <code>arrange</code> function can be used to sort the rows of a tibble. For example, if we want to sort the <code>iris</code> dataset by the <code>Sepal.Length</code> column:</p>
 <div class="cell">
