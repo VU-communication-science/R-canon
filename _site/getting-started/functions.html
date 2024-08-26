@@ -189,8 +189,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/projects-and-workspaces.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Projects and workspaces</span></a>
+  <a href="../getting-started/files-and-projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Files and projects</span></a>
   </div>
 </li>
       </ul>
@@ -388,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#optional-arguments" id="toc-optional-arguments" class="nav-link active" data-scroll-target="#optional-arguments">Optional arguments</a></li>
-  <li><a href="#using-pipes" id="toc-using-pipes" class="nav-link" data-scroll-target="#using-pipes">Using pipes</a></li>
+  <li><a href="#using-pipeond-way-is-to-pipe-the-first-argument-into-the-function-argument1-function_nameargument2-..." id="toc-using-pipeond-way-is-to-pipe-the-first-argument-into-the-function-argument1-function_nameargument2-..." class="nav-link" data-scroll-target="#using-pipeond-way-is-to-pipe-the-first-argument-into-the-function-argument1-function_nameargument2-...">Using pipeond way is to <strong>pipe the first argument into the function</strong>: <code>argument1 |&gt; function_name(argument2, ...)</code></a></li>
   </ul>
 </nav>
     </div>
@@ -421,12 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>performing statistical tests</li>
 <li>visualizing data</li>
 </ul>
-<p>A function in R has the form: <code>output = function_name(argument1, argument2, ...)</code></p>
-<ul>
-<li><strong>function_name</strong> is a name to indicate which function you want to use. It is followed by parentheses.</li>
-<li><strong>arguments</strong> are the input of the function, and are inserted within the parentheses.</li>
-<li><strong>output</strong> is anything that is returned by the function.</li>
-</ul>
+<p>A function in R has the form: <code>output = function_name(argument1, argument2, ...)</code> * <strong>function_name</strong> is a name to indicate which function you want to use. It is followed by parentheses. * <strong>arguments</strong> are the input of the function, and are inserted within the parentheses. * <strong>output</strong> is anything that is returned by the function.</p>
 <p>For example, the function <code>c</code> <em>c</em>ombines multiple values into a <em>vector</em>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -486,13 +481,8 @@ How do I know what arguments a function has?
 </div>
 </div>
 </section>
-<section id="using-pipes" class="level2">
-<h2 class="anchored" data-anchor-id="using-pipes">Using pipes</h2>
-<p>There are two ways for using functions.</p>
-<ul>
-<li>The first is the one shown above, where we <strong>put all the arguments between the parentheses</strong>: <code>function_name(argument1, argument2, ...)</code>.</li>
-<li>The second way is to <strong>pipe the first argument into the function</strong>: <code>argument1 |&gt; function_name(argument2, ...)</code></li>
-</ul>
+<section id="using-pipeond-way-is-to-pipe-the-first-argument-into-the-function-argument1-function_nameargument2-..." class="level2">
+<h2 class="anchored" data-anchor-id="using-pipeond-way-is-to-pipe-the-first-argument-into-the-function-argument1-function_nameargument2-...">Using pipeond way is to <strong>pipe the first argument into the function</strong>: <code>argument1 |&gt; function_name(argument2, ...)</code></h2>
 <p>If this is your first time seeing pipes, you’re probably wondering why you would want to do this? Why bother having two ways to do the exact same thing? The reason is that when writing code, you shouldn’t just think about <strong>what the code does</strong>, but also about <strong>how easy the code is to read</strong>. This not only helps you prevent mistakes, but also makes your analysis <strong>transparent</strong>.</p>
 <p>As you’ll see later, you’ll encounter many cases where your analysis requires you to string together multiple functions. In these cases, pipes make your code much easier to read. let’s rewrite our code from above using the <strong>pipe</strong> notation:</p>
 <div class="cell">

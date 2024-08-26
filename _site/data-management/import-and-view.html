@@ -387,15 +387,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tibble" id="toc-tibble" class="nav-link active" data-scroll-target="#tibble">Data in a tibble format</a>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link active" data-scroll-target="#importing-data">Importing data</a>
   <ul class="collapse">
-  <li><a href="#printing-the-tibble" id="toc-printing-the-tibble" class="nav-link" data-scroll-target="#printing-the-tibble">Printing the tibble</a></li>
-  <li><a href="#functions-for-showing-parts-of-the-tibble" id="toc-functions-for-showing-parts-of-the-tibble" class="nav-link" data-scroll-target="#functions-for-showing-parts-of-the-tibble">Functions for showing parts of the tibble</a></li>
-  <li><a href="#viewing-the-entire-tibble" id="toc-viewing-the-entire-tibble" class="nav-link" data-scroll-target="#viewing-the-entire-tibble">Viewing the entire tibble</a></li>
+  <li><a href="#csv-files" id="toc-csv-files" class="nav-link" data-scroll-target="#csv-files">CSV files</a>
+  <ul class="collapse">
+  <li><a href="#importing-data-from-a-url" id="toc-importing-data-from-a-url" class="nav-link" data-scroll-target="#importing-data-from-a-url">Importing data from a URL</a></li>
+  <li><a href="#writing-data-to-a-csv-file-on-your-computer" id="toc-writing-data-to-a-csv-file-on-your-computer" class="nav-link" data-scroll-target="#writing-data-to-a-csv-file-on-your-computer">Writing data to a CSV file on your computer</a></li>
   </ul></li>
-  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing data</a>
+  <li><a href="#reading-other-file-formats-like-excel-and-spss" id="toc-reading-other-file-formats-like-excel-and-spss" class="nav-link" data-scroll-target="#reading-other-file-formats-like-excel-and-spss">Reading other file formats, like Excel and SPSS</a></li>
+  </ul></li>
+  <li><a href="#as-tibble" id="toc-as-tibble" class="nav-link" data-scroll-target="#as-tibble">Convert data.frame to tibble</a></li>
+  <li><a href="#viewing-data" id="toc-viewing-data" class="nav-link" data-scroll-target="#viewing-data">Viewing and exploring data</a>
   <ul class="collapse">
-  <li><a href="#csv-files" id="toc-csv-files" class="nav-link" data-scroll-target="#csv-files">CSV files</a></li>
+  <li><a href="#viewing-a-summary-of-every-column" id="toc-viewing-a-summary-of-every-column" class="nav-link" data-scroll-target="#viewing-a-summary-of-every-column">Viewing a summary of every column</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -423,112 +427,140 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="tibble" class="level1">
-<h1>Data in a tibble format</h1>
-<p>In this tutorial we will use the <code>tidyverse</code> package to import a <strong>data frame</strong> into R as a <code>tibble</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>By <strong>data frame</strong> we mean data consisting of rows and columns (e.g., a spreadsheet in <em>Excel</em> or <em>Numbers</em>). In the most typical use case, rows represent cases in your data (e.g., respondents, participants) and columns represent variables (e.g., age, gender). In R this type of data is called a <code>data.frame</code>. The tidyverse has its own special version of a data.frame called a <code>tibble</code> (a “tidy table”). This is the core data structure that we’ll be using in this book, and it will form the basis of all your data management, analysis, and visualization.</p>
-<p>Let’s start simpe. The following code creates a tibble containing respondents, their gender, and their height. We’ll call our tibble <strong>d</strong> (short for data).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">resp_id =</span> <span class="fu">c</span>(  <span class="dv">1</span>,   <span class="dv">2</span>,   <span class="dv">3</span>,   <span class="dv">4</span>), </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">gender  =</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>), </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">height  =</span> <span class="fu">c</span>(<span class="dv">176</span>, <span class="dv">165</span>, <span class="dv">172</span>, <span class="dv">160</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The name <code>d</code> now refers to the entire tibble. Compared to spreadsheet software like Excel, we do not automatically see the data. This is actually a benefit, because it means working with large data sets won’t slow down your computer. Instead, we have several ways to view only the parts of the data that we’re interested in.</p>
-<section id="printing-the-tibble" class="level2">
-<h2 class="anchored" data-anchor-id="printing-the-tibble">Printing the tibble</h2>
-<p>The simplest way to view the data is to just print the tibble by typing <code>d</code> and running the code:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 3
-  resp_id gender height
-    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
-1       1 M         176
-2       2 M         165
-3       3 F         172
-4       4 F         160</code></pre>
-</div>
-</div>
-<p>This will print a textual representation of the tibble in the console. If the tibble is too large to fit on the screen, R will only print the first few rows and columns, so you don’t have to worry about blowing up your computer. Note that the tibble also reports the number of rows and columns <code>(4 x 3)</code>, and below the names of the columns it shows the data type. <code>&lt;dbl&gt;</code> stands for double, which is a numeric value, and <code>&lt;chr&gt;</code> stands for character, which is a textual value.</p>
-</section>
-<section id="functions-for-showing-parts-of-the-tibble" class="level2">
-<h2 class="anchored" data-anchor-id="functions-for-showing-parts-of-the-tibble">Functions for showing parts of the tibble</h2>
-<p>There are several functions that allow you to show specific parts of the tibble.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)      <span class="co"># Show the first few rows</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(d)      <span class="co"># Show the last few rows</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(d)  <span class="co"># Show the column names</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(d)  <span class="co"># Show the row names (if they exist)</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(d)      <span class="co"># Show the number of columns</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(d)      <span class="co"># Show the number of rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="viewing-the-entire-tibble" class="level2">
-<h2 class="anchored" data-anchor-id="viewing-the-entire-tibble">Viewing the entire tibble</h2>
-<p>If you want, you can ask R to show the entire tibble. You can do this in two ways:</p>
-<ul>
-<li>In the top-right window in RStudio, open the Environment tab. Here you see all the objects you’ve created, including the tibble <code>d</code>. Click on <code>d</code> to view the entire tibble.</li>
-<li>You can also do this using code, by running <code>View(d)</code>.</li>
-</ul>
-<p>This opens up a convenient window with a spreadsheet, where you can scroll through the data. Note that in the top-bar there is also a <em>Filter</em> button, and a <em>Search</em> bar, which can be very useful for exploring your data.</p>
-</section>
-</section>
-<section id="importing-data" class="level1">
-<h1>Importing data</h1>
-<p>The first step for any data analysis is to get your data into R. Accordingly, you’ll need to learn how to import data from the most common file formats. The most important one to know about is the <strong>csv</strong> file, but you can also import data from <strong>Excel</strong>, <strong>SPSS</strong>, <strong>Stata</strong>, and many other formats.</p>
-<section id="csv-files" class="level2">
-<h2 class="anchored" data-anchor-id="csv-files">CSV files</h2>
-<p>One of the most common formats for storing and sharing rectangular data is the <code>csv</code> format. <code>CSV</code> stands for Comma Separated Values, meaning that the columns in the data are separated by commas. The benefit of CSV files is that they are so simple that any respectable statistical software can read them. Formats such as Excel or SPSS files are specifically designed for their respective software (you can’t open an SPSS file in Excel).</p>
-<p>Tidyverse contains a function <code>read_csv</code> that allows you to read a csv file directly into a data frame. You just specify the location of the file, which can either be a filepath your own device, or a URL to download the data directly from the Internet! Here we download a data set about gun polls from the <a href="https://fivethirtyeight.com/">data analytics site 538</a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gunpolls <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 57 Columns: 9
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (6): Question, Start, End, Pollster, Population, URL
-dbl (3): Support, Republican Support, Democratic Support
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
-<p>When you import the CSV, R will print some information about the number of rows and columns, and the names of the columns. Always check this information to make sure that the data was imported correctly.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="How do I know the location of the file on my computer?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-How do I know the location of the file on my computer?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>If you’ve never worked with file paths before, you might be wondering how to know the location of the file on your computer. There are several easy ways to find it. Just pick one or two that you find most convenient.</p>
-<ul>
-<li><strong>Using RStudio</strong>. In the bottom-right window, you can go to the <code>Files</code> tab. Here you can browse to the file on your computer. Then when you click on the file, RStudio will understand that it’s a CSV file, and give you the <code>Import Dataset</code> option. This will open a visual interface for importing the data. Note that it also gives you the code that you can use to import the data.</li>
-<li><strong>From the file explorer</strong>: Open the file explorer on your computer, and navigate to the file. You can then right-click on the file and select <em>Properties</em> (or some similar term). Here you’ll find the <em>Location</em> of the file. <strong>Even better</strong>: you can right-click on the file and copy it, and when you then paste it into RStudio, it will give you the file path.</li>
-<li><strong>run file.choose</strong>. If you run the code <code>file.choose()</code>, R will open a file explorer window. Here you can browse to the file, and when you select it, R will print the file path in the console window.</li>
-<li><strong>Using relative paths</strong>: A file path can be both an <em>absolute path</em> (e.g., <code>C:/Users/username/Documents/data.csv</code>) or a <em>relative path</em> (e.g., <code>data.csv</code>). The relative path is relative to your <a href="../getting-started/working-directory.qmd#working-directory">working directory</a>. You can always check your working directory by running <code>getwd()</code>. If a file is in your current working directory, you can just specify the name of the file (e.g., <code>data.csv</code>). If the file is in a subfolder, you can specify this by using a forward slash (e.g., <code>subfolder/data.csv</code>).</li>
-</ul>
-<p>If you click “Import Dataset”, then you’ll get a window for importing the data.</p>
-<div class="callout callout-style-default callout-warning callout-titled" title="?">
+<div class="callout callout-style-default callout-note callout-titled" title="Short code summary">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-?
+Short code summary
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To read a CSV file, you can use the <code>read_csv</code> function from the <code>readr</code> package, which is included in the <code>tidyverse</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To see the data, you can just type <code>d</code> in the console, or use the <code>View</code> function to open a spreadsheet view.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To quickly get detailed information about your variables, you can use the <code>dfSummary</code> function from the <code>summarytools</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(<span class="fu">dfSummary</span>(d)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<section id="importing-data" class="level1">
+<h1>Importing data</h1>
+<p>R can read files from many types of file formats. Here we will focus on the <strong>csv</strong> format, which is one of the most common formats for storing and sharing rectangular data (i.e., data in rows and columns). Once you know how to read a CSV file, you can easily read other file formats as well (e.g., <strong>Excel</strong>, <strong>SPSS</strong>).</p>
+<section id="csv-files" class="level2">
+<h2 class="anchored" data-anchor-id="csv-files">CSV files</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="What is a CSV file?">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is a CSV file?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>CSV</code> stands for Comma Separated Values. It is a simple text file, that you can open in any text editor. In order to store a data frame (i.e.&nbsp;data in rows and colums), it simply read every line as a row, and separates the columns by a comma (or sometimes another symbol, like a semicolon). For example, the following CSV file contains a data frame with three columns: <code>resp_id</code>, <code>gender</code>, and <code>height</code>. The first row contains the column names, and the following rows contain the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>resp_id,gender,height</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>,M,<span class="dv">176</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>,M,<span class="dv">165</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>,F,<span class="dv">172</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>,F,<span class="dv">160</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The benefit of this simplicity is that any respectable spreadsheet or statistical software (e.g., Excel, Google sheets, SPSS, Stata) can read it. This makes CSV files a great way to share and store data.</p>
+</div>
+</div>
+</div>
+<p>The Tidyverse contains a function <code>read_csv</code> that allows you to read a csv file directly into a <code>tibble</code>. You can read a file from your own computer, but also directly from the internet. We’ll walk you through this in three steps:</p>
+<ul>
+<li>Import data from the internet</li>
+<li>Write data to a CSV file on your computer</li>
+<li>Read data from this CSV file back into R</li>
+</ul>
+<section id="importing-data-from-a-url" class="level3">
+<h3 class="anchored" data-anchor-id="importing-data-from-a-url">Importing data from a URL</h3>
+<p>For this example we download data about gun polls from the data analytics site <a href="https://fivethirtyeight.com/">fivethirtyeight</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gunpolls <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Make sure to always check whether the data was imported correctly:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gunpolls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can also view the data in a larger spreadsheet-like view by using the <code>View</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(gunpolls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="writing-data-to-a-csv-file-on-your-computer" class="level3">
+<h3 class="anchored" data-anchor-id="writing-data-to-a-csv-file-on-your-computer">Writing data to a CSV file on your computer</h3>
+<p>You can use the <code>write_csv</code> function to write a tibble to a CSV file on your computer. You need to specify the <a href="../getting-started/files-and-projects.html#filesystem">file path</a> where you want to save it. If you just provide a file name, it will be saved in your current working directory.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Finding and changing your working directory">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Finding and changing your working directory
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Your working directory is basically the location (i.e.&nbsp;directory) on your computer where R is currently looking for files. Here we provide a short refresher for how to find and change your working directory. For a more detailed explanation, see the <a href="../getting-started/files-and-projects.html#filesystem">file system introduction</a>.</p>
+<p>To find your working directory, you can use the <code>getwd()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/home/kasper/projects/R-canon/data-management"</code></pre>
+</div>
+</div>
+<p>The <strong>path</strong> you see here is a directory (i.e.&nbsp;a folder) on your computer. If you write a file without specifying a specific location, it will be saved in this directory. A good practise is therefore to <strong>create a directory</strong> where you do all your R stuff, and set this as your working directory.</p>
+<p>There are two ways to set your working directory:</p>
+<ul>
+<li><strong>Manually</strong>: You can set the working directory with the <code>setwd()</code> function.<br>
+</li>
+<li><strong>Using RStudio</strong>: In RStudio, you can set the working directory by clicking on <code>Session</code> in the menu bar, then <code>Set Working Directory</code>, and then <code>Choose Directory</code>. This will open a file explorer window where you can select the directory you want to set as the working directory.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(gunpolls, <span class="st">"gunpoll_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will write the <code>gunpolls</code> tibble to a file called <code>gunpoll_data.csv</code> in your current working directory. Try finding it in your file system!</p>
+<p>Now let’s read this file back into R. Since the file is in your working directory, you can just specify the file name:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>gunpolls2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"gunpoll_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can check and verify that the data (gunpolls2) is indeed identical to the original data (gunpolls).</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="CSV pitfalls to avoid">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+CSV pitfalls to avoid
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>There are two important pitfalls to avoid when working with CSV files:</p>
 <section id="pitfall-1-corrupting-the-file-by-opening-it-in-excel" class="level3">
@@ -542,12 +574,32 @@ How do I know the location of the file on my computer?
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="reading-other-file-formats-like-excel-and-spss" class="level2">
+<h2 class="anchored" data-anchor-id="reading-other-file-formats-like-excel-and-spss">Reading other file formats, like Excel and SPSS</h2>
+<p>Not that you know how to read and write CSV files, reading other file formats is a piece of cake. It works almost the same way, but you just need to download a package that can read the file format.</p>
+<p>For example, to read an Excel file, you can use the <code>readxl</code> package, which provides the <code>read_excel</code> function. To read an SPSS file, you can use the <code>haven</code> package, which provides the <code>read_sav</code> function.</p>
+</section>
+</section>
 <section id="as-tibble" class="level1">
 <h1>Convert data.frame to tibble</h1>
 <p>Sometimes you already have a data.frame in R, and you just want to convert it to a tibble. For this you can use the <code>as_tibble</code> function.</p>
-<p>For example, R comes with several built-in data.frames, that are usefull if you want to quickly test something. One of these is the <code>iris</code> data set, which contains measurements of flowers. If you want to convert this to a tibble, you can use the <code>as_tibble</code> function:</p>
+<p>For example, R comes with several built-in data.frames, that are usefull if you want to quickly test something. One of these is the <code>iris</code> data set, which contains measurements of flowers. If you print the <code>iris</code> data.frame, you’ll see that it is a data.frame, but doesn’t have the nice formatting that a tibble has. (We actually won’t print it here, because it’s too large to fit on the screen.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can also ask R for the <code>class</code> of the object, which will tell you that it is a data.frame:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+<p>To convert this to a tibble, you can use the <code>as_tibble</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>iris_tibble <span class="ot">=</span> <span class="fu">as_tibble</span>(iris)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>iris_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 150 × 5
    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -565,24 +617,738 @@ How do I know the location of the file on my computer?
 # ℹ 140 more rows</code></pre>
 </div>
 </div>
-<section id="iris" class="level2">
-<h2 class="anchored" data-anchor-id="iris">The iris dataset</h2>
-<p>We’ll be using this <code>iris</code> dataset in some of the next tutorials, so let’s see what data it contains. From the previous output we see that there are five columns:</p>
+</section>
+<section id="viewing-data" class="level1">
+<h1>Viewing and exploring data</h1>
+<p>If you want, you can ask R to show the entire tibble. You can do this in two ways:</p>
 <ul>
-<li><code>Sepal.Length</code>: the length of the sepal (the green leaf-like part of the flower)</li>
-<li><code>Sepal.Width</code>: the width of the sepal</li>
-<li><code>Petal.Length</code>: the length of the petal (the colored part of the flower)</li>
-<li><code>Petal.Width</code>: the width of the petal</li>
-<li><code>Species</code>: the species of the flower</li>
+<li>In the top-right window in RStudio, open the Environment tab. Here you see all the objects you’ve created, including the tibble <code>d</code>. Click on <code>d</code> to view the entire tibble.</li>
+<li>You can also do this using code, by running <code>View(d)</code>.</li>
 </ul>
-<p>The data has 150 rows, so it contains measurements of 150 flowers. The sepal and petal columns are numeric, and measured in centimeters. The species column is a factor with three levels: <code>setosa</code>, <code>versicolor</code>, and <code>virginica</code>.</p>
+<p>This opens up a convenient window with a spreadsheet, where you can scroll through the data. Note that in the top-bar there is also a <em>Filter</em> button, and a <em>Search</em> bar, which can be very useful for exploring your data.</p>
+<section id="viewing-a-summary-of-every-column" class="level2">
+<h2 class="anchored" data-anchor-id="viewing-a-summary-of-every-column">Viewing a summary of every column</h2>
+<p>Often, the main information that you’re interested in is the summary of each column. You can compute this yourself (as we’ll show later), but there is also a nice package called <code>summarytools</code> that can generate a handy overview. You can create the summary as follows (remember to install the package first):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dfSummary</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will print the summary in your console, but you can also render it in a more readable format with the <code>view</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(<span class="fu">dfSummary</span>(d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="container st-container">
+<h3 class="anchored">Data Frame Summary</h3>
+<h4 class="anchored">d</h4>
+<strong>Dimensions</strong>: 57 x 9
+  <br><strong>Duplicates</strong>: 0
+<br>
+<div style="max-height:500px;overflow-y:scroll;margin:10px 2px">
+  
+<table class="table table-striped table-bordered st-table st-table-striped st-table-bordered st-multiline caption-top table-sm small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>No</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Variable</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Stats / Values</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Freqs (% of Valid)</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Graph</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Valid</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Missing</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Question [character]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">1. age-21</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">2. arm-teachers</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">3. background-checks</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">4. ban-assault-weapons</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">5. ban-high-capacity-magazin</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">6. mental-health-own-gun</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">7. repeal-2nd-amendment</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">8. stricter-gun-laws</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">7</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">12.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">6</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">10.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">7</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">12.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">12</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">21.1%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">7</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">12.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">6</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">10.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">1</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">1.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">11</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">19.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAACwAAADECAQAAABOmgtlAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gIGg0LEbiLpR8AAADySURBVHja7dpBDoIwEAVQMJzOE+gJ9QReT7dFrbRAkdE3O9PkxXxM5gfb37s2c2jkBoSH9MOlKPBTnztJD4bx0XGSvX07CjAYDAb/OPy0mkoXz/T06f5cWl7SZRo84+tkFvlO8RGe6hU1jzZexmAwGAzeB6xXtIcre0XXlXYL7yvAYDAYPG+s/8DwjF6Rn3MScnWvyM/4FxUvYzAYDAZXjV4RGPa+AgwGg8E7g/WKwLD7FWAwGAzeGaxXtIffrP/yFV/xjZf8XbFRFGAwGAz+L1ivaDCrXYN4biMrXYN4fejxMgaDwWDwPuBt3leEiCIe/ADr/C6elwrHiAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">57 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">Start [character]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">1. 2/20/18</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">2. 2/27/18</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">3. 3/1/18</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">4. 2/15/18</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">5. 2/18/18</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">6. 2/25/18</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">7. 3/3/18</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">8. 2/16/18</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">9. 2/22/18</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">10. 3/4/18</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">[ 2 others ]</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">12</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">21.1%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">8</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">14.0%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">7</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">12.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">4</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">7.0%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">2</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">3.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">2</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">3.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">2</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">3.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAACwAAAEKCAQAAADDD38VAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gIGg0LEbiLpR8AAAEUSURBVHja7dZBCsIwEAXQVjydJ9AT6gl6PV1aJLFpSsoMvOyK8BZ/hP/n9zTmXQa5CeHr+uN5MPDHXIGn6XaAXc6JAgwGg8Ex4J8GWfqUwpvXNXd0Y6wqL2HG5xzvtSPk+/z/985dsf3vyZcxGAwGg3c9u2I83FH/W8VfgFvqv/W8+TIGg8FgcAzYrhgPN++KtjVRgeu7Yv9R82UMBoPB4BiwXTEetivAYDAYHAxW/4lhuwIMBoPBwWC7IjFsV4DBYDA4GGxXjIcb6n9v8RfgUv33njNfxmAwGAyOAdsV4+HqruhbExX4uyuOHzFfxmAwGAyOAdsV42G7AgwGg8HBYPWfGLYrwGAwGBwMPmdXpIgiH/wBSDtBEa7F6eQAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">57 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">End [character]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">1. 3/5/18</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">2. 2/23/18</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">3. 2/28/18</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">4. 2/19/18</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">5. 2/20/18</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">6. 2/27/18</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">7. 2/24/18</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">8. 2/26/18</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">9. 3/6/18</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">10. 2/18/18</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">[ 3 others ]</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">11</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">19.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">9</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">15.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">9</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">15.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">8</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">14.0%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">2</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">3.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">2</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">3.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">2</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">3.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">1</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">1.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">3</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">5.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAACoAAAEKCAQAAADOEQ9SAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gIGg0LEbiLpR8AAAEeSURBVHja7dxBbsIwEEDRBPV0PQGcsD0B12uXRBC7xB5XHuXNDhZPZBLxgxSx/izxcxlgJkI/ti++OhZ8Wwvosnw2kvfxhw+FQqHQmHn65r+3KU+zbrPUcw+wSVSinY4/Ud8Hl3pd99/v6H75SsmzUygUCj0hqvvxI9FQKBQKnRXV/fhp7n6p+S/o+92vn9A8O4VCoVBozOh+/Lzd/Vrnq2i5+8dOYJ6dQqFQ6AlRiU6C6j4UCoVCA0b3k6DF7h/pfBV9dL/vKsizUygUCj0hqvvxI9FQKBQKnRXV/fjRfSgUCoXOiup+/Ox0v6f4u5+09d9w/uHwoVAoFDoElehZ0T8ewWu7B6g+gtd6LeTZKRQKhZ4QHf/TfOrDz4P+AjPKQFe7SzNVAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">57 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">Pollster [character]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">1. YouGov</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">2. Morning Consult</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">3. Quinnipiac</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">4. NPR/Ipsos</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">5. CNN/SSRS</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">6. CBS News</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">7. Rasmussen</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">8. Suffolk</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">9. ABC/Washington Post</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">10. Harris Interactive</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">[ 4 others ]</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">12</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">21.1%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">11</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">19.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">8</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">14.0%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">7</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">12.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">4</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">7.0%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">2</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">3.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">2</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">3.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">1</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">1.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">1</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">1.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">4</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">7.0%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAACwAAAEKCAQAAADDD38VAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gIGg0LEbiLpR8AAAEzSURBVHja7dzLbcMwEAVAKUh1qSCp0KnA7TlHKzZp8WMKXGj2psvAeCSwD7Cg9baMmY9BbkD4c/tw6Qz8Z83Ay/LVwV6PiQIMBoPBc8APG+TapiRm3a653o6xWXkBMz7m8H47Qv5e/z+/qVc836Z4GYPBYDC4avSK8XDz+n9c9y/h8vW/f8jxMgaDwWDwHLBeMR5u6BV7jSIBl/SK0uONlzEYDAaD54D1ivFwca8oaxMZON8r6g81XsZgMBgMrhrrPzBc0CtqG0UCTvWK1nsSL2MwGAwGV41eERjO9oq2NpGB772i/3bEyxgMBoPBVaNXjIetfzAYDAafBdYrxsOJXtHbKJK/uOdrEAdFAQaDweBzwXrFgNErwGAwGDw3bP1Hgr1eCQaDweDJ4GP+rggRRTz4D6whP51OaJ+sAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">57 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">Population [character]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">1. Adults</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">2. Registered Voters</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">13</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">22.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">44</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">77.2%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAIAAAAA3CAQAAABu+IqNAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gIGg0LEbiLpR8AAADOSURBVGje7dlBCsJAEAVRR3I6T6An1BN4Pd32CCKSwEvoX7sQCJWCnkXPeJ16c9YCmgTQApqlPtw3ORCuQ//UL6rgMr+6rP74U//dn7QfgQTQApoE0AKaBNACmgTQApoE0AKaBNACmgTQApoE0AKaBNACmo+d4NE2eusZdRHc5ZaoboXbj0D7ANMZ8GgyA7cyA5tfjOyf+aBvPwIJoAU0CaAFNAmgBTQJoAU0CaAFNAmgBTQJoAU0CaAFNAmgBTS5GGmyCP5K+xFIAC2geQPhWgvi/2T+1QAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">57 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">Support [numeric]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 67.8 (16)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">10 ≤ 68 ≤ 97</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 15 (0.2)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle;">34 distinct values</td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gIGg0LEbiLpR8AAAF7SURBVHja7d1BToNAAEDRYno6T6AnrCfwerpFF0OeIAr8t2uaUPKTAQoMTB+3iKe/XoGjKRgqGLrPP/zf7dnb4qq9TL/36/NF33+8lJ09D7993209GpKoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGDoMNP/loxnVG43m/I0wUbzKbecTdmQRAVDBUOn2YaNbbdLuEiw7XYJDUlUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDC022W25cdvH8OO1yWXHr+91+0k6zQkUcFQwVDBUMFQwVDBUMHQRW6oG1v6F/I6u0OxYDd7BVBDEhUMFQwVDBUMFQwVDH05Dlv3FseznIQe+3bguu4tjsc4ybxOQxIVDBUMTfMt9eMSm203P1sx1cg0JFHBUMHQJxHXHD6psuGuAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">57 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">Republican Support [numeric]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 59.7 (19.8)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">5 ≤ 59 ≤ 97</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 33 (0.3)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle;">41 distinct values</td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gIGg0LEbiLpR8AAAF/SURBVHja7d1BTsJAAEBRazidJ9ATygm8nm5cVBMqf1Jope/tIJlCfjJkplA6fT5RPG/9Bv4bwSLBotP8wb0/z84LL/g6jYxaGjdufsjT8FFW8XLh+Y+hUX+NW4MpGQkWCRYJFgkWCRYJFgkW3Xzhen6w0yF3WOlvuS5fnykZCRYJFgkWCRYJFgkWCRZtfIr6stEdwtj3BNfbbbDR/cGt9xWmZCRYJFgkWCRYJFgkWCRYtNuF6y2ssQs4VLA1dgGmZCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFh0qN/pL1m66OFtdtGDYN+uvejBlIwEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLfpyiHr2J16PdZGDJr3P6e/0z0P0wJSPBIsEiwSLBIsEiwSLBomm+SH8/0Iq9mP96Z9KoMSUjwSLBoi/9UiDlTWGnPgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">57 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">Democratic Support [numeric]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 77.2 (23.7)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">10 ≤ 85 ≤ 99</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 10 (0.3)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle;">27 distinct values</td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gIGg0LEbiLpR8AAAFtSURBVHja7dxLasMwAEBBu+R0PUF7wvQEuV67dbOQGEid1H6zC4Z8HkgOEtb6vUS8PfsL/DcFQwVDl+2Lo85nX5Mf9rGOr28vX5ZTeB9cu9E7NSRRwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMHQSR6SH5udOvC5OVagYMv4zIH7UwcakqhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYOggC4izNdPHOUiwR57UOtaQRAVDBUMFQwVDv+6S85vz7CD147v7WyFbmufUkEQFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUO4Lzlek/279dj9NmpnMNhe26X2yXuuBTckUcHQup0cri8zU7yW7eN/a41MQxIVDBUM/QCIfBg6U6cF0wAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">57 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: left;">URL [character]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">1. https://www.ipsos.com/en-</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">2. https://morningconsult.co</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">3. http://cdn.cnn.com/cnn/20</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">4. https://d25d2506sfb94s.cl</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">5. https://d25d2506sfb94s.cl</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">6. https://poll.qu.edu/natio</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">7. https://drive.google.com/</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">8. https://morningconsult.co</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">9. https://poll.qu.edu/image</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">10. http://www.suffolk.edu/do</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">[ 10 others ]</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">7</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">12.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">6</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">10.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">5</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">8.8%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">4</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">7.0%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">4</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">7.0%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">3</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">5.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">2</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">3.5%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: right; padding: 0 5px 0 7px; margin: 0; border: 0;">11</td>
+<td style="text-align: left; padding: 0 2px 0 0; border: 0;">(</td>
+<td style="text-align: right; padding: 0; border: 0;">19.3%</td>
+<td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAACoAAAEKCAQAAADOEQ9SAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gIGg0LEbiLpR8AAAEjSURBVHja7dxBbsIwEEBRgjhdT0BP2J6A69ElDnVqO5moGeXNjiA9iXGUzyrT8xI/1x3MROit/PDVteD7VLtaXrzNv/poko//+vlQKBQKjZm3J3/Pc709U5mlLf8Bykbl2en+B/XdXGq9+X+ire733ht5dgqFQqEnRHU/froT3RfnCrqc6LEDzLNTKBQKhcaM7seP7kOhUCj0qKjux4/uQ6FQKDRgJDoJqvtQKBQKDRjdT4J2dH+k+BW01v0190OenUKhUOgJUd2PH4mGQqFQ6FFR3Y+fRvfHm/8Lfe/+2mPLs1MoFAqFxozux89i99cVv4K+ur/twPLsFAqFQk+ISnQSdPBtOMvzWSx1+C149ZnfNXl2CoVCoSdE9+/+oX9+HvQHeJRBEhRFIK4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">57 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.4.1)<br>2024-08-26</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Using summarytools in Quarty or RMarkdown">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Using summarytools in Quarty or RMarkdown
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If you’re working in Quarto or RMarkdown, the normal way of using <code>summarytools</code> doesn’t create a nice table. Instead, what you need to do is tell Quarto to render the output as HTML. You can do this by setting the <code>method</code> argument to <code>render</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dfSummary</span>(iris), </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">method=</span><span class="st">'render'</span>, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">max.tbl.height =</span> <span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that we also set the <code>max.tbl.height</code> argument to 500, to make sure that very large tables are put inside a scrollable window.</p>
+</div>
+</div>
+</div>
 
 
-</section>
-</section>
-</div>
-</div>
-</div>
 </section>
 </section>
 

@@ -1,0 +1,42 @@
+
+```{r}
+library(tidyverse)
+d = read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv")
+```
+
+
+## Viewing a summary of every column
+
+Often, the main information that you're interested in is the summary of each column.
+You can compute this yourself (as we'll show later), but there is also a nice package called `summarytools` that can generate a handy overview.
+You can create the summary as follows (remember to install the package first):
+
+```{r, output=FALSE, message=FALSE}
+library(summarytools)
+dfSummary(d)
+```
+
+This will print the summary in your console, but you can also render it in a more readable format with the `view` function.
+
+```{r, eval=FALSE}
+view(dfSummary(d))
+```
+
+```{r, echo=FALSE}
+print(dfSummary(d), 
+      method='render', 
+      max.tbl.height = 500)
+```
+
+::: {.callout-note title="Using summarytools in Quarty or RMarkdown" collapse="true"}
+
+If you're working in Quarto or RMarkdown, the normal way of using `summarytools` doesn't create a nice table. Instead, what you need to do is tell Quarto to render the output as HTML. You can do this by setting the `method` argument to `render`.
+
+```{r, eval=FALSE}
+print(dfSummary(iris), 
+      method='render', 
+      max.tbl.height = 500)
+```
+
+Note that we also set the `max.tbl.height` argument to 500, to make sure that very large tables are put inside a scrollable window.
+:::

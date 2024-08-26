@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -64,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../data-management/import-and-view.html" rel="next">
+<link href="../data-management/import-and-export.html" rel="next">
 <link href="../data-management/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -212,8 +232,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/import-and-view.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Import and view</span></a>
+  <a href="../data-management/import-and-export.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Import and export data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -244,12 +264,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pipes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/real-world-examples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Real world examples</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -292,8 +306,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../2_statistics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistics</span></a>
+            <a href="../2_data_preparation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data preparation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -301,58 +315,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/0_general-concepts/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../2_data_preparation/inspect-and-clean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viewing a summary of every column</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../2_data_preparation/scale-construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scale Construction</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../3_statistics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_statistics/0_general-concepts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Concepts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/0_hypotheses.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/0_hypotheses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/1_causality.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/1_causality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Tests</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/2_tests/0_selecting-the-right-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/2_tests/0_selecting-the-right-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Selecting the right test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/2_tests/anova.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/2_tests/anova.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Anova</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/2_tests/chi2.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/2_tests/chi2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chi2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/2_tests/regression.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/2_tests/regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/2_tests/t-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/2_tests/t-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">T Test</span></a>
   </div>
 </li>
@@ -362,13 +399,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Good to Know</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../good-to-know/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
@@ -387,10 +424,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#installing-the-tidyverse" id="toc-installing-the-tidyverse" class="nav-link active" data-scroll-target="#installing-the-tidyverse">Installing the tidyverse</a>
-  <ul class="collapse">
-  <li><a href="#what-packages-does-the-tidyverse-contain" id="toc-what-packages-does-the-tidyverse-contain" class="nav-link" data-scroll-target="#what-packages-does-the-tidyverse-contain">What packages does the tidyverse contain?</a></li>
-  </ul></li>
+  <li><a href="#installing-the-tidyverse" id="toc-installing-the-tidyverse" class="nav-link active" data-scroll-target="#installing-the-tidyverse">Installing the tidyverse</a></li>
+  <li><a href="#data-management-with-the-tidyverse" id="toc-data-management-with-the-tidyverse" class="nav-link" data-scroll-target="#data-management-with-the-tidyverse">Data management with the tidyverse</a></li>
   </ul>
 </nav>
     </div>
@@ -427,22 +462,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Then in every script that you use the package, you open it with <code>library</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-</div>
-<section id="what-packages-does-the-tidyverse-contain" class="level2">
-<h2 class="anchored" data-anchor-id="what-packages-does-the-tidyverse-contain">What packages does the tidyverse contain?</h2>
-<p>Notice above that when you run <code>library(tidyverse)</code>, R prints all the tidyverse packages that it opened for you. Some of the most important ones that we’ll we using are:</p>
+<p>When you first run this code, it will print a message that shows you all the packages that it opened for you. Some of the most important ones that we’ll we using are:</p>
 <ul>
 <li><a href="https://tibble.tidyverse.org/">tibble</a>. An optimized way for structuring <em>rectangular data</em> (basically: a spreadsheet of rows and columns)</li>
 <li><a href="https://dplyr.tidyverse.org/">dplyr</a>. Functions for manipulating tibbles: select and rename columns, filter rows, mutate values, etc.</li>
@@ -468,8 +489,8 @@ What about the ‘Conflicts’?
 <p>Since anyone can write new packages for R, it can happen that two packages provide functions with the same name. In this example, we see that the <code>filter</code> function exists in both the <code>dplyr</code> package (which we opened by opening the tidyverse), and in the <code>stats</code> package (which is included in base R). So now R needs to decide which version of the function to use when you type <code>filter()</code>. In this case, it says that the <code>dplyr::filter()</code> <strong>masks</strong> <code>stats::filter()</code>, meaning that it will now use the <code>dplyr</code> version.</p>
 <p>In practice, this will rarely be a problem, because you seldom need two versions of a function in the same script. But if you ever do, there is a simple solution. Instead of just using <code>filter()</code>, you can type <code>dplyr::filter()</code> to specifically use this version. In the following code, we use this notation to specifically open the help page for <code>dplyr::filter</code> and <code>stats::filter</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>?dplyr<span class="sc">::</span><span class="fu">filter</span>()</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>?stats<span class="sc">::</span><span class="fu">filter</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>?dplyr<span class="sc">::</span><span class="fu">filter</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>?stats<span class="sc">::</span><span class="fu">filter</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -492,12 +513,43 @@ The tidyverse versus base R
 </div>
 </div>
 </div>
+</section>
+<section id="data-management-with-the-tidyverse" class="level1">
+<h1>Data management with the tidyverse</h1>
+<p>The tidyverse is built around the concept of <em>tidy data</em> <span class="citation" data-cites="wickham14">(<a href="#ref-wickham14" role="doc-biblioref">Wickham 2014</a>)</span>. The main principles of tidy data are:</p>
+<ol type="1">
+<li>Each variable must have its own column.</li>
+<li>Each observation must have its own row.</li>
+<li>Each value must have its own cell.</li>
+</ol>
+<p>This type of data is also called a data frame, or a spreadsheet. What the tidyverse does is provide a set of tools that make it easy to work with this type of data. At the core of this is the <code>tibble</code> data structure. As a simple example, the following code creates a tibble containing respondents, their gender, and their height. We’ll call our tibble <strong>d</strong> (short for data).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">resp_id =</span> <span class="fu">c</span>(  <span class="dv">1</span>,   <span class="dv">2</span>,   <span class="dv">3</span>,   <span class="dv">4</span>), </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">gender  =</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>), </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">height  =</span> <span class="fu">c</span>(<span class="dv">176</span>, <span class="dv">165</span>, <span class="dv">172</span>, <span class="dv">160</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  resp_id gender height
+    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+1       1 M         176
+2       2 M         165
+3       3 F         172
+4       4 F         160</code></pre>
+</div>
+</div>
+<p>The vast majority of data that we work with in the social sciences can be structured in this way. The rows then typically represent our units of analysis (e.g., respondents, participants, texts, etc.), and the columns represent the variables that we measure on these units. This makes it imperative for us to learn how we can manage this type of data effectively. We need to be able to <code>select</code> columns, <code>filter</code> rows, <code>mutate</code> values, and <code>summarize</code> data. Sometimes we also need to <code>pivot</code> the data, or <code>join</code> it with other data. In this chapter you will learn how to do all of this with the tidyverse.</p>
+
 
 
 </section>
-</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-wickham14" class="csl-entry" role="listitem">
+Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical Software</em> 59 (10): 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -925,8 +977,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../data-management/import-and-view.html" class="pagination-link" aria-label="Import and view">
-        <span class="nav-page-text">Import and view</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../data-management/import-and-export.html" class="pagination-link" aria-label="Import and export data">
+        <span class="nav-page-text">Import and export data</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

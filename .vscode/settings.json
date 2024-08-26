@@ -1,5 +1,6 @@
 {
   "search.exclude": {
-    "**.html": true
+    "**.html": true,
+    "**.json": true
   }
 }

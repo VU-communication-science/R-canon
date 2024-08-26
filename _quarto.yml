@@ -10,22 +10,21 @@ website:
   sidebar:
     style: "docked"
     contents: auto
+
   page-footer:
     left: "VU University, Department of Communication Science"
   back-to-top-navigation: true
   page-navigation: true
-  
+
 bibliography: references/references.bib
 cls: references/apa7.cls
 
-    
 format:
   html:
-    theme: 
+    theme:
       - cosmo
       - style.scss
     toc: true
-
 
 execute:
   freeze: auto
