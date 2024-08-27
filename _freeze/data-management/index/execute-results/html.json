@@ -1,0 +1,15 @@
+{
+  "hash": "68bd441474a84fc4dc92e0dc399e3a9d",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Data management\norder: 1\n---\n\n\n\n\n# Chapter overview\n\nIn this chapter you will lean how to manage your data in R using the `tidyverse`.\nAt the end of this chapter, you will have learned a powerful set of tools to import, clean, and transform data. \nSpecifically, we will cover the following topics:\n\n* Introduction to the tidyverse\n* Importing and exporting data\n* Selecting and renaming columns\n* Filtering and sorting rows\n* Creating and mutating columns\n* Summarizing\n* Working with textual data\n* Pivoting between long and wide data\n* Joining data\n\n# Practice data {#practice-data} \n\nThroughout this chapter, and further throughout this book, we'll use a practice data set that contains **simulated data**.\nThe data looks like real data used in communication science, but it's entirely made up.\n\nThe benefit of using simulated data is that it's **tailored to give you the best learning experience**. \nIt contains all the common issues that you might encounter when working with real data, but it's also simple enough to not overwhelm you.\nMoreover, you only need to get acquinted with the data once, so that you can spend all your cognitive energy on developing your data literacy.\nJust do keep in mind that **this data is not real**, and should not be used for any real-world analysis.\n\n## Structure of the data\n\nThe practice data describes a fictional study about how popular media might influence people's attitudes. It includes an experiment to measure the effect of **watching moview *about* journalism** on people's **trust in journalists**, and includes a range of measures about the participants.\n\n**Number of participants (n)**: 600\n\n**Variables**:\n\n\n| Variable name | Type | Description |\n|---------------|------|-------------|\n| **id** | `numeric` | Unique identifier for each participant |\n| **age** | `numeric` | Age of the participant in years |\n| **np_subscription** | `factor` | Whether the participant has a newspaper subscription (`yes`, `no`) |\n| **news_consumption** | `numeric` | Average number of hours per week the participant consumes news |\n| **experiment_group** | `factor` | Type of movie shown: `neutral` (control group), `positive` (positive portrayal of journalism), `negative` (negative portrayal of journalism) |\n| **trust_t1** | `numeric` | Trust in journalists before the experiment (range: 1-10) |\n| **trust_t2** | `numeric` | Trust in journalists after the experiment (range: 1-10) |\n\n\n## Reading the data into R\n\nThe following code reads the practice data into R.\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nd <- read_csv('https://tinyurl.com/R-practice-data')\n```\n:::\n\n\n\n\nWe will explain this code in the next tutorials, and also include it at the top of each tutorial that uses it.\n\n\n\nhttps://tinyurl.com/R-practice-data",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

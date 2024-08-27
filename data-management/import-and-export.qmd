@@ -5,27 +5,17 @@ subtitle: How to get data into R, and how to get it out
 ---
 
 
-::: {.callout-note title="Short code summary" collapse="true"}
+::: {.callout-note title="TLDR summary" collapse="true"}
 
-To read a CSV file, you can use the `read_csv` function from the `readr` package, which is included in the `tidyverse`.
+One of the most common formats for storing and sharing rectangular data (i.e., data in rows and columns) is the `csv` format.
+With the `read_csv` and `write_csv` functions you can easily read and write CSV files in R. 
 
 ```{r, message=FALSE}
 library(tidyverse)
-d <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv")
+d  <- read_csv("https://tinyurl.com/R-practice-data")  # read CSV file from the internet
+write_csv(d, "my_data.csv")                            # write to a CSV file on your computer
+d2 <- read_csv("my_data.csv")                          # read CSV file from your own computer
 ``` 
-
-To see the data, you can just type `d` in the console, or use the `View` function to open a spreadsheet view.
-
-```{r, eval=FALSE}
-d
-View(d)
-```
-
-To write a tibble to a CSV file, you can use the `write_csv` function.
-
-```{r, eval=FALSE}
-write_csv(d, "my_data.csv")
-```
 
 :::
 
@@ -71,7 +61,7 @@ We'll walk you through this in three steps:
 
 ### Importing data from a URL
 
-For this example we download data about gun polls from the data analytics site [fivethirtyeight](https://fivethirtyeight.com/).
+The following code downloads the 
 
 ```{r, message=FALSE}
 url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"

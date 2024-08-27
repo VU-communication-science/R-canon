@@ -3,12 +3,59 @@ title: Data management
 order: 1
 ---
 
-Here we'll add tutorials for
+# Chapter overview
 
-* importing data as a tibble
-* selecting and renaming columns
-* filtering rows
-* mutating columns
-* joining data
-* reshaping data (long - wide)
+In this chapter you will lean how to manage your data in R using the `tidyverse`.
+At the end of this chapter, you will have learned a powerful set of tools to import, clean, and transform data. 
+Specifically, we will cover the following topics:
 
+* Introduction to the tidyverse
+* Importing and exporting data
+* Selecting and renaming columns
+* Filtering and sorting rows
+* Creating and mutating columns
+* Summarizing
+* Working with textual data
+* Pivoting between long and wide data
+* Joining data
+
+# Practice data {#practice-data} 
+
+Throughout this chapter, and further throughout this book, we'll use a practice data set that contains **simulated data**.
+The data looks like real data used in communication science, but it's entirely made up.
+
+The benefit of using simulated data is that it's **tailored to give you the best learning experience**. 
+It contains all the common issues that you might encounter when working with real data, but it's also simple enough to not overwhelm you.
+Moreover, you only need to get acquinted with the data once, so that you can spend all your cognitive energy on developing your data literacy.
+Just do keep in mind that **this data is not real**, and should not be used for any real-world analysis.
+
+## Structure of the data
+
+The practice data describes a fictional study about how popular media might influence people's attitudes. It includes an experiment to measure the effect of **watching moview *about* journalism** on people's **trust in journalists**, and includes a range of measures about the participants.
+
+**Number of participants (n)**: 600
+
+**Variables**:
+
+
+| Variable name | Type | Description |
+|---------------|------|-------------|
+| **id** | `numeric` | Unique identifier for each participant |
+| **age** | `numeric` | Age of the participant in years |
+| **np_subscription** | `factor` | Whether the participant has a newspaper subscription (`yes`, `no`) |
+| **news_consumption** | `numeric` | Average number of hours per week the participant consumes news |
+| **experiment_group** | `factor` | Type of movie shown: `neutral` (control group), `positive` (positive portrayal of journalism), `negative` (negative portrayal of journalism) |
+| **trust_t1** | `numeric` | Trust in journalists before the experiment (range: 1-10) |
+| **trust_t2** | `numeric` | Trust in journalists after the experiment (range: 1-10) |
+
+
+## Reading the data into R
+
+The following code reads the practice data into R.
+We will explain this code in the next tutorials, and include it at the top of every tutorial that uses it.
+Note that in order to run this code, you need to have installed the `tidyverse` package.
+
+```{r, message=FALSE}
+library(tidyverse)
+d <- read_csv('https://tinyurl.com/R-practice-data')
+```

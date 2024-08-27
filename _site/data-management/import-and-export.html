@@ -439,31 +439,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Short code summary">
+<div class="callout callout-style-default callout-note callout-titled" title="TLDR summary">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Short code summary
+TLDR summary
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>To read a CSV file, you can use the <code>read_csv</code> function from the <code>readr</code> package, which is included in the <code>tidyverse</code>.</p>
+<p>One of the most common formats for storing and sharing rectangular data (i.e., data in rows and columns) is the <code>csv</code> format. With the <code>read_csv</code> and <code>write_csv</code> functions you can easily read and write CSV files in R.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>To see the data, you can just type <code>d</code> in the console, or use the <code>View</code> function to open a spreadsheet view.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>To write a tibble to a CSV file, you can use the <code>write_csv</code> function.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(d, <span class="st">"my_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d  <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>)  <span class="co"># read CSV file from the internet</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(d, <span class="st">"my_data.csv"</span>)                            <span class="co"># write to a CSV file on your computer</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"my_data.csv"</span>)                          <span class="co"># read CSV file from your own computer</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -488,11 +481,11 @@ What is a CSV file?
 <p><code>CSV</code> stands for Comma Separated Values. It is a simple text file, that you can open in any text editor. In order to store a data frame (i.e.&nbsp;data in rows and colums), it simply read every line as a row, and separates the columns by a comma (or sometimes another symbol, like a semicolon).</p>
 <p>For example, the following CSV file contains a data frame with three columns: <code>resp_id</code>, <code>gender</code>, and <code>height</code>. The first row contains the column names, and the following rows contain the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>resp_id,gender,height</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>,M,<span class="dv">176</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>,M,<span class="dv">165</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>,F,<span class="dv">172</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>,F,<span class="dv">160</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>resp_id,gender,height</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>,M,<span class="dv">176</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>,M,<span class="dv">165</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>,F,<span class="dv">172</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>,F,<span class="dv">160</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The benefit of this simplicity is that any respectable spreadsheet or statistical software (e.g., Excel, Google sheets, SPSS, Stata) can read it. This makes CSV files a great way to share and store data.</p>
 <p>And just in case you’re worried, yes, CSV can also handle textual data. It uses some tricks to make sure that commas inside the text are not interpreted as column separators.</p>
@@ -507,18 +500,18 @@ What is a CSV file?
 </ul>
 <section id="importing-data-from-a-url" class="level3">
 <h3 class="anchored" data-anchor-id="importing-data-from-a-url">Importing data from a URL</h3>
-<p>For this example we download data about gun polls from the data analytics site <a href="https://fivethirtyeight.com/">fivethirtyeight</a>.</p>
+<p>The following code downloads the</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gunpolls <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gunpolls <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Make sure to always check whether the data was imported correctly:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gunpolls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>gunpolls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can also view the data in a larger spreadsheet-like view by using the <code>View</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(gunpolls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(gunpolls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="writing-data-to-a-csv-file-on-your-computer" class="level3">
@@ -539,7 +532,7 @@ Finding and changing your working directory
 <p>Your working directory is basically the location (i.e.&nbsp;directory) on your computer where R is currently looking for files. Here we provide a short refresher for how to find and change your working directory. For a more detailed explanation, see the <a href="../getting-started/files-and-projects.html#filesystem">file system introduction</a>.</p>
 <p>To find your working directory, you can use the <code>getwd()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/home/kasper/projects/R-canon/data-management"</code></pre>
 </div>
@@ -555,12 +548,12 @@ Finding and changing your working directory
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(gunpolls, <span class="st">"gunpoll_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(gunpolls, <span class="st">"gunpoll_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will write the <code>gunpolls</code> tibble to a file called <code>gunpoll_data.csv</code> in your current working directory. Try finding it in your file system!</p>
 <p>Now let’s read this file back into R. Since the file is in your working directory, you can just specify the file name:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>gunpolls2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"gunpoll_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gunpolls2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"gunpoll_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can check and verify that the data (gunpolls2) is indeed identical to the original data (gunpolls).</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="CSV pitfalls to avoid">

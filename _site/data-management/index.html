@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -178,8 +212,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/import-and-view.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Import and view</span></a>
+  <a href="../data-management/import-and-export.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Import and export data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -210,12 +244,6 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pipes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/real-world-examples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Real world examples</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -258,8 +286,8 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../2_statistics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistics</span></a>
+            <a href="../2_data_preparation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data preparation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -267,58 +295,81 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/0_general-concepts/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../2_data_preparation/inspect-and-clean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viewing a summary of every column</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../2_data_preparation/scale-construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scale Construction</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../3_statistics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_statistics/0_general-concepts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Concepts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/0_hypotheses.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/0_hypotheses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/1_causality.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/1_causality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Tests</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/2_tests/0_selecting-the-right-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/2_tests/0_selecting-the-right-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Selecting the right test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/2_tests/anova.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/2_tests/anova.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Anova</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/2_tests/chi2.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/2_tests/chi2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chi2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/2_tests/regression.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/2_tests/regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../2_statistics/2_tests/t-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/2_tests/t-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">T Test</span></a>
   </div>
 </li>
@@ -328,13 +379,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Good to Know</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../good-to-know/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
@@ -348,8 +399,19 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#chapter-overview" id="toc-chapter-overview" class="nav-link active" data-scroll-target="#chapter-overview">Chapter overview</a></li>
+  <li><a href="#practice-data" id="toc-practice-data" class="nav-link" data-scroll-target="#practice-data">Practice data</a>
+  <ul class="collapse">
+  <li><a href="#structure-of-the-data" id="toc-structure-of-the-data" class="nav-link" data-scroll-target="#structure-of-the-data">Structure of the data</a></li>
+  <li><a href="#reading-the-data-into-r" id="toc-reading-the-data-into-r" class="nav-link" data-scroll-target="#reading-the-data-into-r">Reading the data into R</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -373,17 +435,95 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Here we’ll add tutorials for</p>
+<section id="chapter-overview" class="level1">
+<h1>Chapter overview</h1>
+<p>In this chapter you will lean how to manage your data in R using the <code>tidyverse</code>. At the end of this chapter, you will have learned a powerful set of tools to import, clean, and transform data. Specifically, we will cover the following topics:</p>
 <ul>
-<li>importing data as a tibble</li>
-<li>selecting and renaming columns</li>
-<li>filtering rows</li>
-<li>mutating columns</li>
-<li>joining data</li>
-<li>reshaping data (long - wide)</li>
+<li>Introduction to the tidyverse</li>
+<li>Importing and exporting data</li>
+<li>Selecting and renaming columns</li>
+<li>Filtering and sorting rows</li>
+<li>Creating and mutating columns</li>
+<li>Summarizing</li>
+<li>Working with textual data</li>
+<li>Pivoting between long and wide data</li>
+<li>Joining data</li>
 </ul>
+</section>
+<section id="practice-data" class="level1">
+<h1>Practice data</h1>
+<p>Throughout this chapter, and further throughout this book, we’ll use a practice data set that contains <strong>simulated data</strong>. The data looks like real data used in communication science, but it’s entirely made up.</p>
+<p>The benefit of using simulated data is that it’s <strong>tailored to give you the best learning experience</strong>. It contains all the common issues that you might encounter when working with real data, but it’s also simple enough to not overwhelm you. Moreover, you only need to get acquinted with the data once, so that you can spend all your cognitive energy on developing your data literacy. Just do keep in mind that <strong>this data is not real</strong>, and should not be used for any real-world analysis.</p>
+<section id="structure-of-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="structure-of-the-data">Structure of the data</h2>
+<p>The practice data describes a fictional study about how popular media might influence people’s attitudes. It includes an experiment to measure the effect of <strong>watching moview <em>about</em> journalism</strong> on people’s <strong>trust in journalists</strong>, and includes a range of measures about the participants.</p>
+<p><strong>Number of participants (n)</strong>: 600</p>
+<p><strong>Variables</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 17%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>id</strong></td>
+<td><code>numeric</code></td>
+<td>Unique identifier for each participant</td>
+</tr>
+<tr class="even">
+<td><strong>age</strong></td>
+<td><code>numeric</code></td>
+<td>Age of the participant in years</td>
+</tr>
+<tr class="odd">
+<td><strong>np_subscription</strong></td>
+<td><code>factor</code></td>
+<td>Whether the participant has a newspaper subscription (<code>yes</code>, <code>no</code>)</td>
+</tr>
+<tr class="even">
+<td><strong>news_consumption</strong></td>
+<td><code>numeric</code></td>
+<td>Average number of hours per week the participant consumes news</td>
+</tr>
+<tr class="odd">
+<td><strong>experiment_group</strong></td>
+<td><code>factor</code></td>
+<td>Type of movie shown: <code>neutral</code> (control group), <code>positive</code> (positive portrayal of journalism), <code>negative</code> (negative portrayal of journalism)</td>
+</tr>
+<tr class="even">
+<td><strong>trust_t1</strong></td>
+<td><code>numeric</code></td>
+<td>Trust in journalists before the experiment (range: 1-10)</td>
+</tr>
+<tr class="odd">
+<td><strong>trust_t2</strong></td>
+<td><code>numeric</code></td>
+<td>Trust in journalists after the experiment (range: 1-10)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reading-the-data-into-r" class="level2">
+<h2 class="anchored" data-anchor-id="reading-the-data-into-r">Reading the data into R</h2>
+<p>The following code reads the practice data into R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://tinyurl.com/R-practice-data'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will explain this code in the next tutorials, and also include it at the top of each tutorial that uses it.</p>
+<p>https://tinyurl.com/R-practice-data</p>
 
 
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -3,6 +3,7 @@ title: 'Select and rename columns'
 order: 1
 ---
 
+In this tutorial we use the `tidyverse` and our simulated [practice data](../datasets/practice-data.csv).
 
 Open the tidyverse package, and read the data from the URL.
 
