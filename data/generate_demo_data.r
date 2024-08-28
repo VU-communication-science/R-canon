@@ -45,7 +45,6 @@ plot(age, trust_t1)
 # - be slightly higher, but not significantly, in the positive group compared to the neutral group
 # - make the negative effect weaker for those who are subscribed to the newspaper
 # - force 10 pt scale
-
 trust_t2 <- trust_t1 + 
   (experiment_group == "positive") * 0.4 +
   (experiment_group == "negative") * (!np_subscription) * -1.6+
@@ -58,7 +57,6 @@ plot(trust_t2 ~ experiment_group)
 
 # create tibble and randomize order
 d = tibble(
-    id = 1:n,
     age = age,
     np_subscription = factor(np_subscription, labels = c("no", "yes")),
     news_consumption = news_consumption,
@@ -67,6 +65,7 @@ d = tibble(
     trust_t2 = trust_t2
 )
 d = d[sample(nrow(d)),]
+d$id = 1:nrow(d)
 
 
 
@@ -111,6 +110,9 @@ ds$age[i] = 2025 - ds$age[i]
 
 # some people didnnt enter age
 ds$age[sample(1:n, 5)] = NA
+
+# adding a stupid space in news_consumption
+colnames(ds)[colnames(ds) == "news_consumption"] = "news consumption"
 
 write_csv(ds, "data/fake_demo_data.csv")
 

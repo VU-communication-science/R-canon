@@ -1,7 +1,7 @@
 ---
-title: Import and export data
+title: Read and write data
 order: 1
-subtitle: How to get data into R, and how to get it out
+subtitle: How to get data into R, and how to store it
 ---
 
 
@@ -12,9 +12,15 @@ With the `read_csv` and `write_csv` functions you can easily read and write CSV 
 
 ```{r, message=FALSE}
 library(tidyverse)
-d  <- read_csv("https://tinyurl.com/R-practice-data")  # read CSV file from the internet
-write_csv(d, "my_data.csv")                            # write to a CSV file on your computer
-d2 <- read_csv("my_data.csv")                          # read CSV file from your own computer
+
+# read CSV file from the internet
+d  <- read_csv("https://tinyurl.com/R-practice-data")
+
+# write to a CSV file on your computer
+write_csv(d, "my_data.csv")                            
+
+# read CSV file from your own computer 
+d2 <- read_csv("my_data.csv")                          
 ``` 
 
 :::
@@ -51,34 +57,38 @@ And just in case you're worried, yes, CSV can also handle textual data.
 It uses some tricks to make sure that commas inside the text are not interpreted as column separators.
 :::
 
-The Tidyverse contains a function `read_csv` that allows you to read a csv file directly into a `tibble`.
-You can read a file from your own computer, but also directly from the internet.
-We'll walk you through this in three steps:
 
-* Import data from the internet
-* Write data to a CSV file on your computer
-* Read data from this CSV file back into R
+To show you how to work with CSV files, we'll first import a dataset from the internet. Then we'll show how to write this data to a CSV file on your computer, and how to read it back into R.
 
 ### Importing data from a URL
 
-The following code downloads the 
+To read CSV files into R, you can use the `read_csv` from the tidyverse (more specifically from the `readr` package).
+If you provide a URL, it will download the file from the internet.
+Here we read the data and assign it to the name `d` (short for data).
+You can use any name you like, but since you'll be referring to this data a lot, it's convenient to keep it short.
 
 ```{r, message=FALSE}
-url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"
-gunpolls <- read_csv(url)
+library(tidyverse)
+
+url <- "https://tinyurl.com/R-practice-data"
+d <- read_csv(url)
 ```
 
 Make sure to always check whether the data was imported correctly:
 
-```{r, output=FALSE}
-gunpolls
+```{r, results=FALSE}
+d
 ```
 
-You can also view the data in a larger spreadsheet-like view by using the `View` function:
+You can also view the data in a larger spreadsheet-like view using the `View` function.
+Either click on the name (`d`) in the **Environment** tab in RStudio (top right panel), or use the `View` function:
 
-```{r, eval=FALSE}
-View(gunpolls)
+```{r}
+View(d)
 ```
+
+This will open a new tab in RStudio that shows all the data. 
+In the top menu bar you can also `filter` the data and `search` for specific values, or click on column names to sort the data.
 
 
 ### Writing data to a CSV file on your computer

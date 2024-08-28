@@ -212,8 +212,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/import-and-export.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Import and export data</span></a>
+  <a href="../data-management/read-and-write.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Read and write data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -388,8 +388,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../good-to-know/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Function Help Pages</span></a>
+  <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Function Documentation</span></a>
   </div>
 </li>
       </ul>
@@ -404,8 +404,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#optional-arguments" id="toc-optional-arguments" class="nav-link active" data-scroll-target="#optional-arguments">Optional arguments</a></li>
-  <li><a href="#using-pipeond-way-is-to-pipe-the-first-argument-into-the-function-argument1-function_nameargument2-..." id="toc-using-pipeond-way-is-to-pipe-the-first-argument-into-the-function-argument1-function_nameargument2-..." class="nav-link" data-scroll-target="#using-pipeond-way-is-to-pipe-the-first-argument-into-the-function-argument1-function_nameargument2-...">Using pipeond way is to <strong>pipe the first argument into the function</strong>: <code>argument1 |&gt; function_name(argument2, ...)</code></a></li>
+  <li><a href="#what-is-a-function" id="toc-what-is-a-function" class="nav-link active" data-scroll-target="#what-is-a-function">What is a function?</a>
+  <ul class="collapse">
+  <li><a href="#optional-arguments" id="toc-optional-arguments" class="nav-link" data-scroll-target="#optional-arguments">Optional arguments</a></li>
+  <li><a href="#pipe-syntax" id="toc-pipe-syntax" class="nav-link" data-scroll-target="#pipe-syntax">Using the pipe syntax</a></li>
+  </ul></li>
+  <li><a href="#mastering-functions" id="toc-mastering-functions" class="nav-link" data-scroll-target="#mastering-functions">Mastering functions</a></li>
   </ul>
 </nav>
     </div>
@@ -431,6 +435,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="what-is-a-function" class="level1">
+<h1>What is a function?</h1>
 <p>99% of what you do in R will involve using functions. A function in R is like a mini-program that you can use to perform specific tasks. It takes <em>input</em>, processes it, and gives you an <em>output</em>. For example, there are functions for:</p>
 <ul>
 <li>importing data</li>
@@ -438,18 +444,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>performing statistical tests</li>
 <li>visualizing data</li>
 </ul>
-<p>A function in R has the form: <code>output = function_name(argument1, argument2, ...)</code> * <strong>function_name</strong> is a name to indicate which function you want to use. It is followed by parentheses. * <strong>arguments</strong> are the input of the function, and are inserted within the parentheses. * <strong>output</strong> is anything that is returned by the function.</p>
+<p>A function in R has the form:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">function_name</span>(argument1, argument2, ...)<span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>function_name</strong> is a name to indicate which function you want to use. It is followed by parentheses.</li>
+<li><strong>arguments</strong> are the input of the function, and are inserted within the parentheses.</li>
+<li><strong>output</strong> is anything that is returned by the function.</li>
+</ul>
 <p>For example, the function <code>c</code> <em>c</em>ombines multiple values into a <em>vector</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, we can use the <code>mean</code> function to calculate the mean of these numbers:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The calculated mean, <code>2.5</code>, is now assigned to the name <code>m</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.5</code></pre>
 </div>
@@ -459,18 +473,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the <code>c</code> and <code>mean</code> functions above, all the arguments were <strong>required</strong>. To <strong>c</strong>ombine numbers into a vector, we <em>needed</em> to provide a list of numbers. To calculate a <strong>mean</strong>, we <em>needed</em> to provide a numeric vector.</p>
 <p>In addition to the <strong>required</strong> arguments, a function can also have <strong>optional</strong> arguments, that give you more control over what a function does. For example, suppose we have a range of numbers that also contains a missing value. In R a missing value is called <code>NA</code>, which stands for <code>Not Available</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x_with_missing <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x_with_missing <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, if we call the <code>mean</code> function, R will say that the mean is unknown, since the third value is unknown:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x_with_missing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x_with_missing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
 <p>This is statistically a very correct answer. But often, if some values happen to be missing in your data, you want to be able to calculate the mean just for the numbers that are not missing. Fortunately, the mean function has an <strong>optional argument</strong> <code>na.rm</code> (remove NAs) that you can set to <code>TRUE</code> (or to <code>T</code>, which is short for <code>TRUE</code>) to ignore the NAs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.5</code></pre>
 </div>
@@ -490,32 +504,45 @@ How do I know what arguments a function has?
 <div class="callout-body-container callout-body">
 <p>To learn more about what a function does and what arguments it has, you can look it up in the ‘Help’ pane in the bottom right, or run <code>?function_name</code> in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>?mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>?mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here you can learn about the <code>na.rm</code> argument that we just used!</p>
-<p>If you are just getting to know R, we recommend first finishing the rest of the <code>Getting Started</code> section. Then once you get the hang of things, have a look at the <a href="99_tips-and-best-practises/0_use-help-pages.qmd">Use ?function help page</a> tutorial.</p>
+<p>If you are just getting to know R, we recommend first finishing the rest of the <code>Getting Started</code> section. Then once you get the hang of things, have a look at the <a href="../good-to-know/0_how-to-use-a-function.qmd">Use ?function help page</a> tutorial.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="using-pipeond-way-is-to-pipe-the-first-argument-into-the-function-argument1-function_nameargument2-..." class="level2">
-<h2 class="anchored" data-anchor-id="using-pipeond-way-is-to-pipe-the-first-argument-into-the-function-argument1-function_nameargument2-...">Using pipeond way is to <strong>pipe the first argument into the function</strong>: <code>argument1 |&gt; function_name(argument2, ...)</code></h2>
-<p>If this is your first time seeing pipes, you’re probably wondering why you would want to do this? Why bother having two ways to do the exact same thing? The reason is that when writing code, you shouldn’t just think about <strong>what the code does</strong>, but also about <strong>how easy the code is to read</strong>. This not only helps you prevent mistakes, but also makes your analysis <strong>transparent</strong>.</p>
-<p>As you’ll see later, you’ll encounter many cases where your analysis requires you to string together multiple functions. In these cases, pipes make your code much easier to read. let’s rewrite our code from above using the <strong>pipe</strong> notation:</p>
+<section id="pipe-syntax" class="level2">
+<h2 class="anchored" data-anchor-id="pipe-syntax">Using the pipe syntax</h2>
+<p>There is another common way to use functions in R using the <strong>pipe</strong> syntax. With the pipe syntax, you can <em>pipe</em> the first argument into the function, instead of putting it inside the parentheses. As you will see below, this allows you to create a pipeline of functions, which is often easier to read. The pipe syntax uses the <code>|&gt;</code> operator, which is used as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x_with_missing <span class="sc">|&gt;</span> <span class="fu">mean</span>(<span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>argument1 <span class="sc">|&gt;</span> <span class="fu">function_name</span>(argument2, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For example, the following two lines of code give identical output:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x_with_missing, <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x_with_missing <span class="sc">|&gt;</span> <span class="fu">mean</span>(<span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.5</code></pre>
+</div>
 </div>
 <p>Notice how our first argument, the <strong>required</strong> argument <code>x_with_missing</code>, is <em>piped</em> into the mean function. Inside the mean function, we only specify the second argument, the <strong>optional</strong> argument <code>na.rm</code>.</p>
-<p>Now imagine we would want to round the result (<code>2.5</code>) up to a round number (<code>3</code>). We can do this without pipe notation, but it would be quite ugly and hard to read:</p>
+<p>So why do we need this alternative way of doing the same thing? The reason is that when writing code, you shouldn’t just think about <strong>what the code does</strong>, but also about <strong>how easy the code is to read</strong>. This not only helps you prevent mistakes, but also makes your analysis <strong>transparent</strong>. As you’ll see later, you’ll encounter many cases where your analysis requires you to string together multiple functions. In these cases, pipes make your code much easier to read.</p>
+<p>For example, imagine we would want to round the result (<code>2.5</code>) up to a round number (<code>3</code>). With the pipe syntax we can just add the round function to our pipeline.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(x_with_missing, <span class="at">na.rm=</span>T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x_with_missing <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="at">na.rm=</span>T) <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The pipe notation allows us to break this down into a nice pipeline:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x_with_missing <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="at">na.rm=</span>T) <span class="sc">|&gt;</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>You’ll see how powerful this can be later on, especially in the <a href="../data-management/index.html">Data Management</a> chapter. In order to prepare and clean up your data, you’ll often need to perform a series of functions in a specific order. The pipe syntax allows you to do this in a very readable way.</p>
+</section>
+</section>
+<section id="mastering-functions" class="level1">
+<h1>Mastering functions</h1>
+<p>There are some usefull tricks for using functions in R that are good to know about. We do not discuss these here, because if you’re just starting out, there are more important things to learn first. But once you get the hang of things, you can learn more about these tricks in the <a href="../good-to-know/function-documentation.html">Good to Know</a> tutorial.</p>
 
 
 </section>

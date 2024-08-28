@@ -3,49 +3,140 @@ title: 'Select and rename columns'
 order: 1
 ---
 
-In this tutorial we use the `tidyverse` and our simulated [practice data](../datasets/practice-data.csv).
 
-Open the tidyverse package, and read the data from the URL.
+::: {.callout-note title="TLDR summary" collapse="true"}
+
+To select columns from a tibble (or data frame), you can use the `select` function.
+
+```{r, message=FALSE}
+library(tidyverse)
+d <- read_csv("https://tinyurl.com/R-practice-data")
+
+# select columns age and np_subscription
+d_subset <- select(d, age, np_subscription)
+
+# select columns from experiment_group to trust_t2
+d_subset <- select(d, experiment_group:trust_t2)
+
+# select columns and rename them
+d_subset <- select(d, group = experiment_group, 
+                      trust_before = trust_t1, 
+                      trust_after = trust_t2)
+
+# select columns with spaces in the name
+d_subset <- select(d, news_consumption = `news consumption`)
+
+# drop columns
+d_subset <- select(d, -np_subscription, -trust_t1)
+```
+
+You can also rename columns without selecting them using the `rename` function:
+```{r}
+d_renamed <- rename(d, group = experiment_group, 
+                        trust_before = trust_t1, 
+                        trust_after = trust_t2)
+``` 
+:::
+
+In this tutorial we use the `tidyverse` and our simulated [practice data](../datasets/practice-data.csv).
 
 ```{r, eval=T}
 library(tidyverse)
-url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"
-d <- read_csv(url)
+d <- read_csv("https://tinyurl.com/R-practice-data")
 ```
 
-## Selecting certain columns
+# Selecting columns with `select`
 
-Where `filter` selects specific rows, `select` allows you to select specific columns. 
-Most simply, we can simply name the columns that we want to retrieve them in that particular order. 
+Often you do not need to use all columns in your data, or you only need a subset of the columns for a specific analysis.
+You can do this with the `select` function.
+
+First, let's see what columns are in our data using the `colnames` function, which returns the column names of a data frame:
 
 ```{r}
-select(d, Population, Support, Pollster)
+colnames(d)
 ```
 
-You can also specify a range of columns, for example all columns from Support to Democratic Support:
+### Selecting specific columns
+
+The simplest way of using `select` is to explicitly specify the columns you want to keep:
 
 ```{r}
-select(d, Support:`Democratic Support`)
+ds <- select(d, age, np_subscription)
 ```
 
-Note the use of 'backticks' (reverse quotes) to specify the column name, as R does not normally allow spaces in names. 
-
-Select can also be used to rename columns when selecting them, for example to get rid of the spaces:
+This will return a new tibble with only the columns `id`, `age`, and `np_subscription`.
+We assigned this new tibble to the variable `ds` (short for "data subset").
+Sometimes you want to overwrite the original data frame with the new selection.
+You can do this by assigning the result to the same name as the input (`d` in this case):
 
 ```{r}
-select(d, Pollster, rep = `Republican Support`, dem = `Democratic Support`)
+d <- select(d, age, np_subscription)
 ```
 
-Note that `select` drops all columns not selected. If you only want to rename columns, you can use the `rename` function:
+Just be carefull with this. 
+One of the nice things about R is that you can have multiple versions of your data in different tibbles.
+It is often smart to at least keep the original (raw) data frame intact.
+
+### Selecting a range of columns
+
+You can also specify a range of columns using the syntax `first_column:last_column`.
+For example, to select all columns from `experiment_group` to `trust_t2`:
 
 ```{r}
-rename(d, start_date = Start, end_date = End)
+select(d, experiment_group:trust_t2)
 ```
 
-Finally, you can drop a variable by adding a minus sign in front of a name:
+This will return a new tibble with only the columns `experiment_group`, `trust_t1`, and `trust_t2`.
+
+Note that here we did not assign the result to anything.
+So in this case R will just print the result to the console, but not store it in a variable.
+
+### Selecting and renaming columns
+
+When you select a column, you can also rename it using the syntax `new_name = old_name`. 
+The following code selects the columns `experiment_group`, `trust_t1`, and `trust_t2`, and renames them to `group`, `trust_before`, and `trust_after`:
 
 ```{r}
-select(d, -Question, -URL)
+select(d, group = experiment_group, 
+          trust_before = trust_t1, 
+          trust_after = trust_t2)
 ```
 
 
+### Selecting columns that have spaces in the name  
+
+Sometimes columns names have spaces in them.
+This is a bit annoying to work with in R, because you need to then tell R where a name starts and ends.
+You can do this by using backticks (reverse quotes) around the column name. 
+In our practice data, we need this to select the `news consumption` column.
+It is then often smart to immediately rename the column to something without spaces, such as just replacing them with underscores:
+
+```{r}
+select(d, news_consumption = `news consumption`)
+```
+
+### Dropping columns
+
+Instead of selecting which column to keep, you can also specify which columns to drop.
+You can do this by adding a minus sign in front of the column name.
+The following code drops the columns `np_subscription` and `trust_t1`:
+
+```{r}
+select(d, -np_subscription, -trust_t1)
+```
+
+This will return a new tibble with all columns except `np_subscription` and `trust_t1`.
+
+
+# Renaming columns with `rename`
+
+Sometimes you only want to rename columns without selecting or dropping any.
+You can do this with the `rename` function, which works similarly to how you rename columns with `select`:
+
+```{r}
+rename(d, group = experiment_group, 
+          trust_before = trust_t1, 
+          trust_after = trust_t2)
+```
+
+In this case, we do rename the columns, but without dropping all the other columns.
