@@ -158,7 +158,7 @@ And if there are multiple ways in which the name can be completed, R will show y
 
 For example, type the following code in your R script:
 
-```{r}
+```{r, eval=F}
 mean()
 ```
 
@@ -169,7 +169,7 @@ Since the mean function is empty, you should only have seen the `x` argument (an
 But you can also use tab completion when adding additional arguments.
 Type the following code in your R script:
 
-```{r}
+```{r, eval=F}
 x = c(1,2,3,4)
 mean(x, )
 ```
@@ -184,7 +184,7 @@ It can even help you find files on your computer.
 If you use tab completion between quotes, RStudio will show you all the files in your working directory that match the characters you've typed so far.
 So you can use this inside functions like `read_csv` to quickly find the file you want to read.
 
-```{r}  
+```{r, eval=F}  
 library(tidyverse)
 read_csv("")
 ```

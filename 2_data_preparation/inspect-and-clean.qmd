@@ -1,25 +1,74 @@
+---
+title: Inspecting and Cleaning Data
+subtitle: garbage in, data out
+order: 2
+format:
+    html:
+        df-print: paged
+---
 
-```{r}
+In this tutorial we use the `tidyverse` and our simulated [practice data](../data-management/index.qmd#practice-data).
+
+```{r, message=FALSE}
 library(tidyverse)
-d = read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv")
+d <- read_csv("https://tinyurl.com/R-practice-data")
 ```
 
 
+# Inspecting the data
+
+A famous saying in data science is "garbage in, garbage out".[^1]
+If you don't take the time to inspect your data, and clean it up if necessary, you run the risk of ending up with incorrect results.
+
+[^1]: Or the more common version: "Sh*t in, sh*t out".
+
+In this section we'll show you some techniques for inspecting your data, and how you can *tidy* it up using the data management techniques we've learned so far.
+
+## Just ...look
+
+It never hurts to just take a first general look at your data.
+Especially when you're working with a new dataset, just looking at what columns you have, and what the first few rows look like, can give you a decent first impression.
+For a tibble with a few columns you can just print it to the console:
+
+```{r, results="hide"}
+d
+```
+
+But another nice way to look at the data is to use the `View` function in RStudio (or clicking on the name of the tibble in the Environment tab in the top-right corner).
+
+```{r, eval=FALSE}
+View(d)
+```
+```{r, echo=FALSE}
+d
+```
+
 ## Viewing a summary of every column
 
-Often, the main information that you're interested in is the summary of each column.
-You can compute this yourself (as we'll show later), but there is also a nice package called `summarytools` that can generate a handy overview.
-You can create the summary as follows (remember to install the package first):
+Viewing the top of your data is a good start, but there are many things that can go wrong that you won't be able to spot. 
+There can be missing values, incorrect data types, or outliers that are hard to spot just by looking at the data.
+So in addition you will want to view summaries of all the columns that you intend to use in your analysis.
+
+One way to get a quick summary is by just using the `summary` function in R.
+This is a generic function that you can use on many types of objects, and when you use it on a tibble (or regular data frame) it will give you a summary of each column.
+
+```{r, results="hide"}
+summary(d)
+```
+
+The summary includes various usefull statistics, like the minimum and maximum values, the median, and the number of missing values (`NA`). 
+However, this output can be a bit hard to read, especially when you have many columns.
+A great alternative is to use the `summarytools` package, which can create summaries in a nice table, including small graphs for each column to get a quick impression of the distribution.
 
 ```{r, output=FALSE, message=FALSE}
 library(summarytools)
 dfSummary(d)
 ```
 
-This will print the summary in your console, but you can also render it in a more readable format with the `view` function.
+This will print the summary in your console, but you can also render it in a more readable format with the `view` (With a small `v`) function.
 
 ```{r, eval=FALSE}
-view(dfSummary(d))
+dfSummary(d) |> view()
 ```
 
 ```{r, echo=FALSE}
@@ -27,6 +76,36 @@ print(dfSummary(d),
       method='render', 
       max.tbl.height = 500)
 ```
+
+### What to look for in the summary
+
+When you look at the summary, there are a few things you should look out for:
+
+* **Missing values**: Are there any columns with a lot of missing values? If so, you might need to think about how to deal with these.
+* **Data types**: Are the data types of the columns correct? For example, are dates stored as dates, and not as text?
+* **Outliers**: Are there any columns with very high or very low values? These might be errors in the data.
+* **Distribution**: Are the values in the columns distributed in a way that you would expect? For example, if you have a column with ages, are there any values that are negative, or over 100?
+
+Taking this into account, most of the columns in our data look pretty good.
+Our trust variables (`trust_t1` and `trust_t2`) are on a scale from 1 to 10, with a pretty normal distribution.
+We have a completely balanced distribution over the three experimental groups.
+The `news consumption` variable is a bit skewed, but nobody's perfect.
+However, there is one column that stands out sorely: `age`.
+
+The first sign that something is off is the histogram, which shows a very strange distribution where pretty much all observations are in the same bin on the left side.
+The reason for this becomes clear when we look at the maximum value, which is 1987.
+This is clearly an error in the data, as it is very unlikely that someone in our study is 1987 years old.
+What is much more likely is that at least one person entered their birth year instead of their age.
+
+In addition, we also see that there are 5 missing values in the `age` column.
+This isn't too bad, but we do need to be transparent about how we deal with these missing values in our analysis.
+
+# Cleaning up our data
+
+Now that we've identified some issues in our data, we need to clean it up.
+
+
+
 
 ::: {.callout-note title="Using summarytools in Quarty or RMarkdown" collapse="true"}
 

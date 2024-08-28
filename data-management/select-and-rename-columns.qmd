@@ -1,6 +1,7 @@
 ---
 title: 'Select and rename columns'
 order: 1
+
 ---
 
 
@@ -8,7 +9,7 @@ order: 1
 
 To select columns from a tibble (or data frame), you can use the `select` function.
 
-```{r, message=FALSE}
+```{r, message=FALSE, results='hide'}
 library(tidyverse)
 d <- read_csv("https://tinyurl.com/R-practice-data")
 
@@ -31,16 +32,16 @@ d_subset <- select(d, -np_subscription, -trust_t1)
 ```
 
 You can also rename columns without selecting them using the `rename` function:
-```{r}
+```{r, eval=F, results='hide'}
 d_renamed <- rename(d, group = experiment_group, 
                         trust_before = trust_t1, 
                         trust_after = trust_t2)
 ``` 
 :::
 
-In this tutorial we use the `tidyverse` and our simulated [practice data](../datasets/practice-data.csv).
+In this tutorial we use the `tidyverse` and our simulated [practice data](../data-management/index.qmd#practice-data).
 
-```{r, eval=T}
+```{r, message=FALSE}
 library(tidyverse)
 d <- read_csv("https://tinyurl.com/R-practice-data")
 ```
@@ -60,7 +61,7 @@ colnames(d)
 
 The simplest way of using `select` is to explicitly specify the columns you want to keep:
 
-```{r}
+```{r, results='hide'}
 ds <- select(d, age, np_subscription)
 ```
 
@@ -69,7 +70,7 @@ We assigned this new tibble to the variable `ds` (short for "data subset").
 Sometimes you want to overwrite the original data frame with the new selection.
 You can do this by assigning the result to the same name as the input (`d` in this case):
 
-```{r}
+```{r, results='hide', eval=FALSE}
 d <- select(d, age, np_subscription)
 ```
 
@@ -82,7 +83,7 @@ It is often smart to at least keep the original (raw) data frame intact.
 You can also specify a range of columns using the syntax `first_column:last_column`.
 For example, to select all columns from `experiment_group` to `trust_t2`:
 
-```{r}
+```{r, results='hide'}
 select(d, experiment_group:trust_t2)
 ```
 
@@ -96,7 +97,7 @@ So in this case R will just print the result to the console, but not store it in
 When you select a column, you can also rename it using the syntax `new_name = old_name`. 
 The following code selects the columns `experiment_group`, `trust_t1`, and `trust_t2`, and renames them to `group`, `trust_before`, and `trust_after`:
 
-```{r}
+```{r, results='hide'}
 select(d, group = experiment_group, 
           trust_before = trust_t1, 
           trust_after = trust_t2)
@@ -111,7 +112,7 @@ You can do this by using backticks (reverse quotes) around the column name.
 In our practice data, we need this to select the `news consumption` column.
 It is then often smart to immediately rename the column to something without spaces, such as just replacing them with underscores:
 
-```{r}
+```{r, results='hide'}
 select(d, news_consumption = `news consumption`)
 ```
 
@@ -121,7 +122,7 @@ Instead of selecting which column to keep, you can also specify which columns to
 You can do this by adding a minus sign in front of the column name.
 The following code drops the columns `np_subscription` and `trust_t1`:
 
-```{r}
+```{r, results='hide'}
 select(d, -np_subscription, -trust_t1)
 ```
 
@@ -133,7 +134,7 @@ This will return a new tibble with all columns except `np_subscription` and `tru
 Sometimes you only want to rename columns without selecting or dropping any.
 You can do this with the `rename` function, which works similarly to how you rename columns with `select`:
 
-```{r}
+```{r, results='hide'}
 rename(d, group = experiment_group, 
           trust_before = trust_t1, 
           trust_after = trust_t2)

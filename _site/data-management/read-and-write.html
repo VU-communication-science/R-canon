@@ -165,14 +165,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/r-in-action.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R in Action (demo)</span></a>
+  <a href="../getting-started/names-and-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Names and Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/names-and-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Names and Values</span></a>
+  <a href="../getting-started/types-of-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Types of Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -183,14 +183,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Packages</span></a>
+  <a href="../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">File management</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/files-and-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Files and projects</span></a>
+  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
   </div>
 </li>
       </ul>
@@ -244,36 +244,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pipes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/2_summarizing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Summarizing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/3_visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Visualization basics</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/4_reshaping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Long and Wide data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/5_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Joining data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/6_strings.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Textual data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -388,8 +358,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../good-to-know/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Function Help Pages</span></a>
+  <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Function Documentation</span></a>
   </div>
 </li>
       </ul>
@@ -410,6 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#importing-data-from-a-url" id="toc-importing-data-from-a-url" class="nav-link" data-scroll-target="#importing-data-from-a-url">Importing data from a URL</a></li>
   <li><a href="#writing-data-to-a-csv-file-on-your-computer" id="toc-writing-data-to-a-csv-file-on-your-computer" class="nav-link" data-scroll-target="#writing-data-to-a-csv-file-on-your-computer">Writing data to a CSV file on your computer</a></li>
+  <li><a href="#reading-data-from-a-csv-file-on-your-computer" id="toc-reading-data-from-a-csv-file-on-your-computer" class="nav-link" data-scroll-target="#reading-data-from-a-csv-file-on-your-computer">Reading data from a CSV file on your computer</a></li>
   </ul></li>
   <li><a href="#reading-other-file-formats-like-excel-and-spss" id="toc-reading-other-file-formats-like-excel-and-spss" class="nav-link" data-scroll-target="#reading-other-file-formats-like-excel-and-spss">Reading other file formats, like Excel and SPSS</a></li>
   </ul></li>
@@ -520,48 +491,21 @@ What is a CSV file?
 </section>
 <section id="writing-data-to-a-csv-file-on-your-computer" class="level3">
 <h3 class="anchored" data-anchor-id="writing-data-to-a-csv-file-on-your-computer">Writing data to a CSV file on your computer</h3>
-<p>You can use the <code>write_csv</code> function to write a tibble to a CSV file on your computer. You need to specify the <a href="../getting-started/files-and-projects.html#filesystem">file path</a> where you want to save it. If you just provide a file name, it will be saved in your current working directory.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Finding and changing your working directory">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Finding and changing your working directory
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Your working directory is basically the location (i.e.&nbsp;directory) on your computer where R is currently looking for files. Here we provide a short refresher for how to find and change your working directory. For a more detailed explanation, see the <a href="../getting-started/files-and-projects.html#filesystem">file system introduction</a>.</p>
-<p>To find your working directory, you can use the <code>getwd()</code> function:</p>
+<p>You can use the <code>write_csv</code> function to write a tibble to a CSV file on your computer. If you just provide a file name, it will be saved in your current working directory. <a href="../getting-started/file-management.html#working-directory">Remember</a> that you can set your working directory with <code>setwd()</code>, or using the RStudio interface (<code>Session -&gt; Set Working Directory -&gt; Choose Directory</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "/home/kasper/projects/R-canon/data-management"</code></pre>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(d, <span class="st">"practice_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>The <strong>path</strong> you see here is a directory (i.e.&nbsp;a folder) on your computer. If you write a file without specifying a specific location, it will be saved in this directory. A good practise is therefore to <strong>create a directory</strong> where you do all your R stuff, and set this as your working directory.</p>
-<p>There are two ways to set your working directory:</p>
-<ul>
-<li><strong>Manually</strong>: You can set the working directory with the <code>setwd()</code> function.<br>
-</li>
-<li><strong>Using RStudio</strong>: In RStudio, you can set the working directory by clicking on <code>Session</code> in the menu bar, then <code>Set Working Directory</code>, and then <code>Choose Directory</code>. This will open a file explorer window where you can select the directory you want to set as the working directory.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(gunpolls, <span class="st">"gunpoll_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This will write the <code>gunpolls</code> tibble to a file called <code>gunpoll_data.csv</code> in your current working directory. Try finding it in your file system!</p>
+<p>This will write the <code>d</code> tibble to a file called <code>practice_data.csv</code> in your current working directory. Try finding it in your file system!</p>
+</section>
+<section id="reading-data-from-a-csv-file-on-your-computer" class="level3">
+<h3 class="anchored" data-anchor-id="reading-data-from-a-csv-file-on-your-computer">Reading data from a CSV file on your computer</h3>
 <p>Now let’s read this file back into R. Since the file is in your working directory, you can just specify the file name:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gunpolls2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"gunpoll_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"practice_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can check and verify that the data (gunpolls2) is indeed identical to the original data (gunpolls).</p>
+<p>You can check and verify that the data (d2) is indeed identical to the original data (d).</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="CSV pitfalls to avoid">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -570,7 +514,7 @@ CSV pitfalls to avoid
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>There are two important pitfalls to avoid when working with CSV files:</p>
 <section id="pitfall-1-corrupting-the-file-by-opening-it-in-excel" class="level3">

@@ -1,6 +1,6 @@
 ---
 title: Causality
-subtitle: Does A cause B?
+subtitle: Does Nicolas Cage really drown people in pools?
 ---
 
 
@@ -42,7 +42,14 @@ When two variables are correlated, they tend to change together.
 This can be due to a causal relationship in either or both directions, but it could also be due to a third variable that causes both of them to change.
 This is known as a **confounding variable**, and a correlation that results from a confounding variable is called a **spurious correlation**.
 
-A [famous example](http://www.brixtonhealth.com/storksBabies.pdf) is that across European countries the number of storks is quite strongly correlated ($\r = 0.62$) with the number of newborn babies. The confounder in this case is the size of the country: larger countries have more storks and more babies. So the correlation is not evidence for the folk theory that storks deliver babies.
+::: {.callout-note title="Famous spurious correlations" collapse="true"}
+A [famous example](http://www.brixtonhealth.com/storksBabies.pdf) is that across European countries the number of storks is quite strongly correlated with the number of newborn babies ($\rho = 0.62$). The confounder in this case is the size of the country: larger countries have more storks and more babies. So the correlation is not evidence for the folk theory that storks deliver babies.
+
+Spurious correlations can also just be coincidental. 
+Especially when we look at many different variables over time, we are likely to find some that are correlated just by chance. 
+A whole website, [Spurious Correlations](https://www.tylervigen.com/spurious-correlations), is dedicated to finding statistical gems, such as the correlation between the number of people who drowned by falling into a pool and the number of films Nicolas Cage appeared in.
+This is why it's important to have a theoretical foundation for the relationships we test, and always be cautious when interpreting statistical results.
+:::
 
 
 In the case of screen time and psychological well-being study, the authors did observe an "association", but were not able to establish which variable causes the other.
@@ -70,7 +77,7 @@ Using **statistical methods**, we can try to control for confounding variables.
 This is not perfect, because there can always be other confounders, but it does allow us to build evidence to support or refute our theories.
 In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion [@mccombs72].
 And even common knowledge like "smoking causes cancer" relies heavily on evidence from statistical methods that control for confounders.
-This makes statistical modeling of confounding variables an essential part of the communication scientist's toolkit.
+Given that many communication science theories cannot be tested with experiments, being able to gather some level of evidence for causal relations from observational data is an essential part of the communication scientist's toolkit.
 
 
 # Confounders, and how to control for them

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Names and Values – Communication Science R Book</title>
+<title>Names and Objects – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../getting-started/functions.html" rel="next">
-<link href="../getting-started/r-in-action.html" rel="prev">
+<link href="../getting-started/types-of-objects.html" rel="next">
+<link href="../getting-started/using-rstudio.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/names-and-values.html">Names and Values</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/names-and-values.html">Names and Objects</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -165,14 +165,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/r-in-action.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R in Action (demo)</span></a>
+  <a href="../getting-started/names-and-values.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Names and Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/names-and-values.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Names and Values</span></a>
+  <a href="../getting-started/types-of-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Types of Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -183,14 +183,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Packages</span></a>
+  <a href="../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">File management</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/files-and-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Files and projects</span></a>
+  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
   </div>
 </li>
       </ul>
@@ -244,36 +244,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pipes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/2_summarizing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Summarizing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/3_visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Visualization basics</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/4_reshaping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Long and Wide data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/5_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Joining data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/6_strings.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Textual data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -388,8 +358,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../good-to-know/0_use-help-pages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Function Help Pages</span></a>
+  <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Function Documentation</span></a>
   </div>
 </li>
       </ul>
@@ -404,7 +374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#assigning-different-types-of-values" id="toc-assigning-different-types-of-values" class="nav-link active" data-scroll-target="#assigning-different-types-of-values">Assigning different types of values</a></li>
+  <li><a href="#assigning-different-types-of-objects" id="toc-assigning-different-types-of-objects" class="nav-link active" data-scroll-target="#assigning-different-types-of-objects">Assigning different types of objects</a></li>
   <li><a href="#assigning-results" id="toc-assigning-results" class="nav-link" data-scroll-target="#assigning-results">Assigning results</a></li>
   </ul>
 </nav>
@@ -412,9 +382,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/names-and-values.html">Names and Values</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/names-and-values.html">Names and Objects</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Names and Values</h1>
+<h1 class="title">Names and Objects</h1>
 </div>
 
 
@@ -431,8 +401,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In R, and in computer programming in general, the most essential operation is to assign <strong>values</strong> to <strong>names</strong>. By <strong>value</strong>, we then simply mean a piece of information. This can be a anything: a single number, a string (i.e.&nbsp;piece of text), a list of numbers, and even an entire data set. <strong>Assigning</strong> such values to names is essential, because it allows us to more easily refer to the values.</p>
-<p>In plain terms, <strong>assignment</strong> is how you make R remember things by assigning them to a name. To assign a value to a name, we use the <strong>arrow notation</strong>: <code>name &lt;- value</code>. For example:</p>
+<p>In R, and in computer programming in general, the most essential operation is to assign <strong>objects</strong> to <strong>names</strong>. By <strong>object</strong>, we then broadly mean any piece of information. a single number, a text, a list of numbers, and even an entire data set. <strong>Assigning</strong> objects to names is essential, because it allows us to refer to them in our code.</p>
+<p>In plain terms, <strong>assignment</strong> is how you make R remember things by assigning them to a name. To assign an object to a name, we use the <strong>arrow notation</strong>: <code>name &lt;- value</code>. For example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -448,7 +418,7 @@ Good to know: you can also use <code>x = 2</code>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Instead of using the <strong>arrow</strong> notation, you can also use the <strong>equal sign</strong> notation: <code>name = value</code>.</p>
+<p>Instead of using the <strong>arrow</strong> notation, you can also use the <strong>equal sign</strong> notation: <code>name = object</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -456,7 +426,7 @@ Good to know: you can also use <code>x = 2</code>
 </div>
 </div>
 </div>
-<p>By <strong>running</strong> the code <code>x &lt;- 2</code>, you are saying: <strong>Assign the value <code>2</code> to the name <code>x</code></strong>. Any values that you assigned to names are stored in your <strong>Environment</strong>. You can see this environment in the top-right window, under the <strong>Environment</strong> tab. If you assigned <code>2</code> to <code>x</code>, you should see a table called <strong>Values</strong>, with in the left column the names (<code>x</code>) and in the right column the values (<code>2</code>).</p>
+<p>By <strong>running</strong> the code <code>x &lt;- 2</code>, you are saying: <strong>Assign the value <code>2</code> to the name <code>x</code></strong>. Any objects that you assigned to names are stored in your <strong>Environment</strong>. You can see this environment in the top-right window, under the <strong>Environment</strong> tab. If you assigned <code>2</code> to <code>x</code>, you should see a table with in the left column the names (<code>x</code>) and in the right column a description of the object. For simply objects like numbers, this will just be the value (<code>2</code>).</p>
 <p>From hereon, when you use the name <code>x</code> in your code, it will <strong>refer</strong> to the value <code>2</code>. So when we run the code <code>x * 5</code> (x times 5) it will print the number <code>10</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -488,22 +458,22 @@ Why does R print a [1] before the result?
 </div>
 </div>
 </div>
-<section id="assigning-different-types-of-values" class="level2">
-<h2 class="anchored" data-anchor-id="assigning-different-types-of-values">Assigning different types of values</h2>
-<p>You can assign any type of value to a name, and you can use any name, as long as it starts with a letter and doesn’t contain spaces or symbols (but underscores are OK)</p>
+<section id="assigning-different-types-of-objects" class="level2">
+<h2 class="anchored" data-anchor-id="assigning-different-types-of-objects">Assigning different types of objects</h2>
+<p>You can assign any type of object to a name, and you can use any name, as long as it starts with a letter and doesn’t contain spaces or symbols (but underscores are OK)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>a_number <span class="ot">=</span> <span class="dv">5</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>my_cats_name <span class="ot">=</span> <span class="st">"Hobbes"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If you run this code and check you <strong>Environment</strong> (top-right), you should now see these name-value pairs added.</p>
+<p>If you run this code and check you <strong>Environment</strong> (top-right), you should now see these name-object pairs added.</p>
 </section>
 <section id="assigning-results" class="level2">
 <h2 class="anchored" data-anchor-id="assigning-results">Assigning results</h2>
-<p>Till now we only directly assigned values to names. This is convenient, but the power of assignment really shines when you use it to store <strong>results</strong>. For example, we can also do this.</p>
+<p>Till now we only directly assigned objects to names. This is convenient, but the power of assignment really shines when you use it to store <strong>results</strong>. For example, we can also do this.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This a very simple example, but just think for a second what this allows us to do. Since we can assign anything to a name, we can break down any complicated procedure into multiple steps! For now, the key lesson is just to wrap your head around the syntax for assigning values to names. This is fundamental to everything you will be doing in R (and in programming in general).</p>
+<p>This a very simple example, but just think for a second what this allows us to do. Since we can assign anything to a name, we can break down any complicated procedure into multiple steps! For now, the key lesson is just to wrap your head around the syntax for assigning objects to names. This is fundamental to everything you will be doing in R (and in programming in general).</p>
 
 
 </section>
@@ -931,13 +901,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../getting-started/r-in-action.html" class="pagination-link" aria-label="R in Action (demo)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">R in Action (demo)</span>
+      <a href="../getting-started/using-rstudio.html" class="pagination-link" aria-label="How to use RStudio">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">How to use RStudio</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../getting-started/functions.html" class="pagination-link" aria-label="Functions">
-        <span class="nav-page-text">Functions</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../getting-started/types-of-objects.html" class="pagination-link" aria-label="Types of Objects">
+        <span class="nav-page-text">Types of Objects</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

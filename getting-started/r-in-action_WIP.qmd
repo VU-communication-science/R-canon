@@ -1,6 +1,6 @@
 ---
 title: R in Action (demo)
-order: 2
+order: 10
 ---
 
 R is a very powerful tool, but it takes some time to learn how to use it before you get to fully appreciate what you can use it for.
@@ -28,6 +28,39 @@ When you then use the packages in an R script, you just *open* them like this:
 library(tidyverse)
 library(sjPlot)
 ```
+
+## Example 1: Importing and cleaning data
+
+The first step for any analysis is to import data and clean it up.
+In the [Data Management](../data-management/index.qmd) chapter, you will learn how to use the `tidyverse` and `pipe` syntax to create clear and transparent data cleaning pipelines.
+
+In this example we show a pipeline that performs the following steps:
+
+* Import a data set from the internet
+* Select the columns that we need, and rename one inconvenient name
+* Correct that some participants entered their birth year instead of their age
+* Filter out rows where the age is below 18 or missing (`NA`)
+
+```{r}
+library(tidyverse)
+
+d <- read_csv("https://tinyurl.com/R-practice-data") |>
+  select(age, np_subscription, news_consumption = `news consumption`) |>
+  mutate(age = ifelse(age > 200, 2024 - age, age)) |>
+  filter(!is.na(age) & age >= 18)
+```
+
+## Example 2: Visualizing data
+
+```{r}
+ggplot(d, aes(x = age, y = news_consumption, color = np_subscription)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "Trust in T1 by age",
+       x = "Age",
+       y = "Trust in T1")
+```
+
 
 ## Import data
 

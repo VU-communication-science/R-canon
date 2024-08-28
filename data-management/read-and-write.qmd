@@ -10,7 +10,7 @@ subtitle: How to get data into R, and how to store it
 One of the most common formats for storing and sharing rectangular data (i.e., data in rows and columns) is the `csv` format.
 With the `read_csv` and `write_csv` functions you can easily read and write CSV files in R. 
 
-```{r, message=FALSE}
+```{r, message=FALSE, eval=F}
 library(tidyverse)
 
 # read CSV file from the internet
@@ -85,6 +85,7 @@ Either click on the name (`d`) in the **Environment** tab in RStudio (top right 
 
 ```{r}
 View(d)
+
 ```
 
 This will open a new tab in RStudio that shows all the data. 
@@ -94,46 +95,27 @@ In the top menu bar you can also `filter` the data and `search` for specific val
 ### Writing data to a CSV file on your computer
 
 You can use the `write_csv` function to write a tibble to a CSV file on your computer.
-You need to specify the [file path](../getting-started/files-and-projects.qmd#filesystem) where you want to save it.
 If you just provide a file name, it will be saved in your current working directory.
+[Remember](../getting-started/file-management.qmd#working-directory) that you can set your working directory with `setwd()`, or using the RStudio interface (`Session -> Set Working Directory -> Choose Directory`).
 
-::: {.callout-note title="Finding and changing your working directory" collapse="true"}
-
-Your working directory is basically the location (i.e. directory) on your computer where R is currently looking for files.
-Here we provide a short refresher for how to find and change your working directory.
-For a more detailed explanation, see the [file system introduction](../getting-started/files-and-projects.qmd#filesystem).
-
-To find your working directory, you can use the `getwd()` function:
-
-```{r}
-getwd()
-```
-
-The **path** you see here is a directory (i.e. a folder) on your computer. 
-If you write a file without specifying a specific location, it will be saved in this directory.
-A good practise is therefore to **create a directory** where you do all your R stuff, and set this as your working directory.
-
-There are two ways to set your working directory:
-
-* **Manually**: You can set the working directory with the `setwd()` function.  
-* **Using RStudio**: In RStudio, you can set the working directory by clicking on `Session` in the menu bar, then `Set Working Directory`, and then `Choose Directory`. This will open a file explorer window where you can select the directory you want to set as the working directory.
-:::
 
 ```{r, eval=FALSE}
-write_csv(gunpolls, "gunpoll_data.csv")
+write_csv(d, "practice_data.csv")
 ```
 
-This will write the `gunpolls` tibble to a file called `gunpoll_data.csv` in your current working directory.
+This will write the `d` tibble to a file called `practice_data.csv` in your current working directory.
 Try finding it in your file system!
+
+### Reading data from a CSV file on your computer
 
 Now let's read this file back into R.
 Since the file is in your working directory, you can just specify the file name:
 
 ```{r, eval=FALSE}
-gunpolls2 <- read_csv("gunpoll_data.csv")
+d2 <- read_csv("practice_data.csv")
 ```
 
-You can check and verify that the data (gunpolls2) is indeed identical to the original data (gunpolls).
+You can check and verify that the data (d2) is indeed identical to the original data (d).
 
 ::: {.callout-warning title="CSV pitfalls to avoid" collapse="true"}
 There are two important pitfalls to avoid when working with CSV files:
