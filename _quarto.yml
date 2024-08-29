@@ -6,15 +6,18 @@ project:
 
 website:
   title: "Communication Science R Book"
-  navbar:
-    title: "Communication Science R Book"
-    logo: "data/logo.png"
-    background: "primary"
   sidebar:
+    title: "Communication Science R Book"
+    allignment: center
+    logo: "data/logo.png"
+    logo-href: "https://vu.nl/en/about-vu/faculties/faculty-of-social-sciences/departments/communication-science"
+    search: true
     style: "docked"
+    collapse-level: 1
     contents: auto
 
   page-footer:
+    background: primary
     left: "VU University, Department of Communication Science"
   back-to-top-navigation: true
   page-navigation: true
@@ -25,7 +28,7 @@ cls: references/apa7.cls
 format:
   html:
     theme:
-      - cosmo
+      - cerulean
       - style.scss
     toc: true
 

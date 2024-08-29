@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>regression – Communication Science R Book</title>
+<title>Hypotheses – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +50,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../good-to-know/function-documentation.html" rel="next">
-<link href="../../3_statistics/2_tests/correlation.html" rel="prev">
+<link href="../../3_statistics/0_concepts/standardization.html" rel="next">
+<link href="../../3_statistics/0_concepts/correlation.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,6 +89,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -96,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../3_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../../3_statistics/2_tests/correlation.html">Tests</a></li><li class="breadcrumb-item"><a href="../../3_statistics/2_tests/regression.html">Regression</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../3_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../../3_statistics/0_concepts/index.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../3_statistics/0_concepts/hypotheses.html">Hypotheses</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -157,6 +206,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">File management</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in Quarto</span></a>
   </div>
 </li>
       </ul>
@@ -244,34 +299,46 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../3_statistics/0_concepts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Concepts</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../3_statistics/0_concepts/0_hypotheses.html" class="sidebar-item-text sidebar-link">
+  <a href="../../3_statistics/0_concepts/causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../3_statistics/0_concepts/correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../3_statistics/0_concepts/hypotheses.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../3_statistics/0_concepts/1_causality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causality</span></a>
+  <a href="../../3_statistics/0_concepts/standardization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Standardization</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Tests</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../3_statistics/2_tests/correlation.html" class="sidebar-item-text sidebar-link">
@@ -280,7 +347,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../3_statistics/2_tests/regression.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../3_statistics/2_tests/regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Regression</span></a>
   </div>
 </li>
@@ -310,19 +377,75 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#deriving-hypotheses-from-theories" id="toc-deriving-hypotheses-from-theories" class="nav-link active" data-scroll-target="#deriving-hypotheses-from-theories">Deriving hypotheses from theories</a>
+  <ul class="collapse">
+  <li><a href="#evidence-neq-proof" id="toc-evidence-neq-proof" class="nav-link" data-scroll-target="#evidence-neq-proof">Evidence <span class="math inline">\(\neq\)</span> proof</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../3_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../../3_statistics/0_concepts/index.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../3_statistics/0_concepts/hypotheses.html">Hypotheses</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Hypotheses</h1>
+<p class="subtitle lead">From theories to testable statements</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="deriving-hypotheses-from-theories" class="level1">
+<h1>Deriving hypotheses from theories</h1>
+<p>In order to use statistical methods to test theories, we first need to <strong>derive hypotheses</strong> from them. A hypothesis is a <strong>testable statement</strong>, that when proven true or false, provides evidence for or against the theory.</p>
+<p>For example, consider the theory that playing violent video games leads to increased aggression in children. There is much disagreement about whether this theory is correct <span class="citation" data-cites="griffiths99">(<a href="#ref-griffiths99" role="doc-biblioref">Griffiths 1999</a>)</span>, so it’s important to test it empirically. In order to do so, we need to derive hypotheses that we can conduct to rigorous statistical tests. Some examples of hypotheses are:</p>
+<ul>
+<li>There is a relation “between arcade game use and teachers’ ratings of impulsiveness and aggresiveness”. <span class="citation" data-cites="lin87">(<a href="#ref-lin87" role="doc-biblioref">Lin and Lepper 1987, 81</a>)</span></li>
+<li>Playing violent video games leads to higher levels of heart rate and blood pressure compared to playing non-violent video games. <span class="citation" data-cites="lynch94">(<a href="#ref-lynch94" role="doc-biblioref">Lynch 1994</a>)</span></li>
+<li>There will be a “linear increase in aggressive affect after playing nonaggressive, moderately aggresive, and highly aggressive games”. <span class="citation" data-cites="scott95">(<a href="#ref-scott95" role="doc-biblioref">Scott 1995, 125</a>)</span></li>
+</ul>
+<p>Notice that these hypotheses are more specific than the theory they are derived from. There are multiple ways to define and measure “playing violent video games” and “increased aggression”, and it could also be that the relation only holds for certain groups of people, or only for short periods of time. Hypotheses help us make (different aspects of) the theory more explicit, so that we can conduct empirical tests.</p>
+<section id="evidence-neq-proof" class="level2">
+<h2 class="anchored" data-anchor-id="evidence-neq-proof">Evidence <span class="math inline">\(\neq\)</span> proof</h2>
+<p>If an hypothesis is confirmed, it <strong>provides evidence</strong> in support of the theory. However, note that it does <strong>not necessarily prove</strong> the theory. For example, if we find that children who play violent video games are more aggressive, it does not yet prove that the games caused the aggression, because there are other possible explanations for finding this relation. Perhaps people who are already aggressive are more likely to play violent video games, or there could be a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).</p>
+<p>Hypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.</p>
 
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-griffiths99" class="csl-entry" role="listitem">
+Griffiths, Mark. 1999. <span>“Violent Video Games and Aggression: A Review of the Literature.”</span> <em>Aggression and Violent Behavior</em> 4 (2): 203–12. https://doi.org/<a href="https://doi.org/10.1016/S1359-1789(97)00055-4">https://doi.org/10.1016/S1359-1789(97)00055-4</a>.
+</div>
+<div id="ref-lin87" class="csl-entry" role="listitem">
+Lin, Sabrina, and Mark R Lepper. 1987. <span>“Correlates of Children’s Usage of Videogames and Computers.”</span> <em>Journal of Applied Social Psychology</em> 17 (1): 72–93.
+</div>
+<div id="ref-lynch94" class="csl-entry" role="listitem">
+Lynch, P. 1994. <span>“Type-a Behavior, Hostility, and Cardiovascular Function at Rest and After Playing Video Games in Teenagers.”</span> In <em>Psychosomatic Medicine</em>, 56:152–52. 2. WILLIAMS &amp; WILKINS 351 WEST CAMDEN ST, BALTIMORE, MD 21201-2436.
+</div>
+<div id="ref-scott95" class="csl-entry" role="listitem">
+Scott, Derek. 1995. <span>“The Effect of Video Games on Feelings of Aggression.”</span> <em>The Journal of Psychology</em> 129 (2): 121–32.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -415,7 +538,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -745,13 +868,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../3_statistics/2_tests/correlation.html" class="pagination-link" aria-label="Correlation">
+      <a href="../../3_statistics/0_concepts/correlation.html" class="pagination-link" aria-label="Correlation">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Correlation</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../good-to-know/function-documentation.html" class="pagination-link" aria-label="Function Documentation">
-        <span class="nav-page-text">Function Documentation</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../3_statistics/0_concepts/standardization.html" class="pagination-link" aria-label="Standardization">
+        <span class="nav-page-text">Standardization</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

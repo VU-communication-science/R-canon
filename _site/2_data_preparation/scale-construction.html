@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>scale-construction – Communication Science R Book</title>
+<title>Scale construction – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -96,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_data_preparation/index.html">Data preparation</a></li><li class="breadcrumb-item"><a href="../2_data_preparation/scale-construction.html">Scale Construction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_data_preparation/index.html">Data preparation</a></li><li class="breadcrumb-item"><a href="../2_data_preparation/scale-construction.html">Scale construction</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -226,7 +246,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../2_data_preparation/scale-construction.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Scale Construction</span></a>
+ <span class="menu-text">Scale construction</span></a>
   </div>
 </li>
       </ul>
@@ -310,19 +330,79 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-a-scale" id="toc-what-is-a-scale" class="nav-link active" data-scroll-target="#what-is-a-scale">What is a scale?</a>
+  <ul class="collapse">
+  <li><a href="#create-scale" id="toc-create-scale" class="nav-link" data-scroll-target="#create-scale">How to create a scale</a>
+  <ul class="collapse">
+  <li><a href="#choose-the-items-based-on-theory" id="toc-choose-the-items-based-on-theory" class="nav-link" data-scroll-target="#choose-the-items-based-on-theory">1. Choose the items based on theory</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_data_preparation/index.html">Data preparation</a></li><li class="breadcrumb-item"><a href="../2_data_preparation/scale-construction.html">Scale construction</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Scale construction</h1>
+<p class="subtitle lead">How to create and validate scales</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="what-is-a-scale" class="level1">
+<h1>What is a scale?</h1>
+<p>A scale is a composite measure that combines multiple items into a single score. For example, in order to measure the complex construct “happiness”, you could ask people multiple questions related to happiness, such as “How often do you feel happy?”, “How satisfied are you with your life?”, and “How often do you feel joy?”.</p>
+<p>The idea is that by combining multiple items into a single score, you can get a more reliable and valid measure of the underlying construct. If we would just ask people the single question “How happy are you?”, we might not get a very accurate measure of their happiness, because happiness is a complex and multi-faceted construct. By breaking it down into a multi-item scale, we can get a more nuanced and accurate measure.</p>
+<p>If you’ve ever taken a survey, you’ve probably encountered scales before. For example, you might have been asked to rate your agreement with a series of statements on a scale from 1 to 5, where 1 means “strongly disagree” and 5 means “strongly agree”. This is also called a <strong>Likert scale</strong>, and it’s a common way to gather data on multiple items, with the goal of combining them into a single score for a complex construct.</p>
+<p>You will also hear scales referred to as <strong>latent variables</strong>. The word <strong>latent</strong> means hidden or concealed, and it refers here to the fact that the construct we are trying to measure is not directly observable. We can only measure it propertly by looking at multiple observable indicators (items) that are related to the construct.</p>
+<section id="create-scale" class="level2">
+<h2 class="anchored" data-anchor-id="create-scale">How to create a scale</h2>
+<p>To create a scale, we need to combine multiple columns in your data (i.e.&nbsp;the variables for the scale items) into a single score. However, we cannot just pick any columns, or ask participants any questions, and assume that they form a valid scale. We need to take several steps to ensure that the scale is reliable and valid.</p>
+<section id="choose-the-items-based-on-theory" class="level3">
+<h3 class="anchored" data-anchor-id="choose-the-items-based-on-theory">1. Choose the items based on theory</h3>
+<p>The first step is to choose the items that will make up your scale. This should be based on theory, and if possible on prior research that has already validated the items. For example, if you want to measure the construct “trust in journalism”, you might want to build on existing scales, such as the “Trust in news media” scale developed by <span class="citation" data-cites="kohring07">Kohring and Matthes (<a href="#ref-kohring07" role="doc-biblioref">2007</a>)</span>, or use the items proposed by <span class="citation" data-cites="stromback20">Strömbäck et al. (<a href="#ref-stromback20" role="doc-biblioref">2020</a>)</span>.</p>
+<p>Our (hypothetical) study used the five items for measuring truts in journalism, proposed by <span class="citation" data-cites="stromback20">Strömbäck et al. (<a href="#ref-stromback20" role="doc-biblioref">2020</a>)</span>:</p>
+<p>‘Generally speaking, to what extent do you agree or disagree with the following statements about journalists in The Netherlands?’ - Journalists are fair when covering the news</p>
+<ul>
+<li><p>Journalists are unbiased when covering the news</p></li>
+<li><p>Journalists tell the whole story when covering the news</p></li>
+<li><p>Journalists are accurate when covering the news</p></li>
+<li><p>Journalists separate facts from opinion when covering the news</p></li>
+</ul>
 
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+</section>
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-kohring07" class="csl-entry" role="listitem">
+Kohring, Matthias, and Jörg Matthes. 2007. <span>“Trust in News Media: Development and Validation of a Multidimensional Scale.”</span> <em>Communication Research</em> 34 (2): 231–52.
+</div>
+<div id="ref-stromback20" class="csl-entry" role="listitem">
+Strömbäck, Jesper, Yariv Tsfati, Hajo Boomgaarden, Alyt Damstra, Elina Lindgren, Rens Vliegenthart, and Torun Lindholm. 2020. <span>“News Media Trust and Its Impact on Media Use: Toward a Framework for Future Research.”</span> <em>Annals of the International Communication Association</em> 44 (2): 139–56.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -415,7 +495,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

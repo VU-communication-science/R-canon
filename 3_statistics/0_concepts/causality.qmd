@@ -26,7 +26,6 @@ However, when testing causal relations, we need to be particularly careful, beca
 
 ## Correlation versus causation
 
-
 ### Causation 
 
 Causation implies a cause-and-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). 

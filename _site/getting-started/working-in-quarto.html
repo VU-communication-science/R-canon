@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Filter and Arrange – Communication Science R Book</title>
+<title>Working in Quarto – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../data-management/pipes.html" rel="next">
-<link href="../data-management/select-and-rename.html" rel="prev">
+<link href="../data-management/index.html" rel="next">
+<link href="../getting-started/file-management.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,11 +76,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -106,40 +106,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../data/logo.png" alt="" class="navbar-logo">
-    </a>
-    <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Communication Science R Book</span>
-    </a>
-  </div>
-        <div class="quarto-navbar-tools tools-end">
-</div>
-          <div id="quarto-search" class="" title="Search"></div>
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/filter-and-arrange.html">Filter and Arrange</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/working-in-quarto.html">Working in Quarto</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://vu.nl/en/about-vu/faculties/faculty-of-social-sciences/departments/communication-science" class="sidebar-logo-link">
+      <img src="../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Communication Science R Book</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -193,17 +194,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">File management</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Working in Quarto</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../data-management/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data management</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
@@ -224,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link active">
+  <a href="../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Filter and Arrange</span></a>
   </div>
 </li>
@@ -246,11 +253,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="../2_data_preparation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data preparation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../2_data_preparation/inspect-and-clean.html" class="sidebar-item-text sidebar-link">
@@ -269,11 +276,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="../3_statistics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../3_statistics/0_concepts/index.html" class="sidebar-item-text sidebar-link">
@@ -285,14 +292,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/0_hypotheses.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/0_concepts/causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_statistics/0_concepts/correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_statistics/0_concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/1_causality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causality</span></a>
+  <a href="../3_statistics/0_concepts/standardization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Standardization</span></a>
   </div>
 </li>
       </ul>
@@ -324,13 +343,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Good to Know</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
@@ -349,19 +368,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#filter" id="toc-filter" class="nav-link active" data-scroll-target="#filter">Subsetting rows with filter()</a></li>
-  <li><a href="#filtering-out-missing-values" id="toc-filtering-out-missing-values" class="nav-link" data-scroll-target="#filtering-out-missing-values">Filtering out missing values</a></li>
-  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange">Sorting rows with arrange()</a></li>
+  <li><a href="#integrating-code-and-text" id="toc-integrating-code-and-text" class="nav-link active" data-scroll-target="#integrating-code-and-text">Integrating code and text</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-quarto-file" id="toc-creating-a-quarto-file" class="nav-link" data-scroll-target="#creating-a-quarto-file">Creating a Quarto file</a>
+  <ul class="collapse">
+  <li><a href="#the-header" id="toc-the-header" class="nav-link" data-scroll-target="#the-header">1. The Header</a></li>
+  <li><a href="#the-textual-content" id="toc-the-textual-content" class="nav-link" data-scroll-target="#the-textual-content">2. The textual content</a></li>
+  <li><a href="#the-code-chunks" id="toc-the-code-chunks" class="nav-link" data-scroll-target="#the-code-chunks">3. The code chunks</a></li>
+  </ul></li>
+  <li><a href="#rendering-the-document" id="toc-rendering-the-document" class="nav-link" data-scroll-target="#rendering-the-document">Rendering the document</a></li>
+  </ul></li>
+  <li><a href="#some-tips-and-warnings" id="toc-some-tips-and-warnings" class="nav-link" data-scroll-target="#some-tips-and-warnings">Some tips and warnings</a>
+  <ul class="collapse">
+  <li><a href="#turn-on-render-on-save" id="toc-turn-on-render-on-save" class="nav-link" data-scroll-target="#turn-on-render-on-save">Turn on <code>'Render on save'</code></a></li>
+  <li><a href="#the-working-directory-is-the-folder-where-the-quarto-file-is-located" id="toc-the-working-directory-is-the-folder-where-the-quarto-file-is-located" class="nav-link" data-scroll-target="#the-working-directory-is-the-folder-where-the-quarto-file-is-located">The working directory is the folder where the Quarto file is located</a></li>
+  <li><a href="#use-code-block-parameters" id="toc-use-code-block-parameters" class="nav-link" data-scroll-target="#use-code-block-parameters">Use code block parameters</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/filter-and-arrange.html">Filter and Arrange</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/working-in-quarto.html">Working in Quarto</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Filter and Arrange</h1>
-<p class="subtitle lead">Filter rows and arrange them in a specific order</p>
+<h1 class="title">Working in Quarto</h1>
 </div>
 
 
@@ -378,200 +409,106 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In this tutorial we use the <code>tidyverse</code> and our simulated <a href="../data-management/index.html#practice-data">practice data</a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="filter" class="level1">
-<h1>Subsetting rows with filter()</h1>
-<p>The <code>filter</code> function can be used to select a subset of rows. The first argument of the <code>filter</code> function is the tibble you want to filter. The second argument is the condition that should be met for a row to be included in the result. Let’s say we want to select only the rows where the <code>experiment_group</code> column is equal to <code>control</code>. We can then use the <code>==</code> (is equal to) operator.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, experiment_group <span class="sc">==</span> <span class="st">'control'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 200 × 7
-     age np_subscription `news consumption` experiment_group trust_t1 trust_t2
-   &lt;dbl&gt; &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;
- 1    29 no                            9.39 control              5.13     5.53
- 2    25 no                            7.22 control              4.71     2.84
- 3    37 yes                          13.0  control              6.33     7.32
- 4    62 yes                          12.2  control              5.11     4.71
- 5    62 yes                          10.6  control              6.46     5.92
- 6    59 yes                          10.9  control              7.14     6.25
- 7    19 yes                          10.1  control              4.28     2.24
- 8    22 no                           12.6  control              4.98     5.34
- 9    25 no                            6.55 control              3.62     4.94
-10    44 no                            8.91 control              5.12     3.27
-# ℹ 190 more rows
-# ℹ 1 more variable: id &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<p>This gives us the 200 rows (out of 600) where the <code>experiment_group</code> is <code>control</code>.</p>
-<p>We can use other common operators as well, such as <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, and <code>!=</code> (not equal). And we can also combine multiple conditions with the <code>&amp;</code> (and) and <code>|</code> (or) operators.</p>
-<p>For example, here we select all rows where the <code>experiment_group</code> is <code>control</code> and the <code>age</code> is greater than 30:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, experiment_group <span class="sc">==</span> <span class="st">'control'</span> <span class="sc">&amp;</span> age <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>A less common operator that is usefull to know about is <code>%in%</code>, which is used to check if a value is in a list of values. For example, to select all rows where the <code>experiment_group</code> is either <code>positive</code> or <code>negative</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, experiment_group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'positive'</span>, <span class="st">'negative'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You an also <em>invert</em> any condition by putting a <code>!</code> (NOT) in front of it. So the following code selects all rows where the <code>experiment_group</code> is NOT in the list <code>positive</code> or <code>negative</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, <span class="sc">!</span>experiment_group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'positive'</span>, <span class="st">'negative'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="A deeper understanding of the filter condition">
+<section id="integrating-code-and-text" class="level1">
+<h1>Integrating code and text</h1>
+<p>The classic way of working in R is to write your code in a script file. This is still a very common way of working, and it has many advantages. But today there are also great alternatives, that make it possible to integrate your code directly in your reporting.</p>
+<p>In fact, the book that you are currently reading is written in one such alternatives, called <strong>Quarto</strong>. Quarto is a <strong>literate programming</strong> tool, which means that it allows you to write your code and your text in the same document. Any results and visualizations that you generate in your code can also be directly included in the output document. This is not only convenient, but also makes your analysis more transparent and reproducible. If you ever need to update your analysis, you can just rerun the code and the document will automatically update, including any tables, figures and statistial results that you generated.</p>
+<p>And despite all those features, it really isn’t that different from writing an R script. In some ways it is even a more convenient way of working.</p>
+<p>In some courses in this program, you will be asked to write your assignments in Quarto. This section therefore provides a brief introduction to working in Quarto.</p>
+<section id="creating-a-quarto-file" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-quarto-file">Creating a Quarto file</h2>
+<p>You can create and work with Quarto directly in RStudio. For assignments, you will often be given a template Quarto file, but here we’ll create one from scratch. To create a new Quarto file in RStudio, go to the menu bar and select <code>File &gt; New File &gt; Quarto document</code>.</p>
+<p>You’ll get a menu where you can select some options, such as whether you want the output to be created in HTML, PDF or Word. We’ll stick with the default HTML, because this doesn’t require any additional software to be installed. For now, the only thing you should change is the <strong>Title</strong>. Just name it something like <em>My First Quarto Document</em>, and click <code>Create</code>.</p>
+<p>The new file will open in the editor, and you’ll see that it already contains some text and code, that also doubles as a quick tutorial. Roughly speaking, there are three general components.</p>
+<section id="the-header" class="level3">
+<h3 class="anchored" data-anchor-id="the-header">1. The Header</h3>
+<p>At the top of the file there is a header, which is enclosed by three dashes <code>---</code>. Here you can specify some general settings for the document, such as the title, the author, and the output format. The default is:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My First Quarto Document"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">editor</span><span class="kw">:</span><span class="at"> visual</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This means that the title of the document is “My First Quarto Document”, the output format is HTML, and the editor is the visual editor.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Visual or Source editor">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-A deeper understanding of the filter condition
+Visual or Source editor
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Based on the examples given you probably already have a good enough understanding of how the <code>filter</code> function works to use it in your own code. In this optional information block we’ll go a bit deeper into how the filter condition works, and what operators you can use.</p>
-<section id="the-condition-is-a-logical-expression" class="level2">
-<h2 class="anchored" data-anchor-id="the-condition-is-a-logical-expression">The condition is a logical expression</h2>
-<p>The condition in <code>filter</code> can be any <strong>logical expression</strong>. A logical expression is simply a statement that is either <code>TRUE</code> or <code>FALSE</code>. When we use a logical expression in the <code>filter</code> function, we are asking R to evaluate this expression for each row in the tibble. Each row for which the expression evaluates to <code>TRUE</code> is then included in the subset.</p>
-<p>If you know a bit about how logical expressions work, you will have great control over what rows are included in your subset. Here is an overview of the most important operators for logical expressions.</p>
-<section id="comparison-operators" class="level3">
-<h3 class="anchored" data-anchor-id="comparison-operators">Comparison operators</h3>
-<p>Comparison operators are used to compare two values.</p>
+<p>The Quarto editor can be <code>source</code> or <code>visual</code>. In <code>visual</code> mode, everything looks a bit more pretty. It doesn’t yet look as pretty as when you render the document (which we’ll show you in a bit), but it’s a bit easier to read. Also, in the toolbar you get some buttons to make text bold or italics, add codeblocks, insert images, create tables, etc.</p>
+<p>In <code>source</code> mode, everything is just in plain text. Behind the scenes, Quarto uses a format called <strong>Markdown</strong> to format the text. Markdown is a type of markup language (like HTML). What this means is that any formatting that you do (e.g., bold, tables, lists) is done by writing the text in a specific way. For example, to make a word bold, you write it between two asterisks <code>**like this**</code>.</p>
+<p>Working in <code>source</code> mode can be convenient if you’re already familiar with Markdown. If not, we recommend sticking with <code>visual</code> mode for now, and maybe forever.</p>
+</div>
+</div>
+</div>
+<p>You can add many more options to the header, but for now we’ll stick with the basics. There is just one thing we recommend adding:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"test"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">editor</span><span class="kw">:</span><span class="at"> visual</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">editor_options</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">chunk_output_type</span><span class="kw">:</span><span class="at"> console</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will make sure that any output you generate while working on your document will be shown in the console. If you don’t set this, it will be shown in the document itself, and this can make the document a bit cluttered. Note that this doesn’t affect the final output of the document, just the way it is shown in the editor.</p>
+</section>
+<section id="the-textual-content" class="level3">
+<h3 class="anchored" data-anchor-id="the-textual-content">2. The textual content</h3>
+<p>After the header, you can start writing your text. This works like a light version of Word. You can add heading, lists, tables, images, and more.</p>
+</section>
+<section id="the-code-chunks" class="level3">
+<h3 class="anchored" data-anchor-id="the-code-chunks">3. The code chunks</h3>
+<p>At some point you see a code chunk, which looks like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Inside these code chunks you can write R code. When you render the document, the code will be executed, and the output will be shown in the document.</p>
+<p>While working on the document you can also run the code chunks separately. You can do this like you would do in an R script, by selectin the code you want to run and hitting <code>Run</code> (or <code>Ctrl/Cmd + Enter</code>). But there is also a convenient option to run the entire code chunk at once by clicking on the <code>run current chunk</code> button in the top right of the code chunk. Here you also find a button to run all the chunks above the current one. It is recommended to do this often, because it will make sure that the output is up to date.</p>
+</section>
+</section>
+<section id="rendering-the-document" class="level2">
+<h2 class="anchored" data-anchor-id="rendering-the-document">Rendering the document</h2>
+<p>When you’re done writing your document, or if you want to see a preview, you can <code>render</code> the document by clicking the <code>Render</code> button in the toolbar (or hitting <code>Ctrl/Cmd + Shift + K</code>). Try it now! If you did not yet save your Quarto file, R will first ask you to save it. You should then give it a name with the <code>.qmd</code> (Quarto Markdown) extension, for example <code>my-first-quarto-document.qmd</code>. This should produce an HTML file that opens in your browser (unless you changed something and broke it).</p>
+<p>There is <strong>one big challenge when working with Quarto</strong>, which is also a blessing in disguise. If there is ANY error in your code, the entire document will not render. This can be frustrating, especially if you need to hand in an assignment in a few minutes. So whenever you’re working with Quarty, make sure to <strong>frequently render your document</strong> while you’re working on it, to catch any errors early on. It is much easier to trace back an error if you only made a few changes since the last time you rendered the document. If you only render the document at the end, you might have to go through the entire document to find the error. (though the error messages will tell you where to look)</p>
+<p>So why is this a blessing in disguise? It forces you to write your code in a way that is clean and well-structured. When working in an R script, a common mistake to make is that some pieces of code depend on code that is further down in the script. For example, if you use a certain column on line 10, but you only create that column on line 20. This might not pose a problem while you’re working on it, but it will bite you when for whatever reason you need to rerun the entire script. Quarto forces you to write your code in a way that if you run the entire script from scratch, it will work.</p>
+</section>
+</section>
+<section id="some-tips-and-warnings" class="level1">
+<h1>Some tips and warnings</h1>
+<section id="turn-on-render-on-save" class="level3">
+<h3 class="anchored" data-anchor-id="turn-on-render-on-save">Turn on <code>'Render on save'</code></h3>
+<p>In the toolbar you can turn on <code>Render on Save</code>. This way, any time you save the document, it will try to render. Now make sure to save often (get used to using <code>Ctrl/Cmd + s</code>). This way you can catch any rendering errors early on.</p>
+</section>
+<section id="the-working-directory-is-the-folder-where-the-quarto-file-is-located" class="level3">
+<h3 class="anchored" data-anchor-id="the-working-directory-is-the-folder-where-the-quarto-file-is-located">The working directory is the folder where the Quarto file is located</h3>
+<p>A Quarto file will always use it’s own location as the <a href="../getting-started/file-management.html#choosing-working-directory">working directory</a> This is actually quite convenient. Just make sure to put your Quarto file in the same directory as your data, and you’re good to go.</p>
+</section>
+<section id="use-code-block-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="use-code-block-parameters">Use code block parameters</h3>
+<p>You can add parameters to the code chunks. For example, the following code chunk will only show the code, but not the output:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>{r, results<span class="ot">=</span><span class="cn">FALSE</span>}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Following this same notation, you can set the following parameters:</p>
 <ul>
-<li><code>==</code> equal to</li>
-<li><code>!=</code> not equal to</li>
-<li><code>&gt;</code> greater than</li>
-<li><code>&gt;=</code> greater than or equal to</li>
-<li><code>&lt;</code> less than</li>
-<li><code>&lt;=</code> less than or equal to</li>
-<li><code>%in%</code> is in a list of values (second value must be a list or vector)</li>
+<li><code>{r, results=F}</code>: show the code, but not the output</li>
+<li><code>{r, eval=F}</code>: show the code, but do not run it</li>
+<li><code>{r, echo=F}</code>: do not show the code, but show the output</li>
+<li><code>{r, message=F}</code>: do not show any messages that are generated by the code. This can for instance hide the message that is printed when you run <em>library(tidyverse)</em>.</li>
+<li><code>{r, warning=F}</code>: do not show any warnings that are generated by the code. This is more dangerous than hiding messages, but if you are sure that the warning is harmless, you can use this to make the document cleaner.</li>
+<li><code>{r, message=F, warning=F}</code>: separate multiple parameters with a comma.</li>
+<li><code>{r, cache=T}</code>: cache the output. This way, if you render the document again, but the code chunk did not change, it will not rerun the code. If you have any code that takes a long time to run, this allows you to still render the document quickly (which is especially useful if you have <em>Render on Save</em> turned on). Just make sure to turn cache of before rendering the final version, to be sure that everything is up to date.</li>
 </ul>
-<p>Example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">1</span>    <span class="co"># TRUE:  5 is greater than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>    <span class="co"># FALSE: 5 is less than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="st">"A"</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)  <span class="co"># TRUE: "A" is in the list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="st">"A"</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>)  <span class="co"># FALSE: "A" is not in the list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
-</div>
-</section>
-<section id="logical-operators" class="level3">
-<h3 class="anchored" data-anchor-id="logical-operators">Logical operators</h3>
-<p>Logical operators are used to combine multiple conditions.</p>
-<ul>
-<li><code>&amp;</code> and</li>
-<li><code>|</code> or</li>
-<li><code>!</code> not</li>
-</ul>
-<p>Example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">|</span> <span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>   <span class="co"># TRUE: 5 is greater than 1 OR 5 is less than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>   <span class="co"># FALSE: 5 is greater than 1 AND 5 is less than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>          <span class="co"># TRUE: it is not the case that 5 is smaller than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-</div>
-</section>
-<section id="using-equations" class="level3">
-<h3 class="anchored" data-anchor-id="using-equations">Using equations</h3>
-<p>You can also use equations in your conditions. For example, to select all rows where the absolute difference between <code>trust_t1</code> and <code>trust_t2</code> is greater than 2:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, <span class="fu">abs</span>(trust_t2 <span class="sc">-</span> trust_t1) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="parentheses" class="level3">
-<h3 class="anchored" data-anchor-id="parentheses">Parentheses</h3>
-<p>For complex conditions, you can use parentheses to group conditions, similar to how you would in a mathematical expression. For example, say that you want to inspect <em>surprising</em> cases where trust in journalists decreased after watching the positive movie, or increased after watching the negative movie.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, (experiment_group <span class="sc">==</span> <span class="st">'positive'</span> <span class="sc">&amp;</span> trust_t2 <span class="sc">&lt;</span> trust_t1) <span class="sc">|</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>          (experiment_group <span class="sc">==</span> <span class="st">'negative'</span> <span class="sc">&amp;</span> trust_t2 <span class="sc">&gt;</span> trust_t1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-</div>
-</div>
-</div>
-</section>
-<section id="filtering-out-missing-values" class="level1">
-<h1>Filtering out missing values</h1>
-<p>Filtering out cases with missing values works a bit differently. Missing values in R are represented by <code>NA</code>, but you <strong>cannot (!!)</strong> use something like <code>filter(d, age != NA)</code>. Instead, you can use the <code>is.na</code> function to check if a value is missing.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, <span class="fu">is.na</span>(age))     <span class="do">## rows where age IS missing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 7
-    age np_subscription `news consumption` experiment_group trust_t1 trust_t2
-  &lt;dbl&gt; &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;
-1    NA no                            6.13 positive             5.39     4.76
-2    NA yes                          11.5  positive             5.17     4.65
-3    NA no                            2.50 control              4.63     5.97
-4    NA yes                           9.13 positive             6.44     6.21
-5    NA no                            8.39 negative             5.60     4.75
-# ℹ 1 more variable: id &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, <span class="sc">!</span><span class="fu">is.na</span>(age))    <span class="do">## rows where age IS NOT missing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>In addition, there is a special function in the <code>tidyverse</code> for removing rows if ANY column in the data is missing. This is the <code>drop_na</code> function.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_na</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This returns 595 rows (out of 600) because 5 rows had missing values in the <code>age</code> column.</p>
-</section>
-<section id="arrange" class="level1">
-<h1>Sorting rows with arrange()</h1>
-<p>The <code>arrange</code> function can be used to sort the rows of a tibble. For example, if we want to sort the data by the <code>age</code> column:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(d, age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 600 × 7
-     age np_subscription `news consumption` experiment_group trust_t1 trust_t2
-   &lt;dbl&gt; &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;
- 1    18 no                           6.78  negative             3.36     2.68
- 2    18 no                           9.00  positive             4.73     5.75
- 3    18 yes                         13.7   control              3.35     4.85
- 4    19 no                          13.3   negative             2.73     1.14
- 5    19 yes                         10.1   control              4.28     2.24
- 6    19 no                           5.11  control              3.49     3.56
- 7    19 no                           0.763 negative             3.65     1   
- 8    19 yes                         13.2   control              1.97     1.66
- 9    19 no                          10.1   positive             3.24     3.80
-10    19 no                           5.18  negative             3.36     1.55
-# ℹ 590 more rows
-# ℹ 1 more variable: id &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<p>By default, the rows are sorted in ascending order. If you want to sort in descending order, you can put a minus in front of the variable name.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(d, <span class="sc">-</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If you want to sort on multiple columns, you can simply add them to the <code>arrange</code> function. For example, to sort first on <code>experiment_group</code> (ascending) and then on <code>age</code> (descending):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(d, experiment_group, <span class="sc">-</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -667,7 +604,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -997,13 +934,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../data-management/select-and-rename.html" class="pagination-link" aria-label="Select and rename">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Select and rename</span>
+      <a href="../getting-started/file-management.html" class="pagination-link" aria-label="File management">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">File management</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../data-management/pipes.html" class="pagination-link" aria-label="Pipes">
-        <span class="nav-page-text">Pipes</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../data-management/index.html" class="pagination-link" aria-label="Data management">
+        <span class="nav-page-text">Data management</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

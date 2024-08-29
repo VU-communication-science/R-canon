@@ -70,8 +70,7 @@ You can use any name you like, but since you'll be referring to this data a lot,
 ```{r, message=FALSE}
 library(tidyverse)
 
-url <- "https://tinyurl.com/R-practice-data"
-d <- read_csv(url)
+d <- read_csv("https://tinyurl.com/R-practice-data")
 ```
 
 Make sure to always check whether the data was imported correctly:
@@ -95,16 +94,12 @@ In the top menu bar you can also `filter` the data and `search` for specific val
 ### Writing data to a CSV file on your computer
 
 You can use the `write_csv` function to write a tibble to a CSV file on your computer.
-If you just provide a file name, it will be saved in your current working directory.
-[Remember](../getting-started/file-management.qmd#working-directory) that you can set your working directory with `setwd()`, or using the RStudio interface (`Session -> Set Working Directory -> Choose Directory`).
-
+If you just provide a file name, it will be saved in your current [working directory](../getting-started/file-management.qmd#working-directory).
 
 ```{r, eval=FALSE}
 write_csv(d, "practice_data.csv")
 ```
 
-This will write the `d` tibble to a file called `practice_data.csv` in your current working directory.
-Try finding it in your file system!
 
 ### Reading data from a CSV file on your computer
 

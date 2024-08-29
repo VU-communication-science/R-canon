@@ -1,14 +1,20 @@
 /*-- scss:defaults --*/
 
-$primary: #0080c9;
-
 .continue {
   @extend .btn;
   @extend .btn-outline-primary;
   margin-top: 2rem;
 }
 
-.navbar-logo {
-  height: 100px;
-  width: 100px;
+.sidebar-header {
+  text-align: center;
+}
+
+.sidebar-logo {
+  margin: 0 auto;
+
+  border-radius: 5%;
+  .link {
+    width: 100%;
+  }
 }

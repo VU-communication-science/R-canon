@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../data-management/index.html" rel="next">
+<link href="../getting-started/working-in-quarto.html" rel="next">
 <link href="../getting-started/packages.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -76,11 +76,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -106,25 +106,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../data/logo.png" alt="" class="navbar-logo">
-    </a>
-    <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Communication Science R Book</span>
-    </a>
-  </div>
-        <div class="quarto-navbar-tools tools-end">
-</div>
-          <div id="quarto-search" class="" title="Search"></div>
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -133,13 +118,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/file-management.html">File management</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://vu.nl/en/about-vu/faculties/faculty-of-social-sciences/departments/communication-science" class="sidebar-logo-link">
+      <img src="../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Communication Science R Book</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -193,39 +194,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">File management</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in Quarto</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../data-management/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data management</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/welcome-to-the-tidyverse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome to the tidyverse</span></a>
+  <a href="../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data-management/read-and-write.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Read and write data</span></a>
+ <span class="menu-text">Read and write</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/select-and-rename-columns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Select and rename columns</span></a>
+  <a href="../data-management/select-and-rename.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Select and rename</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/filter-and-arrange-rows.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Filter and Arrange rows</span></a>
+  <a href="../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter and Arrange</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -246,21 +253,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="../2_data_preparation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data preparation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../2_data_preparation/inspect-and-clean.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Inspecting and Cleaning Data</span></a>
+ <span class="menu-text">Inspect and clean</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../2_data_preparation/scale-construction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scale Construction</span></a>
+ <span class="menu-text">Scale construction</span></a>
   </div>
 </li>
       </ul>
@@ -269,11 +276,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="../3_statistics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../3_statistics/0_concepts/index.html" class="sidebar-item-text sidebar-link">
@@ -285,14 +292,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/0_hypotheses.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/0_concepts/causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_statistics/0_concepts/correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_statistics/0_concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/1_causality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causality</span></a>
+  <a href="../3_statistics/0_concepts/standardization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Standardization</span></a>
   </div>
 </li>
       </ul>
@@ -324,13 +343,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Good to Know</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
@@ -349,12 +368,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#file-management" id="toc-file-management" class="nav-link active" data-scroll-target="#file-management">Keeping track of your data</a>
+  <li><a href="#file-management" id="toc-file-management" class="nav-link active" data-scroll-target="#file-management">Keeping track of your data</a></li>
+  <li><a href="#recommended-approach-stick-to-your-working-directory" id="toc-recommended-approach-stick-to-your-working-directory" class="nav-link" data-scroll-target="#recommended-approach-stick-to-your-working-directory">Recommended approach: stick to your working directory</a>
   <ul class="collapse">
-  <li><a href="#reading-the-file-using-the-absolute-path" id="toc-reading-the-file-using-the-absolute-path" class="nav-link" data-scroll-target="#reading-the-file-using-the-absolute-path">Reading the file using the absolute path</a></li>
-  <li><a href="#working-directory" id="toc-working-directory" class="nav-link" data-scroll-target="#working-directory">Setting your working directory to read files easily</a></li>
+  <li><a href="#writing-a-file-to-your-working-directory" id="toc-writing-a-file-to-your-working-directory" class="nav-link" data-scroll-target="#writing-a-file-to-your-working-directory">Writing a file to your working directory</a></li>
+  <li><a href="#reading-a-file-from-your-working-directory" id="toc-reading-a-file-from-your-working-directory" class="nav-link" data-scroll-target="#reading-a-file-from-your-working-directory">Reading a file from your working directory</a></li>
+  <li><a href="#choosing-your-working-directory" id="toc-choosing-your-working-directory" class="nav-link" data-scroll-target="#choosing-your-working-directory">Choosing your working directory</a></li>
   </ul></li>
-  <li><a href="#projects" id="toc-projects" class="nav-link" data-scroll-target="#projects">Projects</a></li>
+  <li><a href="#optional-working-with-absolute-paths" id="toc-optional-working-with-absolute-paths" class="nav-link" data-scroll-target="#optional-working-with-absolute-paths">Optional: working with absolute paths</a>
+  <ul class="collapse">
+  <li><a href="#finding-the-absolute-path" id="toc-finding-the-absolute-path" class="nav-link" data-scroll-target="#finding-the-absolute-path">Finding the absolute path</a>
+  <ul class="collapse">
+  <li><a href="#using-file.choose" id="toc-using-file.choose" class="nav-link" data-scroll-target="#using-file.choose">Using file.choose()</a></li>
+  <li><a href="#using-the-file-explorer" id="toc-using-the-file-explorer" class="nav-link" data-scroll-target="#using-the-file-explorer">Using the file explorer</a></li>
+  <li><a href="#using-tab-completion" id="toc-using-tab-completion" class="nav-link" data-scroll-target="#using-tab-completion">Using tab completion</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -364,7 +393,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/file-management.html">File management</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">File management</h1>
-<p class="subtitle lead">How to find files on your computer</p>
+<p class="subtitle lead">Reading and writing files in R</p>
 </div>
 
 
@@ -383,10 +412,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="file-management" class="level1">
 <h1>Keeping track of your data</h1>
-<p>In order to read and write data in R, you need to be able to refer to data files by their <strong>file path</strong> (i.e.&nbsp;their name and location on your computer). You can specify this path in two ways: using an <strong>absolute path</strong> (starting from the root directory) or a <strong>relative path</strong> (starting from the current working directory). Let’s practice a bit using both approaches.</p>
-<p>First, download <a href="../data/fake_demo_data.csv" download="">this CSV file </a>containing some practice data. Don’t worry about the content for now (we’ll get to that later). You computer will probably save it in your <code>Downloads</code> directory, but otherwise just pick a location where you can find it. Check to make sure that the file actually downloaded by opening your file explorer (outside of RStudio) and navigating to the file.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="How does your computer organize files?">
+<p>If you’re working with data you need to be able to keep track of where you store it, especially if it concerns sensitive data such as personal information. In this section we’ll first explain and demonstrate a simple, recommended approach to managing files in R. Secondly, we provide some optional material that goes more in-depth on how your computer’s file system works, and we provide some additional techniques that give you more flexibility in managing files. This second part is optional, and if you’re just starting out with R we recommend skipping it for now.</p>
+</section>
+<section id="recommended-approach-stick-to-your-working-directory" class="level1">
+<h1>Recommended approach: stick to your working directory</h1>
+<p>When you read or write files in R, you need to two things:</p>
+<ul>
+<li><strong>The file name</strong>: This is the name of the file you want to read or write.</li>
+<li><strong>The file path</strong>: This is the location of the file on your computer.</li>
+</ul>
+<p>The file name is easy to understand, but to find the file path you need to know a bit about how your computer organizes files. In addition, it’s inconvenient to always provide the exact location of a file.</p>
+<p>Luckily, there is an alternative. When you are working in R, you are always working in a specific directory on your computer, called your <strong>working directory</strong>. You can check the current working directory with the <code>getwd()</code> (<em>get working directory</em>) function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"/home/kasper/projects"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/home/kasper/projects"</code></pre>
+</div>
+</div>
+<p>Your working directory will be different from the one shown above, but the general structure is the same. In our case it tells us that the working directory is the <code>projects</code> directory in the <code>home</code> directory of the user <code>kasper</code>.</p>
+<p>If I now write a files and I <em>only</em> provide the file name (e.g., <code>file.csv</code>), R will create (over overwrite) it in this directory (<code>/home/kasper/projects/file.csv</code>). We also refer to this as a <strong>relative path</strong>: by providing just the file name, R will look for it relative to the working directory. Let’s try this out!</p>
+<section id="writing-a-file-to-your-working-directory" class="level2">
+<h2 class="anchored" data-anchor-id="writing-a-file-to-your-working-directory">Writing a file to your working directory</h2>
+<p>The following code writes a plain text file name <code>hello_world.txt</code> to your current working directory.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">"Hello world!"</span>, <span class="st">"hello_world.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you now open your file explorer and navigate to your working directory, you should see the file <code>hello_world.txt</code> there. Note that there is also a file explorer inside of RStudio, under the <code>Files</code> tab in the bottom-right window. If you click on the <code>gear</code> (settings) icon there, you can click <code>Go To Working Directory</code>.</p>
+<p>You can also ask R to list all the files in your working directory.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>()                    <span class="do">## show all files</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">pattern=</span><span class="st">"*.txt"</span>)     <span class="do">## show files with .txt extension</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="reading-a-file-from-your-working-directory" class="level2">
+<h2 class="anchored" data-anchor-id="reading-a-file-from-your-working-directory">Reading a file from your working directory</h2>
+<p>Reading files works the same way. Since there is now a file <code>hello_world.txt</code> in your working directory, you can read it with the following code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">readLines</span>(<span class="st">"hello_world.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Directories inside your working directory">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Directories inside your working directory
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In this tutorial we only show you how to work with files directly in your working directory, but you can also access directories. For example, if you have a directory called <code>data</code> inside your working directory, with a file called <code>survey.csv</code> in it, you can access it via the relative path <code>data/survey.csv</code>. This is very convenient in bigger projects, where you might want to organize things like data, results and visualizations in different directories.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="choosing-your-working-directory" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-your-working-directory">Choosing your working directory</h2>
+<p>We highly recommend to always set your working directory to a specific location on your computer. For instance, in a directory called <code>R_projects,</code> or even a specific directory for your current project or assignment.</p>
+<p><strong>If you are working in a regular R script</strong>, you can set the working directory with the <code>setwd()</code> function. For example, to set the working directory to <code>/home/you/R_projects</code>, you can run <code>setwd("/home/you/R_projects")</code>. If you prefer using a menu, you can also use <strong>RStudio</strong>: click on <code>Session</code> in the menu bar, then <code>Set Working Directory</code>, and then <code>Choose Directory</code>.</p>
+<p><strong>If you are working in a Quarto file</strong>, (<a href="../getting-started/working-in-quarto.html">as we explain here</a>), the working directory is always the directory where the Quarto file is located (and you cannot change it). This is convenient, because it means that you just need to put the Quarto file and your data together in the directory that you want to work in.</p>
+<p>Finally, you can also create an <strong>RStudio project</strong>. In the top-right corner of your RStudio window, you can see a button labeled <strong>Project: (None)</strong>. If you click it, you can create a new project, in a new or existing directory on your computer. RStudio will automatically set the working directory to this project directory, and in the top-right corner you will now see the name of the project instead of <strong>Project: (None)</strong>.</p>
+</section>
+</section>
+<section id="optional-working-with-absolute-paths" class="level1">
+<h1>Optional: working with absolute paths</h1>
+<p>In the previous section we showed you the easiest way to manage files in R: by sticking to your working directory. This will get you through most situations, but sometimes it’s convenient to be able to read files from other locations on your computer. You can achieve this by specifying the complete path to the file, also called the <strong>absolute path</strong> (as opposed to the <strong>relative path</strong> we used before). If we know that the path to our Desktop is <code>/home/kasper/Desktop</code>, we can write a file directly to the Desktop with the following code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">"Hello desktop!"</span>, <span class="st">"/home/kasper/Desktop/hello_desktop.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that the absolute path <strong>must</strong> start with the root directory, which is <code>/</code> on Linux and Mac, and <code>C:\</code> (or another drive) on Windows.</p>
+<p>Off course, if <em>you</em> run the above line of code it will throw an error saying that there is <code>No such file or directory</code> (unless you happen to be another user named <code>kasper</code> working on a Linux machine). So in order to work with absolute paths, you’ll need to know how to find the path to a file or directory on your computer.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="How does your computer organize files?">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -395,86 +496,52 @@ How does your computer organize files?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Computers organize files and directories (or folders) in a hierarchical structure that resembles a tree, called the <strong>file system</strong>. This tree-like structure starts from a single <strong>root directory</strong> and branches out into subdirectories, which can contain more subdirectories or files. It looks a bit different on Windows and Mac (or Linux), but the basic idea is the same. Here is a simplified example (normally there are more layers, such as your user directory):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span> (Root Directory) </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>│</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>├── Documents</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>│   ├── Work</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>│   │   ├── survey.csv</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>│   │   └──  </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>│   └── Personal</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>│       ├── Resume.pdf</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>│       └── Budget.xlsx</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>│</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>├── Downloads</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>│   ├── Report.docx</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>│   └── image.jpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span> (Root Directory) </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>├── Documents</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>│   ├── Work</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>│   │   ├── survey.csv</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>│   │   └──  </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>│   └── Personal</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>│       ├── Resume.pdf</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>│       └── Budget.xlsx</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>├── Downloads</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>│   ├── Report.docx</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>│   └── image.jpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Because of this structure, any file on your computer has a unique <strong>path</strong> that describes its location in the file system. For example, the path to the <code>Report.docx</code> file in the <code>Work</code> directory would be <code>/Documents/Work/survey.csv</code>, or <code>C:\Documents\Work\survey.csv</code> on Windows.</p>
 </div>
 </div>
 </div>
-<section id="reading-the-file-using-the-absolute-path" class="level2">
-<h2 class="anchored" data-anchor-id="reading-the-file-using-the-absolute-path">Reading the file using the absolute path</h2>
-<p>First, let’s try to read the file using the absolute path, using the following code. Don’t worry about understanding the code for now, as we’ll get back to this in the <a href="../data-management/read-and-write.html">data management chapter</a>.</p>
+<section id="finding-the-absolute-path" class="level2">
+<h2 class="anchored" data-anchor-id="finding-the-absolute-path">Finding the absolute path</h2>
+<p>So how do you find the absolute path to the file? Here are several options.</p>
+<section id="using-file.choose" class="level3">
+<h3 class="anchored" data-anchor-id="using-file.choose">Using file.choose()</h3>
+<p>If you run the code <code>file.choose()</code>, R will open a file explorer window.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">'ENTER THE ABSOLUTE PATH TO THE FILE HERE'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.choose</span>()              <span class="do">## find path of existing file</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">file.choose</span>(<span class="at">new =</span> <span class="cn">TRUE</span>)    <span class="do">## create a path for a new file</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>So how do you find the absolute path to the file? There are several options, so try to find at least one that you like.</p>
-<ul>
-<li><strong>Using file.choose()</strong>: If you run the code <code>file.choose()</code>, R will open a file explorer window. Here you can browse to the file, and when you select it, R will print the file path in the console window.</li>
-<li><strong>From the file explorer</strong>: Open the file explorer on your computer, and navigate to the file. You can then right-click on the file and select <em>Properties</em> (or some similar term). Here you’ll find the <em>Location</em> of the file.</li>
-<li><strong>Using RStudio</strong>: For some types of files, you can use the RStudio <em>data importer</em> interface. In the bottom-right window, you can go to the <code>Files</code> tab. Here you can browse to the file on your computer. If the file is something that you can read into R (e.g., a CSV file), RStudio will give you the <code>Import Dataset</code> option. This will open a visual interface for importing the data, that also shows the file path.</li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled" title="Cool kids use tab completion">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Cool kids use tab completion
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<p>Here you can browse to the file, and when you select it, R will print the file path in the console window. This is easy, because you get a nice menu to browse through your files. But it’s also a bit cumbersome, because you have to do it every time you want to read a file. Also, you can’t select folder, only existing files.</p>
+</section>
+<section id="using-the-file-explorer" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-file-explorer">Using the file explorer</h3>
+<p>You can also use your own file explorer (outside of RStudio). Navigate to a file or folder, and right click on it. You should then be able to select something like <em>Properties</em> (this depends on your operating system). Here you should be able to find the absolute path.</p>
+</section>
+<section id="using-tab-completion" class="level3">
+<h3 class="anchored" data-anchor-id="using-tab-completion">Using tab completion</h3>
 <p>There is one other nice trick that you can use to find files on your computer: <strong>tab completion</strong>. Whenever you are writing something in a code editor, you can often use the <strong>Tab</strong> key (above caps lock) to automatically complete it (like auto-complete on your phone). If you’ve ever seen programmers work really fast, it’s because they’re using tab completion all the time.</p>
-<p>To use tab completion for file paths, put your text cursor between the quotes in <code>read_csv("")</code>, and then press the <code>Tab</code> key. If there are multiple files that match the characters you’ve typed so far, RStudio will show you all the options. Keep typing to narrow down the options, and once you see the file or directory you want, press tab again to complete it.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="working-directory" class="level2">
-<h2 class="anchored" data-anchor-id="working-directory">Setting your working directory to read files easily</h2>
-<p>Whenever you are working in R, you are always working in a specific directory on your computer. This directory is called the <strong>working directory</strong>. You can check the current working directory with the <code>getwd()</code> (<em>get working directory</em>) function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If a file is inside of your working directory, you can easily read it by just providing the file name. Also, if you write a file without specifying a directory, it will be saved in this directory. Therefore, a good way to make data management in R easy, is by making a directory for your current project, and setting this as your working directory.</p>
-<p>Open your file explorer (outside of RStudio) and create a directory somewhere with a name like “R_projects”. Then copy the <code>fake_demo_data.csv</code> file you downloaded earlier into this directory.</p>
-<p>Now, you can set this directory as your working directory in R. There are two ways to do this:</p>
-<ul>
-<li><strong>Manually</strong>: You can set the working directory with the <code>setwd()</code> function. For example, to set the working directory to <code>/home/you/R_projects</code>, you can run <code>setwd("/home/you/R_projects")</code>.</li>
-<li><strong>Using RStudio</strong>: In RStudio, you can set the working directory by clicking on <code>Session</code> in the menu bar, then <code>Set Working Directory</code>, and then <code>Choose Directory</code>. This will open a file explorer window where you can select the directory you want to set as the working directory.</li>
-</ul>
-<p>If you did everything correctly, you should now be able to read the file using the following code:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">'fake_demo_data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-<section id="projects" class="level1">
-<h1>Projects</h1>
-<p>Setting your working directory can be a good way to manage files on your on computer. However, if you are working on a project, it can be even more convenient to start an actual <strong>project</strong> in RStudio.</p>
-<p>In the top-right corner of your RStudio window, you can see a button labeled <strong>Project: (None)</strong>. If you click it, you can create a new project. You can create this project in a new or existing directory on your computer. This will mark the directory as a project, and in the top-right corner you will see the name of the project instead of <strong>Project: (None)</strong>.</p>
-<p>Projects are very convenient because they allow you to store all your files and data for a project in a single directory. The working directory is automatically set to the project directory, and you can easily access all files in the project from the RStudio interface. Moreover, if you share the project with others, they can easily open the project in RStudio and start working on it. As long as you make sure to save all files in the project directory, and use relative paths to access files, your code will work on any computer.</p>
+<p>To use tab completion for file paths, put your text cursor between the quotes in <code>readLines("")</code> (or any function for reading/writing files), and then press the <code>Tab</code> key. If there are multiple files that match the characters you’ve typed so far, RStudio will show you all the options. Keep typing to narrow down the options, and once you see the file or directory you want, press tab again to complete it. This takes some time to get used to, but it’s a very powerful trick.</p>
 
 
+</section>
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -905,8 +972,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../data-management/index.html" class="pagination-link" aria-label="Data management">
-        <span class="nav-page-text">Data management</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../getting-started/working-in-quarto.html" class="pagination-link" aria-label="Working in Quarto">
+        <span class="nav-page-text">Working in Quarto</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
