@@ -1,5 +1,5 @@
 ---
-title: Welcome to the tidyverse
+title: The tidyverse
 subtitle: A swiss army knife for data management
 order: 0
 ---

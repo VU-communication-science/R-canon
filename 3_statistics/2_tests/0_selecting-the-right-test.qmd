@@ -1,5 +1,0 @@
----
-title: Selecting the right test
----
-
-On this page we can explain when to use what test, and link to the right page.

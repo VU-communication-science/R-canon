@@ -1,47 +1,52 @@
 ---
-title: "Filter and Arrange rows"
+title: "Filter and Arrange"
 subtitle: Filter rows and arrange them in a specific order
 order: 2
 ---
 
-For the examples in this tutorial we'll use the `iris` dataset, like we [explained here](./import-and-view.qmd#iris).
-
-
+In this tutorial we use the `tidyverse` and our simulated [practice data](../data-management/index.qmd#practice-data).
 
 ```{r, message=FALSE}
 library(tidyverse)
-d <- as_tibble(iris)
+d <- read_csv("https://tinyurl.com/R-practice-data")
 ```
 
 
 # Subsetting rows with filter() {#filter} 
 
 The `filter` function can be used to select a subset of rows. 
-For example, the following code selects only the rows where the `Species` column is equal to `setosa`.
 The first argument of the `filter` function is the tibble you want to filter.
 The second argument is the condition that should be met for a row to be included in the result.
-Here we use the `==` operator to say that the value in the `Species` column should be equal to `setosa`.
+Let's say we want to select only the rows where the `experiment_group` column is equal to `control`.
+We can then use the `==` (is equal to) operator.
 
 ```{r}
-filter(d, Species == 'setosa')
+filter(d, experiment_group == 'control')
 ```
 
-Note that we now get 50 out of the 150 rows in the `iris` dataset.
+This gives us the 200 rows (out of 600) where the `experiment_group` is `control`.
 
 We can use other common operators as well, such as `>`, `<`, `>=`, `<=`, and `!=` (not equal).
 And we can also combine multiple conditions with the `&` (and) and `|` (or) operators. 
 
-For example, here we select all rows where the `Species` is `setosa` and the `Sepal.Length` is greater than 5.
+For example, here we select all rows where the `experiment_group` is `control` and the `age` is greater than 30:
 
 ```{r, output=FALSE}
-filter(d, Species == 'setosa' & Sepal.Length > 5)
+filter(d, experiment_group == 'control' & age > 30)
 ```
 
 A less common operator that is usefull to know about is `%in%`, which is used to check if a value is in a list of values.
-For example, to select all rows where the `Species` is either `setosa` or `versicolor`:
+For example, to select all rows where the `experiment_group` is either `positive` or `negative`:
 
 ```{r, output=FALSE}
-filter(d, Species %in% c('setosa', 'versicolor'))
+filter(d, experiment_group %in% c('positive', 'negative'))
+```
+
+You an also *invert* any condition by putting a `!` (NOT) in front of it.
+So the following code selects all rows where the `experiment_group` is NOT in the list `positive` or `negative`:
+
+```{r, output=FALSE}
+filter(d, !experiment_group %in% c('positive', 'negative'))
 ```
 
 ::: {.callout-note title="A deeper understanding of the filter condition" collapse="true"}
@@ -76,7 +81,8 @@ Example:
 ```{r}
 5 > 1    # TRUE:  5 is greater than 1
 5 < 1    # FALSE: 5 is less than 1
-"setosa" %in% c("setosa", "versicolor")  # TRUE: "setosa" is in the list
+"A" %in% c("A", "B", "C")  # TRUE: "A" is in the list
+"A" %in% c("B", "C", "D")  # FALSE: "A" is not in the list
 ```
 
 ### Logical operators
@@ -94,40 +100,69 @@ Example:
 !5 < 1          # TRUE: it is not the case that 5 is smaller than 1
 ```
 
+### Using equations
+
+You can also use equations in your conditions.
+For example, to select all rows where the absolute difference between `trust_t1` and `trust_t2` is greater than 2:
+
+```{r, output=FALSE}
+filter(d, abs(trust_t2 - trust_t1) > 2)
+```
+
 ### Parentheses
 
 For complex conditions, you can use parentheses to group conditions, similar to how you would in a mathematical expression.
-Say you want to select big flowers, but you want to take into account that some species are generally smaller.
-So the minimum Sepal.Length for `setosa` should be 5, but for `versicolor` it should be 6.
-You could then write the following condition:
-
+For example, say that you want to inspect *surprising* cases where trust in journalists decreased after watching the positive movie, or increased after watching the negative movie.
 
 ```{r, output=FALSE}
-filter(d, (Species == 'setosa' & Sepal.Length > 5) | 
-          (Species == 'versicolor' & Sepal.Length > 6)
-      )
+filter(d, (experiment_group == 'positive' & trust_t2 < trust_t1) |
+          (experiment_group == 'negative' & trust_t2 > trust_t1))
 ```
 :::
+
+# Filtering out missing values
+
+Filtering out cases with missing values works a bit differently.
+Missing values in R are represented by `NA`, but you **cannot (!!)** use something like `filter(d, age != NA)`.
+Instead, you can use the `is.na` function to check if a value is missing.
+
+```{r}
+filter(d, is.na(age))     ## rows where age IS missing
+```
+```{r, results='hide'}
+filter(d, !is.na(age))    ## rows where age IS NOT missing
+```
+
+In addition, there is a special function in the `tidyverse` for removing rows if ANY column in the data is missing.
+This is the `drop_na` function.
+
+```{r, results='hide'}
+drop_na(d)
+```
+
+This returns 595 rows (out of 600) because 5 rows had missing values in the `age` column.
 
 # Sorting rows with arrange() {#arrange}
 
 The `arrange` function can be used to sort the rows of a tibble.
-For example, if we want to sort the `iris` dataset by the `Sepal.Length` column:
+For example, if we want to sort the data by the `age` column:
 
 ```{r}
-arrange(d, Sepal.Length)
+arrange(d, age)
 ```
 
 By default, the rows are sorted in ascending order.
 If you want to sort in descending order, you can put a minus in front of the variable name.
 
 ```{r, output=FALSE}
-arrange(d, -Sepal.Length)
+arrange(d, -age)
 ```
 
 If you want to sort on multiple columns, you can simply add them to the `arrange` function.
-For example, to sort by `Species` and then by `Sepal.Length`:
+For example, to sort first on `experiment_group` (ascending) and then on `age` (descending):
 
 ```{r, output=FALSE}
-arrange(d, Species, Sepal.Length)
+arrange(d, experiment_group, -age)
 ```
+
+

@@ -1,0 +1,49 @@
+---
+title: Scale construction
+subtitle: How to create and validate scales
+order: 2
+---
+
+# What is a scale?
+
+A scale is a composite measure that combines multiple items into a single score.
+For example, in order to measure the complex construct "happiness", you could ask people multiple questions related to happiness, such as "How often do you feel happy?", "How satisfied are you with your life?", and "How often do you feel joy?".
+
+The idea is that by combining multiple items into a single score, you can get a more reliable and valid measure of the underlying construct.
+If we would just ask people the single question "How happy are you?", we might not get a very accurate measure of their happiness, because happiness is a complex and multi-faceted construct.
+By breaking it down into a multi-item scale, we can get a more nuanced and accurate measure.
+
+If you've ever taken a survey, you've probably encountered scales before.
+For example, you might have been asked to rate your agreement with a series of statements on a scale from 1 to 5, where 1 means "strongly disagree" and 5 means "strongly agree".
+This is also called a **Likert scale**, and it's a common way to gather data on multiple items, with the goal of combining them into a single score for a complex construct.
+
+You will also hear scales referred to as **latent variables**.
+The word **latent** means hidden or concealed, and it refers here to the fact that the construct we are trying to measure is not directly observable.
+We can only measure it propertly by looking at multiple observable indicators (items) that are related to the construct.
+
+## How to create a scale {#create-scale}
+
+To create a scale, we need to combine multiple columns in your data (i.e. the variables for the scale items) into a single score.
+However, we cannot just pick any columns, or ask participants any questions, and assume that they form a valid scale.
+We need to take several steps to ensure that the scale is reliable and valid.
+
+### 1. Choose the items based on theory
+
+The first step is to choose the items that will make up your scale.
+This should be based on theory, and if possible on prior research that has already validated the items. 
+For example, if you want to measure the construct "trust in journalism", you might want to build on existing scales, such as the "Trust in news media" scale developed by @kohring07, or use the items proposed by @stromback20.
+
+
+
+Our (hypothetical) study used the five items for measuring truts in journalism, proposed by @stromback20:
+
+‘Generally speaking, to what extent do you agree or disagree with the following statements about journalists in The Netherlands?’
+- Journalists are fair when covering the news
+
+- Journalists are unbiased when covering the news
+
+- Journalists tell the whole story when covering the news
+
+- Journalists are accurate when covering the news
+
+- Journalists separate facts from opinion when covering the news

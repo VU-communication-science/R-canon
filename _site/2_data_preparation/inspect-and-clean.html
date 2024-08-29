@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Inspecting and Cleaning Data – Communication Science R Book</title>
+<title>Inspect and clean – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_data_preparation/index.html">Data preparation</a></li><li class="breadcrumb-item"><a href="../2_data_preparation/inspect-and-clean.html">Inspecting and Cleaning Data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_data_preparation/index.html">Data preparation</a></li><li class="breadcrumb-item"><a href="../2_data_preparation/inspect-and-clean.html">Inspect and clean</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -167,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/names-and-values.html" class="sidebar-item-text sidebar-link">
+  <a href="../getting-started/names-and-objects.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Names and Objects</span></a>
   </div>
 </li>
@@ -185,14 +185,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">File management</span></a>
+  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Packages</span></a>
+  <a href="../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">File management</span></a>
   </div>
 </li>
       </ul>
@@ -208,38 +208,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/welcome-to-the-tidyverse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome to the tidyverse</span></a>
+  <a href="../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data-management/read-and-write.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Read and write data</span></a>
+ <span class="menu-text">Read and write</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/select-and-rename-columns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Select and rename columns</span></a>
+  <a href="../data-management/select-and-rename.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Select and rename</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/cleaning-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/filter-and-arrange-rows.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Filter and Arrange rows</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/sorting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ordering rows</span></a>
+  <a href="../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter and Arrange</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -268,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../2_data_preparation/inspect-and-clean.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Inspecting and Cleaning Data</span></a>
+ <span class="menu-text">Inspect and clean</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -288,28 +276,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_general-concepts/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">General Concepts</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_hypotheses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Hypotheses</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/1_causality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causality</span></a>
-  </div>
-</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Tests</span></a>
+            <a href="../3_statistics/0_concepts/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concepts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -317,20 +287,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/2_tests/0_selecting-the-right-test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Selecting the right test</span></a>
+  <a href="../3_statistics/0_concepts/0_hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/2_tests/anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Anova</span></a>
+  <a href="../3_statistics/0_concepts/1_causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Tests</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/2_tests/chi2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Chi2</span></a>
+  <a href="../3_statistics/2_tests/correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -339,25 +320,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Regression</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/2_tests/t-test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">T Test</span></a>
-  </div>
-</li>
       </ul>
   </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
  <span class="menu-text">Good to Know</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
@@ -379,17 +354,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#inspecting-the-data" id="toc-inspecting-the-data" class="nav-link active" data-scroll-target="#inspecting-the-data">Inspecting the data</a>
   <ul class="collapse">
   <li><a href="#just-look" id="toc-just-look" class="nav-link" data-scroll-target="#just-look">Just …look</a></li>
-  <li><a href="#viewing-a-summary-of-every-column" id="toc-viewing-a-summary-of-every-column" class="nav-link" data-scroll-target="#viewing-a-summary-of-every-column">Viewing a summary of every column</a></li>
+  <li><a href="#viewing-a-summary-of-every-column" id="toc-viewing-a-summary-of-every-column" class="nav-link" data-scroll-target="#viewing-a-summary-of-every-column">Viewing a summary of every column</a>
+  <ul class="collapse">
+  <li><a href="#what-to-look-for-in-the-summary" id="toc-what-to-look-for-in-the-summary" class="nav-link" data-scroll-target="#what-to-look-for-in-the-summary">What to look for in the summary</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#cleaning-up-our-data" id="toc-cleaning-up-our-data" class="nav-link" data-scroll-target="#cleaning-up-our-data">Cleaning up our data</a>
+  <ul class="collapse">
+  <li><a href="#selecting-columns" id="toc-selecting-columns" class="nav-link" data-scroll-target="#selecting-columns">Selecting columns</a></li>
+  <li><a href="#mutating-columns" id="toc-mutating-columns" class="nav-link" data-scroll-target="#mutating-columns">Mutating columns</a>
+  <ul class="collapse">
+  <li><a href="#option-1-subtract-the-birth-year-from-the-year-of-the-study" id="toc-option-1-subtract-the-birth-year-from-the-year-of-the-study" class="nav-link" data-scroll-target="#option-1-subtract-the-birth-year-from-the-year-of-the-study">Option 1: Subtract the birth year from the year of the study</a></li>
+  <li><a href="#option-2-recode-specific-values" id="toc-option-2-recode-specific-values" class="nav-link" data-scroll-target="#option-2-recode-specific-values">Option 2: Recode specific values</a></li>
+  <li><a href="#the-nuclear-option-just-remove-them" id="toc-the-nuclear-option-just-remove-them" class="nav-link" data-scroll-target="#the-nuclear-option-just-remove-them">The nuclear option: just remove them</a></li>
+  </ul></li>
+  <li><a href="#filtering-rows" id="toc-filtering-rows" class="nav-link" data-scroll-target="#filtering-rows">Filtering rows</a></li>
+  </ul></li>
+  <li><a href="#check-again" id="toc-check-again" class="nav-link" data-scroll-target="#check-again">Check again!</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_data_preparation/index.html">Data preparation</a></li><li class="breadcrumb-item"><a href="../2_data_preparation/inspect-and-clean.html">Inspecting and Cleaning Data</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_data_preparation/index.html">Data preparation</a></li><li class="breadcrumb-item"><a href="../2_data_preparation/inspect-and-clean.html">Inspect and clean</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Inspecting and Cleaning Data</h1>
+<h1 class="title">Inspect and clean</h1>
 <p class="subtitle lead">garbage in, data out</p>
 </div>
 
@@ -414,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="inspecting-the-data" class="level1">
 <h1>Inspecting the data</h1>
-<p>A famous saying in data science is “garbage in, garbage out”.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> If you don’t take the time to inspect your data, and clean it up if necessary, you run the risk of ending up with incorrect results.</p>
+<p>An wise saying in data science is “garbage in, garbage out”.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> If you don’t take the time to inspect your data, and clean it up if necessary, you run the risk of ending up with incorrect results.</p>
 <p>In this section we’ll show you some techniques for inspecting your data, and how you can <em>tidy</em> it up using the data management techniques we’ve learned so far.</p>
 <section id="just-look" class="level2">
 <h2 class="anchored" data-anchor-id="just-look">Just …look</h2>
@@ -438,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="viewing-a-summary-of-every-column" class="level2">
 <h2 class="anchored" data-anchor-id="viewing-a-summary-of-every-column">Viewing a summary of every column</h2>
-<p>Viewing the top of your data is a good start, but there are many things that can go wrong that you won’t be able to spot. There can be missing values, incorrect data types, or outliers that are hard to spot just by looking at the data. So in addition you will want to view summaries of all the columns that you intend to use in your analysis.</p>
+<p>Viewing the top of your data is a good start, but there are many things that can go wrong that you won’t be able to spot. There can be missing values, incorrect data types, or outliers that are hard to spot just by looking at the data. So in addition you will want to view summaries of all the columns that you intend to use in your analysis.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>One way to get a quick summary is by just using the <code>summary</code> function in R. This is a generic function that you can use on many types of objects, and when you use it on a tibble (or regular data frame) it will give you a summary of each column.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -504,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">51 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCBwPOBLzBhonAAABKUlEQVR42u3dwQnCQBBAUVdSnRVohekg7cXrCir80yq8dwshMPmwe51xXiiuqwf4N4JFgkXb/LB/vdDuY/Wwq8w/vr2+un386Fg99Y9wJCPBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsGiMe8R3m1Jf+sxbRUeGjWOZCRYJFj0BOldCNuRoZjlAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTA4LTI4VDE1OjU2OjE4KzAwOjAw/Z8nZgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wOC0yOFQxNTo1NjoxOCswMDowMIzCn9oAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCB0HBhTtD5KyAAABKUlEQVR42u3dwQnCQBBAUVdSnRVohekg7cXrCir80yq8dwshMPmwe51xXiiuqwf4N4JFgkXb/LB/vdDuY/Wwq8w/vr2+un386Fg99Y9wJCPBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsGiMe8R3m1Jf+sxbRUeGjWOZCRYJFj0BOldCNuRoZjlAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTA4LTI5VDA3OjA2OjIwKzAwOjAwYpMHDAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wOC0yOVQwNzowNjoyMCswMDowMBPOv7AAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">595 (99.2%)</td>
 <td style="text-align: center;">5 (0.8%)</td>
 </tr>
@@ -537,7 +527,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAGEAAAA3CAQAAAC22OzCAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCBwPOBLzBhonAAAAoklEQVRo3u2YwQ2AIBAExVidFWiFWoHt6ffwRfgwXGZeECBhkj0SrrzL7KyjL6BCDoUtTi5AYRylZVfctNVL+2CBp+NMgiCpQEAFAioQUIGACgRUIKACARUIqEDg93fu+buOpsSmBaCB0XrtME4QpAQKVS3c0yTpDEmCtcLaqB+dBEFSgYAKBFQgoAIBFQioQEAFAioQUIFAtlbYnCQIkgoEPtxjC+LOHhD6AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTA4LTI4VDE1OjU2OjE4KzAwOjAw/Z8nZgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wOC0yOFQxNTo1NjoxOCswMDowMIzCn9oAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAGEAAAA3CAQAAAC22OzCAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCB0HBhTtD5KyAAAAoklEQVRo3u2YwQ2AIBAExVidFWiFWoHt6ffwRfgwXGZeECBhkj0SrrzL7KyjL6BCDoUtTi5AYRylZVfctNVL+2CBp+NMgiCpQEAFAioQUIGACgRUIKACARUIqEDg93fu+buOpsSmBaCB0XrtME4QpAQKVS3c0yTpDEmCtcLaqB+dBEFSgYAKBFQgoAIBFQioQEAFAioQUIFAtlbYnCQIkgoEPtxjC+LOHhD6AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTA4LTI5VDA3OjA2OjIwKzAwOjAwYpMHDAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wOC0yOVQwNzowNjoyMCswMDowMBPOv7AAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -561,7 +551,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">598 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCBwPOBLzBhonAAABhUlEQVR42u3cUU7CMACAYTGczhPoCfUEXk9fp0GaX0Yp5PveCGQsf9I2G2WHryeK51ufwL0RLBIsOm5frDuffQxP7fVwvW/fHvr476NM9nL23c9p52FIRoJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFd7NVYOT87ov9dl48TLBzey/23HlhSEaCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkXLbEYZP/tkDcsEm7f/5jKGZCRYJFgkWCRYJFgkWCRYJFgkWDTt0uherhVHJl5LrvKczMsYkpFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYNGOdytWvoGz32NAdr29s+6P/fudmSEZCRalIbnyLDVLnMPWnaVmMSQjwSLBIsGiH5O+VXDs1yr5GD+2XpMhGQkWCRYt9MeG2xktdm+b2z+H7WffrZIn/RmMMXNYJFgkWPQN1cgfOcirMQwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjQtMDgtMjhUMTU6NTY6MTgrMDA6MDD9nydmAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI0LTA4LTI4VDE1OjU2OjE4KzAwOjAwjMKf2gAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCB0HBhTtD5KyAAABhUlEQVR42u3cUU7CMACAYTGczhPoCfUEXk9fp0GaX0Yp5PveCGQsf9I2G2WHryeK51ufwL0RLBIsOm5frDuffQxP7fVwvW/fHvr476NM9nL23c9p52FIRoJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFd7NVYOT87ov9dl48TLBzey/23HlhSEaCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkXLbEYZP/tkDcsEm7f/5jKGZCRYJFgkWCRYJFgkWCRYJFgkWDTt0uherhVHJl5LrvKczMsYkpFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYNGOdytWvoGz32NAdr29s+6P/fudmSEZCRalIbnyLDVLnMPWnaVmMSQjwSLBIsGiH5O+VXDs1yr5GD+2XpMhGQkWCRYt9MeG2xktdm+b2z+H7WffrZIn/RmMMXNYJFgkWPQN1cgfOcirMQwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjQtMDgtMjlUMDc6MDY6MjArMDA6MDBikwcMAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI0LTA4LTI5VDA3OjA2OjIwKzAwOjAwE86/sAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -603,7 +593,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAABOCAQAAAA9KAYwAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCBwPOBLzBhonAAAAh0lEQVRo3u3XsQ3AIAxEURxlumyQCcMErJe0JlIaJHwR/te54UlAcba7KLNJ9eT87ocr5COc9sGXckzHWzflfnt4eHh4eHj49flX2WpjpwzHfLuMWTlc01Rffm6++3qVNSM08PDw8PDw8Ovz9HxhcvP0fGHg4eHh4eHh4SfnT2tGfHK/vZh/AGZVEctI8U1yAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTA4LTI4VDE1OjU2OjE4KzAwOjAw/Z8nZgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wOC0yOFQxNTo1NjoxOCswMDowMIzCn9oAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAABOCAQAAAA9KAYwAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCB0HBhTtD5KyAAAAh0lEQVRo3u3XsQ3AIAxEURxlumyQCcMErJe0JlIaJHwR/te54UlAcba7KLNJ9eT87ocr5COc9sGXckzHWzflfnt4eHh4eHj49flX2WpjpwzHfLuMWTlc01Rffm6++3qVNSM08PDw8PDw8Ovz9HxhcvP0fGHg4eHh4eHh4SfnT2tGfHK/vZh/AGZVEctI8U1yAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTA4LTI5VDA3OjA2OjIwKzAwOjAwYpMHDAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wOC0yOVQwNzowNjoyMCswMDowMBPOv7AAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -627,7 +617,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">600 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCBwPOBLzBhonAAABgklEQVR42u3cUU7CQBRAUWtYHSvQFeoK3J7+mUp0misNbeGcP0JSmps8KMOU6fOJ4nnrEzgawSLBotP8wZbvZ+8LL/4ybXdu85c+/fsoqzsPnvvY+uS+GclIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLDoZqsVS8s3R3HD5Z3z8Nn9LOCMGclIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwaEf79Mf2cuPDYYLt5XdzIxkJFq04kveyP2ds1fewY9xedR0jGQkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWHWZT8JLx/sf19ljfTbBb7X40kpFgkWCRYJFgkWBRuqx4jHs9xuJ12CPc6zFmJCPBIsEiwSLBIsEiwSLBIsGiH1f6vvosu/hqtJe/09ivu1nTH7tudl5nP6FM8yO9Gclf/RmMZT4lI8EiwaIvS1QckmYWvC4AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjQtMDgtMjhUMTU6NTY6MTgrMDA6MDD9nydmAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI0LTA4LTI4VDE1OjU2OjE4KzAwOjAwjMKf2gAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCB0HBhWaCKIkAAABgklEQVR42u3cUU7CQBRAUWtYHSvQFeoK3J7+mUp0misNbeGcP0JSmps8KMOU6fOJ4nnrEzgawSLBotP8wZbvZ+8LL/4ybXdu85c+/fsoqzsPnvvY+uS+GclIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLDoZqsVS8s3R3HD5Z3z8Nn9LOCMGclIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwaEf79Mf2cuPDYYLt5XdzIxkJFq04kveyP2ds1fewY9xedR0jGQkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWHWZT8JLx/sf19ljfTbBb7X40kpFgkWCRYJFgkWBRuqx4jHs9xuJ12CPc6zFmJCPBIsEiwSLBIsEiwSLBIsGiH1f6vvosu/hqtJe/09ivu1nTH7tudl5nP6FM8yO9Gclf/RmMZT4lI8EiwaIvS1QckmYWvC4AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjQtMDgtMjlUMDc6MDY6MjErMDA6MDDE5Ay4AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI0LTA4LTI5VDA3OjA2OjIxKzAwOjAwtbm0BAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -651,7 +641,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">589 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCBwPOBLzBhonAAABiElEQVR42u3bW07CUBRAUWsYHSPQEeoInJ7+mWrMbZY0fcBef4REmh0OgZ7r9PkU8bz3BZxNwVDB0GX+YM/Ps/eFF3+Z9ru2+Utf/v1XVncdPPex98V9ayTRZu+wpZE7iw1H8jp89jhDN9ZIooKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoQNtvseOcpTgNMGOstVsJNGK77B7OQwwtupInuP8zW0aSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBEW6PHWKSN4ZrtERZpY40kKhgqGCoYKhgqGCoYKhgqGCoYKhg6zSnqJeMbA+sdSr+bYFvdFmgkUcFQwVDBUMFQwVDBUMFQwVDB0I+fRi1ql/36LXmUfxQ+rkYSFQwVDBUMFQwVDBUMFQwVDBUMFQwVDN3NInfstvswr7O9+YMEG+/F5R5NI4kKhgqGCoYKhgqGCoam+Te6t9Zsf5p/cZ1qZBpJVDBUMPQFDR4elAXv+I8AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjQtMDgtMjhUMTU6NTY6MTgrMDA6MDD9nydmAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI0LTA4LTI4VDE1OjU2OjE4KzAwOjAwjMKf2gAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCB0HBhWaCKIkAAABiElEQVR42u3bW07CUBRAUWsYHSPQEeoInJ7+mWrMbZY0fcBef4REmh0OgZ7r9PkU8bz3BZxNwVDB0GX+YM/Ps/eFF3+Z9ru2+Utf/v1XVncdPPex98V9ayTRZu+wpZE7iw1H8jp89jhDN9ZIooKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoQNtvseOcpTgNMGOstVsJNGK77B7OQwwtupInuP8zW0aSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBEW6PHWKSN4ZrtERZpY40kKhgqGCoYKhgqGCoYKhgqGCoYKhg6zSnqJeMbA+sdSr+bYFvdFmgkUcFQwVDBUMFQwVDBUMFQwVDB0I+fRi1ql/36LXmUfxQ+rkYSFQwVDBUMFQwVDBUMFQwVDBUMFQwVDN3NInfstvswr7O9+YMEG+/F5R5NI4kKhgqGCoYKhgqGCoam+Te6t9Zsf5p/cZ1qZBpJVDBUMPQFDR4elAXv+I8AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjQtMDgtMjlUMDc6MDY6MjErMDA6MDDE5Ay4AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI0LTA4LTI5VDA3OjA2OjIxKzAwOjAwtbm0BAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -675,7 +665,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">600 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCBwPOBLzBhonAAABKElEQVR42u3duw3CMBRAUYwyHRswIRtkPVJiJDe3iALSOVW+cnQlp33jfaO4X/0B/0awSLBom09efmhLz/E53r5vPZYv7Mvr+888ffaaM1syEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBrzHGFDhdfmocJDo8aWjASLBIsOtpIT22gqMX4AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjQtMDgtMjhUMTU6NTY6MTgrMDA6MDD9nydmAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI0LTA4LTI4VDE1OjU2OjE4KzAwOjAwjMKf2gAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCB0HBhWaCKIkAAABKElEQVR42u3duw3CMBRAUYwyHRswIRtkPVJiJDe3iALSOVW+cnQlp33jfaO4X/0B/0awSLBom09efmhLz/E53r5vPZYv7Mvr+888ffaaM1syEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBrzHGFDhdfmocJDo8aWjASLBIsOtpIT22gqMX4AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjQtMDgtMjlUMDc6MDY6MjErMDA6MDDE5Ay4AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI0LTA4LTI5VDA3OjA2OjIxKzAwOjAwtbm0BAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -683,7 +673,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 
 </div>
-<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.3.1)<br>2024-08-28</p>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.3.1)<br>2024-08-29</p>
 </div>
 </div>
 </div>
@@ -709,16 +699,213 @@ Using summarytools in Quarty or RMarkdown
 </div>
 </div>
 </div>
-
-
+<section id="what-to-look-for-in-the-summary" class="level3">
+<h3 class="anchored" data-anchor-id="what-to-look-for-in-the-summary">What to look for in the summary</h3>
+<p>When you look at the summary, there are a few things you should look out for:</p>
+<ul>
+<li><strong>Missing values</strong>: Are there any columns with a lot of missing values? If so, you might need to think about how to deal with these.</li>
+<li><strong>Data types</strong>: Are the data types of the columns correct? For example, are dates stored as dates, and not as text?</li>
+<li><strong>Outliers</strong>: Are there any columns with very high or very low values? These might be errors in the data.</li>
+<li><strong>Distribution</strong>: Are the values in the columns distributed in a way that you would expect? For example, if you have a column with ages, are there any values that are negative, or over 100?</li>
+</ul>
+<p>Taking this into account, most of the columns in our data look pretty good. Our trust variables (<code>trust_t1</code> and <code>trust_t2</code>) are on a scale from 1 to 10, with a pretty normal distribution. We have a completely balanced distribution over the three experimental groups. The <code>news consumption</code> variable is a bit skewed, but nobody’s perfect. However, there is one column that stands out sorely: <code>age</code>.</p>
+<p>The first sign that something is off is the histogram, which shows a very strange distribution where pretty much all observations are in the same bin on the left side. The reason for this becomes clear when we look at the maximum value, which is 1987. This is clearly an error in the data, as it is very unlikely that someone in our study is 1987 years old. What is much more likely is that at least one person entered their birth year instead of their age.</p>
+<p>To see if this is the case, we can look at the <code>unique</code> values in the <code>age</code> column. Recall that we can refer to a vector in a data frame using the <code>$</code> operator, like <code>d$age</code>. When we run the <code>unique</code> function on this vector, we see multiple several cases that indeed look like birth years.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]   48   29   52   37   19   25   40   59   30   34   35   57   65   62   39
+[16]   20   46   22   23   31   60   44   49   55   58   51   33   NA   41   64
+[31]   21   27   24   18   36   32   26   45   38   47   63   43   56   28   50
+[46]   42   54   53   61 1987 1963 1985</code></pre>
+</div>
+</div>
+<p>Finally, one thing to look out for when inspecting the data is <em>missing values</em>, which are often coded as <code>NA</code> (not available) in R. In the summary we see that there are 5 missing values in the <code>age</code> column. This isn’t too bad, but we do need to be transparent about how we deal with these missing values in our analysis.</p>
 </section>
+</section>
+</section>
+<section id="cleaning-up-our-data" class="level1">
+<h1>Cleaning up our data</h1>
+<p>Now that we’ve identified some issues in our data, we need to clean it up. For this we can use the techniques you learned in the <a href="../data-management/index.html">Data Management</a> chapter.</p>
+<section id="selecting-columns" class="level2">
+<h2 class="anchored" data-anchor-id="selecting-columns">Selecting columns</h2>
+<p>The first thing we can do is to select only the columns that we need for our analysis, and where needed rename them. For the current example, let’s say that we just need the columns <code>id</code>, <code>age</code> and <code>news consumption</code>. While selecting them, we’ll immediately also rename the <code>news consumption</code> column to <code>news_consumption</code>, because spaces in column names can be a bit annoying to work with.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d_clean <span class="ot">&lt;-</span> <span class="fu">select</span>(d, id, age, <span class="at">news_consumption =</span> <span class="st">`</span><span class="at">news consumption</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that we assigned the result to a new tibble called <code>d_clean</code>. This is a good practice, because it keeps the original data frame intact, and you can always go back to it if you need to.</p>
+</section>
+<section id="mutating-columns" class="level2">
+<h2 class="anchored" data-anchor-id="mutating-columns">Mutating columns</h2>
+<p>Next, we need to deal with the <code>age</code> column. When inspecting the data we saw that there were some birth years in there. Let’s consider some ways to address this.</p>
+<section id="option-1-subtract-the-birth-year-from-the-year-of-the-study" class="level3">
+<h3 class="anchored" data-anchor-id="option-1-subtract-the-birth-year-from-the-year-of-the-study">Option 1: Subtract the birth year from the year of the study</h3>
+<p>The easiest (and in this case best) way is to <strong>subtract</strong> the <strong>birth year</strong> from the <strong>year in which the study took place</strong>. We need to do this only for the birth years, and not for the actual ages, so we’ll use the <code>if_else</code> function. This let’s us say: <strong>if</strong> some condition is met, do this, <strong>else</strong> do that. The format is: <code>if_else(condition, if_true, if_false)</code>.</p>
+<p>In this case, our condition is that the number is a birth year, which we can do by checking if it’s unrealistically high, like over 200. When we can say: if the age is greater than 200, subtract it from the year of the study, otherwise just return the age.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>d_clean <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d_clean, <span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">200</span>, <span class="dv">2024</span> <span class="sc">-</span> age, age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that this time we also used the <code>d_clean</code> tibble as input, and assigned the result back to <code>d_clean</code> to overwrite it. A common mistake would be to use <code>d</code> as input, but then we’d lose our previous clean up steps.</p>
+</section>
+<section id="option-2-recode-specific-values" class="level3">
+<h3 class="anchored" data-anchor-id="option-2-recode-specific-values">Option 2: Recode specific values</h3>
+<p>Another option would be to recode the specific values that are wrong. This is more work, but it is a versatile technique that you can use in many situations.</p>
+<p>Using the <code>case_when</code> function, we can make a list of conditions and their corresponding values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d_clean <span class="ot">=</span> <span class="fu">mutate</span>(d_clean, <span class="at">age =</span> <span class="fu">case_when</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">==</span> <span class="dv">1987</span> <span class="sc">~</span> <span class="dv">37</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">==</span> <span class="dv">1970</span> <span class="sc">~</span> <span class="dv">51</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">==</span> <span class="dv">1967</span> <span class="sc">~</span> <span class="dv">54</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> age</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-nuclear-option-just-remove-them" class="level3">
+<h3 class="anchored" data-anchor-id="the-nuclear-option-just-remove-them">The nuclear option: just remove them</h3>
+<p>In this case we were able to correct the data, but sometimes that’s not an option. In that case you’d have to remove the rows with incorrect data (which is the same as selecting the rows that are correct).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d_clean <span class="ot">&lt;-</span> <span class="fu">filter</span>(d_clean, age <span class="sc">&lt;</span> <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="filtering-rows" class="level2">
+<h2 class="anchored" data-anchor-id="filtering-rows">Filtering rows</h2>
+<p>Finally, we’ll remove any rows that we do want to use. This can be because we do not want to include missing values in our analysis, but also because there might be data we do not want to use. Let’s say that we want to remove participants with missing values, and participants that are younger than 18.</p>
+<p>To remove cases, we can use the <code>filter</code> function to select the cases we do want to keep. To filter out people below 17, we can use the <code>age &gt;= 18</code> condition. For filtering out missing values, we can use the <code>is.na</code> function to check whether a value is missing, and then say that it should NOT (<code>!</code>) be missing: <code>!is.na(age)</code>. We can then combine these two conditions with the <code>&amp;</code> (AND) operator.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>d_clean <span class="ot">&lt;-</span> <span class="fu">filter</span>(d_clean, <span class="sc">!</span><span class="fu">is.na</span>(age) <span class="sc">&amp;</span> age <span class="sc">&gt;=</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="check-again" class="level1">
+<h1>Check again!</h1>
+<p>After cleaning your data, it’s always a good idea to check if everything went as planned. So just use the same tricks to inspect your data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dfSummary</span>(d_clean) <span class="sc">|&gt;</span> <span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="container st-container">
+<h3 class="anchored" data-anchor-id="check-again">Data Frame Summary</h3>
+<h4 class="anchored">d_clean</h4>
+<strong>Dimensions</strong>: 595 x 3
+  <br><strong>Duplicates</strong>: 0
+<br>
+<div style="max-height:500px;overflow-y:scroll;margin:10px 2px">
+  
+<table class="table table-striped table-bordered st-table st-table-striped st-table-bordered st-multiline caption-top table-sm small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>No</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Variable</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Stats / Values</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Freqs (% of Valid)</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Graph</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Valid</strong></th>
+<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Missing</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">id [numeric]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 300.4 (173)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">1 ≤ 301 ≤ 600</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 298 (0.6)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle;">595 distinct values</td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCB0HBhWaCKIkAAABV0lEQVR42u3dUY4BQRRA0emJ1VnBWCErsD1+i1SLQ4tMcs8fSnXnevq3lstPxO+3b+C/KRgqGNqNL9aeZ6eVD/4WWb1mtovuoeZ3vmZcvHvuK/vJe2dcvZ+uPcMej3bZ4prPuAmmv+s2c/DpaXr/modhxO4mbJspMDa923h9Hnvoo4KhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoWU8+/TYKelT45GvS41Mf0lUMFQwdAXBfh/VCUryggAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNC0wOC0yOVQwNzowNjoyMSswMDowMMTkDLgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjQtMDgtMjlUMDc6MDY6MjErMDA6MDC1ubQEAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">595 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">age [numeric]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 41.6 (13.3)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">18 ≤ 41 ≤ 65</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 22 (0.3)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle;">48 distinct values</td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCB0HBhWaCKIkAAABiklEQVR42u3cW06DQABAUTFdnSvQFdoVuD39RSO11zA89Jy/pgmQ286UDoHp/YHice8DOBvBIsGiy/zF1vPZ9eYOn6fNayyYH8jl11tZxdPiO2/7HtgiQzISLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsuns97CyLfaOFBcTzLfaNYEhGw5eor3/swucGa/pbDuXxM+3OF0HWN/rjMYdFgkWCRSvNYVv+Fo7Y1+1tvsx+LFYKtu1J7Yi93btNQzISLBIsOvCJ6zH/VB042NI0vO/aiCEZHfgbtr41Bvm/CrbG+ZshGQkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFn26seGYt0Mdy5c7QTwu5ieGZCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYNM2v3b66kPut+aOVJ40aQzISLBIs+gCzbyLgRwquHwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNC0wOC0yOVQwNzowNjoyMSswMDowMMTkDLgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjQtMDgtMjlUMDc6MDY6MjErMDA6MDC1ubQEAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">595 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">news_consumption [numeric]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 10.1 (3.2)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">0 ≤ 10.8 ≤ 16.6</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 3.9 (0.3)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle;">593 distinct values</td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCB0HBhWaCKIkAAABiUlEQVR42u3cUU7CQBRAUTGszhXoCnUFbk9/q9FOrrR1gHP+CASaS+aFlklPHw8Uj/99ANdGsEiw6Lx8MO88exse2vNpv09fvvX5z+9ysKfVZ98POw5LMhIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsupqtAiPruy+223lxM8HW9l5sufPCkowEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIum2YwyvvfJHKYJdtz+m8tYkpFgkWCRYJFgkWCRYJFgkWCRYNFhp0bXcq44cuC55Cz3ybyMJRkJFgkWCRYJFgkWCRYJFgkWCRYJFgkWbXjyfSvXI9ZterVi3v+ut7sNyERbBfa03VdphkWCRWlJ3sdYXxdn2Lxj/SiWZCRYJFj0ZYYZ6mPfhv5t/He4J0syEiwSLBIsupOrFetGvw5eFpd/TsvXvvpZ8aNfgzFmhkWCRYJFn2FPHzse34KIAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTA4LTI5VDA3OjA2OjIxKzAwOjAwxOQMuAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wOC0yOVQwNzowNjoyMSswMDowMLW5tAQAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">595 (100.0%)</td>
+<td style="text-align: center;">0 (0.0%)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.3.1)<br>2024-08-29</p>
+</div>
+</div>
+</div>
+<p>If done right, your age column should now have a more reasonable distribution, the missing values should be gone, and the minimum age should be 18.</p>
+
+
 </section>
 
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Or the more common version: “Sh<em>t in, sh</em>t out”.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Or the more common version: “Sh*t in, sh*t out”.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>If you have a very large dataset, you might first want to select only the columns that you need for your analysis. We’ll show you how to do this in the next section.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

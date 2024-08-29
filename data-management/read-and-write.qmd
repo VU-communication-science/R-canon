@@ -1,5 +1,5 @@
 ---
-title: Read and write data
+title: Read and write
 order: 1
 subtitle: How to get data into R, and how to store it
 ---

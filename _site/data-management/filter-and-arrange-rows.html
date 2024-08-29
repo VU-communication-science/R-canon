@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../data-management/sorting.html" rel="next">
-<link href="../data-management/cleaning-data.html" rel="prev">
+<link href="../data-management/pipes.html" rel="next">
+<link href="../data-management/select-and-rename-columns.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/names-and-values.html" class="sidebar-item-text sidebar-link">
+  <a href="../getting-started/names-and-objects.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Names and Objects</span></a>
   </div>
 </li>
@@ -183,14 +183,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">File management</span></a>
+  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Packages</span></a>
+  <a href="../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">File management</span></a>
   </div>
 </li>
       </ul>
@@ -224,20 +224,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/cleaning-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../data-management/filter-and-arrange-rows.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Filter and Arrange rows</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-management/sorting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ordering rows</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -266,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../2_data_preparation/inspect-and-clean.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Viewing a summary of every column</span></a>
+ <span class="menu-text">Inspecting and Cleaning Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -286,28 +274,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_general-concepts/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">General Concepts</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_hypotheses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Hypotheses</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/1_causality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causality</span></a>
-  </div>
-</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Tests</span></a>
+            <a href="../3_statistics/0_concepts/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concepts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -315,32 +285,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/2_tests/0_selecting-the-right-test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Selecting the right test</span></a>
+  <a href="../3_statistics/0_concepts/0_hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/2_tests/anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Anova</span></a>
+  <a href="../3_statistics/0_concepts/1_causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/2_tests/chi2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Chi2</span></a>
-  </div>
-</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Tests</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../3_statistics/2_tests/regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Regression</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/2_tests/t-test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">T Test</span></a>
   </div>
 </li>
       </ul>
@@ -349,13 +318,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
  <span class="menu-text">Good to Know</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
@@ -375,6 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#filter" id="toc-filter" class="nav-link active" data-scroll-target="#filter">Subsetting rows with filter()</a></li>
+  <li><a href="#filtering-out-missing-values" id="toc-filtering-out-missing-values" class="nav-link" data-scroll-target="#filtering-out-missing-values">Filtering out missing values</a></li>
   <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange">Sorting rows with arrange()</a></li>
   </ul>
 </nav>
@@ -402,42 +372,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>For the examples in this tutorial we’ll use the <code>iris</code> dataset, like we <a href="./import-and-view.qmd#iris">explained here</a>.</p>
+<p>In this tutorial we use the <code>tidyverse</code> and our simulated <a href="../data-management/index.html#practice-data">practice data</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="filter" class="level1">
 <h1>Subsetting rows with filter()</h1>
-<p>The <code>filter</code> function can be used to select a subset of rows. For example, the following code selects only the rows where the <code>Species</code> column is equal to <code>setosa</code>. The first argument of the <code>filter</code> function is the tibble you want to filter. The second argument is the condition that should be met for a row to be included in the result. Here we use the <code>==</code> operator to say that the value in the <code>Species</code> column should be equal to <code>setosa</code>.</p>
+<p>The <code>filter</code> function can be used to select a subset of rows. The first argument of the <code>filter</code> function is the tibble you want to filter. The second argument is the condition that should be met for a row to be included in the result. Let’s say we want to select only the rows where the <code>experiment_group</code> column is equal to <code>control</code>. We can then use the <code>==</code> (is equal to) operator.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, Species <span class="sc">==</span> <span class="st">'setosa'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, experiment_group <span class="sc">==</span> <span class="st">'control'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 50 × 5
-   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
- 1          5.1         3.5          1.4         0.2 setosa 
- 2          4.9         3            1.4         0.2 setosa 
- 3          4.7         3.2          1.3         0.2 setosa 
- 4          4.6         3.1          1.5         0.2 setosa 
- 5          5           3.6          1.4         0.2 setosa 
- 6          5.4         3.9          1.7         0.4 setosa 
- 7          4.6         3.4          1.4         0.3 setosa 
- 8          5           3.4          1.5         0.2 setosa 
- 9          4.4         2.9          1.4         0.2 setosa 
-10          4.9         3.1          1.5         0.1 setosa 
-# ℹ 40 more rows</code></pre>
+<pre><code># A tibble: 200 × 7
+     age np_subscription `news consumption` experiment_group trust_t1 trust_t2
+   &lt;dbl&gt; &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;
+ 1    29 no                            9.39 control              5.13     5.53
+ 2    25 no                            7.22 control              4.71     2.84
+ 3    37 yes                          13.0  control              6.33     7.32
+ 4    62 yes                          12.2  control              5.11     4.71
+ 5    62 yes                          10.6  control              6.46     5.92
+ 6    59 yes                          10.9  control              7.14     6.25
+ 7    19 yes                          10.1  control              4.28     2.24
+ 8    22 no                           12.6  control              4.98     5.34
+ 9    25 no                            6.55 control              3.62     4.94
+10    44 no                            8.91 control              5.12     3.27
+# ℹ 190 more rows
+# ℹ 1 more variable: id &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Note that we now get 50 out of the 150 rows in the <code>iris</code> dataset.</p>
+<p>This gives us the 200 rows (out of 600) where the <code>experiment_group</code> is <code>control</code>.</p>
 <p>We can use other common operators as well, such as <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, and <code>!=</code> (not equal). And we can also combine multiple conditions with the <code>&amp;</code> (and) and <code>|</code> (or) operators.</p>
-<p>For example, here we select all rows where the <code>Species</code> is <code>setosa</code> and the <code>Sepal.Length</code> is greater than 5.</p>
+<p>For example, here we select all rows where the <code>experiment_group</code> is <code>control</code> and the <code>age</code> is greater than 30:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, Species <span class="sc">==</span> <span class="st">'setosa'</span> <span class="sc">&amp;</span> Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, experiment_group <span class="sc">==</span> <span class="st">'control'</span> <span class="sc">&amp;</span> age <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>A less common operator that is usefull to know about is <code>%in%</code>, which is used to check if a value is in a list of values. For example, to select all rows where the <code>Species</code> is either <code>setosa</code> or <code>versicolor</code>:</p>
+<p>A less common operator that is usefull to know about is <code>%in%</code>, which is used to check if a value is in a list of values. For example, to select all rows where the <code>experiment_group</code> is either <code>positive</code> or <code>negative</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, Species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'setosa'</span>, <span class="st">'versicolor'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, experiment_group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'positive'</span>, <span class="st">'negative'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You an also <em>invert</em> any condition by putting a <code>!</code> (NOT) in front of it. So the following code selects all rows where the <code>experiment_group</code> is NOT in the list <code>positive</code> or <code>negative</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, <span class="sc">!</span>experiment_group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'positive'</span>, <span class="st">'negative'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="A deeper understanding of the filter condition">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -470,17 +445,21 @@ A deeper understanding of the filter condition
 </ul>
 <p>Example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">1</span>    <span class="co"># TRUE:  5 is greater than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">1</span>    <span class="co"># TRUE:  5 is greater than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>    <span class="co"># FALSE: 5 is less than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>    <span class="co"># FALSE: 5 is less than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="st">"setosa"</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"setosa"</span>, <span class="st">"versicolor"</span>)  <span class="co"># TRUE: "setosa" is in the list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="st">"A"</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)  <span class="co"># TRUE: "A" is in the list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="st">"A"</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>)  <span class="co"># FALSE: "A" is not in the list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 </section>
@@ -494,63 +473,96 @@ A deeper understanding of the filter condition
 </ul>
 <p>Example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">|</span> <span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>   <span class="co"># TRUE: 5 is greater than 1 OR 5 is less than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">|</span> <span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>   <span class="co"># TRUE: 5 is greater than 1 OR 5 is less than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>   <span class="co"># FALSE: 5 is greater than 1 AND 5 is less than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>   <span class="co"># FALSE: 5 is greater than 1 AND 5 is less than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>          <span class="co"># TRUE: it is not the case that 5 is smaller than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="dv">5</span> <span class="sc">&lt;</span> <span class="dv">1</span>          <span class="co"># TRUE: it is not the case that 5 is smaller than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
+</div>
+</section>
+<section id="using-equations" class="level3">
+<h3 class="anchored" data-anchor-id="using-equations">Using equations</h3>
+<p>You can also use equations in your conditions. For example, to select all rows where the absolute difference between <code>trust_t1</code> and <code>trust_t2</code> is greater than 2:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, <span class="fu">abs</span>(trust_t2 <span class="sc">-</span> trust_t1) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="parentheses" class="level3">
 <h3 class="anchored" data-anchor-id="parentheses">Parentheses</h3>
-<p>For complex conditions, you can use parentheses to group conditions, similar to how you would in a mathematical expression. Say you want to select big flowers, but you want to take into account that some species are generally smaller. So the minimum Sepal.Length for <code>setosa</code> should be 5, but for <code>versicolor</code> it should be 6. You could then write the following condition:</p>
+<p>For complex conditions, you can use parentheses to group conditions, similar to how you would in a mathematical expression. For example, say that you want to inspect <em>surprising</em> cases where trust in journalists decreased after watching the positive movie, or increased after watching the negative movie.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, (Species <span class="sc">==</span> <span class="st">'setosa'</span> <span class="sc">&amp;</span> Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>) <span class="sc">|</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>          (Species <span class="sc">==</span> <span class="st">'versicolor'</span> <span class="sc">&amp;</span> Sepal.Length <span class="sc">&gt;</span> <span class="dv">6</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, (experiment_group <span class="sc">==</span> <span class="st">'positive'</span> <span class="sc">&amp;</span> trust_t2 <span class="sc">&lt;</span> trust_t1) <span class="sc">|</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>          (experiment_group <span class="sc">==</span> <span class="st">'negative'</span> <span class="sc">&amp;</span> trust_t2 <span class="sc">&gt;</span> trust_t1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 </div>
 </div>
 </div>
+</section>
+<section id="filtering-out-missing-values" class="level1">
+<h1>Filtering out missing values</h1>
+<p>Filtering out cases with missing values works a bit differently. Missing values in R are represented by <code>NA</code>, but you <strong>cannot (!!)</strong> use something like <code>filter(d, age != NA)</code>. Instead, you can use the <code>is.na</code> function to check if a value is missing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, <span class="fu">is.na</span>(age))     <span class="do">## rows where age IS missing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 7
+    age np_subscription `news consumption` experiment_group trust_t1 trust_t2
+  &lt;dbl&gt; &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;
+1    NA no                            6.13 positive             5.39     4.76
+2    NA yes                          11.5  positive             5.17     4.65
+3    NA no                            2.50 control              4.63     5.97
+4    NA yes                           9.13 positive             6.44     6.21
+5    NA no                            8.39 negative             5.60     4.75
+# ℹ 1 more variable: id &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(d, <span class="sc">!</span><span class="fu">is.na</span>(age))    <span class="do">## rows where age IS NOT missing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In addition, there is a special function in the <code>tidyverse</code> for removing rows if ANY column in the data is missing. This is the <code>drop_na</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_na</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This returns 595 rows (out of 600) because 5 rows had missing values in the <code>age</code> column.</p>
 </section>
 <section id="arrange" class="level1">
 <h1>Sorting rows with arrange()</h1>
-<p>The <code>arrange</code> function can be used to sort the rows of a tibble. For example, if we want to sort the <code>iris</code> dataset by the <code>Sepal.Length</code> column:</p>
+<p>The <code>arrange</code> function can be used to sort the rows of a tibble. For example, if we want to sort the data by the <code>age</code> column:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(d, Sepal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(d, age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 150 × 5
-   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
- 1          4.3         3            1.1         0.1 setosa 
- 2          4.4         2.9          1.4         0.2 setosa 
- 3          4.4         3            1.3         0.2 setosa 
- 4          4.4         3.2          1.3         0.2 setosa 
- 5          4.5         2.3          1.3         0.3 setosa 
- 6          4.6         3.1          1.5         0.2 setosa 
- 7          4.6         3.4          1.4         0.3 setosa 
- 8          4.6         3.6          1           0.2 setosa 
- 9          4.6         3.2          1.4         0.2 setosa 
-10          4.7         3.2          1.3         0.2 setosa 
-# ℹ 140 more rows</code></pre>
+<pre><code># A tibble: 600 × 7
+     age np_subscription `news consumption` experiment_group trust_t1 trust_t2
+   &lt;dbl&gt; &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;
+ 1    18 no                           6.78  negative             3.36     2.68
+ 2    18 no                           9.00  positive             4.73     5.75
+ 3    18 yes                         13.7   control              3.35     4.85
+ 4    19 no                          13.3   negative             2.73     1.14
+ 5    19 yes                         10.1   control              4.28     2.24
+ 6    19 no                           5.11  control              3.49     3.56
+ 7    19 no                           0.763 negative             3.65     1   
+ 8    19 yes                         13.2   control              1.97     1.66
+ 9    19 no                          10.1   positive             3.24     3.80
+10    19 no                           5.18  negative             3.36     1.55
+# ℹ 590 more rows
+# ℹ 1 more variable: id &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>By default, the rows are sorted in ascending order. If you want to sort in descending order, you can put a minus in front of the variable name.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(d, <span class="sc">-</span>Sepal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(d, <span class="sc">-</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If you want to sort on multiple columns, you can simply add them to the <code>arrange</code> function. For example, to sort by <code>Species</code> and then by <code>Sepal.Length</code>:</p>
+<p>If you want to sort on multiple columns, you can simply add them to the <code>arrange</code> function. For example, to sort first on <code>experiment_group</code> (ascending) and then on <code>age</code> (descending):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(d, Species, Sepal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(d, experiment_group, <span class="sc">-</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -979,13 +991,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../data-management/cleaning-data.html" class="pagination-link" aria-label="Basic data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Basic data</span>
+      <a href="../data-management/select-and-rename-columns.html" class="pagination-link" aria-label="Select and rename columns">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Select and rename columns</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../data-management/sorting.html" class="pagination-link" aria-label="Ordering rows">
-        <span class="nav-page-text">Ordering rows</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../data-management/pipes.html" class="pagination-link" aria-label="Pipes">
+        <span class="nav-page-text">Pipes</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

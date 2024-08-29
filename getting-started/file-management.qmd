@@ -1,13 +1,13 @@
 ---
 title: File management
 subtitle: How to find files on your computer
-order: 5
+order: 6
 ---
 
 
-#  {#file-management}
+# Keeping track of your data {#file-management}
 
-In order to read and write files in R, you need to be able to refer to them by their **file path** (i.e. their name and location on your computer).
+In order to read and write data in R, you need to be able to refer to data files by their **file path** (i.e. their name and location on your computer).
 You can specify this path in two ways: using an **absolute path** (starting from the root directory) or a **relative path** (starting from the current working directory).
 Let's practice a bit using both approaches.
 
@@ -41,7 +41,7 @@ Here is a simplified example (normally there are more layers, such as your user 
 ```
 
 Because of this structure, any file on your computer has a unique **path** that describes its location in the file system.
-For example, the path to the `Report.docx` file in the `Work` directory would be `/Documents/Work/survey.csv` (or `C:\Documents\Work\survey.csv` on Windows). 
+For example, the path to the `Report.docx` file in the `Work` directory would be `/Documents/Work/survey.csv`, or `C:\Documents\Work\survey.csv` on Windows.
 
 :::
 ## Reading the file using the absolute path

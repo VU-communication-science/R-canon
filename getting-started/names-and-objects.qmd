@@ -1,11 +1,13 @@
 ---
 title: Names and Objects
+subtitle: Remember information by giving it a name
 order: 2
 ---
 
+# The power of assignment 
+
 In R, and in computer programming in general, the most essential operation is to assign **objects** to **names**.
 By **object**, we then broadly mean any piece of information. a single number, a text, a list of numbers, and even an entire data set. 
-**Assigning** objects to names is essential, because it allows us to refer to them in our code. 
 
 In plain terms, **assignment** is how you make R remember things by assigning them to a name. To assign an object to a name, we use the **arrow notation**: `name <- value`. For example:
 
@@ -34,8 +36,6 @@ From hereon, when you use the name `x` in your code, it will **refer** to the va
 x * 5
 ```
 
-
-
 ::: {.callout-note title="Why does R print a [1] before the result?" collapse="true"}
 When running `x * 5`, R correctly prints the value 10. But why does it say `[1] 10`?
 The reason is that R always thinks of a number (or string) as a **vector** (i.e. list of values), that can have 1 or multiple values. 
@@ -48,6 +48,27 @@ The following code generates a vector with numbers from 1 to 50
 1:50
 ```
 :::
+
+
+
+## Assigning versus printing
+
+Notice that when you ran the code `x <- 2`, R didn't print any values to the console (the bottom-left window).
+But when you ran `x * 5`, R did print the value `10`.
+Basically, when you run code, and you DO NOT assign the result to a name, R will print the result to the console.
+
+So the following code will NOT print the object (`"I will not be printed"`) to the console, but will store it (you can see the name pop up in the **Environment** tab)
+
+```{r}
+i_will_be_remembered <- "I will not be printed"
+```
+
+And the following object (`"I will be printed"`) will be printed to the console, but not stored in the **Environment**.
+
+```{r}
+"I will be printed"
+```
+
 
 
 ## Assigning different types of objects

@@ -1,7 +1,0 @@
----
-title: General Concepts
-order: 0
----
-
-In this folder we can put explanations of general concepts, like p-values, distributions, etc.
-
