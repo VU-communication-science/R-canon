@@ -219,31 +219,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../1_data-management/0_tidyverse/2_summarizing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R Tidyverse: Data Summarization with group_by, summarize, and mutate</span></a>
+ <span class="menu-text">Summarizing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../1_data-management/0_tidyverse/3_visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basics of data visualization</span></a>
+ <span class="menu-text">Visualization basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../1_data-management/0_tidyverse/4_reshaping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reshaping data: wide, long, and tidy</span></a>
+ <span class="menu-text">Long and Wide data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../1_data-management/0_tidyverse/5_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">13a_joining_data</span></a>
+ <span class="menu-text">Joining data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../1_data-management/0_tidyverse/6_strings.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Working with textual data: stringr</span></a>
+ <span class="menu-text">Textual data</span></a>
   </div>
 </li>
       </ul>
@@ -395,8 +395,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="tidyverse-basics" class="level1">
 <h1>Tidyverse basics</h1>
-<p>As in most packages, the functionality in dplyr is offered through functions. In the tidverse package <code>dplyr</code>, almost all <code>functions</code> primarily operate on data sets, for example for filtering and sorting data.</p>
-<p>With a data set we mean a rectangular data frame consisting of rows (often items or respondents) and columns (often measurements of or data about these items). These data sets can be R <code>data.frames</code>, but tidyverse has its own version of data frames called <code>tibble</code>, which is functionally (almost) equivalent to a data frame but is more efficient and somewhat easier to use.</p>
+<p>As in most packages, the functionality in dplyr is offered through functions. In the tidverse package <code>dplyr</code>, almost all <code>functions</code> primarily operate on data frames, for example for filtering and sorting data.</p>
+<p>With a data set we mean a rectangular data frame consisting of rows and columns. In general, the rows represent the units in your data (e.g., respondents, participants, documents) and the columns represent the variables (e.g., age, gender). These data sets can be R <code>data.frames</code>, but tidyverse has its own version of data frames called <code>tibble</code>, which is functionally (almost) equivalent to a data frame but is more efficient and somewhat easier to use.</p>
 <p>As a very simply example, the following code creates a tibble containing respondents, their gender, and their height:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">resp =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), </span>
@@ -593,7 +593,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -928,8 +928,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../1_data-management/0_tidyverse/2_summarizing.html" class="pagination-link" aria-label="R Tidyverse: Data Summarization with group_by, summarize, and mutate">
-        <span class="nav-page-text">R Tidyverse: Data Summarization with group_by, summarize, and mutate</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../1_data-management/0_tidyverse/2_summarizing.html" class="pagination-link" aria-label="Summarizing">
+        <span class="nav-page-text">Summarizing</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
