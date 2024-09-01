@@ -62,11 +62,11 @@ div.csl-indent {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -92,25 +92,10 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../data/logo.png" alt="" class="navbar-logo">
-    </a>
-    <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Communication Science R Book</span>
-    </a>
-  </div>
-        <div class="quarto-navbar-tools tools-end">
-</div>
-          <div id="quarto-search" class="" title="Search"></div>
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -119,24 +104,40 @@ div.csl-indent {
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../2_data_preparation/index.html">Data preparation</a></li><li class="breadcrumb-item"><a href="../2_data_preparation/scale-construction.html">Scale construction</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://vu.nl/en/about-vu/faculties/faculty-of-social-sciences/departments/communication-science" class="sidebar-logo-link">
+      <img src="../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Communication Science R Book</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../getting-started/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../getting-started/install-r-and-rstudio.html" class="sidebar-item-text sidebar-link">
@@ -179,17 +180,23 @@ div.csl-indent {
  <span class="menu-text">File management</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in Quarto</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../data-management/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data management</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
@@ -255,11 +262,11 @@ div.csl-indent {
       <div class="sidebar-item-container"> 
             <a href="../3_statistics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../3_statistics/0_concepts/index.html" class="sidebar-item-text sidebar-link">
@@ -271,14 +278,26 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/0_hypotheses.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/0_concepts/causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_statistics/0_concepts/correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_statistics/0_concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/1_causality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causality</span></a>
+  <a href="../3_statistics/0_concepts/standardization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Standardization</span></a>
   </div>
 </li>
       </ul>
@@ -310,13 +329,13 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Good to Know</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
@@ -376,18 +395,21 @@ div.csl-indent {
 <p>You will also hear scales referred to as <strong>latent variables</strong>. The word <strong>latent</strong> means hidden or concealed, and it refers here to the fact that the construct we are trying to measure is not directly observable. We can only measure it propertly by looking at multiple observable indicators (items) that are related to the construct.</p>
 <section id="create-scale" class="level2">
 <h2 class="anchored" data-anchor-id="create-scale">How to create a scale</h2>
-<p>To create a scale, we need to combine multiple columns in your data (i.e.&nbsp;the variables for the scale items) into a single score. However, we cannot just pick any columns, or ask participants any questions, and assume that they form a valid scale. We need to take several steps to ensure that the scale is reliable and valid.</p>
+<p>To create a scale, we combine multiple columns in your data (i.e.&nbsp;the variables for the scale items) into a single score. For instance, by taking the average of the values in these columns. However, before we can do that, we need to make sure that the scale is reliable and valid. This requires a few steps:</p>
 <section id="choose-the-items-based-on-theory" class="level3">
 <h3 class="anchored" data-anchor-id="choose-the-items-based-on-theory">1. Choose the items based on theory</h3>
-<p>The first step is to choose the items that will make up your scale. This should be based on theory, and if possible on prior research that has already validated the items. For example, if you want to measure the construct “trust in journalism”, you might want to build on existing scales, such as the “Trust in news media” scale developed by <span class="citation" data-cites="kohring07">Kohring and Matthes (<a href="#ref-kohring07" role="doc-biblioref">2007</a>)</span>, or use the items proposed by <span class="citation" data-cites="stromback20">Strömbäck et al. (<a href="#ref-stromback20" role="doc-biblioref">2020</a>)</span>.</p>
-<p>Our (hypothetical) study used the five items for measuring truts in journalism, proposed by <span class="citation" data-cites="stromback20">Strömbäck et al. (<a href="#ref-stromback20" role="doc-biblioref">2020</a>)</span>:</p>
-<p>‘Generally speaking, to what extent do you agree or disagree with the following statements about journalists in The Netherlands?’ - Journalists are fair when covering the news</p>
+<p>First, you need to think carefully about which items to include in your scale, and this needs to be grounded in theory. There might also already be existing scales that you can use. For example, if you want to measure the construct “trust in journalism”, you could use the items proposed by <span class="citation" data-cites="stromback20">Strömbäck et al. (<a href="#ref-stromback20" role="doc-biblioref">2020</a>)</span>. Specifically, they propose the following questions:</p>
+<p>“Generally speaking, to what extent do you agree or disagree with the following statements about journalists in [COUNTRY]?”</p>
 <ul>
-<li><p>Journalists are unbiased when covering the news</p></li>
-<li><p>Journalists tell the whole story when covering the news</p></li>
-<li><p>Journalists are accurate when covering the news</p></li>
-<li><p>Journalists separate facts from opinion when covering the news</p></li>
+<li>Journalists are fair when covering the news</li>
+<li>Journalists are unbiased when covering the news</li>
+<li>Journalists tell the whole story when covering the news</li>
+<li>Journalists are accurate when covering the news</li>
+<li>Journalists separate facts from opinion when covering the news</li>
 </ul>
+<p>As an example, let us assume that the trust measures in our <a href="../data-management/index.html#practice-data">practice data</a> are based on these questions. We just make one small modification: for some questions we inverse the scale, so that higher values indicate higher trust.</p>
+<p>In our simulated <a href="../data-management/index.html#practice-data">practice data</a> we have two items that measure trust in journalists: <code>trust_t1</code> and <code>trust_t2</code>.</p>
+<p>Let’s assume that these items are based on the above questions, and that we want to combine them into a single scale.</p>
 
 
 
@@ -396,9 +418,6 @@ div.csl-indent {
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-kohring07" class="csl-entry" role="listitem">
-Kohring, Matthias, and Jörg Matthes. 2007. <span>“Trust in News Media: Development and Validation of a Multidimensional Scale.”</span> <em>Communication Research</em> 34 (2): 231–52.
-</div>
 <div id="ref-stromback20" class="csl-entry" role="listitem">
 Strömbäck, Jesper, Yariv Tsfati, Hajo Boomgaarden, Alyt Damstra, Elina Lindgren, Rens Vliegenthart, and Torun Lindholm. 2020. <span>“News Media Trust and Its Impact on Media Use: Toward a Framework for Future Research.”</span> <em>Annals of the International Communication Association</em> 44 (2): 139–56.
 </div>
@@ -495,7 +514,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

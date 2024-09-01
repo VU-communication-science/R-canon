@@ -29,26 +29,45 @@ It contains all the common issues that you might encounter when working with rea
 Moreover, you only need to get acquinted with the data once, so that you can spend all your cognitive energy on developing your data literacy.
 Just do keep in mind that **this data is not real**, and should not be used for any real-world analysis.
 
-## Structure of the data
+## Description of the data
 
-The practice data describes a fictional study about how popular media might influence people's attitudes. It includes an experiment to measure the effect of **watching moview *about* journalism** on people's **trust in journalists**, and includes a range of measures about the participants.
+The practice data describes a fictional study about how entertainment media might influence people's attitudes.
+In this study, **600** participants were shown holywood movies that portray journalism in different ways, and we measured their trust in journalists before (`trust_t1`) and after (`trust_t2`) the experiment.[^1]
 
-**Number of participants (n)**: 600
+[^1]: The `t1` in `trust_t1` stands for "time 1". This is a common notation in studies where you measure the same construct at different points in time. Here `t1` and `t2` refer to the time before and after the experiment, respectively.
 
-**Variables**:
+There were three types of movies (`experiment_group`): a control group that watched a **neutral movie**, a group that watched a movie with a **positive portrayal** of journalism, and a group that watched a movie with a **negative portrayal** of journalism.
+Participants were **randomly assigned** to one of these groups, with **balanced group sizes** (i.e., 200 participants per group).
+We also collected some demographic information (`age`), asked whether they have a newspaper subscription (`np_subscription`), and how much hours of news they consume per week (`news consumption`).
 
+Since trust is a complex construct, we measured it with **five items** that participants rated on a scale from 1 to 10.
+These items are based on the questions proposed by @stromback20, but with some modifications.
+For example, we **inversed** the scale for one of the items, so that higher values indicate lower trust.
+The items are:
+
+1. Journalists are fair when covering the news
+2. Journalists are unbiased when covering the news
+3. (**inversed**) Journalists do not tell the whole story when covering the news
+4. Journalists are accurate when covering the news
+5. Journalists separate facts from opinion when covering the news
+
+
+
+### Variables
 
 | Variable name | Type | Description |
 |---------------|------|-------------|
 | **id** | `numeric` | Unique identifier for each participant |
 | **age** | `numeric` | Age of the participant in years |
 | **np_subscription** | `factor` | Whether the participant has a newspaper subscription (`yes`, `no`) |
-| **news_consumption** | `numeric` | Average number of hours per week the participant consumes news |
+| **news consumption** | `numeric` | Average number of hours per week the participant consumes news |
 | **experiment_group** | `factor` | Type of movie shown: `neutral` (control group), `positive` (positive portrayal of journalism), `negative` (negative portrayal of journalism) |
 | **trust_t1** | `numeric` | Trust in journalists before the experiment (range: 1-10) |
 | **trust_t2** | `numeric` | Trust in journalists after the experiment (range: 1-10) |
+| **trust_t1_item[1-5]** | `numeric` | Scale items for trust_t1 |
+| **trust_t2_item[1-5]** | `numeric` | Scale items for trust_t2 |
 
-
+    
 ## Reading the data into R
 
 The following code reads the practice data into R.

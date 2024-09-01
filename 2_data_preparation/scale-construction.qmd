@@ -23,27 +23,32 @@ We can only measure it propertly by looking at multiple observable indicators (i
 
 ## How to create a scale {#create-scale}
 
-To create a scale, we need to combine multiple columns in your data (i.e. the variables for the scale items) into a single score.
-However, we cannot just pick any columns, or ask participants any questions, and assume that they form a valid scale.
-We need to take several steps to ensure that the scale is reliable and valid.
+To create a scale, we combine multiple columns in your data (i.e. the variables for the scale items) into a single score.
+For instance, by taking the average of the values in these columns.
+However, before we can do that, we need to make sure that the scale is reliable and valid.
+This requires a few steps:
 
 ### 1. Choose the items based on theory
 
-The first step is to choose the items that will make up your scale.
-This should be based on theory, and if possible on prior research that has already validated the items. 
-For example, if you want to measure the construct "trust in journalism", you might want to build on existing scales, such as the "Trust in news media" scale developed by @kohring07, or use the items proposed by @stromback20.
+First, you need to think carefully about which items to include in your scale, and this needs to be grounded in theory.
+There might also already be existing scales that you can use.
+For example, if you want to measure the construct "trust in journalism", you could use the items proposed by @stromback20.
+Specifically, they propose the following questions:
 
+"Generally speaking, to what extent do you agree or disagree with the following statements about journalists in [COUNTRY]?"
 
-
-Our (hypothetical) study used the five items for measuring truts in journalism, proposed by @stromback20:
-
-‘Generally speaking, to what extent do you agree or disagree with the following statements about journalists in The Netherlands?’
 - Journalists are fair when covering the news
-
 - Journalists are unbiased when covering the news
-
 - Journalists tell the whole story when covering the news
-
 - Journalists are accurate when covering the news
-
 - Journalists separate facts from opinion when covering the news
+
+
+
+As an example, let us assume that the trust measures in our [practice data](../data-management/index.qmd#practice-data) are based on these questions.
+We just make one small modification: for some questions we inverse the scale, so that higher values indicate higher trust.
+
+In our simulated [practice data](../data-management/index.qmd#practice-data) we have two items that measure trust in journalists: `trust_t1` and `trust_t2`.
+
+
+Let's assume that these items are based on the above questions, and that we want to combine them into a single scale.

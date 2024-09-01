@@ -64,7 +64,40 @@ d = tibble(
     trust_t2 = trust_t2
 )
 d = d[sample(nrow(d)),]
-d$id = 1:nrow(d)
+d = cbind(id = 1:n, d)
+
+# Now decompose the trust scales into underlying items.
+# To do this in a way that roughtyl preserves the simulated correlations,
+# we'll first generate the items with error, and then reconstruct 
+# the scales from the items.
+
+sim_trust_item <- function(x, coef, sd) {
+  v = rnorm(length(x), mean = x*coef, sd = sd)
+  v[v < 1] = 1
+  v[v > 10] = 10
+  return(round(v))
+}
+
+sim_trust_items <- function(x, prefix='') {
+  item1 = sim_trust_item(x, 0.812, 0.73)
+  item2 = sim_trust_item(x, 0.625, 0.96)
+  item3 = sim_trust_item(x, 0.757, 1.14)
+  item4 = sim_trust_item(x, 0.625, 1.02)
+  item5 = sim_trust_item(x, 0.812, 0.76)
+  df = cbind(item1, item2, item3, item4, item5)
+  message(cor.test(x, rowMeans(df))$estimate)
+  colnames(df) = paste0(prefix, colnames(df))
+  df
+}
+
+t1_items = sim_trust_items(d$trust_t1, 'trust_t1_I')
+t2_items = sim_trust_items(d$trust_t2, 'trust_t2_I')
+d$trust_t1 = rowMeans(t1_items)
+d$trust_t2 = rowMeans(t2_items)
+d = cbind(d, t1_items, t2_items)
+
+
+View(d)
 
 
 function() {

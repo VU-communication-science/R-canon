@@ -230,7 +230,7 @@
     "href": "data-management/index.html#structure-of-the-data",
     "title": "Data management",
     "section": "Structure of the data",
-    "text": "Structure of the data\nThe practice data describes a fictional study about how popular media might influence people’s attitudes. It includes an experiment to measure the effect of watching moview about journalism on people’s trust in journalists, and includes a range of measures about the participants.\nNumber of participants (n): 600\nVariables:\n\n\n\n\n\n\n\n\nVariable name\nType\nDescription\n\n\n\n\nid\nnumeric\nUnique identifier for each participant\n\n\nage\nnumeric\nAge of the participant in years\n\n\nnp_subscription\nfactor\nWhether the participant has a newspaper subscription (yes, no)\n\n\nnews_consumption\nnumeric\nAverage number of hours per week the participant consumes news\n\n\nexperiment_group\nfactor\nType of movie shown: neutral (control group), positive (positive portrayal of journalism), negative (negative portrayal of journalism)\n\n\ntrust_t1\nnumeric\nTrust in journalists before the experiment (range: 1-10)\n\n\ntrust_t2\nnumeric\nTrust in journalists after the experiment (range: 1-10)",
+    "text": "Structure of the data\nThe practice data describes a fictional study about how popular media might influence people’s attitudes. It includes an experiment to measure the effect of watching moview about journalism on people’s trust in journalists, and includes a range of measures about the participants.\nNumber of participants (n): 600\nVariables:\n\n\n\n\n\n\n\n\nVariable name\nType\nDescription\n\n\n\n\nid\nnumeric\nUnique identifier for each participant\n\n\nage\nnumeric\nAge of the participant in years\n\n\nnp_subscription\nfactor\nWhether the participant has a newspaper subscription (yes, no)\n\n\nnews_consumption\nnumeric\nAverage number of hours per week the participant consumes news\n\n\nexperiment_group\nfactor\nType of movie shown: neutral (control group), positive (positive portrayal of journalism), negative (negative portrayal of journalism)\n\n\ntrust_t1\nnumeric\nTrust in journalists before the experiment (range: 1-10)\n\n\ntrust_t2\nnumeric\nTrust in journalists after the experiment (range: 1-10)\n\n\ntrust_t1_item[1-5]\nnumeric\nScale items for trust_t1\n\n\ntrust_t2_item[1-5]\nnumeric\nScale items for trust_t2\n\n\n\n\nItems for measuring trust in journalists\nThe trust items (i.e. the question for measuring trust in journalists) are based on the questions proposed by Strömbäck et al. (2020), but with some modifications. Participants are asked to rate their agreement with the following statements on a scale from 1 to 10:\n\n\nJournalists are fair when covering the news\n\n\nJournalists are unbiased when covering the news\n\n\nJournalists do not tell the whole story when covering the news\n\n\nJournalists are accurate when covering the news\n\n\nJournalists separate facts from opinion when covering the news\n\n\nNot that item 3 is inversed, so that higher values indicate lower trust. For all other items, higher values indicate higher trust.",
     "crumbs": [
       "Data management"
     ]
@@ -259,7 +259,7 @@
     "section": "",
     "text": "In the VU Communication Science track, you’ll be using the R statistical software as a key tool for learning quantitative methods and data analysis techniques. R is a powerful, open-source programming language that is widely used in academia and industry for statistical analysis, visualization, text analysis, and more.\nThrough our courses, you’ll get hands-on experience with R, allowing you to analyze real-world data, perform statistical tests, create insightful visualizations, and develop reproducible research workflows. These skills will be invaluable as you move forward in your studies and future career, where data-driven decision-making plays a crucial role.\nR is also open-source, and therefore free to use for both academic and commercial purposes. This means you can continue to use R beyond your studies without any licensing costs, giving you the flexibility to apply your skills in various professional settings. The open-source nature of R also fosters a vibrant community of users and contributors who regularly share packages, tutorials, and resources. This community support makes it easier to find help, learn new techniques, and stay updated with the latest developments in data science and statistical analysis.\nIn this Getting started section, we’ll walk you through your first steps. We will cover how to install R, how to install and use the RStudio software for working with R, and the basics of the R syntax.\n\n\n\n Back to top",
     "crumbs": [
-      "Getting started"
+      "Getting Started"
     ]
   },
   {
@@ -310,7 +310,7 @@
     "href": "2_data_preparation/scale-construction.html",
     "title": "Scale construction",
     "section": "",
-    "text": "A scale is a composite measure that combines multiple items into a single score. For example, in order to measure the complex construct “happiness”, you could ask people multiple questions related to happiness, such as “How often do you feel happy?”, “How satisfied are you with your life?”, and “How often do you feel joy?”.\nThe idea is that by combining multiple items into a single score, you can get a more reliable and valid measure of the underlying construct. If we would just ask people the single question “How happy are you?”, we might not get a very accurate measure of their happiness, because happiness is a complex and multi-faceted construct. By breaking it down into a multi-item scale, we can get a more nuanced and accurate measure.\nIf you’ve ever taken a survey, you’ve probably encountered scales before. For example, you might have been asked to rate your agreement with a series of statements on a scale from 1 to 5, where 1 means “strongly disagree” and 5 means “strongly agree”. This is also called a Likert scale, and it’s a common way to gather data on multiple items, with the goal of combining them into a single score for a complex construct.\nYou will also hear scales referred to as latent variables. The word latent means hidden or concealed, and it refers here to the fact that the construct we are trying to measure is not directly observable. We can only measure it propertly by looking at multiple observable indicators (items) that are related to the construct.\n\n\nTo create a scale, we need to combine multiple columns in your data (i.e. the variables for the scale items) into a single score. However, we cannot just pick any columns, or ask participants any questions, and assume that they form a valid scale. We need to take several steps to ensure that the scale is reliable and valid.\n\n\nThe first step is to choose the items that will make up your scale. This should be based on theory, and if possible on prior research that has already validated the items. For example, if you want to measure the construct “trust in journalism”, you might want to build on existing scales, such as the “Trust in news media” scale developed by Kohring and Matthes (2007), or use the items proposed by Strömbäck et al. (2020).\nOur (hypothetical) study used the five items for measuring truts in journalism, proposed by Strömbäck et al. (2020):\n‘Generally speaking, to what extent do you agree or disagree with the following statements about journalists in The Netherlands?’ - Journalists are fair when covering the news\n\nJournalists are unbiased when covering the news\nJournalists tell the whole story when covering the news\nJournalists are accurate when covering the news\nJournalists separate facts from opinion when covering the news",
+    "text": "A scale is a composite measure that combines multiple items into a single score. For example, in order to measure the complex construct “happiness”, you could ask people multiple questions related to happiness, such as “How often do you feel happy?”, “How satisfied are you with your life?”, and “How often do you feel joy?”.\nThe idea is that by combining multiple items into a single score, you can get a more reliable and valid measure of the underlying construct. If we would just ask people the single question “How happy are you?”, we might not get a very accurate measure of their happiness, because happiness is a complex and multi-faceted construct. By breaking it down into a multi-item scale, we can get a more nuanced and accurate measure.\nIf you’ve ever taken a survey, you’ve probably encountered scales before. For example, you might have been asked to rate your agreement with a series of statements on a scale from 1 to 5, where 1 means “strongly disagree” and 5 means “strongly agree”. This is also called a Likert scale, and it’s a common way to gather data on multiple items, with the goal of combining them into a single score for a complex construct.\nYou will also hear scales referred to as latent variables. The word latent means hidden or concealed, and it refers here to the fact that the construct we are trying to measure is not directly observable. We can only measure it propertly by looking at multiple observable indicators (items) that are related to the construct.\n\n\nTo create a scale, we combine multiple columns in your data (i.e. the variables for the scale items) into a single score. For instance, by taking the average of the values in these columns. However, before we can do that, we need to make sure that the scale is reliable and valid. This requires a few steps:\n\n\nFirst, you need to think carefully about which items to include in your scale, and this needs to be grounded in theory. There might also already be existing scales that you can use. For example, if you want to measure the construct “trust in journalism”, you could use the items proposed by Strömbäck et al. (2020). Specifically, they propose the following questions:\n“Generally speaking, to what extent do you agree or disagree with the following statements about journalists in [COUNTRY]?”\n\nJournalists are fair when covering the news\nJournalists are unbiased when covering the news\nJournalists tell the whole story when covering the news\nJournalists are accurate when covering the news\nJournalists separate facts from opinion when covering the news\n\nAs an example, let us assume that the trust measures in our practice data are based on these questions. We just make one small modification: for some questions we inverse the scale, so that higher values indicate higher trust.\nIn our simulated practice data we have two items that measure trust in journalists: trust_t1 and trust_t2.\nLet’s assume that these items are based on the above questions, and that we want to combine them into a single scale.",
     "crumbs": [
       "Data preparation",
       "Scale construction"
@@ -321,7 +321,7 @@
     "href": "2_data_preparation/scale-construction.html#create-scale",
     "title": "Scale construction",
     "section": "",
-    "text": "To create a scale, we need to combine multiple columns in your data (i.e. the variables for the scale items) into a single score. However, we cannot just pick any columns, or ask participants any questions, and assume that they form a valid scale. We need to take several steps to ensure that the scale is reliable and valid.\n\n\nThe first step is to choose the items that will make up your scale. This should be based on theory, and if possible on prior research that has already validated the items. For example, if you want to measure the construct “trust in journalism”, you might want to build on existing scales, such as the “Trust in news media” scale developed by Kohring and Matthes (2007), or use the items proposed by Strömbäck et al. (2020).\nOur (hypothetical) study used the five items for measuring truts in journalism, proposed by Strömbäck et al. (2020):\n‘Generally speaking, to what extent do you agree or disagree with the following statements about journalists in The Netherlands?’ - Journalists are fair when covering the news\n\nJournalists are unbiased when covering the news\nJournalists tell the whole story when covering the news\nJournalists are accurate when covering the news\nJournalists separate facts from opinion when covering the news",
+    "text": "To create a scale, we combine multiple columns in your data (i.e. the variables for the scale items) into a single score. For instance, by taking the average of the values in these columns. However, before we can do that, we need to make sure that the scale is reliable and valid. This requires a few steps:\n\n\nFirst, you need to think carefully about which items to include in your scale, and this needs to be grounded in theory. There might also already be existing scales that you can use. For example, if you want to measure the construct “trust in journalism”, you could use the items proposed by Strömbäck et al. (2020). Specifically, they propose the following questions:\n“Generally speaking, to what extent do you agree or disagree with the following statements about journalists in [COUNTRY]?”\n\nJournalists are fair when covering the news\nJournalists are unbiased when covering the news\nJournalists tell the whole story when covering the news\nJournalists are accurate when covering the news\nJournalists separate facts from opinion when covering the news\n\nAs an example, let us assume that the trust measures in our practice data are based on these questions. We just make one small modification: for some questions we inverse the scale, so that higher values indicate higher trust.\nIn our simulated practice data we have two items that measure trust in journalists: trust_t1 and trust_t2.\nLet’s assume that these items are based on the above questions, and that we want to combine them into a single scale.",
     "crumbs": [
       "Data preparation",
       "Scale construction"
@@ -767,6 +767,120 @@
     "crumbs": [
       "Getting Started",
       "Working in Quarto"
+    ]
+  },
+  {
+    "objectID": "3_statistics/0_concepts/causality.html",
+    "href": "3_statistics/0_concepts/causality.html",
+    "title": "Causality",
+    "section": "",
+    "text": "xkcd: correlation",
+    "crumbs": [
+      "Statistics",
+      "Concepts",
+      "Causality"
+    ]
+  },
+  {
+    "objectID": "3_statistics/0_concepts/causality.html#correlation-versus-causation",
+    "href": "3_statistics/0_concepts/causality.html#correlation-versus-causation",
+    "title": "Causality",
+    "section": "Correlation versus causation",
+    "text": "Correlation versus causation\n\nCausation\nCausation implies a cause-and-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). If we were to somehow manipulate the cause (which we could do in an experiment), we would expect to see a corresponding change in the effect.\nFor instance, if we could somehow make the news media talk more about climate change, we would expect the public to think and talk about it more, too. Basically, this is why PR exists, and why politicians try to get media to talk about the issues they care about.\n\n\nCorrelation\nCorrelation, on the other hand, merely indicates an association or relationship between two variables. When two variables are correlated, they tend to change together. This can be due to a causal relationship in either or both directions, but it could also be due to a third variable that causes both of them to change. This is known as a confounding variable, and a correlation that results from a confounding variable is called a spurious correlation.\n\n\n\n\n\n\nFamous spurious correlations\n\n\n\n\n\nA famous example is that across European countries the number of storks is quite strongly correlated with the number of newborn babies (\\(\\rho = 0.62\\)). The confounder in this case is the size of the country: larger countries have more storks and more babies. So the correlation is not evidence for the folk theory that storks deliver babies.\nSpurious correlations can also just be coincidental. Especially when we look at many different variables over time, we are likely to find some that are correlated just by chance. A whole website, Spurious Correlations, is dedicated to finding statistical gems, such as the correlation between the number of people who drowned by falling into a pool and the number of films Nicolas Cage appeared in. This is why it’s important to have a theoretical foundation for the relationships we test, and always be cautious when interpreting statistical results.\n\n\n\nIn the case of screen time and psychological well-being study, the authors did observe an “association”, but were not able to establish which variable causes the other. Based on their data, “it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both” (Twenge and Campbell 2018, 281). Indeed, it could be that children who are already unhappy end up spending more time on screens, which would mean that taking away their phone might not help (and might even make things worse). Furthermore, possible confounders could be that parents who are more involved in their children’s lives might both limit screen time and help develop better psychological well-being.",
+    "crumbs": [
+      "Statistics",
+      "Concepts",
+      "Causality"
+    ]
+  },
+  {
+    "objectID": "3_statistics/0_concepts/causality.html#how-to-establish-causality",
+    "href": "3_statistics/0_concepts/causality.html#how-to-establish-causality",
+    "title": "Causality",
+    "section": "How to establish causality",
+    "text": "How to establish causality\nSo when we observe a correlation between two variables, how can we determine whether there is a causal relationship between them?\n\nThe gold standard: controlled experiments\nThe gold standard for establishing causation is the randomized controlled experiment, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant. Since the treatment group and the control group are statistically identical before the treatment is applied, any difference in the outcome can be attributed to the treatment. Where possible, this is the best way to establish causation.\nHowever, this is often not possible or feasible in communication science. In those cases, where we only have observational data (e.g., surveys, interviews, content analysis), we therefore have to rely on special statistical methods to control for confounding variables and establish causation.\n\n\nThe next best thing: controlling for confounders\nUsing statistical methods, we can try to control for confounding variables. This is not perfect, because there can always be other confounders, but it does allow us to build evidence to support or refute our theories. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion (Mccombs and Shaw 1972). And even common knowledge like “smoking causes cancer” relies heavily on evidence from statistical methods that control for confounders. Given that many communication science theories cannot be tested with experiments, being able to gather some level of evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.",
+    "crumbs": [
+      "Statistics",
+      "Concepts",
+      "Causality"
+    ]
+  },
+  {
+    "objectID": "3_statistics/0_concepts/correlation.html",
+    "href": "3_statistics/0_concepts/correlation.html",
+    "title": "Communication Science R Book",
+    "section": "",
+    "text": "Back to top",
+    "crumbs": [
+      "Statistics",
+      "Concepts",
+      "Correlation"
+    ]
+  },
+  {
+    "objectID": "3_statistics/0_concepts/hypotheses.html",
+    "href": "3_statistics/0_concepts/hypotheses.html",
+    "title": "Hypotheses",
+    "section": "",
+    "text": "In order to use statistical methods to test theories, we first need to derive hypotheses from them. A hypothesis is a testable statement, that when proven true or false, provides evidence for or against the theory.\nFor example, consider the theory that playing violent video games leads to increased aggression in children. There is much disagreement about whether this theory is correct (Griffiths 1999), so it’s important to test it empirically. In order to do so, we need to derive hypotheses that we can conduct to rigorous statistical tests. Some examples of hypotheses are:\n\nThere is a relation “between arcade game use and teachers’ ratings of impulsiveness and aggresiveness”. (Lin and Lepper 1987, 81)\nPlaying violent video games leads to higher levels of heart rate and blood pressure compared to playing non-violent video games. (Lynch 1994)\nThere will be a “linear increase in aggressive affect after playing nonaggressive, moderately aggresive, and highly aggressive games”. (Scott 1995, 125)\n\nNotice that these hypotheses are more specific than the theory they are derived from. There are multiple ways to define and measure “playing violent video games” and “increased aggression”, and it could also be that the relation only holds for certain groups of people, or only for short periods of time. Hypotheses help us make (different aspects of) the theory more explicit, so that we can conduct empirical tests.\n\n\nIf an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory. For example, if we find that children who play violent video games are more aggressive, it does not yet prove that the games caused the aggression, because there are other possible explanations for finding this relation. Perhaps people who are already aggressive are more likely to play violent video games, or there could be a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
+    "crumbs": [
+      "Statistics",
+      "Concepts",
+      "Hypotheses"
+    ]
+  },
+  {
+    "objectID": "3_statistics/0_concepts/hypotheses.html#evidence-neq-proof",
+    "href": "3_statistics/0_concepts/hypotheses.html#evidence-neq-proof",
+    "title": "Hypotheses",
+    "section": "",
+    "text": "If an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory. For example, if we find that children who play violent video games are more aggressive, it does not yet prove that the games caused the aggression, because there are other possible explanations for finding this relation. Perhaps people who are already aggressive are more likely to play violent video games, or there could be a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
+    "crumbs": [
+      "Statistics",
+      "Concepts",
+      "Hypotheses"
+    ]
+  },
+  {
+    "objectID": "3_statistics/0_concepts/standardization.html",
+    "href": "3_statistics/0_concepts/standardization.html",
+    "title": "Communication Science R Book",
+    "section": "",
+    "text": "Back to top",
+    "crumbs": [
+      "Statistics",
+      "Concepts",
+      "Standardization"
+    ]
+  },
+  {
+    "objectID": "data-management/index.html#items-for-measuring-trust-in-journalists",
+    "href": "data-management/index.html#items-for-measuring-trust-in-journalists",
+    "title": "Data management",
+    "section": "Items for measuring trust in journalists",
+    "text": "Items for measuring trust in journalists\nThe trust items (i.e. the question for measuring trust in journalists) are based on the questions proposed by Strömbäck et al. (2020), but with some modifications. Participants are asked to rate their agreement with the following statements on a scale from 1 to 10:\n\n\nJournalists are fair when covering the news\n\n\nJournalists are unbiased when covering the news\n\n\nJournalists do not tell the whole story when covering the news\n\n\nJournalists are accurate when covering the news\n\n\nJournalists separate facts from opinion when covering the news\n\n\nNot that item 3 is inversed, so that higher values indicate lower trust. For all other items, higher values indicate higher trust.",
+    "crumbs": [
+      "Data management"
+    ]
+  },
+  {
+    "objectID": "data-management/index.html#description-of-the-data",
+    "href": "data-management/index.html#description-of-the-data",
+    "title": "Data management",
+    "section": "Description of the data",
+    "text": "Description of the data\nThe practice data describes a fictional study about how entertainment media might influence people’s attitudes. In this study, 600 participants were shown holywood movies that portray journalism in different ways, and we measured their trust in journalists before (trust_t1) and after (trust_t2) the experiment.1\nThere were three types of movies (experiment_group): a control group that watched a neutral movie, a group that watched a movie with a positive portrayal of journalism, and a group that watched a movie with a negative portrayal of journalism. Participants were randomly assigned to one of these groups, with balanced group sizes (i.e., 200 participants per group). We also collected some demographic information (age), asked whether they have a newspaper subscription (np_subscription), and how much hours of news they consume per week (news consumption).\nSince trust is a complex construct, we measured it with five items that participants rated on a scale from 1 to 10. These items are based on the questions proposed by Strömbäck et al. (2020), but with some modifications. For example, we inversed the scale for one of the items, so that higher values indicate lower trust. The items are:\n\nJournalists are fair when covering the news\nJournalists are unbiased when covering the news\n(inversed) Journalists do not tell the whole story when covering the news\nJournalists are accurate when covering the news\nJournalists separate facts from opinion when covering the news\n\n\nVariables\n\n\n\n\n\n\n\n\nVariable name\nType\nDescription\n\n\n\n\nid\nnumeric\nUnique identifier for each participant\n\n\nage\nnumeric\nAge of the participant in years\n\n\nnp_subscription\nfactor\nWhether the participant has a newspaper subscription (yes, no)\n\n\nnews consumption\nnumeric\nAverage number of hours per week the participant consumes news\n\n\nexperiment_group\nfactor\nType of movie shown: neutral (control group), positive (positive portrayal of journalism), negative (negative portrayal of journalism)\n\n\ntrust_t1\nnumeric\nTrust in journalists before the experiment (range: 1-10)\n\n\ntrust_t2\nnumeric\nTrust in journalists after the experiment (range: 1-10)\n\n\ntrust_t1_item[1-5]\nnumeric\nScale items for trust_t1\n\n\ntrust_t2_item[1-5]\nnumeric\nScale items for trust_t2",
+    "crumbs": [
+      "Data management"
+    ]
+  },
+  {
+    "objectID": "data-management/index.html#footnotes",
+    "href": "data-management/index.html#footnotes",
+    "title": "Data management",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nThe t1 in trust_t1 stands for “time 1”. This is a common notation in studies where you measure the same construct at different points in time. Here t1 and t2 refer to the time before and after the experiment, respectively.↩︎",
+    "crumbs": [
+      "Data management"
     ]
   }
 ]
