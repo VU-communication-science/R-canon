@@ -44,6 +44,55 @@ For example, in our [practice data](../data-management/index.qmd#practice-data) 
 Note that **item 3 is inversed**, so that higher values indicate lower trust.
 Keep this in mind, because to create the scale we 
 
+### 2. Inspect your data
+
+Once you have collected your data, always check whether everything is in order. 
+In the [Inspect and clean](../data-management/index.qmd#inspect-and-clean) chapter we looked at how to do this.
+Here we just use the `dfSummary` function from the `summarytools` package to get a quick overview of our data.
+
+First though, let's load our data and select the columns that we're interested in. 
+
+```{r, message=F}
+library(tidyverse)
+d = read_csv('https://tinyurl.com/R-practice-data')
+```
+
+In the practice data we have two scales: `trust_t1` and `trust_t2`, with each having five items (`trust_t1_item1` to `trust_t1_item5` and `trust_t2_item1` to `trust_t2_item5`).
+For this tutorial we'll just focus on `trust_t1`.
+The following code selects the five items for `trust_t1`, and then uses the `dfSummary` function to get a summary of these columns.
+
+```{r, eval=F}
+library(summarytools)
+d |> 
+    select(trust_t1_item1:trust_t1_item5) |> 
+    dfSummary() |>
+    view()
+```
+```{r, echo=F, message=F, warning=F}
+library(summarytools)
+d |> 
+    select(trust_t1_item1:trust_t1_item5) |> 
+    dfSummary() |>
+    print(method="render", max.tb.height=500)
+```
+
+This looks good. 
+There are no missing values, all values are within the expected range (1-10), and the distributions look reasonable.
+
+### 3. Look at the correlations
+
+The idea behind a scale is that the items are related to each other, because they all measure the same underlying construct.
+A good way to check this is by looking at the correlations between the items.
+
+For this we'll be using the `sjPlot` package, which has a function `tab_corr` (tabulate correlations) that creates a nice table with the correlations between all columns in a data frame. 
+
+```{r}
+library(sjPlot)
+d |> 
+    select(trust_t1_item1:trust_t1_item5) |> 
+    tab_corr()
+```
+ 
 
 As an example, let us assume that the trust measures in our [practice data](../data-management/index.qmd#practice-data) are based on these questions.
 We just make one small modification: for some questions we inverse the scale, so that higher values indicate higher trust.

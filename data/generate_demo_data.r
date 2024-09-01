@@ -81,11 +81,11 @@ sim_trust_item <- function(x, coef, sd, inversed=F) {
 }
 
 sim_trust_items <- function(x, prefix='') {
-  item1 = sim_trust_item(x, 0.812, 0.73)
-  item2 = sim_trust_item(x, 0.625, 0.96)
-  item3 = sim_trust_item(x, 0.757, 1.14, TRUE)
-  item4 = sim_trust_item(x, 0.625, 1.02)
-  item5 = sim_trust_item(x, 0.812, 0.76)
+  item1 = sim_trust_item(x, 0.812, 0.43)
+  item2 = sim_trust_item(x, 0.698, 0.66)
+  item3 = sim_trust_item(x, 0.857, 0.70, TRUE)
+  item4 = sim_trust_item(x, 0.725, 0.55)
+  item5 = sim_trust_item(x, 0.912, 0.35)
 
   df = tibble(item1, item2, item3, item4, item5)
   colnames(df) = paste0(prefix, colnames(df))
@@ -141,6 +141,11 @@ function() {
     geom_point() +
     geom_smooth(method = "lm", se = FALSE) +
     facet_wrap(~time)
+
+  library(sjPlot)
+  d |>
+    select(trust_t1_item1:trust_t1_item5) |>
+    tab_corr()
 }
 
 ## adding some missing values and noise, and then saving
