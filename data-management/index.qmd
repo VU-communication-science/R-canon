@@ -22,11 +22,10 @@ By the end of this chapter, you will be able to manage your data in a way that i
 # Practice data {#practice-data} 
 
 Throughout this chapter, and further throughout this book, we'll use a practice data set that contains **simulated data**.
-The data looks like real data used in communication science, but it's entirely made up.
+The data looks like real data used in communication science, but it's entirely made up. 
 
 The benefit of using simulated data is that it's **tailored to give you the best learning experience**. 
-It contains all the common issues that you might encounter when working with real data, but it's also simple enough to not overwhelm you.
-Moreover, you only need to get acquinted with the data once, so that you can spend all your cognitive energy on developing your data literacy.
+We can the re-use the same data across the learning material, so that you can focus on learning the concepts, rather than spending energy on getting acquinted with new data all the time.
 Just do keep in mind that **this data is not real**, and should not be used for any real-world analysis.
 
 ## Description of the data

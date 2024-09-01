@@ -32,17 +32,17 @@ This requires a few steps:
 
 First, you need to think carefully about which items to include in your scale, and this needs to be grounded in theory.
 There might also already be existing scales that you can use.
-For example, if you want to measure the construct "trust in journalism", you could use the items proposed by @stromback20.
-Specifically, they propose the following questions:
 
-"Generally speaking, to what extent do you agree or disagree with the following statements about journalists in [COUNTRY]?"
+For example, in our [practice data](../data-management/index.qmd#practice-data) we have a construct called "trust in journalism", which we measure with five items, based on the items proposed by @stromback20. Participants were asked to rate their agreement with the following items on a scale from 1 to 10:
 
-- Journalists are fair when covering the news
-- Journalists are unbiased when covering the news
-- Journalists tell the whole story when covering the news
-- Journalists are accurate when covering the news
-- Journalists separate facts from opinion when covering the news
+1. Journalists are fair when covering the news
+2. Journalists are unbiased when covering the news
+3. Journalists do not tell the whole story when covering the news
+4. Journalists are accurate when covering the news
+5. Journalists separate facts from opinion when covering the news
 
+Note that **item 3 is inversed**, so that higher values indicate lower trust.
+Keep this in mind, because to create the scale we 
 
 
 As an example, let us assume that the trust measures in our [practice data](../data-management/index.qmd#practice-data) are based on these questions.

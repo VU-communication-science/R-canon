@@ -71,33 +71,44 @@ d = cbind(id = 1:n, d)
 # we'll first generate the items with error, and then reconstruct 
 # the scales from the items.
 
-sim_trust_item <- function(x, coef, sd) {
+sim_trust_item <- function(x, coef, sd, inversed=F) {
   v = rnorm(length(x), mean = x*coef, sd = sd)
   v[v < 1] = 1
   v[v > 10] = 10
-  return(round(v))
+  v = round(v)
+  if (inversed) v = 11 - v
+  v
 }
 
 sim_trust_items <- function(x, prefix='') {
   item1 = sim_trust_item(x, 0.812, 0.73)
   item2 = sim_trust_item(x, 0.625, 0.96)
-  item3 = sim_trust_item(x, 0.757, 1.14)
+  item3 = sim_trust_item(x, 0.757, 1.14, TRUE)
   item4 = sim_trust_item(x, 0.625, 1.02)
   item5 = sim_trust_item(x, 0.812, 0.76)
-  df = cbind(item1, item2, item3, item4, item5)
-  message(cor.test(x, rowMeans(df))$estimate)
+
+  df = tibble(item1, item2, item3, item4, item5)
   colnames(df) = paste0(prefix, colnames(df))
   df
 }
 
-t1_items = sim_trust_items(d$trust_t1, 'trust_t1_I')
-t2_items = sim_trust_items(d$trust_t2, 'trust_t2_I')
-d$trust_t1 = rowMeans(t1_items)
-d$trust_t2 = rowMeans(t2_items)
+t1_items = sim_trust_items(d$trust_t1, 'trust_t1_')
+t2_items = sim_trust_items(d$trust_t2, 'trust_t2_')
+
+t1_items_alligned = t1_items 
+t1_items_alligned$trust_t1_item3 = 11 - t1_items_alligned$trust_t1_item3
+t2_items_alligned = t2_items
+t2_items_alligned$trust_t2_item3 = 11 - t2_items_alligned$trust_t2_item3
+
+new_trust_t1 rowMeans(t1_items_alligned)
+new_trust_t2 = rowMeans(t2_items_alligned)
+
+## check if the correlations are still there
+cor.test(d$trust_t1, new_trust_t1)$estimate
+cor.test(d$trust_t2, new_trust_t2)$estimate
+d$trust_t1 = new_trust_t1
+d$trust_t2 = new_trust_t2
 d = cbind(d, t1_items, t2_items)
-
-
-View(d)
 
 
 function() {
