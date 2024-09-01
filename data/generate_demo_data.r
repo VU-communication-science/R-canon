@@ -82,7 +82,7 @@ sim_trust_item <- function(x, coef, sd, inversed=F) {
 
 sim_trust_items <- function(x, prefix='') {
   item1 = sim_trust_item(x, 0.812, 0.43)
-  item2 = sim_trust_item(x, 0.698, 0.66)
+  item2 = sim_trust_item(x, 0.5, 1.6)
   item3 = sim_trust_item(x, 0.857, 0.70, TRUE)
   item4 = sim_trust_item(x, 0.725, 0.55)
   item5 = sim_trust_item(x, 0.912, 0.35)

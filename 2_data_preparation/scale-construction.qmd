@@ -4,6 +4,7 @@ subtitle: How to create and validate scales
 order: 2
 ---
 
+
 # What is a scale?
 
 A scale is a composite measure that combines multiple items into a single score.
@@ -63,17 +64,11 @@ The following code selects the five items for `trust_t1`, and then uses the `dfS
 
 ```{r, eval=F}
 library(summarytools)
+
 d |> 
     select(trust_t1_item1:trust_t1_item5) |> 
     dfSummary() |>
     view()
-```
-```{r, echo=F, message=F, warning=F}
-library(summarytools)
-d |> 
-    select(trust_t1_item1:trust_t1_item5) |> 
-    dfSummary() |>
-    print(method="render", max.tb.height=500)
 ```
 
 This looks good. 
@@ -85,19 +80,116 @@ The idea behind a scale is that the items are related to each other, because the
 A good way to check this is by looking at the correlations between the items.
 
 For this we'll be using the `sjPlot` package, which has a function `tab_corr` (tabulate correlations) that creates a nice table with the correlations between all columns in a data frame. 
+We again use this on the five items for `trust_t1`.
+In `tab_corr` we also set `p.numeric=TRUE` to show the p-values for the correlations as numbers (instead of stars).
 
-```{r}
+```{r, message=F}
 library(sjPlot)
 d |> 
     select(trust_t1_item1:trust_t1_item5) |> 
-    tab_corr()
+    tab_corr(p.numeric=TRUE)
 ```
- 
 
-As an example, let us assume that the trust measures in our [practice data](../data-management/index.qmd#practice-data) are based on these questions.
-We just make one small modification: for some questions we inverse the scale, so that higher values indicate higher trust.
+Here we see that the correlations between the items is mostly quite strong, and all significant at the 0.001 level.
+The only notable exception in terms of strength is that the correlations of `item2` to the other items is much lower.
+This suggests that our items indeed measure are common underlying construct, but `item2` (about *bias*) might measure a somewhat different aspect of trust in journalism.
 
-In our simulated [practice data](../data-management/index.qmd#practice-data) we have two items that measure trust in journalists: `trust_t1` and `trust_t2`.
+One **very important thing** to notice is that the correlation of `trust_t1_item3` with the other items is **negative**! 
+So when the score on `trust_t1_item3` goes up, the scores on the other items tend to go down.
+This makes complete sense if we remember that `trust_t1_item3` is inversed, so that higher values indicate lower trust.
 
 
-Let's assume that these items are based on the above questions, and that we want to combine them into a single scale.
+::: {.callout-note title="Factor analysis" collapse="true"}
+
+Another common way to check whether the items in your scale are related is by using **factor analysis**.
+This is a statistical technique that can help you identify the underlying factors that explain the correlations between the items.
+We'll cover factor analysis in a later tutorial.
+
+:::
+
+### 4. Invert items if necessary
+
+In the correlation analysis we saw that the third item (`trust_t1_item3`) is negatively correlated with the other items.
+This is all according to plan, since we inversed the scale for this item.
+But to create a single construct, we need to make sure that all items have the same directionality.
+So we need to invert the values for `trust_t1_item3`. 
+
+Since we have a scale from 1 to 10, we can inverse the value by subtracking it from `11` (11 - 1 = 10, 11 - 2 = 9, ..., 11 - 10 = 1).
+
+```{r}
+d <- d |> 
+    mutate(trust_t1_item3_inv = 11 - trust_t1_item3)
+```
+
+Notice that we **do not** overwrite the original column, but create a new column `trust_t1_item3_inv` (inversed). 
+Overwriting the original column is possible, but dangerous and not transparent. 
+Creating a new column prevents you from accidentally running the inversion multiple times, and messing up your analysis.
+
+::: {.callout-note title="General formula for inversing" collapse="true"}
+
+Since we had a scale from 1 to 10, we could invert the values by subtracting from 11.
+Similarly, if you have a scale from 1 to 7, you could invert the values by subtracting from 8.
+So for any scale starting from 1, the formula you can use is:
+
+$$ \text{new value} = \text{max value} + 1 - \text{old value} $$
+
+However, if your scale does not start from 1, this doesn't work!
+(try it out for a scale from 0 to 10, and you'll see why).
+The more general formula therefore is:
+
+$$ \text{new value} = \text{max value} + \text{min value} - \text{old value} $$
+
+Note that in this case you need to use the minimum and maximum **possible** values of your scale, and NOT the actual minimum and maximum values in your data!
+So if your scale goes from 1 to 7, you would use 1 and 7 in the formula, even if the minimum and maximum values in your data are 1.5 and 6.5.
+
+:::
+
+### 5. Calculate the reliability
+
+The reliability of a scale is a measure of how consistent the items in the scale are.
+There are different ways to calculate reliability, but one of the most common is **Cronbach's alpha**.
+
+Cronbach's alpha ranges from 0 to 1, where higher values indicate higher reliability.
+A common rule of thumb is that a value of 0.7 or higher is acceptable, but this can vary depending on the context.
+As with any *rule of thumb*, don't blindly follow it, but think about what makes sense in your specific situation.
+
+To calculate Cronbach's alpha, we can use the `psych` package, which has a function `alpha` that calculates the alpha for the columns on an input data frame.
+So we'll do the same thing as above, but note that this time our select statement looks different, because we need to include the inversed item.
+
+```{r, message=F}
+library(psych)
+
+d |> 
+    select(trust_t1_item1,  
+           trust_t1_item2, 
+           trust_t1_item3_inv, 
+           trust_t1_item4, 
+           trust_t1_item5) |> 
+    alpha()
+```
+
+::: {.callout-note title="Cronbach's alpha with 3 digits" collapse="true"}
+
+By default, `alpha` only shows two digits for Cronbach's alpha.
+If you want to see more digits, you can use the `print` function with the `digits` argument.
+
+```{r}
+d |> 
+    select(trust_t1_item1, trust_t1_item2, trust_t1_item3_inv, trust_t1_item4, trust_t1_item5) |> 
+    alpha() |>
+    print(digits=3)
+```
+
+Note that this way of setting the nr of digits is specific to the `psych` package.
+
+:::
+
+This gives a quite a lot of output, so let's go through it step by step.
+
+1. **Cronbach's alpha**: At the top we have a row that says `raw_alpha`, `std.alpha`, etc. Here we are just interested in the `raw_alpha`, which is the value of Cronbach's alpha. In this case it's 0.85, which is already very good. 
+2. **Reliability if an item is dropped**: This part shows you what would happen to the `raw_alpha` (and the other reliability measures) if you would drop one of the items from the scale. In our data we see that if `item2` would be dropped, the `raw_alpha` would go up to `0.92` (from 0.85). In other words, if we would use a 4-item scale with `item2` dropped, the scale would be more reliable.  
+3. **Item statistics**: This part shows you the mean, standard deviation, and correlation with the total scale (i.e. the other items in the scale) for each item. This can be useful to see if there are any items that are not working well with the rest of the scale. The `r.cor` (`r` for correlation, `cor` for corrected) column is particularly useful. 
+
+```{r}
+?psych::alpha
+```

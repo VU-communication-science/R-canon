@@ -123,6 +123,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -395,6 +424,8 @@ div.csl-indent {
   <li><a href="#choose-the-items-based-on-theory" id="toc-choose-the-items-based-on-theory" class="nav-link" data-scroll-target="#choose-the-items-based-on-theory">1. Choose the items based on theory</a></li>
   <li><a href="#inspect-your-data" id="toc-inspect-your-data" class="nav-link" data-scroll-target="#inspect-your-data">2. Inspect your data</a></li>
   <li><a href="#look-at-the-correlations" id="toc-look-at-the-correlations" class="nav-link" data-scroll-target="#look-at-the-correlations">3. Look at the correlations</a></li>
+  <li><a href="#invert-items-if-necessary" id="toc-invert-items-if-necessary" class="nav-link" data-scroll-target="#invert-items-if-necessary">4. Invert items if necessary</a></li>
+  <li><a href="#calculate-the-reliability" id="toc-calculate-the-reliability" class="nav-link" data-scroll-target="#calculate-the-reliability">5. Calculate the reliability</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -456,504 +487,33 @@ div.csl-indent {
 <p>In the practice data we have two scales: <code>trust_t1</code> and <code>trust_t2</code>, with each having five items (<code>trust_t1_item1</code> to <code>trust_t1_item5</code> and <code>trust_t2_item1</code> to <code>trust_t2_item5</code>). For this tutorial we’ll just focus on <code>trust_t1</code>. The following code selects the five items for <code>trust_t1</code>, and then uses the <code>dfSummary</code> function to get a summary of these columns.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(trust_t1_item1<span class="sc">:</span>trust_t1_item5) <span class="sc">|&gt;</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dfSummary</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div class="container st-container">
-<h3 class="anchored">Data Frame Summary</h3>
-<h4 class="anchored"></h4>
-<strong>Dimensions</strong>: 600 x 5
-  <br><strong>Duplicates</strong>: 113
-<br>
-
-<table class="table table-striped table-bordered st-table st-table-striped st-table-bordered st-multiline caption-top table-sm small" data-quarto-postprocess="true">
-<colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-</colgroup>
-<thead>
-<tr class="header">
-<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>No</strong></th>
-<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Variable</strong></th>
-<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Stats / Values</strong></th>
-<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Freqs (% of Valid)</strong></th>
-<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Graph</strong></th>
-<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Valid</strong></th>
-<th class="st-protect-top-border" style="text-align: center;" data-quarto-table-cell-role="th"><strong>Missing</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">1</td>
-<td style="text-align: left;">trust_t1_item1 [numeric]</td>
-<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 4.1 (1.2)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">1 ≤ 4 ≤ 8</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 2 (0.3)</td>
-</tr>
-</tbody>
-</table></td>
-<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">1</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">11</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">1.8%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">2</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">50</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">8.3%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">3</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">127</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">21.2%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">4</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">181</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">30.2%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">5</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">157</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">26.2%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">6</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">65</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">10.8%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">7</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">8</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">1.3%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">8</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">1</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">0.2%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-</tbody>
-</table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADoAAADECAQAAABkKvrKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCQEONxeaJT6iAAABIklEQVR42u3cQY6CQBAFUDGezhOMJxxP4PV04SzQDARDVbfpen/HhpemmuSHkJ7uh/Y5djALoaf5xe/fgH+meGh+y7eVng/nBiutM1MoFAqFQqH7c3q9vDVBp3nZzizeK8WsTfrP9Lr4fGOb8NtG+r/1Rm+vOjOFQqFQKBS6P3pvavrP9Lrz+W5tx5t677Zs34R1ZgqFQqFQ6GCoCpqaOmho713LZTbUwN67lte3os5MoVAoFAodDNV7U1MHTe29S99/E3vv8ptQZ6ZQKBQKhQ6G6r2pqYN+2Htj/vP9qPdG7e06M4VCoVAodDBU701N/5k+K2jGwQqrK21xsEKlmUKhUCgUCg1H9d7Y9Eczf7X9rpVCoVAoFAqFfh86Ob93OPQBG0ssG/SIqyMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjQtMDktMDFUMTQ6NTU6MjMrMDA6MDCZEwi4AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI0LTA5LTAxVDE0OjU1OjIzKzAwOjAw6E6wBAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
-<td style="text-align: center;">600 (100.0%)</td>
-<td style="text-align: center;">0 (0.0%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">2</td>
-<td style="text-align: left;">trust_t1_item2 [numeric]</td>
-<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 3.2 (1.2)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">1 ≤ 3 ≤ 7</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 2 (0.4)</td>
-</tr>
-</tbody>
-</table></td>
-<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">1</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">53</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">8.8%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">2</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">121</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">20.2%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">3</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">192</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">32.0%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">4</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">148</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">24.7%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">5</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">72</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">12.0%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">6</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">13</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">2.2%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">7</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">1</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">0.2%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-</tbody>
-</table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD0AAACsCAQAAABiUWyEAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCQEONxeaJT6iAAABCUlEQVR42u3a0Q2CMBQFUDFMxwQ6oU7gevplUkjEAm1p8s79M0RP2gfJlXR4X87K9TQ5KD2mHx4rg78NJbj0R8b5penHV14VVh1z1mg0Go1Go/unFwWpRhH6lSFtgvX/DqS10Kwvz0M7vrWpZ/bw/9l+g8acNRqNRqPR6P5pPbxxepn1sR6ek3uy48V6eE7mN3HMWaPRaDQajc6MMtw4MelqPfz/2/FKPTznSYk5azQajUaj0ZnRwxsnJr2jh5c5Kb6jh5d7BmLOGo1Go9FodGb08MbpZdbfMlyq7m5a9VT5eMgK3TJoNBqNRqPRK9HDG6cXuv4h7R5XjUaj0Wg0Go1e9PAwq45JfwBtECbrCU2gBwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNC0wOS0wMVQxNDo1NToyMyswMDowMJkTCLgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjQtMDktMDFUMTQ6NTU6MjMrMDA6MDDoTrAEAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
-<td style="text-align: center;">600 (100.0%)</td>
-<td style="text-align: center;">0 (0.0%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">3</td>
-<td style="text-align: left;">trust_t1_item3 [numeric]</td>
-<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 7.1 (1.5)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">3 ≤ 7 ≤ 10</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 2 (0.2)</td>
-</tr>
-</tbody>
-</table></td>
-<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">3</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">4</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">0.7%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">4</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">27</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">4.5%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">5</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">49</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">8.2%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">6</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">111</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">18.5%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">7</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">170</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">28.3%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">8</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">137</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">22.8%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">9</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">69</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">11.5%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">10</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">33</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">5.5%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-</tbody>
-</table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADcAAADECAQAAACR1HF6AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCQEONxeaJT6iAAABGklEQVR42u3bQQ6CMBRFUWpYnSvQFeIK3B4OKQx+Snht8fX+EUw8kd/BjcG0Ti3n0VQz5+b8Zlmn6ZXURP6B3g8TDg4ODg4O7t+5lGdtncQdJ412nfk5PE19c87722d2/a3w7bx3BwcHBwcHNwJ3iIcawZAPnSmcsDO3URVn0Jnb6A6Q9+7g4ODg4OC6cISfcLy5ws6Mp7xCizoznjOn2Xt3cHBwcHBwXTg6UzjenKQz43lnyxN0Zjz7s+69Ozg4ODg4uC4cnSkcb65CZ0a/bso7Mz7b3ruDg4ODg4PrwtGZwrl7+F17dfJk+F09St67g4ODg4ODG4GjM4Vzr85U/wU87Ez9wfHeHRwcHBwc3Ahcz86sP967a8z9ADdtLZ4dM2wYAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTA5LTAxVDE0OjU1OjIzKzAwOjAwmRMIuAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wOS0wMVQxNDo1NToyMyswMDowMOhOsAQAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
-<td style="text-align: center;">600 (100.0%)</td>
-<td style="text-align: center;">0 (0.0%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">4</td>
-<td style="text-align: left;">trust_t1_item4 [numeric]</td>
-<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 3.1 (1.3)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">1 ≤ 3 ≤ 7</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 2 (0.4)</td>
-</tr>
-</tbody>
-</table></td>
-<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">1</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">75</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">12.5%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">2</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">113</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">18.8%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">3</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">177</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">29.5%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">4</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">143</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">23.8%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">5</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">69</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">11.5%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">6</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">21</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">3.5%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">7</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">2</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">0.3%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-</tbody>
-</table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADkAAACsCAQAAABrusz+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCQEONxeaJT6iAAABAklEQVR42u3cQQ7BUBQFUBWrswJWyApsj6FPxPNbr1Xv3JlIc9LeP7iRxnDdzJ3t7GIRctd+OH1U7GHoZ9pLdo9f7cOLL5PvskaXSCQSiUQi4zwNkekzI87QLqy8Gd3OrYJdnkc/2Z5t271jX6Xv0NXoEolEIpFIZBw7NilLdzl+x0Y5Nk/2Kzs2yuOhrNElEolEIpGrI43KpNQgU3bs+19nE3ZsdOprdIlEIpFI5OpIOzYpNcjuHTvm7dg3ZLxjv3Gia3SJRCKRSOTqSDs2KUt32Y7K6ePxI/I+KjOPUY0ukUgkEolExrFjk7I0mfey6i/dJRKJRCKRSOScGfzv1t+QNzZGJ1k78vAhAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTA5LTAxVDE0OjU1OjIzKzAwOjAwmRMIuAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wOS0wMVQxNDo1NToyMyswMDowMOhOsAQAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
-<td style="text-align: center;">600 (100.0%)</td>
-<td style="text-align: center;">0 (0.0%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">5</td>
-<td style="text-align: left;">trust_t1_item5 [numeric]</td>
-<td style="text-align: left; padding: 8; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 4.1 (1.3)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">1 ≤ 4 ≤ 9</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 2 (0.3)</td>
-</tr>
-</tbody>
-</table></td>
-<td style="text-align: left; padding: 0; vertical-align: middle;"><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">1</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">18</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">3.0%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">2</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">45</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">7.5%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">3</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">132</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">22.0%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">4</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">160</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">26.7%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">5</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">172</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">28.7%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">6</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">55</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">9.2%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="odd" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">7</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">17</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">2.8%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-<tr class="even" style="background-color:transparent">
-<td style="text-align: right; padding: 0 2px 0 7px; margin: 0; border: 0;">9</td>
-<td style="text-align: left; padding: 0 2px; border: 0;">:</td>
-<td style="text-align: right; padding: 0 4px 0 6px; margin: 0; border: 0;">1</td>
-<td style="text-align: left; padding: 0; border: 0;">(</td>
-<td style="text-align: right; padding: 0 2px; margin: 0; border: 0;">0.2%</td>
-<td style="text-align: left; padding: 0 4px 0 0; border: 0;">)</td>
-</tr>
-</tbody>
-</table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADgAAADECAQAAABg3yr3AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfoCQEONxeaJT6iAAABFUlEQVR42u3cQQrCMBAF0FQ8nSfQE+oJvJ4uCpKg0hYmGsf3d0XoI84sPtQ63cpns/uw9wfgvr44PwZ6nCKR+mb79qNDKaWUa8cT5p8hEAgEAoHAp4rRs1zMmeoi3KsU1yXqz2Z4efOdRrbUl720Tewi5Z8hEAgEAoFAvbRDxuylW7LUYVf00i1ZXrr8MwQCgUAgcEBQTQxPfjC8l7Z5bqnBvbTNq53PP0MgEAgEAgcE9dLw5Ac799I5p2qIXXvpnHbz888QCAQCgcABQb00PPnB1b006jemK3tp3PbmnyEQCAQCgQOCeml4RqmJsa/HvwW9Hg8EAoFAIDAmeml4vgv2eqw+zgmBQCAQCAQCYzL5/9KfB+8Tdy1DW/A45AAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNC0wOS0wMVQxNDo1NToyMyswMDowMJkTCLgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjQtMDktMDFUMTQ6NTU6MjMrMDA6MDDoTrAEAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
-<td style="text-align: center;">600 (100.0%)</td>
-<td style="text-align: center;">0 (0.0%)</td>
-</tr>
-</tbody>
-</table>
-
-<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.3.1)<br>2024-09-01</p>
-</div>
-</div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(trust_t1_item1<span class="sc">:</span>trust_t1_item5) <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dfSummary</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This looks good. There are no missing values, all values are within the expected range (1-10), and the distributions look reasonable.</p>
 </section>
 <section id="look-at-the-correlations" class="level3">
 <h3 class="anchored" data-anchor-id="look-at-the-correlations">3. Look at the correlations</h3>
 <p>The idea behind a scale is that the items are related to each other, because they all measure the same underlying construct. A good way to check this is by looking at the correlations between the items.</p>
-<p>For this we’ll be using the <code>sjPlot</code> package, which has a function <code>tab_corr</code> (tabulate correlations) that creates a nice table with the correlations between all columns in a data frame.</p>
+<p>For this we’ll be using the <code>sjPlot</code> package, which has a function <code>tab_corr</code> (tabulate correlations) that creates a nice table with the correlations between all columns in a data frame. We again use this on the five items for <code>trust_t1</code>. In <code>tab_corr</code> we also set <code>p.numeric=TRUE</code> to show the p-values for the correlations as numbers (instead of stars).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>#refugeeswelcome</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(trust_t1_item1<span class="sc">:</span>trust_t1_item5) <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_corr</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(trust_t1_item1<span class="sc">:</span>trust_t1_item5) <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_corr</span>(<span class="at">p.numeric=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">&nbsp;</td>
@@ -966,41 +526,61 @@ div.csl-indent {
 <tr class="even">
 <td style="font-style: italic">trust_t1_item1</td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">0.503<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.497<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.464<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.660<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.681<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.730<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.724<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.848<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
 </tr>
 <tr class="odd">
 <td style="font-style: italic">trust_t1_item2</td>
-<td style="text-align: center; padding: 0.2cm;">0.503<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.681<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">-0.369<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.349<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.494<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.635<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.622<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.715<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
 </tr>
 <tr class="even">
 <td style="font-style: italic">trust_t1_item3</td>
-<td style="text-align: center; padding: 0.2cm;">-0.497<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.369<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.730<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.635<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">-0.361<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.464<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.673<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.764<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
 </tr>
 <tr class="odd">
 <td style="font-style: italic">trust_t1_item4</td>
-<td style="text-align: center; padding: 0.2cm;">0.464<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.349<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.361<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.724<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.622<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.673<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">0.461<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.753<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
 </tr>
 <tr class="even">
 <td style="font-style: italic">trust_t1_item5</td>
-<td style="text-align: center; padding: 0.2cm;">0.660<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.494<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.464<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.461<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.848<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.715<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.764<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.753<br>
+<span style="font-style:italic;">(&lt;.001)</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
 </tr>
 <tr class="odd">
@@ -1010,9 +590,192 @@ div.csl-indent {
 </table>
 </div>
 </div>
-<p>As an example, let us assume that the trust measures in our <a href="../data-management/index.html#practice-data">practice data</a> are based on these questions. We just make one small modification: for some questions we inverse the scale, so that higher values indicate higher trust.</p>
-<p>In our simulated <a href="../data-management/index.html#practice-data">practice data</a> we have two items that measure trust in journalists: <code>trust_t1</code> and <code>trust_t2</code>.</p>
-<p>Let’s assume that these items are based on the above questions, and that we want to combine them into a single scale.</p>
+<p>Here we see that the correlations between the items is mostly quite strong, and all significant at the 0.001 level. The only notable exception in terms of strength is that the correlations of <code>item2</code> to the other items is much lower. This suggests that our items indeed measure are common underlying construct, but <code>item2</code> (about <em>bias</em>) might measure a somewhat different aspect of trust in journalism.</p>
+<p>One <strong>very important thing</strong> to notice is that the correlation of <code>trust_t1_item3</code> with the other items is <strong>negative</strong>! So when the score on <code>trust_t1_item3</code> goes up, the scores on the other items tend to go down. This makes complete sense if we remember that <code>trust_t1_item3</code> is inversed, so that higher values indicate lower trust.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Factor analysis">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Factor analysis
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Another common way to check whether the items in your scale are related is by using <strong>factor analysis</strong>. This is a statistical technique that can help you identify the underlying factors that explain the correlations between the items. We’ll cover factor analysis in a later tutorial.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="invert-items-if-necessary" class="level3">
+<h3 class="anchored" data-anchor-id="invert-items-if-necessary">4. Invert items if necessary</h3>
+<p>In the correlation analysis we saw that the third item (<code>trust_t1_item3</code>) is negatively correlated with the other items. This is all according to plan, since we inversed the scale for this item. But to create a single construct, we need to make sure that all items have the same directionality. So we need to invert the values for <code>trust_t1_item3</code>.</p>
+<p>Since we have a scale from 1 to 10, we can inverse the value by subtracking it from <code>11</code> (11 - 1 = 10, 11 - 2 = 9, …, 11 - 10 = 1).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">trust_t1_item3_inv =</span> <span class="dv">11</span> <span class="sc">-</span> trust_t1_item3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that we <strong>do not</strong> overwrite the original column, but create a new column <code>trust_t1_item3_inv</code> (inversed). Overwriting the original column is possible, but dangerous and not transparent. Creating a new column prevents you from accidentally running the inversion multiple times, and messing up your analysis.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="General formula for inversing">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+General formula for inversing
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since we had a scale from 1 to 10, we could invert the values by subtracting from 11. Similarly, if you have a scale from 1 to 7, you could invert the values by subtracting from 8. So for any scale starting from 1, the formula you can use is:</p>
+<p><span class="math display">\[ \text{new value} = \text{max value} + 1 - \text{old value} \]</span></p>
+<p>However, if your scale does not start from 1, this doesn’t work! (try it out for a scale from 0 to 10, and you’ll see why). The more general formula therefore is:</p>
+<p><span class="math display">\[ \text{new value} = \text{max value} + \text{min value} - \text{old value} \]</span></p>
+<p>Note that in this case you need to use the minimum and maximum <strong>possible</strong> values of your scale, and NOT the actual minimum and maximum values in your data! So if your scale goes from 1 to 7, you would use 1 and 7 in the formula, even if the minimum and maximum values in your data are 1.5 and 6.5.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-the-reliability" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-the-reliability">5. Calculate the reliability</h3>
+<p>The reliability of a scale is a measure of how consistent the items in the scale are. There are different ways to calculate reliability, but one of the most common is <strong>Cronbach’s alpha</strong>.</p>
+<p>Cronbach’s alpha ranges from 0 to 1, where higher values indicate higher reliability. A common rule of thumb is that a value of 0.7 or higher is acceptable, but this can vary depending on the context. As with any <em>rule of thumb</em>, don’t blindly follow it, but think about what makes sense in your specific situation.</p>
+<p>To calculate Cronbach’s alpha, we can use the <code>psych</code> package, which has a function <code>alpha</code> that calculates the alpha for the columns on an input data frame. So we’ll do the same thing as above, but note that this time our select statement looks different, because we need to include the inversed item.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(trust_t1_item1,  </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>           trust_t1_item2, </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>           trust_t1_item3_inv, </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>           trust_t1_item4, </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>           trust_t1_item5) <span class="sc">|&gt;</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">alpha</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = select(d, trust_t1_item1, trust_t1_item2, trust_t1_item3_inv, 
+    trust_t1_item4, trust_t1_item5))
+
+  raw_alpha std.alpha G6(smc) average_r S/N    ase mean sd median_r
+      0.93      0.93    0.91      0.71  13 0.0048  4.1  1     0.72
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.92  0.93  0.93
+Duhachek  0.92  0.93  0.93
+
+ Reliability if an item is dropped:
+                   raw_alpha std.alpha G6(smc) average_r  S/N alpha se  var.r
+trust_t1_item1          0.90      0.90    0.88      0.69  9.1   0.0066 0.0036
+trust_t1_item2          0.92      0.92    0.90      0.75 11.9   0.0052 0.0034
+trust_t1_item3_inv      0.91      0.91    0.89      0.72 10.5   0.0057 0.0057
+trust_t1_item4          0.91      0.91    0.90      0.73 10.8   0.0057 0.0053
+trust_t1_item5          0.89      0.89    0.87      0.68  8.4   0.0071 0.0020
+                   med.r
+trust_t1_item1      0.69
+trust_t1_item2      0.74
+trust_t1_item3_inv  0.72
+trust_t1_item4      0.72
+trust_t1_item5      0.68
+
+ Item statistics 
+                     n raw.r std.r r.cor r.drop mean  sd
+trust_t1_item1     600  0.91  0.91  0.89   0.85  4.1 1.1
+trust_t1_item2     600  0.83  0.83  0.76   0.74  3.5 1.1
+trust_t1_item3_inv 600  0.87  0.87  0.82   0.79  4.3 1.3
+trust_t1_item4     600  0.85  0.86  0.81   0.78  3.7 1.1
+trust_t1_item5     600  0.93  0.93  0.92   0.88  4.6 1.2
+
+Non missing response frequency for each item
+                      1    2    3    4    5    6    7 8 9 miss
+trust_t1_item1     0.01 0.07 0.22 0.33 0.27 0.10 0.01 0 0    0
+trust_t1_item2     0.03 0.15 0.32 0.31 0.16 0.03 0.00 0 0    0
+trust_t1_item3_inv 0.01 0.06 0.20 0.26 0.28 0.13 0.05 0 0    0
+trust_t1_item4     0.02 0.12 0.29 0.34 0.18 0.04 0.00 0 0    0
+trust_t1_item5     0.00 0.03 0.15 0.25 0.32 0.18 0.06 0 0    0</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Cronbach's alpha with 3 digits">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cronbach’s alpha with 3 digits
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>By default, <code>alpha</code> only shows two digits for Cronbach’s alpha. If you want to see more digits, you can use the <code>print</code> function with the <code>digits</code> argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(trust_t1_item1, trust_t1_item2, trust_t1_item3_inv, trust_t1_item4, trust_t1_item5) <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">alpha</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: alpha(x = select(d, trust_t1_item1, trust_t1_item2, trust_t1_item3_inv, 
+    trust_t1_item4, trust_t1_item5))
+
+  raw_alpha std.alpha G6(smc) average_r  S/N     ase mean   sd median_r
+     0.925     0.926   0.914     0.715 12.5 0.00476 4.06 1.04     0.72
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt    0.915 0.925 0.934
+Duhachek 0.916 0.925 0.934
+
+ Reliability if an item is dropped:
+                   raw_alpha std.alpha G6(smc) average_r   S/N alpha se   var.r
+trust_t1_item1         0.899     0.901   0.877     0.694  9.06  0.00658 0.00360
+trust_t1_item2         0.921     0.923   0.904     0.749 11.92  0.00524 0.00336
+trust_t1_item3_inv     0.913     0.913   0.895     0.724 10.49  0.00572 0.00573
+trust_t1_item4         0.914     0.915   0.897     0.729 10.76  0.00572 0.00535
+trust_t1_item5         0.891     0.894   0.865     0.678  8.40  0.00712 0.00198
+                   med.r
+trust_t1_item1     0.694
+trust_t1_item2     0.742
+trust_t1_item3_inv 0.720
+trust_t1_item4     0.723
+trust_t1_item5     0.677
+
+ Item statistics 
+                     n raw.r std.r r.cor r.drop mean   sd
+trust_t1_item1     600 0.906 0.907 0.889  0.851 4.10 1.15
+trust_t1_item2     600 0.827 0.832 0.763  0.736 3.54 1.12
+trust_t1_item3_inv 600 0.875 0.866 0.817  0.788 4.34 1.33
+trust_t1_item4     600 0.853 0.859 0.806  0.777 3.67 1.09
+trust_t1_item5     600 0.931 0.929 0.924  0.884 4.64 1.24
+
+Non missing response frequency for each item
+                       1     2     3     4     5     6     7     8     9 miss
+trust_t1_item1     0.008 0.073 0.217 0.330 0.267 0.097 0.007 0.002 0.000    0
+trust_t1_item2     0.025 0.148 0.322 0.312 0.158 0.032 0.003 0.000 0.000    0
+trust_t1_item3_inv 0.013 0.062 0.197 0.265 0.283 0.127 0.048 0.003 0.002    0
+trust_t1_item4     0.018 0.122 0.293 0.342 0.185 0.038 0.002 0.000 0.000    0
+trust_t1_item5     0.005 0.032 0.152 0.248 0.323 0.180 0.058 0.000 0.002    0</code></pre>
+</div>
+</div>
+<p>Note that this way of setting the nr of digits is specific to the <code>psych</code> package.</p>
+</div>
+</div>
+</div>
+<p>This gives a quite a lot of output, so let’s go through it step by step.</p>
+<ol type="1">
+<li><strong>Cronbach’s alpha</strong>: At the top we have a row that says <code>raw_alpha</code>, <code>std.alpha</code>, etc. Here we are just interested in the <code>raw_alpha</code>, which is the value of Cronbach’s alpha. In this case it’s 0.85, which is already very good.</li>
+<li><strong>Reliability if an item is dropped</strong>: This part shows you what would happen to the <code>raw_alpha</code> (and the other reliability measures) if you would drop one of the items from the scale. In our data we see that if <code>item2</code> would be dropped, the <code>raw_alpha</code> would go up to <code>0.92</code> (from 0.85). In other words, if we would use a 4-item scale with <code>item2</code> dropped, the scale would be more reliable.<br>
+</li>
+<li><strong>Item statistics</strong>: This part shows you the mean, standard deviation, and correlation with the total scale (i.e.&nbsp;the other items in the scale) for each item. This can be useful to see if there are any items that are not working well with the rest of the scale. The <code>r.cor</code> (<code>r</code> for correlation, <code>cor</code> for corrected) column is particularly useful.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>?psych<span class="sc">::</span>alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 
