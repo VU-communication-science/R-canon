@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>correlation – Communication Science R Book</title>
+<title>Correlation test – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -69,6 +103,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -81,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../3_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../../3_statistics/2_tests/correlation.html">Tests</a></li><li class="breadcrumb-item"><a href="../../3_statistics/2_tests/correlation.html">Correlation</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../3_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../../3_statistics/2_tests/correlation.html">Tests</a></li><li class="breadcrumb-item"><a href="../../3_statistics/2_tests/correlation.html">Correlation test</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -258,14 +321,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../3_statistics/0_concepts/causality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causality</span></a>
+  <a href="../../3_statistics/0_concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Covariance and correlation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../3_statistics/0_concepts/correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Correlation</span></a>
+  <a href="../../3_statistics/0_concepts/causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -294,7 +357,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../3_statistics/2_tests/correlation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Correlation</span></a>
+ <span class="menu-text">Correlation test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -329,17 +392,193 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-the-correlation-test" id="toc-what-is-the-correlation-test" class="nav-link active" data-scroll-target="#what-is-the-correlation-test">What is the correlation test?</a></li>
+  <li><a href="#conducting-the-correlation-test" id="toc-conducting-the-correlation-test" class="nav-link" data-scroll-target="#conducting-the-correlation-test">Conducting the correlation test</a>
+  <ul class="collapse">
+  <li><a href="#between-two-variables-cor.test" id="toc-between-two-variables-cor.test" class="nav-link" data-scroll-target="#between-two-variables-cor.test">Between two variables: cor.test</a></li>
+  <li><a href="#between-more-variables-tab_corr" id="toc-between-more-variables-tab_corr" class="nav-link" data-scroll-target="#between-more-variables-tab_corr">Between more variables: tab_corr</a></li>
+  <li><a href="#reporting-the-correlation-test" id="toc-reporting-the-correlation-test" class="nav-link" data-scroll-target="#reporting-the-correlation-test">Reporting the correlation test</a></li>
+  </ul></li>
+  <li><a href="#alternative-correlation-tests" id="toc-alternative-correlation-tests" class="nav-link" data-scroll-target="#alternative-correlation-tests">Alternative correlation tests</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../3_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../../3_statistics/2_tests/correlation.html">Tests</a></li><li class="breadcrumb-item"><a href="../../3_statistics/2_tests/correlation.html">Correlation test</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Correlation test</h1>
+<p class="subtitle lead">Testing the relationship between numeric variables</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<section id="what-is-the-correlation-test" class="level1">
+<h1>What is the correlation test?</h1>
+<p>In communication science we are often interested in the relationship between numeric variables. For example, we might want to know if there is a relationship between the amount of time people spend on social media and their feelings of loneliness.</p>
+<p>The correlation test is a statistical test that can tell us if there is a relationship between two numeric variables. It also provides a coefficient between -1 and 1 that tells us how strong the relationship is, and whether it is positive or negative. In this tutorial we focus on conducting the test. For more details on the concept of correlation and how to interpret the correlation coefficient <span class="math inline">\(r\)</span>, see the <a href="../../3_statistics/0_concepts/covariance-and-correlation.html">covariance and correlation</a> section.</p>
+<p>What the correlation test <strong>does not</strong> tell us is whether there is a causal relationship between the variables. For example, if we find that there is a correlation between social media use and loneliness, it does not mean that social media use causes loneliness. For more detail on this, see the <a href="../../3_statistics/0_concepts/causality.html">causality</a> section.</p>
+</section>
+<section id="conducting-the-correlation-test" class="level1">
+<h1>Conducting the correlation test</h1>
+<p>We’ll show two ways of conducting the correlation test: using the <code>cor.test</code> function and using the <code>tab_corr</code> function from the <code>sjPlot</code> package. The <code>cor.test</code> function is part of the base R package, and is usefull if you just have two variables. The <code>tab_corr</code> function is part of the <code>sjPlot</code> package, and is useful if you have multiple variables and want to see the correlations between all of them.</p>
+<p>To demonstrate the correlation test, we’ll use the practice data that we’ve used before. Here we load the data, and immediately rename the <code>news consumption</code> variable to <code>news_consumption</code> to avoid spaces in the column name.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rename</span>(<span class="at">news_consumption =</span> <span class="st">`</span><span class="at">news consumption</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="between-two-variables-cor.test" class="level2">
+<h2 class="anchored" data-anchor-id="between-two-variables-cor.test">Between two variables: cor.test</h2>
+<p>In the practice data we have variables for the <code>news_consumption</code> of the participants, and their <code>trust_t1</code> in the news media (measured before the experiment). These are both numeric variables, so we can use the correlation test to see if there is a relationship between them.</p>
+<p>To perform the correlation test using the <code>cor.test</code> function, we pass the two variables to the function. Recall that we can use the <code>$</code> symbol to access variables in a data frame. So here we access the <code>news_consumption</code> and <code>trust_t1</code> variables from the <code>d</code> data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(d<span class="sc">$</span>news_consumption, d<span class="sc">$</span>trust_t1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  d$news_consumption and d$trust_t1
+t = 2.6273, df = 598, p-value = 0.008827
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.02700997 0.18528348
+sample estimates:
+      cor 
+0.1068234 </code></pre>
+</div>
+</div>
+<p>The output gives us the correlation coefficient under the <code>sample estimates</code>, which in our case is <span class="math inline">\(r = 0.107\)</span>. This means that the correlation is positive (&gt; 0), but quite weak. The test also reports a p-value (<code>0.009</code>), which tells us that the correlation is significant at the <span class="math inline">\(99\%\)</span> (<code>&lt; 0.01</code>) confidence level. Also note that the degrees of freedom are reported as <code>598</code>, which is the number of observations minus 2.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="cor.test using the formula notation">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+cor.test using the formula notation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>It is also possible to use the formula notation in the <code>cor.test</code> function. However, this looks a bit weird, because in the correlation tests there are no dependent variables, since we are <strong>just looking at the relationship</strong>. The convention for formulas in R is to use the <code>~</code> symbol to separate the dependent and independent variables (<code>dependent ~ independent_1 + independent_2 + ...</code>). For the correlation test, we would just omit the dependent variable. So for the example above, the code would look like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(<span class="sc">~</span> age <span class="sc">+</span> trust_t1, <span class="at">data =</span> d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="between-more-variables-tab_corr" class="level2">
+<h2 class="anchored" data-anchor-id="between-more-variables-tab_corr">Between more variables: tab_corr</h2>
+<p>If we need to see the correlations between multiple variables, we can use the <code>tab_corr</code> function from the <code>sjPlot</code> package. For example, let’s look at the correlations between the 5 items used to calculate the <code>trust_t1</code> scale. To use <code>tab_corr</code>, we can simply pass a data frame with the variables we want to use. Here we use the <code>select</code> function to select all columns from <code>trust_t1_item1</code> to <code>trust_t1_item5</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(trust_t1_item1<span class="sc">:</span>trust_t1_item5) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_corr</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">&nbsp;</td>
+<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">trust_t1_item1</td>
+<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">trust_t1_item2</td>
+<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">trust_t1_item3</td>
+<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">trust_t1_item4</td>
+<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">trust_t1_item5</td>
+</tr>
+<tr class="even">
+<td style="font-style: italic">trust_t1_item1</td>
+<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
+<td style="text-align: center; padding: 0.2cm;">0.268<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.730<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.724<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.848<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+</tr>
+<tr class="odd">
+<td style="font-style: italic">trust_t1_item2</td>
+<td style="text-align: center; padding: 0.2cm;">0.268<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
+<td style="text-align: center; padding: 0.2cm;">-0.273<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.252<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.289<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+</tr>
+<tr class="even">
+<td style="font-style: italic">trust_t1_item3</td>
+<td style="text-align: center; padding: 0.2cm;">-0.730<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.273<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
+<td style="text-align: center; padding: 0.2cm;">-0.673<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.764<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+</tr>
+<tr class="odd">
+<td style="font-style: italic">trust_t1_item4</td>
+<td style="text-align: center; padding: 0.2cm;">0.724<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.252<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.673<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
+<td style="text-align: center; padding: 0.2cm;">0.753<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+</tr>
+<tr class="even">
+<td style="font-style: italic">trust_t1_item5</td>
+<td style="text-align: center; padding: 0.2cm;">0.848<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.289<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.764<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.753<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: right; border-bottom: double black; border-top: 1px solid black; font-style: italic; font-size: 0.9em;">Computed correlation used pearson-method with listwise-deletion.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This is great for getting a quick overview of the relationships between multiple variables. If you need to get the exact p-values, you can also use <code>tab_corr(p.numeric = TRUE)</code>.</p>
+</section>
+<section id="reporting-the-correlation-test" class="level2">
+<h2 class="anchored" data-anchor-id="reporting-the-correlation-test">Reporting the correlation test</h2>
+<p>For APA style reporting of the correlation test you need to know the <code>correlation coefficient</code>, <code>p-value</code>, and the <code>degrees of freedom</code>. The formula for reporting the results of a correlation test in APA style is:</p>
+<blockquote class="blockquote">
+<p>r(<code>df</code>) = <code>correlation coefficient</code>, p = <code>p-value</code>.</p>
+</blockquote>
+<p>In our example above we observed a correlation coefficient of <span class="math inline">\(r = 0.107\)</span> with a p-value of <span class="math inline">\(p = 0.009\)</span>, and <span class="math inline">\(598\)</span> degrees of freedom. So we would report this as:</p>
+<blockquote class="blockquote">
+<p>There is a positive correlation between age and trust in the news media <span class="math inline">\(r(598) = 0.107\)</span>, <span class="math inline">\(p &lt; 0.01\)</span>.</p>
+</blockquote>
+</section>
+</section>
+<section id="alternative-correlation-tests" class="level1">
+<h1>Alternative correlation tests</h1>
+<p>By default the <code>cor.test</code> function uses the Pearson correlation coefficient. This is the most common correlation coefficient, but there are also other types of correlation coefficients that you might want to use depending on your data.</p>
+<p>The Pearson correlation coefficient assumes that the relationship between the variables is linear, and that the variables are normally distributed. If this is not the case, you might want to use instead use Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span>.</p>
+<p>Using these alternative methods is easy in R. You just need to specify the <code>method</code> argument in the <code>cor.test</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(d<span class="sc">$</span>news_consumption, d<span class="sc">$</span>trust_t1, <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(d<span class="sc">$</span>news_consumption, d<span class="sc">$</span>trust_t1, <span class="at">method =</span> <span class="st">"kendall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

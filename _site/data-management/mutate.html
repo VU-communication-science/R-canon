@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>mutate – Communication Science R Book</title>
+<title>Mutate and recode – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../2_data_preparation/index.html" rel="next">
-<link href="../data-management/pipes.html" rel="prev">
+<link href="../data-management/filter-and-arrange.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -42,11 +76,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -68,55 +102,58 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../data/logo.png" alt="" class="navbar-logo">
-    </a>
-    <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Communication Science R Book</span>
-    </a>
-  </div>
-        <div class="quarto-navbar-tools tools-end">
-</div>
-          <div id="quarto-search" class="" title="Search"></div>
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/mutate.html">Mutate</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/mutate.html">Mutate and recode</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://vu.nl/en/about-vu/faculties/faculty-of-social-sciences/departments/communication-science" class="sidebar-logo-link">
+      <img src="../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Communication Science R Book</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../getting-started/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../getting-started/install-r-and-rstudio.html" class="sidebar-item-text sidebar-link">
@@ -159,6 +196,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">File management</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in Quarto</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -196,14 +239,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pipes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../data-management/mutate.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Mutate</span></a>
+ <span class="menu-text">Mutate and recode</span></a>
   </div>
 </li>
       </ul>
@@ -212,11 +249,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../2_data_preparation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data preparation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../2_data_preparation/inspect-and-clean.html" class="sidebar-item-text sidebar-link">
@@ -235,11 +272,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../3_statistics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../3_statistics/0_concepts/index.html" class="sidebar-item-text sidebar-link">
@@ -251,14 +288,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/0_hypotheses.html" class="sidebar-item-text sidebar-link">
+  <a href="../3_statistics/0_concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Covariance and correlation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_statistics/0_concepts/causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_statistics/0_concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/1_causality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causality</span></a>
+  <a href="../3_statistics/0_concepts/standardization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Standardization</span></a>
   </div>
 </li>
       </ul>
@@ -275,13 +324,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../3_statistics/2_tests/correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Correlation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/2_tests/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Regression</span></a>
+ <span class="menu-text">Correlation test</span></a>
   </div>
 </li>
       </ul>
@@ -290,13 +333,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Good to Know</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
@@ -310,17 +353,163 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link active" data-scroll-target="#mutate">Creating and modifying columns with mutate()</a>
+  <ul class="collapse">
+  <li><a href="#creating-new-variables" id="toc-creating-new-variables" class="nav-link" data-scroll-target="#creating-new-variables">Creating new variables</a></li>
+  <li><a href="#mutate-existing-variables" id="toc-mutate-existing-variables" class="nav-link" data-scroll-target="#mutate-existing-variables">Mutate existing variables</a></li>
+  </ul></li>
+  <li><a href="#recode" id="toc-recode" class="nav-link" data-scroll-target="#recode">Recoding variables</a>
+  <ul class="collapse">
+  <li><a href="#recode-with-case_match" id="toc-recode-with-case_match" class="nav-link" data-scroll-target="#recode-with-case_match">Recode with <code>case_match</code></a></li>
+  <li><a href="#more-flexible-recoding-with-case_when" id="toc-more-flexible-recoding-with-case_when" class="nav-link" data-scroll-target="#more-flexible-recoding-with-case_when">More flexible recoding with <code>case_when</code></a></li>
+  <li><a href="#binary-cases-with-if_else" id="toc-binary-cases-with-if_else" class="nav-link" data-scroll-target="#binary-cases-with-if_else">Binary cases with <code>if_else</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/mutate.html">Mutate and recode</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Mutate and recode</h1>
+<p class="subtitle lead">Create new variables and recode existing ones</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<p>In this tutorial we use the <code>tidyverse</code> and our simulated <a href="../data-management/index.html#practice-data">practice data</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="mutate" class="level1">
+<h1>Creating and modifying columns with mutate()</h1>
+<p>The <code>mutate</code> function allows you to create columns in a table, or overwrite existing ones. You just specify which columns you want to create or modify, and then provide an expression for how to compute the new values. In this expression you can refer to other columns in the table, and use any R functions you like, which makes <code>mutate</code> a very powerful tool.</p>
+<section id="creating-new-variables" class="level2">
+<h2 class="anchored" data-anchor-id="creating-new-variables">Creating new variables</h2>
+<p>To create a new variable in <code>mutate</code>, you use the following syntax:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(d, <span class="at">new_variable =</span> expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The expression can be anything that returns a vector of the same length as the table. For example, in the practice data we have the columns <code>trust_t1</code> and <code>trust_t2</code>, which represent trust in journalists before and after the experiment. We can create a new variable <code>trust_change</code> that represents the change in trust from before to after the experiment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">trust_change =</span> trust_t2 <span class="sc">-</span> trust_t1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You could use <code>select</code> to quickly verify that it worked as expected.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, trust_t1, trust_t2, trust_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["trust_t1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["trust_t2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["trust_change"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.6","2":"5.0","3":"-0.6"},{"1":"4.2","2":"5.0","3":"0.8"},{"1":"5.6","2":"4.8","3":"-0.8"},{"1":"5.6","2":"6.4","3":"0.8"},{"1":"2.6","2":"1.2","3":"-1.4"},{"1":"3.4","2":"2.2","3":"-1.2"},{"1":"3.8","2":"2.4","3":"-1.4"},{"1":"5.4","2":"6.2","3":"0.8"},{"1":"3.0","2":"2.4","3":"-0.6"},{"1":"2.2","2":"1.2","3":"-1.0"},{"1":"4.4","2":"2.6","3":"-1.8"},{"1":"4.6","2":"4.0","3":"-0.6"},{"1":"3.6","2":"5.6","3":"2.0"},{"1":"3.4","2":"2.2","3":"-1.2"},{"1":"5.0","2":"4.8","3":"-0.2"},{"1":"3.8","2":"4.4","3":"0.6"},{"1":"3.2","2":"3.0","3":"-0.2"},{"1":"6.0","2":"4.2","3":"-1.8"},{"1":"5.4","2":"4.2","3":"-1.2"},{"1":"3.6","2":"1.4","3":"-2.2"},{"1":"4.4","2":"5.2","3":"0.8"},{"1":"5.0","2":"6.0","3":"1.0"},{"1":"2.6","2":"2.6","3":"0.0"},{"1":"4.6","2":"2.8","3":"-1.8"},{"1":"3.2","2":"4.6","3":"1.4"},{"1":"3.6","2":"4.8","3":"1.2"},{"1":"5.4","2":"5.8","3":"0.4"},{"1":"3.0","2":"4.2","3":"1.2"},{"1":"5.0","2":"5.4","3":"0.4"},{"1":"3.0","2":"1.8","3":"-1.2"},{"1":"3.8","2":"4.4","3":"0.6"},{"1":"3.8","2":"4.4","3":"0.6"},{"1":"4.2","2":"2.8","3":"-1.4"},{"1":"3.8","2":"2.6","3":"-1.2"},{"1":"4.2","2":"4.4","3":"0.2"},{"1":"5.6","2":"7.4","3":"1.8"},{"1":"3.6","2":"1.8","3":"-1.8"},{"1":"4.6","2":"4.0","3":"-0.6"},{"1":"3.6","2":"2.2","3":"-1.4"},{"1":"3.2","2":"3.8","3":"0.6"},{"1":"4.2","2":"3.8","3":"-0.4"},{"1":"3.6","2":"3.6","3":"0.0"},{"1":"3.8","2":"4.0","3":"0.2"},{"1":"3.8","2":"4.4","3":"0.6"},{"1":"2.8","2":"1.2","3":"-1.6"},{"1":"2.4","2":"1.2","3":"-1.2"},{"1":"3.4","2":"2.0","3":"-1.4"},{"1":"4.8","2":"5.0","3":"0.2"},{"1":"4.2","2":"4.8","3":"0.6"},{"1":"4.2","2":"3.2","3":"-1.0"},{"1":"2.0","2":"2.0","3":"0.0"},{"1":"2.2","2":"2.2","3":"0.0"},{"1":"3.6","2":"3.4","3":"-0.2"},{"1":"4.8","2":"3.2","3":"-1.6"},{"1":"4.2","2":"4.2","3":"0.0"},{"1":"4.0","2":"4.0","3":"0.0"},{"1":"5.2","2":"5.6","3":"0.4"},{"1":"6.0","2":"6.4","3":"0.4"},{"1":"5.4","2":"5.0","3":"-0.4"},{"1":"5.4","2":"5.6","3":"0.2"},{"1":"3.6","2":"3.2","3":"-0.4"},{"1":"3.0","2":"3.6","3":"0.6"},{"1":"5.6","2":"4.8","3":"-0.8"},{"1":"4.8","2":"1.8","3":"-3.0"},{"1":"3.2","2":"3.0","3":"-0.2"},{"1":"4.4","2":"2.0","3":"-2.4"},{"1":"2.0","2":"2.4","3":"0.4"},{"1":"4.2","2":"5.2","3":"1.0"},{"1":"3.6","2":"3.8","3":"0.2"},{"1":"5.6","2":"5.4","3":"-0.2"},{"1":"3.2","2":"3.0","3":"-0.2"},{"1":"4.2","2":"6.4","3":"2.2"},{"1":"5.0","2":"3.4","3":"-1.6"},{"1":"3.2","2":"2.2","3":"-1.0"},{"1":"5.0","2":"4.8","3":"-0.2"},{"1":"4.4","2":"4.4","3":"0.0"},{"1":"4.2","2":"4.0","3":"-0.2"},{"1":"5.4","2":"4.8","3":"-0.6"},{"1":"3.6","2":"3.4","3":"-0.2"},{"1":"3.4","2":"5.4","3":"2.0"},{"1":"6.0","2":"4.2","3":"-1.8"},{"1":"2.2","2":"2.6","3":"0.4"},{"1":"3.4","2":"2.8","3":"-0.6"},{"1":"3.6","2":"3.4","3":"-0.2"},{"1":"4.0","2":"3.0","3":"-1.0"},{"1":"4.8","2":"3.2","3":"-1.6"},{"1":"4.2","2":"3.8","3":"-0.4"},{"1":"3.6","2":"4.8","3":"1.2"},{"1":"2.4","2":"1.4","3":"-1.0"},{"1":"5.2","2":"4.0","3":"-1.2"},{"1":"5.0","2":"2.4","3":"-2.6"},{"1":"4.4","2":"4.6","3":"0.2"},{"1":"5.0","2":"3.6","3":"-1.4"},{"1":"4.4","2":"4.2","3":"-0.2"},{"1":"2.8","2":"4.4","3":"1.6"},{"1":"2.4","2":"1.4","3":"-1.0"},{"1":"4.4","2":"7.4","3":"3.0"},{"1":"4.0","2":"6.2","3":"2.2"},{"1":"3.8","2":"3.8","3":"0.0"},{"1":"4.0","2":"4.0","3":"0.0"},{"1":"5.0","2":"6.0","3":"1.0"},{"1":"3.0","2":"3.4","3":"0.4"},{"1":"2.6","2":"4.2","3":"1.6"},{"1":"4.4","2":"2.6","3":"-1.8"},{"1":"4.8","2":"6.6","3":"1.8"},{"1":"3.2","2":"4.4","3":"1.2"},{"1":"2.4","2":"3.4","3":"1.0"},{"1":"2.8","2":"1.6","3":"-1.2"},{"1":"4.0","2":"3.8","3":"-0.2"},{"1":"3.0","2":"2.6","3":"-0.4"},{"1":"5.2","2":"4.8","3":"-0.4"},{"1":"3.2","2":"5.0","3":"1.8"},{"1":"2.8","2":"2.2","3":"-0.6"},{"1":"5.6","2":"5.2","3":"-0.4"},{"1":"3.6","2":"4.8","3":"1.2"},{"1":"3.8","2":"3.0","3":"-0.8"},{"1":"2.6","2":"2.0","3":"-0.6"},{"1":"4.4","2":"4.4","3":"0.0"},{"1":"4.4","2":"3.4","3":"-1.0"},{"1":"3.0","2":"4.6","3":"1.6"},{"1":"3.2","2":"3.8","3":"0.6"},{"1":"2.6","2":"3.4","3":"0.8"},{"1":"2.8","2":"3.2","3":"0.4"},{"1":"4.6","2":"6.4","3":"1.8"},{"1":"4.2","2":"4.2","3":"0.0"},{"1":"4.4","2":"4.2","3":"-0.2"},{"1":"4.6","2":"4.4","3":"-0.2"},{"1":"2.6","2":"2.2","3":"-0.4"},{"1":"3.6","2":"2.8","3":"-0.8"},{"1":"4.8","2":"4.2","3":"-0.6"},{"1":"4.4","2":"3.0","3":"-1.4"},{"1":"4.2","2":"4.6","3":"0.4"},{"1":"4.0","2":"4.0","3":"0.0"},{"1":"3.4","2":"3.0","3":"-0.4"},{"1":"5.2","2":"4.8","3":"-0.4"},{"1":"5.2","2":"5.6","3":"0.4"},{"1":"4.0","2":"4.0","3":"0.0"},{"1":"4.6","2":"5.0","3":"0.4"},{"1":"4.4","2":"4.6","3":"0.2"},{"1":"2.4","2":"1.4","3":"-1.0"},{"1":"5.2","2":"4.4","3":"-0.8"},{"1":"4.2","2":"3.8","3":"-0.4"},{"1":"2.8","2":"3.4","3":"0.6"},{"1":"3.8","2":"3.4","3":"-0.4"},{"1":"2.0","2":"1.4","3":"-0.6"},{"1":"4.2","2":"4.2","3":"0.0"},{"1":"3.0","2":"1.4","3":"-1.6"},{"1":"2.6","2":"2.4","3":"-0.2"},{"1":"2.4","2":"3.2","3":"0.8"},{"1":"5.4","2":"5.0","3":"-0.4"},{"1":"3.8","2":"1.4","3":"-2.4"},{"1":"2.4","2":"1.0","3":"-1.4"},{"1":"4.2","2":"4.2","3":"0.0"},{"1":"4.6","2":"3.6","3":"-1.0"},{"1":"4.0","2":"5.2","3":"1.2"},{"1":"3.2","2":"2.4","3":"-0.8"},{"1":"5.2","2":"5.4","3":"0.2"},{"1":"4.4","2":"5.4","3":"1.0"},{"1":"2.4","2":"1.8","3":"-0.6"},{"1":"2.6","2":"2.4","3":"-0.2"},{"1":"2.4","2":"3.0","3":"0.6"},{"1":"4.0","2":"3.4","3":"-0.6"},{"1":"4.2","2":"5.2","3":"1.0"},{"1":"2.2","2":"1.0","3":"-1.2"},{"1":"5.2","2":"6.2","3":"1.0"},{"1":"4.0","2":"4.6","3":"0.6"},{"1":"2.0","2":"2.6","3":"0.6"},{"1":"4.0","2":"3.2","3":"-0.8"},{"1":"4.0","2":"5.2","3":"1.2"},{"1":"3.6","2":"3.6","3":"0.0"},{"1":"5.0","2":"4.4","3":"-0.6"},{"1":"4.8","2":"3.8","3":"-1.0"},{"1":"3.6","2":"3.2","3":"-0.4"},{"1":"4.0","2":"3.4","3":"-0.6"},{"1":"3.4","2":"1.6","3":"-1.8"},{"1":"4.2","2":"5.2","3":"1.0"},{"1":"4.0","2":"2.2","3":"-1.8"},{"1":"3.6","2":"3.6","3":"0.0"},{"1":"3.0","2":"2.0","3":"-1.0"},{"1":"2.6","2":"3.8","3":"1.2"},{"1":"3.0","2":"2.8","3":"-0.2"},{"1":"5.0","2":"6.4","3":"1.4"},{"1":"3.6","2":"4.2","3":"0.6"},{"1":"3.6","2":"3.4","3":"-0.2"},{"1":"4.2","2":"4.0","3":"-0.2"},{"1":"2.4","2":"2.2","3":"-0.2"},{"1":"3.2","2":"2.0","3":"-1.2"},{"1":"4.4","2":"4.8","3":"0.4"},{"1":"3.8","2":"2.6","3":"-1.2"},{"1":"3.2","2":"4.2","3":"1.0"},{"1":"4.0","2":"3.6","3":"-0.4"},{"1":"5.0","2":"6.2","3":"1.2"},{"1":"3.0","2":"3.8","3":"0.8"},{"1":"5.2","2":"3.8","3":"-1.4"},{"1":"3.2","2":"1.0","3":"-2.2"},{"1":"3.0","2":"1.8","3":"-1.2"},{"1":"2.4","2":"1.6","3":"-0.8"},{"1":"4.4","2":"4.6","3":"0.2"},{"1":"5.0","2":"5.8","3":"0.8"},{"1":"4.6","2":"4.6","3":"0.0"},{"1":"4.2","2":"5.0","3":"0.8"},{"1":"4.8","2":"5.2","3":"0.4"},{"1":"3.6","2":"3.0","3":"-0.6"},{"1":"5.2","2":"3.0","3":"-2.2"},{"1":"3.4","2":"6.0","3":"2.6"},{"1":"2.8","2":"1.8","3":"-1.0"},{"1":"3.6","2":"4.2","3":"0.6"},{"1":"3.2","2":"2.0","3":"-1.2"},{"1":"5.8","2":"6.2","3":"0.4"},{"1":"2.2","2":"2.2","3":"0.0"},{"1":"5.0","2":"4.2","3":"-0.8"},{"1":"5.0","2":"4.2","3":"-0.8"},{"1":"5.0","2":"5.4","3":"0.4"},{"1":"4.6","2":"5.0","3":"0.4"},{"1":"4.4","2":"3.2","3":"-1.2"},{"1":"3.4","2":"3.8","3":"0.4"},{"1":"4.0","2":"4.0","3":"0.0"},{"1":"5.8","2":"6.0","3":"0.2"},{"1":"3.0","2":"4.0","3":"1.0"},{"1":"2.6","2":"2.8","3":"0.2"},{"1":"3.6","2":"3.4","3":"-0.2"},{"1":"4.2","2":"4.0","3":"-0.2"},{"1":"3.6","2":"4.6","3":"1.0"},{"1":"3.8","2":"3.8","3":"0.0"},{"1":"4.8","2":"5.8","3":"1.0"},{"1":"5.8","2":"6.2","3":"0.4"},{"1":"2.8","2":"2.4","3":"-0.4"},{"1":"5.8","2":"5.8","3":"0.0"},{"1":"3.0","2":"2.0","3":"-1.0"},{"1":"3.2","2":"1.8","3":"-1.4"},{"1":"3.8","2":"4.6","3":"0.8"},{"1":"2.8","2":"2.0","3":"-0.8"},{"1":"2.4","2":"2.0","3":"-0.4"},{"1":"4.0","2":"5.2","3":"1.2"},{"1":"3.8","2":"2.8","3":"-1.0"},{"1":"3.2","2":"2.4","3":"-0.8"},{"1":"4.8","2":"4.0","3":"-0.8"},{"1":"4.8","2":"4.6","3":"-0.2"},{"1":"4.0","2":"5.2","3":"1.2"},{"1":"3.8","2":"3.6","3":"-0.2"},{"1":"5.2","2":"5.4","3":"0.2"},{"1":"2.8","2":"2.8","3":"0.0"},{"1":"3.6","2":"5.4","3":"1.8"},{"1":"5.0","2":"6.0","3":"1.0"},{"1":"3.6","2":"3.8","3":"0.2"},{"1":"2.8","2":"2.6","3":"-0.2"},{"1":"3.4","2":"3.0","3":"-0.4"},{"1":"4.8","2":"3.6","3":"-1.2"},{"1":"2.8","2":"3.8","3":"1.0"},{"1":"5.6","2":"4.0","3":"-1.6"},{"1":"3.6","2":"4.2","3":"0.6"},{"1":"3.8","2":"3.6","3":"-0.2"},{"1":"4.0","2":"3.8","3":"-0.2"},{"1":"2.4","2":"2.4","3":"0.0"},{"1":"5.2","2":"5.0","3":"-0.2"},{"1":"4.8","2":"7.8","3":"3.0"},{"1":"4.0","2":"3.8","3":"-0.2"},{"1":"6.4","2":"7.6","3":"1.2"},{"1":"3.8","2":"3.0","3":"-0.8"},{"1":"4.0","2":"4.8","3":"0.8"},{"1":"3.4","2":"2.8","3":"-0.6"},{"1":"4.6","2":"4.4","3":"-0.2"},{"1":"4.8","2":"3.0","3":"-1.8"},{"1":"5.4","2":"6.0","3":"0.6"},{"1":"3.8","2":"3.4","3":"-0.4"},{"1":"2.6","2":"2.6","3":"0.0"},{"1":"6.2","2":"6.2","3":"0.0"},{"1":"4.0","2":"3.6","3":"-0.4"},{"1":"3.8","2":"4.4","3":"0.6"},{"1":"4.6","2":"5.0","3":"0.4"},{"1":"5.0","2":"5.2","3":"0.2"},{"1":"5.0","2":"2.4","3":"-2.6"},{"1":"3.6","2":"1.6","3":"-2.0"},{"1":"5.6","2":"4.2","3":"-1.4"},{"1":"3.8","2":"4.0","3":"0.2"},{"1":"3.0","2":"4.2","3":"1.2"},{"1":"2.6","2":"2.0","3":"-0.6"},{"1":"3.8","2":"3.8","3":"0.0"},{"1":"3.0","2":"3.0","3":"0.0"},{"1":"3.2","2":"4.8","3":"1.6"},{"1":"5.2","2":"4.4","3":"-0.8"},{"1":"3.4","2":"2.4","3":"-1.0"},{"1":"5.2","2":"4.0","3":"-1.2"},{"1":"4.4","2":"5.6","3":"1.2"},{"1":"4.2","2":"4.6","3":"0.4"},{"1":"5.2","2":"4.6","3":"-0.6"},{"1":"3.8","2":"3.4","3":"-0.4"},{"1":"4.6","2":"4.4","3":"-0.2"},{"1":"3.8","2":"2.0","3":"-1.8"},{"1":"3.8","2":"3.4","3":"-0.4"},{"1":"3.0","2":"4.6","3":"1.6"},{"1":"4.0","2":"6.2","3":"2.2"},{"1":"2.8","2":"3.0","3":"0.2"},{"1":"3.2","2":"3.0","3":"-0.2"},{"1":"4.6","2":"4.0","3":"-0.6"},{"1":"4.4","2":"3.2","3":"-1.2"},{"1":"3.2","2":"3.6","3":"0.4"},{"1":"4.4","2":"4.0","3":"-0.4"},{"1":"4.0","2":"5.6","3":"1.6"},{"1":"4.2","2":"3.8","3":"-0.4"},{"1":"3.6","2":"2.2","3":"-1.4"},{"1":"4.0","2":"4.0","3":"0.0"},{"1":"5.0","2":"7.8","3":"2.8"},{"1":"1.8","2":"2.6","3":"0.8"},{"1":"2.8","2":"1.4","3":"-1.4"},{"1":"3.2","2":"3.4","3":"0.2"},{"1":"5.4","2":"5.4","3":"0.0"},{"1":"3.0","2":"4.6","3":"1.6"},{"1":"5.0","2":"2.2","3":"-2.8"},{"1":"3.6","2":"3.2","3":"-0.4"},{"1":"5.0","2":"5.6","3":"0.6"},{"1":"4.0","2":"2.8","3":"-1.2"},{"1":"4.8","2":"4.6","3":"-0.2"},{"1":"3.6","2":"3.4","3":"-0.2"},{"1":"4.8","2":"5.2","3":"0.4"},{"1":"3.4","2":"3.6","3":"0.2"},{"1":"4.4","2":"4.4","3":"0.0"},{"1":"4.4","2":"5.2","3":"0.8"},{"1":"5.4","2":"5.0","3":"-0.4"},{"1":"3.6","2":"2.6","3":"-1.0"},{"1":"3.8","2":"3.4","3":"-0.4"},{"1":"3.4","2":"1.8","3":"-1.6"},{"1":"3.8","2":"4.0","3":"0.2"},{"1":"2.6","2":"3.2","3":"0.6"},{"1":"5.2","2":"7.2","3":"2.0"},{"1":"3.0","2":"2.2","3":"-0.8"},{"1":"4.6","2":"4.6","3":"0.0"},{"1":"3.8","2":"3.6","3":"-0.2"},{"1":"4.6","2":"3.6","3":"-1.0"},{"1":"5.4","2":"5.0","3":"-0.4"},{"1":"3.8","2":"3.0","3":"-0.8"},{"1":"4.8","2":"6.6","3":"1.8"},{"1":"3.6","2":"6.2","3":"2.6"},{"1":"4.8","2":"5.2","3":"0.4"},{"1":"5.2","2":"4.4","3":"-0.8"},{"1":"4.4","2":"4.6","3":"0.2"},{"1":"4.8","2":"3.8","3":"-1.0"},{"1":"4.0","2":"4.6","3":"0.6"},{"1":"3.6","2":"3.2","3":"-0.4"},{"1":"3.0","2":"3.8","3":"0.8"},{"1":"5.8","2":"7.4","3":"1.6"},{"1":"3.0","2":"3.0","3":"0.0"},{"1":"5.2","2":"5.6","3":"0.4"},{"1":"2.8","2":"2.0","3":"-0.8"},{"1":"4.4","2":"4.0","3":"-0.4"},{"1":"3.2","2":"4.8","3":"1.6"},{"1":"3.6","2":"6.6","3":"3.0"},{"1":"4.0","2":"4.4","3":"0.4"},{"1":"5.0","2":"5.6","3":"0.6"},{"1":"3.2","2":"3.6","3":"0.4"},{"1":"5.2","2":"4.8","3":"-0.4"},{"1":"2.8","2":"1.6","3":"-1.2"},{"1":"3.8","2":"2.8","3":"-1.0"},{"1":"3.0","2":"2.8","3":"-0.2"},{"1":"4.8","2":"3.0","3":"-1.8"},{"1":"4.4","2":"2.4","3":"-2.0"},{"1":"3.4","2":"3.4","3":"0.0"},{"1":"5.2","2":"5.6","3":"0.4"},{"1":"5.0","2":"5.8","3":"0.8"},{"1":"2.0","2":"1.0","3":"-1.0"},{"1":"4.2","2":"4.6","3":"0.4"},{"1":"4.4","2":"4.0","3":"-0.4"},{"1":"4.6","2":"1.6","3":"-3.0"},{"1":"3.8","2":"5.0","3":"1.2"},{"1":"2.8","2":"3.0","3":"0.2"},{"1":"5.4","2":"3.8","3":"-1.6"},{"1":"4.0","2":"5.0","3":"1.0"},{"1":"3.4","2":"2.0","3":"-1.4"},{"1":"3.4","2":"2.8","3":"-0.6"},{"1":"4.8","2":"6.0","3":"1.2"},{"1":"3.2","2":"2.8","3":"-0.4"},{"1":"2.2","2":"3.0","3":"0.8"},{"1":"3.6","2":"3.8","3":"0.2"},{"1":"3.8","2":"3.4","3":"-0.4"},{"1":"4.2","2":"5.4","3":"1.2"},{"1":"4.0","2":"4.4","3":"0.4"},{"1":"5.4","2":"6.0","3":"0.6"},{"1":"4.0","2":"3.2","3":"-0.8"},{"1":"4.6","2":"4.4","3":"-0.2"},{"1":"5.4","2":"4.4","3":"-1.0"},{"1":"2.8","2":"2.8","3":"0.0"},{"1":"2.2","2":"1.4","3":"-0.8"},{"1":"3.6","2":"3.4","3":"-0.2"},{"1":"2.8","2":"2.4","3":"-0.4"},{"1":"5.8","2":"4.2","3":"-1.6"},{"1":"4.4","2":"4.0","3":"-0.4"},{"1":"4.6","2":"4.4","3":"-0.2"},{"1":"5.4","2":"5.8","3":"0.4"},{"1":"2.8","2":"4.4","3":"1.6"},{"1":"3.6","2":"3.4","3":"-0.2"},{"1":"4.6","2":"4.2","3":"-0.4"},{"1":"2.8","2":"4.4","3":"1.6"},{"1":"4.8","2":"5.0","3":"0.2"},{"1":"3.0","2":"2.0","3":"-1.0"},{"1":"2.2","2":"4.2","3":"2.0"},{"1":"3.0","2":"1.2","3":"-1.8"},{"1":"4.8","2":"4.4","3":"-0.4"},{"1":"2.6","2":"3.8","3":"1.2"},{"1":"3.2","2":"2.8","3":"-0.4"},{"1":"5.0","2":"3.6","3":"-1.4"},{"1":"2.4","2":"2.2","3":"-0.2"},{"1":"3.4","2":"3.4","3":"0.0"},{"1":"3.6","2":"4.4","3":"0.8"},{"1":"4.2","2":"4.6","3":"0.4"},{"1":"4.0","2":"4.0","3":"0.0"},{"1":"5.2","2":"5.8","3":"0.6"},{"1":"4.2","2":"5.0","3":"0.8"},{"1":"3.2","2":"3.6","3":"0.4"},{"1":"3.0","2":"2.0","3":"-1.0"},{"1":"3.8","2":"3.4","3":"-0.4"},{"1":"4.8","2":"3.4","3":"-1.4"},{"1":"2.6","2":"1.6","3":"-1.0"},{"1":"3.2","2":"5.6","3":"2.4"},{"1":"3.0","2":"2.2","3":"-0.8"},{"1":"4.0","2":"4.2","3":"0.2"},{"1":"3.2","2":"2.0","3":"-1.2"},{"1":"3.6","2":"4.0","3":"0.4"},{"1":"5.6","2":"5.8","3":"0.2"},{"1":"2.8","2":"3.4","3":"0.6"},{"1":"2.4","2":"2.8","3":"0.4"},{"1":"3.0","2":"1.0","3":"-2.0"},{"1":"5.2","2":"5.4","3":"0.2"},{"1":"2.6","2":"2.2","3":"-0.4"},{"1":"5.6","2":"5.4","3":"-0.2"},{"1":"4.8","2":"7.2","3":"2.4"},{"1":"2.2","2":"2.6","3":"0.4"},{"1":"3.8","2":"3.0","3":"-0.8"},{"1":"4.6","2":"3.6","3":"-1.0"},{"1":"3.0","2":"4.0","3":"1.0"},{"1":"4.0","2":"3.8","3":"-0.2"},{"1":"3.8","2":"1.8","3":"-2.0"},{"1":"5.2","2":"4.4","3":"-0.8"},{"1":"4.8","2":"4.0","3":"-0.8"},{"1":"4.6","2":"4.2","3":"-0.4"},{"1":"2.6","2":"2.0","3":"-0.6"},{"1":"3.0","2":"2.6","3":"-0.4"},{"1":"5.2","2":"7.4","3":"2.2"},{"1":"5.2","2":"3.6","3":"-1.6"},{"1":"3.4","2":"3.4","3":"0.0"},{"1":"5.4","2":"5.4","3":"0.0"},{"1":"3.4","2":"3.0","3":"-0.4"},{"1":"2.8","2":"2.2","3":"-0.6"},{"1":"2.2","2":"2.4","3":"0.2"},{"1":"4.4","2":"4.4","3":"0.0"},{"1":"2.8","2":"4.0","3":"1.2"},{"1":"4.4","2":"4.4","3":"0.0"},{"1":"2.0","2":"1.0","3":"-1.0"},{"1":"3.2","2":"2.2","3":"-1.0"},{"1":"2.6","2":"1.4","3":"-1.2"},{"1":"3.0","2":"3.2","3":"0.2"},{"1":"3.2","2":"3.0","3":"-0.2"},{"1":"3.0","2":"2.4","3":"-0.6"},{"1":"5.2","2":"3.8","3":"-1.4"},{"1":"3.4","2":"4.4","3":"1.0"},{"1":"2.8","2":"1.8","3":"-1.0"},{"1":"4.0","2":"4.0","3":"0.0"},{"1":"4.4","2":"4.2","3":"-0.2"},{"1":"1.0","2":"1.0","3":"0.0"},{"1":"2.8","2":"3.4","3":"0.6"},{"1":"4.6","2":"4.6","3":"0.0"},{"1":"2.2","2":"1.2","3":"-1.0"},{"1":"3.4","2":"5.2","3":"1.8"},{"1":"2.4","2":"2.4","3":"0.0"},{"1":"3.8","2":"4.8","3":"1.0"},{"1":"2.0","2":"1.8","3":"-0.2"},{"1":"3.8","2":"5.0","3":"1.2"},{"1":"2.6","2":"3.4","3":"0.8"},{"1":"3.8","2":"2.8","3":"-1.0"},{"1":"3.6","2":"3.4","3":"-0.2"},{"1":"5.4","2":"7.2","3":"1.8"},{"1":"6.0","2":"6.4","3":"0.4"},{"1":"5.8","2":"6.4","3":"0.6"},{"1":"5.6","2":"6.2","3":"0.6"},{"1":"3.8","2":"5.2","3":"1.4"},{"1":"4.4","2":"4.2","3":"-0.2"},{"1":"3.6","2":"4.0","3":"0.4"},{"1":"3.8","2":"4.6","3":"0.8"},{"1":"2.8","2":"3.4","3":"0.6"},{"1":"3.2","2":"2.6","3":"-0.6"},{"1":"3.4","2":"2.2","3":"-1.2"},{"1":"4.8","2":"3.8","3":"-1.0"},{"1":"3.6","2":"2.0","3":"-1.6"},{"1":"2.2","2":"3.4","3":"1.2"},{"1":"5.4","2":"4.2","3":"-1.2"},{"1":"3.0","2":"1.8","3":"-1.2"},{"1":"2.2","2":"1.2","3":"-1.0"},{"1":"4.6","2":"4.6","3":"0.0"},{"1":"5.0","2":"4.6","3":"-0.4"},{"1":"5.6","2":"5.4","3":"-0.2"},{"1":"2.8","2":"3.8","3":"1.0"},{"1":"4.0","2":"3.8","3":"-0.2"},{"1":"2.4","2":"1.6","3":"-0.8"},{"1":"3.6","2":"4.2","3":"0.6"},{"1":"2.4","2":"2.2","3":"-0.2"},{"1":"3.2","2":"3.8","3":"0.6"},{"1":"3.6","2":"5.2","3":"1.6"},{"1":"3.8","2":"4.0","3":"0.2"},{"1":"3.8","2":"2.6","3":"-1.2"},{"1":"1.6","2":"1.4","3":"-0.2"},{"1":"3.6","2":"4.8","3":"1.2"},{"1":"4.2","2":"3.8","3":"-0.4"},{"1":"4.0","2":"4.6","3":"0.6"},{"1":"3.6","2":"5.2","3":"1.6"},{"1":"4.4","2":"4.4","3":"0.0"},{"1":"3.8","2":"3.6","3":"-0.2"},{"1":"1.8","2":"2.4","3":"0.6"},{"1":"1.8","2":"2.2","3":"0.4"},{"1":"4.0","2":"4.0","3":"0.0"},{"1":"3.0","2":"2.6","3":"-0.4"},{"1":"4.4","2":"5.0","3":"0.6"},{"1":"3.8","2":"3.0","3":"-0.8"},{"1":"3.0","2":"3.2","3":"0.2"},{"1":"5.6","2":"3.8","3":"-1.8"},{"1":"3.6","2":"2.2","3":"-1.4"},{"1":"4.8","2":"7.0","3":"2.2"},{"1":"4.8","2":"5.2","3":"0.4"},{"1":"5.4","2":"5.4","3":"0.0"},{"1":"5.4","2":"7.6","3":"2.2"},{"1":"4.8","2":"4.6","3":"-0.2"},{"1":"3.4","2":"3.0","3":"-0.4"},{"1":"4.8","2":"5.0","3":"0.2"},{"1":"4.2","2":"3.8","3":"-0.4"},{"1":"5.0","2":"4.6","3":"-0.4"},{"1":"3.2","2":"1.2","3":"-2.0"},{"1":"4.2","2":"4.2","3":"0.0"},{"1":"5.0","2":"5.8","3":"0.8"},{"1":"3.6","2":"1.8","3":"-1.8"},{"1":"1.2","2":"2.2","3":"1.0"},{"1":"3.6","2":"1.6","3":"-2.0"},{"1":"2.8","2":"2.2","3":"-0.6"},{"1":"4.2","2":"3.8","3":"-0.4"},{"1":"1.8","2":"2.2","3":"0.4"},{"1":"2.6","2":"2.6","3":"0.0"},{"1":"2.2","2":"2.2","3":"0.0"},{"1":"3.6","2":"3.8","3":"0.2"},{"1":"4.0","2":"3.6","3":"-0.4"},{"1":"3.2","2":"3.6","3":"0.4"},{"1":"3.2","2":"1.4","3":"-1.8"},{"1":"3.6","2":"3.0","3":"-0.6"},{"1":"4.2","2":"5.0","3":"0.8"},{"1":"7.6","2":"8.0","3":"0.4"},{"1":"2.4","2":"2.0","3":"-0.4"},{"1":"5.2","2":"4.8","3":"-0.4"},{"1":"3.4","2":"4.4","3":"1.0"},{"1":"2.4","2":"3.0","3":"0.6"},{"1":"4.0","2":"5.2","3":"1.2"},{"1":"4.6","2":"3.4","3":"-1.2"},{"1":"4.6","2":"4.8","3":"0.2"},{"1":"4.8","2":"6.2","3":"1.4"},{"1":"5.0","2":"5.6","3":"0.6"},{"1":"4.6","2":"3.8","3":"-0.8"},{"1":"4.2","2":"3.8","3":"-0.4"},{"1":"4.4","2":"3.2","3":"-1.2"},{"1":"4.6","2":"4.8","3":"0.2"},{"1":"4.0","2":"2.8","3":"-1.2"},{"1":"3.2","2":"3.6","3":"0.4"},{"1":"4.8","2":"4.0","3":"-0.8"},{"1":"1.6","2":"1.6","3":"0.0"},{"1":"4.4","2":"4.2","3":"-0.2"},{"1":"3.2","2":"3.4","3":"0.2"},{"1":"3.0","2":"3.4","3":"0.4"},{"1":"2.8","2":"3.6","3":"0.8"},{"1":"4.6","2":"6.2","3":"1.6"},{"1":"3.4","2":"4.6","3":"1.2"},{"1":"2.4","2":"1.6","3":"-0.8"},{"1":"4.4","2":"4.2","3":"-0.2"},{"1":"4.0","2":"3.6","3":"-0.4"},{"1":"2.6","2":"3.4","3":"0.8"},{"1":"4.0","2":"3.6","3":"-0.4"},{"1":"5.0","2":"5.2","3":"0.2"},{"1":"5.4","2":"5.4","3":"0.0"},{"1":"2.6","2":"5.0","3":"2.4"},{"1":"4.4","2":"5.4","3":"1.0"},{"1":"4.6","2":"4.2","3":"-0.4"},{"1":"3.6","2":"3.8","3":"0.2"},{"1":"2.2","2":"4.4","3":"2.2"},{"1":"4.4","2":"4.6","3":"0.2"},{"1":"5.0","2":"4.2","3":"-0.8"},{"1":"3.2","2":"2.0","3":"-1.2"},{"1":"4.0","2":"2.6","3":"-1.4"},{"1":"3.4","2":"2.8","3":"-0.6"},{"1":"3.2","2":"4.6","3":"1.4"},{"1":"4.8","2":"4.6","3":"-0.2"},{"1":"3.0","2":"2.2","3":"-0.8"},{"1":"4.4","2":"3.2","3":"-1.2"},{"1":"3.2","2":"4.8","3":"1.6"},{"1":"4.6","2":"4.0","3":"-0.6"},{"1":"3.8","2":"3.8","3":"0.0"},{"1":"4.2","2":"5.0","3":"0.8"},{"1":"3.0","2":"3.0","3":"0.0"},{"1":"5.2","2":"4.8","3":"-0.4"},{"1":"3.6","2":"3.4","3":"-0.2"},{"1":"4.6","2":"5.8","3":"1.2"},{"1":"3.0","2":"3.4","3":"0.4"},{"1":"3.8","2":"2.4","3":"-1.4"},{"1":"4.2","2":"3.0","3":"-1.2"},{"1":"5.0","2":"5.6","3":"0.6"},{"1":"3.2","2":"3.4","3":"0.2"},{"1":"3.6","2":"4.2","3":"0.6"},{"1":"3.8","2":"2.8","3":"-1.0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="mutate-existing-variables" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-existing-variables">Mutate existing variables</h2>
+<p>To mutate an existing variable, you can simply overwrite the column with the same name. For example, let’s say that we want to standardize the <code>trust_change</code> variable that we just made. We can standardize a variable with the <code>scale</code> function, so we can use that inside of <code>mutate</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">trust_change =</span> <span class="fu">scale</span>(trust_change))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now the <code>trust_change</code> variable is standardized, which means that it has a mean of 0 and a standard deviation of 1. A nice way to get a quick overview of the distribution of a single variable is to plot a histogram.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d<span class="sc">$</span>trust_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="mutate_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="recode" class="level1">
+<h1>Recoding variables</h1>
+<p>Recoding variables means changing the values of a variable based on some condition. This is a common operation in data management, because often you want to change the values of a variable to make them more interpretable, correct errors, or prepare the data for analysis. To recode variables in R, you can use the <code>mutate</code> function in combination with the <code>case_match</code> and <code>case_when</code> functions.</p>
+<section id="recode-with-case_match" class="level2">
+<h2 class="anchored" data-anchor-id="recode-with-case_match">Recode with <code>case_match</code></h2>
+<p>The <code>case_match</code> function is a simple way to recode specific values into new values. For example, in our practice data we have a column with the experimental groups, which are <code>control</code>, <code>positive</code>, and <code>negative</code>. Let’s say we want to clarify that <code>positive</code> means <code>positive_movie</code>, and <code>negative</code> means <code>negative_movie</code>. We could then use <code>case_match</code> to change these values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">experiment_group =</span> <span class="fu">case_match</span>(experiment_group,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"positive"</span> <span class="sc">~</span> <span class="st">"positive_movie"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"negative"</span> <span class="sc">~</span> <span class="st">"negative_movie"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">.default =</span> experiment_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here we say: overwrite the <code>experiment_group</code> column with output of the <code>case_match</code> function. Inside the <code>case_match</code> function, we specify three things:</p>
+<ol type="1">
+<li>The column we want to recode (<code>experiment_group</code>).</li>
+<li>The conditions for recoding the values. We have two conditions:
+<ol type="1">
+<li>If <code>positive</code>, return <code>"positive_movie"</code>.</li>
+<li>If <code>negative</code>, return <code>"negative_movie"</code>.</li>
+</ol></li>
+<li>The <code>.default</code> is to return the current value of the column. This means that if the value is not matched in any of the conditions, it will remain the same.</li>
+</ol>
+<p>If you check the unique values of the <code>experiment_group</code> column, you will see that <code>positive</code> and <code>negative</code> have been changed to <code>positive_movie</code> and <code>negative_movie</code>, and that <code>control</code> remains the same.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d<span class="sc">$</span>experiment_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "negative_movie" "control"        "positive_movie"</code></pre>
+</div>
+</div>
+</section>
+<section id="more-flexible-recoding-with-case_when" class="level2">
+<h2 class="anchored" data-anchor-id="more-flexible-recoding-with-case_when">More flexible recoding with <code>case_when</code></h2>
+<p>The <code>case_match</code> function is great if you need to recode many values, but sometimes you need more flexibility. For example, if we want to recode the <code>age</code> variable into categories (e.g., <code>&lt;= 20</code>, <code>20-30</code>), it would be really tiresome to recode every individual age value. With the <code>case_when</code> function, we can specify the conditions using <strong>logical expressions</strong>. Each condition is evaluated in order, and the first one that is <code>TRUE</code> is used.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">age_category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"&lt;= 20"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"20-30"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">40</span> <span class="sc">~</span> <span class="st">"30-40"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">"40-50"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"50-60"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="st">"&gt;= 60"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d<span class="sc">$</span>age_category)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+&lt;= 20 &gt;= 60 20-30 30-40 40-50 50-60 
+   12    78   124   138   129   119 </code></pre>
+</div>
+</div>
+</section>
+<section id="binary-cases-with-if_else" class="level2">
+<h2 class="anchored" data-anchor-id="binary-cases-with-if_else">Binary cases with <code>if_else</code></h2>
+<p>If you only have two categories, you can use the <code>if_else</code> function. You could technically also use <code>case_when</code> for this, but <code>if_else</code> is more concise and easier to read. The syntax for <code>if_else</code> is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">if_else</span>(condition, value_if_true, value_if_false)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A common use case is that sometimes you want to perform an operation only on a subset of the data. For example, in our data there are a few participants that accidentally entered their birthyear instead of their age. To correct this, we can use <code>if_else</code> to set the age to <code>2024 - birthyear</code>, but only if the number the participants entered is above 1000 (which is only the case if it’s a birthyear).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">1000</span>, <span class="dv">2024</span> <span class="sc">-</span> age, age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So this reads: if the age is above 1000, return <code>2024 - age</code>, otherwise return the current age.</p>
+
+
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -415,7 +604,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -745,8 +934,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../data-management/pipes.html" class="pagination-link" aria-label="Pipes">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Pipes</span>
+      <a href="../data-management/filter-and-arrange.html" class="pagination-link" aria-label="Filter and Arrange">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Filter and Arrange</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

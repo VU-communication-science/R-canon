@@ -25,6 +25,8 @@ Hypotheses help us make (different aspects of) the theory more explicit, so that
 
 If an hypothesis is confirmed, it **provides evidence** in support of the theory.
 However, note that it does **not necessarily prove** the theory.
+
+
 For example, if we find that children who play violent video games are more aggressive, it does not yet prove that the games caused the aggression, because there are other possible explanations for finding this relation.
 Perhaps people who are already aggressive are more likely to play violent video games, or there could be a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).
 

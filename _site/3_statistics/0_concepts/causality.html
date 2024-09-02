@@ -50,8 +50,8 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../3_statistics/0_concepts/correlation.html" rel="next">
-<link href="../../3_statistics/0_concepts/index.html" rel="prev">
+<link href="../../3_statistics/0_concepts/hypotheses.html" rel="next">
+<link href="../../3_statistics/0_concepts/covariance-and-correlation.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -253,7 +253,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../data-management/pipes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pipes</span></a>
+ <span class="menu-text">Using the pipe notation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -307,14 +307,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../3_statistics/0_concepts/causality.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Causality</span></a>
+  <a href="../../3_statistics/0_concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Covariance and correlation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../3_statistics/0_concepts/correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Correlation</span></a>
+  <a href="../../3_statistics/0_concepts/causality.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Causality</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -343,13 +343,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../3_statistics/2_tests/correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Correlation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../3_statistics/2_tests/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Regression</span></a>
+ <span class="menu-text">Correlation test</span></a>
   </div>
 </li>
       </ul>
@@ -396,7 +390,6 @@ window.Quarto = {
   <li><a href="#the-next-best-thing-controlling-for-confounders" id="toc-the-next-best-thing-controlling-for-confounders" class="nav-link" data-scroll-target="#the-next-best-thing-controlling-for-confounders">The next best thing: controlling for confounders</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#confounders-and-how-to-control-for-them" id="toc-confounders-and-how-to-control-for-them" class="nav-link" data-scroll-target="#confounders-and-how-to-control-for-them">Confounders, and how to control for them</a></li>
   </ul>
 </nav>
     </div>
@@ -406,7 +399,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../3_statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../../3_statistics/0_concepts/index.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../3_statistics/0_concepts/causality.html">Causality</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Causality</h1>
-<p class="subtitle lead">Does Nicolas Cage really drown people in pools?</p>
+<p class="subtitle lead">How to find evidence for causal relations?</p>
 </div>
 
 
@@ -475,21 +468,16 @@ Famous spurious correlations
 <section id="the-gold-standard-controlled-experiments" class="level3">
 <h3 class="anchored" data-anchor-id="the-gold-standard-controlled-experiments">The gold standard: controlled experiments</h3>
 <p>The gold standard for establishing causation is the <strong>randomized controlled experiment</strong>, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant. Since the treatment group and the control group are statistically identical before the treatment is applied, any difference in the outcome can be attributed to the treatment. Where possible, this is the best way to establish causation.</p>
-<p>However, this is often not possible or feasible in communication science. In those cases, where we only have <strong>observational data</strong> (e.g., surveys, interviews, content analysis), we therefore have to rely on <strong>special statistical methods</strong> to control for confounding variables and establish causation.</p>
+<p>However, this is often not possible or feasible in communication science. In those cases, where we only have <strong>observational data</strong> (e.g., surveys, interviews, content analysis), we therefore have to rely on <strong>statistical methods</strong> to control for confounding variables and establish causation.</p>
 </section>
 <section id="the-next-best-thing-controlling-for-confounders" class="level3">
 <h3 class="anchored" data-anchor-id="the-next-best-thing-controlling-for-confounders">The next best thing: controlling for confounders</h3>
-<p>Using <strong>statistical methods</strong>, we can try to control for confounding variables. This is not perfect, because there can always be other confounders, but it does allow us to build evidence to support or refute our theories. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>. And even common knowledge like “smoking causes cancer” relies heavily on evidence from statistical methods that control for confounders. Given that many communication science theories cannot be tested with experiments, being able to gather some level of evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.</p>
-</section>
-</section>
-</section>
-<section id="confounders-and-how-to-control-for-them" class="level1">
-<h1>Confounders, and how to control for them</h1>
-<p>We have established that confounders can lead to spurious correlations, and that controlling for them is essential when we want to establish causality. Here we will discuss some common types of confounders, and how we can control for them in our statistical models.</p>
-<p>Use age as an example of a confounder in the relationship between screen time and psychological well-being. Also note that if the correlation is explained by age, it doesn’t necessarily mean that there is not causal relation. It just means that now we have to consider that there are many other factors that could be related to age and psychological well being.</p>
+<p>Using <strong>statistical methods</strong>, such as multiple regression, we can try to control for confounding variables. This is not perfect, because there can always be other confounders, but it does allow us to build evidence to support or refute our theories. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>. And even common knowledge like “smoking causes cancer” relies heavily on evidence from statistical methods that control for confounders. Given that many communication science theories cannot be tested with experiments, being able to gather some level of evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.</p>
 
 
 
+</section>
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
@@ -922,13 +910,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../3_statistics/0_concepts/index.html" class="pagination-link" aria-label="Concepts">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Concepts</span>
+      <a href="../../3_statistics/0_concepts/covariance-and-correlation.html" class="pagination-link" aria-label="Covariance and correlation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Covariance and correlation</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../3_statistics/0_concepts/correlation.html" class="pagination-link" aria-label="Correlation">
-        <span class="nav-page-text">Correlation</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../3_statistics/0_concepts/hypotheses.html" class="pagination-link" aria-label="Hypotheses">
+        <span class="nav-page-text">Hypotheses</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

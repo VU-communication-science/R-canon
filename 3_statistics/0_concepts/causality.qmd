@@ -1,6 +1,6 @@
 ---
 title: Causality
-subtitle: Does Nicolas Cage really drown people in pools?
+subtitle: How to find evidence for causal relations?
 ---
 
 
@@ -68,22 +68,13 @@ Since the treatment group and the control group are statistically identical befo
 Where possible, this is the best way to establish causation.
 
 However, this is often not possible or feasible in communication science.
-In those cases, where we only have **observational data** (e.g., surveys, interviews, content analysis), we therefore have to rely on **special statistical methods** to control for confounding variables and establish causation.
+In those cases, where we only have **observational data** (e.g., surveys, interviews, content analysis), we therefore have to rely on **statistical methods** to control for confounding variables and establish causation.
 
 ### The next best thing: controlling for confounders
 
-Using **statistical methods**, we can try to control for confounding variables.
+Using **statistical methods**, such as multiple regression, we can try to control for confounding variables.
 This is not perfect, because there can always be other confounders, but it does allow us to build evidence to support or refute our theories.
 In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion [@mccombs72].
 And even common knowledge like "smoking causes cancer" relies heavily on evidence from statistical methods that control for confounders.
 Given that many communication science theories cannot be tested with experiments, being able to gather some level of evidence for causal relations from observational data is an essential part of the communication scientist's toolkit.
 
-
-# Confounders, and how to control for them
-
-We have established that confounders can lead to spurious correlations, and that controlling for them is essential when we want to establish causality.
-Here we will discuss some common types of confounders, and how we can control for them in our statistical models.
-
-
-Use age as an example of a confounder in the relationship between screen time and psychological well-being.
-Also note that if the correlation is explained by age, it doesn't necessarily mean that there is not causal relation. It just means that now we have to consider that there are many other factors that could be related to age and psychological well being. 

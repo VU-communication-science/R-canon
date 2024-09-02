@@ -1,12 +1,31 @@
 ---
-title: "Pipes"
-order: 5
+title: "Using the pipe notation"
+subtitle: "How to make your code more readable"
+order: 6
 ---
 
 
 # Working with Pipes
 
-If you look at the code above, you notice that the result of each function is stored as an object, 
+In the previous sections you learned several data management techniques.
+In practise, you will often apply multiple of these techniques in succession to clean and prepare data.
+For example, the following code reads a csv file, filters rows, computes a new variable, selects columns, and sorts the data:
+
+```{r}
+library(tidyverse)
+
+practice_data = read_csv("https://tinyurl.com/R-practice-data")
+practice_data = select(practice_data, age, experiment_group, trust_t1)
+practice_data = filter(practice_data, age >= 18)
+practice_data = arrange(practice_data, trust_t1)
+```
+
+This code works fine, but it is a bit cumbersome to read.
+For each step, we need to provide `practice_data` as input, and also assign the output to `practice_data` to overwrite it.
+
+
+
+If syou look at the code above, you notice that the result of each function is stored as an object, 
 and that this object is used as the first argument for the next function.
 Moreover, we don't really care about this temporary object, we only care about the final summary table. 
 
