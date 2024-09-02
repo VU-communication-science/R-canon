@@ -100,7 +100,7 @@ t1_items_alligned$trust_t1_item3 = 11 - t1_items_alligned$trust_t1_item3
 t2_items_alligned = t2_items
 t2_items_alligned$trust_t2_item3 = 11 - t2_items_alligned$trust_t2_item3
 
-new_trust_t1 rowMeans(t1_items_alligned)
+new_trust_t1 = rowMeans(t1_items_alligned)
 new_trust_t2 = rowMeans(t2_items_alligned)
 
 ## check if the correlations are still there
