@@ -1,71 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/2_data_preparation/inspect-and-clean.html</loc>
-    <lastmod>2024-08-29T07:17:05.302Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/techniques/data-cleaning.html</loc>
+    <lastmod>2024-09-03T07:28:05.301Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/good-to-know/function-documentation.html</loc>
-    <lastmod>2024-08-28T10:12:40.744Z</lastmod>
+    <lastmod>2024-09-03T07:32:56.204Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/data-management/select-and-rename.html</loc>
     <lastmod>2024-08-29T07:04:08.917Z</lastmod>
   </url>
   <url>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/techniques/scale-construction.html</loc>
+    <lastmod>2024-09-03T07:31:15.060Z</lastmod>
+  </url>
+  <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/names-and-objects.html</loc>
     <lastmod>2024-08-29T06:55:21.041Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/data-management/the-tidyverse.html</loc>
-    <lastmod>2024-08-29T07:05:45.236Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/data-management/read-and-write.html</loc>
+    <lastmod>2024-08-29T11:57:05.648Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/getting-started/packages.html</loc>
-    <lastmod>2024-08-28T08:27:26.664Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/tests/correlation.html</loc>
+    <lastmod>2024-09-03T07:28:58.941Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/data-management/index.html</loc>
-    <lastmod>2024-08-28T14:54:37.200Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/getting-started/working-in-quarto.html</loc>
+    <lastmod>2024-08-29T14:45:46.260Z</lastmod>
+  </url>
+  <url>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/concepts/covariance-and-correlation.html</loc>
+    <lastmod>2024-09-02T16:50:54.807Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/index.html</loc>
     <lastmod>2024-08-22T06:39:44.399Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/3_statistics/0_concepts/1_causality.html</loc>
-    <lastmod>2024-08-28T15:32:59.518Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/tests/index.html</loc>
+    <lastmod>2024-09-03T07:25:58.517Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/2_data_preparation/scale-construction.html</loc>
-    <lastmod>2024-08-29T07:47:42.477Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/index.html</loc>
+    <lastmod>2024-09-03T07:23:20.286Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/data-management/mutate.html</loc>
-    <lastmod>2024-08-22T06:59:04.671Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/concepts/hypotheses.html</loc>
+    <lastmod>2024-09-02T11:03:25.524Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/3_statistics/2_tests/correlation.html</loc>
-    <lastmod>2024-08-29T06:59:27.855Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/concepts/standardization.html</loc>
+    <lastmod>2024-08-29T09:00:03.129Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/3_statistics/2_tests/regression.html</loc>
-    <lastmod>2024-08-27T08:10:39.156Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/concepts/causality.html</loc>
+    <lastmod>2024-09-03T07:22:20.830Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/2_data_preparation/index.html</loc>
-    <lastmod>2024-08-27T08:10:39.156Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/concepts/index.html</loc>
+    <lastmod>2024-09-03T07:25:15.878Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/3_statistics/0_concepts/0_hypotheses.html</loc>
-    <lastmod>2024-08-28T15:18:39.694Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/analysis/techniques/index.html</loc>
+    <lastmod>2024-09-03T07:25:09.358Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/3_statistics/0_concepts/index.html</loc>
-    <lastmod>2024-08-29T06:59:20.419Z</lastmod>
-  </url>
-  <url>
-    <loc>https://VU-communication-science.github.io/R-canon/3_statistics/index.html</loc>
+    <loc>https://VU-communication-science.github.io/R-canon/data_preparation/index.html</loc>
     <lastmod>2024-08-27T08:10:39.156Z</lastmod>
   </url>
   <url>
@@ -74,23 +78,31 @@
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/using-rstudio.html</loc>
-    <lastmod>2024-08-22T06:37:26.852Z</lastmod>
+    <lastmod>2024-09-03T07:29:22.369Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/data-management/pipes.html</loc>
-    <lastmod>2024-08-22T08:51:58.527Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/data-management/index.html</loc>
+    <lastmod>2024-09-02T14:57:48.803Z</lastmod>
+  </url>
+  <url>
+    <loc>https://VU-communication-science.github.io/R-canon/getting-started/packages.html</loc>
+    <lastmod>2024-08-28T08:27:26.664Z</lastmod>
+  </url>
+  <url>
+    <loc>https://VU-communication-science.github.io/R-canon/data-management/the-tidyverse.html</loc>
+    <lastmod>2024-08-29T07:05:45.236Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/file-management.html</loc>
-    <lastmod>2024-08-29T07:03:04.037Z</lastmod>
-  </url>
-  <url>
-    <loc>https://VU-communication-science.github.io/R-canon/data-management/read-and-write.html</loc>
-    <lastmod>2024-08-29T07:04:31.357Z</lastmod>
+    <lastmod>2024-08-29T14:44:59.517Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/types-of-objects.html</loc>
-    <lastmod>2024-08-28T14:28:33.220Z</lastmod>
+    <lastmod>2024-09-02T16:34:09.811Z</lastmod>
+  </url>
+  <url>
+    <loc>https://VU-communication-science.github.io/R-canon/data-management/mutate.html</loc>
+    <lastmod>2024-09-02T16:29:35.381Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/functions.html</loc>
@@ -98,6 +110,6 @@
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/data-management/filter-and-arrange.html</loc>
-    <lastmod>2024-08-29T07:04:39.325Z</lastmod>
+    <lastmod>2024-09-02T16:25:22.488Z</lastmod>
   </url>
 </urlset>
