@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/analysis/techniques/data-cleaning.html</loc>
-    <lastmod>2024-09-03T08:16:13.039Z</lastmod>
+    <lastmod>2024-09-03T15:54:27.221Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/analysis/concepts/covariance-and-correlation.html</loc>
@@ -13,8 +13,8 @@
     <lastmod>2024-08-28T14:29:29.391Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/data-management/mutate.html</loc>
-    <lastmod>2024-09-02T16:29:35.381Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/data-management/select-and-rename.html</loc>
+    <lastmod>2024-09-03T15:56:49.508Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/types-of-objects.html</loc>
@@ -90,7 +90,7 @@
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/data-management/read-and-write.html</loc>
-    <lastmod>2024-08-29T11:57:05.648Z</lastmod>
+    <lastmod>2024-09-03T15:57:13.019Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/names-and-objects.html</loc>
@@ -101,8 +101,8 @@
     <lastmod>2024-09-03T07:31:15.060Z</lastmod>
   </url>
   <url>
-    <loc>https://VU-communication-science.github.io/R-canon/data-management/select-and-rename.html</loc>
-    <lastmod>2024-08-29T07:04:08.917Z</lastmod>
+    <loc>https://VU-communication-science.github.io/R-canon/data-management/mutate.html</loc>
+    <lastmod>2024-09-03T15:55:30.524Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/good-to-know/function-documentation.html</loc>
@@ -110,6 +110,6 @@
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/data-management/filter-and-arrange.html</loc>
-    <lastmod>2024-09-03T08:42:07.833Z</lastmod>
+    <lastmod>2024-09-03T15:58:49.166Z</lastmod>
   </url>
 </urlset>
