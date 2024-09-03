@@ -308,12 +308,6 @@ window.Quarto = {
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../analysis/concepts/standardization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Standardization</span></a>
-  </div>
-</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -548,10 +542,14 @@ cor.test using the formula notation
 <p>For APA style reporting of the correlation test you need to know the <code>correlation coefficient</code>, <code>p-value</code>, and the <code>degrees of freedom</code>. The formula for reporting the results of a correlation test in APA style is:</p>
 <blockquote class="blockquote">
 <p>r(<code>df</code>) = <code>correlation coefficient</code>, p = <code>p-value</code>.</p>
+<ul>
+<li>the <code>correlation coefficient</code> is rounded to two decimal places, and the number before the decimal point is ommited if zero (<code>.11</code> instead of <code>0.11</code>).</li>
+<li>The <code>p-value</code> is reported for the smallest significant level (<code>p &lt; 0.05</code>, <code>p &lt; 0.01</code> or <code>p &lt; 0.001</code>), or in full with three decimal places if not significant (<code>p = 0.123</code>).</li>
+</ul>
 </blockquote>
 <p>In our example above we observed a correlation coefficient of <span class="math inline">\(r = 0.107\)</span> with a p-value of <span class="math inline">\(p = 0.009\)</span>, and <span class="math inline">\(598\)</span> degrees of freedom. So we would report this as:</p>
 <blockquote class="blockquote">
-<p>There is a positive correlation between age and trust in the news media <span class="math inline">\(r(598) = 0.107\)</span>, <span class="math inline">\(p &lt; 0.01\)</span>.</p>
+<p>There is a positive correlation between age and trust in the news media, <span class="math inline">\(r(598) = .12\)</span>, <span class="math inline">\(p &lt; 0.01\)</span>.</p>
 </blockquote>
 </section>
 </section>
@@ -559,10 +557,13 @@ cor.test using the formula notation
 <h1>Alternative correlation tests</h1>
 <p>By default the <code>cor.test</code> function uses the Pearson correlation coefficient. This is the most common correlation coefficient, but there are also other types of correlation coefficients that you might want to use depending on your data.</p>
 <p>The Pearson correlation coefficient assumes that the relationship between the variables is linear, and that the variables are normally distributed. If this is not the case, you might want to use instead use Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span>.</p>
-<p>Using these alternative methods is easy in R. You just need to specify the <code>method</code> argument in the <code>cor.test</code> function.</p>
+<p>To use these alternative methods, you just need to specify the <code>method</code> argument in the <code>cor.test</code> function, or the <code>corr.method</code> argument in the <code>tab_corr</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(d<span class="sc">$</span>news_consumption, d<span class="sc">$</span>trust_t1, <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(d<span class="sc">$</span>news_consumption, d<span class="sc">$</span>trust_t1, <span class="at">method =</span> <span class="st">"kendall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(d<span class="sc">$</span>news_consumption, d<span class="sc">$</span>trust_t1, <span class="at">method =</span> <span class="st">"kendall"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">select</span>(trust_t1_item1<span class="sc">:</span>trust_t1_item5) <span class="sc">|&gt;</span> <span class="fu">tab_corr</span>(<span class="at">corr.method=</span><span class="st">"spearman"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">select</span>(trust_t1_item1<span class="sc">:</span>trust_t1_item5) <span class="sc">|&gt;</span> <span class="fu">tab_corr</span>(<span class="at">corr.method=</span><span class="st">"kendall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

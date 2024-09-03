@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/analysis/techniques/data-cleaning.html</loc>
-    <lastmod>2024-09-03T07:28:05.301Z</lastmod>
+    <lastmod>2024-09-03T08:16:13.039Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/good-to-know/function-documentation.html</loc>
-    <lastmod>2024-09-03T07:39:08.294Z</lastmod>
+    <lastmod>2024-09-03T08:40:52.138Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/data-management/select-and-rename.html</loc>
@@ -26,15 +26,15 @@
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/analysis/tests/correlation.html</loc>
-    <lastmod>2024-09-03T07:28:58.941Z</lastmod>
+    <lastmod>2024-09-03T08:37:47.250Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/working-in-quarto.html</loc>
-    <lastmod>2024-08-29T14:45:46.260Z</lastmod>
+    <lastmod>2024-09-03T10:03:16.609Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/analysis/concepts/covariance-and-correlation.html</loc>
-    <lastmod>2024-09-02T16:50:54.807Z</lastmod>
+    <lastmod>2024-09-03T08:26:55.286Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/index.html</loc>
@@ -42,7 +42,7 @@
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/index.html</loc>
-    <lastmod>2024-08-22T06:39:44.399Z</lastmod>
+    <lastmod>2024-09-03T08:40:23.443Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/analysis/techniques/index.html</loc>
@@ -55,10 +55,6 @@
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/analysis/concepts/causality.html</loc>
     <lastmod>2024-09-03T07:22:20.830Z</lastmod>
-  </url>
-  <url>
-    <loc>https://VU-communication-science.github.io/R-canon/analysis/concepts/standardization.html</loc>
-    <lastmod>2024-08-29T09:00:03.129Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/analysis/concepts/hypotheses.html</loc>
@@ -82,7 +78,7 @@
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/data-management/index.html</loc>
-    <lastmod>2024-09-02T14:57:48.803Z</lastmod>
+    <lastmod>2024-09-03T08:40:33.219Z</lastmod>
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/getting-started/packages.html</loc>
@@ -110,6 +106,6 @@
   </url>
   <url>
     <loc>https://VU-communication-science.github.io/R-canon/data-management/filter-and-arrange.html</loc>
-    <lastmod>2024-09-02T16:25:22.488Z</lastmod>
+    <lastmod>2024-09-03T08:42:07.833Z</lastmod>
   </url>
 </urlset>
