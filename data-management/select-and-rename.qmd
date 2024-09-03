@@ -4,47 +4,15 @@ order: 1
 
 ---
 
+::: {.callout-note title="Required packages and data for this tutorial"}
 
-::: {.callout-note title="TLDR summary" collapse="true"}
-
-To select columns from a tibble (or data frame), you can use the `select` function.
-
-```{r, message=FALSE, results='hide'}
-library(tidyverse)
-d <- read_csv("https://tinyurl.com/R-practice-data")
-
-# select columns age and np_subscription
-d_subset <- select(d, age, np_subscription)
-
-# select columns from experiment_group to trust_t2
-d_subset <- select(d, experiment_group:trust_t2)
-
-# select columns and rename them
-d_subset <- select(d, group = experiment_group, 
-                      trust_before = trust_t1, 
-                      trust_after = trust_t2)
-
-# select columns with spaces in the name
-d_subset <- select(d, news_consumption = `news consumption`)
-
-# drop columns
-d_subset <- select(d, -np_subscription, -trust_t1)
-```
-
-You can also rename columns without selecting them using the `rename` function:
-```{r, eval=F, results='hide'}
-d_renamed <- rename(d, group = experiment_group, 
-                        trust_before = trust_t1, 
-                        trust_after = trust_t2)
-``` 
-:::
-
-In this tutorial we use the `tidyverse` and our simulated [practice data](../data-management/index.qmd#practice-data).
+In this tutorial we use the `tidyverse` package and the simulated [practice data](../../data-management/index.qmd#practice-data).
 
 ```{r, message=FALSE}
 library(tidyverse)
 d <- read_csv("https://tinyurl.com/R-practice-data")
 ```
+:::
 
 # Selecting columns with `select`
 

@@ -5,27 +5,6 @@ subtitle: How to get data into R, and how to store it
 ---
 
 
-::: {.callout-note title="TLDR summary" collapse="true"}
-
-One of the most common formats for storing and sharing rectangular data (i.e., data in rows and columns) is the `csv` format.
-With the `read_csv` and `write_csv` functions you can easily read and write CSV files in R. 
-
-```{r, message=FALSE, eval=F}
-library(tidyverse)
-
-# read CSV file from the internet
-d  <- read_csv("https://tinyurl.com/R-practice-data")
-
-# write to a CSV file on your computer
-write_csv(d, "my_data.csv")                            
-
-# read CSV file from your own computer 
-d2 <- read_csv("my_data.csv")                          
-``` 
-
-:::
-
-
 # Reading and writing data {#importing-data}
 
 R can read files from many types of file formats.

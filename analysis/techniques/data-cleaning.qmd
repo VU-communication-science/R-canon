@@ -7,13 +7,17 @@ format:
         df-print: paged
 ---
 
-In this tutorial we use the `tidyverse` and our simulated [practice data](../../data-management/index.qmd#practice-data).
+
+::: {.callout-note title="Required packages and data for this tutorial"}
+
+In this tutorial we use the `tidyverse` and `summarytools` packages, and the simulated [practice data](../../data-management/index.qmd#practice-data).
 
 ```{r, message=FALSE}
 library(tidyverse)
+library(summarytools)
 d <- read_csv("https://tinyurl.com/R-practice-data")
 ```
-
+:::
 
 # Inspect and clean your data
 
@@ -36,7 +40,7 @@ For a tibble with a few columns you can just print it to the console:
 d
 ```
 
-But another nice way to look at the data is to use the `View` function in RStudio (or clicking on the name of the tibble in the Environment tab in the top-right corner).
+But another nice way to look at the data is to use the `View` function in RStudio (or clicking on the name of the tibble in the Environment tab in the top-right corner of RStudio).
 
 ```{r, eval=FALSE}
 View(d)
@@ -82,7 +86,7 @@ print(dfSummary(d),
       max.tbl.height = 500)
 ```
 
-::: {.callout-note title="Using summarytools in Quarty or RMarkdown" collapse="true"}
+::: {.callout-note title="Using summarytools in Quarto or RMarkdown" collapse="true"}
 
 If you're working in Quarto or RMarkdown, the normal way of using `summarytools` doesn't create a nice table. Instead, what you need to do is tell Quarto to render the output as HTML. You can do this by setting the `method` argument to `render`.
 
@@ -97,10 +101,10 @@ Note that we also set the `max.tbl.height` argument to 500, to make sure that ve
 
 ### What to look for in the summary
 
-When you look at the summary, there are a few things you should look out for:
+There are a few things in particular that you should look out for:
 
 * **Missing values**: Are there any columns with a lot of missing values? If so, you might need to think about how to deal with these.
-* **Data types**: Are the data types of the columns correct? For example, are dates stored as dates, and not as text?
+* **Data types**: Are the data types of the columns correct? For example, are numbers stored as numbers, and not as text?
 * **Outliers**: Are there any columns with very high or very low values? These might be errors in the data.
 * **Distribution**: Are the values in the columns distributed in a way that you would expect? For example, if you have a column with ages, are there any values that are negative, or over 100?
 

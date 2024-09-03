@@ -607,7 +607,7 @@ y  22.5  2.5</code></pre>
 </ul>
 <p>Given this information, the correlation between <code>x</code> and <code>y</code> can be calculated as:</p>
 <p><span class="math display">\[ r = \frac{cov(X, Y)}{S_X S_Y} \]</span></p>
-<p>Where <span class="math inline">\(S_X\)</span> and <span class="math inline">\(S_Y\)</span> are the standard deviations of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, which is the square root of the variance. <span class="math display">\[ S_X = \sqrt{var(X)} \]</span></p>
+<p>Where <span class="math inline">\(S_X\)</span> is the standard deviation of <span class="math inline">\(X\)</span>, which you get by taking the square root of the variance. <span class="math display">\[ S_X = \sqrt{var(X)} \]</span></p>
 <p>So the calculation is:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cov_xy <span class="ot">=</span> <span class="fl">22.5</span></span>
@@ -725,7 +725,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

@@ -8,12 +8,15 @@ format:
     df-print: paged
 ---
 
-In this tutorial we use the `tidyverse` and our simulated [practice data](../data-management/index.qmd#practice-data).
+::: {.callout-note title="Required packages and data for this tutorial"}
+
+In this tutorial we use the `tidyverse` package and the simulated [practice data](../../data-management/index.qmd#practice-data).
 
 ```{r, message=FALSE}
 library(tidyverse)
 d <- read_csv("https://tinyurl.com/R-practice-data")
 ```
+:::
 
 # Creating and modifying columns with mutate() {#mutate}
 
