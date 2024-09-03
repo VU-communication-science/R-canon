@@ -50,6 +50,7 @@ editor: visual
 ```
 
 This means that the title of the document is "My First Quarto Document", the output format is HTML, and the editor is the visual editor.
+You can add many more options to the header, but for now we'll stick with the basics. 
 
 ::: {.callout-note title="Visual or Source editor" collapse="true"}
 
@@ -68,22 +69,6 @@ Working in `source` mode can be convenient if you're already familiar with Markd
 If not, we recommend sticking with `visual` mode for now, and maybe forever.
 :::
 
-You can add many more options to the header, but for now we'll stick with the basics. 
-There is just one thing we recommend adding:
-
-```yaml
----
-title: "test"
-format: html
-editor: visual
-editor_options: 
-  chunk_output_type: console
----
-```
-
-This will make sure that any output you generate while working on your document will be shown in the console. 
-If you don't set this, it will be shown in the document itself, and this can make the document a bit cluttered.
-Note that this doesn't affect the final output of the document, just the way it is shown in the editor.
 
 ### 2. The textual content
 
@@ -103,11 +88,13 @@ At some point you see a code chunk, which looks like:
 Inside these code chunks you can write R code.
 When you render the document, the code will be executed, and the output will be shown in the document.
 
-While working on the document you can also run the code chunks separately.
+While working on the document you can also run the code chunks separately (i.e. without rendering).
 You can do this like you would do in an R script, by selectin the code you want to run and hitting `Run` (or `Ctrl/Cmd + Enter`).
 But there is also a convenient option to run the entire code chunk at once by clicking on the `run current chunk` button in the top right of the code chunk.
 Here you also find a button to run all the chunks above the current one.
-It is recommended to do this often, because it will make sure that the output is up to date.
+
+To add a new block, you can click on the `Insert` button in the toolbar, and select `Executable Cell` -> `R`.
+
 
 ## Rendering the document
 

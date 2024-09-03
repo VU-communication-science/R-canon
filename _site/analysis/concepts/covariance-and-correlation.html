@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../analysis/concepts/causality.html" rel="next">
-<link href="../../analysis/concepts/index.html" rel="prev">
+<link href="../../analysis/concepts/hypotheses.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -238,6 +272,12 @@ window.Quarto = {
  <span class="menu-text">Mutate and recode</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../data-management/pipes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the pipe syntax</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -260,6 +300,12 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypotheses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../analysis/concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Covariance and correlation</span></a>
   </div>
@@ -268,18 +314,6 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Causality</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Hypotheses</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../analysis/concepts/standardization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Standardization</span></a>
   </div>
 </li>
       </ul>
@@ -353,10 +387,19 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#visualizing-covariance-and-correlation" id="toc-visualizing-covariance-and-correlation" class="nav-link active" data-scroll-target="#visualizing-covariance-and-correlation">Visualizing covariance and correlation</a>
+  <li><a href="#what-are-covariance-and-correlation" id="toc-what-are-covariance-and-correlation" class="nav-link active" data-scroll-target="#what-are-covariance-and-correlation">What are covariance and correlation?</a></li>
+  <li><a href="#visualizing-covariance-and-correlation" id="toc-visualizing-covariance-and-correlation" class="nav-link" data-scroll-target="#visualizing-covariance-and-correlation">Visualizing covariance and correlation</a>
   <ul class="collapse">
-  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a></li>
-  <li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance">Covariance</a></li>
+  <li><a href="#the-difference-between-covariance-and-correlation" id="toc-the-difference-between-covariance-and-correlation" class="nav-link" data-scroll-target="#the-difference-between-covariance-and-correlation">The difference between covariance and correlation</a></li>
+  </ul></li>
+  <li><a href="#calculating-covariance-and-correlation" id="toc-calculating-covariance-and-correlation" class="nav-link" data-scroll-target="#calculating-covariance-and-correlation">Calculating covariance and correlation</a>
+  <ul class="collapse">
+  <li><a href="#calculate-covariance" id="toc-calculate-covariance" class="nav-link" data-scroll-target="#calculate-covariance">Calculate covariance</a></li>
+  <li><a href="#calculate-correlation" id="toc-calculate-correlation" class="nav-link" data-scroll-target="#calculate-correlation">Calculate correlation</a>
+  <ul class="collapse">
+  <li><a href="#first-standardize-the-variables-then-calculate-the-covariance" id="toc-first-standardize-the-variables-then-calculate-the-covariance" class="nav-link" data-scroll-target="#first-standardize-the-variables-then-calculate-the-covariance">First standardize the variables, then calculate the covariance</a></li>
+  <li><a href="#first-calculate-covariance-then-standardize-it" id="toc-first-calculate-covariance-then-standardize-it" class="nav-link" data-scroll-target="#first-calculate-covariance-then-standardize-it">First calculate covariance, then standardize it</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -384,51 +427,212 @@ window.Quarto = {
 </header>
 
 
-<section id="visualizing-covariance-and-correlation" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-covariance-and-correlation">Visualizing covariance and correlation</h2>
-<p>To get a good intuition of what covariance and correlation are, it helps to have a visual image. For this we’ll be looking at how two variables are correlated <strong>over time</strong>. We use time because it can nicely be visualized on the x-axis, but the same principles apply to any two variables.</p>
-<section id="correlation" class="level3">
-<h3 class="anchored" data-anchor-id="correlation">Correlation</h3>
-<p>First, let’s look at three scenarios for the correlation between variables <strong>V1</strong> and <strong>V2</strong>. In all three scenarios V1 is the same, but we change V2 so that is has a <strong>strong positive</strong>, <strong>strong negative</strong>, and <strong>weak correlation</strong>.</p>
+<section id="what-are-covariance-and-correlation" class="level1">
+<h1>What are covariance and correlation?</h1>
+<p>Covariance and correlation are fundamental concepts in statistics. The covariance of two variables tells us something about the extend to which they <strong>change together</strong>. If one variable goes up, does the other variable go up as well? This information is the foundation for many statistical methods, because it enables us to quantify relationships between variables. For example, it allows us to measure: <em>how is a person’s social media use related to their feelings of loneliness?</em></p>
+<p>The correlation is a standardized version of the covariance, which expresses the <strong>strength</strong> and <strong>direction</strong> of the relationship between two variables on a scale from -1 to 1. This makes it easier to interpret. Consider the following example:</p>
+<ul>
+<li>if the correlation between a person’s social media use and their feelings of loneliness is positive (<code>&gt; 0</code>), it means that people that spend a lot of time on social media tend to feel more lonely.</li>
+<li>If the correlation is negative (<code>&lt; 0</code>), it means that people that spend a lot of time on social media tend to feel <em>less</em> lonely.</li>
+<li>If the correlation is (close to) <code>-1</code> or <code>1</code>, it means that the relationship is strong.</li>
+<li>If the correlation is (close to) <code>0</code>, it means that the relationship is weak or absent.</li>
+</ul>
+<p>Developing a good intuition for covariance and correlation is important, because it helps you to understand relationships between variables, and to interpret the results of statistical tests. In this tutorial we’ll develop this intuition by looking at visualizations, and calculating the covariance and correlation ourselves.</p>
+</section>
+<section id="visualizing-covariance-and-correlation" class="level1">
+<h1>Visualizing covariance and correlation</h1>
+<p>To get a good intuition of what covariance and correlation are, it helps to have a visual image. One way to visualize the relation between two variables is to make a scatter plot where one variable is on the x-axis, and the other on the y-axis. This way you can see how the variables <strong>move together</strong>.</p>
+<ul>
+<li>If the correlation is positive, the points will tend to form a line that goes up, because when x goes up, y goes up as well.</li>
+<li>If the correlation is negative, the points will tend to form a line that goes down, because when x goes up, y goes down.</li>
+<li>If the relation is strong, the points will clearly form a line.</li>
+<li>If the relation is weak, the points will be more scattered.</li>
+</ul>
+<p>Let’s first plot three scenarios, for a <strong>strong positive</strong>, <strong>strong negative</strong>, and <strong>weak correlation</strong>. We’ll pretend this is data about <strong>social media use</strong> in hours per day and <strong>feelings of loneliness</strong>. At the top we report the correlation coefficient as <strong>r</strong> and the covariance as <strong>cov</strong>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="covariance-and-correlation_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="covariance-and-correlation_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><strong>Strong positive correlation</strong> (<span class="math inline">\(r = 0.869\)</span>). On the left we see a clear relation between V1 and V2. When x (black line) goes up, y (green line) goes up as well. When x goes down, y goes down. Notice that for correlation it doesn’t matter that overall the y-values are lower than the x values. It’s all about how they <strong>move together</strong>.</p>
-<p><strong>Strong negative correlation</strong> (<span class="math inline">\(r = -0.906\)</span>). Here we still see a strong relation between x and y. They still <strong>move together</strong>, only in the opposite direction. When x goes up, y goes down. When x goes down, y goes up.</p>
-<p><strong>Weak correlation</strong> (<span class="math inline">\(r = 0.128\)</span>). Here we see that there is no clear relation between x and y. Whether y goes up or down does not seem to be related to x.</p>
-</section>
-<section id="covariance" class="level3">
-<h3 class="anchored" data-anchor-id="covariance">Covariance</h3>
-<p>So how does covariance differ from correlation? Covariance is also measure of how two variables <strong>change together</strong>. The difference is that the covariance <strong>is not standardized</strong>. This means that:</p>
+<p><strong>Strong positive correlation</strong> (<span class="math inline">\(r = 0.887\)</span>). On the left we see a clear, positive relation between social media use and feelings of loneliness. When social media use goes up, feelings of loneliness go up as well.</p>
+<p><strong>Strong negative correlation</strong> (<span class="math inline">\(r = -0.907\)</span>). Here the relation is negative (when social media use goes up, feelings of loneliness go down), but it’s still a <strong>strong</strong> relation. They still <strong>move together</strong>, only in the opposite direction.</p>
+<p><strong>Weak correlation</strong> (<span class="math inline">\(r = -0.188\)</span>). Here we see that there is a weak, negative relation. When social media use goes up, there is a very minor decrease in feelings of loneliness.</p>
+<section id="the-difference-between-covariance-and-correlation" class="level2">
+<h2 class="anchored" data-anchor-id="the-difference-between-covariance-and-correlation">The difference between covariance and correlation</h2>
+<p>If we look at the plots above, we see that the covariance and correlation are closely related. The difference is that the correlation is <strong>standardized</strong>, while the covariance is not. This means that:</p>
 <ol type="1">
 <li>The covariance can be any number, while the correlation is always between -1 and 1.</li>
-<li>The covariance depends on the scale of the variables.</li>
+<li>The covariance depends on the <em>scale</em> of the variables.</li>
 </ol>
-<p>To illustrate this, let’s compare two scenarios. The first scenario is the same as the strong positive correlation from the previous example. In the second scenario, we have only multiplied V2 by 2, thus changing the scale of the variable.</p>
+<p>By the <strong>scale</strong> we mean the units in which the variables are measured. For instance, we can measure social media use in hours or in minutes per day. This shouldn’t change the relation between social media use and feelings of loneliness, but it does change the covariance.</p>
+<p>To illustrate this, let’s plot the positive correlation scenario from above three times:</p>
+<ul>
+<li>once with the X variable (social media use) in hours</li>
+<li>once with the X variable in minutes</li>
+<li>once with both the X and Y variables standardized (i.e, turn them into z-scores).</li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="covariance-and-correlation_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="covariance-and-correlation_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>On the left we see the same scenario as before, with a positive correlation of <span class="math inline">\(r = 0.869\)</span>. The covariance here is <span class="math inline">\(cov = 2.188\)</span>.</p>
-<p>On the right we see the data where we multiplied V2 by 2. Visually, this looks like stretching the line vertically. The data still <em>moves</em> the same way, but the steps are twice as big.</p>
-<p>For the correlation between V1 and V2 (<span class="math inline">\(r = 0.869\)</span>), this does not matter, because the scales of the variables are standardized. But the covariance (<span class="math inline">\(cov = 4.236\)</span>) <em>has</em> changed!</p>
+<p>As we can see, the direction and strength of the relation is the same in all three plots. The only thing that changed is the scale of the variables, which you can see in the X and Y axis. This doesn’t affect the correlation (<span class="math inline">\(r = 0.887\)</span> in all three cases), but it does affect the covariance:</p>
+<ul>
+<li>For the original data, the covariance is <span class="math inline">\(1.287\)</span>, as we saw before</li>
+<li>For the data where we increased the scale of X by a factor 60 (to go from hours to minutes), the covariance increased to <span class="math inline">\(76.683\)</span>.</li>
+<li>In the final plot we standardized both the X and Y variables. As a result, the covariance is now identical to the correlation (<span class="math inline">\(r = 0.887, cov = 0.887\)</span>). This is what we mean when we say that the correlation is the standardized version of the covariance!</li>
+</ul>
+</section>
+</section>
+<section id="calculating-covariance-and-correlation" class="level1">
+<h1>Calculating covariance and correlation</h1>
+<p>To round up our understanding of covariance and correlation, let’s calculate them ourselves. For this we’ll use a toy dataset with two variables, <code>x</code> and <code>y</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fu">c</span>( <span class="dv">3</span>,  <span class="dv">2</span>,  <span class="dv">5</span>,  <span class="dv">4</span>,  <span class="dv">6</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["y"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"20","2":"3"},{"1":"10","2":"2"},{"1":"30","2":"5"},{"1":"40","2":"4"},{"1":"50","2":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<section id="calculate-covariance" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-covariance">Calculate covariance</h2>
+<p>The formula for the calculating the covariance between two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in a sample<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is:</p>
+<p><span class="math display">\[ cov(X, Y) = \frac{\sum (X_i - \bar{X}) (Y_i - \bar{Y})}{n-1} \]</span></p>
+<ul>
+<li><span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> are the individual values of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
+<li><span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(\bar{Y}\)</span> are the means of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
+<li><span class="math inline">\(n\)</span> is the number of observations</li>
+<li><span class="math inline">\(\sum\)</span> is the sum over all observations</li>
+</ul>
+<p>Let’s perform this calculation in steps, to make it easier to follow. First, calculate the means for x and y.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">x_mean =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">y_mean =</span> <span class="fu">mean</span>(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now calculate the <strong>deviation from the mean</strong> for both variables. This is the <span class="math inline">\(X_i - \bar{X}\)</span> and <span class="math inline">\(Y_i - \bar{Y}\)</span> part of the formula.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">x_deviation =</span> x <span class="sc">-</span> x_mean,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">y_deviation =</span> y <span class="sc">-</span> y_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then multiply these deviations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">deviation_product =</span> x_deviation <span class="sc">*</span> y_deviation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Have a look at the intermediate results to see what we’ve done so far. Try to do the calculations in your head to see if you understand what’s going on.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["y"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["x_mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["y_mean"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["x_deviation"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["y_deviation"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["deviation_product"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"20","2":"3","3":"30","4":"4","5":"-10","6":"-1","7":"10"},{"1":"10","2":"2","3":"30","4":"4","5":"-20","6":"-2","7":"40"},{"1":"30","2":"5","3":"30","4":"4","5":"0","6":"1","7":"0"},{"1":"40","2":"4","3":"30","4":"4","5":"10","6":"0","7":"0"},{"1":"50","2":"6","3":"30","4":"4","5":"20","6":"2","7":"40"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Finally, sum the deviation products and divide by <span class="math inline">\(n-1\)</span> to get the covariance. Here we use the <code>sum()</code> function to calculate the sum of the <code>deviation_product</code> column, and the <code>nrow()</code> function to get the number of observations in the data <code>d</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dev_sum <span class="ot">=</span> <span class="fu">sum</span>(d<span class="sc">$</span>deviation_product)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">nrow</span>(d)        </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>dev_sum <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22.5</code></pre>
+</div>
+</div>
+<p>Here we use the summarize function, which allows us to calculate summarizing statistics functions, such as <code>sum()</code> and <code>n()</code> (which gives the number of observations).</p>
+<p>You can check your answer by using the <code>cov()</code> function, which is R’s built-in function for calculating the covariance.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(d<span class="sc">$</span>x, d<span class="sc">$</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22.5</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-correlation" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-correlation">Calculate correlation</h2>
+<p>The correlation is the standardized covariance. There are two ways to go about this:</p>
+<section id="first-standardize-the-variables-then-calculate-the-covariance" class="level3">
+<h3 class="anchored" data-anchor-id="first-standardize-the-variables-then-calculate-the-covariance">First standardize the variables, then calculate the covariance</h3>
+<p>We can repeat the covariance calculation, but this time standardize the variables first. This is also what we showed in the previous section, where we plotted the data with the variables standardized.</p>
+<p>To standardize a variable, we subtract the mean and divide by the standard deviation (there is also the built in function <code>scale()</code> that can do this for you). Be carefull to use the parentheses correctly!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">x_z =</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x),    </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">y_z =</span> (y <span class="sc">-</span> <span class="fu">mean</span>(y)) <span class="sc">/</span> <span class="fu">sd</span>(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now you can repeat the covariance calculation, but this time with the standardized variables <code>x_z</code> and <code>y_z</code> instead of <code>x</code> and <code>y</code>. Here we won’t repeat the steps, but instead use the built in <code>cov()</code> function with the standardized variables. We’ll also calculate the correlation of <code>x</code> and <code>y</code> using the <code>cor()</code> function, so that you can see that it works.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(d<span class="sc">$</span>x_z, d<span class="sc">$</span>y_z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(d<span class="sc">$</span>x, d<span class="sc">$</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9</code></pre>
+</div>
+</div>
+</section>
+<section id="first-calculate-covariance-then-standardize-it" class="level3">
+<h3 class="anchored" data-anchor-id="first-calculate-covariance-then-standardize-it">First calculate covariance, then standardize it</h3>
+<p>The other way to calculate the correlation is to first calculate the covariance, and then standardize it. For this we also need to know the <code>variance</code> of both <code>x</code> and <code>y</code>. Luckily, you already know how to calculate the variance, because this is the same as calculating the covariance of a variable with itself! We heartily invite you to try this yourself, but here we’ll just let R take care of the covariances for us. For this we again use the <code>cov</code> function, but this time we give it a <code>tibble</code> as input. R will then return the covariance matrix for all variables in the <code>tibble</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(x, y) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      x    y
+x 250.0 22.5
+y  22.5  2.5</code></pre>
+</div>
+</div>
+<p>Here we see four values:</p>
+<ul>
+<li>The covariance of <code>x</code> with <code>x</code> (the variance of <code>x</code>), which is <code>250</code>.</li>
+<li>The covariance of <code>y</code> with <code>y</code> (the variance of <code>y</code>), which is <code>2.5</code>.</li>
+<li>The covariance of <code>x</code> with <code>y</code>, which we already know is <code>22.5</code>.</li>
+<li>The covariance of <code>y</code> with <code>x</code>, which is the same as the covariance of <code>x</code> with <code>y</code>, because the covariance is symmetric.</li>
+</ul>
+<p>Given this information, the correlation between <code>x</code> and <code>y</code> can be calculated as:</p>
+<p><span class="math display">\[ r = \frac{cov(X, Y)}{S_X S_Y} \]</span></p>
+<p>Where <span class="math inline">\(S_X\)</span> and <span class="math inline">\(S_Y\)</span> are the standard deviations of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, which is the square root of the variance. <span class="math display">\[ S_X = \sqrt{var(X)} \]</span></p>
+<p>So the calculation is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cov_xy <span class="ot">=</span> <span class="fl">22.5</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Sx <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="dv">250</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>Sy <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="fl">2.5</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>cov_xy <span class="sc">/</span> (Sx <span class="sc">*</span> Sy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9</code></pre>
+</div>
+</div>
+<p>Which is the same as the correlation we calculated before!</p>
 
 
 </section>
 </section>
+</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The formula is different depending on whether you are working with a sample or the entire population. Above we showed the formula for a sample, which is the most common case in practice. To calculate the covariance for the entire population, the only difference is that you would divide by <span class="math inline">\(n\)</span> instead of <span class="math inline">\(n-1\)</span>: <span class="math inline">\(\frac{\sum (X_i - \bar{X}) (Y_i - \bar{Y})}{n}\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -521,7 +725,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -851,8 +1055,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../analysis/concepts/index.html" class="pagination-link" aria-label="Key concepts">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Key concepts</span>
+      <a href="../../analysis/concepts/hypotheses.html" class="pagination-link" aria-label="Hypotheses">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Hypotheses</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

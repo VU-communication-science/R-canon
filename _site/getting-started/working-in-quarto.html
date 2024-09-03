@@ -241,6 +241,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Mutate and recode</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the pipe notation</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -277,12 +283,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hypotheses</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/concepts/standardization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Standardization</span></a>
   </div>
 </li>
       </ul>
@@ -416,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">editor</span><span class="kw">:</span><span class="at"> visual</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This means that the title of the document is “My First Quarto Document”, the output format is HTML, and the editor is the visual editor.</p>
+<p>This means that the title of the document is “My First Quarto Document”, the output format is HTML, and the editor is the visual editor. You can add many more options to the header, but for now we’ll stick with the basics.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Visual or Source editor">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -435,15 +435,6 @@ Visual or Source editor
 </div>
 </div>
 </div>
-<p>You can add many more options to the header, but for now we’ll stick with the basics. There is just one thing we recommend adding:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"test"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">editor</span><span class="kw">:</span><span class="at"> visual</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">editor_options</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">chunk_output_type</span><span class="kw">:</span><span class="at"> console</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This will make sure that any output you generate while working on your document will be shown in the console. If you don’t set this, it will be shown in the document itself, and this can make the document a bit cluttered. Note that this doesn’t affect the final output of the document, just the way it is shown in the editor.</p>
 </section>
 <section id="the-textual-content" class="level3">
 <h3 class="anchored" data-anchor-id="the-textual-content">2. The textual content</h3>
@@ -453,11 +444,12 @@ Visual or Source editor
 <h3 class="anchored" data-anchor-id="the-code-chunks">3. The code chunks</h3>
 <p>At some point you see a code chunk, which looks like:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Inside these code chunks you can write R code. When you render the document, the code will be executed, and the output will be shown in the document.</p>
-<p>While working on the document you can also run the code chunks separately. You can do this like you would do in an R script, by selectin the code you want to run and hitting <code>Run</code> (or <code>Ctrl/Cmd + Enter</code>). But there is also a convenient option to run the entire code chunk at once by clicking on the <code>run current chunk</code> button in the top right of the code chunk. Here you also find a button to run all the chunks above the current one. It is recommended to do this often, because it will make sure that the output is up to date.</p>
+<p>While working on the document you can also run the code chunks separately (i.e.&nbsp;without rendering). You can do this like you would do in an R script, by selectin the code you want to run and hitting <code>Run</code> (or <code>Ctrl/Cmd + Enter</code>). But there is also a convenient option to run the entire code chunk at once by clicking on the <code>run current chunk</code> button in the top right of the code chunk. Here you also find a button to run all the chunks above the current one.</p>
+<p>To add a new block, you can click on the <code>Insert</code> button in the toolbar, and select <code>Executable Cell</code> -&gt; <code>R</code>.</p>
 </section>
 </section>
 <section id="rendering-the-document" class="level2">
@@ -481,8 +473,8 @@ Visual or Source editor
 <h3 class="anchored" data-anchor-id="use-code-block-parameters">Use code block parameters</h3>
 <p>You can add parameters to the code chunks. For example, the following code chunk will only show the code, but not the output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>{r, results<span class="ot">=</span><span class="cn">FALSE</span>}</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{r, results<span class="ot">=</span><span class="cn">FALSE</span>}</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Following this same notation, you can set the following parameters:</p>
 <ul>
@@ -592,7 +584,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

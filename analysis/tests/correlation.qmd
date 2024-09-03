@@ -86,11 +86,16 @@ For APA style reporting of the correlation test you need to know the `correlatio
 The formula for reporting the results of a correlation test in APA style is:
 
 > r(`df`) = `correlation coefficient`, p = `p-value`.
+>
+> * the `correlation coefficient` is rounded to two decimal places, and the number before the decimal point is ommited if zero (`.11` instead of `0.11`).
+> * The `p-value` is reported for the smallest significant level (`p < 0.05`, `p < 0.01` or `p < 0.001`), or in full with three decimal places if not significant (`p = 0.123`).
+
+
 
 In our example above we observed a correlation coefficient of $r = 0.107$ with a p-value of $p = 0.009$, and $598$ degrees of freedom. 
 So we would report this as:
 
-> There is a positive correlation between age and trust in the news media $r(598) = 0.107$, $p < 0.01$.
+> There is a positive correlation between age and trust in the news media, $r(598) = .12$, $p < 0.01$.
 
 
 # Alternative correlation tests
@@ -101,10 +106,14 @@ This is the most common correlation coefficient, but there are also other types 
 The Pearson correlation coefficient assumes that the relationship between the variables is linear, and that the variables are normally distributed.
 If this is not the case, you might want to use instead use Spearman's $\rho$ or Kendall's $\tau$.
 
-Using these alternative methods is easy in R.
-You just need to specify the `method` argument in the `cor.test` function.
+To use these alternative methods, you just need to specify the `method` argument in the `cor.test` function, or the `corr.method` argument in the `tab_corr` function.
 
 ```{r, results='hide', warning=F, message=F}
 cor.test(d$news_consumption, d$trust_t1, method = "spearman")
 cor.test(d$news_consumption, d$trust_t1, method = "kendall")
+
+d |> select(trust_t1_item1:trust_t1_item5) |> tab_corr(corr.method="spearman")
+d |> select(trust_t1_item1:trust_t1_item5) |> tab_corr(corr.method="kendall")
 ```
+
+

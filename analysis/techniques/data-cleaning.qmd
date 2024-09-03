@@ -7,7 +7,7 @@ format:
         df-print: paged
 ---
 
-In this tutorial we use the `tidyverse` and our simulated [practice data](../data-management/index.qmd#practice-data).
+In this tutorial we use the `tidyverse` and our simulated [practice data](../../data-management/index.qmd#practice-data).
 
 ```{r, message=FALSE}
 library(tidyverse)

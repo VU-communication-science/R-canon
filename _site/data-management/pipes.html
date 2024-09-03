@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Using the pipe notation – Communication Science R Book</title>
+<title>Using the pipe syntax – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../data-management/mutate.html" rel="next">
-<link href="../data-management/filter-and-arrange.html" rel="prev">
+<link href="../analysis/index.html" rel="next">
+<link href="../data-management/mutate.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/pipes.html">Using the pipe notation</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/pipes.html">Using the pipe syntax</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -237,54 +237,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Using the pipe notation</span></a>
+  <a href="../data-management/mutate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mutate and recode</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/mutate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mutate</span></a>
+  <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Using the pipe syntax</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../2_data_preparation/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data preparation</span></a>
+            <a href="../analysis/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../2_data_preparation/inspect-and-clean.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Inspect and clean</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../2_data_preparation/scale-construction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scale construction</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../3_statistics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistics</span></a>
+            <a href="../analysis/concepts/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Key concepts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Covariance and correlation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypotheses</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../3_statistics/0_concepts/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Concepts</span></a>
+            <a href="../analysis/techniques/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Techniques</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -292,34 +298,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Covariance and correlation</span></a>
+  <a href="../analysis/techniques/data-cleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data cleaning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/causality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Causality</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Hypotheses</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../3_statistics/0_concepts/standardization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Standardization</span></a>
+  <a href="../analysis/techniques/scale-construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scale construction</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Tests</span></a>
+            <a href="../analysis/tests/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical tests</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -327,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_statistics/2_tests/correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/tests/correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Correlation test</span></a>
   </div>
 </li>
@@ -362,16 +356,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#working-with-pipes" id="toc-working-with-pipes" class="nav-link active" data-scroll-target="#working-with-pipes">Working with Pipes</a></li>
+  <li><a href="#working-with-pipes" id="toc-working-with-pipes" class="nav-link active" data-scroll-target="#working-with-pipes">Working with Pipes</a>
+  <ul class="collapse">
+  <li><a href="#using-pipes-with-the-tidyverse" id="toc-using-pipes-with-the-tidyverse" class="nav-link" data-scroll-target="#using-pipes-with-the-tidyverse">Using pipes with the tidyverse</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/pipes.html">Using the pipe notation</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/pipes.html">Using the pipe syntax</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Using the pipe notation</h1>
+<h1 class="title">Using the pipe syntax</h1>
 <p class="subtitle lead">How to make your code more readable</p>
 </div>
 
@@ -391,60 +388,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="working-with-pipes" class="level1">
 <h1>Working with Pipes</h1>
-<p>In the previous sections you learned several data management techniques. In practise, you will often apply multiple of these techniques in succession to clean and prepare data. For example, the following code reads a csv file, filters rows, computes a new variable, selects columns, and sorts the data:</p>
+<p>In the <a href="../getting-started/functions.html#using-the-pipe-syntax">Functions</a> tutorial we already mentioned that R also has a <code>pipe</code> syntax. This is a way to chain functions together, where the output of one function is the input of the next function. The syntax for the pipe is <code>|&gt;</code>, and it is used like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>argument1 <span class="sc">|&gt;</span> <span class="cf">function</span>(argument2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>practice_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 600 Columns: 17
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr  (2): np_subscription, experiment_group
-dbl (15): id, age, news consumption, trust_t1, trust_t2, trust_t1_item1, tru...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>practice_data <span class="ot">=</span> <span class="fu">select</span>(practice_data, age, experiment_group, trust_t1)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>practice_data <span class="ot">=</span> <span class="fu">filter</span>(practice_data, age <span class="sc">&gt;=</span> <span class="dv">18</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>practice_data <span class="ot">=</span> <span class="fu">arrange</span>(practice_data, trust_t1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This code works fine, but it is a bit cumbersome to read. For each step, we need to provide <code>practice_data</code> as input, and also assign the output to <code>practice_data</code> to overwrite it. Currently this is just three times, but</p>
-<p>If syou look at the code above, you notice that the result of each function is stored as an object, and that this object is used as the first argument for the next function. Moreover, we don’t really care about this temporary object, we only care about the final summary table.</p>
-<p>This is a very common usage pattern, and it can be seen as a <em>pipeline</em> of functions, where the output of each function is the input for the next function. Because this is so common, tidyverse offers a more convenient way of writing the code above using the pipeline operator <code>%&gt;%</code>. In sort, whenever you write <code>f(a, x)</code> you can replace it by <code>a %&gt;% f(x)</code>. If you then want to use the output of <code>f(a, x)</code> for a second function, you can just add it to the pipe: <code>a %&gt;% f(x) %&gt;% f2(y)</code> is equivalent to <code>f2(f(a,x), y)</code>, or more readable, <code>b=f(a,x); f2(b, y)</code></p>
-<p>Put simply, pipes take the output of a function, and directly use that output as the input for the <code>.data</code> argument in the next function. As you have seen, all the <code>dplyr</code> functions that we discussed have in common that the first argument is a <em>tibble</em>, and all functions return a <em>tibble</em>. This is intentional, and allows us to pipe all the functions together.</p>
-<p>This seems a bit abstract, but consider the code below, which is a collection of statements from above:</p>
+<p>The first argument of a funtion can be <em>piped into it</em>. Between the parentheses of the function we then only need to specify any additional arguments (if needed). Often the first argument of a function is the input data, which allows you to chain functions together.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># d &lt;- read_csv(url)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># d &lt;- filter(d, Question == 'age-21')</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># d &lt;- mutate(d, party_diff = abs(`Republican Support` - `Democratic Support`))</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># d &lt;- select(d, Question, Pollster, party_diff)</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># arrange(d, -party_diff)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">do_this</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">then_this</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">finally_this</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To recap, this reads the csv, filters by question, computes the difference, drops other variables, and sorts. Since the output of each function is the input of the next, we can also write this as a single pipeline:</p>
+<section id="using-pipes-with-the-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="using-pipes-with-the-tidyverse">Using pipes with the tidyverse</h2>
+<p>The tidyverse is designed to work really well with pipes. All of the functions for working with a tibble (like <code>select</code>, <code>filter</code>, <code>arrange</code>, etc.) have the first argument as the tibble itself, and the output is also a tibble. This means that you can chain these functions together to create a single pipeline for cleaning and preparing your data.</p>
+<p>For example, the following code reads a csv file, selects columns, filters rows and finally arranges the data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read_csv(url) %&gt;% </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(Question == 'age-21') %&gt;% </span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(party_diff = abs(`Republican Support` - `Democratic Support`)) %&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(Question, Pollster, party_diff) %&gt;% </span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   arrange(-party_diff)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>practice_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>practice_data <span class="ot">=</span> <span class="fu">select</span>(practice_data, age, experiment_group, trust_t1)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>practice_data <span class="ot">=</span> <span class="fu">filter</span>(practice_data, age <span class="sc">&gt;=</span> <span class="dv">18</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>practice_data <span class="ot">=</span> <span class="fu">arrange</span>(practice_data, trust_t1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The nice thing about pipes is that it makes it really clear what you are doing. Also, it doesn’t require making many intermediate objects (such as <code>ds</code>). If applied right, piping allows you to make nicely contained pieces of code to perform specific parts of your analysis from raw input straight to results, including statistical modeling or visualization. It usually makes sense to have each “step” in the pipeline in its own line. This way, we can easily read the code line by line</p>
-<p>Of course, you probably don’t want to replace your whole script with a single pipe, and often it is nice to store intermediate values. For example, you might want to download, clean, and subset a data set before doing multiple analyses with it. In that case, you probably want to store the result of downloading, cleaning, and subsetting as a variable, and use that in your analyses.</p>
+<p>With pipes, we can write the same code in a more readable way:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>practice_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, experiment_group, trust_t1) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(trust_t1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="The alternative pipe symbol `%>%`">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The alternative pipe symbol <code>%&gt;%</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>There is another pipe symbol in R: <code>%&gt;%</code>. In this book we will always use <code>|&gt;</code>, but it’s good to know about the existence of <code>%&gt;%</code>, because you might encounter it in other resources.</p>
+<p>Both functions work almost in the same way. So why have two? The reason is simply that R keeps evolving, and the <code>|&gt;</code> pipe was only recently introduced.</p>
+<p>The <code>%&gt;%</code> pipe was introduced in the <code>magrittr</code> package, and was made popular by the <code>tidyverse</code>. Because of this popularity, R decided that it would be a good idea to have a <em>native</em> pipe in the language itself, meaning that you don’t need to install a package to use it. This is why they introduced the <code>|&gt;</code> pipe.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -870,30 +864,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../data-management/filter-and-arrange.html" class="pagination-link" aria-label="Filter and Arrange">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Filter and Arrange</span>
+      <a href="../data-management/mutate.html" class="pagination-link" aria-label="Mutate and recode">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Mutate and recode</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../data-management/mutate.html" class="pagination-link" aria-label="Mutate">
-        <span class="nav-page-text">Mutate</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../analysis/index.html" class="pagination-link" aria-label="Analysis">
+        <span class="nav-page-text">Analysis</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
-    <div class="nav-footer-left">
-<p>VU University, Department of Communication Science</p>
-</div>   
-    <div class="nav-footer-center">
-      &nbsp;
-    </div>
-    <div class="nav-footer-right">
-      &nbsp;
-    </div>
-  </div>
-</footer>
 
 
 
