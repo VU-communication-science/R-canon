@@ -1,0 +1,116 @@
+---
+title: Causality
+subtitle: How to find evidence for causal relations?
+---
+
+
+![xkcd: correlation](https://imgs.xkcd.com/comics/correlation.png)
+
+
+# Testing causal relations
+
+In communication science we are often concerned with **causal relations**. 
+Consider the following two examples:
+
+- When news media focus heavily on certain issues, it enhances the public's perception of their importance [@mccombs72].
+- More screen time among children and adolescents is associated with lower psychological well-being [@twenge18].
+
+Research into such causal relations is important, because by understanding causal mechanisms, we can develop strategies to change the outcomes for the better.
+If more screen time is indeed associated with lower psychological well-being, we should advice parents to limit children's screen time.
+
+But before we incurr the wrath of our children by trying to take away their smartphones, we should first make sure that our theory is correct.
+As usual, we can **derive hypotheses** that predict relationships between variables, and then test these hypotheses with **statistical methods**.
+
+However, when testing causal relations, we need to be particularly careful, because **correlation does not imply causation**!
+
+
+# Correlation versus causation
+
+## Causation 
+
+Causation implies a cause-and-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). 
+If we could *manipulate* the cause in an experiment, we would expect to see a corresponding change in the effect.
+For instance, if we could somehow make the news media talk more about climate change, we would expect the public to think and talk about it more, too. 
+Basically, this is why PR exists, and why politicians try to get media to talk about the issues they care about.
+
+However, in reality we often cannot experimentally manipulate a variable to see if it has a causal effect.
+To empirically investigate causal relations we therefore often look at correlations in the real-world. 
+This is a valid approach, but we should always be mindfull that correlation by itself is not strong evidence of causation.
+
+
+## Correlation
+
+Correlation *merely* indicates an association or relationship between two variables.
+When two variables are correlated, they tend to change together.
+This can be due to a causal relationship in either or both directions, but it could also be due to a third variable that causes both of them to change.
+This is known as a **confounding variable**, and a correlation that results from a confounding variable is called a **spurious correlation**.
+
+::: {.callout-note title="Famous spurious correlations" collapse="true"}
+A [famous example](http://www.brixtonhealth.com/storksBabies.pdf) is that across European countries the number of storks is quite strongly correlated with the number of newborn babies ($\rho = 0.62$). The confounder in this case is the size of the country: larger countries have more storks and more babies. So the correlation is not evidence for the folk theory that storks deliver babies.
+
+Spurious correlations can also just be coincidental. 
+Especially when we look at many variables over time, we are likely to find some that are correlated just by chance. 
+A whole website, [Spurious Correlations](https://www.tylervigen.com/spurious-correlations), is dedicated to finding statistical gems, such as the correlation between the number of people who drowned by falling into a pool and the number of films Nicolas Cage appeared in.
+This is why it's important to have a theoretical foundation for the relationships we test, and always be cautious when interpreting statistical results.
+:::
+
+
+In the case of screen time and psychological well-being study, the authors did observe an "association", but were not able to establish which variable causes the other.
+Based on their data, "it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both" [@twenge18, p. 281].
+Indeed, it could be that children who are already unhappy end up spending more time on screens, which would mean that taking away their phone might not help (and might even make things worse).
+Furthermore, possible confounders could be that parents who are more involved in their children's lives might both limit screen time and help develop better psychological well-being.
+
+# How to deal with confounders?
+
+So when we observe a correlation between two variables, how can we determine whether there is actually a causal effect from one variable on the other?
+How can we get rid of the possible influence of confounding variables?
+
+## The gold standard: controlled experiments
+
+The gold standard for establishing causation is the **randomized controlled experiment**, in which the researcher *manipulates the cause* and observes the effect, while keeping all other variables constant.
+So how can one manipulate a cause?
+The trick is to create different experimental conditions.
+A well known example comes from the field of medicine: you give some participants a medicine you want to test, where others get a placebo (i.e. a fake medicine that only looks the same).
+The people that got the real medicine are then the *treatment group*, and the people that got the placebo are the *control group*
+To test if the medicine works, you compare the treatment group to the control group.
+
+A similar example from communication science would be that you want to test the effictiveness of a new persuasion strategy.
+You could then show the treatment group a persuasive message that uses the new strategy, and the control group a message that doesn't. 
+
+There are two ways in which a randomized controlled expriment deals with confounding:
+
+* By randomly assigning people to the treatment or control group, the people in both groups are *statistically identical*. If the randomization is done correctly, any possible confounding variables are equally distributed between the two groups, and so any difference in the outcome can be attributed to the treatment. 
+* By comparing the treatment group to the control group, you can account for confounding variables that have to do with the process of appyling the treatment. A well known example of this is the *placebo effect*, where people feel better just because they *think* they're taking a medicine (control group), and not because of the actual medicine (treatment group). If the medicine works, the treatment group should see a stronger effect than the control group. 
+
+This ability to eliminate the influence of confounders makes experiments a very powerful tool for establishing causation.
+However, in the field of communication science it is often not possible or ethical to conduct valid experiments.
+There should be absolutely no difference between the treatment and control group, except for the treatment.
+This is relatively easy in medical trials, because people can receive an identical looking placebo, but in communication science it's often more difficult to create a placebo condition that is identical to the treatment condition.
+We cannot ask people to stop using social media for a week, because being asked to do so is already a treatment in itself, and it is not possible to have a control group that only thinks they are not using social media.
+
+
+## The next best thing: controlling for confounders
+
+If we cannot conduct an experiment, we can to some extend control for confounding variables using **statistical methods**.
+This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data.
+In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion [@mccombs72].
+And even common knowledge like "smoking causes cancer", that is the foundation for anti-smoking policies, relies heavily on evidence from these types of observational studies.
+Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist's toolkit.
+
+The trick behind statistically controlling for confounders lies in **multivariate analysis** (i.e. analyzing more than two variables at the same time).
+If we are worried that a correlation between a **dependent variable** and **independent variable** is due to a third variable, we can add this **confounding variable** to the analysis.
+Using techniques like **multiple regression**, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant.
+We also call this **controlling for** the confounder.
+
+Note that this is different from experiments, where we can controll for all possible confounders through randomization.
+In observational studies, we can only control for the variables that we have measured.
+This puts an even greater burden on having a solid theoretical foundation for the relationships we test.
+
+An an example, consider the *agenda-setting theory* [@mccombs72], which posits that the media influence the public's perception of the importance of issues.
+Initially, the primary evidence for this theory came from a study that showed a correlation between the amount of media coverage of an issue and the public's perception of its importance.
+At the time, news media were one of the few sources of information for the public, so *on theoretical grounds* it was reasonable to assume that the media were the cause of the public's perception.
+But today, with the rise of social media and other information sources, the relationship between media coverage and public opinion is more complex.
+To test the theory today, we would need to control for other sources of information, such as social media, to see if the relationship between media coverage and public opinion still holds.
+
+This also emphasizes that statistics are never a substitute for theory.
+Statistics allow us to build stronger empirical evidence for our theories, but we need theory to guide us in what to measure and how to interpret the results.

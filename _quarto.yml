@@ -18,7 +18,7 @@ website:
 
   page-footer:
     background: primary
-    left: "VU University, Department of Communication Science"
+    left: ""
   back-to-top-navigation: true
   page-navigation: true
 

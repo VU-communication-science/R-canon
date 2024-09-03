@@ -1,0 +1,130 @@
+---
+title: Covariance and correlation
+subtitle: measuring the relationship between variables
+order: 3
+format:
+    html:
+        df-print: paged
+---
+
+
+
+## Visualizing covariance and correlation
+
+To get a good intuition of what covariance and correlation are, it helps to have a visual image.
+For this we'll be looking at how two variables are correlated **over time**.
+We use time because it can nicely be visualized on the x-axis, but the same principles apply to any two variables.
+
+### Correlation
+
+First, let's look at three scenarios for the correlation between variables **V1** and **V2**.
+In all three scenarios V1 is the same, but we change V2 so that is has a **strong positive**, **strong negative**, and **weak correlation**.
+
+```{r, echo=F, message=F}
+library(tidyverse)
+set.seed(2)
+
+n = 16
+time = 1:n
+V1 = cumsum(rnorm(n, 0, 1))
+V2_positive = V1 - 3 + rnorm(n, 0, 0.7)
+V2_negative = -V1 + 2 + rnorm(n, 0, 0.6)
+V2_weak = rnorm(n, 0, 1)
+
+d = tibble(time, V1, V2_positive, V2_negative, V2_weak)
+dl = pivot_longer(d, cols = c(V2_positive, V2_negative, V2_weak), names_to = "correlation", values_to = "V2")
+dl$color = case_when(dl$correlation == "V2_positive" ~ "darkgreen",
+                      dl$correlation == "V2_negative" ~ "red",
+                      dl$correlation == "V2_weak" ~ "darkgrey")
+
+pos_cor = cor(V1, V2_positive)
+neg_cor = cor(V1, V2_negative)
+weak_cor = cor(V1, V2_weak)
+labels = labeller(correlation = c(V2_positive = sprintf("Positive (r = %.3f)", pos_cor), 
+                                 V2_negative = sprintf("Negative (r = %.3f)", neg_cor),
+                                 V2_weak = sprintf("Weak (r = %.3f)", weak_cor)))
+
+ggplot(dl) +
+  geom_line(aes(x = time, y = V2, color=color, linetype='solid'), lwd=0.8) +
+  geom_line(aes(x = time, y = V1, color="black", linetype='dashed'), lwd=0.8) +
+  scale_color_identity() + 
+  facet_wrap(~correlation, labeller = labels) +
+  xlab('Time') + ylab('') + 
+  scale_linetype_manual(name = "", values = c("dashed", "solid"), labels = c("V1", "V2")) +
+  theme(legend.position='top', legend.key.size=unit(2, 'lines'))
+```
+
+**Strong positive correlation** ($r = 0.869$).
+On the left we see a clear relation between V1 and V2.
+When x (black line) goes up, y (green line) goes up as well.
+When x goes down, y goes down.
+Notice that for correlation it doesn't matter that overall the y-values are lower than the x values.
+It's all about how they **move together**.
+
+**Strong negative correlation** ($r = -0.906$).
+Here we still see a strong relation between x and y.
+They still **move together**, only in the opposite direction.
+When x goes up, y goes down.
+When x goes down, y goes up.
+
+**Weak correlation** ($r = 0.128$).
+Here we see that there is no clear relation between x and y.
+Whether y goes up or down does not seem to be related to x.
+
+
+### Covariance
+
+So how does covariance differ from correlation?
+Covariance is also measure of how two variables **change together**.
+The difference is that the covariance **is not standardized**.
+This means that:
+
+1. The covariance can be any number, while the correlation is always between -1 and 1.
+2. The covariance depends on the scale of the variables. 
+
+To illustrate this, let's compare two scenarios.
+The first scenario is the same as the strong positive correlation from the previous example.
+In the second scenario, we have only multiplied V2 by 2, thus changing the scale of the variable.
+
+
+```{r, echo=F}
+set.seed(2)
+n = 16
+time = 1:n
+V1 = cumsum(rnorm(n, 0, 1))
+V2_normal = V1 - 3 + rnorm(n, 0, 0.7)
+V2_scaled = V2_normal *2
+
+d = tibble(time, V1, V2_normal, V2_scaled)
+dl = pivot_longer(d, cols = c(V2_normal, V2_scaled), names_to = "covariance", values_to = "V2")
+dl$color = case_when(dl$covariance == "V2_normal" ~ "darkgreen",
+                      dl$covariance == "V2_scaled" ~ "purple")
+
+cov1 = cov(V1, V2_normal)
+cov2 = cov(V1, V2_scaled)
+
+cor1 = cor(V1, V2_normal)
+cor2 = cor(V1, V2_scaled)
+
+labels = labeller(covariance = c(V2_normal = sprintf("Same scale (cov = %.3f, r = %.3f)", cov1, cor1), 
+                                 V2_scaled = sprintf("Lower mean (cov = %.3f, r = %.3f)", cov2, cor2)))
+ggplot(dl) +
+    geom_line(aes(x = time, y = V2, color=color, linetype='solid'), lwd=0.8) +
+    geom_line(aes(x = time, y = V1, linetype='dashed'), color = "black", lwd=0.8) +
+    scale_color_identity() + 
+    facet_wrap(~covariance, labeller = labels) +
+    xlab('Time') + ylab('Value') +
+  scale_linetype_manual(name = "", values = c("dashed", "solid"), labels = c("V1", "V2")) +
+  theme(legend.position='top', legend.key.size=unit(2, 'lines'))
+
+```
+
+On the left we see the same scenario as before, with a positive correlation of $r = 0.869$.
+The covariance here is $cov = 2.188$.
+
+On the right we see the data where we multiplied V2 by 2.
+Visually, this looks like stretching the line vertically.
+The data still *moves* the same way, but the steps are twice as big.
+
+For the correlation between V1 and V2 ($r = 0.869$), this does not matter, because the scales of the variables are standardized.
+But the covariance ($cov = 4.236$) *has* changed!

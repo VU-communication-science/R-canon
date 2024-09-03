@@ -87,6 +87,8 @@ sum(numbers)
 ```
 
 
+
+
 ## From Vectors to Data Frames
 
 Single vectors are still not very usefull for data analysis, since we're often interested in relations between variables.
@@ -106,9 +108,8 @@ d <- data.frame(country, height)
 ```
 
 Now, you can perform operations on the entire data frame at once!
-You can for instance perform a statistical test to see if the average height differs between countries.
-
-And just like with single values and vectors, we need to take the type of each column into account.
+You can for instance perform a statistical test to see if the average height of people differs between countries.
+Just like with single values and vectors, we need to take the type of each column into account.
 For instance, we can't perform a correlation analysis using the `country` column, because it's a character vector.
 
 

@@ -4,7 +4,7 @@ order: 1
 ---
 
 
-Once you have [installed R and RStudio](0_install-r-and-rstudio.qmd), you can start by launching RStudio. If everything was installed correctly, RStudio will automatically launch R as well.
+Once you have [installed R and RStudio](./install-r-and-rstudio.qmd), you can start by launching RStudio. If everything was installed correctly, RStudio will automatically launch R as well.
 
 The first time you open RStudio, you will likely see three separate windows. The first thing you want to do is **open an R Script (!!)** to work in. To do so, go to the toolbar and select **File -\> New File -\> R Script**.
 

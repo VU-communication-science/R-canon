@@ -1,6 +1,0 @@
----
-title: Data preparation
-order: 2
---- 
-
-In the Data Management chapter you've learned how to import and manage data with the tidyverse. 

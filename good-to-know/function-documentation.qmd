@@ -88,7 +88,7 @@ If we want to remove missing values, we can set `na.rm` to `TRUE`:
 mean(x_with_missing, na.rm=TRUE)
 ```
 
-::: {.callout-note title="To name or not to name your arguments"}
+::: {.callout-note title="To name or not to name your arguments" collapse="true"}
 
 Notice how in the code above we specify the argument name `na.rm = TRUE` to indicate that we want to use this optional argument.
 For the `x` argument we don't need to specify the argument name, because it's the first argument and the function knows that the first argument is `x`.

@@ -23,13 +23,13 @@ In this expression you can refer to other columns in the table, and use any R fu
 
 ## Creating new variables
 
-To create a new variable in `mutate`, you use the following syntax:
+To create a new variable you use the following syntax:
 
 ```{r, eval=F}
 mutate(d, new_variable = expression)
 ```
 
-The expression can be anything that returns a vector of the same length as the table.
+The expression can be anything that returns a valid column.
 For example, in the practice data we have the columns `trust_t1` and `trust_t2`, which represent trust in journalists before and after the experiment.
 We can create a new variable `trust_change` that represents the change in trust from before to after the experiment.
 
