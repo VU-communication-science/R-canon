@@ -20,7 +20,7 @@ d <- read_csv("https://tinyurl.com/R-practice-data")
 
 # Creating and modifying columns with mutate() {#mutate}
 
-The `mutate` function allows you to create columns in a table, or overwrite existing ones.
+The `mutate` function allows you to create or modify columns in a data frame.
 You just specify which columns you want to create or modify, and then provide an expression for how to compute the new values.
 In this expression you can refer to other columns in the table, and use any R functions you like, which makes `mutate` a very powerful tool.
 
@@ -36,13 +36,9 @@ The expression can be anything that returns a valid column.
 For example, in the practice data we have the columns `trust_t1` and `trust_t2`, which represent trust in journalists before and after the experiment.
 We can create a new variable `trust_change` that represents the change in trust from before to after the experiment.
 
-```{r, results=F}
+```{r}
 d <- mutate(d, trust_change = trust_t2 - trust_t1)
-```
 
-You could use `select` to quickly verify that it worked as expected.
-
-```{r, results=T}
 select(d, trust_t1, trust_t2, trust_change)
 ```
 
@@ -93,9 +89,9 @@ Inside the `case_match` function, we specify three things:
 
 1. The column we want to recode (`experiment_group`).
 2. The conditions for recoding the values. We have two conditions:
-   1. If `positive`, return `"positive_movie"`.
-   2. If `negative`, return `"negative_movie"`.
-3. The `.default` is to return the current value of the column. This means that if the value is not matched in any of the conditions, it will remain the same.
+   1. If value is `"positive"`, recode into `"positive_movie"`.
+   2. If value is `"negative"`, recode into `"negative_movie"`.
+3. We specify a `.default` value for values that are not matched in the conditions. Here we say that in that case we want to use the current value of the `experiment_group` column.
 
 If you check the unique values of the `experiment_group` column, you will see that `positive` and `negative` have been changed to `positive_movie` and `negative_movie`, and that `control` remains the same.
 ```{r}

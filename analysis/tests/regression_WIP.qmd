@@ -1,0 +1,75 @@
+
+
+
+
+# Multiple regression
+
+In multiple regression, we can include multiple predictors in the model. 
+This allows us to control for the effects of other variables. 
+
+
+
+As explained in the section on [correlation](../tests/correlation.qmd), we need to be careful when interpreting the correlation between two variables.
+The same is true for the effects in a regression model.
+It is possible (and common) that the effect of the independent variable on the dependent variable is not because of an actual causal relation. 
+Instead, it could be due to a third variable that influences both the independent and dependent variable.
+This third variable is then called a **confounding variable**, and the effect that we observe between the independent and dependent variable is a **spurious effect**.
+
+Confounding variables happen all the time in real-world data.
+Unless you're doing an experiment, you can be almost certain that there are confounding variables in your data.
+One of the main reasons why surveys always ask you for basic demographic information, such as age, gender, and education, is because these variables influence so many elements: income, health, media use, political views, etc.
+
+
+## Controlling for confounding variables
+
+There is a [famous example](http://www.brixtonhealth.com/storksBabies.pdf) of confounding, which points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries ($\rho = 0.62$)
+A naive interpretation would then be that this is evidence for the folk theory that storks deliver babies.
+The real reason however, as explained in the article, is that the size of the country is a confounding variable: larger countries simply have more storks and more babies.
+
+So let's use this example to demonstrate how we can control for confounding variables in a regression model!
+Here we create a tibble using the data from **table 1** in the article.
+
+```{r, message=F}
+library(tidyverse)
+library(sjPlot)
+
+storks <- tibble(
+ storks = c(100,300,1,5000,9,140,3300,2500,4,5000,5,30000,1500,5000,8000,150,25000),
+ birth_rate = c(83,87,118,117,59,774,901,106,188,124,551,610,120,367,439,82,1576),
+ area_km2 = c(29,84,31,111,43,544,357,132,42,93,301,312,92,237,505,41,779) 
+)
+```
+
+The data we have here is about the number of `storks`, the `birth_rate`, and the `area_km2` of the country.
+Let's first have a look at the correlations.
+
+```{r}
+tab_corr(storks)
+```
+
+As reported in the article, the correlation between the number of storks and the birth rate is high at $r = 0.62$.
+But we also see that the area of the country is correlated with both the number of storks and the birth rate.
+This is a good indication that the area of the country is likely a confounding variable.
+
+Now let's see what happens when we put the number of storks into a regression model.
+Our dependent variable is the `birth_rate`, our independent variable is the `storks`, and we'll control for the `area_km2`.
+The variables are standardized first, so that you can see the relation to the correlation coefficients.
+We'll run two models: without and with the control variable.
+
+
+```{r}
+##  standardize all variables
+storks_z <- storks |> scale() |> as_tibble()
+
+m1 <- lm(birth_rate ~ storks,            data = storks_z)
+m2 <- lm(birth_rate ~ storks + area_km2, data = storks_z)
+tab_model(m1, m2)
+```
+
+In the first model we see a positive effect of the number of storks on the birth rate ($\beta = 0.62$).
+The effect is significant (p < 0.01) and the standardized coefficient is the same as the correlation coefficient.
+So here you see firsthand a spurious effect.
+
+In the second model, where we control for the area of the country, the effect of the number of storks on the birth rate is no longer significant (p = 0.304).
+Instead, we see a very strong effect of the area of the country on the birth rate ($\beta = 0.85$, p < 0.001).
+So here you see the power of multiple regression in action: by controlling for `area_km2`, the spurious effect of `storks` on `birth_rate` disappears. 

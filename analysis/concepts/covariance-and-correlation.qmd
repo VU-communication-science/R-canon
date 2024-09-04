@@ -9,13 +9,13 @@ format:
 
 # What are covariance and correlation? 
 
-Covariance and correlation are fundamental concepts in statistics.
-The covariance of two variables tells us something about the extend to which they **change together**.
+The **covariance** of two variables tells us something about the extent to which they **change together**.
 If one variable goes up, does the other variable go up as well?
-This information is the foundation for many statistical methods, because it enables us to quantify relationships between variables.
-For example, it allows us to measure: *how is a person's social media use related to their feelings of loneliness?*
+This information is the foundation for many statistical methods, because it enables us to quantify relationships between phenomena.
+For example, it allows us to measure: *to what extent is a person's social media use related to their feelings of loneliness?*
 
-The correlation is a standardized version of the covariance, which expresses the **strength** and **direction** of the relationship between two variables on a scale from -1 to 1.
+
+The **correlation** is a standardized version of the covariance, which expresses the **strength** and **direction** of the relationship between two variables on a scale from -1 to 1.
 This makes it easier to interpret. Consider the following example:
 
 * if the correlation between a person's social media use and their feelings of loneliness is positive (`> 0`), it means that people that spend a lot of time on social media tend to feel more lonely.

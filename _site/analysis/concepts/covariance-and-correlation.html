@@ -429,8 +429,8 @@ window.Quarto = {
 
 <section id="what-are-covariance-and-correlation" class="level1">
 <h1>What are covariance and correlation?</h1>
-<p>Covariance and correlation are fundamental concepts in statistics. The covariance of two variables tells us something about the extend to which they <strong>change together</strong>. If one variable goes up, does the other variable go up as well? This information is the foundation for many statistical methods, because it enables us to quantify relationships between variables. For example, it allows us to measure: <em>how is a person’s social media use related to their feelings of loneliness?</em></p>
-<p>The correlation is a standardized version of the covariance, which expresses the <strong>strength</strong> and <strong>direction</strong> of the relationship between two variables on a scale from -1 to 1. This makes it easier to interpret. Consider the following example:</p>
+<p>The <strong>covariance</strong> of two variables tells us something about the extent to which they <strong>change together</strong>. If one variable goes up, does the other variable go up as well? This information is the foundation for many statistical methods, because it enables us to quantify relationships between phenomena. For example, it allows us to measure: <em>to what extent is a person’s social media use related to their feelings of loneliness?</em></p>
+<p>The <strong>correlation</strong> is a standardized version of the covariance, which expresses the <strong>strength</strong> and <strong>direction</strong> of the relationship between two variables on a scale from -1 to 1. This makes it easier to interpret. Consider the following example:</p>
 <ul>
 <li>if the correlation between a person’s social media use and their feelings of loneliness is positive (<code>&gt; 0</code>), it means that people that spend a lot of time on social media tend to feel more lonely.</li>
 <li>If the correlation is negative (<code>&lt; 0</code>), it means that people that spend a lot of time on social media tend to feel <em>less</em> lonely.</li>
@@ -725,7 +725,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

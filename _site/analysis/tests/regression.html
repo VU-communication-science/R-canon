@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Working in Quarto – Communication Science R Book</title>
+<title>regression – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,24 +57,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../data-management/index.html" rel="next">
-<link href="../getting-started/file-management.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../good-to-know/function-documentation.html" rel="next">
+<link href="../../analysis/tests/correlation.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/working-in-quarto.html">Working in Quarto</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/index.html">Statistical tests</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/regression.html">Regression</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,10 +130,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="https://vu.nl/en/about-vu/faculties/faculty-of-social-sciences/departments/communication-science" class="sidebar-logo-link">
-      <img src="../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="../../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Communication Science R Book</a> 
+      <a href="../../">Communication Science R Book</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -145,58 +145,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../getting-started/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../getting-started/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/install-r-and-rstudio.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/install-r-and-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Install R and RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/using-rstudio.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/using-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">How to use RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/names-and-objects.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/names-and-objects.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Names and Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/types-of-objects.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/types-of-objects.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Types of Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">File management</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working in Quarto</span></a>
   </div>
 </li>
@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../data-management/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../data-management/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data management</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -213,37 +213,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/read-and-write.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/read-and-write.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Read and write</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/select-and-rename.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/select-and-rename.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Select and rename</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Filter and Arrange</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/mutate.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/mutate.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mutate and recode</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/pipes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using the pipe syntax</span></a>
   </div>
 </li>
@@ -251,16 +251,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/concepts/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/concepts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Key concepts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -269,19 +269,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Covariance and correlation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
@@ -289,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/techniques/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/techniques/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Techniques</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -298,13 +298,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/techniques/data-cleaning.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/techniques/data-cleaning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data cleaning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/techniques/scale-construction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/techniques/scale-construction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scale construction</span></a>
   </div>
 </li>
@@ -312,17 +312,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/tests/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/tests/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical tests</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/tests/correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/tests/correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Correlation test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/tests/regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Regression</span></a>
   </div>
 </li>
       </ul>
@@ -340,7 +346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Function Documentation</span></a>
   </div>
 </li>
@@ -351,145 +357,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#integrating-code-and-text" id="toc-integrating-code-and-text" class="nav-link active" data-scroll-target="#integrating-code-and-text">Integrating code and text</a>
-  <ul class="collapse">
-  <li><a href="#creating-a-quarto-file" id="toc-creating-a-quarto-file" class="nav-link" data-scroll-target="#creating-a-quarto-file">Creating a Quarto file</a>
-  <ul class="collapse">
-  <li><a href="#the-header" id="toc-the-header" class="nav-link" data-scroll-target="#the-header">1. The Header</a></li>
-  <li><a href="#the-textual-content" id="toc-the-textual-content" class="nav-link" data-scroll-target="#the-textual-content">2. The textual content</a></li>
-  <li><a href="#the-code-chunks" id="toc-the-code-chunks" class="nav-link" data-scroll-target="#the-code-chunks">3. The code chunks</a></li>
-  </ul></li>
-  <li><a href="#rendering-the-document" id="toc-rendering-the-document" class="nav-link" data-scroll-target="#rendering-the-document">Rendering the document</a></li>
-  </ul></li>
-  <li><a href="#some-tips-and-warnings" id="toc-some-tips-and-warnings" class="nav-link" data-scroll-target="#some-tips-and-warnings">Some tips and warnings</a>
-  <ul class="collapse">
-  <li><a href="#turn-on-render-on-save" id="toc-turn-on-render-on-save" class="nav-link" data-scroll-target="#turn-on-render-on-save">Turn on <code>'Render on save'</code></a></li>
-  <li><a href="#the-working-directory-is-the-folder-where-the-quarto-file-is-located" id="toc-the-working-directory-is-the-folder-where-the-quarto-file-is-located" class="nav-link" data-scroll-target="#the-working-directory-is-the-folder-where-the-quarto-file-is-located">The working directory is the folder where the Quarto file is located</a></li>
-  <li><a href="#use-code-block-parameters" id="toc-use-code-block-parameters" class="nav-link" data-scroll-target="#use-code-block-parameters">Use code block parameters</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/working-in-quarto.html">Working in Quarto</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">Working in Quarto</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="integrating-code-and-text" class="level1">
-<h1>Integrating code and text</h1>
-<p>The classic way of working in R is to write your code in a script file. This is still a very common way of working, and it has many advantages. But today there are also great alternatives, that make it possible to integrate your code directly in your reporting.</p>
-<p>In fact, the book that you are currently reading is written in one such alternatives, called <strong>Quarto</strong>. Quarto is a <strong>literate programming</strong> tool, which means that it allows you to write your code and your text in the same document. Any results and visualizations that you generate in your code can also be directly included in the output document. This is not only convenient, but also makes your analysis more transparent and reproducible. If you ever need to update your analysis, you can just rerun the code and the document will automatically update, including any tables, figures and statistial results that you generated.</p>
-<p>And despite all those features, it really isn’t that different from writing an R script. In some ways it is even a more convenient way of working.</p>
-<p>In some courses in this program, you will be asked to write your assignments in Quarto. This section therefore provides a brief introduction to working in Quarto.</p>
-<section id="creating-a-quarto-file" class="level2">
-<h2 class="anchored" data-anchor-id="creating-a-quarto-file">Creating a Quarto file</h2>
-<p>You can create and work with Quarto directly in RStudio. For assignments, you will often be given a template Quarto file, but here we’ll create one from scratch. To create a new Quarto file in RStudio, go to the menu bar and select <code>File &gt; New File &gt; Quarto document</code>.</p>
-<p>You’ll get a menu where you can select some options, such as whether you want the output to be created in HTML, PDF or Word. We’ll stick with the default HTML, because this doesn’t require any additional software to be installed. For now, the only thing you should change is the <strong>Title</strong>. Just name it something like <em>My First Quarto Document</em>, and click <code>Create</code>.</p>
-<p>The new file will open in the editor, and you’ll see that it already contains some text and code, that also doubles as a quick tutorial. Roughly speaking, there are three general components.</p>
-<section id="the-header" class="level3">
-<h3 class="anchored" data-anchor-id="the-header">1. The Header</h3>
-<p>At the top of the file there is a header, which is enclosed by three dashes <code>---</code>. Here you can specify some general settings for the document, such as the title, the author, and the output format. The default is:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My First Quarto Document"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">editor</span><span class="kw">:</span><span class="at"> visual</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This means that the title of the document is “My First Quarto Document”, the output format is HTML, and the editor is the visual editor. You can add many more options to the header, but for now we’ll stick with the basics.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Visual or Source editor">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Visual or Source editor
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The Quarto editor can be <code>source</code> or <code>visual</code>. In <code>visual</code> mode, everything looks a bit more pretty. It doesn’t yet look as pretty as when you render the document (which we’ll show you in a bit), but it’s a bit easier to read. Also, in the toolbar you get some buttons to make text bold or italics, add codeblocks, insert images, create tables, etc.</p>
-<p>In <code>source</code> mode, everything is just in plain text. Behind the scenes, Quarto uses a format called <strong>Markdown</strong> to format the text. Markdown is a type of markup language (like HTML). What this means is that any formatting that you do (e.g., bold, tables, lists) is done by writing the text in a specific way. For example, to make a word bold, you write it between two asterisks <code>**like this**</code>.</p>
-<p>Working in <code>source</code> mode can be convenient if you’re already familiar with Markdown. If not, we recommend sticking with <code>visual</code> mode for now, and maybe forever.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="the-textual-content" class="level3">
-<h3 class="anchored" data-anchor-id="the-textual-content">2. The textual content</h3>
-<p>After the header, you can start writing your text. This works like a light version of Word. You can add heading, lists, tables, images, and more.</p>
-</section>
-<section id="the-code-chunks" class="level3">
-<h3 class="anchored" data-anchor-id="the-code-chunks">3. The code chunks</h3>
-<p>At some point you see a code chunk, which looks like:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<p>Inside these code chunks you can write R code. When you render the document, the code will be executed, and the output will be shown in the document.</p>
-<p>While working on the document you can also run the code chunks separately (i.e.&nbsp;without rendering). You can do this like you would do in an R script, by selectin the code you want to run and hitting <code>Run</code> (or <code>Ctrl/Cmd + Enter</code>). But there is also a convenient option to run the entire code chunk at once by clicking on the <code>run current chunk</code> button in the top right of the code chunk. Here you also find a button to run all the chunks above the current one.</p>
-<p>To add a new block, you can click on the <code>Insert</code> button in the toolbar, and select <code>Executable Cell</code> -&gt; <code>R</code>.</p>
-</section>
-</section>
-<section id="rendering-the-document" class="level2">
-<h2 class="anchored" data-anchor-id="rendering-the-document">Rendering the document</h2>
-<p>When you’re done writing your document, or if you want to see a preview, you can <code>render</code> the document by clicking the <code>Render</code> button in the toolbar (or hitting <code>Ctrl/Cmd + Shift + K</code>). Try it now! If you did not yet save your Quarto file, R will first ask you to save it. You should then give it a name with the <code>.qmd</code> (Quarto Markdown) extension, for example <code>my-first-quarto-document.qmd</code>. This should produce an HTML file that opens in your browser (unless you changed something and broke it).</p>
-<p>There is <strong>one big challenge when working with Quarto</strong>, which is also a blessing in disguise. If there is ANY error in your code, the entire document will not render. This can be frustrating, especially if you need to hand in an assignment in a few minutes. So whenever you’re working with Quarty, make sure to <strong>frequently render your document</strong> while you’re working on it, to catch any errors early on. It is much easier to trace back an error if you only made a few changes since the last time you rendered the document. If you only render the document at the end, you might have to go through the entire document to find the error. (though the error messages will tell you where to look)</p>
-<p>So why is this a blessing in disguise? It forces you to write your code in a way that is clean and well-structured. When working in an R script, a common mistake to make is that some pieces of code depend on code that is further down in the script. For example, if you use a certain column on line 10, but you only create that column on line 20. This might not pose a problem while you’re working on it, but it will bite you when for whatever reason you need to rerun the entire script. Quarto forces you to write your code in a way that if you run the entire script from scratch, it will work.</p>
-</section>
-</section>
-<section id="some-tips-and-warnings" class="level1">
-<h1>Some tips and warnings</h1>
-<section id="turn-on-render-on-save" class="level3">
-<h3 class="anchored" data-anchor-id="turn-on-render-on-save">Turn on <code>'Render on save'</code></h3>
-<p>In the toolbar you can turn on <code>Render on Save</code>. This way, any time you save the document, it will try to render. Now make sure to save often (get used to using <code>Ctrl/Cmd + s</code>). This way you can catch any rendering errors early on.</p>
-</section>
-<section id="the-working-directory-is-the-folder-where-the-quarto-file-is-located" class="level3">
-<h3 class="anchored" data-anchor-id="the-working-directory-is-the-folder-where-the-quarto-file-is-located">The working directory is the folder where the Quarto file is located</h3>
-<p>A Quarto file will always use it’s own location as the <a href="../getting-started/file-management.html#choosing-working-directory">working directory</a> This is actually quite convenient. Just make sure to put your Quarto file in the same directory as your data, and you’re good to go.</p>
-</section>
-<section id="use-code-block-parameters" class="level3">
-<h3 class="anchored" data-anchor-id="use-code-block-parameters">Use code block parameters</h3>
-<p>You can add parameters to the code chunks. For example, the following code chunk will only show the code, but not the output:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{r, results<span class="ot">=</span><span class="cn">FALSE</span>}</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>storks <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">storks =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">300</span>, <span class="dv">1</span>, <span class="dv">5000</span>, <span class="dv">9</span>, <span class="dv">140</span>, <span class="dv">3300</span>, <span class="dv">2500</span>, <span class="dv">4</span>, <span class="dv">5000</span>, <span class="dv">5</span>, <span class="dv">30000</span>, <span class="dv">1500</span>, <span class="dv">5000</span>, <span class="dv">8000</span>, <span class="dv">150</span>, <span class="dv">25000</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">birth_rate =</span> <span class="fu">c</span>(<span class="dv">83</span>, <span class="dv">87</span>, <span class="dv">118</span>, <span class="dv">117</span>, <span class="dv">59</span>, <span class="dv">774</span>, <span class="dv">901</span>, <span class="dv">106</span>, <span class="dv">188</span>, <span class="dv">124</span>, <span class="dv">551</span>, <span class="dv">610</span>, <span class="dv">120</span>, <span class="dv">367</span>, <span class="dv">439</span>, <span class="dv">82</span>, <span class="dv">1576</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">area_km2 =</span> <span class="fu">c</span>(<span class="dv">29</span>, <span class="dv">84</span>, <span class="dv">31</span>, <span class="dv">111</span>, <span class="dv">43</span>, <span class="dv">544</span>, <span class="dv">357</span>, <span class="dv">132</span>, <span class="dv">42</span>, <span class="dv">93</span>, <span class="dv">301</span>, <span class="dv">312</span>, <span class="dv">92</span>, <span class="dv">237</span>, <span class="dv">505</span>, <span class="dv">41</span>, <span class="dv">779</span>) </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Following this same notation, you can set the following parameters:</p>
-<ul>
-<li><code>{r, results=F}</code>: show the code, but not the output</li>
-<li><code>{r, eval=F}</code>: show the code, but do not run it</li>
-<li><code>{r, echo=F}</code>: do not show the code, but show the output</li>
-<li><code>{r, message=F}</code>: do not show any messages that are generated by the code. This can for instance hide the message that is printed when you run <em>library(tidyverse)</em>.</li>
-<li><code>{r, warning=F}</code>: do not show any warnings that are generated by the code. This is more dangerous than hiding messages, but if you are sure that the warning is harmless, you can use this to make the document cleaner.</li>
-<li><code>{r, message=F, warning=F}</code>: separate multiple parameters with a comma.</li>
-<li><code>{r, cache=T}</code>: cache the output. This way, if you render the document again, but the code chunk did not change, it will not rerun the code. If you have any code that takes a long time to run, this allows you to still render the document quickly (which is especially useful if you have <em>Render on Save</em> turned on). Just make sure to turn cache of before rendering the final version, to be sure that everything is up to date.</li>
-</ul>
 
 
-</section>
-</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -914,13 +812,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../getting-started/file-management.html" class="pagination-link" aria-label="File management">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">File management</span>
+      <a href="../../analysis/tests/correlation.html" class="pagination-link" aria-label="Correlation test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Correlation test</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../data-management/index.html" class="pagination-link" aria-label="Data management">
-        <span class="nav-page-text">Data management</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../good-to-know/function-documentation.html" class="pagination-link" aria-label="Function Documentation">
+        <span class="nav-page-text">Function Documentation</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

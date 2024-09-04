@@ -16,15 +16,13 @@ What the correlation test **does not** tell us is whether there is a causal rela
 For example, if we find that there is a correlation between social media use and loneliness, it does not mean that social media use causes loneliness.
 For more detail on this, see the [causality](../concepts/causality.qmd) section.
 
-# Conducting the correlation test
+# How to use it
 
 We'll show two ways of conducting the correlation test: using the `cor.test` function and using the `tab_corr` function from the `sjPlot` package.
 The `cor.test` function is part of the base R package, and is usefull if you just have two variables.
 The `tab_corr` function is part of the `sjPlot` package, and is useful if you have multiple variables and want to see the correlations between all of them.
 
 To demonstrate the correlation test, we'll use the practice data that we've used before.
-Here we load the data, and immediately rename the `news consumption` variable to `news_consumption` to avoid spaces in the column name.
-
 ```{r, message=F}
 library(tidyverse)
 d <- read_csv("https://tinyurl.com/R-practice-data") |>
@@ -80,31 +78,11 @@ This is great for getting a quick overview of the relationships between multiple
 If you need to get the exact p-values, you can also use `tab_corr(p.numeric = TRUE)`.
 
 
-## Reporting the correlation test
-
-For APA style reporting of the correlation test you need to know the `correlation coefficient`, `p-value`, and the `degrees of freedom`. 
-The formula for reporting the results of a correlation test in APA style is:
-
-> r(`df`) = `correlation coefficient`, p = `p-value`.
->
-> * the `correlation coefficient` is rounded to two decimal places, and the number before the decimal point is ommited if zero (`.11` instead of `0.11`).
-> * The `p-value` is reported for the smallest significant level (`p < 0.05`, `p < 0.01` or `p < 0.001`), or in full with three decimal places if not significant (`p = 0.123`).
-
-
-
-In our example above we observed a correlation coefficient of $r = 0.107$ with a p-value of $p = 0.009$, and $598$ degrees of freedom. 
-So we would report this as:
-
-> There is a positive correlation between age and trust in the news media, $r(598) = .12$, $p < 0.01$.
-
-
-# Alternative correlation tests
+## Pearson, Spearman, and Kendall
 
 By default the `cor.test` function uses the Pearson correlation coefficient.
-This is the most common correlation coefficient, but there are also other types of correlation coefficients that you might want to use depending on your data.
-
-The Pearson correlation coefficient assumes that the relationship between the variables is linear, and that the variables are normally distributed.
-If this is not the case, you might want to use instead use Spearman's $\rho$ or Kendall's $\tau$.
+This assumes that the relationship between the variables is linear, and that the variables are (roughly) normally distributed.
+If this is not the case, you might want to instead use Spearman's $\rho$ or Kendall's $\tau$.
 
 To use these alternative methods, you just need to specify the `method` argument in the `cor.test` function, or the `corr.method` argument in the `tab_corr` function.
 
@@ -115,5 +93,29 @@ cor.test(d$news_consumption, d$trust_t1, method = "kendall")
 d |> select(trust_t1_item1:trust_t1_item5) |> tab_corr(corr.method="spearman")
 d |> select(trust_t1_item1:trust_t1_item5) |> tab_corr(corr.method="kendall")
 ```
+
+
+
+# How to report it
+
+For APA style reporting of the correlation test you need to know the `correlation coefficient`, `p-value`, and the `degrees of freedom`. 
+You can find all these values in the output of the `cor.test` function.[^1] 
+
+[^1]: When using `tab_corr`, you can use the `p.numeric = TRUE` argument to get the p-values.
+The degrees of freedom is always the number of observations minus 2, but be carefull not to count missing (NA) values.  
+
+The formula for reporting the results of a correlation test in APA style is:
+
+r(`degrees of freedom`) = `correlation coefficient`, p = `p-value`.
+
+* the `correlation coefficient` is rounded to two decimal places, and the number before the decimal point is ommited if zero (`.11` instead of `0.11`).
+* The `p-value` is reported for the smallest significant level (`p < 0.05`, `p < 0.01` or `p < 0.001`), or in full with three decimal places if not significant (`p = 0.123`).
+
+
+
+In our example above we observed a correlation coefficient of $r = 0.107$ with a p-value of $p = 0.009$, and $598$ degrees of freedom. 
+So we would report this as:
+
+> There is a positive correlation between age and trust in journalists, $r(598) = .12$, $p < 0.01$.
 
 

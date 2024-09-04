@@ -372,15 +372,12 @@ window.Quarto = {
    
   <ul>
   <li><a href="#testing-causal-relations" id="toc-testing-causal-relations" class="nav-link active" data-scroll-target="#testing-causal-relations">Testing causal relations</a></li>
-  <li><a href="#correlation-versus-causation" id="toc-correlation-versus-causation" class="nav-link" data-scroll-target="#correlation-versus-causation">Correlation versus causation</a>
+  <li><a href="#why-correlation-does-not-imply-causation" id="toc-why-correlation-does-not-imply-causation" class="nav-link" data-scroll-target="#why-correlation-does-not-imply-causation">Why correlation does not imply causation</a></li>
+  <li><a href="#how-to-establish-causation" id="toc-how-to-establish-causation" class="nav-link" data-scroll-target="#how-to-establish-causation">How to establish causation</a>
   <ul class="collapse">
-  <li><a href="#causation" id="toc-causation" class="nav-link" data-scroll-target="#causation">Causation</a></li>
-  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a></li>
-  </ul></li>
-  <li><a href="#how-to-deal-with-confounders" id="toc-how-to-deal-with-confounders" class="nav-link" data-scroll-target="#how-to-deal-with-confounders">How to deal with confounders?</a>
-  <ul class="collapse">
-  <li><a href="#the-gold-standard-controlled-experiments" id="toc-the-gold-standard-controlled-experiments" class="nav-link" data-scroll-target="#the-gold-standard-controlled-experiments">The gold standard: controlled experiments</a></li>
-  <li><a href="#the-next-best-thing-controlling-for-confounders" id="toc-the-next-best-thing-controlling-for-confounders" class="nav-link" data-scroll-target="#the-next-best-thing-controlling-for-confounders">The next best thing: controlling for confounders</a></li>
+  <li><a href="#theoretical-foundation" id="toc-theoretical-foundation" class="nav-link" data-scroll-target="#theoretical-foundation">Theoretical foundation</a></li>
+  <li><a href="#randomized-controlled-experiments" id="toc-randomized-controlled-experiments" class="nav-link" data-scroll-target="#randomized-controlled-experiments">Randomized controlled experiments</a></li>
+  <li><a href="#controlling-for-confounders" id="toc-controlling-for-confounders" class="nav-link" data-scroll-target="#controlling-for-confounders">Controlling for confounders</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -421,21 +418,20 @@ window.Quarto = {
 <li>When news media focus heavily on certain issues, it enhances the public’s perception of their importance <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>.</li>
 <li>More screen time among children and adolescents is associated with lower psychological well-being <span class="citation" data-cites="twenge18">(<a href="#ref-twenge18" role="doc-biblioref">Twenge and Campbell 2018</a>)</span>.</li>
 </ul>
-<p>Research into such causal relations is important, because by understanding causal mechanisms, we can develop strategies to change the outcomes for the better. If more screen time is indeed associated with lower psychological well-being, we should advice parents to limit children’s screen time.</p>
-<p>But before we incurr the wrath of our children by trying to take away their smartphones, we should first make sure that our theory is correct. As usual, we can <strong>derive hypotheses</strong> that predict relationships between variables, and then test these hypotheses with <strong>statistical methods</strong>.</p>
-<p>However, when testing causal relations, we need to be particularly careful, because <strong>correlation does not imply causation</strong>!</p>
+<p>Research into such causal relations is important, because by understanding causal mechanisms, we can develop strategies to change the outcomes for the better. If more screen time causes lower psychological well-being, we should advice parents to limit children’s screen time.</p>
+<p>In order to determine whether we should really incur the wrath of our children by taking away their smartphones, we need to test our theory with empirical data. As usual, we can <a href="../../analysis/concepts/hypotheses.html">derive hypotheses</a> that predict relationships between variables, and then test these hypotheses with <strong>statistical methods</strong>. However, when testing causal relations, we need to particularly careful!</p>
+<p>A common mistake is to assume that a correlation between two variables implies a causal relationship. Even if we find strong evidence that people that have more screen time also have lower psychological well-being, this does not prove that screen time causes lower well-being! There is a famous saying in statistics: <strong>correlation does not imply causation</strong>. In this tutorial you will learn why this is the case, and how to deal with it.</p>
 </section>
-<section id="correlation-versus-causation" class="level1">
-<h1>Correlation versus causation</h1>
-<section id="causation" class="level2">
-<h2 class="anchored" data-anchor-id="causation">Causation</h2>
-<p>Causation implies a cause-and-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). If we could <em>manipulate</em> the cause in an experiment, we would expect to see a corresponding change in the effect. For instance, if we could somehow make the news media talk more about climate change, we would expect the public to think and talk about it more, too. Basically, this is why PR exists, and why politicians try to get media to talk about the issues they care about.</p>
-<p>However, in reality we often cannot experimentally manipulate a variable to see if it has a causal effect. To empirically investigate causal relations we therefore often look at correlations in the real-world. This is a valid approach, but we should always be mindfull that correlation by itself is not strong evidence of causation.</p>
-</section>
-<section id="correlation" class="level2">
-<h2 class="anchored" data-anchor-id="correlation">Correlation</h2>
-<p>Correlation <em>merely</em> indicates an association or relationship between two variables. When two variables are correlated, they tend to change together. This can be due to a causal relationship in either or both directions, but it could also be due to a third variable that causes both of them to change. This is known as a <strong>confounding variable</strong>, and a correlation that results from a confounding variable is called a <strong>spurious correlation</strong>.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Famous spurious correlations">
+<section id="why-correlation-does-not-imply-causation" class="level1">
+<h1>Why correlation does not imply causation</h1>
+<p><strong>Causation</strong> implies a cause-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). The cause does not need to be the <em>only</em> cause of the effect (there are many things that affect well-being), nor does it <em>always</em> need to lead to the effect (some people with high screen time will be happier than other with low screen time). It is enough that the cause increases the likelihood of the effect. If we were to somehow manipulate the cause, we would expect the likelihood of the effect to change.</p>
+<p><a href="../../analysis/concepts/covariance-and-correlation.html">Correlation</a>, on the other hand, only indicates an association or relationship between two variables. It makes sense why people can confuse this for a causal relationship. If we see that people that that are often on their phone are overall less happy, it is easy to assume that the phone is the cause of their unhappiness. But in order to establish whether a correlation is due to a causal relationship, we need address three issues:</p>
+<ul>
+<li><strong>Confounding</strong>: A correlation could be due to a third variable that causes both of them to change. Both screen time and psychological well-being could for instance be influenced by parental involvement. If the relation between two variables is not because they are causally related, but because they are both influenced by a third variable, we call this a <strong>spurious correlation</strong>. The third variable that causes the correlation is called a <strong>confounding variable</strong>.</li>
+<li><strong>Directionality</strong>: A correlation does not tell us which variable causes the other. It could be that more screen time causes lower psychological well-being, but it could also be that children with lower psychological well-being spend more time on screens. If this is the case, taking away their phone would not help!</li>
+<li><strong>Coincidence</strong>: A correlation is also <strong>spurious</strong> if it is just a coincidence. This is something we can address with statistical tests, but it bears keeping in mind. (See the box below for some famous examples of spurious correlations.)</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Famous spurious correlations">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -447,49 +443,67 @@ Famous spurious correlations
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A <a href="http://www.brixtonhealth.com/storksBabies.pdf">famous example</a> is that across European countries the number of storks is quite strongly correlated with the number of newborn babies (<span class="math inline">\(\rho = 0.62\)</span>). The confounder in this case is the size of the country: larger countries have more storks and more babies. So the correlation is not evidence for the folk theory that storks deliver babies.</p>
-<p>Spurious correlations can also just be coincidental. Especially when we look at many variables over time, we are likely to find some that are correlated just by chance. A whole website, <a href="https://www.tylervigen.com/spurious-correlations">Spurious Correlations</a>, is dedicated to finding statistical gems, such as the correlation between the number of people who drowned by falling into a pool and the number of films Nicolas Cage appeared in. This is why it’s important to have a theoretical foundation for the relationships we test, and always be cautious when interpreting statistical results.</p>
+<p>A <a href="http://www.brixtonhealth.com/storksBabies.pdf">famous example</a> is that across European countries the number of storks is quite strongly correlated with the number of newborn babies (<span class="math inline">\(\rho = 0.62\)</span>). A naive interpretation would be that this provides evidence for the folk theory that storks deliver babies. The real reason in this case is due to a confounding variable: the size of the country. Larger countries simply have more storks and more babies.</p>
+<p>There is also a website called <a href="https://www.tylervigen.com/spurious-correlations">Spurious Correlations</a>, that is dedicated to finding coincidental spurious correlations, such as the correlation between the number of people who drowned by falling into a pool and the number of films Nicolas Cage appeared in.</p>
 </div>
 </div>
 </div>
-<p>In the case of screen time and psychological well-being study, the authors did observe an “association”, but were not able to establish which variable causes the other. Based on their data, “it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both” <span class="citation" data-cites="twenge18">(<a href="#ref-twenge18" role="doc-biblioref">Twenge and Campbell 2018, 281</a>)</span>. Indeed, it could be that children who are already unhappy end up spending more time on screens, which would mean that taking away their phone might not help (and might even make things worse). Furthermore, possible confounders could be that parents who are more involved in their children’s lives might both limit screen time and help develop better psychological well-being.</p>
 </section>
+<section id="how-to-establish-causation" class="level1">
+<h1>How to establish causation</h1>
+<p>So how can we better establish whether a cause-effect relationship exists between our variables of interest? There is no easy answer for this, and the appropriate methodology is a whole field of research in itself <span class="citation" data-cites="pearl09">(see <a href="#ref-pearl09" role="doc-biblioref">Pearl 2009</a>)</span>. But there are several general strategies that we can use to build evidence for causation.</p>
+<section id="theoretical-foundation" class="level2">
+<h2 class="anchored" data-anchor-id="theoretical-foundation">Theoretical foundation</h2>
+<p>First of all, it is critical to have a solid <strong>theoretical foundation</strong> for the relationship. We need to have a good reason to believe that one variable causes the other.</p>
+<p>A theoretical foundation can also help address the issue of <strong>directionality</strong>. In their study on screen time and psychological well-being, Twenge and Campbell emphasized that based on their (observational) data “it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both” <span class="citation" data-cites="twenge18">(<a href="#ref-twenge18" role="doc-biblioref">Twenge and Campbell 2018, 281</a>)</span>. So in order to build their argument for a causal relationship, they discussed literature that supports their view that screen time is the cause of lower well-being, and not the other way around.</p>
+<p>It is often the case that we cannot determine causality from a single study, but need to build a body of evidence from multiple studies that point in the same direction. An experiment might be able to establish causality, but only for a very specific context and short term effects. An observational study might be able to find correlations that are consistent across many different contexts and time periods, but it cannot establish causality. To build theory on complicated issues such as the relationship between screen time and well-being, we need to combine both types of studies.</p>
 </section>
-<section id="how-to-deal-with-confounders" class="level1">
-<h1>How to deal with confounders?</h1>
-<p>So when we observe a correlation between two variables, how can we determine whether there is actually a causal effect from one variable on the other? How can we get rid of the possible influence of confounding variables?</p>
-<section id="the-gold-standard-controlled-experiments" class="level2">
-<h2 class="anchored" data-anchor-id="the-gold-standard-controlled-experiments">The gold standard: controlled experiments</h2>
-<p>The gold standard for establishing causation is the <strong>randomized controlled experiment</strong>, in which the researcher <em>manipulates the cause</em> and observes the effect, while keeping all other variables constant. So how can one manipulate a cause? The trick is to create different experimental conditions. A well known example comes from the field of medicine: you give some participants a medicine you want to test, where others get a placebo (i.e.&nbsp;a fake medicine that only looks the same). The people that got the real medicine are then the <em>treatment group</em>, and the people that got the placebo are the <em>control group</em> To test if the medicine works, you compare the treatment group to the control group.</p>
-<p>A similar example from communication science would be that you want to test the effictiveness of a new persuasion strategy. You could then show the treatment group a persuasive message that uses the new strategy, and the control group a message that doesn’t.</p>
-<p>There are two ways in which a randomized controlled expriment deals with confounding:</p>
+<section id="randomized-controlled-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="randomized-controlled-experiments">Randomized controlled experiments</h2>
+<p>The gold standard for establishing causation is the <strong>randomized controlled experiment</strong>, in which the researcher <em>manipulates the cause</em> and observes the effect, while keeping all other variables constant. In order to manipulate the cause, the researcher creates different experimental conditions. The classic example comes from the field of medicine: you give some participants a medicine you want to test, where others get a placebo (i.e.&nbsp;a fake medicine that only looks the same). The people that got the real medicine are then the <em>treatment group</em>, and the people that got the placebo are the <em>control group</em> To test if the medicine works, you compare the treatment group to the control group.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The experimental design helps to adress both <strong>confounding</strong> and <strong>directionality</strong>.</p>
 <ul>
 <li>By randomly assigning people to the treatment or control group, the people in both groups are <em>statistically identical</em>. If the randomization is done correctly, any possible confounding variables are equally distributed between the two groups, and so any difference in the outcome can be attributed to the treatment.</li>
 <li>By comparing the treatment group to the control group, you can account for confounding variables that have to do with the process of appyling the treatment. A well known example of this is the <em>placebo effect</em>, where people feel better just because they <em>think</em> they’re taking a medicine (control group), and not because of the actual medicine (treatment group). If the medicine works, the treatment group should see a stronger effect than the control group.</li>
 </ul>
-<p>This ability to eliminate the influence of confounders makes experiments a very powerful tool for establishing causation. However, in the field of communication science it is often not possible or ethical to conduct valid experiments. There should be absolutely no difference between the treatment and control group, except for the treatment. This is relatively easy in medical trials, because people can receive an identical looking placebo, but in communication science it’s often more difficult to create a placebo condition that is identical to the treatment condition. We cannot ask people to stop using social media for a week, because being asked to do so is already a treatment in itself, and it is not possible to have a control group that only thinks they are not using social media.</p>
+<p>This ability to eliminate the influence of confounders makes experiments a powerful tool for establishing causation. However, in the field of communication science it is often not possible (or ethical) to conduct valid experiments. For many of the causes that we are interested in, it is simply not possible to manipulate it in a controlled setting that is still sufficiently similar to the real world.</p>
 </section>
-<section id="the-next-best-thing-controlling-for-confounders" class="level2">
-<h2 class="anchored" data-anchor-id="the-next-best-thing-controlling-for-confounders">The next best thing: controlling for confounders</h2>
+<section id="controlling-for-confounders" class="level2">
+<h2 class="anchored" data-anchor-id="controlling-for-confounders">Controlling for confounders</h2>
 <p>If we cannot conduct an experiment, we can to some extend control for confounding variables using <strong>statistical methods</strong>. This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>. And even common knowledge like “smoking causes cancer”, that is the foundation for anti-smoking policies, relies heavily on evidence from these types of observational studies. Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.</p>
 <p>The trick behind statistically controlling for confounders lies in <strong>multivariate analysis</strong> (i.e.&nbsp;analyzing more than two variables at the same time). If we are worried that a correlation between a <strong>dependent variable</strong> and <strong>independent variable</strong> is due to a third variable, we can add this <strong>confounding variable</strong> to the analysis. Using techniques like <strong>multiple regression</strong>, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant. We also call this <strong>controlling for</strong> the confounder.</p>
 <p>Note that this is different from experiments, where we can controll for all possible confounders through randomization. In observational studies, we can only control for the variables that we have measured. This puts an even greater burden on having a solid theoretical foundation for the relationships we test.</p>
-<p>An an example, consider the <em>agenda-setting theory</em> <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>, which posits that the media influence the public’s perception of the importance of issues. Initially, the primary evidence for this theory came from a study that showed a correlation between the amount of media coverage of an issue and the public’s perception of its importance. At the time, news media were one of the few sources of information for the public, so <em>on theoretical grounds</em> it was reasonable to assume that the media were the cause of the public’s perception. But today, with the rise of social media and other information sources, the relationship between media coverage and public opinion is more complex. To test the theory today, we would need to control for other sources of information, such as social media, to see if the relationship between media coverage and public opinion still holds.</p>
-<p>This also emphasizes that statistics are never a substitute for theory. Statistics allow us to build stronger empirical evidence for our theories, but we need theory to guide us in what to measure and how to interpret the results.</p>
+<!-- An an example, consider the *agenda-setting theory* [@mccombs72], which posits that the media influence the public's perception of the importance of issues.
+Initially, the primary evidence for this theory came from a study that showed a correlation between the amount of media coverage of an issue and the public's perception of its importance.
+At the time, news media were one of the few sources of information for the public, so *on theoretical grounds* it was reasonable to assume that the media were the cause of the public's perception.
+But today, with the rise of social media and other information sources, the relationship between media coverage and public opinion is more complex.
+To test the theory today, we would need to control for other sources of information, such as social media, to see if the relationship between media coverage and public opinion still holds.
+
+This also emphasizes that statistics are never a substitute for theory.
+Statistics allow us to build stronger empirical evidence for our theories, but we need theory to guide us in what to measure and how to interpret the results. -->
 
 
 
 </section>
 </section>
+
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-mccombs72" class="csl-entry" role="listitem">
 Mccombs, Maxwell, and Donald Shaw. 1972. <span>“The Agenda-Setting Function of Mass Media.”</span> <em>Public Opinion Quarterly</em> 36 (June): 176–87. <a href="https://doi.org/10.1086/267990">https://doi.org/10.1086/267990</a>.
 </div>
+<div id="ref-pearl09" class="csl-entry" role="listitem">
+Pearl, Judea. 2009. <em>Causality</em>. Cambridge university press.
+</div>
 <div id="ref-twenge18" class="csl-entry" role="listitem">
 Twenge, Jean M., and W. Keith Campbell. 2018. <span>“Associations Between Screen Time and Lower Psychological Well-Being Among Children and Adolescents: Evidence from a Population-Based Study.”</span> <em>Preventive Medicine Reports</em> 12: 271–83. https://doi.org/<a href="https://doi.org/10.1016/j.pmedr.2018.10.003">https://doi.org/10.1016/j.pmedr.2018.10.003</a>.
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>A similar example from communication science could be that you want to test the effictiveness of a new persuasion strategy. You could then show the treatment group a persuasive message that uses the new strategy, and the control group a message that doesn’t.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -582,7 +596,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

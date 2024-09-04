@@ -327,6 +327,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Correlation test</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/tests/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -414,7 +420,7 @@ Required packages and data for this tutorial
 </div>
 <section id="mutate" class="level1">
 <h1>Creating and modifying columns with mutate()</h1>
-<p>The <code>mutate</code> function allows you to create columns in a table, or overwrite existing ones. You just specify which columns you want to create or modify, and then provide an expression for how to compute the new values. In this expression you can refer to other columns in the table, and use any R functions you like, which makes <code>mutate</code> a very powerful tool.</p>
+<p>The <code>mutate</code> function allows you to create or modify columns in a data frame. You just specify which columns you want to create or modify, and then provide an expression for how to compute the new values. In this expression you can refer to other columns in the table, and use any R functions you like, which makes <code>mutate</code> a very powerful tool.</p>
 <section id="creating-new-variables" class="level2">
 <h2 class="anchored" data-anchor-id="creating-new-variables">Creating new variables</h2>
 <p>To create a new variable you use the following syntax:</p>
@@ -423,11 +429,9 @@ Required packages and data for this tutorial
 </div>
 <p>The expression can be anything that returns a valid column. For example, in the practice data we have the columns <code>trust_t1</code> and <code>trust_t2</code>, which represent trust in journalists before and after the experiment. We can create a new variable <code>trust_change</code> that represents the change in trust from before to after the experiment.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">trust_change =</span> trust_t2 <span class="sc">-</span> trust_t1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You could use <code>select</code> to quickly verify that it worked as expected.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, trust_t1, trust_t2, trust_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">trust_change =</span> trust_t2 <span class="sc">-</span> trust_t1)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, trust_t1, trust_t2, trust_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -441,15 +445,15 @@ Required packages and data for this tutorial
 <h2 class="anchored" data-anchor-id="mutate-existing-variables">Mutate existing variables</h2>
 <p>To mutate an existing variable, you can simply overwrite the column with the same name. For example, let’s say that we want to standardize the <code>trust_change</code> variable that we just made. We can standardize a variable with the <code>scale</code> function, so we can use that inside of <code>mutate</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">trust_change =</span> <span class="fu">scale</span>(trust_change))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">trust_change =</span> <span class="fu">scale</span>(trust_change))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now the <code>trust_change</code> variable is standardized, which means that it has a mean of 0 and a standard deviation of 1. A nice way to get a quick overview of the distribution of a single variable is to plot a histogram.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d<span class="sc">$</span>trust_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d<span class="sc">$</span>trust_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="mutate_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="mutate_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -463,24 +467,24 @@ Required packages and data for this tutorial
 <h2 class="anchored" data-anchor-id="recode-with-case_match">Recode with <code>case_match</code></h2>
 <p>The <code>case_match</code> function is a simple way to recode specific values into new values. For example, in our practice data we have a column with the experimental groups, which are <code>control</code>, <code>positive</code>, and <code>negative</code>. Let’s say we want to clarify that <code>positive</code> means <code>positive_movie</code>, and <code>negative</code> means <code>negative_movie</code>. We could then use <code>case_match</code> to change these values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">experiment_group =</span> <span class="fu">case_match</span>(experiment_group,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"positive"</span> <span class="sc">~</span> <span class="st">"positive_movie"</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"negative"</span> <span class="sc">~</span> <span class="st">"negative_movie"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">.default =</span> experiment_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">experiment_group =</span> <span class="fu">case_match</span>(experiment_group,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"positive"</span> <span class="sc">~</span> <span class="st">"positive_movie"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"negative"</span> <span class="sc">~</span> <span class="st">"negative_movie"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">.default =</span> experiment_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here we say: overwrite the <code>experiment_group</code> column with output of the <code>case_match</code> function. Inside the <code>case_match</code> function, we specify three things:</p>
 <ol type="1">
 <li>The column we want to recode (<code>experiment_group</code>).</li>
 <li>The conditions for recoding the values. We have two conditions:
 <ol type="1">
-<li>If <code>positive</code>, return <code>"positive_movie"</code>.</li>
-<li>If <code>negative</code>, return <code>"negative_movie"</code>.</li>
+<li>If value is <code>"positive"</code>, recode into <code>"positive_movie"</code>.</li>
+<li>If value is <code>"negative"</code>, recode into <code>"negative_movie"</code>.</li>
 </ol></li>
-<li>The <code>.default</code> is to return the current value of the column. This means that if the value is not matched in any of the conditions, it will remain the same.</li>
+<li>We specify a <code>.default</code> value for values that are not matched in the conditions. Here we say that in that case we want to use the current value of the <code>experiment_group</code> column.</li>
 </ol>
 <p>If you check the unique values of the <code>experiment_group</code> column, you will see that <code>positive</code> and <code>negative</code> have been changed to <code>positive_movie</code> and <code>negative_movie</code>, and that <code>control</code> remains the same.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d<span class="sc">$</span>experiment_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d<span class="sc">$</span>experiment_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "negative_movie" "control"        "positive_movie"</code></pre>
 </div>
@@ -490,16 +494,16 @@ Required packages and data for this tutorial
 <h2 class="anchored" data-anchor-id="more-flexible-recoding-with-case_when">More flexible recoding with <code>case_when</code></h2>
 <p>The <code>case_match</code> function is great if you need to recode many values, but sometimes you need more flexibility. For example, if we want to recode the <code>age</code> variable into categories (e.g., <code>&lt;= 20</code>, <code>20-30</code>), it would be really tiresome to recode every individual age value. With the <code>case_when</code> function, we can specify the conditions using <strong>logical expressions</strong>. Each condition is evaluated in order, and the first one that is <code>TRUE</code> is used.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">age_category =</span> <span class="fu">case_when</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"&lt;= 20"</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"20-30"</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">40</span> <span class="sc">~</span> <span class="st">"30-40"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">"40-50"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"50-60"</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="st">"&gt;= 60"</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d<span class="sc">$</span>age_category)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">age_category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"&lt;= 20"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"20-30"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">40</span> <span class="sc">~</span> <span class="st">"30-40"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">"40-50"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"50-60"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="st">"&gt;= 60"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d<span class="sc">$</span>age_category)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 &lt;= 20 &gt;= 60 20-30 30-40 40-50 50-60 
@@ -511,11 +515,11 @@ Required packages and data for this tutorial
 <h2 class="anchored" data-anchor-id="binary-cases-with-if_else">Binary cases with <code>if_else</code></h2>
 <p>If you only have two categories, you can use the <code>if_else</code> function. You could technically also use <code>case_when</code> for this, but <code>if_else</code> is more concise and easier to read. The syntax for <code>if_else</code> is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">if_else</span>(condition, value_if_true, value_if_false)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">if_else</span>(condition, value_if_true, value_if_false)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A common use case is that sometimes you want to perform an operation only on a subset of the data. For example, in our data there are a few participants that accidentally entered their birthyear instead of their age. To correct this, we can use <code>if_else</code> to set the age to <code>2024 - birthyear</code>, but only if the number the participants entered is above 1000 (which is only the case if it’s a birthyear).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">1000</span>, <span class="dv">2024</span> <span class="sc">-</span> age, age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">1000</span>, <span class="dv">2024</span> <span class="sc">-</span> age, age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>So this reads: if the age is above 1000, return <code>2024 - age</code>, otherwise return the current age.</p>
 

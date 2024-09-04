@@ -386,13 +386,13 @@ window.Quarto = {
    
   <ul>
   <li><a href="#what-is-the-correlation-test" id="toc-what-is-the-correlation-test" class="nav-link active" data-scroll-target="#what-is-the-correlation-test">What is the correlation test?</a></li>
-  <li><a href="#conducting-the-correlation-test" id="toc-conducting-the-correlation-test" class="nav-link" data-scroll-target="#conducting-the-correlation-test">Conducting the correlation test</a>
+  <li><a href="#how-to-use-it" id="toc-how-to-use-it" class="nav-link" data-scroll-target="#how-to-use-it">How to use it</a>
   <ul class="collapse">
   <li><a href="#between-two-variables-cor.test" id="toc-between-two-variables-cor.test" class="nav-link" data-scroll-target="#between-two-variables-cor.test">Between two variables: cor.test</a></li>
   <li><a href="#between-more-variables-tab_corr" id="toc-between-more-variables-tab_corr" class="nav-link" data-scroll-target="#between-more-variables-tab_corr">Between more variables: tab_corr</a></li>
-  <li><a href="#reporting-the-correlation-test" id="toc-reporting-the-correlation-test" class="nav-link" data-scroll-target="#reporting-the-correlation-test">Reporting the correlation test</a></li>
+  <li><a href="#pearson-spearman-and-kendall" id="toc-pearson-spearman-and-kendall" class="nav-link" data-scroll-target="#pearson-spearman-and-kendall">Pearson, Spearman, and Kendall</a></li>
   </ul></li>
-  <li><a href="#alternative-correlation-tests" id="toc-alternative-correlation-tests" class="nav-link" data-scroll-target="#alternative-correlation-tests">Alternative correlation tests</a></li>
+  <li><a href="#how-to-report-it" id="toc-how-to-report-it" class="nav-link" data-scroll-target="#how-to-report-it">How to report it</a></li>
   </ul>
 </nav>
     </div>
@@ -425,8 +425,8 @@ window.Quarto = {
 <p>The correlation test is a statistical test that can tell us if there is a relationship between two numeric variables. It also provides a coefficient between -1 and 1 that tells us how strong the relationship is, and whether it is positive or negative. In this tutorial we focus on conducting the test. For more details on the concept of correlation and how to interpret the correlation coefficient <span class="math inline">\(r\)</span>, see the <a href="../../analysis/concepts/covariance-and-correlation.html">covariance and correlation</a> section.</p>
 <p>What the correlation test <strong>does not</strong> tell us is whether there is a causal relationship between the variables. For example, if we find that there is a correlation between social media use and loneliness, it does not mean that social media use causes loneliness. For more detail on this, see the <a href="../../analysis/concepts/causality.html">causality</a> section.</p>
 </section>
-<section id="conducting-the-correlation-test" class="level1">
-<h1>Conducting the correlation test</h1>
+<section id="how-to-use-it" class="level1">
+<h1>How to use it</h1>
 <p>We’ll show two ways of conducting the correlation test: using the <code>cor.test</code> function and using the <code>tab_corr</code> function from the <code>sjPlot</code> package. The <code>cor.test</code> function is part of the base R package, and is usefull if you just have two variables. The <code>tab_corr</code> function is part of the <code>sjPlot</code> package, and is useful if you have multiple variables and want to see the correlations between all of them.</p>
 <p>To demonstrate the correlation test, we’ll use the practice data that we’ve used before. Here we load the data, and immediately rename the <code>news consumption</code> variable to <code>news_consumption</code> to avoid spaces in the column name.</p>
 <div class="cell">
@@ -543,26 +543,9 @@ cor.test using the formula notation
 </div>
 <p>This is great for getting a quick overview of the relationships between multiple variables. If you need to get the exact p-values, you can also use <code>tab_corr(p.numeric = TRUE)</code>.</p>
 </section>
-<section id="reporting-the-correlation-test" class="level2">
-<h2 class="anchored" data-anchor-id="reporting-the-correlation-test">Reporting the correlation test</h2>
-<p>For APA style reporting of the correlation test you need to know the <code>correlation coefficient</code>, <code>p-value</code>, and the <code>degrees of freedom</code>. The formula for reporting the results of a correlation test in APA style is:</p>
-<blockquote class="blockquote">
-<p>r(<code>df</code>) = <code>correlation coefficient</code>, p = <code>p-value</code>.</p>
-<ul>
-<li>the <code>correlation coefficient</code> is rounded to two decimal places, and the number before the decimal point is ommited if zero (<code>.11</code> instead of <code>0.11</code>).</li>
-<li>The <code>p-value</code> is reported for the smallest significant level (<code>p &lt; 0.05</code>, <code>p &lt; 0.01</code> or <code>p &lt; 0.001</code>), or in full with three decimal places if not significant (<code>p = 0.123</code>).</li>
-</ul>
-</blockquote>
-<p>In our example above we observed a correlation coefficient of <span class="math inline">\(r = 0.107\)</span> with a p-value of <span class="math inline">\(p = 0.009\)</span>, and <span class="math inline">\(598\)</span> degrees of freedom. So we would report this as:</p>
-<blockquote class="blockquote">
-<p>There is a positive correlation between age and trust in the news media, <span class="math inline">\(r(598) = .12\)</span>, <span class="math inline">\(p &lt; 0.01\)</span>.</p>
-</blockquote>
-</section>
-</section>
-<section id="alternative-correlation-tests" class="level1">
-<h1>Alternative correlation tests</h1>
-<p>By default the <code>cor.test</code> function uses the Pearson correlation coefficient. This is the most common correlation coefficient, but there are also other types of correlation coefficients that you might want to use depending on your data.</p>
-<p>The Pearson correlation coefficient assumes that the relationship between the variables is linear, and that the variables are normally distributed. If this is not the case, you might want to use instead use Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span>.</p>
+<section id="pearson-spearman-and-kendall" class="level2">
+<h2 class="anchored" data-anchor-id="pearson-spearman-and-kendall">Pearson, Spearman, and Kendall</h2>
+<p>By default the <code>cor.test</code> function uses the Pearson correlation coefficient. This assumes that the relationship between the variables is linear, and that the variables are (roughly) normally distributed. If this is not the case, you might want to instead use Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span>.</p>
 <p>To use these alternative methods, you just need to specify the <code>method</code> argument in the <code>cor.test</code> function, or the <code>corr.method</code> argument in the <code>tab_corr</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(d<span class="sc">$</span>news_consumption, d<span class="sc">$</span>trust_t1, <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
@@ -571,11 +554,32 @@ cor.test using the formula notation
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">select</span>(trust_t1_item1<span class="sc">:</span>trust_t1_item5) <span class="sc">|&gt;</span> <span class="fu">tab_corr</span>(<span class="at">corr.method=</span><span class="st">"spearman"</span>)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">select</span>(trust_t1_item1<span class="sc">:</span>trust_t1_item5) <span class="sc">|&gt;</span> <span class="fu">tab_corr</span>(<span class="at">corr.method=</span><span class="st">"kendall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+</section>
+<section id="how-to-report-it" class="level1">
+<h1>How to report it</h1>
+<p>For APA style reporting of the correlation test you need to know the <code>correlation coefficient</code>, <code>p-value</code>, and the <code>degrees of freedom</code>. You can find all these values in the output of the <code>cor.test</code> function.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The formula for reporting the results of a correlation test in APA style is:</p>
+<p>r(<code>degrees of freedom</code>) = <code>correlation coefficient</code>, p = <code>p-value</code>.</p>
+<ul>
+<li>the <code>correlation coefficient</code> is rounded to two decimal places, and the number before the decimal point is ommited if zero (<code>.11</code> instead of <code>0.11</code>).</li>
+<li>The <code>p-value</code> is reported for the smallest significant level (<code>p &lt; 0.05</code>, <code>p &lt; 0.01</code> or <code>p &lt; 0.001</code>), or in full with three decimal places if not significant (<code>p = 0.123</code>).</li>
+</ul>
+<p>In our example above we observed a correlation coefficient of <span class="math inline">\(r = 0.107\)</span> with a p-value of <span class="math inline">\(p = 0.009\)</span>, and <span class="math inline">\(598\)</span> degrees of freedom. So we would report this as:</p>
+<blockquote class="blockquote">
+<p>There is a positive correlation between age and trust in journalists, <span class="math inline">\(r(598) = .12\)</span>, <span class="math inline">\(p &lt; 0.01\)</span>.</p>
+</blockquote>
 
 
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>When using <code>tab_corr</code>, you can use the <code>p.numeric = TRUE</code> argument to get the p-values. The degrees of freedom is always the number of observations minus 2, but be carefull not to count missing (NA) values.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -668,7 +672,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/VU-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
