@@ -57,6 +57,53 @@ A [famous example](http://www.brixtonhealth.com/storksBabies.pdf) is that across
 There is also a website called [Spurious Correlations](https://www.tylervigen.com/spurious-correlations), that is dedicated to finding coincidental spurious correlations, such as the correlation between the number of people who drowned by falling into a pool and the number of films Nicolas Cage appeared in.
 :::
 
+```{r, echo=F, message=F, fig.height=4}
+library(ggdag)
+library(gridExtra)
+library(tidyverse)
+library(grid)
+
+coords <- list(
+    x = c(x=1, z=2, y=3),
+    y = c(x=1, z=2, y=1)
+)
+
+
+d_cause <- dagify(y ~ x, coords = coords) |> 
+    tidy_dagitty() |> 
+    ggdag() + theme_dag() + ggtitle("Causal relation") 
+
+d_cause_rev <- dagify(x ~ y, coords = coords) |> 
+    tidy_dagitty() |>
+    ggdag() + theme_dag() + ggtitle("Reverse causal relation")
+
+d_coin <- dagify(x ~ y, coords = coords) |> 
+    tidy_dagitty() |> 
+    ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+    geom_dag_point() +
+    geom_dag_text() +
+    theme_dag() + ggtitle("Coincidence")
+
+d_conf <- confounder_triangle(x_y_associated = FALSE) %>% 
+  tidy_dagitty() %>% 
+  mutate(linetype = ifelse(name == "z", "solid", "dashed")) %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) + 
+  geom_dag_point() + 
+  geom_dag_text() + 
+  geom_dag_edges(aes(edge_linetype = linetype), show.legend = FALSE) +
+  theme_dag() + ggtitle("Confounding")
+
+title <- textGrob("Different possible reasons for correlation between X and Y", gp = gpar( cex = 1.5))
+
+grid.arrange(d_cause,d_cause_rev, d_coin, d_conf, layout_matrix = rbind(c(1,4), c(2,4), c(3,4)),
+             bottom=title)
+```
+
+
+
+
+
+
 
 # How to (better) establish causation
 

@@ -376,8 +376,8 @@ window.Quarto = {
   <li><a href="#how-to-better-establish-causation" id="toc-how-to-better-establish-causation" class="nav-link" data-scroll-target="#how-to-better-establish-causation">How to (better) establish causation</a>
   <ul class="collapse">
   <li><a href="#theoretical-foundation" id="toc-theoretical-foundation" class="nav-link" data-scroll-target="#theoretical-foundation">Theoretical foundation</a></li>
-  <li><a href="#randomized-controlled-experiments" id="toc-randomized-controlled-experiments" class="nav-link" data-scroll-target="#randomized-controlled-experiments">Randomized controlled experiments</a></li>
-  <li><a href="#controlling-for-confounders" id="toc-controlling-for-confounders" class="nav-link" data-scroll-target="#controlling-for-confounders">Controlling for confounders</a></li>
+  <li><a href="#if-possible-conduct-an-experiment" id="toc-if-possible-conduct-an-experiment" class="nav-link" data-scroll-target="#if-possible-conduct-an-experiment">If possible, conduct an experiment</a></li>
+  <li><a href="#for-observational-data-control-for-confounders" id="toc-for-observational-data-control-for-confounders" class="nav-link" data-scroll-target="#for-observational-data-control-for-confounders">For observational data, control for confounders</a></li>
   <li><a href="#triangulation" id="toc-triangulation" class="nav-link" data-scroll-target="#triangulation">Triangulation</a></li>
   </ul></li>
   </ul>
@@ -449,6 +449,15 @@ Famous spurious correlations
 </div>
 </div>
 </div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="causality_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="how-to-better-establish-causation" class="level1">
 <h1>How to (better) establish causation</h1>
@@ -456,11 +465,11 @@ Famous spurious correlations
 <section id="theoretical-foundation" class="level2">
 <h2 class="anchored" data-anchor-id="theoretical-foundation">Theoretical foundation</h2>
 <p>The most important thing is to have a <strong>theoretical foundation</strong> for a causal relationship. This means that we have a good reason to believe that that a change in one variable will lead to a change in the other.</p>
-<p>Ideally, this theory should precede your data collection, to avoid the risk of <strong>post hoc</strong> (Latin for “after this”) <strong>theorizing</strong>. This is also known as <strong>HARKing</strong> (Hypothesizing After the Results are Known). The problem with post hoc theorizing is that you tend to shape the theory to fit the data, which is a form of <strong>confirmation bias</strong>. This increases the risk of finding a relationship that is not there (a <strong>false positive</strong>). Many scientific journals therefore require you to pre-register your hypotheses before you start collecting data. This doesn’t mean that there is no room for exploration in your data, but it does mean that you should be transparent about what you were looking for and what you found.</p>
+<p>Ideally, this theory should be based on <strong>a priori</strong> reasoning, meaning that you develop your theory before you collect data. This avoids the risks of <strong>post hoc</strong> (Latin for “after this”) reasoning, which is also known as <strong>HARKing</strong> (Hypothesizing After the Results are Known). The prime risk of post hoc reasoning is that you end up shaping a theory to fit the data, rather than using theory to guide your data collection and analysis. Many scientific journals therefore require you to pre-register your hypotheses before you start collecting data. This doesn’t mean that there is no room for exploration in your data, but it does mean that you should be transparent about what you were looking for based on <strong>a priori</strong> reasoning, and what you learned from <strong>post hoc</strong> reasoning about your data.</p>
 <p>Theory also helps us to identify possible confounding variables. Consider for example the <strong>gender gap in chess</strong>. Women are underrepresented in chess, with especially few women at the top levels <span class="citation" data-cites="christopher07">(<a href="#ref-christopher07" role="doc-biblioref">Chabris and Glickman 2006</a>)</span>. A naive interpretation would be that this is because, as grandmaster Garry Kasparov said in 1989: “Men are hardwired to be better chess players than women”. To properly understand where this gap comes from, we need to build theory that takes alternative explanations into account. If you have time for a tangent, try reading <a href="https://slate.com/technology/2020/12/why-are-the-best-chess-players-men.html">this Slate Magazine article</a> and see if you can identify some of the confounding variables that the author mentions.</p>
 </section>
-<section id="randomized-controlled-experiments" class="level2">
-<h2 class="anchored" data-anchor-id="randomized-controlled-experiments">Randomized controlled experiments</h2>
+<section id="if-possible-conduct-an-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="if-possible-conduct-an-experiment">If possible, conduct an experiment</h2>
 <p>The gold standard for establishing causation is the <strong>randomized controlled experiment</strong>, in which the researcher <em>manipulates the cause</em> and observes the effect, while keeping all other variables constant. In order to manipulate the cause, the researcher creates different experimental conditions. The classic example comes from the field of medicine: you give some participants a medicine you want to test, where others get a placebo (i.e.&nbsp;a fake medicine that only looks the same). The people that got the real medicine are then the <em>treatment group</em>, and the people that got the placebo are the <em>control group</em> To test if the medicine works, you compare the treatment group to the control group.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>The experimental design helps to adress both <strong>confounding</strong> and <strong>directionality</strong>.</p>
 <ul>
@@ -469,11 +478,11 @@ Famous spurious correlations
 </ul>
 <p>This ability to eliminate the influence of confounders makes experiments a powerful tool for establishing causation. However, in the field of communication science it is often not possible (or ethical) to conduct valid experiments. For many of the causes that we are interested in, it is simply not possible to manipulate it in a controlled setting that is still sufficiently similar to the real world.</p>
 </section>
-<section id="controlling-for-confounders" class="level2">
-<h2 class="anchored" data-anchor-id="controlling-for-confounders">Controlling for confounders</h2>
-<p>If we cannot conduct an experiment, we can to some extend control for confounding variables using <strong>statistical methods</strong>. This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>. And even common knowledge like “smoking causes cancer”, that is the foundation for anti-smoking policies, relies heavily on evidence from these types of observational studies. Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.</p>
-<p>The trick behind statistically controlling for confounders lies in <strong>multivariate analysis</strong> (i.e.&nbsp;analyzing more than two variables at the same time). If we are worried that a correlation between a <strong>dependent variable</strong> and <strong>independent variable</strong> is due to a third variable, we can add this <strong>confounding variable</strong> to the analysis. Using techniques like <strong>multiple regression</strong>, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant. We also call this <strong>controlling for</strong> the confounder.</p>
-<p>Note that this is different from experiments, where we can controll for all possible confounders through randomization. In observational studies, we can only control for the variables that we have measured. This puts an even greater burden on having a solid theoretical foundation for the relationships we test.</p>
+<section id="for-observational-data-control-for-confounders" class="level2">
+<h2 class="anchored" data-anchor-id="for-observational-data-control-for-confounders">For observational data, control for confounders</h2>
+<p>If we cannot conduct an experiment, we can to some extend control for confounding variables using <strong>statistical methods</strong>. This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>. And even well established causal relations like “smoking causes cancer” rely heavily on evidence from observational studies. Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.</p>
+<p>The trick behind statistically controlling for confounders lies in <strong>multivariate analysis</strong> (i.e.&nbsp;analyzing more than two variables at the same time). If we are worried that a correlation between a <strong>dependent variable</strong> and <strong>independent variable</strong> is due to a third variable, we can add this <strong>confounding variable</strong> to the analysis. Using techniques like <a href="../tests/multiple-regression_WIP.qmd">multiple regression</a>, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant. We also call this <strong>controlling for</strong> the confounder.</p>
+<p>The main limitation of this approach is that we can only control for the variables that we have measured. This puts an even greater burden on having a solid theoretical foundation for the relationships we test.</p>
 </section>
 <section id="triangulation" class="level2">
 <h2 class="anchored" data-anchor-id="triangulation">Triangulation</h2>

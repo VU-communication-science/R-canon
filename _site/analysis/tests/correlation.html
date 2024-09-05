@@ -428,7 +428,7 @@ window.Quarto = {
 <section id="how-to-use-it" class="level1">
 <h1>How to use it</h1>
 <p>We’ll show two ways of conducting the correlation test: using the <code>cor.test</code> function and using the <code>tab_corr</code> function from the <code>sjPlot</code> package. The <code>cor.test</code> function is part of the base R package, and is usefull if you just have two variables. The <code>tab_corr</code> function is part of the <code>sjPlot</code> package, and is useful if you have multiple variables and want to see the correlations between all of them.</p>
-<p>To demonstrate the correlation test, we’ll use the practice data that we’ve used before. Here we load the data, and immediately rename the <code>news consumption</code> variable to <code>news_consumption</code> to avoid spaces in the column name.</p>
+<p>To demonstrate the correlation test, we’ll use the practice data that we’ve used before.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>) <span class="sc">|&gt;</span></span>
@@ -469,7 +469,7 @@ cor.test using the formula notation
 <div class="callout-body-container callout-body">
 <p>It is also possible to use the formula notation in the <code>cor.test</code> function. However, this looks a bit weird, because in the correlation tests there are no dependent variables, since we are <strong>just looking at the relationship</strong>. The convention for formulas in R is to use the <code>~</code> symbol to separate the dependent and independent variables (<code>dependent ~ independent_1 + independent_2 + ...</code>). For the correlation test, we would just omit the dependent variable. So for the example above, the code would look like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(<span class="sc">~</span> age <span class="sc">+</span> trust_t1, <span class="at">data =</span> d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(<span class="sc">~</span> news_consumption <span class="sc">+</span> trust_t1, <span class="at">data =</span> d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
