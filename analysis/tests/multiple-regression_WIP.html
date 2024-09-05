@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>regression_wip</title>
+<title>Multiple regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,16 +57,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="regression_WIP_files/libs/clipboard/clipboard.min.js"></script>
-<script src="regression_WIP_files/libs/quarto-html/quarto.js"></script>
-<script src="regression_WIP_files/libs/quarto-html/popper.min.js"></script>
-<script src="regression_WIP_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="regression_WIP_files/libs/quarto-html/anchor.min.js"></script>
-<link href="regression_WIP_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="regression_WIP_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="regression_WIP_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="regression_WIP_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="regression_WIP_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="multiple-regression_WIP_files/libs/clipboard/clipboard.min.js"></script>
+<script src="multiple-regression_WIP_files/libs/quarto-html/quarto.js"></script>
+<script src="multiple-regression_WIP_files/libs/quarto-html/popper.min.js"></script>
+<script src="multiple-regression_WIP_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="multiple-regression_WIP_files/libs/quarto-html/anchor.min.js"></script>
+<link href="multiple-regression_WIP_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="multiple-regression_WIP_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="multiple-regression_WIP_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="multiple-regression_WIP_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="multiple-regression_WIP_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="multiple-regression_WIP_files/libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="multiple-regression_WIP_files/libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -106,30 +108,127 @@ window.Quarto = {
 
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Multiple regression</h1>
+<p class="subtitle lead">Controlling for other variables</p>
+</div>
 
 
 
-<section id="multiple-regression" class="level1">
-<h1>Multiple regression</h1>
-<p>In multiple regression, we can include multiple predictors in the model. This allows us to control for the effects of other variables.</p>
-<section id="controlling-for-confounding-variables" class="level2">
-<h2 class="anchored" data-anchor-id="controlling-for-confounding-variables">Controlling for confounding variables</h2>
-<p>As explained in the section on <a href="../tests/correlation.qmd">correlation</a>, we need to be careful when interpreting the correlation between two variables. The same is true for the effects in a regression model. It is possible (and common) that the effect of the independent variable on the dependent variable is not because of an actual causal relation. Instead, it could be due to a third variable that influences both the independent and dependent variable. This third variable is then called a <strong>confounding variable</strong>, and the effect that we observe between the independent and dependent variable is a <strong>spurious effect</strong>.</p>
-<p>There is a <a href="http://www.brixtonhealth.com/storksBabies.pdf">famous example</a> of this in the correlation between the number of storks and the number of newborn babies across European countries. The correlation is quite strong (<span class="math inline">\(\rho = 0.62\)</span>), and if you were to put the numbers into a regression analysis, you would see that the number of storks is a significant predictor of the number of newborn babies. A naive interpretation would then be that this is evidence for the folk theory that storks deliver babies. The real reason however, as explained in the article, is that the size of the country is a confounding variable: larger countries simply have more storks and more babies.</p>
-<p>So let’s use this example to demonstrate how we can control for confounding variables in a regression model! Here we create a tibble using the data from <strong>table 1</strong> in the article.</p>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="what-is-multiple-regression" class="level1">
+<h1>What is multiple regression?</h1>
+<p>Multiple regression means that we are using more than one predictor variable to predict the dependent variable. In practice, it is very similar to simple linear regression, and if you already know how to use and report simple linear regression, you can easily extend this to multiple regression. If you are not yet familiar with simple linear regression, make sure to check out the <a href="../tests/linear-regression.qmd">tutorial on linear regression</a> first.</p>
+<p>Multiple regression is a critical tool in the social sciences, because it allows us to control for confounding variables. As explained in the section on <a href="../tests/correlation.qmd">correlation</a>, we need to be careful when interpreting the correlation between two variables, because it might be a <strong>spurious correlation</strong>. The same is true for the effects in a regression model. It is possible (and common) that the effect of the independent variable on the dependent variable is not because of an actual causal relation. Instead, it could be due to a third variable that influences both the independent and dependent variable. This third variable is then called a <strong>confounding variable</strong>, and the effect that we observe between the independent and dependent variable is a <strong>spurious effect</strong>.</p>
+<p><em>Multiple</em> regression allows us to control for these confounding variables by including <em>multiple</em> independent variables in the model. When we do, the model estimates the effect of each independent variable on the dependent variable <em>while controlling for the other variables</em>.</p>
+</section>
+<section id="how-to-use" class="level1">
+<h1>How to use</h1>
+<p>To use multiple regression in R, you can use the <code>lm()</code> function, just like in simple linear regression. Let’s use the same example data as in the linear regression tutorial for using a <code>dummy</code> variable, where we looked at the effect of <code>np_subscription</code> (yes/no) on <code>trust_t1</code>. But this time, we also run a second model where we also add the <code>age</code> of the participants as a control variable. <!-- Demographic variables like `age`, `gender` and `education` are often used as control variables, because they are known to influence many other variables, making them likely to lead to spurious effects. --></p>
+<p>When running multiple regression, it is good practice to report the results of multiple models side by side. This way you can see what happens to the effects when you control for other variables. With the <code>tab_model()</code> function from the <code>sjPlot</code> package, you can pass multiple models to the function and it will show you the results side by side.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>storks <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="at">storks =</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">300</span>,<span class="dv">1</span>,<span class="dv">5000</span>,<span class="dv">9</span>,<span class="dv">140</span>,<span class="dv">3300</span>,<span class="dv">2500</span>,<span class="dv">4</span>,<span class="dv">5000</span>,<span class="dv">5</span>,<span class="dv">30000</span>,<span class="dv">1500</span>,<span class="dv">5000</span>,<span class="dv">8000</span>,<span class="dv">150</span>,<span class="dv">25000</span>),</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="at">birth_rate =</span> <span class="fu">c</span>(<span class="dv">83</span>,<span class="dv">87</span>,<span class="dv">118</span>,<span class="dv">117</span>,<span class="dv">59</span>,<span class="dv">774</span>,<span class="dv">901</span>,<span class="dv">106</span>,<span class="dv">188</span>,<span class="dv">124</span>,<span class="dv">551</span>,<span class="dv">610</span>,<span class="dv">120</span>,<span class="dv">367</span>,<span class="dv">439</span>,<span class="dv">82</span>,<span class="dv">1576</span>),</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="at">area_km2 =</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">84</span>,<span class="dv">31</span>,<span class="dv">111</span>,<span class="dv">43</span>,<span class="dv">544</span>,<span class="dv">357</span>,<span class="dv">132</span>,<span class="dv">42</span>,<span class="dv">93</span>,<span class="dv">301</span>,<span class="dv">312</span>,<span class="dv">92</span>,<span class="dv">237</span>,<span class="dv">505</span>,<span class="dv">41</span>,<span class="dv">779</span>) </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## read and clean the practice data</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">2024</span> <span class="sc">-</span> age, age))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> np_subscription, <span class="at">data =</span> d)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> np_subscription <span class="sc">+</span> age, <span class="at">data =</span> d)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">trust_t1</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">trust_t1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center;">p</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">3.68</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">3.56&nbsp;–&nbsp;3.80</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">2.21</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.99&nbsp;–&nbsp;2.43</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">np subscription [yes]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.37</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.22&nbsp;–&nbsp;0.53</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.04</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.18&nbsp;–&nbsp;0.11</td>
+<td style="text-align: center;">0.612</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">age</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.04</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.04&nbsp;–&nbsp;0.05</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">600</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">595</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.035 / 0.033</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.293 / 0.290</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>In the first model, we see that people that have a subscription to a newspaper have a higher trust in the news media compared to people that do not have a subscription (<span class="math inline">\(b = 0.37\)</span>, p &lt; 0.001). However, in the second model, where we control for age, this effect is no longer significant (<span class="math inline">\(b = -0.04\)</span>, p = 0.612). This suggests that the effect of <code>np_subscription</code> on <code>trust_t1</code> was spurious, and that the real reason for the difference in trust between subscribers and non-subscribers is the age of the participants. That is, older people are more likely to have a newspaper subscription, and older people also have a higher trust in the news media.</p>
+<p>Being able to control for confounding variables enables us to better explore possible <a href="../concepts/causality.qmd">causal relationships</a> between variables. Based on the first model, we might have concluded that having a newspaper subscription causes people to trust the news media more. If we were a newspaper, this finding might have led us to invest in subscription campaigns to increase trust in the news media. However, our second model indicates that this strategy would <em>probably</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> not be effective.</p>
+</section>
+<section id="example-of-controlling-for-confounding-variables" class="level1">
+<h1>Example of controlling for confounding variables</h1>
+<p>There is a <a href="http://www.brixtonhealth.com/storksBabies.pdf">famous example</a> of confounding, which points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries (<span class="math inline">\(\rho = 0.62\)</span>) A naive interpretation would then be that this is evidence for the folk theory that storks deliver babies. The real reason however, as explained in the article, is that the size of the country is a confounding variable: larger countries simply have more storks and more babies.</p>
+<p>So let’s use this example to demonstrate how we can control for confounding variables in a regression model! Here we create a tibble using the data from <strong>table 1</strong> in the article.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>storks <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="at">storks =</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">300</span>,<span class="dv">1</span>,<span class="dv">5000</span>,<span class="dv">9</span>,<span class="dv">140</span>,<span class="dv">3300</span>,<span class="dv">2500</span>,<span class="dv">4</span>,<span class="dv">5000</span>,<span class="dv">5</span>,<span class="dv">30000</span>,<span class="dv">1500</span>,<span class="dv">5000</span>,<span class="dv">8000</span>,<span class="dv">150</span>,<span class="dv">25000</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="at">birth_rate =</span> <span class="fu">c</span>(<span class="dv">83</span>,<span class="dv">87</span>,<span class="dv">118</span>,<span class="dv">117</span>,<span class="dv">59</span>,<span class="dv">774</span>,<span class="dv">901</span>,<span class="dv">106</span>,<span class="dv">188</span>,<span class="dv">124</span>,<span class="dv">551</span>,<span class="dv">610</span>,<span class="dv">120</span>,<span class="dv">367</span>,<span class="dv">439</span>,<span class="dv">82</span>,<span class="dv">1576</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="at">area_km2 =</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">84</span>,<span class="dv">31</span>,<span class="dv">111</span>,<span class="dv">43</span>,<span class="dv">544</span>,<span class="dv">357</span>,<span class="dv">132</span>,<span class="dv">42</span>,<span class="dv">93</span>,<span class="dv">301</span>,<span class="dv">312</span>,<span class="dv">92</span>,<span class="dv">237</span>,<span class="dv">505</span>,<span class="dv">41</span>,<span class="dv">779</span>) </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The data we have here is about the number of <code>storks</code>, the <code>birth_rate</code>, and the <code>area_km2</code> of the country. Let’s first have a look at the correlations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_corr</span>(storks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_corr</span>(storks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -164,15 +263,15 @@ window.Quarto = {
 </table>
 </div>
 </div>
-<p>As reported in the article, the correlation between the number of storks and the birth rate is high at <span class="math inline">\(r = 0.62\)</span>. But we also see that the area of the country is correlated with both the number of storks and the birth rate. This is a good indication that the area of the country is likely a confounding variable.</p>
+<p>As reported in the article, the correlation between the number of storks and the birth rate is high at <span class="math inline">\(r = 0.62\)</span>. But we also see that the area of the country is correlated with both the number of storks and the birth rate (<span class="math inline">\(r = 0.58\)</span> and <span class="math inline">\(r = 0.92\)</span> respectively). This is a good indication that the area of the country is likely a confounding variable.</p>
 <p>Now let’s see what happens when we put the number of storks into a regression model. Our dependent variable is the <code>birth_rate</code>, our independent variable is the <code>storks</code>, and we’ll control for the <code>area_km2</code>. The variables are standardized first, so that you can see the relation to the correlation coefficients. We’ll run two models: without and with the control variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  standardize all variables</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>storks_z <span class="ot">&lt;-</span> storks <span class="sc">|&gt;</span> <span class="fu">scale</span>() <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(birth_rate <span class="sc">~</span> storks,            <span class="at">data =</span> storks_z)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(birth_rate <span class="sc">~</span> storks <span class="sc">+</span> area_km2, <span class="at">data =</span> storks_z)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  standardize all variables</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>storks_z <span class="ot">&lt;-</span> storks <span class="sc">|&gt;</span> <span class="fu">scale</span>() <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(birth_rate <span class="sc">~</span> storks,            <span class="at">data =</span> storks_z)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(birth_rate <span class="sc">~</span> storks <span class="sc">+</span> area_km2, <span class="at">data =</span> storks_z)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -236,9 +335,14 @@ window.Quarto = {
 <p>In the first model we see a positive effect of the number of storks on the birth rate (<span class="math inline">\(\beta = 0.62\)</span>). The effect is significant (p &lt; 0.01) and the standardized coefficient is the same as the correlation coefficient. So here you see firsthand a spurious effect.</p>
 <p>In the second model, where we control for the area of the country, the effect of the number of storks on the birth rate is no longer significant (p = 0.304). Instead, we see a very strong effect of the area of the country on the birth rate (<span class="math inline">\(\beta = 0.85\)</span>, p &lt; 0.001). So here you see the power of multiple regression in action: by controlling for <code>area_km2</code>, the spurious effect of <code>storks</code> on <code>birth_rate</code> disappears.</p>
 </section>
-</section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>We say <em>probably</em>, because we cannot say with certainty that a newspaper subscription really has no effect. The only thing we can say is that based on this data, we do not find evidence for this effect. But this <em>is</em> already a huge win, because it prevents us from making bad decisions based on a spurious effect.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

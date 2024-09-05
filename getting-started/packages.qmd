@@ -30,6 +30,23 @@ To install this package, you can use the `install.packages()` function:
 install.packages("lubridate")
 ```
 
+::: {.callout-warning title="What if R asks tot 'install from source'?" collapse="true"}
+
+When running `install.packages()` You sometimes get the message that `There is a binary version available but the source version is later` (we're mainly seen this on Mac). You then get the question whether you want to `install from source` the package which needs compilation `(Yes/no)`. 
+To answer this question, you have to type "yes" or "no" in your R console. 
+
+It is then usually **best to say NO**. 
+This will install a slightly older version of the package, but it will be much faster and easier to install.
+You often don't need the latest version, so it's not worth the extra hassle.
+
+In case you're curious, the reason for this is that the newest version has not been *prepared* for your system yet.
+They do have the **source code**, but it has not yet been compiled into a **binary** version that is ready to use.
+Think of the source code as a recipe, and the binary version as the ready-made dish.
+If you really want to have the newest version you can say "yes", but you'll have to cook it yourself! 
+The main problem is that you will often need to install some extra software to do this, which can be a hassle.
+So unless you really need the newest version, it's usually best to say "no", and just install the older version that has already been prepared for your system.
+:::
+
 ## 2. Load a package
 
 Once you have installed a package, it is not yet loaded into your current R session.

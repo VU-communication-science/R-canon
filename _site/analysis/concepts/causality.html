@@ -373,11 +373,12 @@ window.Quarto = {
   <ul>
   <li><a href="#testing-causal-relations" id="toc-testing-causal-relations" class="nav-link active" data-scroll-target="#testing-causal-relations">Testing causal relations</a></li>
   <li><a href="#why-correlation-does-not-imply-causation" id="toc-why-correlation-does-not-imply-causation" class="nav-link" data-scroll-target="#why-correlation-does-not-imply-causation">Why correlation does not imply causation</a></li>
-  <li><a href="#how-to-establish-causation" id="toc-how-to-establish-causation" class="nav-link" data-scroll-target="#how-to-establish-causation">How to establish causation</a>
+  <li><a href="#how-to-better-establish-causation" id="toc-how-to-better-establish-causation" class="nav-link" data-scroll-target="#how-to-better-establish-causation">How to (better) establish causation</a>
   <ul class="collapse">
   <li><a href="#theoretical-foundation" id="toc-theoretical-foundation" class="nav-link" data-scroll-target="#theoretical-foundation">Theoretical foundation</a></li>
   <li><a href="#randomized-controlled-experiments" id="toc-randomized-controlled-experiments" class="nav-link" data-scroll-target="#randomized-controlled-experiments">Randomized controlled experiments</a></li>
   <li><a href="#controlling-for-confounders" id="toc-controlling-for-confounders" class="nav-link" data-scroll-target="#controlling-for-confounders">Controlling for confounders</a></li>
+  <li><a href="#triangulation" id="toc-triangulation" class="nav-link" data-scroll-target="#triangulation">Triangulation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -449,14 +450,14 @@ Famous spurious correlations
 </div>
 </div>
 </section>
-<section id="how-to-establish-causation" class="level1">
-<h1>How to establish causation</h1>
-<p>So how can we better establish whether a cause-effect relationship exists between our variables of interest? There is no easy answer for this, and the appropriate methodology is a whole field of research in itself <span class="citation" data-cites="pearl09">(see <a href="#ref-pearl09" role="doc-biblioref">Pearl 2009</a>)</span>. But there are several general strategies that we can use to build evidence for causation.</p>
+<section id="how-to-better-establish-causation" class="level1">
+<h1>How to (better) establish causation</h1>
+<p>Let’s first acknowledge that establishing causation is hard (see <span class="citation" data-cites="pearl09">Pearl (<a href="#ref-pearl09" role="doc-biblioref">2009</a>)</span>). But this should not deter us from doing our best to build evidence for causal relationships! Luckily, we have a number of strategies at our disposal to build evidence for causation.</p>
 <section id="theoretical-foundation" class="level2">
 <h2 class="anchored" data-anchor-id="theoretical-foundation">Theoretical foundation</h2>
-<p>First of all, it is critical to have a solid <strong>theoretical foundation</strong> for the relationship. We need to have a good reason to believe that one variable causes the other.</p>
-<p>A theoretical foundation can also help address the issue of <strong>directionality</strong>. In their study on screen time and psychological well-being, Twenge and Campbell emphasized that based on their (observational) data “it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both” <span class="citation" data-cites="twenge18">(<a href="#ref-twenge18" role="doc-biblioref">Twenge and Campbell 2018, 281</a>)</span>. So in order to build their argument for a causal relationship, they discussed literature that supports their view that screen time is the cause of lower well-being, and not the other way around.</p>
-<p>It is often the case that we cannot determine causality from a single study, but need to build a body of evidence from multiple studies that point in the same direction. An experiment might be able to establish causality, but only for a very specific context and short term effects. An observational study might be able to find correlations that are consistent across many different contexts and time periods, but it cannot establish causality. To build theory on complicated issues such as the relationship between screen time and well-being, we need to combine both types of studies.</p>
+<p>The most important thing is to have a <strong>theoretical foundation</strong> for a causal relationship. This means that we have a good reason to believe that that a change in one variable will lead to a change in the other.</p>
+<p>Ideally, this theory should precede your data collection, to avoid the risk of <strong>post hoc</strong> (Latin for “after this”) <strong>theorizing</strong>. This is also known as <strong>HARKing</strong> (Hypothesizing After the Results are Known). The problem with post hoc theorizing is that you tend to shape the theory to fit the data, which is a form of <strong>confirmation bias</strong>. This increases the risk of finding a relationship that is not there (a <strong>false positive</strong>). Many scientific journals therefore require you to pre-register your hypotheses before you start collecting data. This doesn’t mean that there is no room for exploration in your data, but it does mean that you should be transparent about what you were looking for and what you found.</p>
+<p>Theory also helps us to identify possible confounding variables. Consider for example the <strong>gender gap in chess</strong>. Women are underrepresented in chess, with especially few women at the top levels <span class="citation" data-cites="christopher07">(<a href="#ref-christopher07" role="doc-biblioref">Chabris and Glickman 2006</a>)</span>. A naive interpretation would be that this is because, as grandmaster Garry Kasparov said in 1989: “Men are hardwired to be better chess players than women”. To properly understand where this gap comes from, we need to build theory that takes alternative explanations into account. If you have time for a tangent, try reading <a href="https://slate.com/technology/2020/12/why-are-the-best-chess-players-men.html">this Slate Magazine article</a> and see if you can identify some of the confounding variables that the author mentions.</p>
 </section>
 <section id="randomized-controlled-experiments" class="level2">
 <h2 class="anchored" data-anchor-id="randomized-controlled-experiments">Randomized controlled experiments</h2>
@@ -473,6 +474,11 @@ Famous spurious correlations
 <p>If we cannot conduct an experiment, we can to some extend control for confounding variables using <strong>statistical methods</strong>. This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>. And even common knowledge like “smoking causes cancer”, that is the foundation for anti-smoking policies, relies heavily on evidence from these types of observational studies. Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.</p>
 <p>The trick behind statistically controlling for confounders lies in <strong>multivariate analysis</strong> (i.e.&nbsp;analyzing more than two variables at the same time). If we are worried that a correlation between a <strong>dependent variable</strong> and <strong>independent variable</strong> is due to a third variable, we can add this <strong>confounding variable</strong> to the analysis. Using techniques like <strong>multiple regression</strong>, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant. We also call this <strong>controlling for</strong> the confounder.</p>
 <p>Note that this is different from experiments, where we can controll for all possible confounders through randomization. In observational studies, we can only control for the variables that we have measured. This puts an even greater burden on having a solid theoretical foundation for the relationships we test.</p>
+</section>
+<section id="triangulation" class="level2">
+<h2 class="anchored" data-anchor-id="triangulation">Triangulation</h2>
+<p>It is generally the case that we cannot determine causality from a single study, and need to build a body of evidence from multiple studies that point in the same direction. An experiment might be able to establish causality, but only for a very specific context and short term effects. An observational study might be able to find correlations that are consistent across many different contexts and time periods, but it cannot establish causality. To build theory on complicated issues such as the relationship between screen time and well-being, we need to combine both types of studies.</p>
+<p>For example, in their study on screen time and well-being, Twenge and Campbell presented valuable data on the correlation between these variables, but emphasized that based on their data they cannot determine the direction of the relationship <span class="citation" data-cites="twenge18">(<a href="#ref-twenge18" role="doc-biblioref">Twenge and Campbell 2018, 281</a>)</span>. So to build a stronger case for the causal relationship, they also discussed literature that looked at this from other angles. One study they mention is an experiment that showed that people that took a one week break from Facebook showed higher well-being than people that continued using Facebook <span class="citation" data-cites="tromholt16">(<a href="#ref-tromholt16" role="doc-biblioref">Tromholt 2016</a>)</span>. By itself this experiment does not prove that the problem is screen time, but if multiple similar experiments show that manipulating different forms of screen time has a positive effect on well-being, it strengthens the argument that the correlation between screen time and well-being is due to a causal relationship.</p>
 <!-- An an example, consider the *agenda-setting theory* [@mccombs72], which posits that the media influence the public's perception of the importance of issues.
 Initially, the primary evidence for this theory came from a study that showed a correlation between the amount of media coverage of an issue and the public's perception of its importance.
 At the time, news media were one of the few sources of information for the public, so *on theoretical grounds* it was reasonable to assume that the media were the cause of the public's perception.
@@ -489,11 +495,17 @@ Statistics allow us to build stronger empirical evidence for our theories, but w
 
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-christopher07" class="csl-entry" role="listitem">
+Chabris, Christopher F., and Mark E. Glickman. 2006. <span>“Sex Differences in Intellectual Performance: Analysis of a Large Cohort of Competitive Chess Players.”</span> <em>Psychological Science</em> 17 (12): 1040–46. <a href="https://doi.org/10.1111/j.1467-9280.2006.01828.x">https://doi.org/10.1111/j.1467-9280.2006.01828.x</a>.
+</div>
 <div id="ref-mccombs72" class="csl-entry" role="listitem">
 Mccombs, Maxwell, and Donald Shaw. 1972. <span>“The Agenda-Setting Function of Mass Media.”</span> <em>Public Opinion Quarterly</em> 36 (June): 176–87. <a href="https://doi.org/10.1086/267990">https://doi.org/10.1086/267990</a>.
 </div>
 <div id="ref-pearl09" class="csl-entry" role="listitem">
 Pearl, Judea. 2009. <em>Causality</em>. Cambridge university press.
+</div>
+<div id="ref-tromholt16" class="csl-entry" role="listitem">
+Tromholt, Morten. 2016. <span>“The Facebook Experiment: Quitting Facebook Leads to Higher Levels of Well-Being.”</span> <em>Cyberpsychology, Behavior, and Social Networking</em> 19 (11): 661–66.
 </div>
 <div id="ref-twenge18" class="csl-entry" role="listitem">
 Twenge, Jean M., and W. Keith Campbell. 2018. <span>“Associations Between Screen Time and Lower Psychological Well-Being Among Children and Adolescents: Evidence from a Population-Based Study.”</span> <em>Preventive Medicine Reports</em> 12: 271–83. https://doi.org/<a href="https://doi.org/10.1016/j.pmedr.2018.10.003">https://doi.org/10.1016/j.pmedr.2018.10.003</a>.

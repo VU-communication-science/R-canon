@@ -152,9 +152,6 @@ function() {
 
 # Some people entered age as birthyear, and one person is too young
 ds = d
-i = sample(1:n, 4)
-## we need the specific birthyears to be deterministic for the tutorials
-ds$age[i] = c(1987, 1970, 1967, 17)
 
 # some people didnnt enter age
 ds$age[sample(1:n, 5)] = NA
@@ -162,5 +159,11 @@ ds$age[sample(1:n, 5)] = NA
 # adding a stupid space in news_consumption
 colnames(ds)[colnames(ds) == "news_consumption"] = "news consumption"
 
+
+i = sample(1:n, 4)
+## we need the specific birthyears to be deterministic for the tutorials
+ds$age[i] = c(1987, 1970, 1967, 17)
+
+write_csv(d, )
 write_csv(ds, "data/fake_demo_data.csv")
 

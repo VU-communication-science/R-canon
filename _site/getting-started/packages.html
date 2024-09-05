@@ -403,6 +403,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lubridate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="callout callout-style-default callout-warning callout-titled" title="What if R asks tot 'install from source'?">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What if R asks tot ‘install from source’?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>When running <code>install.packages()</code> You sometimes get the message that <code>There is a binary version available but the source version is later</code> (we’re mainly seen this on Mac). You then get the question whether you want to install from sources the package which needs compilation <code>(Yes/no)</code>. To answer this question, you have to type “yes” or “no” in your R console.</p>
+<p>It is then usually <strong>best to say NO</strong>. This will install a slightly older version of the package, but it will be much faster and easier to install. You often don’t need the latest version, so it’s usually not worth the extra hassle.</p>
+<p>In case you’re curious, the reason for this is that the newest version has not been <em>prepared</em> for your system yet. They do have the <strong>source code</strong>, but it has not yet been compiled into a <strong>binary</strong> version that is ready to use. Think of the source code as a recipe, and the binary version as the ready-made dish. If you really want to have the newest version you can say “yes”, but you’ll have to cook the dish yourself! The main problem is that you will often need to install some extra software to do this, which can be a hassle. So unless you really need the newest version, it’s usually best to say “no”, and just install the older version that has already been prepared for your system.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="load-a-package" class="level2">
 <h2 class="anchored" data-anchor-id="load-a-package">2. Load a package</h2>

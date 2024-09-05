@@ -56,7 +56,7 @@ For the correlation test, we would just omit the dependent variable.
 So for the example above, the code would look like this:
 
 ```{r, results='hide'}
-cor.test(~ age + trust_t1, data = d)
+cor.test(~ news_consumption + trust_t1, data = d)
 ```
 :::
 

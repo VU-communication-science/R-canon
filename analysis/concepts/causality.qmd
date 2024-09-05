@@ -58,27 +58,34 @@ There is also a website called [Spurious Correlations](https://www.tylervigen.co
 :::
 
 
-# How to establish causation
+# How to (better) establish causation
 
-So how can we better establish whether a cause-effect relationship exists between our variables of interest?
-There is no easy answer for this, and the appropriate methodology is a whole field of research in itself [see @pearl09].
-But there are several general strategies that we can use to build evidence for causation.
+Let's first acknowledge that establishing causation is hard (see @pearl09).
+But this should not deter us from doing our best to build evidence for causal relationships!
+Luckily, we have a number of strategies at our disposal to build evidence for causation.
+
 
 ## Theoretical foundation
 
-First of all, it is critical to have a solid **theoretical foundation** for the relationship.
-We need to have a good reason to believe that one variable causes the other.
+The most important thing is to have a **theoretical foundation** for a causal relationship.
+This means that we have a good reason to believe that that a change in one variable will lead to a change in the other.
 
-A theoretical foundation can also help address the issue of **directionality**.
-In their study on screen time and psychological well-being, Twenge and Campbell emphasized that based on their (observational) data "it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both" [@twenge18, p. 281].
-So in order to build their argument for a causal relationship, they discussed literature that supports their view that screen time is the cause of lower well-being, and not the other way around.
+Ideally, this theory should be based on **a priori** reasoning, meaning that you develop your theory before you collect data.
+This avoids the risks of **post hoc** (Latin for "after this") reasoning, which is also known as **HARKing** (Hypothesizing After the Results are Known).
+The prime risk of post hoc reasoning is that you end up shaping a theory to fit the data, rather than using theory to guide your data collection and analysis.
+Many scientific journals therefore require you to pre-register your hypotheses before you start collecting data.
+This doesn't mean that there is no room for exploration in your data, but it does mean that you should be transparent about what you were looking for based on **a priori** reasoning, and what you learned from **post hoc** reasoning about your data.
 
-It is often the case that we cannot determine causality from a single study, but need to build a body of evidence from multiple studies that point in the same direction.
-An experiment might be able to establish causality, but only for a very specific context and short term effects.
-An observational study might be able to find correlations that are consistent across many different contexts and time periods, but it cannot establish causality.
-To build theory on complicated issues such as the relationship between screen time and well-being, we need to combine both types of studies.
+Theory also helps us to identify possible confounding variables.
+Consider for example the **gender gap in chess**.
+Women are underrepresented in chess, with especially few women at the top levels [@christopher07].
+A naive interpretation would be that this is because, as grandmaster Garry Kasparov said in 1989: "Men are hardwired to be better chess players than women". 
+To properly understand where this gap comes from, we need to build theory that takes alternative explanations into account.
+If you have time for a tangent, try reading [this Slate Magazine article](https://slate.com/technology/2020/12/why-are-the-best-chess-players-men.html) and see if you can identify some of the confounding variables that the author mentions.
 
-## Randomized controlled experiments
+
+
+## If possible, conduct an experiment
 
 The gold standard for establishing causation is the **randomized controlled experiment**, in which the researcher *manipulates the cause* and observes the effect, while keeping all other variables constant.
 In order to manipulate the cause, the researcher creates different experimental conditions.
@@ -98,22 +105,35 @@ This ability to eliminate the influence of confounders makes experiments a power
 However, in the field of communication science it is often not possible (or ethical) to conduct valid experiments.
 For many of the causes that we are interested in, it is simply not possible to manipulate it in a controlled setting that is still sufficiently similar to the real world.
 
-## Controlling for confounders
+## For observational data, control for confounders
 
 If we cannot conduct an experiment, we can to some extend control for confounding variables using **statistical methods**.
 This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data.
 In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion [@mccombs72].
-And even common knowledge like "smoking causes cancer", that is the foundation for anti-smoking policies, relies heavily on evidence from these types of observational studies.
+And even well established causal relations like "smoking causes cancer" rely heavily on evidence from observational studies.
 Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist's toolkit.
 
 The trick behind statistically controlling for confounders lies in **multivariate analysis** (i.e. analyzing more than two variables at the same time).
 If we are worried that a correlation between a **dependent variable** and **independent variable** is due to a third variable, we can add this **confounding variable** to the analysis.
-Using techniques like **multiple regression**, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant.
+Using techniques like [multiple regression](../tests/multiple-regression_WIP.qmd), we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant.
 We also call this **controlling for** the confounder.
 
-Note that this is different from experiments, where we can controll for all possible confounders through randomization.
-In observational studies, we can only control for the variables that we have measured.
+The main limitation of this approach is that we can only control for the variables that we have measured.
 This puts an even greater burden on having a solid theoretical foundation for the relationships we test.
+
+## Triangulation
+
+It is generally the case that we cannot determine causality from a single study, and need to build a body of evidence from multiple studies that point in the same direction.
+An experiment might be able to establish causality, but only for a very specific context and short term effects.
+An observational study might be able to find correlations that are consistent across many different contexts and time periods, but it cannot establish causality.
+To build theory on complicated issues such as the relationship between screen time and well-being, we need to combine both types of studies.
+
+For example, in their study on screen time and well-being, Twenge and Campbell presented valuable data on the correlation between these variables, but emphasized that based on their data they cannot determine the direction of the relationship [@twenge18, p. 281].
+So to build a stronger case for the causal relationship, they also discussed literature that looked at this from other angles.
+One study they mention is an experiment that showed that people that took a one week break from Facebook showed higher well-being than people that continued using Facebook [@tromholt16].
+By itself this experiment does not prove that the problem is screen time, but if multiple similar experiments show that manipulating different forms of screen time has a positive effect on well-being, it strengthens the argument that the correlation between screen time and well-being is due to a causal relationship.
+
+
 
 
 <!-- An an example, consider the *agenda-setting theory* [@mccombs72], which posits that the media influence the public's perception of the importance of issues.
