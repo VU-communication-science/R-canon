@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Names and Objects – Communication Science R Book</title>
+<title>Controlling for confounders – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,24 +57,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../getting-started/types-of-objects.html" rel="next">
-<link href="../getting-started/using-rstudio.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../analysis/tests/index.html" rel="next">
+<link href="../../analysis/techniques/scale-construction.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -115,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/names-and-objects.html">Names and Objects</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/index.html">Techniques</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/controlling.html">Controlling for confounders</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,10 +159,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="https://vu.nl/en/about-vu/faculties/faculty-of-social-sciences/departments/communication-science" class="sidebar-logo-link">
-      <img src="../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="../../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Communication Science R Book</a> 
+      <a href="../../">Communication Science R Book</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -145,58 +174,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../getting-started/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../getting-started/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/install-r-and-rstudio.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/install-r-and-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Install R and RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/using-rstudio.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/using-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">How to use RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/names-and-objects.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../getting-started/names-and-objects.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Names and Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/types-of-objects.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/types-of-objects.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Types of Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">File management</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working in Quarto</span></a>
   </div>
 </li>
@@ -204,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../data-management/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../data-management/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data management</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -213,37 +242,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/read-and-write.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/read-and-write.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Read and write</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/select-and-rename.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/select-and-rename.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Select and rename</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Filter and Arrange</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/mutate.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/mutate.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mutate and recode</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/pipes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using the pipe syntax</span></a>
   </div>
 </li>
@@ -251,16 +280,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/concepts/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/concepts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Key concepts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -269,19 +298,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Covariance and correlation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
@@ -289,30 +318,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/techniques/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/techniques/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Techniques</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/techniques/data-cleaning.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/techniques/data-cleaning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data cleaning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/techniques/scale-construction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/techniques/scale-construction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scale construction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/techniques/controlling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Controlling for confounders</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/tests/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/tests/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical tests</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -321,7 +356,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/tests/correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/tests/correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Correlation test</span></a>
   </div>
 </li>
@@ -340,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Function Documentation</span></a>
   </div>
 </li>
@@ -356,22 +391,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-power-of-assignment" id="toc-the-power-of-assignment" class="nav-link active" data-scroll-target="#the-power-of-assignment">The power of assignment</a>
+  <li><a href="#controlling-for-spurious-correlations" id="toc-controlling-for-spurious-correlations" class="nav-link active" data-scroll-target="#controlling-for-spurious-correlations">Controlling for spurious correlations</a>
   <ul class="collapse">
-  <li><a href="#assigning-versus-printing" id="toc-assigning-versus-printing" class="nav-link" data-scroll-target="#assigning-versus-printing">Assigning versus printing</a></li>
-  <li><a href="#assigning-different-types-of-objects" id="toc-assigning-different-types-of-objects" class="nav-link" data-scroll-target="#assigning-different-types-of-objects">Assigning different types of objects</a></li>
-  <li><a href="#assigning-results" id="toc-assigning-results" class="nav-link" data-scroll-target="#assigning-results">Assigning results</a></li>
+  <li><a href="#do-storks-deliver-babies" id="toc-do-storks-deliver-babies" class="nav-link" data-scroll-target="#do-storks-deliver-babies">Do storks deliver babies?</a></li>
+  <li><a href="#correlation-analysis" id="toc-correlation-analysis" class="nav-link" data-scroll-target="#correlation-analysis">Correlation analysis</a></li>
+  <li><a href="#multiple-regression-analysis" id="toc-multiple-regression-analysis" class="nav-link" data-scroll-target="#multiple-regression-analysis">Multiple regression analysis</a></li>
   </ul></li>
+  <li><a href="#why-controlling-for-confounding-is-important" id="toc-why-controlling-for-confounding-is-important" class="nav-link" data-scroll-target="#why-controlling-for-confounding-is-important">Why controlling for confounding is important</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/names-and-objects.html">Names and Objects</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/index.html">Techniques</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/controlling.html">Controlling for confounders</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Names and Objects</h1>
-<p class="subtitle lead">Remember information by giving it a name</p>
+<h1 class="title">Controlling for confounders</h1>
+<p class="subtitle lead">Using multiple regression to better test causal relationships</p>
 </div>
 
 
@@ -388,99 +424,145 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="the-power-of-assignment" class="level1">
-<h1>The power of assignment</h1>
-<p>In R, and in computer programming in general, the most essential operation is to assign <strong>objects</strong> to <strong>names</strong>. By <strong>object</strong>, we then broadly mean any piece of information. a single number, a text, a list of numbers, and even an entire data set.</p>
-<p>In plain terms, <strong>assignment</strong> is how you make R remember things by assigning them to a name. To assign an object to a name, we use the <strong>arrow notation</strong>: <code>name &lt;- value</code>. For example:</p>
+<section id="controlling-for-spurious-correlations" class="level1">
+<h1>Controlling for spurious correlations</h1>
+<p>In the section about <a href="../../analysis/concepts/causality.html">causality</a> we discussed the difference between correlation and causation, and what techniques we can use to distinguish between the two. One of those techniques is to control for confounding variables using <strong>multivariate analysis</strong> techniques, such as <strong>multiple regression</strong>. In this tutorial we will show you how to use multiple regression to control for confounding variables. As example data we’ll be using a famous example of a spurious correlation: the number of storks and the birth rate of a country.</p>
+<section id="do-storks-deliver-babies" class="level2">
+<h2 class="anchored" data-anchor-id="do-storks-deliver-babies">Do storks deliver babies?</h2>
+<p>There is a <a href="http://www.brixtonhealth.com/storksBabies.pdf">famous example</a> of confounding, which points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries (<span class="math inline">\(\rho = 0.62\)</span>). Based on this empirical finding, could one actually argue that the might be some truth to the old folk tale that storks deliver babies? The answer to this questions is obviously no, but it does raise an important issue: how can we distinguish between correlation and causation? The example of storks and babies is sufficiently ridiculous to make it clear that this is a spurious correlation, but how can we be sure in more realistic cases?</p>
+<p>One of the techniques in our tool belt is to control for confounding variables in a multiple regression model. Let’s see how this works in practice using the storks and babies data from the article.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Good to know: you can also use `x = 2`">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Good to know: you can also use <code>x = 2</code>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Instead of using the <strong>arrow</strong> notation, you can also use the <strong>equal sign</strong> notation: <code>name = object</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We will in general always use the <strong>arrow</strong> notation. But if you encounter the <strong>equal sign</strong> notation, just remember that it’s the same thing.</p>
-</div>
-</div>
-</div>
-<p>By <strong>running</strong> the code <code>x &lt;- 2</code>, you are saying: <strong>Assign the value <code>2</code> to the name <code>x</code></strong>. Any objects that you assigned to names are stored in your <strong>Environment</strong>. You can see this environment in the top-right window, under the <strong>Environment</strong> tab. If you assigned <code>2</code> to <code>x</code>, you should see a table with in the left column the names (<code>x</code>) and in the right column a description of the object. For simply objects like numbers, this will just be the value (<code>2</code>).</p>
-<p>From hereon, when you use the name <code>x</code> in your code, it will <strong>refer</strong> to the value <code>2</code>. So when we run the code <code>x * 5</code> (x times 5) it will print the number <code>10</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Why does R print a [1] before the result?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Why does R print a [1] before the result?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>When running <code>x * 5</code>, R correctly prints the value 10. But why does it say <code>[1] 10</code>? The reason is that R always thinks of a number (or string) as a <strong>vector</strong> (i.e.&nbsp;list of values), that can have 1 or multiple values. The <code>[1]</code> indicates that 10 is the first (and only) value.</p>
-<p>If you print a longer <strong>vector</strong>, you can see that R prints <code>[...]</code> at the start of each line, just to help you see the position of individual values. The following code generates a vector with numbers from 1 to 50</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">50</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-[26] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section id="assigning-versus-printing" class="level2">
-<h2 class="anchored" data-anchor-id="assigning-versus-printing">Assigning versus printing</h2>
-<p>Notice that when you ran the code <code>x &lt;- 2</code>, R didn’t print any values to the console (the bottom-left window). But when you ran <code>x * 5</code>, R did print the value <code>10</code>. Basically, when you run code, and you DO NOT assign the result to a name, R will print the result to the console.</p>
-<p>So the following code will NOT print the object (<code>"I will not be printed"</code>) to the console, but will store it (you can see the name pop up in the <strong>Environment</strong> tab)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>i_will_be_remembered <span class="ot">&lt;-</span> <span class="st">"I will not be printed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>And the following object (<code>"I will be printed"</code>) will be printed to the console, but not stored in the <strong>Environment</strong>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="st">"I will be printed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "I will be printed"</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>storks <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="at">storks =</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">300</span>,<span class="dv">1</span>,<span class="dv">5000</span>,<span class="dv">9</span>,<span class="dv">140</span>,<span class="dv">3300</span>,<span class="dv">2500</span>,<span class="dv">4</span>,<span class="dv">5000</span>,<span class="dv">5</span>,<span class="dv">30000</span>,<span class="dv">1500</span>,<span class="dv">5000</span>,<span class="dv">8000</span>,<span class="dv">150</span>,<span class="dv">25000</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="at">birth_rate =</span> <span class="fu">c</span>(<span class="dv">83</span>,<span class="dv">87</span>,<span class="dv">118</span>,<span class="dv">117</span>,<span class="dv">59</span>,<span class="dv">774</span>,<span class="dv">901</span>,<span class="dv">106</span>,<span class="dv">188</span>,<span class="dv">124</span>,<span class="dv">551</span>,<span class="dv">610</span>,<span class="dv">120</span>,<span class="dv">367</span>,<span class="dv">439</span>,<span class="dv">82</span>,<span class="dv">1576</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="at">area_km2 =</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">84</span>,<span class="dv">31</span>,<span class="dv">111</span>,<span class="dv">43</span>,<span class="dv">544</span>,<span class="dv">357</span>,<span class="dv">132</span>,<span class="dv">42</span>,<span class="dv">93</span>,<span class="dv">301</span>,<span class="dv">312</span>,<span class="dv">92</span>,<span class="dv">237</span>,<span class="dv">505</span>,<span class="dv">41</span>,<span class="dv">779</span>) </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="assigning-different-types-of-objects" class="level2">
-<h2 class="anchored" data-anchor-id="assigning-different-types-of-objects">Assigning different types of objects</h2>
-<p>You can assign any type of object to a name, and you can use any name, as long as it starts with a letter and doesn’t contain spaces or symbols (but underscores are OK)</p>
+<section id="correlation-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-analysis">Correlation analysis</h2>
+<p>The data we have here is about the number of <code>storks</code>, the <code>birth_rate</code>, and the <code>area_km2</code> of the country. Let’s first have a look at the correlations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>a_number <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>my_cats_name <span class="ot">=</span> <span class="st">"Hobbes"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_corr</span>(storks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">&nbsp;</td>
+<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">storks</td>
+<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">birth_rate</td>
+<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">area_km2</td>
+</tr>
+<tr class="even">
+<td style="font-style: italic">storks</td>
+<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
+<td style="text-align: center; padding: 0.2cm;">0.620<span style="vertical-align:super;font-size:0.8em;">**</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.579<span style="vertical-align:super;font-size:0.8em;">*</span></td>
+</tr>
+<tr class="odd">
+<td style="font-style: italic">birth_rate</td>
+<td style="text-align: center; padding: 0.2cm;">0.620<span style="vertical-align:super;font-size:0.8em;">**</span></td>
+<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
+<td style="text-align: center; padding: 0.2cm;">0.922<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+</tr>
+<tr class="even">
+<td style="font-style: italic">area_km2</td>
+<td style="text-align: center; padding: 0.2cm;">0.579<span style="vertical-align:super;font-size:0.8em;">*</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.922<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
+</tr>
+<tr class="odd">
+<td colspan="4" style="text-align: right; border-bottom: double black; border-top: 1px solid black; font-style: italic; font-size: 0.9em;">Computed correlation used pearson-method with listwise-deletion.</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>If you run this code and check you <strong>Environment</strong> (top-right), you should now see these name-object pairs added.</p>
+</div>
+<p>As reported in the article, the correlation between the number of storks and the birth rate is high at <span class="math inline">\(r = 0.62\)</span>. But we also see that the area of the country is correlated with both the number of storks and the birth rate (<span class="math inline">\(r = 0.58\)</span> and <span class="math inline">\(r = 0.92\)</span> respectively). This is a good indication that the area of the country is likely a confounding variable.</p>
 </section>
-<section id="assigning-results" class="level2">
-<h2 class="anchored" data-anchor-id="assigning-results">Assigning results</h2>
-<p>Till now we only directly assigned objects to names. This is convenient, but the power of assignment really shines when you use it to store <strong>results</strong>. For example, we can also do this.</p>
+<section id="multiple-regression-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-regression-analysis">Multiple regression analysis</h2>
+<p>Now let’s see what happens when we put the number of storks into a regression model. Our dependent variable is the <code>birth_rate</code>, our independent variable is the <code>storks</code>, and we’ll control for the <code>area_km2</code>. The variables are standardized first, so that you can see the relation to the correlation coefficients. We’ll run two models: without and with the control variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This a very simple example, but just think for a second what this allows us to do. Since we can assign anything to a name, we can break down any complicated procedure into multiple steps! For now, the key lesson is just to wrap your head around the syntax for assigning objects to names. This is fundamental to everything you will be doing in R (and in programming in general).</p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  standardize all variables</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>storks_z <span class="ot">&lt;-</span> storks <span class="sc">|&gt;</span> <span class="fu">scale</span>() <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(birth_rate <span class="sc">~</span> storks,            <span class="at">data =</span> storks_z)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(birth_rate <span class="sc">~</span> storks <span class="sc">+</span> area_km2, <span class="at">data =</span> storks_z)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">birth_rate</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">birth_rate</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center;">p</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.00</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.42&nbsp;–&nbsp;0.42</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.000</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.00</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.21&nbsp;–&nbsp;0.21</td>
+<td style="text-align: center;">1.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">storks</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.62</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.19&nbsp;–&nbsp;1.05</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.008</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.13</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.13&nbsp;–&nbsp;0.39</td>
+<td style="text-align: center;">0.304</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">area km2</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.85</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.59&nbsp;–&nbsp;1.11</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">17</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.385 / 0.344</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.862 / 0.842</td>
+</tr>
+</tbody>
+</table>
 
 
+</div>
+</div>
+<p>In the first model we see a positive effect of the number of storks on the birth rate (<span class="math inline">\(\beta = 0.62\)</span>). The effect is significant (p &lt; 0.01) and the standardized coefficient is the same as the correlation coefficient. So here you see firsthand a spurious effect.</p>
+<p>In the second model, where we control for the area of the country, the effect of the number of storks on the birth rate is no longer significant (p = 0.304). Instead, we see a very strong effect of the area of the country on the birth rate (<span class="math inline">\(\beta = 0.85\)</span>, p &lt; 0.001). So here you see the power of multiple regression in action: by controlling for <code>area_km2</code>, the spurious effect of <code>storks</code> on <code>birth_rate</code> disappears.</p>
 </section>
+</section>
+<section id="why-controlling-for-confounding-is-important" class="level1">
+<h1>Why controlling for confounding is important</h1>
+<p>Being able to control for confounding variables enables us to better explore possible <a href="../../analysis/concepts/causality.html">causal relationships</a> between variables. Based on the first model, we might have concluded that if the number of storks increases or decreases, the birth rate of the country will follow. Imagine the policy implications of such a finding! If a government would want to increase the birth rate, they would simply have to breed more storks.</p>
+<p>The second model however shows that this relation between storks and birth rate is spurious. This suggests that our stork breeding program would not have the desired effect. Instead, the model gives reason to believe that the birth rate is influenced by the size of the country, which is a much more plausible explanation. If a government would want to increase the birth rate, they would have to increase the size of the country. And this is why we have too many wars, and too few storks.</p>
+
+
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -576,7 +658,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -906,13 +988,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../getting-started/using-rstudio.html" class="pagination-link" aria-label="How to use RStudio">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">How to use RStudio</span>
+      <a href="../../analysis/techniques/scale-construction.html" class="pagination-link" aria-label="Scale construction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Scale construction</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../getting-started/types-of-objects.html" class="pagination-link" aria-label="Types of Objects">
-        <span class="nav-page-text">Types of Objects</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../analysis/tests/index.html" class="pagination-link" aria-label="Statistical tests">
+        <span class="nav-page-text">Statistical tests</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -88,7 +88,7 @@
     "href": "analysis/concepts/covariance-and-correlation.html",
     "title": "Covariance and correlation",
     "section": "",
-    "text": "The covariance of two variables tells us something about the extent to which they change together. If one variable goes up, does the other variable go up as well? This information is the foundation for many statistical methods, because it enables us to quantify relationships between phenomena. For example, it allows us to measure: to what extent is a person’s social media use related to their feelings of loneliness?\nThe correlation is a standardized version of the covariance, which expresses the strength and direction of the relationship between two variables on a scale from -1 to 1. This makes it easier to interpret. Consider the following example:\n\nif the correlation between a person’s social media use and their feelings of loneliness is positive (&gt; 0), it means that people that spend a lot of time on social media tend to feel more lonely.\nIf the correlation is negative (&lt; 0), it means that people that spend a lot of time on social media tend to feel less lonely.\nIf the correlation is (close to) -1 or 1, it means that the relationship is strong.\nIf the correlation is (close to) 0, it means that the relationship is weak or absent.\n\nDeveloping a good intuition for covariance and correlation is important, because it helps you to understand relationships between variables, and to interpret the results of statistical tests. In this tutorial we’ll develop this intuition by looking at visualizations, and calculating the covariance and correlation ourselves.",
+    "text": "The covariance of two variables tells us something about the extent to which they change together. If one variable goes up, does the other variable go up as well? This information is the foundation for many statistical methods, because it enables us to quantify relationships between phenomena. For example, it allows us to measure: to what extent is a person’s social media use related to their feelings of loneliness?\nThe correlation is a standardized version of the covariance, which expresses the strength and direction of the relationship between two variables on a scale from -1 to 1. This makes it easier to interpret. Consider the following example:\n\nif the correlation between a person’s social media use and their feelings of loneliness is positive (&gt; 0), it means that people that spend more time on social media tend to feel more lonely.\nIf the correlation is negative (&lt; 0), it means that people that spend more time on social media tend to feel less lonely.\nIf the correlation is (close to) -1 or 1, it means that the relationship is strong.\nIf the correlation is (close to) 0, it means that the relationship is weak or absent.\n\nDeveloping a good intuition for covariance and correlation is important, because it helps you to understand relationships between variables, and to interpret the results of statistical tests. In this tutorial we’ll develop this intuition by looking at visualizations, and calculating the covariance and correlation ourselves.",
     "crumbs": [
       "Analysis",
       "Key concepts",
@@ -177,69 +177,14 @@
     ]
   },
   {
-    "objectID": "data-management/mutate.html",
-    "href": "data-management/mutate.html",
-    "title": "Mutate and recode",
+    "objectID": "data-management/select-and-rename.html",
+    "href": "data-management/select-and-rename.html",
+    "title": "Select and rename",
     "section": "",
-    "text": "Required packages and data for this tutorial\n\n\n\nIn this tutorial we use the tidyverse package and the simulated practice data.\n\nlibrary(tidyverse)\nd &lt;- read_csv(\"https://tinyurl.com/R-practice-data\")",
+    "text": "Required packages and data for this tutorial\n\n\n\nIn this tutorial we use the tidyverse package and the simulated practice data.\n\nlibrary(tidyverse)\nd &lt;- read_csv(\"https://tinyurl.com/R-practice-data\")\n\n\n\n\nSelecting columns with select\nOften you do not need to use all columns in your data, or you only need a subset of the columns for a specific analysis. You can do this with the select function.\nFirst, let’s see what columns are in our data using the colnames function, which returns the column names of a data frame:\n\ncolnames(d)\n\n [1] \"id\"               \"age\"              \"np_subscription\"  \"news consumption\"\n [5] \"experiment_group\" \"trust_t1\"         \"trust_t2\"         \"trust_t1_item1\"  \n [9] \"trust_t1_item2\"   \"trust_t1_item3\"   \"trust_t1_item4\"   \"trust_t1_item5\"  \n[13] \"trust_t2_item1\"   \"trust_t2_item2\"   \"trust_t2_item3\"   \"trust_t2_item4\"  \n[17] \"trust_t2_item5\"  \n\n\n\nSelecting specific columns\nThe simplest way of using select is to explicitly specify the columns you want to keep:\n\nds &lt;- select(d, age, np_subscription)\n\nThis will return a new tibble with only the columns id, age, and np_subscription. We assigned this new tibble to the variable ds (short for “data subset”). Sometimes you want to overwrite the original data frame with the new selection. You can do this by assigning the result to the same name as the input (d in this case):\n\nd &lt;- select(d, age, np_subscription)\n\nJust be carefull with this. One of the nice things about R is that you can have multiple versions of your data in different tibbles. It is often smart to at least keep the original (raw) data frame intact.\n\n\nSelecting a range of columns\nYou can also specify a range of columns using the syntax first_column:last_column. For example, to select all columns from experiment_group to trust_t2:\n\nselect(d, experiment_group:trust_t2)\n\nThis will return a new tibble with only the columns experiment_group, trust_t1, and trust_t2.\nNote that here we did not assign the result to anything. So in this case R will just print the result to the console, but not store it in a variable.\n\n\nSelecting and renaming columns\nWhen you select a column, you can also rename it using the syntax new_name = old_name. The following code selects the columns experiment_group, trust_t1, and trust_t2, and renames them to group, trust_before, and trust_after:\n\nselect(d, group = experiment_group, \n          trust_before = trust_t1, \n          trust_after = trust_t2)\n\n\n\nSelecting columns that have spaces in the name\nSometimes columns names have spaces in them. This is a bit annoying to work with in R, because you need to then tell R where a name starts and ends. You can do this by using backticks (reverse quotes) around the column name. In our practice data, we need this to select the news consumption column. It is then often smart to immediately rename the column to something without spaces, such as just replacing them with underscores:\n\nselect(d, news_consumption = `news consumption`)\n\n\n\nDropping columns\nInstead of selecting which column to keep, you can also specify which columns to drop. You can do this by adding a minus sign in front of the column name. The following code drops the columns np_subscription and trust_t1:\n\nselect(d, -np_subscription, -trust_t1)\n\nThis will return a new tibble with all columns except np_subscription and trust_t1.\n\n\n\nRenaming columns with rename\nSometimes you only want to rename columns without selecting or dropping any. You can do this with the rename function, which works similarly to how you rename columns with select:\n\nrename(d, group = experiment_group, \n          trust_before = trust_t1, \n          trust_after = trust_t2)\n\nIn this case, we do rename the columns, but without dropping all the other columns.\n\n\n\n\n Back to top",
     "crumbs": [
       "Data management",
-      "Mutate and recode"
-    ]
-  },
-  {
-    "objectID": "data-management/mutate.html#creating-new-variables",
-    "href": "data-management/mutate.html#creating-new-variables",
-    "title": "Mutate and recode",
-    "section": "Creating new variables",
-    "text": "Creating new variables\nTo create a new variable you use the following syntax:\n\nmutate(d, new_variable = expression)\n\nThe expression can be anything that returns a valid column. For example, in the practice data we have the columns trust_t1 and trust_t2, which represent trust in journalists before and after the experiment. We can create a new variable trust_change that represents the change in trust from before to after the experiment.\n\nd &lt;- mutate(d, trust_change = trust_t2 - trust_t1)\n\nselect(d, trust_t1, trust_t2, trust_change)",
-    "crumbs": [
-      "Data management",
-      "Mutate and recode"
-    ]
-  },
-  {
-    "objectID": "data-management/mutate.html#mutate-existing-variables",
-    "href": "data-management/mutate.html#mutate-existing-variables",
-    "title": "Mutate and recode",
-    "section": "Mutate existing variables",
-    "text": "Mutate existing variables\nTo mutate an existing variable, you can simply overwrite the column with the same name. For example, let’s say that we want to standardize the trust_change variable that we just made. We can standardize a variable with the scale function, so we can use that inside of mutate.\n\nd &lt;- mutate(d, trust_change = scale(trust_change))\n\nNow the trust_change variable is standardized, which means that it has a mean of 0 and a standard deviation of 1. A nice way to get a quick overview of the distribution of a single variable is to plot a histogram.\n\nhist(d$trust_change)",
-    "crumbs": [
-      "Data management",
-      "Mutate and recode"
-    ]
-  },
-  {
-    "objectID": "data-management/mutate.html#recode-with-case_match",
-    "href": "data-management/mutate.html#recode-with-case_match",
-    "title": "Mutate and recode",
-    "section": "Recode with case_match",
-    "text": "Recode with case_match\nThe case_match function is a simple way to recode specific values into new values. For example, in our practice data we have a column with the experimental groups, which are control, positive, and negative. Let’s say we want to clarify that positive means positive_movie, and negative means negative_movie. We could then use case_match to change these values.\n\nd &lt;- mutate(d, experiment_group = case_match(experiment_group,\n                                            \"positive\" ~ \"positive_movie\",\n                                            \"negative\" ~ \"negative_movie\",\n                                            .default = experiment_group))\n\nHere we say: overwrite the experiment_group column with output of the case_match function. Inside the case_match function, we specify three things:\n\nThe column we want to recode (experiment_group).\nThe conditions for recoding the values. We have two conditions:\n\nIf value is \"positive\", recode into \"positive_movie\".\nIf value is \"negative\", recode into \"negative_movie\".\n\nWe specify a .default value for values that are not matched in the conditions. Here we say that in that case we want to use the current value of the experiment_group column.\n\nIf you check the unique values of the experiment_group column, you will see that positive and negative have been changed to positive_movie and negative_movie, and that control remains the same.\n\nunique(d$experiment_group)\n\n[1] \"negative_movie\" \"control\"        \"positive_movie\"",
-    "crumbs": [
-      "Data management",
-      "Mutate and recode"
-    ]
-  },
-  {
-    "objectID": "data-management/mutate.html#more-flexible-recoding-with-case_when",
-    "href": "data-management/mutate.html#more-flexible-recoding-with-case_when",
-    "title": "Mutate and recode",
-    "section": "More flexible recoding with case_when",
-    "text": "More flexible recoding with case_when\nThe case_match function is great if you need to recode many values, but sometimes you need more flexibility. For example, if we want to recode the age variable into categories (e.g., &lt;= 20, 20-30), it would be really tiresome to recode every individual age value. With the case_when function, we can specify the conditions using logical expressions. Each condition is evaluated in order, and the first one that is TRUE is used.\n\nd &lt;- mutate(d, age_category = case_when(\n  age &lt; 20 ~ \"&lt;= 20\",\n  age &lt; 30 ~ \"20-30\",\n  age &lt; 40 ~ \"30-40\",\n  age &lt; 50 ~ \"40-50\",\n  age &lt; 60 ~ \"50-60\",\n  .default = \"&gt;= 60\"\n))\n\ntable(d$age_category)\n\n\n&lt;= 20 &gt;= 60 20-30 30-40 40-50 50-60 \n   12    78   124   138   129   119",
-    "crumbs": [
-      "Data management",
-      "Mutate and recode"
-    ]
-  },
-  {
-    "objectID": "data-management/mutate.html#binary-cases-with-if_else",
-    "href": "data-management/mutate.html#binary-cases-with-if_else",
-    "title": "Mutate and recode",
-    "section": "Binary cases with if_else",
-    "text": "Binary cases with if_else\nIf you only have two categories, you can use the if_else function. You could technically also use case_when for this, but if_else is more concise and easier to read. The syntax for if_else is:\n\nif_else(condition, value_if_true, value_if_false)\n\nA common use case is that sometimes you want to perform an operation only on a subset of the data. For example, in our data there are a few participants that accidentally entered their birthyear instead of their age. To correct this, we can use if_else to set the age to 2024 - birthyear, but only if the number the participants entered is above 1000 (which is only the case if it’s a birthyear).\n\nd &lt;- mutate(d, age = if_else(age &gt; 1000, 2024 - age, age))\n\nSo this reads: if the age is above 1000, return 2024 - age, otherwise return the current age.",
-    "crumbs": [
-      "Data management",
-      "Mutate and recode"
+      "Select and rename"
     ]
   },
   {
@@ -463,6 +408,90 @@
     ]
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Communication Science R Book",
+    "section": "",
+    "text": "This is the home page of the Communication Science R Book. We are currently developing this book along with the methods courses of the program. If you were directed to specific chapters by your instructor, these chapters will be ready for you to read.\n\nGetting started\nData management\nAnalysis\nGood to know\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "getting-started/index.html",
+    "href": "getting-started/index.html",
+    "title": "Getting Started",
+    "section": "",
+    "text": "In the VU Communication Science track, you’ll be using the R statistical software as a key tool for learning quantitative methods and data analysis techniques. R is a powerful, open-source programming language that is widely used in academia and industry for statistical analysis, visualization, text analysis, and more.\nThrough our courses, you’ll get hands-on experience with R, allowing you to analyze real-world data, perform statistical tests, create insightful visualizations, and develop reproducible research workflows. These skills will be invaluable as you move forward in your studies and future career, where data-driven decision-making plays a crucial role.\nR is also open-source, and therefore free to use for both academic and commercial purposes. This means you can continue to use R beyond your studies without any licensing costs, giving you the flexibility to apply your skills in various professional settings. The open-source nature of R also fosters a vibrant community of users and contributors who regularly share packages, tutorials, and resources. This community support makes it easier to find help, learn new techniques, and stay updated with the latest developments in data science and statistical analysis.\nIn this Getting started section, we’ll walk you through your first steps. We will cover how to install R, how to install and use the RStudio software for working with R, and the basics of the R syntax.\n\n\n\n Back to top",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "analysis/techniques/index.html",
+    "href": "analysis/techniques/index.html",
+    "title": "Techniques",
+    "section": "",
+    "text": "Back to top",
+    "crumbs": [
+      "Analysis",
+      "Techniques"
+    ]
+  },
+  {
+    "objectID": "analysis/concepts/index.html",
+    "href": "analysis/concepts/index.html",
+    "title": "Key concepts",
+    "section": "",
+    "text": "Back to top",
+    "crumbs": [
+      "Analysis",
+      "Key concepts"
+    ]
+  },
+  {
+    "objectID": "analysis/concepts/hypotheses.html",
+    "href": "analysis/concepts/hypotheses.html",
+    "title": "Hypotheses",
+    "section": "",
+    "text": "In order to use statistical methods to test theories, we first need to derive hypotheses from them. A hypothesis is a testable statement, that when proven true or false, provides evidence for or against the theory.\nFor example, consider the theory that playing violent video games leads to increased aggression in children. There is much disagreement about whether this theory is correct (Griffiths 1999), so it’s important to test it empirically. In order to do so, we need to derive hypotheses that we can conduct to rigorous statistical tests. Some examples of hypotheses are:\n\nThere is a relation “between arcade game use and teachers’ ratings of impulsiveness and aggresiveness”. (Lin and Lepper 1987, 81)\nPlaying violent video games leads to higher levels of heart rate and blood pressure compared to playing non-violent video games. (Lynch 1994)\nThere will be a “linear increase in aggressive affect after playing nonaggressive, moderately aggresive, and highly aggressive games”. (Scott 1995, 125)\n\nNotice that these hypotheses are more specific than the theory they are derived from. There are multiple ways to define and measure “playing violent video games” and “increased aggression”, and it could also be that the relation only holds for certain groups of people, or only for short periods of time. Hypotheses help us make (different aspects of) the theory more explicit, so that we can conduct empirical tests.\n\n\nIf an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory.\nFor example, if we find that children who play violent video games are more aggressive, it does not yet prove that the games caused the aggression, because there are other possible explanations for finding this relation. Perhaps people who are already aggressive are more likely to play violent video games, or there could be a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
+    "crumbs": [
+      "Analysis",
+      "Key concepts",
+      "Hypotheses"
+    ]
+  },
+  {
+    "objectID": "analysis/concepts/hypotheses.html#evidence-neq-proof",
+    "href": "analysis/concepts/hypotheses.html#evidence-neq-proof",
+    "title": "Hypotheses",
+    "section": "",
+    "text": "If an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory.\nFor example, if we find that children who play violent video games are more aggressive, it does not yet prove that the games caused the aggression, because there are other possible explanations for finding this relation. Perhaps people who are already aggressive are more likely to play violent video games, or there could be a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
+    "crumbs": [
+      "Analysis",
+      "Key concepts",
+      "Hypotheses"
+    ]
+  },
+  {
+    "objectID": "analysis/index.html",
+    "href": "analysis/index.html",
+    "title": "Analysis",
+    "section": "",
+    "text": "Back to top",
+    "crumbs": [
+      "Analysis"
+    ]
+  },
+  {
+    "objectID": "analysis/tests/index.html",
+    "href": "analysis/tests/index.html",
+    "title": "Statistical tests",
+    "section": "",
+    "text": "Back to top",
+    "crumbs": [
+      "Analysis",
+      "Statistical tests"
+    ]
+  },
+  {
     "objectID": "getting-started/install-r-and-rstudio.html",
     "href": "getting-started/install-r-and-rstudio.html",
     "title": "Install R and RStudio",
@@ -496,51 +525,6 @@
     ]
   },
   {
-    "objectID": "analysis/tests/index.html",
-    "href": "analysis/tests/index.html",
-    "title": "Statistical tests",
-    "section": "",
-    "text": "Back to top",
-    "crumbs": [
-      "Analysis",
-      "Statistical tests"
-    ]
-  },
-  {
-    "objectID": "analysis/index.html",
-    "href": "analysis/index.html",
-    "title": "Analysis",
-    "section": "",
-    "text": "Back to top",
-    "crumbs": [
-      "Analysis"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/hypotheses.html",
-    "href": "analysis/concepts/hypotheses.html",
-    "title": "Hypotheses",
-    "section": "",
-    "text": "In order to use statistical methods to test theories, we first need to derive hypotheses from them. A hypothesis is a testable statement, that when proven true or false, provides evidence for or against the theory.\nFor example, consider the theory that playing violent video games leads to increased aggression in children. There is much disagreement about whether this theory is correct (Griffiths 1999), so it’s important to test it empirically. In order to do so, we need to derive hypotheses that we can conduct to rigorous statistical tests. Some examples of hypotheses are:\n\nThere is a relation “between arcade game use and teachers’ ratings of impulsiveness and aggresiveness”. (Lin and Lepper 1987, 81)\nPlaying violent video games leads to higher levels of heart rate and blood pressure compared to playing non-violent video games. (Lynch 1994)\nThere will be a “linear increase in aggressive affect after playing nonaggressive, moderately aggresive, and highly aggressive games”. (Scott 1995, 125)\n\nNotice that these hypotheses are more specific than the theory they are derived from. There are multiple ways to define and measure “playing violent video games” and “increased aggression”, and it could also be that the relation only holds for certain groups of people, or only for short periods of time. Hypotheses help us make (different aspects of) the theory more explicit, so that we can conduct empirical tests.\n\n\nIf an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory.\nFor example, if we find that children who play violent video games are more aggressive, it does not yet prove that the games caused the aggression, because there are other possible explanations for finding this relation. Perhaps people who are already aggressive are more likely to play violent video games, or there could be a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Hypotheses"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/hypotheses.html#evidence-neq-proof",
-    "href": "analysis/concepts/hypotheses.html#evidence-neq-proof",
-    "title": "Hypotheses",
-    "section": "",
-    "text": "If an hypothesis is confirmed, it provides evidence in support of the theory. However, note that it does not necessarily prove the theory.\nFor example, if we find that children who play violent video games are more aggressive, it does not yet prove that the games caused the aggression, because there are other possible explanations for finding this relation. Perhaps people who are already aggressive are more likely to play violent video games, or there could be a confounding variable that causes both aggression and video game playing (e.g., gender, socioeconomic status, or parental involvement).\nHypotheses are thus the bridge between theory and statistical methods, and are essential for conducting rigorous research in communication science. They need to be specific enough to be testable, but close enough to the theory they are derived from to allow for meaningful conclusions.",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Hypotheses"
-    ]
-  },
-  {
     "objectID": "analysis/concepts/causality.html",
     "href": "analysis/concepts/causality.html",
     "title": "Causality",
@@ -553,11 +537,11 @@
     ]
   },
   {
-    "objectID": "analysis/concepts/causality.html#causation",
-    "href": "analysis/concepts/causality.html#causation",
+    "objectID": "analysis/concepts/causality.html#visualizing-causation",
+    "href": "analysis/concepts/causality.html#visualizing-causation",
     "title": "Causality",
-    "section": "Causation",
-    "text": "Causation\nCausation implies a cause-and-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). If we could manipulate the cause in an experiment, we would expect to see a corresponding change in the effect. For instance, if we could somehow make the news media talk more about climate change, we would expect the public to think and talk about it more, too. Basically, this is why PR exists, and why politicians try to get media to talk about the issues they care about.\nHowever, in reality we often cannot experimentally manipulate a variable to see if it has a causal effect. To empirically investigate causal relations we therefore often look at correlations in the real-world. This is a valid approach, but we should always be mindfull that correlation by itself is not strong evidence of causation.",
+    "section": "Visualizing causation",
+    "text": "Visualizing causation\nTo develop a good intuition for the difference between correlation and causation, it helps to have a good mental model of what a causal relationship looks like. A good way to do this is to use Directed Acyclic Graphs (DAGs), which are a visual way to represent causal relationships. Simply put, these are graphs where the arrows indicate the direction of the causal relationship. Here are three DAGs that show different reasons for a correlation between X and Y. X represents what we believe to be the cause (e.g., screen time), and Y the effect (e.g., well-being). Z represents a confounding variable (e.g., parental involvement).\n\n\n\n\n\n\n\n\n\nThis shows why a correlation between X and Y is not enough to establish causation. Each of these DAGs shows a different reason for the correlation between X and Y, but only the first one supports our hypothesis that X causes Y. Our job as researchers is to figure out which of these DAGs is best supported by empirical evidence.",
     "crumbs": [
       "Analysis",
       "Key concepts",
@@ -565,11 +549,11 @@
     ]
   },
   {
-    "objectID": "analysis/concepts/causality.html#correlation",
-    "href": "analysis/concepts/causality.html#correlation",
+    "objectID": "analysis/concepts/causality.html#theoretical-foundation",
+    "href": "analysis/concepts/causality.html#theoretical-foundation",
     "title": "Causality",
-    "section": "Correlation",
-    "text": "Correlation\nCorrelation merely indicates an association or relationship between two variables. When two variables are correlated, they tend to change together. This can be due to a causal relationship in either or both directions, but it could also be due to a third variable that causes both of them to change. This is known as a confounding variable, and a correlation that results from a confounding variable is called a spurious correlation.\n\n\n\n\n\n\nFamous spurious correlations\n\n\n\n\n\nA famous example is that across European countries the number of storks is quite strongly correlated with the number of newborn babies (\\(\\rho = 0.62\\)). The confounder in this case is the size of the country: larger countries have more storks and more babies. So the correlation is not evidence for the folk theory that storks deliver babies.\nSpurious correlations can also just be coincidental. Especially when we look at many variables over time, we are likely to find some that are correlated just by chance. A whole website, Spurious Correlations, is dedicated to finding statistical gems, such as the correlation between the number of people who drowned by falling into a pool and the number of films Nicolas Cage appeared in. This is why it’s important to have a theoretical foundation for the relationships we test, and always be cautious when interpreting statistical results.\n\n\n\nIn the case of screen time and psychological well-being study, the authors did observe an “association”, but were not able to establish which variable causes the other. Based on their data, “it is not possible to determine if screen time leads to low well-being, low well-being leads to screen time, or both” (Twenge and Campbell 2018, 281). Indeed, it could be that children who are already unhappy end up spending more time on screens, which would mean that taking away their phone might not help (and might even make things worse). Furthermore, possible confounders could be that parents who are more involved in their children’s lives might both limit screen time and help develop better psychological well-being.",
+    "section": "Theoretical foundation",
+    "text": "Theoretical foundation\nThe most important thing is to have a theoretical foundation for a causal relationship. This means that we have a good reason to believe that that a change in one variable will lead to a change in the other.\nIdeally, this theory should be based on a priori reasoning, meaning that you develop your theory before you collect data. This avoids the risks of post hoc (Latin for “after this”) reasoning, which is also known as HARKing (Hypothesizing After the Results are Known). The prime risk of post hoc reasoning is that you end up shaping a theory to fit the data, rather than using theory to guide your data collection and analysis. Many scientific journals therefore require you to pre-register your hypotheses before you start collecting data. This doesn’t mean that there is no room for exploration in your data, but it does mean that you should be transparent about what you were looking for based on a priori reasoning, and what you learned from post hoc reasoning about your data.\nTheory also helps us to identify possible confounding variables. Consider for example the gender gap in chess. Women are underrepresented in chess, with especially few women at the top levels (Chabris and Glickman 2006). A naive interpretation would be that this is because, as grandmaster Garry Kasparov said in 1989: “Men are hardwired to be better chess players than women”. To properly understand where this gap comes from, we need to build theory that takes alternative explanations into account. If you have time for a tangent, try reading this Slate Magazine article and see if you can identify some of the confounding variables that the author mentions.",
     "crumbs": [
       "Analysis",
       "Key concepts",
@@ -577,11 +561,11 @@
     ]
   },
   {
-    "objectID": "analysis/concepts/causality.html#the-gold-standard-controlled-experiments",
-    "href": "analysis/concepts/causality.html#the-gold-standard-controlled-experiments",
+    "objectID": "analysis/concepts/causality.html#if-possible-conduct-an-experiment",
+    "href": "analysis/concepts/causality.html#if-possible-conduct-an-experiment",
     "title": "Causality",
-    "section": "The gold standard: controlled experiments",
-    "text": "The gold standard: controlled experiments\nThe gold standard for establishing causation is the randomized controlled experiment, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant. So how can one manipulate a cause? The trick is to create different experimental conditions. A well known example comes from the field of medicine: you give some participants a medicine you want to test, where others get a placebo (i.e. a fake medicine that only looks the same). The people that got the real medicine are then the treatment group, and the people that got the placebo are the control group To test if the medicine works, you compare the treatment group to the control group.\nA similar example from communication science would be that you want to test the effictiveness of a new persuasion strategy. You could then show the treatment group a persuasive message that uses the new strategy, and the control group a message that doesn’t.\nThere are two ways in which a randomized controlled expriment deals with confounding:\n\nBy randomly assigning people to the treatment or control group, the people in both groups are statistically identical. If the randomization is done correctly, any possible confounding variables are equally distributed between the two groups, and so any difference in the outcome can be attributed to the treatment.\nBy comparing the treatment group to the control group, you can account for confounding variables that have to do with the process of appyling the treatment. A well known example of this is the placebo effect, where people feel better just because they think they’re taking a medicine (control group), and not because of the actual medicine (treatment group). If the medicine works, the treatment group should see a stronger effect than the control group.\n\nThis ability to eliminate the influence of confounders makes experiments a very powerful tool for establishing causation. However, in the field of communication science it is often not possible or ethical to conduct valid experiments. There should be absolutely no difference between the treatment and control group, except for the treatment. This is relatively easy in medical trials, because people can receive an identical looking placebo, but in communication science it’s often more difficult to create a placebo condition that is identical to the treatment condition. We cannot ask people to stop using social media for a week, because being asked to do so is already a treatment in itself, and it is not possible to have a control group that only thinks they are not using social media.",
+    "section": "If possible, conduct an experiment",
+    "text": "If possible, conduct an experiment\nThe gold standard for establishing causation is the randomized controlled experiment, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant. In order to manipulate the cause, the researcher creates different experimental conditions. The classic example comes from the field of medicine: you give some participants a medicine you want to test, where others get a placebo (i.e. a fake medicine that only looks the same). The people that got the real medicine are then the treatment group, and the people that got the placebo are the control group To test if the medicine works, you compare the treatment group to the control group.1\nThe experimental design helps to adress both confounding and directionality.\n\nBy randomly assigning people to the treatment or control group, the people in both groups are statistically identical. If the randomization is done correctly, any possible confounding variables are equally distributed between the two groups, and so any difference in the outcome can be attributed to the treatment.\nBy comparing the treatment group to the control group, you can account for confounding variables that have to do with the process of appyling the treatment. A well known example of this is the placebo effect, where people feel better just because they think they’re taking a medicine (control group), and not because of the actual medicine (treatment group). If the medicine works, the treatment group should see a stronger effect than the control group.\n\nThis ability to eliminate the influence of confounders makes experiments a powerful tool for establishing causation. However, in the field of communication science it is often not possible (or ethical) to conduct valid experiments. For many of the causes that we are interested in, it is simply not possible to manipulate it in a controlled setting that is still sufficiently similar to the real world.",
     "crumbs": [
       "Analysis",
       "Key concepts",
@@ -589,11 +573,11 @@
     ]
   },
   {
-    "objectID": "analysis/concepts/causality.html#the-next-best-thing-controlling-for-confounders",
-    "href": "analysis/concepts/causality.html#the-next-best-thing-controlling-for-confounders",
+    "objectID": "analysis/concepts/causality.html#for-observational-data-control-for-confounders",
+    "href": "analysis/concepts/causality.html#for-observational-data-control-for-confounders",
     "title": "Causality",
-    "section": "The next best thing: controlling for confounders",
-    "text": "The next best thing: controlling for confounders\nIf we cannot conduct an experiment, we can to some extend control for confounding variables using statistical methods. This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion (Mccombs and Shaw 1972). And even common knowledge like “smoking causes cancer”, that is the foundation for anti-smoking policies, relies heavily on evidence from these types of observational studies. Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.\nThe trick behind statistically controlling for confounders lies in multivariate analysis (i.e. analyzing more than two variables at the same time). If we are worried that a correlation between a dependent variable and independent variable is due to a third variable, we can add this confounding variable to the analysis. Using techniques like multiple regression, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant. We also call this controlling for the confounder.\nNote that this is different from experiments, where we can controll for all possible confounders through randomization. In observational studies, we can only control for the variables that we have measured. This puts an even greater burden on having a solid theoretical foundation for the relationships we test.\nAn an example, consider the agenda-setting theory (Mccombs and Shaw 1972), which posits that the media influence the public’s perception of the importance of issues. Initially, the primary evidence for this theory came from a study that showed a correlation between the amount of media coverage of an issue and the public’s perception of its importance. At the time, news media were one of the few sources of information for the public, so on theoretical grounds it was reasonable to assume that the media were the cause of the public’s perception. But today, with the rise of social media and other information sources, the relationship between media coverage and public opinion is more complex. To test the theory today, we would need to control for other sources of information, such as social media, to see if the relationship between media coverage and public opinion still holds.\nThis also emphasizes that statistics are never a substitute for theory. Statistics allow us to build stronger empirical evidence for our theories, but we need theory to guide us in what to measure and how to interpret the results.",
+    "section": "For observational data, control for confounders",
+    "text": "For observational data, control for confounders\nIf we cannot conduct an experiment, we can to some extend control for confounding variables using statistical methods. This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion (Mccombs and Shaw 1972). And even well established causal relations like “smoking causes cancer” rely heavily on evidence from observational studies. Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.\nThe trick behind statistically controlling for confounders lies in multivariate analysis (i.e. analyzing more than two variables at the same time). If we are worried that a correlation between a dependent variable and independent variable is due to a third variable, we can add this confounding variable to the analysis. Using techniques like multiple regression, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant. We also call this controlling for the confounder.\nThe main limitation of this approach is that we can only control for the variables that we have measured. This puts an even greater burden on having a solid theoretical foundation for the relationships we test.",
     "crumbs": [
       "Analysis",
       "Key concepts",
@@ -601,43 +585,28 @@
     ]
   },
   {
-    "objectID": "analysis/concepts/index.html",
-    "href": "analysis/concepts/index.html",
-    "title": "Key concepts",
-    "section": "",
-    "text": "Back to top",
+    "objectID": "analysis/concepts/causality.html#triangulation",
+    "href": "analysis/concepts/causality.html#triangulation",
+    "title": "Causality",
+    "section": "Triangulation",
+    "text": "Triangulation\nIt is generally the case that we cannot determine causality from a single study, and need to build a body of evidence from multiple studies that point in the same direction. An experiment might be able to establish causality, but only for a very specific context and short term effects. An observational study might be able to find correlations that are consistent across many different contexts and time periods, but it cannot establish causality. To build theory on complicated issues such as the relationship between screen time and well-being, we need to combine both types of studies.\nFor example, in their study on screen time and well-being, Twenge and Campbell presented valuable data on the correlation between these variables, but emphasized that based on their data they cannot determine the direction of the relationship (Twenge and Campbell 2018, 281). So to build a stronger case for the causal relationship, they also discussed literature that looked at this from other angles. One study they mention is an experiment that showed that people that took a one week break from Facebook showed higher well-being than people that continued using Facebook (Tromholt 2016). By itself this experiment does not prove that the problem is screen time, but if multiple similar experiments show that manipulating different forms of screen time has a positive effect on well-being, it strengthens the argument that the correlation between screen time and well-being is due to a causal relationship.",
     "crumbs": [
       "Analysis",
-      "Key concepts"
+      "Key concepts",
+      "Causality"
     ]
   },
   {
-    "objectID": "analysis/techniques/index.html",
-    "href": "analysis/techniques/index.html",
-    "title": "Techniques",
-    "section": "",
-    "text": "Back to top",
+    "objectID": "analysis/concepts/causality.html#footnotes",
+    "href": "analysis/concepts/causality.html#footnotes",
+    "title": "Causality",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nA similar example from communication science could be that you want to test the effictiveness of a new persuasion strategy. You could then show the treatment group a persuasive message that uses the new strategy, and the control group a message that doesn’t.↩︎",
     "crumbs": [
       "Analysis",
-      "Techniques"
+      "Key concepts",
+      "Causality"
     ]
-  },
-  {
-    "objectID": "getting-started/index.html",
-    "href": "getting-started/index.html",
-    "title": "Getting Started",
-    "section": "",
-    "text": "In the VU Communication Science track, you’ll be using the R statistical software as a key tool for learning quantitative methods and data analysis techniques. R is a powerful, open-source programming language that is widely used in academia and industry for statistical analysis, visualization, text analysis, and more.\nThrough our courses, you’ll get hands-on experience with R, allowing you to analyze real-world data, perform statistical tests, create insightful visualizations, and develop reproducible research workflows. These skills will be invaluable as you move forward in your studies and future career, where data-driven decision-making plays a crucial role.\nR is also open-source, and therefore free to use for both academic and commercial purposes. This means you can continue to use R beyond your studies without any licensing costs, giving you the flexibility to apply your skills in various professional settings. The open-source nature of R also fosters a vibrant community of users and contributors who regularly share packages, tutorials, and resources. This community support makes it easier to find help, learn new techniques, and stay updated with the latest developments in data science and statistical analysis.\nIn this Getting started section, we’ll walk you through your first steps. We will cover how to install R, how to install and use the RStudio software for working with R, and the basics of the R syntax.\n\n\n\n Back to top",
-    "crumbs": [
-      "Getting Started"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Communication Science R Book",
-    "section": "",
-    "text": "This is the home page of the Communication Science R Book. We are currently developing this book along with the methods courses of the program. If you were directed to specific chapters by your instructor, these chapters will be ready for you to read.\n\nGetting started\nData management\nAnalysis\nGood to know\n\n\n\n\n Back to top"
   },
   {
     "objectID": "data-management/index.html",
@@ -749,11 +718,23 @@
     ]
   },
   {
-    "objectID": "analysis/tests/correlation.html#reporting-the-correlation-test",
-    "href": "analysis/tests/correlation.html#reporting-the-correlation-test",
+    "objectID": "analysis/tests/correlation.html#pearson-spearman-and-kendall",
+    "href": "analysis/tests/correlation.html#pearson-spearman-and-kendall",
     "title": "Correlation test",
-    "section": "Reporting the correlation test",
-    "text": "Reporting the correlation test\nFor APA style reporting of the correlation test you need to know the correlation coefficient, p-value, and the degrees of freedom. The formula for reporting the results of a correlation test in APA style is:\n\nr(df) = correlation coefficient, p = p-value.\n\nthe correlation coefficient is rounded to two decimal places, and the number before the decimal point is ommited if zero (.11 instead of 0.11).\nThe p-value is reported for the smallest significant level (p &lt; 0.05, p &lt; 0.01 or p &lt; 0.001), or in full with three decimal places if not significant (p = 0.123).\n\n\nIn our example above we observed a correlation coefficient of \\(r = 0.107\\) with a p-value of \\(p = 0.009\\), and \\(598\\) degrees of freedom. So we would report this as:\n\nThere is a positive correlation between age and trust in the news media, \\(r(598) = .12\\), \\(p &lt; 0.01\\).",
+    "section": "Pearson, Spearman, and Kendall",
+    "text": "Pearson, Spearman, and Kendall\nBy default the cor.test function uses the Pearson correlation coefficient. This assumes that the relationship between the variables is linear, and that the variables are (roughly) normally distributed. If this is not the case, you might want to instead use Spearman’s \\(\\rho\\) or Kendall’s \\(\\tau\\).\nTo use these alternative methods, you just need to specify the method argument in the cor.test function, or the corr.method argument in the tab_corr function.\n\ncor.test(d$news_consumption, d$trust_t1, method = \"spearman\")\ncor.test(d$news_consumption, d$trust_t1, method = \"kendall\")\n\nd |&gt; select(trust_t1_item1:trust_t1_item5) |&gt; tab_corr(corr.method=\"spearman\")\nd |&gt; select(trust_t1_item1:trust_t1_item5) |&gt; tab_corr(corr.method=\"kendall\")",
+    "crumbs": [
+      "Analysis",
+      "Statistical tests",
+      "Correlation test"
+    ]
+  },
+  {
+    "objectID": "analysis/tests/correlation.html#footnotes",
+    "href": "analysis/tests/correlation.html#footnotes",
+    "title": "Correlation test",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nWhen using tab_corr, you can use the p.numeric = TRUE argument to get the p-values. The degrees of freedom is always the number of observations minus 2, but be carefull not to count missing (NA) values.↩︎",
     "crumbs": [
       "Analysis",
       "Statistical tests",
@@ -862,14 +843,69 @@
     ]
   },
   {
-    "objectID": "data-management/select-and-rename.html",
-    "href": "data-management/select-and-rename.html",
-    "title": "Select and rename",
+    "objectID": "data-management/mutate.html",
+    "href": "data-management/mutate.html",
+    "title": "Mutate and recode",
     "section": "",
-    "text": "Required packages and data for this tutorial\n\n\n\nIn this tutorial we use the tidyverse package and the simulated practice data.\n\nlibrary(tidyverse)\nd &lt;- read_csv(\"https://tinyurl.com/R-practice-data\")\n\n\n\n\nSelecting columns with select\nOften you do not need to use all columns in your data, or you only need a subset of the columns for a specific analysis. You can do this with the select function.\nFirst, let’s see what columns are in our data using the colnames function, which returns the column names of a data frame:\n\ncolnames(d)\n\n [1] \"id\"               \"age\"              \"np_subscription\"  \"news consumption\"\n [5] \"experiment_group\" \"trust_t1\"         \"trust_t2\"         \"trust_t1_item1\"  \n [9] \"trust_t1_item2\"   \"trust_t1_item3\"   \"trust_t1_item4\"   \"trust_t1_item5\"  \n[13] \"trust_t2_item1\"   \"trust_t2_item2\"   \"trust_t2_item3\"   \"trust_t2_item4\"  \n[17] \"trust_t2_item5\"  \n\n\n\nSelecting specific columns\nThe simplest way of using select is to explicitly specify the columns you want to keep:\n\nds &lt;- select(d, age, np_subscription)\n\nThis will return a new tibble with only the columns id, age, and np_subscription. We assigned this new tibble to the variable ds (short for “data subset”). Sometimes you want to overwrite the original data frame with the new selection. You can do this by assigning the result to the same name as the input (d in this case):\n\nd &lt;- select(d, age, np_subscription)\n\nJust be carefull with this. One of the nice things about R is that you can have multiple versions of your data in different tibbles. It is often smart to at least keep the original (raw) data frame intact.\n\n\nSelecting a range of columns\nYou can also specify a range of columns using the syntax first_column:last_column. For example, to select all columns from experiment_group to trust_t2:\n\nselect(d, experiment_group:trust_t2)\n\nThis will return a new tibble with only the columns experiment_group, trust_t1, and trust_t2.\nNote that here we did not assign the result to anything. So in this case R will just print the result to the console, but not store it in a variable.\n\n\nSelecting and renaming columns\nWhen you select a column, you can also rename it using the syntax new_name = old_name. The following code selects the columns experiment_group, trust_t1, and trust_t2, and renames them to group, trust_before, and trust_after:\n\nselect(d, group = experiment_group, \n          trust_before = trust_t1, \n          trust_after = trust_t2)\n\n\n\nSelecting columns that have spaces in the name\nSometimes columns names have spaces in them. This is a bit annoying to work with in R, because you need to then tell R where a name starts and ends. You can do this by using backticks (reverse quotes) around the column name. In our practice data, we need this to select the news consumption column. It is then often smart to immediately rename the column to something without spaces, such as just replacing them with underscores:\n\nselect(d, news_consumption = `news consumption`)\n\n\n\nDropping columns\nInstead of selecting which column to keep, you can also specify which columns to drop. You can do this by adding a minus sign in front of the column name. The following code drops the columns np_subscription and trust_t1:\n\nselect(d, -np_subscription, -trust_t1)\n\nThis will return a new tibble with all columns except np_subscription and trust_t1.\n\n\n\nRenaming columns with rename\nSometimes you only want to rename columns without selecting or dropping any. You can do this with the rename function, which works similarly to how you rename columns with select:\n\nrename(d, group = experiment_group, \n          trust_before = trust_t1, \n          trust_after = trust_t2)\n\nIn this case, we do rename the columns, but without dropping all the other columns.\n\n\n\n\n Back to top",
+    "text": "Required packages and data for this tutorial\n\n\n\nIn this tutorial we use the tidyverse package and the simulated practice data.\n\nlibrary(tidyverse)\nd &lt;- read_csv(\"https://tinyurl.com/R-practice-data\")",
     "crumbs": [
       "Data management",
-      "Select and rename"
+      "Mutate and recode"
+    ]
+  },
+  {
+    "objectID": "data-management/mutate.html#creating-new-variables",
+    "href": "data-management/mutate.html#creating-new-variables",
+    "title": "Mutate and recode",
+    "section": "Creating new variables",
+    "text": "Creating new variables\nTo create a new variable you use the following syntax:\n\nmutate(d, new_variable = expression)\n\nThe expression can be anything that returns a valid column. For example, in the practice data we have the columns trust_t1 and trust_t2, which represent trust in journalists before and after the experiment. We can create a new variable trust_change that represents the change in trust from before to after the experiment.\n\nd &lt;- mutate(d, trust_change = trust_t2 - trust_t1)\n\nselect(d, trust_t1, trust_t2, trust_change)",
+    "crumbs": [
+      "Data management",
+      "Mutate and recode"
+    ]
+  },
+  {
+    "objectID": "data-management/mutate.html#mutate-existing-variables",
+    "href": "data-management/mutate.html#mutate-existing-variables",
+    "title": "Mutate and recode",
+    "section": "Mutate existing variables",
+    "text": "Mutate existing variables\nTo mutate an existing variable, you can simply overwrite the column with the same name. For example, let’s say that we want to standardize the trust_change variable that we just made. We can standardize a variable with the scale function, so we can use that inside of mutate.\n\nd &lt;- mutate(d, trust_change = scale(trust_change))\n\nNow the trust_change variable is standardized, which means that it has a mean of 0 and a standard deviation of 1. A nice way to get a quick overview of the distribution of a single variable is to plot a histogram.\n\nhist(d$trust_change)",
+    "crumbs": [
+      "Data management",
+      "Mutate and recode"
+    ]
+  },
+  {
+    "objectID": "data-management/mutate.html#recode-with-case_match",
+    "href": "data-management/mutate.html#recode-with-case_match",
+    "title": "Mutate and recode",
+    "section": "Recode with case_match",
+    "text": "Recode with case_match\nThe case_match function is a simple way to recode specific values into new values. For example, in our practice data we have a column with the experimental groups, which are control, positive, and negative. Let’s say we want to clarify that positive means positive_movie, and negative means negative_movie. We could then use case_match to change these values.\n\nd &lt;- mutate(d, experiment_group = case_match(experiment_group,\n                                            \"positive\" ~ \"positive_movie\",\n                                            \"negative\" ~ \"negative_movie\",\n                                            .default = experiment_group))\n\nHere we say: overwrite the experiment_group column with output of the case_match function. Inside the case_match function, we specify three things:\n\nThe column we want to recode (experiment_group).\nThe conditions for recoding the values. We have two conditions:\n\nIf value is \"positive\", recode into \"positive_movie\".\nIf value is \"negative\", recode into \"negative_movie\".\n\nWe specify a .default value for values that are not matched in the conditions. Here we say that in that case we want to use the current value of the experiment_group column.\n\nIf you check the unique values of the experiment_group column, you will see that positive and negative have been changed to positive_movie and negative_movie, and that control remains the same.\n\nunique(d$experiment_group)\n\n[1] \"negative_movie\" \"control\"        \"positive_movie\"",
+    "crumbs": [
+      "Data management",
+      "Mutate and recode"
+    ]
+  },
+  {
+    "objectID": "data-management/mutate.html#more-flexible-recoding-with-case_when",
+    "href": "data-management/mutate.html#more-flexible-recoding-with-case_when",
+    "title": "Mutate and recode",
+    "section": "More flexible recoding with case_when",
+    "text": "More flexible recoding with case_when\nThe case_match function is great if you need to recode many values, but sometimes you need more flexibility. For example, if we want to recode the age variable into categories (e.g., &lt;= 20, 20-30), it would be really tiresome to recode every individual age value. With the case_when function, we can specify the conditions using logical expressions. Each condition is evaluated in order, and the first one that is TRUE is used.\n\nd &lt;- mutate(d, age_category = case_when(\n  age &lt; 20 ~ \"&lt;= 20\",\n  age &lt; 30 ~ \"20-30\",\n  age &lt; 40 ~ \"30-40\",\n  age &lt; 50 ~ \"40-50\",\n  age &lt; 60 ~ \"50-60\",\n  .default = \"&gt;= 60\"\n))\n\ntable(d$age_category)\n\n\n&lt;= 20 &gt;= 60 20-30 30-40 40-50 50-60 \n   12    78   124   138   129   119",
+    "crumbs": [
+      "Data management",
+      "Mutate and recode"
+    ]
+  },
+  {
+    "objectID": "data-management/mutate.html#binary-cases-with-if_else",
+    "href": "data-management/mutate.html#binary-cases-with-if_else",
+    "title": "Mutate and recode",
+    "section": "Binary cases with if_else",
+    "text": "Binary cases with if_else\nIf you only have two categories, you can use the if_else function. You could technically also use case_when for this, but if_else is more concise and easier to read. The syntax for if_else is:\n\nif_else(condition, value_if_true, value_if_false)\n\nA common use case is that sometimes you want to perform an operation only on a subset of the data. For example, in our data there are a few participants that accidentally entered their birthyear instead of their age. To correct this, we can use if_else to set the age to 2024 - birthyear, but only if the number the participants entered is above 1000 (which is only the case if it’s a birthyear).\n\nd &lt;- mutate(d, age = if_else(age &gt; 1000, 2024 - age, age))\n\nSo this reads: if the age is above 1000, return 2024 - age, otherwise return the current age.",
+    "crumbs": [
+      "Data management",
+      "Mutate and recode"
     ]
   },
   {
@@ -939,159 +975,87 @@
     ]
   },
   {
-    "objectID": "analysis/tests/correlation.html#footnotes",
-    "href": "analysis/tests/correlation.html#footnotes",
-    "title": "Correlation test",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nWhen using tab_corr, you can use the p.numeric = TRUE argument to get the p-values. The degrees of freedom is always the number of observations minus 2, but be carefull not to count missing (NA) values.↩︎",
-    "crumbs": [
-      "Analysis",
-      "Statistical tests",
-      "Correlation test"
-    ]
-  },
-  {
-    "objectID": "analysis/tests/correlation.html#alternative-correlation-tests",
-    "href": "analysis/tests/correlation.html#alternative-correlation-tests",
-    "title": "Correlation test",
-    "section": "Alternative correlation tests",
-    "text": "Alternative correlation tests\nBy default the cor.test function uses the Pearson correlation coefficient. This is the most common correlation coefficient, but there are also other types of correlation coefficients that you might want to use depending on your data.\nThe Pearson correlation coefficient assumes that the relationship between the variables is linear, and that the variables are normally distributed. If this is not the case, you might want to use instead use Spearman’s \\(\\rho\\) or Kendall’s \\(\\tau\\).\nTo use these alternative methods, you just need to specify the method argument in the cor.test function, or the corr.method argument in the tab_corr function.\n\ncor.test(d$news_consumption, d$trust_t1, method = \"spearman\")\ncor.test(d$news_consumption, d$trust_t1, method = \"kendall\")\n\nd |&gt; select(trust_t1_item1:trust_t1_item5) |&gt; tab_corr(corr.method=\"spearman\")\nd |&gt; select(trust_t1_item1:trust_t1_item5) |&gt; tab_corr(corr.method=\"kendall\")",
-    "crumbs": [
-      "Analysis",
-      "Statistical tests",
-      "Correlation test"
-    ]
-  },
-  {
-    "objectID": "analysis/tests/correlation.html#pearson-spearman-and-kendall",
-    "href": "analysis/tests/correlation.html#pearson-spearman-and-kendall",
-    "title": "Correlation test",
-    "section": "Pearson, Spearman, and Kendall",
-    "text": "Pearson, Spearman, and Kendall\nBy default the cor.test function uses the Pearson correlation coefficient. This assumes that the relationship between the variables is linear, and that the variables are (roughly) normally distributed. If this is not the case, you might want to instead use Spearman’s \\(\\rho\\) or Kendall’s \\(\\tau\\).\nTo use these alternative methods, you just need to specify the method argument in the cor.test function, or the corr.method argument in the tab_corr function.\n\ncor.test(d$news_consumption, d$trust_t1, method = \"spearman\")\ncor.test(d$news_consumption, d$trust_t1, method = \"kendall\")\n\nd |&gt; select(trust_t1_item1:trust_t1_item5) |&gt; tab_corr(corr.method=\"spearman\")\nd |&gt; select(trust_t1_item1:trust_t1_item5) |&gt; tab_corr(corr.method=\"kendall\")",
-    "crumbs": [
-      "Analysis",
-      "Statistical tests",
-      "Correlation test"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/causality.html#randomized-controlled-experiments",
-    "href": "analysis/concepts/causality.html#randomized-controlled-experiments",
-    "title": "Causality",
-    "section": "Randomized controlled experiments",
-    "text": "Randomized controlled experiments\nThe gold standard for establishing causation is the randomized controlled experiment, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant. In order to manipulate the cause, the researcher creates different experimental conditions. The classic example comes from the field of medicine: you give some participants a medicine you want to test, where others get a placebo (i.e. a fake medicine that only looks the same). The people that got the real medicine are then the treatment group, and the people that got the placebo are the control group To test if the medicine works, you compare the treatment group to the control group.1\nThe experimental design helps to adress both confounding and directionality.\n\nBy randomly assigning people to the treatment or control group, the people in both groups are statistically identical. If the randomization is done correctly, any possible confounding variables are equally distributed between the two groups, and so any difference in the outcome can be attributed to the treatment.\nBy comparing the treatment group to the control group, you can account for confounding variables that have to do with the process of appyling the treatment. A well known example of this is the placebo effect, where people feel better just because they think they’re taking a medicine (control group), and not because of the actual medicine (treatment group). If the medicine works, the treatment group should see a stronger effect than the control group.\n\nThis ability to eliminate the influence of confounders makes experiments a powerful tool for establishing causation. However, in the field of communication science it is often not possible (or ethical) to conduct valid experiments. For many of the causes that we are interested in, it is simply not possible to manipulate it in a controlled setting that is still sufficiently similar to the real world.",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Causality"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/causality.html#controlling-for-confounders",
-    "href": "analysis/concepts/causality.html#controlling-for-confounders",
-    "title": "Causality",
-    "section": "Controlling for confounders",
-    "text": "Controlling for confounders\nIf we cannot conduct an experiment, we can to some extend control for confounding variables using statistical methods. This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion (Mccombs and Shaw 1972). And even common knowledge like “smoking causes cancer”, that is the foundation for anti-smoking policies, relies heavily on evidence from these types of observational studies. Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.\nThe trick behind statistically controlling for confounders lies in multivariate analysis (i.e. analyzing more than two variables at the same time). If we are worried that a correlation between a dependent variable and independent variable is due to a third variable, we can add this confounding variable to the analysis. Using techniques like multiple regression, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant. We also call this controlling for the confounder.\nNote that this is different from experiments, where we can controll for all possible confounders through randomization. In observational studies, we can only control for the variables that we have measured. This puts an even greater burden on having a solid theoretical foundation for the relationships we test.",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Causality"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/causality.html#theoretical-foundation",
-    "href": "analysis/concepts/causality.html#theoretical-foundation",
-    "title": "Causality",
-    "section": "Theoretical foundation",
-    "text": "Theoretical foundation\nThe most important thing is to have a theoretical foundation for a causal relationship. This means that we have a good reason to believe that that a change in one variable will lead to a change in the other.\nIdeally, this theory should be based on a priori reasoning, meaning that you develop your theory before you collect data. This avoids the risks of post hoc (Latin for “after this”) reasoning, which is also known as HARKing (Hypothesizing After the Results are Known). The prime risk of post hoc reasoning is that you end up shaping a theory to fit the data, rather than using theory to guide your data collection and analysis. Many scientific journals therefore require you to pre-register your hypotheses before you start collecting data. This doesn’t mean that there is no room for exploration in your data, but it does mean that you should be transparent about what you were looking for based on a priori reasoning, and what you learned from post hoc reasoning about your data.\nTheory also helps us to identify possible confounding variables. Consider for example the gender gap in chess. Women are underrepresented in chess, with especially few women at the top levels (Chabris and Glickman 2006). A naive interpretation would be that this is because, as grandmaster Garry Kasparov said in 1989: “Men are hardwired to be better chess players than women”. To properly understand where this gap comes from, we need to build theory that takes alternative explanations into account. If you have time for a tangent, try reading this Slate Magazine article and see if you can identify some of the confounding variables that the author mentions.",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Causality"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/causality.html#footnotes",
-    "href": "analysis/concepts/causality.html#footnotes",
-    "title": "Causality",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nA similar example from communication science could be that you want to test the effictiveness of a new persuasion strategy. You could then show the treatment group a persuasive message that uses the new strategy, and the control group a message that doesn’t.↩︎",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Causality"
-    ]
-  },
-  {
-    "objectID": "analysis/tests/regression.html",
-    "href": "analysis/tests/regression.html",
-    "title": "Communication Science R Book",
+    "objectID": "analysis/techniques/controlling.html",
+    "href": "analysis/techniques/controlling.html",
+    "title": "Controlling for confounders",
     "section": "",
-    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nstorks &lt;- tibble(\n    storks = c(100, 300, 1, 5000, 9, 140, 3300, 2500, 4, 5000, 5, 30000, 1500, 5000, 8000, 150, 25000),\n    birth_rate = c(83, 87, 118, 117, 59, 774, 901, 106, 188, 124, 551, 610, 120, 367, 439, 82, 1576),\n    area_km2 = c(29, 84, 31, 111, 43, 544, 357, 132, 42, 93, 301, 312, 92, 237, 505, 41, 779) \n)\n\n\n\n\n Back to top",
+    "text": "In the section about causality we discussed the difference between correlation and causation, and what techniques we can use to distinguish between the two. One of those techniques is to control for confounding variables using multivariate analysis techniques, such as multiple regression. In this tutorial we will show you how to use multiple regression to control for confounding variables. As example data we’ll be using a famous example of a spurious correlation: the number of storks and the birth rate of a country.\n\n\nThere is a famous example of confounding, which points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries (\\(\\rho = 0.62\\)). Based on this empirical finding, could one actually argue that the might be some truth to the old folk tale that storks deliver babies? The answer to this questions is obviously no, but it does raise an important issue: how can we distinguish between correlation and causation? The example of storks and babies is sufficiently ridiculous to make it clear that this is a spurious correlation, but how can we be sure in more realistic cases?\nOne of the techniques in our tool belt is to control for confounding variables in a multiple regression model. Let’s see how this works in practice using the storks and babies data from the article.\n\nlibrary(tidyverse)\nlibrary(sjPlot)\n\nstorks &lt;- tibble(\n storks = c(100,300,1,5000,9,140,3300,2500,4,5000,5,30000,1500,5000,8000,150,25000),\n birth_rate = c(83,87,118,117,59,774,901,106,188,124,551,610,120,367,439,82,1576),\n area_km2 = c(29,84,31,111,43,544,357,132,42,93,301,312,92,237,505,41,779) \n)\n\n\n\n\nThe data we have here is about the number of storks, the birth_rate, and the area_km2 of the country. Let’s first have a look at the correlations.\n\ntab_corr(storks)\n\n\n\n\n \nstorks\nbirth_rate\narea_km2\n\n\nstorks\n \n0.620**\n0.579*\n\n\nbirth_rate\n0.620**\n \n0.922***\n\n\narea_km2\n0.579*\n0.922***\n \n\n\nComputed correlation used pearson-method with listwise-deletion.\n\n\n\n\n\nAs reported in the article, the correlation between the number of storks and the birth rate is high at \\(r = 0.62\\). But we also see that the area of the country is correlated with both the number of storks and the birth rate (\\(r = 0.58\\) and \\(r = 0.92\\) respectively). This is a good indication that the area of the country is likely a confounding variable.\n\n\n\nNow let’s see what happens when we put the number of storks into a regression model. Our dependent variable is the birth_rate, our independent variable is the storks, and we’ll control for the area_km2. The variables are standardized first, so that you can see the relation to the correlation coefficients. We’ll run two models: without and with the control variable.\n\n##  standardize all variables\nstorks_z &lt;- storks |&gt; scale() |&gt; as_tibble()\n\nm1 &lt;- lm(birth_rate ~ storks,            data = storks_z)\nm2 &lt;- lm(birth_rate ~ storks + area_km2, data = storks_z)\ntab_model(m1, m2)\n\n\n\n\n \nbirth_rate\nbirth_rate\n\n\nPredictors\nEstimates\nCI\np\nEstimates\nCI\np\n\n\n(Intercept)\n-0.00\n-0.42 – 0.42\n1.000\n0.00\n-0.21 – 0.21\n1.000\n\n\nstorks\n0.62\n0.19 – 1.05\n0.008\n0.13\n-0.13 – 0.39\n0.304\n\n\narea km2\n\n\n\n0.85\n0.59 – 1.11\n&lt;0.001\n\n\nObservations\n17\n17\n\n\nR2 / R2 adjusted\n0.385 / 0.344\n0.862 / 0.842\n\n\n\n\n\n\n\nIn the first model we see a positive effect of the number of storks on the birth rate (\\(\\beta = 0.62\\)). The effect is significant (p &lt; 0.01) and the standardized coefficient is the same as the correlation coefficient. So here you see firsthand a spurious effect.\nIn the second model, where we control for the area of the country, the effect of the number of storks on the birth rate is no longer significant (p = 0.304). Instead, we see a very strong effect of the area of the country on the birth rate (\\(\\beta = 0.85\\), p &lt; 0.001). So here you see the power of multiple regression in action: by controlling for area_km2, the spurious effect of storks on birth_rate disappears.",
+    "crumbs": [
+      "Analysis",
+      "Techniques",
+      "Controlling for confounders"
+    ]
+  },
+  {
+    "objectID": "analysis/techniques/controlling.html#do-storks-deliver-babies",
+    "href": "analysis/techniques/controlling.html#do-storks-deliver-babies",
+    "title": "Controlling for confounders",
+    "section": "",
+    "text": "There is a famous example of confounding, which points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries (\\(\\rho = 0.62\\)). Based on this empirical finding, could one actually argue that the might be some truth to the old folk tale that storks deliver babies? The answer to this questions is obviously no, but it does raise an important issue: how can we distinguish between correlation and causation? The example of storks and babies is sufficiently ridiculous to make it clear that this is a spurious correlation, but how can we be sure in more realistic cases?\nOne of the techniques in our tool belt is to control for confounding variables in a multiple regression model. Let’s see how this works in practice using the storks and babies data from the article.\n\nlibrary(tidyverse)\nlibrary(sjPlot)\n\nstorks &lt;- tibble(\n storks = c(100,300,1,5000,9,140,3300,2500,4,5000,5,30000,1500,5000,8000,150,25000),\n birth_rate = c(83,87,118,117,59,774,901,106,188,124,551,610,120,367,439,82,1576),\n area_km2 = c(29,84,31,111,43,544,357,132,42,93,301,312,92,237,505,41,779) \n)",
+    "crumbs": [
+      "Analysis",
+      "Techniques",
+      "Controlling for confounders"
+    ]
+  },
+  {
+    "objectID": "analysis/techniques/controlling.html#correlation-analysis",
+    "href": "analysis/techniques/controlling.html#correlation-analysis",
+    "title": "Controlling for confounders",
+    "section": "",
+    "text": "The data we have here is about the number of storks, the birth_rate, and the area_km2 of the country. Let’s first have a look at the correlations.\n\ntab_corr(storks)\n\n\n\n\n \nstorks\nbirth_rate\narea_km2\n\n\nstorks\n \n0.620**\n0.579*\n\n\nbirth_rate\n0.620**\n \n0.922***\n\n\narea_km2\n0.579*\n0.922***\n \n\n\nComputed correlation used pearson-method with listwise-deletion.\n\n\n\n\n\nAs reported in the article, the correlation between the number of storks and the birth rate is high at \\(r = 0.62\\). But we also see that the area of the country is correlated with both the number of storks and the birth rate (\\(r = 0.58\\) and \\(r = 0.92\\) respectively). This is a good indication that the area of the country is likely a confounding variable.",
+    "crumbs": [
+      "Analysis",
+      "Techniques",
+      "Controlling for confounders"
+    ]
+  },
+  {
+    "objectID": "analysis/techniques/controlling.html#multiple-regression-analysis",
+    "href": "analysis/techniques/controlling.html#multiple-regression-analysis",
+    "title": "Controlling for confounders",
+    "section": "",
+    "text": "Now let’s see what happens when we put the number of storks into a regression model. Our dependent variable is the birth_rate, our independent variable is the storks, and we’ll control for the area_km2. The variables are standardized first, so that you can see the relation to the correlation coefficients. We’ll run two models: without and with the control variable.\n\n##  standardize all variables\nstorks_z &lt;- storks |&gt; scale() |&gt; as_tibble()\n\nm1 &lt;- lm(birth_rate ~ storks,            data = storks_z)\nm2 &lt;- lm(birth_rate ~ storks + area_km2, data = storks_z)\ntab_model(m1, m2)\n\n\n\n\n \nbirth_rate\nbirth_rate\n\n\nPredictors\nEstimates\nCI\np\nEstimates\nCI\np\n\n\n(Intercept)\n-0.00\n-0.42 – 0.42\n1.000\n0.00\n-0.21 – 0.21\n1.000\n\n\nstorks\n0.62\n0.19 – 1.05\n0.008\n0.13\n-0.13 – 0.39\n0.304\n\n\narea km2\n\n\n\n0.85\n0.59 – 1.11\n&lt;0.001\n\n\nObservations\n17\n17\n\n\nR2 / R2 adjusted\n0.385 / 0.344\n0.862 / 0.842\n\n\n\n\n\n\n\nIn the first model we see a positive effect of the number of storks on the birth rate (\\(\\beta = 0.62\\)). The effect is significant (p &lt; 0.01) and the standardized coefficient is the same as the correlation coefficient. So here you see firsthand a spurious effect.\nIn the second model, where we control for the area of the country, the effect of the number of storks on the birth rate is no longer significant (p = 0.304). Instead, we see a very strong effect of the area of the country on the birth rate (\\(\\beta = 0.85\\), p &lt; 0.001). So here you see the power of multiple regression in action: by controlling for area_km2, the spurious effect of storks on birth_rate disappears.",
+    "crumbs": [
+      "Analysis",
+      "Techniques",
+      "Controlling for confounders"
+    ]
+  },
+  {
+    "objectID": "analysis/tests/linear-regression.html",
+    "href": "analysis/tests/linear-regression.html",
+    "title": "Simple linear regression",
+    "section": "",
+    "text": "In the tutorial on correlation we learned how to test if there is a relationship between two numeric variables. We saw that the correlation does not have a direction, and that it only tells us if there is a relationship between the variables, and how strong it is. With simple linear regression we can take this one step further, and try to predict the value of one variable based on the value of another variable.\nThe term predict is used here in a statistical sense, which is slighly different from the everyday use of the word. What we want to know is simply how well we can guess the value of one variable if we know the value of another variable. For example, imagine that you want to be able to predict for a random person on the street how much trust they have in journalists. What information would you use to make this prediction? One thing you might consider is the age of the person. You perform a correlation test, and find that there is indeed a positive correlation between age and news consumption. So you could use this information to make a prediction: the older the person, the more news they consume.\nBut how will you use this information to make the best possible prediction, and how good will your prediction be? This is something that regression analysis can help you with! We refer to the variable that we want to predict as the dependent variable (e.g. news consumption), and the variables that we use to make the prediction as the independent variables (e.g. age). In simple linear regression we only have one independent variable. Later you will learn how to use more than one independent variable, using multiple regression.",
     "crumbs": [
       "Analysis",
       "Statistical tests",
-      "Regression"
+      "Simple linear regression"
     ]
   },
   {
-    "objectID": "analysis/concepts/causality.html#triangulation",
-    "href": "analysis/concepts/causality.html#triangulation",
-    "title": "Causality",
-    "section": "Triangulation",
-    "text": "Triangulation\nIt is generally the case that we cannot determine causality from a single study, and need to build a body of evidence from multiple studies that point in the same direction. An experiment might be able to establish causality, but only for a very specific context and short term effects. An observational study might be able to find correlations that are consistent across many different contexts and time periods, but it cannot establish causality. To build theory on complicated issues such as the relationship between screen time and well-being, we need to combine both types of studies.\nFor example, in their study on screen time and well-being, Twenge and Campbell presented valuable data on the correlation between these variables, but emphasized that based on their data they cannot determine the direction of the relationship (Twenge and Campbell 2018, 281). So to build a stronger case for the causal relationship, they also discussed literature that looked at this from other angles. One study they mention is an experiment that showed that people that took a one week break from Facebook showed higher well-being than people that continued using Facebook (Tromholt 2016). By itself this experiment does not prove that the problem is screen time, but if multiple similar experiments show that manipulating different forms of screen time has a positive effect on well-being, it strengthens the argument that the correlation between screen time and well-being is due to a causal relationship.",
+    "objectID": "analysis/tests/linear-regression.html#regression-with-numerical-independent-variable",
+    "href": "analysis/tests/linear-regression.html#regression-with-numerical-independent-variable",
+    "title": "Simple linear regression",
+    "section": "Regression with numerical independent variable",
+    "text": "Regression with numerical independent variable\nLet’s start with the example of predicting trust in journalists based on age. For this we’ll be using the trust_t11 variable as the dependent variable, and the age variable as the independent variable. We’ll use the lm() function to run the regression, and the tab_model() function from the sjPlot package to show the results in a nice table. Inside the lm() function we specify the formula for the regression, which has the format dependent ~ independent (just like in the t-test and ANOVA).\n\nm &lt;- lm(trust_t1 ~ age, data = d) \n\ntab_model(m)\n\n\n\n\n \ntrust_t1\n\n\nPredictors\nEstimates\nCI\np\n\n\n(Intercept)\n2.21\n1.99 – 2.43\n&lt;0.001\n\n\nage\n0.04\n0.04 – 0.05\n&lt;0.001\n\n\nObservations\n595\n\n\nR2 / R2 adjusted\n0.292 / 0.291\n\n\n\n\n\n\n\nThe output of the regression analysis gives us values for two predictors: the (intercept) and the age variable. This is the information that we need to make a prediction.\nTo help you understand what this means, it helps to visualize the regression line. For this we can use the plot_model() function.2\n\nplot_model(m, type = \"pred\", show.data = T, jitter=T)\n\n\n\n\n\n\n\n\nThe (intercept) tells us what the average value of the dependent variable (trust_t1) is when the independent variable (age) is zero. The estimate for the age predictor tells us how much the dependent variable (trust_t1) changes for every unit increase in the independent variable (age).\nThe estimate for the age predictor tells us how much the dependent variable (trust_t1) changes for every unit increase in the independent variable (age). The coefficient that is reported under estimate is 0.04, which means that for every year older a person is, their trust in journalists increases by 0.04 points.\nTogether, the intercept and slope create a regression line that best fits the data. You can think of this line as the prediction.\n\nplot_model(m, type = \"pred\", show.data = T, jitter=T) \n\n\n\n\n\n\n\n\nFor every value of age, it tells us what the average value of trust_t1 is. So around the age of 20, the average trust is around 3, whereas for 50 year olds its around 4.2.\nBy best fits we mean that the line minimizes the distance between the predicted values (the line) and the actual values.\nTo get a better feel for the intercept and slope, we can plot the regression line on a scatterplot of the data.",
     "crumbs": [
       "Analysis",
-      "Key concepts",
-      "Causality"
+      "Statistical tests",
+      "Simple linear regression"
     ]
   },
   {
-    "objectID": "analysis/concepts/causality.html#if-possible-conduct-an-experiment",
-    "href": "analysis/concepts/causality.html#if-possible-conduct-an-experiment",
-    "title": "Causality",
-    "section": "If possible, conduct an experiment",
-    "text": "If possible, conduct an experiment\nThe gold standard for establishing causation is the randomized controlled experiment, in which the researcher manipulates the cause and observes the effect, while keeping all other variables constant. In order to manipulate the cause, the researcher creates different experimental conditions. The classic example comes from the field of medicine: you give some participants a medicine you want to test, where others get a placebo (i.e. a fake medicine that only looks the same). The people that got the real medicine are then the treatment group, and the people that got the placebo are the control group To test if the medicine works, you compare the treatment group to the control group.1\nThe experimental design helps to adress both confounding and directionality.\n\nBy randomly assigning people to the treatment or control group, the people in both groups are statistically identical. If the randomization is done correctly, any possible confounding variables are equally distributed between the two groups, and so any difference in the outcome can be attributed to the treatment.\nBy comparing the treatment group to the control group, you can account for confounding variables that have to do with the process of appyling the treatment. A well known example of this is the placebo effect, where people feel better just because they think they’re taking a medicine (control group), and not because of the actual medicine (treatment group). If the medicine works, the treatment group should see a stronger effect than the control group.\n\nThis ability to eliminate the influence of confounders makes experiments a powerful tool for establishing causation. However, in the field of communication science it is often not possible (or ethical) to conduct valid experiments. For many of the causes that we are interested in, it is simply not possible to manipulate it in a controlled setting that is still sufficiently similar to the real world.",
+    "objectID": "analysis/tests/linear-regression.html#footnotes",
+    "href": "analysis/tests/linear-regression.html#footnotes",
+    "title": "Simple linear regression",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nWe use the trust_t1 variable here, because for the current analysis we are not interested in the effect of the experimental group. Since trust_t1 is measured before the experiment, it is not influenced by the experiment.↩︎\nThe plot_model() function is part of the sjPlot package, and is a very useful tool for visualizing regression models. When use use type = \"pred\" it visualizes the prediction. Here we also say show.data = T to show the actual data points. The jitter = T argument randomly moves the data points around a tiny bit, so that if two observations have exactly the same values, they will not overlap.↩︎",
     "crumbs": [
       "Analysis",
-      "Key concepts",
-      "Causality"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/causality.html#for-observational-data-control-for-confounders",
-    "href": "analysis/concepts/causality.html#for-observational-data-control-for-confounders",
-    "title": "Causality",
-    "section": "For observational data, control for confounders",
-    "text": "For observational data, control for confounders\nIf we cannot conduct an experiment, we can to some extend control for confounding variables using statistical methods. This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion (Mccombs and Shaw 1972). And even well established causal relations like “smoking causes cancer” rely heavily on evidence from observational studies. Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.\nThe trick behind statistically controlling for confounders lies in multivariate analysis (i.e. analyzing more than two variables at the same time). If we are worried that a correlation between a dependent variable and independent variable is due to a third variable, we can add this confounding variable to the analysis. Using techniques like multiple regression, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant. We also call this controlling for the confounder.\nThe main limitation of this approach is that we can only control for the variables that we have measured. This puts an even greater burden on having a solid theoretical foundation for the relationships we test.",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Causality"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/causality.html#visualizing-causation-with-directed-acyclic-graphs",
-    "href": "analysis/concepts/causality.html#visualizing-causation-with-directed-acyclic-graphs",
-    "title": "Causality",
-    "section": "Visualizing causation with Directed Acyclic Graphs",
-    "text": "Visualizing causation with Directed Acyclic Graphs\nTo develop a good intuition for the difference between correlation and causation, it helps to have a good mental model of what a causal relationship looks like. A good way to do this is to use Directed Acyclic Graphs (DAGs), which are a visual way to represent causal relationships. Simply put, these are graphs where the arrows indicate the direction of the causal relationship. Here are three DAGs that show different reasons for a correlation between X and Y. X represents what we believe to be the cause (e.g., screen time), and Y the effect (e.g., well-being). Z represents a confounding variable (e.g., parental involvement).\n\n\n\n\n\n\n\n\n\nThis shows why a correlation between X and Y is not enough to establish causation. Each of these DAGs shows a different reason for the correlation between X and Y, but only the first one supports our hypothesis that X causes Y.",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Causality"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/causality.html#visualizing-causation",
-    "href": "analysis/concepts/causality.html#visualizing-causation",
-    "title": "Causality",
-    "section": "Visualizing causation",
-    "text": "Visualizing causation\nTo develop a good intuition for the difference between correlation and causation, it helps to have a good mental model of what a causal relationship looks like. A good way to do this is to use Directed Acyclic Graphs (DAGs), which are a visual way to represent causal relationships. Simply put, these are graphs where the arrows indicate the direction of the causal relationship. Here are three DAGs that show different reasons for a correlation between X and Y. X represents what we believe to be the cause (e.g., screen time), and Y the effect (e.g., well-being). Z represents a confounding variable (e.g., parental involvement).\n\n\n\n\n\n\n\n\n\nThis shows why a correlation between X and Y is not enough to establish causation. Each of these DAGs shows a different reason for the correlation between X and Y, but only the first one supports our hypothesis that X causes Y. Our job as researchers is to figure out which of these DAGs is best supported by empirical evidence.",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Causality"
+      "Statistical tests",
+      "Simple linear regression"
     ]
   }
 ]

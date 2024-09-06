@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Names and Objects – Communication Science R Book</title>
+<title>Simple linear regression – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,24 +57,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../getting-started/types-of-objects.html" rel="next">
-<link href="../getting-started/using-rstudio.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../good-to-know/function-documentation.html" rel="next">
+<link href="../../analysis/tests/correlation.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/names-and-objects.html">Names and Objects</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/index.html">Statistical tests</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/linear-regression.html">Simple linear regression</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,10 +130,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="https://vu.nl/en/about-vu/faculties/faculty-of-social-sciences/departments/communication-science" class="sidebar-logo-link">
-      <img src="../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="../../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Communication Science R Book</a> 
+      <a href="../../">Communication Science R Book</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -145,58 +145,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../getting-started/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../getting-started/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/install-r-and-rstudio.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/install-r-and-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Install R and RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/using-rstudio.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/using-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">How to use RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/names-and-objects.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../getting-started/names-and-objects.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Names and Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/types-of-objects.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/types-of-objects.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Types of Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">File management</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link">
+  <a href="../../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working in Quarto</span></a>
   </div>
 </li>
@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../data-management/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../data-management/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data management</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -213,37 +213,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/read-and-write.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/read-and-write.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Read and write</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/select-and-rename.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/select-and-rename.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Select and rename</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Filter and Arrange</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/mutate.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/mutate.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mutate and recode</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-management/pipes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using the pipe syntax</span></a>
   </div>
 </li>
@@ -251,16 +251,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/concepts/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/concepts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Key concepts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -269,19 +269,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hypotheses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Covariance and correlation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
@@ -289,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/techniques/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/techniques/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Techniques</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -298,31 +298,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/techniques/data-cleaning.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/techniques/data-cleaning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data cleaning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/techniques/scale-construction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/techniques/scale-construction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scale construction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/techniques/controlling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Controlling for confounders</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/tests/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../analysis/tests/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical tests</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/tests/correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/tests/correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Correlation test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/tests/linear-regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Simple linear regression</span></a>
   </div>
 </li>
       </ul>
@@ -340,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Function Documentation</span></a>
   </div>
 </li>
@@ -356,11 +368,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-power-of-assignment" id="toc-the-power-of-assignment" class="nav-link active" data-scroll-target="#the-power-of-assignment">The power of assignment</a>
+  <li><a href="#what-is-simple-linear-regression" id="toc-what-is-simple-linear-regression" class="nav-link active" data-scroll-target="#what-is-simple-linear-regression">What is simple linear regression?</a></li>
+  <li><a href="#how-to-use-it" id="toc-how-to-use-it" class="nav-link" data-scroll-target="#how-to-use-it">How to use it</a>
   <ul class="collapse">
-  <li><a href="#assigning-versus-printing" id="toc-assigning-versus-printing" class="nav-link" data-scroll-target="#assigning-versus-printing">Assigning versus printing</a></li>
-  <li><a href="#assigning-different-types-of-objects" id="toc-assigning-different-types-of-objects" class="nav-link" data-scroll-target="#assigning-different-types-of-objects">Assigning different types of objects</a></li>
-  <li><a href="#assigning-results" id="toc-assigning-results" class="nav-link" data-scroll-target="#assigning-results">Assigning results</a></li>
+  <li><a href="#regression-with-numerical-independent-variable" id="toc-regression-with-numerical-independent-variable" class="nav-link" data-scroll-target="#regression-with-numerical-independent-variable">Regression with numerical independent variable</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -368,10 +379,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../getting-started/index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="../getting-started/names-and-objects.html">Names and Objects</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/index.html">Statistical tests</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/linear-regression.html">Simple linear regression</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Names and Objects</h1>
-<p class="subtitle lead">Remember information by giving it a name</p>
+<h1 class="title">Simple linear regression</h1>
+<p class="subtitle lead">Predicting one variable from another</p>
 </div>
 
 
@@ -388,102 +399,113 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="the-power-of-assignment" class="level1">
-<h1>The power of assignment</h1>
-<p>In R, and in computer programming in general, the most essential operation is to assign <strong>objects</strong> to <strong>names</strong>. By <strong>object</strong>, we then broadly mean any piece of information. a single number, a text, a list of numbers, and even an entire data set.</p>
-<p>In plain terms, <strong>assignment</strong> is how you make R remember things by assigning them to a name. To assign an object to a name, we use the <strong>arrow notation</strong>: <code>name &lt;- value</code>. For example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Good to know: you can also use `x = 2`">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Good to know: you can also use <code>x = 2</code>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Instead of using the <strong>arrow</strong> notation, you can also use the <strong>equal sign</strong> notation: <code>name = object</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We will in general always use the <strong>arrow</strong> notation. But if you encounter the <strong>equal sign</strong> notation, just remember that it’s the same thing.</p>
-</div>
-</div>
-</div>
-<p>By <strong>running</strong> the code <code>x &lt;- 2</code>, you are saying: <strong>Assign the value <code>2</code> to the name <code>x</code></strong>. Any objects that you assigned to names are stored in your <strong>Environment</strong>. You can see this environment in the top-right window, under the <strong>Environment</strong> tab. If you assigned <code>2</code> to <code>x</code>, you should see a table with in the left column the names (<code>x</code>) and in the right column a description of the object. For simply objects like numbers, this will just be the value (<code>2</code>).</p>
-<p>From hereon, when you use the name <code>x</code> in your code, it will <strong>refer</strong> to the value <code>2</code>. So when we run the code <code>x * 5</code> (x times 5) it will print the number <code>10</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Why does R print a [1] before the result?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Why does R print a [1] before the result?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>When running <code>x * 5</code>, R correctly prints the value 10. But why does it say <code>[1] 10</code>? The reason is that R always thinks of a number (or string) as a <strong>vector</strong> (i.e.&nbsp;list of values), that can have 1 or multiple values. The <code>[1]</code> indicates that 10 is the first (and only) value.</p>
-<p>If you print a longer <strong>vector</strong>, you can see that R prints <code>[...]</code> at the start of each line, just to help you see the position of individual values. The following code generates a vector with numbers from 1 to 50</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">50</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-[26] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section id="assigning-versus-printing" class="level2">
-<h2 class="anchored" data-anchor-id="assigning-versus-printing">Assigning versus printing</h2>
-<p>Notice that when you ran the code <code>x &lt;- 2</code>, R didn’t print any values to the console (the bottom-left window). But when you ran <code>x * 5</code>, R did print the value <code>10</code>. Basically, when you run code, and you DO NOT assign the result to a name, R will print the result to the console.</p>
-<p>So the following code will NOT print the object (<code>"I will not be printed"</code>) to the console, but will store it (you can see the name pop up in the <strong>Environment</strong> tab)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>i_will_be_remembered <span class="ot">&lt;-</span> <span class="st">"I will not be printed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>And the following object (<code>"I will be printed"</code>) will be printed to the console, but not stored in the <strong>Environment</strong>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="st">"I will be printed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "I will be printed"</code></pre>
-</div>
-</div>
+<section id="what-is-simple-linear-regression" class="level1">
+<h1>What is simple linear regression?</h1>
+<p>In the tutorial on <a href="../../analysis/tests/correlation.html">correlation</a> we learned how to test if there is a relationship between two numeric variables. We saw that the correlation does not have a direction, and that it only tells us if there is a relationship between the variables, and how strong it is. With simple linear regression we can take this one step further, and try to <em>predict</em> the value of one variable based on the value of another variable.</p>
+<p>The term <em>predict</em> is used here in a statistical sense, which is slighly different from the everyday use of the word. What we want to know is simply how well we can guess the value of one variable if we know the value of another variable. For example, imagine that you want to be able to predict for a random person on the street how much trust they have in journalists. What information would you use to make this prediction? One thing you might consider is the age of the person. You perform a correlation test, and find that there is indeed a positive correlation between age and news consumption. So you could use this information to make a prediction: the older the person, the more news they consume.</p>
+<p>But how will you use this information to make the best possible prediction, and how good will your prediction be? This is something that regression analysis can help you with! We refer to the variable that we want to predict as the <strong>dependent variable</strong> (e.g.&nbsp;news consumption), and the variables that we use to make the prediction as the <strong>independent variables</strong> (e.g.&nbsp;age). In simple linear regression we only have one independent variable. Later you will learn how to use more than one independent variable, using <a href="../tests/multiple-regression.qmd">multiple regression</a>.</p>
 </section>
-<section id="assigning-different-types-of-objects" class="level2">
-<h2 class="anchored" data-anchor-id="assigning-different-types-of-objects">Assigning different types of objects</h2>
-<p>You can assign any type of object to a name, and you can use any name, as long as it starts with a letter and doesn’t contain spaces or symbols (but underscores are OK)</p>
+<section id="how-to-use-it" class="level1">
+<h1>How to use it</h1>
+<p>For this tutorial we’ll be using our standard practice data. Regression is a flexible tool, allowing the indepent variable to either be numeric (like in a correlation), binary (like in a t-test), or categorical (like in an ANOVA). So we’ll prepare a bunch of columns to show your an example for each of these cases.</p>
+<p>Regression analysis is built into R, but we’ll also be using the <code>tidyverse</code> package to load and clean the data, and the <code>sjPlot</code> package to show the results in a nice table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>a_number <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>my_cats_name <span class="ot">=</span> <span class="st">"Hobbes"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">2024</span> <span class="sc">-</span> age, age)) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(age, experiment_group, np_subscription, trust_t1, trust_t2)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If you run this code and check you <strong>Environment</strong> (top-right), you should now see these name-object pairs added.</p>
-</section>
-<section id="assigning-results" class="level2">
-<h2 class="anchored" data-anchor-id="assigning-results">Assigning results</h2>
-<p>Till now we only directly assigned objects to names. This is convenient, but the power of assignment really shines when you use it to store <strong>results</strong>. For example, we can also do this.</p>
+<section id="regression-with-numerical-independent-variable" class="level2">
+<h2 class="anchored" data-anchor-id="regression-with-numerical-independent-variable">Regression with numerical independent variable</h2>
+<p>Let’s start with the example of predicting <code>trust</code> in journalists based on <code>age</code>. For this we’ll be using the <code>trust_t1</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> variable as the dependent variable, and the <code>age</code> variable as the independent variable. We’ll use the <code>lm()</code> function to run the regression, and the <code>tab_model()</code> function from the <code>sjPlot</code> package to show the results in a nice table. Inside the <code>lm()</code> function we specify the formula for the regression, which has the format <code>dependent ~ independent</code> (just like in the t-test and ANOVA).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> age, <span class="at">data =</span> d) </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">trust_t1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">2.21</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.99&nbsp;–&nbsp;2.43</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">age</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.04</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.04&nbsp;–&nbsp;0.05</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">595</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.292 / 0.291</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
-<p>This a very simple example, but just think for a second what this allows us to do. Since we can assign anything to a name, we can break down any complicated procedure into multiple steps! For now, the key lesson is just to wrap your head around the syntax for assigning objects to names. This is fundamental to everything you will be doing in R (and in programming in general).</p>
+</div>
+<p>The output of the regression analysis gives us values for two <strong>predictors</strong>: the <strong>(intercept)</strong> and the <strong>age</strong> variable. This is the information that we need to make a prediction.<br>
+To help you understand what this means, it helps to visualize the <em>regression line</em>. For this we can use the <code>plot_model()</code> function.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">show.data =</span> T, <span class="at">jitter=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The <strong>(intercept)</strong> tells us what the average value of the dependent variable (<code>trust_t1</code>) is when the independent variable (<code>age</code>) is zero. The <code>estimate</code> for the <code>age</code> predictor tells us how much the dependent variable (<code>trust_t1</code>) changes for every unit increase in the independent variable (<code>age</code>).</p>
+<p>The <code>estimate</code> for the <code>age</code> predictor tells us how much the dependent variable (<code>trust_t1</code>) changes for every unit increase in the independent variable (<code>age</code>). The coefficient that is reported under <code>estimate</code> is <code>0.04</code>, which means that for every year older a person is, their trust in journalists increases by 0.04 points.</p>
+<p>Together, the intercept and slope create a regression line that best fits the data. You can think of this line as the prediction.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">show.data =</span> T, <span class="at">jitter=</span>T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For every value of <code>age</code>, it tells us what the average value of <code>trust_t1</code> is. So around the age of 20, the average trust is around 3, whereas for 50 year olds its around 4.2.</p>
+<p>By <em>best fits</em> we mean that the line minimizes the distance between the predicted values (the line) and the actual values.</p>
+<p>To get a better feel for the intercept and slope, we can plot the regression line on a scatterplot of the data.</p>
 
 
 </section>
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>We use the <code>trust_t1</code> variable here, because for the current analysis we are not interested in the effect of the experimental group. Since <code>trust_t1</code> is measured before the experiment, it is not influenced by the experiment.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The <code>plot_model()</code> function is part of the <code>sjPlot</code> package, and is a very useful tool for visualizing regression models. When use use <code>type = "pred"</code> it visualizes the <code>pred</code>iction. Here we also say <code>show.data = T</code> to show the actual data points. The <code>jitter = T</code> argument randomly moves the data points around a tiny bit, so that if two observations have exactly the same values, they will not overlap.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -576,7 +598,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -906,13 +928,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../getting-started/using-rstudio.html" class="pagination-link" aria-label="How to use RStudio">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">How to use RStudio</span>
+      <a href="../../analysis/tests/correlation.html" class="pagination-link" aria-label="Correlation test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Correlation test</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../getting-started/types-of-objects.html" class="pagination-link" aria-label="Types of Objects">
-        <span class="nav-page-text">Types of Objects</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../good-to-know/function-documentation.html" class="pagination-link" aria-label="Function Documentation">
+        <span class="nav-page-text">Function Documentation</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

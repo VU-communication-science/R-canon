@@ -102,7 +102,6 @@ This shows why a correlation between X and Y is not enough to establish causatio
 Each of these DAGs shows a different reason for the correlation between X and Y, but only the first one supports our hypothesis that X causes Y.
 Our job as researchers is to figure out which of these DAGs is best supported by empirical evidence.
 
-
 # How to (better) establish causation
 
 Let's first acknowledge that establishing causation is hard (see @pearl09).

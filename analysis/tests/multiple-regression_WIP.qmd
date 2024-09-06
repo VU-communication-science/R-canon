@@ -26,13 +26,7 @@ When we do, the model estimates the effect of each independent variable on the d
 # How to use
 
 To use multiple regression in R, you can use the `lm()` function, just like in simple linear regression.
-Let's use the same example data as in the linear regression tutorial for using a `dummy` variable, where we looked at the effect of `np_subscription` (yes/no) on `trust_t1`. 
-But this time, we also run a second model where we also add the `age` of the participants as a control variable.
-<!-- Demographic variables like `age`, `gender` and `education` are often used as control variables, because they are known to influence many other variables, making them likely to lead to spurious effects. -->
-
-When running multiple regression, it is good practice to report the results of multiple models side by side. 
-This way you can see what happens to the effects when you control for other variables.
-With the `tab_model()` function from the `sjPlot` package, you can pass multiple models to the function and it will show you the results side by side.
+We will again be using our practice data, which contains the variables `trust_t1`, `np_subscription`, and `age`.
 
 ```{r, message=F}
 library(tidyverse)
@@ -46,6 +40,15 @@ m1 <- lm(trust_t1 ~ np_subscription, data = d)
 m2 <- lm(trust_t1 ~ np_subscription + age, data = d)
 tab_model(m1, m2)
 ```
+
+Let's use the same example data as in the linear regression tutorial for using a `dummy` variable, where we looked at the effect of `np_subscription` (yes/no) on `trust_t1`. 
+But this time, we also run a second model where we also add the `age` of the participants as a control variable.
+<!-- Demographic variables like `age`, `gender` and `education` are often used as control variables, because they are known to influence many other variables, making them likely to lead to spurious effects. -->
+
+When running multiple regression, it is good practice to report the results of multiple models side by side. 
+This way you can see what happens to the effects when you control for other variables.
+With the `tab_model()` function from the `sjPlot` package, you can pass multiple models to the function and it will show you the results side by side.
+
 
 In the first model, we see that people that have a subscription to a newspaper have a higher trust in the news media compared to people that do not have a subscription ($b = 0.37$, p < 0.001).
 However, in the second model, where we control for age, this effect is no longer significant ($b = -0.04$, p = 0.612).
@@ -61,57 +64,3 @@ However, our second model indicates that this strategy would *probably*[^1] not 
 The only thing we can say is that based on this data, we do not find evidence for this effect.
 But this *is* already a huge win, because it prevents us from making bad decisions based on a spurious effect.
 
-
-# Example of controlling for confounding variables
-
-There is a [famous example](http://www.brixtonhealth.com/storksBabies.pdf) of confounding, which points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries ($\rho = 0.62$)
-A naive interpretation would then be that this is evidence for the folk theory that storks deliver babies.
-The real reason however, as explained in the article, is that the size of the country is a confounding variable: larger countries simply have more storks and more babies.
-
-So let's use this example to demonstrate how we can control for confounding variables in a regression model!
-Here we create a tibble using the data from **table 1** in the article.
-
-```{r, message=F}
-library(tidyverse)
-library(sjPlot)
-
-storks <- tibble(
- storks = c(100,300,1,5000,9,140,3300,2500,4,5000,5,30000,1500,5000,8000,150,25000),
- birth_rate = c(83,87,118,117,59,774,901,106,188,124,551,610,120,367,439,82,1576),
- area_km2 = c(29,84,31,111,43,544,357,132,42,93,301,312,92,237,505,41,779) 
-)
-```
-
-The data we have here is about the number of `storks`, the `birth_rate`, and the `area_km2` of the country.
-Let's first have a look at the correlations.
-
-```{r}
-tab_corr(storks)
-```
-
-As reported in the article, the correlation between the number of storks and the birth rate is high at $r = 0.62$.
-But we also see that the area of the country is correlated with both the number of storks and the birth rate ($r = 0.58$ and $r = 0.92$ respectively).
-This is a good indication that the area of the country is likely a confounding variable.
-
-Now let's see what happens when we put the number of storks into a regression model.
-Our dependent variable is the `birth_rate`, our independent variable is the `storks`, and we'll control for the `area_km2`.
-The variables are standardized first, so that you can see the relation to the correlation coefficients.
-We'll run two models: without and with the control variable.
-
-
-```{r}
-##  standardize all variables
-storks_z <- storks |> scale() |> as_tibble()
-
-m1 <- lm(birth_rate ~ storks,            data = storks_z)
-m2 <- lm(birth_rate ~ storks + area_km2, data = storks_z)
-tab_model(m1, m2)
-```
-
-In the first model we see a positive effect of the number of storks on the birth rate ($\beta = 0.62$).
-The effect is significant (p < 0.01) and the standardized coefficient is the same as the correlation coefficient.
-So here you see firsthand a spurious effect.
-
-In the second model, where we control for the area of the country, the effect of the number of storks on the birth rate is no longer significant (p = 0.304).
-Instead, we see a very strong effect of the area of the country on the birth rate ($\beta = 0.85$, p < 0.001).
-So here you see the power of multiple regression in action: by controlling for `area_km2`, the spurious effect of `storks` on `birth_rate` disappears. 

@@ -18,8 +18,8 @@ For example, it allows us to measure: *to what extent is a person's social media
 The **correlation** is a standardized version of the covariance, which expresses the **strength** and **direction** of the relationship between two variables on a scale from -1 to 1.
 This makes it easier to interpret. Consider the following example:
 
-* if the correlation between a person's social media use and their feelings of loneliness is positive (`> 0`), it means that people that spend a lot of time on social media tend to feel more lonely.
-* If the correlation is negative (`< 0`), it means that people that spend a lot of time on social media tend to feel *less* lonely.
+* if the correlation between a person's social media use and their feelings of loneliness is positive (`> 0`), it means that people that spend more time on social media tend to feel more lonely.
+* If the correlation is negative (`< 0`), it means that people that spend more time on social media tend to feel *less* lonely.
 * If the correlation is (close to) `-1` or `1`, it means that the relationship is strong.
 * If the correlation is (close to) `0`, it means that the relationship is weak or absent.
 
