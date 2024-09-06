@@ -57,52 +57,50 @@ A [famous example](http://www.brixtonhealth.com/storksBabies.pdf) is that across
 There is also a website called [Spurious Correlations](https://www.tylervigen.com/spurious-correlations), that is dedicated to finding coincidental spurious correlations, such as the correlation between the number of people who drowned by falling into a pool and the number of films Nicolas Cage appeared in.
 :::
 
-```{r, echo=F, message=F, fig.height=4}
+## Visualizing causation 
+
+To develop a good intuition for the difference between correlation and causation, it helps to have a good mental model of what a causal relationship looks like.
+A good way to do this is to use **Directed Acyclic Graphs** (DAGs), which are a visual way to represent causal relationships.
+Simply put, these are graphs where the arrows indicate the direction of the causal relationship.
+Here are three DAGs that show different reasons for a correlation between X and Y.
+X represents what we believe to be the cause (e.g., screen time), and Y the effect (e.g., well-being).
+Z represents a confounding variable (e.g., parental involvement).
+
+```{r, echo=F, message=F, fig.height=4, warning=F}
 library(ggdag)
 library(gridExtra)
 library(tidyverse)
-library(grid)
 
 coords <- list(
     x = c(x=1, z=2, y=3),
-    y = c(x=1, z=2, y=1)
+    y = c(x=1, z=1, y=1)
 )
-
+labels <- c("x" = "Screen time", "y" = "Well-being", "z" = "Parental involvement")
 
 d_cause <- dagify(y ~ x, coords = coords) |> 
     tidy_dagitty() |> 
-    ggdag() + theme_dag() + ggtitle("Causal relation") 
+    dag_label(labels) |>
+    ggdag() + theme_dag() + ggtitle("Causal relation")  +
+    geom_dag_label_repel(aes(label=label), box.padding=3, segment.color='transparent')
 
 d_cause_rev <- dagify(x ~ y, coords = coords) |> 
     tidy_dagitty() |>
-    ggdag() + theme_dag() + ggtitle("Reverse causal relation")
+    dag_label(labels) |>
+    ggdag() + theme_dag() + ggtitle("Reversed causal relation") +
+    geom_dag_label_repel(aes(label=label), box.padding=3, segment.color='transparent')
 
-d_coin <- dagify(x ~ y, coords = coords) |> 
+d_conf <- dagify(y ~ x, x ~ z, coords = coords) |> 
     tidy_dagitty() |> 
-    ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-    geom_dag_point() +
-    geom_dag_text() +
-    theme_dag() + ggtitle("Coincidence")
+    dag_label(labels) |>
+    ggdag() + theme_dag() + ggtitle("Confounding") +
+    geom_dag_label_repel(aes(label=label), box.padding=3, segment.color='transparent')
 
-d_conf <- confounder_triangle(x_y_associated = FALSE) %>% 
-  tidy_dagitty() %>% 
-  mutate(linetype = ifelse(name == "z", "solid", "dashed")) %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) + 
-  geom_dag_point() + 
-  geom_dag_text() + 
-  geom_dag_edges(aes(edge_linetype = linetype), show.legend = FALSE) +
-  theme_dag() + ggtitle("Confounding")
-
-title <- textGrob("Different possible reasons for correlation between X and Y", gp = gpar( cex = 1.5))
-
-grid.arrange(d_cause,d_cause_rev, d_coin, d_conf, layout_matrix = rbind(c(1,4), c(2,4), c(3,4)),
-             bottom=title)
+grid.arrange(d_cause, d_cause_rev, d_conf, ncol=1)
 ```
 
-
-
-
-
+This shows why a correlation between X and Y is not enough to establish causation.
+Each of these DAGs shows a different reason for the correlation between X and Y, but only the first one supports our hypothesis that X causes Y.
+Our job as researchers is to figure out which of these DAGs is best supported by empirical evidence.
 
 
 # How to (better) establish causation

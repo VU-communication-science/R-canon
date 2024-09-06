@@ -372,7 +372,10 @@ window.Quarto = {
    
   <ul>
   <li><a href="#testing-causal-relations" id="toc-testing-causal-relations" class="nav-link active" data-scroll-target="#testing-causal-relations">Testing causal relations</a></li>
-  <li><a href="#why-correlation-does-not-imply-causation" id="toc-why-correlation-does-not-imply-causation" class="nav-link" data-scroll-target="#why-correlation-does-not-imply-causation">Why correlation does not imply causation</a></li>
+  <li><a href="#why-correlation-does-not-imply-causation" id="toc-why-correlation-does-not-imply-causation" class="nav-link" data-scroll-target="#why-correlation-does-not-imply-causation">Why correlation does not imply causation</a>
+  <ul class="collapse">
+  <li><a href="#visualizing-causation" id="toc-visualizing-causation" class="nav-link" data-scroll-target="#visualizing-causation">Visualizing causation</a></li>
+  </ul></li>
   <li><a href="#how-to-better-establish-causation" id="toc-how-to-better-establish-causation" class="nav-link" data-scroll-target="#how-to-better-establish-causation">How to (better) establish causation</a>
   <ul class="collapse">
   <li><a href="#theoretical-foundation" id="toc-theoretical-foundation" class="nav-link" data-scroll-target="#theoretical-foundation">Theoretical foundation</a></li>
@@ -449,6 +452,9 @@ Famous spurious correlations
 </div>
 </div>
 </div>
+<section id="visualizing-causation" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-causation">Visualizing causation</h2>
+<p>To develop a good intuition for the difference between correlation and causation, it helps to have a good mental model of what a causal relationship looks like. A good way to do this is to use <strong>Directed Acyclic Graphs</strong> (DAGs), which are a visual way to represent causal relationships. Simply put, these are graphs where the arrows indicate the direction of the causal relationship. Here are three DAGs that show different reasons for a correlation between X and Y. X represents what we believe to be the cause (e.g., screen time), and Y the effect (e.g., well-being). Z represents a confounding variable (e.g., parental involvement).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -458,6 +464,8 @@ Famous spurious correlations
 </div>
 </div>
 </div>
+<p>This shows why a correlation between X and Y is not enough to establish causation. Each of these DAGs shows a different reason for the correlation between X and Y, but only the first one supports our hypothesis that X causes Y. Our job as researchers is to figure out which of these DAGs is best supported by empirical evidence.</p>
+</section>
 </section>
 <section id="how-to-better-establish-causation" class="level1">
 <h1>How to (better) establish causation</h1>
