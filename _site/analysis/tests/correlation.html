@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../good-to-know/function-documentation.html" rel="next">
+<link href="../../analysis/tests/linear-regression.html" rel="next">
 <link href="../../analysis/tests/index.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -337,6 +337,12 @@ window.Quarto = {
  <span class="menu-text">Scale construction</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/techniques/controlling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Controlling for confounders</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -352,6 +358,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../analysis/tests/correlation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Correlation test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/tests/linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simple linear regression</span></a>
   </div>
 </li>
       </ul>
@@ -390,7 +402,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#between-two-variables-cor.test" id="toc-between-two-variables-cor.test" class="nav-link" data-scroll-target="#between-two-variables-cor.test">Between two variables: cor.test</a></li>
   <li><a href="#between-more-variables-tab_corr" id="toc-between-more-variables-tab_corr" class="nav-link" data-scroll-target="#between-more-variables-tab_corr">Between more variables: tab_corr</a></li>
-  <li><a href="#pearson-spearman-and-kendall" id="toc-pearson-spearman-and-kendall" class="nav-link" data-scroll-target="#pearson-spearman-and-kendall">Pearson, Spearman, and Kendall</a></li>
+  </ul></li>
+  <li><a href="#when-can-you-use-it" id="toc-when-can-you-use-it" class="nav-link" data-scroll-target="#when-can-you-use-it">When can you use it?</a>
+  <ul class="collapse">
+  <li><a href="#spearmans-rho-and-kendalls-tau" id="toc-spearmans-rho-and-kendalls-tau" class="nav-link" data-scroll-target="#spearmans-rho-and-kendalls-tau">Spearman’s <span class="math inline">\(\rho\)</span> and Kendall’s <span class="math inline">\(\tau\)</span></a></li>
   </ul></li>
   <li><a href="#how-to-report-it" id="toc-how-to-report-it" class="nav-link" data-scroll-target="#how-to-report-it">How to report it</a></li>
   </ul>
@@ -421,9 +436,9 @@ window.Quarto = {
 
 <section id="what-is-the-correlation-test" class="level1">
 <h1>What is the correlation test?</h1>
-<p>In communication science we are often interested in the relationship between numeric variables. For example, we might want to know if there is a relationship between the amount of time people spend on social media and their feelings of loneliness.</p>
-<p>The correlation test is a statistical test that can tell us if there is a relationship between two numeric variables. It also provides a coefficient between -1 and 1 that tells us how strong the relationship is, and whether it is positive or negative. In this tutorial we focus on conducting the test. For more details on the concept of correlation and how to interpret the correlation coefficient <span class="math inline">\(r\)</span>, see the <a href="../../analysis/concepts/covariance-and-correlation.html">covariance and correlation</a> section.</p>
-<p>What the correlation test <strong>does not</strong> tell us is whether there is a causal relationship between the variables. For example, if we find that there is a correlation between social media use and loneliness, it does not mean that social media use causes loneliness. For more detail on this, see the <a href="../../analysis/concepts/causality.html">causality</a> section.</p>
+<p>The correlation test can be used to see if there is <code>a relationship between two numeric variables</code>. For example, we might want to know if there is a relationship between the amount of time people spend on social media and their feelings of loneliness.</p>
+<p>The relation is expressed as a measure (the correlation coefficient) on a scale from -1 to 1, that tells us how strong the relationship is, and whether it is positive or negative. We also get a p-value that tells us if the relationship is significant. In this tutorial we focus on conducting the test. For more details on the concept of correlation and how to interpret the correlation coefficient <span class="math inline">\(r\)</span>, see the <a href="../../analysis/concepts/covariance-and-correlation.html">covariance and correlation</a> section.</p>
+<p>What the correlation test <strong>does not</strong> tell us is why the relationship exists. If we find that there is a correlation between social media use and loneliness, it does not mean that social media use causes loneliness. For more detail on this, see the <a href="../../analysis/concepts/causality.html">causality</a> section.</p>
 </section>
 <section id="how-to-use-it" class="level1">
 <h1>How to use it</h1>
@@ -543,10 +558,20 @@ cor.test using the formula notation
 </div>
 <p>This is great for getting a quick overview of the relationships between multiple variables. If you need to get the exact p-values, you can also use <code>tab_corr(p.numeric = TRUE)</code>.</p>
 </section>
-<section id="pearson-spearman-and-kendall" class="level2">
-<h2 class="anchored" data-anchor-id="pearson-spearman-and-kendall">Pearson, Spearman, and Kendall</h2>
-<p>By default the <code>cor.test</code> function uses the Pearson correlation coefficient. This assumes that the relationship between the variables is linear, and that the variables are (roughly) normally distributed. If this is not the case, you might want to instead use Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span>.</p>
-<p>To use these alternative methods, you just need to specify the <code>method</code> argument in the <code>cor.test</code> function, or the <code>corr.method</code> argument in the <code>tab_corr</code> function.</p>
+</section>
+<section id="when-can-you-use-it" class="level1">
+<h1>When can you use it?</h1>
+<p>The correlation test is used when you have two <code>numeric</code> variables and you want to know if there is a relationship between them. There is no <code>dependent</code> or <code>independent</code> variable in the correlation test, because we are just looking at the relationship between the variables.</p>
+<p>There are three main conditions that need to be met for the correlation test to be valid:</p>
+<ol type="1">
+<li><strong>Continuous variables</strong>: Both variables should be numeric, and measured on a interval or ratio scale.</li>
+<li><strong>Linearity</strong>: The relationship between the variables should be linear.</li>
+<li><strong>Normality</strong>: The variables should be (roughly) normally distributed. Correlation is particularly sensitive to outliers.</li>
+</ol>
+<p>If these conditions are not met, you might want to use Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span> instead of the Pearson correlation coefficient.</p>
+<section id="spearmans-rho-and-kendalls-tau" class="level2">
+<h2 class="anchored" data-anchor-id="spearmans-rho-and-kendalls-tau">Spearman’s <span class="math inline">\(\rho\)</span> and Kendall’s <span class="math inline">\(\tau\)</span></h2>
+<p>To use the Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span> correlation, you need to specify the <code>method</code> argument in the <code>cor.test</code> function, or the <code>corr.method</code> argument in the <code>tab_corr</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(d<span class="sc">$</span>news_consumption, d<span class="sc">$</span>trust_t1, <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(d<span class="sc">$</span>news_consumption, d<span class="sc">$</span>trust_t1, <span class="at">method =</span> <span class="st">"kendall"</span>)</span>
@@ -672,7 +697,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1007,8 +1032,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../good-to-know/function-documentation.html" class="pagination-link" aria-label="Function Documentation">
-        <span class="nav-page-text">Function Documentation</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../analysis/tests/linear-regression.html" class="pagination-link" aria-label="Simple linear regression">
+        <span class="nav-page-text">Simple linear regression</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

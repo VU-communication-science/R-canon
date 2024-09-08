@@ -21,18 +21,15 @@ You could perhaps use their age, their level of education, and their political o
 Regression analysis allows you to find a mathematical formula that predicts trust based on a combination of these variables.
 This can help you understand complex relationships between multiple variables.
 
-We refer to the variable that we want to predict (trust) as the **dependent variable**, and the variables that we use to make the prediction (age) as the **independent variables**.
-In the current tutorial you will first learn about simple linear regression, where we use one independent variable to predict the dependent variable.
-As you progress, you will learn about [multiple regression](../tests/multiple-regression.qmd), where we use more than one independent variable at once.
+<!-- We refer to the variable that we want to predict (trust) as the **dependent variable**, and the variables that we use to make the prediction (age) as the **independent variables**. -->
+<!-- In the current tutorial you will first learn about simple linear regression, where we use one independent variable to predict the dependent variable.
+As you progress, you will learn about [multiple regression](../tests/multiple-regression.qmd), where we use more than one independent variable at once. -->
 
 
 # How to use it
 
-For this tutorial we'll be using our standard practice data.
-Regression is a flexible tool, allowing the indepent variable to either be numeric (like in a correlation), binary (like in a t-test), or categorical (like in an ANOVA).
-So we'll prepare a bunch of columns to show your an example for each of these cases.
-
-Regression analysis is built into R, but we'll also be using the `tidyverse` package to load and clean the data, and the `sjPlot` package to show the results in a nice table.
+For this tutorial we'll be using our standard practice data, and a bit of `tidyverse` to load and clean the data.
+We'll also be using the `sjPlot` package, which can create nice tables and plots of regression models.
 
 ```{r, message=F, results='hide'}
 library(tidyverse)
@@ -40,11 +37,15 @@ library(sjPlot)
 
 d <- read_csv("https://tinyurl.com/R-practice-data") |>
         mutate(age = if_else(age > 100, 2024 - age, age)) |>
-        select(age, experiment_group, np_subscription, trust_t1, trust_t2)
+        rename(news_consumption = `news consumption`)
 
 d
 ```
 
+The **dependent** variable in the regression model has to be numeric.
+For our examples we'll use the `trust_t1` variable, which measures a person's trust in journalists on a scale from 1 to 10. 
+A regression model can have **one or multiple independent** variables, which can be numeric or categorical.
+This makes regression analysis a very flexible tool that can be used in many different situations.
 
 ## Regression with numerical independent variable
 
@@ -56,6 +57,7 @@ Inside the `lm()` function we specify the formula for the regression, which has 
 [^1]: We use the `trust_t1` variable here, because for the current analysis we are not interested in the effect of the experimental group. Since `trust_t1` is measured before the experiment, it is not influenced by the experiment.
 
 ```{r}
+#| html-table-processing: none
 m <- lm(trust_t1 ~ age, data = d) 
 
 tab_model(m)
@@ -64,48 +66,165 @@ tab_model(m)
 The output of the regression analysis gives us values for two **predictors**: the **(intercept)** and the **age** variable.
 The **(intercept)** tells us what the average value of the dependent variable (`trust_t1`) is when the independent variable (`age`) is zero.
 The **age** predictor tells us how much the dependent variable (`trust_t1`) changes for every unit increase in age. 
-
-
-
-
 For each of these predictors we **estimate**, a **confidence interval**, and a **p-value**.
+
+This could already be all the information we need!
+If our hypothesis was that trust in journalists increases with age, we could now report that this hypothesis is supported by the data (b = 0.04, p < 0.001).
+But let's not stop there, and see how we can interpret these results in more detail!
+
+### Interpreting the intercept and the effect of age 
+
 So why do we get two predictors, when we only specified one variable?
- 
+Why do we need the intercept?
+This is because our prediction of `trust_t1` is based on two pieces of information:
 
-This is the information that we need to make a prediction. 
-To help you understand what this means, it helps to visualize the *regression line*. 
-For this we can use the `plot_model()` function.[^2]
+* What is the average trust in journalists regardless of age?
+* How does trust in journalists change as people get older?
 
-[^2]: The `plot_model()` function is part of the `sjPlot` package, and is a very useful tool for visualizing regression models. When use use `type = "pred"` it visualizes the `pred`iction. Here we also say `show.data = T` to show the actual data points. The `jitter = T` argument randomly moves the data points around a tiny bit, so that if two observations have exactly the same values, they will not overlap. 
+The **intercept** (2.21) tells us the average value of the dependent variable when age is zero.[^2]
+The coefficient for the **age** variable (0.04) tells us how much this trust increases for every year of age.
+Together, these values allow us to predict the trust in journalists for any age, using the following formula:
+
+[^2]: Often, the intercept doesn't have a meaningful interpretation, because the independent variable can't be zero. For example, there are no people with age zero in our data. We therefore often do not interpret the intercept by itself, but we still need it to make the model work.
+
+$$ trust\_t1 = intercept + slope_{age} \times age $$
+
+If we plug in the values from our model, we get: 
+
+$$ trust\_t1 = 2.21 + 0.04 \times age $$
+
+We can for instance calculate the predicted trust in journalists for a 20 year old:
 
 ```{r}
-plot_model(m, type = "pred", show.data = T, jitter=T)
+2.21 + 0.04 * 20
 ```
 
 
+### Visualizing the intercept and slope
 
+We can also visualize how the predicted trust in journalists changes with age.
+The `sjPlot` package has a function `plot_model()` that can do this for us.
+Here we visualize the prediction (`type = "pred"`) for the `age` variable (`terms = "age"`). 
+To show you how the prediction relates to the actual data, we'll also include a scatterplot of the data points (`show.data = T`), and add a bit of jitter[^3] to the data points so they don't overlap (`jitter = T`)
 
-
-
-The `estimate` for the `age` predictor tells us how much the dependent variable (`trust_t1`) changes for every unit increase in the independent variable (`age`).
-The coefficient that is reported under `estimate` is `0.04`, which means that for every year older a person is, their trust in journalists increases by 0.04 points.
-
-
-
-
-Together, the intercept and slope create a regression line that best fits the data.
-You can think of this line as the prediction.
+[^3]: Jitter is a visualization technique that randomly moves the data points a bit, so that they don't overlap. If we don't do this, then data points with identical values are plotted on top of each other, and we can't see how many data points there are.
 
 ```{r}
-plot_model(m, type = "pred", show.data = T, jitter=T) 
+plot_model(m, type = "pred", terms = "age", show.data = T, jitter=T)
 ```
 
-For every value of `age`, it tells us what the average value of `trust_t1` is.
-So around the age of 20, the average trust is around 3, whereas for 50 year olds its around 4.2.
+Here the *regression line* shows the predicted values. 
+You can check that at age 20 the predicted trust is indeed 3.01, as we calculated before. 
+We can now see very clearly how average trust in journalists increases with age!
+
+This should also clarify why the effect of age is called a **slope**.
+Since we have a positive effect, the regression line slopes upwards as age increases.
+The stronger the effect, the steeper the slope.
+If there was no effect of age, the regression line would be flat (i.e. no slope), because the predicted value would not change with age. 
+If the effect was negative, the regression line would slope downwards.
+Note that this is identical to the **direction** and **strength** of [covariance and correlation measures](../concepts/covariance-and-correlation.qmd#visualizing-correlation).
 
 
-By *best fits* we mean that the line minimizes the distance between the predicted values (the line) and the actual values.
+::: {.callout-note title="How intercept and slope make the regression line" collapse="true"}
+
+The **intercept** is the value of the dependent variable when the independent variable is zero, which determines at what value the regression line crosses the y-axis.
+The coefficient for an independent variable tells us how much the dependent variable changes for every unit increase in the independent variable, which determines the **slope** of the regression line.
+The regression model finds the values for the intercept and slope that draws a line through the data points that best fits the data.
+To get a feel for this, try changing the values of the intercept and slope in the interactive widget below, and see how the regression line changes.
+
+```{ojs}
+//| echo: false
+viewof intercept = Inputs.range(
+  [-10, 10], 
+  {value: -5, step: 0.01, label: "Intercept"}
+)
+viewof slope = Inputs.range(
+  [-2,2], 
+  {value: 0.1, step: 0.01, label: "Slope"}
+)
+```
+
+```{ojs}
+//| echo: false
+
+x_values = Array.from({ length: 100 }, (_, i) => i);
+y_values = x_values.map(x => slope * x + intercept);
+
+// Now, plot the regression line
+Plot.plot({
+  marks: [
+    Plot.lineY(y_values, {x: x_values}) // Explicitly pass x and y values
+  ],
+  x: {
+    label: "Independent variable (age)",
+    domain: [0, 100]
+  },
+  y: {
+    label: "Dependent variable (trust)",
+    domain: [-10, 10]
+  },
+  width: 600,
+  height: 400
+})
+
+```
+:::
+
+## Regression with categorical independent variable
+
+The **independent variable** in a regression model can also be categorical.
+This allows us to include categorical variables in the model, similar to the t-test and ANOVA.
+Let's see what this looks like when we predict `trust_t1` based on the `np_subscription` variable, which has the values `yes` and `no` to indicate if a person has a newspaper subscription.
+
+We cannot do calculations with the values "yes" and "no", but we can make this possible by creating a so-called **dummy variable**.
+In a dummy variable, we assign a value of `1` to one of the categories, and `0` to the other categories.
+In our case we'll assign `1` to the category `yes`, and `0` to the category `no`.
+R can actually do this for us, but we'll first show you how to do it yourself to understand what's happening.
+Here we create a new variable `has_subscription` that has the value `1` if the person has a subscription, and `0` if they don't.
+
+```{r}
+d = mutate(d, has_subscription = if_else(np_subscription == "yes", 1, 0))
+
+select(d, np_subscription, has_subscription)
+```
+
+Now we can use this variable in the regression model.
+
+```{r}
+m <- lm(trust_t1 ~ has_subscription, data = d)
+
+tab_model(m)
+```
+
+We now get a **slope** for the `has_subscription` variable.
+Before we saw that the slope tells us how much the dependent variable changes for every unit increase in the independent variable.
+This is still true!
+We only need to remember that the `has_subscription` variable is binary, so it can only take the values `0` and `1`.
+So given a coefficient of `0.37`, we can say that people with a subscription have on average a trust score that is `0.37` points higher than people without a subscription.
+
+Now let's do this again, but this time we'll let R create the dummy variable.
+This time we'll just directly use the `np_subscription` variable in the regression model.
+
+```{r}
+m <- lm(trust_t1 ~ np_subscription, data = d)
+
+tab_model(m)
+```
+
+Notice that the results are identical! 
+The only difference is that the label for the `np_subscription` variable is `np_subscription [yes]`.
+This is R's way of telling us that it created a dummy variable for us in which the value `1` corresponds to the category `yes`.
+
+An additional benefit of letting R create the dummy variable is that it now knows that the variable is categorical. 
+If we now use the `plot_model()` function to visualize the prediction, it will 
+
+```{r}
+plot_model(m, type = "pred", terms = "np_subscription")
+```
 
 
-To get a better feel for the intercept and slope, we can plot the regression line on a scatterplot of the data.
+Just like before, we get an **intercept** and a **slope**.
+The interpretation is mostly the same, but we need to keep in mind that the np_subscription variable is binary.
 
+Notice that the label for the `np_subscription` variable is `np_subscription [yes]`.
+This tells us that R 

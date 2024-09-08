@@ -63,4 +63,3 @@ However, our second model indicates that this strategy would *probably*[^1] not 
 [^1]: We say *probably*, because we cannot say with certainty that a newspaper subscription really has no effect.
 The only thing we can say is that based on this data, we do not find evidence for this effect.
 But this *is* already a huge win, because it prevents us from making bad decisions based on a spurious effect.
-

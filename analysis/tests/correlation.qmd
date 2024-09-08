@@ -5,15 +5,15 @@ subtitle: Testing the relationship between numeric variables
 
 # What is the correlation test?
 
-In communication science we are often interested in the relationship between numeric variables.
+The correlation test can be used to see if there is `a relationship between two numeric variables`.
 For example, we might want to know if there is a relationship between the amount of time people spend on social media and their feelings of loneliness.
 
-The correlation test is a statistical test that can tell us if there is a relationship between two numeric variables.
-It also provides a coefficient between -1 and 1 that tells us how strong the relationship is, and whether it is positive or negative.
+The relation is expressed as a measure (the correlation coefficient) on a scale from -1 to 1, that tells us how strong the relationship is, and whether it is positive or negative.
+We also get a p-value that tells us if the relationship is significant.
 In this tutorial we focus on conducting the test. For more details on the concept of correlation and how to interpret the correlation coefficient $r$, see the [covariance and correlation](../concepts/covariance-and-correlation.qmd) section.
 
-What the correlation test **does not** tell us is whether there is a causal relationship between the variables.
-For example, if we find that there is a correlation between social media use and loneliness, it does not mean that social media use causes loneliness.
+What the correlation test **does not** tell us is why the relationship exists.
+If we find that there is a correlation between social media use and loneliness, it does not mean that social media use causes loneliness.
 For more detail on this, see the [causality](../concepts/causality.qmd) section.
 
 # How to use it
@@ -78,13 +78,22 @@ This is great for getting a quick overview of the relationships between multiple
 If you need to get the exact p-values, you can also use `tab_corr(p.numeric = TRUE)`.
 
 
-## Pearson, Spearman, and Kendall
+# When can you use it?
 
-By default the `cor.test` function uses the Pearson correlation coefficient.
-This assumes that the relationship between the variables is linear, and that the variables are (roughly) normally distributed.
-If this is not the case, you might want to instead use Spearman's $\rho$ or Kendall's $\tau$.
+The correlation test is used when you have two `numeric` variables and you want to know if there is a relationship between them.
+There is no `dependent` or `independent` variable in the correlation test, because we are just looking at the relationship between the variables.   
 
-To use these alternative methods, you just need to specify the `method` argument in the `cor.test` function, or the `corr.method` argument in the `tab_corr` function.
+There are three main conditions that need to be met for the correlation test to be valid:
+
+1. **Continuous variables**: Both variables should be numeric, and measured on a interval or ratio scale.
+2. **Linearity**: The relationship between the variables should be linear.
+3. **Normality**: The variables should be (roughly) normally distributed. Correlation is particularly sensitive to outliers.
+
+If these conditions are not met, you might want to use Spearman's $\rho$ or Kendall's $\tau$ instead of the Pearson correlation coefficient.
+
+## Spearman's $\rho$ and Kendall's $\tau$
+
+To use the Spearman's $\rho$ or Kendall's $\tau$ correlation, you need to specify the `method` argument in the `cor.test` function, or the `corr.method` argument in the `tab_corr` function.
 
 ```{r, results='hide', warning=F, message=F}
 cor.test(d$news_consumption, d$trust_t1, method = "spearman")

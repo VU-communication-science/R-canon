@@ -67,6 +67,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="multiple-regression_WIP_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="multiple-regression_WIP_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="multiple-regression_WIP_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script type="module" src="multiple-regression_WIP_files/libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="multiple-regression_WIP_files/libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 <link href="multiple-regression_WIP_files/libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="multiple-regression_WIP_files/libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -136,8 +138,7 @@ window.Quarto = {
 </section>
 <section id="how-to-use" class="level1">
 <h1>How to use</h1>
-<p>To use multiple regression in R, you can use the <code>lm()</code> function, just like in simple linear regression. Let’s use the same example data as in the linear regression tutorial for using a <code>dummy</code> variable, where we looked at the effect of <code>np_subscription</code> (yes/no) on <code>trust_t1</code>. But this time, we also run a second model where we also add the <code>age</code> of the participants as a control variable. <!-- Demographic variables like `age`, `gender` and `education` are often used as control variables, because they are known to influence many other variables, making them likely to lead to spurious effects. --></p>
-<p>When running multiple regression, it is good practice to report the results of multiple models side by side. This way you can see what happens to the effects when you control for other variables. With the <code>tab_model()</code> function from the <code>sjPlot</code> package, you can pass multiple models to the function and it will show you the results side by side.</p>
+<p>To use multiple regression in R, you can use the <code>lm()</code> function, just like in simple linear regression. We will again be using our practice data, which contains the variables <code>trust_t1</code>, <code>np_subscription</code>, and <code>age</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
@@ -209,131 +210,76 @@ window.Quarto = {
 
 </div>
 </div>
+<p>Let’s use the same example data as in the linear regression tutorial for using a <code>dummy</code> variable, where we looked at the effect of <code>np_subscription</code> (yes/no) on <code>trust_t1</code>. But this time, we also run a second model where we also add the <code>age</code> of the participants as a control variable. <!-- Demographic variables like `age`, `gender` and `education` are often used as control variables, because they are known to influence many other variables, making them likely to lead to spurious effects. --></p>
+<p>When running multiple regression, it is good practice to report the results of multiple models side by side. This way you can see what happens to the effects when you control for other variables. With the <code>tab_model()</code> function from the <code>sjPlot</code> package, you can pass multiple models to the function and it will show you the results side by side.</p>
 <p>In the first model, we see that people that have a subscription to a newspaper have a higher trust in the news media compared to people that do not have a subscription (<span class="math inline">\(b = 0.37\)</span>, p &lt; 0.001). However, in the second model, where we control for age, this effect is no longer significant (<span class="math inline">\(b = -0.04\)</span>, p = 0.612). This suggests that the effect of <code>np_subscription</code> on <code>trust_t1</code> was spurious, and that the real reason for the difference in trust between subscribers and non-subscribers is the age of the participants. That is, older people are more likely to have a newspaper subscription, and older people also have a higher trust in the news media.</p>
 <p>Being able to control for confounding variables enables us to better explore possible <a href="../concepts/causality.qmd">causal relationships</a> between variables. Based on the first model, we might have concluded that having a newspaper subscription causes people to trust the news media more. If we were a newspaper, this finding might have led us to invest in subscription campaigns to increase trust in the news media. However, our second model indicates that this strategy would <em>probably</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> not be effective.</p>
-</section>
-<section id="example-of-controlling-for-confounding-variables" class="level1">
-<h1>Example of controlling for confounding variables</h1>
-<p>There is a <a href="http://www.brixtonhealth.com/storksBabies.pdf">famous example</a> of confounding, which points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries (<span class="math inline">\(\rho = 0.62\)</span>) A naive interpretation would then be that this is evidence for the folk theory that storks deliver babies. The real reason however, as explained in the article, is that the size of the country is a confounding variable: larger countries simply have more storks and more babies.</p>
-<p>So let’s use this example to demonstrate how we can control for confounding variables in a regression model! Here we create a tibble using the data from <strong>table 1</strong> in the article.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>storks <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="at">storks =</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">300</span>,<span class="dv">1</span>,<span class="dv">5000</span>,<span class="dv">9</span>,<span class="dv">140</span>,<span class="dv">3300</span>,<span class="dv">2500</span>,<span class="dv">4</span>,<span class="dv">5000</span>,<span class="dv">5</span>,<span class="dv">30000</span>,<span class="dv">1500</span>,<span class="dv">5000</span>,<span class="dv">8000</span>,<span class="dv">150</span>,<span class="dv">25000</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="at">birth_rate =</span> <span class="fu">c</span>(<span class="dv">83</span>,<span class="dv">87</span>,<span class="dv">118</span>,<span class="dv">117</span>,<span class="dv">59</span>,<span class="dv">774</span>,<span class="dv">901</span>,<span class="dv">106</span>,<span class="dv">188</span>,<span class="dv">124</span>,<span class="dv">551</span>,<span class="dv">610</span>,<span class="dv">120</span>,<span class="dv">367</span>,<span class="dv">439</span>,<span class="dv">82</span>,<span class="dv">1576</span>),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="at">area_km2 =</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">84</span>,<span class="dv">31</span>,<span class="dv">111</span>,<span class="dv">43</span>,<span class="dv">544</span>,<span class="dv">357</span>,<span class="dv">132</span>,<span class="dv">42</span>,<span class="dv">93</span>,<span class="dv">301</span>,<span class="dv">312</span>,<span class="dv">92</span>,<span class="dv">237</span>,<span class="dv">505</span>,<span class="dv">41</span>,<span class="dv">779</span>) </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The data we have here is about the number of <code>storks</code>, the <code>birth_rate</code>, and the <code>area_km2</code> of the country. Let’s first have a look at the correlations.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_corr</span>(storks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">&nbsp;</td>
-<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">storks</td>
-<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">birth_rate</td>
-<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">area_km2</td>
-</tr>
-<tr class="even">
-<td style="font-style: italic">storks</td>
-<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">0.620<span style="vertical-align:super;font-size:0.8em;">**</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.579<span style="vertical-align:super;font-size:0.8em;">*</span></td>
-</tr>
-<tr class="odd">
-<td style="font-style: italic">birth_rate</td>
-<td style="text-align: center; padding: 0.2cm;">0.620<span style="vertical-align:super;font-size:0.8em;">**</span></td>
-<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">0.922<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-</tr>
-<tr class="even">
-<td style="font-style: italic">area_km2</td>
-<td style="text-align: center; padding: 0.2cm;">0.579<span style="vertical-align:super;font-size:0.8em;">*</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.922<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-</tr>
-<tr class="odd">
-<td colspan="4" style="text-align: right; border-bottom: double black; border-top: 1px solid black; font-style: italic; font-size: 0.9em;">Computed correlation used pearson-method with listwise-deletion.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>As reported in the article, the correlation between the number of storks and the birth rate is high at <span class="math inline">\(r = 0.62\)</span>. But we also see that the area of the country is correlated with both the number of storks and the birth rate (<span class="math inline">\(r = 0.58\)</span> and <span class="math inline">\(r = 0.92\)</span> respectively). This is a good indication that the area of the country is likely a confounding variable.</p>
-<p>Now let’s see what happens when we put the number of storks into a regression model. Our dependent variable is the <code>birth_rate</code>, our independent variable is the <code>storks</code>, and we’ll control for the <code>area_km2</code>. The variables are standardized first, so that you can see the relation to the correlation coefficients. We’ll run two models: without and with the control variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  standardize all variables</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>storks_z <span class="ot">&lt;-</span> storks <span class="sc">|&gt;</span> <span class="fu">scale</span>() <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(birth_rate <span class="sc">~</span> storks,            <span class="at">data =</span> storks_z)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(birth_rate <span class="sc">~</span> storks <span class="sc">+</span> area_km2, <span class="at">data =</span> storks_z)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">birth_rate</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">birth_rate</td>
-</tr>
-<tr class="even">
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
-<td style="text-align: center;">p</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.00</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.42&nbsp;–&nbsp;0.42</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.000</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.00</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.21&nbsp;–&nbsp;0.21</td>
-<td style="text-align: center;">1.000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">storks</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.62</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.19&nbsp;–&nbsp;1.05</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.008</strong></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.13</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.13&nbsp;–&nbsp;0.39</td>
-<td style="text-align: center;">0.304</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">area km2</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.85</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.59&nbsp;–&nbsp;1.11</td>
-<td style="text-align: center;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">17</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">17</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.385 / 0.344</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.862 / 0.842</td>
-</tr>
-</tbody>
-</table>
-
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="69" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 68;"><span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>viewof intercept <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> </span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="op">-</span><span class="dv">5</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.01</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Intercept"</span>}</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>viewof slope <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  [<span class="op">-</span><span class="dv">2</span><span class="op">,</span><span class="dv">2</span>]<span class="op">,</span> </span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.01</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Slope"</span>}</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
 
 </div>
 </div>
-<p>In the first model we see a positive effect of the number of storks on the birth rate (<span class="math inline">\(\beta = 0.62\)</span>). The effect is significant (p &lt; 0.01) and the standardized coefficient is the same as the correlation coefficient. So here you see firsthand a spurious effect.</p>
-<p>In the second model, where we control for the area of the country, the effect of the number of storks on the birth rate is no longer significant (p = 0.304). Instead, we see a very strong effect of the area of the country on the birth rate (<span class="math inline">\(\beta = 0.85\)</span>, p &lt; 0.001). So here you see the power of multiple regression in action: by controlling for <code>area_km2</code>, the spurious effect of <code>storks</code> on <code>birth_rate</code> disappears.</p>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="82" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 81;"><span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>x_values <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({ <span class="dt">length</span><span class="op">:</span> <span class="dv">100</span> }<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> i)<span class="op">;</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>y_values <span class="op">=</span> x_values<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> slope <span class="op">*</span> x <span class="op">+</span> intercept)<span class="op">;</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="co">// Now, plot the regression line</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">lineY</span>(y_values<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> x_values}) <span class="co">// Explicitly pass x and y values</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"X-axis"</span><span class="op">,</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">100</span>]</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Y-axis"</span><span class="op">,</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>  <span class="dt">width</span><span class="op">:</span> <span class="dv">600</span><span class="op">,</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">400</span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
 </section>
 
 
@@ -344,6 +290,17 @@ window.Quarto = {
 </ol>
 </section></div></main>
 <!-- /main column -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBpbnRlcmNlcHQgPSBJbnB1dHMucmFuZ2UoXG4gIFstMTAsIDEwXSwgXG4gIHt2YWx1ZTogLTUsIHN0ZXA6IDAuMDEsIGxhYmVsOiBcIkludGVyY2VwdFwifVxuKVxudmlld29mIHNsb3BlID0gSW5wdXRzLnJhbmdlKFxuICBbLTIsMl0sIFxuICB7dmFsdWU6IDAuMSwgc3RlcDogMC4wMSwgbGFiZWw6IFwiU2xvcGVcIn1cbilcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxueF92YWx1ZXMgPSBBcnJheS5mcm9tKHsgbGVuZ3RoOiAxMDAgfSwgKF8sIGkpID0+IGkpO1xueV92YWx1ZXMgPSB4X3ZhbHVlcy5tYXAoeCA9PiBzbG9wZSAqIHggKyBpbnRlcmNlcHQpO1xuXG4vLyBOb3csIHBsb3QgdGhlIHJlZ3Jlc3Npb24gbGluZVxuUGxvdC5wbG90KHtcbiAgbWFya3M6IFtcbiAgICBQbG90LmxpbmVZKHlfdmFsdWVzLCB7eDogeF92YWx1ZXN9KSAvLyBFeHBsaWNpdGx5IHBhc3MgeCBhbmQgeSB2YWx1ZXNcbiAgXSxcbiAgeDoge1xuICAgIGxhYmVsOiBcIlgtYXhpc1wiLFxuICAgIGRvbWFpbjogWzAsIDEwMF1cbiAgfSxcbiAgeToge1xuICAgIGxhYmVsOiBcIlktYXhpc1wiLFxuICAgIGRvbWFpbjogWy0xMCwgMTBdXG4gIH0sXG4gIHdpZHRoOiA2MDAsXG4gIGhlaWdodDogNDAwXG59KVxuXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2ludGVyY2VwdCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzbG9wZScpIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../..";
+window._ojs.paths.runtimeToRoot = "../../../../..";
+window._ojs.paths.docToRoot = "../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

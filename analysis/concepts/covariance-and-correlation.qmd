@@ -27,7 +27,7 @@ Developing a good intuition for covariance and correlation is important, because
 In this tutorial we'll develop this intuition by looking at visualizations, and calculating the covariance and correlation ourselves.
 
 
-# Visualizing covariance and correlation
+# Visualizing covariance and correlation {#visualizing_correlation}
 
 To get a good intuition of what covariance and correlation are, it helps to have a visual image.
 One way to visualize the relation between two variables is to make a scatter plot where one variable is on the x-axis, and the other on the y-axis.
