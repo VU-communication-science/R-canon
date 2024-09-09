@@ -12,7 +12,7 @@ As example data we'll be using a famous example of a spurious correlation: the n
 
 ## Do storks deliver babies?
 
-There is a [famous example](http://www.brixtonhealth.com/storksBabies.pdf) of confounding, which points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries ($\rho = 0.62$).
+There is a [famous example](http://www.brixtonhealth.com/storksBabies.pdf) of confounding, that points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries ($\rho = 0.62$).
 Based on this empirical finding, could one actually argue that the might be some truth to the old folk tale that storks deliver babies?
 The answer to this questions is obviously no, but it does raise an important issue: 
 how can we distinguish between correlation and causation?
@@ -71,6 +71,10 @@ Instead, we see a very strong effect of the area of the country on the birth rat
 So here you see the power of multiple regression in action: by controlling for `area_km2`, the spurious effect of `storks` on `birth_rate` disappears. 
 
 # Why controlling for confounding is important
+
+If we do not control for confounding variables, the coefficients in our regression model might be biased.
+Sometimes the effect is overestimated, as we saw here with the effect of storks on the birth rate.
+But the effect can also be suppressed, or even reversed!
 
 Being able to control for confounding variables enables us to better explore possible [causal relationships](../concepts/causality.qmd) between variables.
 Based on the first model, we might have concluded that if the number of storks increases or decreases, the birth rate of the country will follow.

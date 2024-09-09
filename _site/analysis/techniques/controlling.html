@@ -314,6 +314,12 @@ window.Quarto = {
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/concepts/mean_and_variance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mean and Variance</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -363,7 +369,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../analysis/tests/linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Simple linear regression</span></a>
+ <span class="menu-text">Linear regression</span></a>
   </div>
 </li>
       </ul>
@@ -432,7 +438,7 @@ window.Quarto = {
 
 <section id="controlling-for-spurious-correlations" class="level1">
 <h1>Controlling for spurious correlations</h1>
-<p>In the section about <a href="../../analysis/concepts/causality.html">causality</a> we discussed the difference between correlation and causation, and what techniques we can use to distinguish between the two. One of those techniques is to control for confounding variables using <strong>multivariate analysis</strong> techniques, such as <strong>multiple regression</strong>. In this tutorial we will show you how to use multiple regression to control for confounding variables. As example data we’ll be using a famous example of a spurious correlation: the number of storks and the birth rate of a country.</p>
+<p>In the section about <a href="../../analysis/concepts/causality.html">causality</a> we discussed the difference between correlation and causation, and what techniques we can use to distinguish between the two. One of those techniques is to use <strong>multivariate analysis</strong> techniques, such as <strong>multiple regression</strong>. In this tutorial we will show you how to use multiple regression to control for <strong>confounding variables</strong>, and how this helps us deal with <strong>spurious correlations</strong>. As example data we’ll be using a famous example of a spurious correlation: the number of storks and the birth rate of a country.</p>
 <section id="do-storks-deliver-babies" class="level2">
 <h2 class="anchored" data-anchor-id="do-storks-deliver-babies">Do storks deliver babies?</h2>
 <p>There is a <a href="http://www.brixtonhealth.com/storksBabies.pdf">famous example</a> of confounding, which points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries (<span class="math inline">\(\rho = 0.62\)</span>). Based on this empirical finding, could one actually argue that the might be some truth to the old folk tale that storks deliver babies? The answer to this questions is obviously no, but it does raise an important issue: how can we distinguish between correlation and causation? The example of storks and babies is sufficiently ridiculous to make it clear that this is a spurious correlation, but how can we be sure in more realistic cases?</p>
@@ -565,6 +571,7 @@ window.Quarto = {
 </section>
 <section id="why-controlling-for-confounding-is-important" class="level1">
 <h1>Why controlling for confounding is important</h1>
+<p>If we do not control for confounding variables, the coefficients in our regression model might be biased. Sometimes the effect is overestimated, as we saw here with the effect of storks on the birth rate. But the effect can also be suppressed, or even reversed!</p>
 <p>Being able to control for confounding variables enables us to better explore possible <a href="../../analysis/concepts/causality.html">causal relationships</a> between variables. Based on the first model, we might have concluded that if the number of storks increases or decreases, the birth rate of the country will follow. Imagine the policy implications of such a finding! If a government would want to increase the birth rate, they would simply have to breed more storks.</p>
 <p>The second model however shows that this relation between storks and birth rate is spurious. This suggests that our stork breeding program would not have the desired effect. Instead, the model gives reason to believe that the birth rate is influenced by the size of the country, which is a much more plausible explanation. If a government would want to increase the birth rate, they would have to increase the size of the country. And this is why we have too many wars, and too few storks.</p>
 

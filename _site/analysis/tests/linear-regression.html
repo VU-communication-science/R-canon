@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Simple linear regression – Communication Science R Book</title>
+<title>Linear regression – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,6 +104,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script type="ojs-define">
+{"contents":[{"name":"x","value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]},{"name":"y","value":[-0.6814,1.3095,7.6761,4.2115,5.3879,11.1452,8.3827,4.2048,6.9394,8.663,14.6722,13.0794,14.2023,14.332,13.3325,21.3607,18.4936,12.1001,21.1041,18.5816]}]}
+</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -146,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/index.html">Statistical tests</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/linear-regression.html">Simple linear regression</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/index.html">Statistical tests</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/linear-regression.html">Linear regression</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -316,6 +319,12 @@ window.Quarto = {
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/concepts/mean_and_variance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mean and Variance</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -365,7 +374,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../analysis/tests/linear-regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Simple linear regression</span></a>
+ <span class="menu-text">Linear regression</span></a>
   </div>
 </li>
       </ul>
@@ -399,15 +408,18 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-regression-analysis" id="toc-what-is-regression-analysis" class="nav-link active" data-scroll-target="#what-is-regression-analysis">What is regression analysis?</a></li>
+  <li><a href="#what-is-regression-analysis" id="toc-what-is-regression-analysis" class="nav-link active" data-scroll-target="#what-is-regression-analysis">What is regression analysis?</a>
+  <ul class="collapse">
+  <li><a href="#what-can-we-do-with-it" id="toc-what-can-we-do-with-it" class="nav-link" data-scroll-target="#what-can-we-do-with-it">What can we do with it?</a></li>
+  </ul></li>
   <li><a href="#how-to-use-it" id="toc-how-to-use-it" class="nav-link" data-scroll-target="#how-to-use-it">How to use it</a>
   <ul class="collapse">
-  <li><a href="#regression-with-numerical-independent-variable" id="toc-regression-with-numerical-independent-variable" class="nav-link" data-scroll-target="#regression-with-numerical-independent-variable">Regression with numerical independent variable</a>
+  <li><a href="#regression-with-numerical-independent-variable" id="toc-regression-with-numerical-independent-variable" class="nav-link" data-scroll-target="#regression-with-numerical-independent-variable">Regression with numerical independent variable</a></li>
+  <li><a href="#regression-with-categorical-independent-variable" id="toc-regression-with-categorical-independent-variable" class="nav-link" data-scroll-target="#regression-with-categorical-independent-variable">Regression with categorical independent variable</a>
   <ul class="collapse">
-  <li><a href="#interpreting-the-intercept-and-the-effect-of-age" id="toc-interpreting-the-intercept-and-the-effect-of-age" class="nav-link" data-scroll-target="#interpreting-the-intercept-and-the-effect-of-age">Interpreting the intercept and the effect of age</a></li>
-  <li><a href="#visualizing-the-intercept-and-slope" id="toc-visualizing-the-intercept-and-slope" class="nav-link" data-scroll-target="#visualizing-the-intercept-and-slope">Visualizing the intercept and slope</a></li>
+  <li><a href="#categories-with-more-than-two-levels" id="toc-categories-with-more-than-two-levels" class="nav-link" data-scroll-target="#categories-with-more-than-two-levels">Categories with more than two levels</a></li>
   </ul></li>
-  <li><a href="#regression-with-categorical-independent-variable" id="toc-regression-with-categorical-independent-variable" class="nav-link" data-scroll-target="#regression-with-categorical-independent-variable">Regression with categorical independent variable</a></li>
+  <li><a href="#regression-with-multiple-independent-variables" id="toc-regression-with-multiple-independent-variables" class="nav-link" data-scroll-target="#regression-with-multiple-independent-variables">Regression with multiple independent variables</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -415,9 +427,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/index.html">Statistical tests</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/linear-regression.html">Simple linear regression</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/index.html">Statistical tests</a></li><li class="breadcrumb-item"><a href="../../analysis/tests/linear-regression.html">Linear regression</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Simple linear regression</h1>
+<h1 class="title">Linear regression</h1>
 <p class="subtitle lead">Predicting one variable from another</p>
 </div>
 
@@ -437,130 +449,41 @@ window.Quarto = {
 
 <section id="what-is-regression-analysis" class="level1">
 <h1>What is regression analysis?</h1>
-<p>In the tutorial on <a href="../../analysis/tests/correlation.html">correlation</a> we learned how to test if there is a relationship between two numeric variables. We saw that the correlation does not have a direction, and that it only tells us if there is a relationship between the variables, and how strong it is. With simple linear regression we can take this one step further, and try to <em>predict</em> the value of one variable based on the value of another variable.</p>
-<p>In this context, the term <em>predict</em> is used in a statistical sense. It refers to estimating how well one can infer the value of one variable given knowledge of another. We are often not actually interested in the prediction itself! Instead, we are interested in the relationship between the variables, and what this relationship can tell us about the world. If one variable can predict another, it may for instance suggest a causal relationship.</p>
-<p>For example, imagine that you want to be able to predict for a random person how much trust they have in journalists. What information would you use to make this prediction?</p>
-<p>You could perhaps use their age Regression analysis allows you to find a mathematical formula that predicts trust based on a combination of these variables. This can help you understand complex relationships between two or more variables.</p>
-<!-- We refer to the variable that we want to predict (trust) as the **dependent variable**, and the variables that we use to make the prediction (age) as the **independent variables**. -->
-<!-- In the current tutorial you will first learn about simple linear regression, where we use one independent variable to predict the dependent variable.
-As you progress, you will learn about [multiple regression](../tests/multiple-regression.qmd), where we use more than one independent variable at once. -->
-</section>
-<section id="how-to-use-it" class="level1">
-<h1>How to use it</h1>
-<p>For this tutorial we’ll be using our standard practice data, and a bit of <code>tidyverse</code> to load and clean the data. We’ll also be using the <code>sjPlot</code> package, which can create nice tables and plots of regression models.</p>
+<p>Regression analysis is a statistical technique for <em>predicting</em> a <code>dependent variable</code> based on one or more <code>independent variables</code>. We use <em>predict</em> in a statistical sense, meaning that we are estimating how well we can guess the dependent variable given knowledge of the independent variable(s). The reason we want to do this is usually not to make actual predictions, but to understand the relationship between the variables. If one variable can predict another, it tells us something about how they might be related.</p>
+<p>Let’s first look a how this prediction works for a single independent variable. This is also called <strong>simple linear regression</strong>. We have a dependent variable <code>Y</code> and an independent variable <code>X</code>, and we want to predict <code>Y</code> based on <code>X</code>. The goal is to find a mathematical formula that best describes their relationship. You can visually think of this as a scatterplot, where we draw a <code>regression line</code> such that the distance between the line and the data points is as small as possible.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">2024</span> <span class="sc">-</span> age, age)) <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rename</span>(<span class="at">news_consumption =</span> <span class="st">`</span><span class="at">news consumption</span><span class="st">`</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The <strong>dependent</strong> variable in the regression model has to be numeric. For our examples we’ll use the <code>trust_t1</code> variable, which measures a person’s trust in journalists on a scale from 1 to 10. A regression model can have <strong>one or multiple independent</strong> variables, which can be numeric or categorical. This makes regression analysis a very flexible tool that can be used in many different situations.</p>
-<section id="regression-with-numerical-independent-variable" class="level2">
-<h2 class="anchored" data-anchor-id="regression-with-numerical-independent-variable">Regression with numerical independent variable</h2>
-<p>Let’s start with the example of predicting <code>trust</code> in journalists based on <code>age</code>. For this we’ll be using the <code>trust_t1</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> variable as the dependent variable, and the <code>age</code> variable as the independent variable. We’ll use the <code>lm()</code> function to run the regression, and the <code>tab_model()</code> function from the <code>sjPlot</code> package to show the results in a nice table. Inside the <code>lm()</code> function we specify the formula for the regression, which has the format <code>dependent ~ independent</code> (just like in the t-test and ANOVA).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> age, <span class="at">data =</span> d) </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table style="border-collapse:collapse; border:none;">
-<tbody><tr>
-<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
-<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">trust_t1</th>
-</tr>
-<tr>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.21</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.99&nbsp;–&nbsp;2.43</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">age</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.04</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.04&nbsp;–&nbsp;0.05</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">595</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.292 / 0.291</td>
-</tr>
-
-</tbody></table>
-
-</div>
-</div>
-<p>The output of the regression analysis gives us values for two <strong>predictors</strong>: the <strong>(intercept)</strong> and the <strong>age</strong> variable. The <strong>(intercept)</strong> tells us what the average value of the dependent variable (<code>trust_t1</code>) is when the independent variable (<code>age</code>) is zero. The <strong>age</strong> predictor tells us how much the dependent variable (<code>trust_t1</code>) changes for every unit increase in age. For each of these predictors we <strong>estimate</strong>, a <strong>confidence interval</strong>, and a <strong>p-value</strong>.</p>
-<p>This could already be all the information we need! If our hypothesis was that trust in journalists increases with age, we could now report that this hypothesis is supported by the data (b = 0.04, p &lt; 0.001). But let’s not stop there, and see how we can interpret these results in more detail!</p>
-<section id="interpreting-the-intercept-and-the-effect-of-age" class="level3">
-<h3 class="anchored" data-anchor-id="interpreting-the-intercept-and-the-effect-of-age">Interpreting the intercept and the effect of age</h3>
-<p>So why do we get two predictors, when we only specified one variable? Why do we need the intercept? This is because our prediction of <code>trust_t1</code> is based on two pieces of information:</p>
-<ul>
-<li>What is the average trust in journalists regardless of age?</li>
-<li>How does trust in journalists change as people get older?</li>
-</ul>
-<p>The <strong>intercept</strong> (2.21) tells us the average value of the dependent variable when age is zero.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The coefficient for the <strong>age</strong> variable (0.04) tells us how much this trust increases for every year of age. Together, these values allow us to predict the trust in journalists for any age, using the following formula:</p>
-<p><span class="math display">\[ trust\_t1 = intercept + slope_{age} \times age \]</span></p>
-<p>If we plug in the values from our model, we get:</p>
-<p><span class="math display">\[ trust\_t1 = 2.21 + 0.04 \times age \]</span></p>
-<p>We can for instance calculate the predicted trust in journalists for a 20 year old:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fl">2.21</span> <span class="sc">+</span> <span class="fl">0.04</span> <span class="sc">*</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.01</code></pre>
-</div>
-</div>
-</section>
-<section id="visualizing-the-intercept-and-slope" class="level3">
-<h3 class="anchored" data-anchor-id="visualizing-the-intercept-and-slope">Visualizing the intercept and slope</h3>
-<p>We can also visualize how the predicted trust in journalists changes with age. The <code>sjPlot</code> package has a function <code>plot_model()</code> that can do this for us. Here we visualize the prediction (<code>type = "pred"</code>) for the <code>age</code> variable (<code>terms = "age"</code>). To show you how the prediction relates to the actual data, we’ll also include a scatterplot of the data points (<code>show.data = T</code>), and add a bit of jitter<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> to the data points so they don’t overlap (<code>jitter = T</code>)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">terms =</span> <span class="st">"age"</span>, <span class="at">show.data =</span> T, <span class="at">jitter=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Here the <em>regression line</em> shows the predicted values. You can check that at age 20 the predicted trust is indeed 3.01, as we calculated before. We can now see very clearly how average trust in journalists increases with age!</p>
-<p>This should also clarify why the effect of age is called a <strong>slope</strong>. Since we have a positive effect, the regression line slopes upwards as age increases. The stronger the effect, the steeper the slope. If there was no effect of age, the regression line would be flat (i.e.&nbsp;no slope), because the predicted value would not change with age. If the effect was negative, the regression line would slope downwards. Note that this is identical to the <strong>direction</strong> and <strong>strength</strong> of <a href="../../analysis/concepts/covariance-and-correlation.html#visualizing-correlation">covariance and correlation measures</a>.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="How intercept and slope make the regression line">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-How intercept and slope make the regression line
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The <strong>intercept</strong> is the value of the dependent variable when the independent variable is zero, which determines at what value the regression line crosses the y-axis. The coefficient for an independent variable tells us how much the dependent variable changes for every unit increase in the independent variable, which determines the <strong>slope</strong> of the regression line. The regression model finds the values for the intercept and slope that draws a line through the data points that best fits the data. To get a feel for this, try changing the values of the intercept and slope in the interactive widget below, and see how the regression line changes.</p>
+<p>This model can be described by a classic formula, called the <strong>regression equation</strong>. We’ve coloured the different parts of the equation according to the colours used in the visualization.</p>
+<p><span class="math display">\[ \Large  \color{Green} Y_i = \color{Blue} b_0 + b_1 X_i + \color{Red} \epsilon_i \]</span></p>
+<ul>
+<li><span class="math inline">\(\color{Green} Y_i\)</span> represents the real values of the dependent variable (<span class="math inline">\(Y_1, Y_2, ... Y_n\)</span>) that we want to predict.</li>
+<li><span class="math inline">\(\color{Blue} b_0 + b_1 X_i\)</span> represents our prediction of y. It has two coefficients:
+<ul>
+<li><span class="math inline">\(\color{Blue} b_0\)</span> is the <strong>intercept</strong>. This is the value of Y when X is zero.</li>
+<li><span class="math inline">\(\color{Blue} b_1\)</span> is the <strong>slope</strong>. This tells us how much Y changes for every unit increase in X.</li>
+</ul></li>
+<li><span class="math inline">\(\color{Red} \epsilon_i\)</span> represents the <strong>error</strong>. This is the distance between the <span style="color:blue;">predicted</span> and the <span style="color:green">real</span> value of Y.</li>
+</ul>
+<p>For example, at <span class="math inline">\(X = 10\)</span>, the blue line predicting Y passes through the point <span class="math inline">\(Y = 10.45\)</span>. However, the real value of Y at this point is 8.66. So the error <span class="math inline">\(\epsilon_i\)</span> at this point is <span class="math inline">\(8.66 - 10.45 = -1.79\)</span>.</p>
+<p>The point of regression analysis is to find the values of <span class="math inline">\(b_0\)</span> (intercept) and <span class="math inline">\(b_1\)</span> (slope) that minimize the error. More specifically, it minimizes the sum of the squared errors (SSE), which is why this method is called <strong>least squares regression</strong>.</p>
+<p><span class="math display">\[  SSE = \large \sum_{i=1}^{n} {\color{red} \epsilon_i^2} \]</span></p>
+<p>Try it yourself! Change the values of the intercept and slope in the interactive widget below, and see how the regression line changes. The goal is to get the lowest possible SSE, which means that the line is as close as possible to the data points.</p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="139" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 138;"><span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>viewof intercept <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>  [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> </span>
-<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="op">-</span><span class="dv">5</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.01</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Intercept"</span>}</span>
-<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a>viewof slope <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>  [<span class="op">-</span><span class="dv">2</span><span class="op">,</span><span class="dv">2</span>]<span class="op">,</span> </span>
-<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.01</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Slope"</span>}</span>
-<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="94" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 93;"><span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>viewof intercept <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>  [<span class="op">-</span><span class="dv">8</span><span class="op">,</span> <span class="dv">6</span>]<span class="op">,</span> </span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.001</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Intercept"</span>}</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>viewof slope <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>  [<span class="fl">0.5</span><span class="op">,</span><span class="fl">1.8</span>]<span class="op">,</span> </span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.001</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Slope"</span>}</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -577,25 +500,36 @@ How intercept and slope make the regression line
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="152" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 151;"><span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a>x_values <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({ <span class="dt">length</span><span class="op">:</span> <span class="dv">100</span> }<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> i)<span class="op">;</span></span>
-<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>y_values <span class="op">=</span> x_values<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> slope <span class="op">*</span> x <span class="op">+</span> intercept)<span class="op">;</span></span>
-<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a><span class="co">// Now, plot the regression line</span></span>
-<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">lineY</span>(y_values<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> x_values}) <span class="co">// Explicitly pass x and y values</span></span>
-<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
-<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {</span>
-<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Independent variable (age)"</span><span class="op">,</span></span>
-<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">100</span>]</span>
-<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
-<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Dependent variable (trust)"</span><span class="op">,</span></span>
-<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]</span>
-<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a>  <span class="dt">width</span><span class="op">:</span> <span class="dv">600</span><span class="op">,</span></span>
-<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">400</span></span>
-<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="106" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 105;"><span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>x_line <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({ <span class="dt">length</span><span class="op">:</span> <span class="dv">100</span> }<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> i<span class="op">-</span><span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>y_line <span class="op">=</span> x_line<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> slope <span class="op">*</span> x <span class="op">+</span> intercept)<span class="op">;</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>mutable error <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>update_error <span class="op">=</span> {</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> sse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>  x<span class="op">.</span><span class="fu">forEach</span>((d<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>    sse <span class="op">+=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(y[i] <span class="op">-</span> (slope <span class="op">*</span> x[i] <span class="op">+</span> intercept)<span class="op">,</span> <span class="dv">2</span>)</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>  mutable error <span class="op">=</span> <span class="bu">Number</span>(sse<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>))</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="co">// Now, plot the regression line</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">lineY</span>(y_line<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> x_line<span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"blue"</span>})<span class="op">,</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(x<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> x<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> y<span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"darkgreen"</span>})<span class="op">,</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">text</span>([{intercept<span class="op">,</span>slope}]<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">text</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="vs">`prediction = </span><span class="sc">${</span>d<span class="op">.</span><span class="at">intercept</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs"> + </span><span class="sc">${</span>d<span class="op">.</span><span class="at">slope</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs"> * X`</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span> <span class="dt">fontSize</span><span class="op">:</span> <span class="dv">16</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"blue"</span><span class="op">,</span> <span class="dt">textAnchor</span><span class="op">:</span> <span class="st">"start"</span>})<span class="op">,</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">text</span>([error]<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">text</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="vs">`SSE = </span><span class="sc">${</span>d<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span> <span class="dt">fontSize</span><span class="op">:</span> <span class="dv">16</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"red"</span><span class="op">,</span> <span class="dt">textAnchor</span><span class="op">:</span> <span class="st">"start"</span>})</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"X"</span><span class="op">,</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">5</span><span class="op">,</span> <span class="dv">20</span>]</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Y"</span><span class="op">,</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">5</span><span class="op">,</span><span class="dv">22</span>]</span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">
@@ -612,145 +546,457 @@ How intercept and slope make the regression line
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-2-3" data-nodetype="expression">
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-5" data-nodetype="expression">
 
 </div>
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Spoiler">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Spoiler
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The optimal values for the intercept and slope are <span class="math inline">\(b_0 = 0.930\)</span> and <span class="math inline">\(b_1 = 0.952\)</span>. This should give you an SSE of <span class="math inline">\(160.24\)</span>.</p>
 </div>
 </div>
 </div>
+<section id="what-can-we-do-with-it" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-we-do-with-it">What can we do with it?</h2>
+<p>The primary goal of regression analysis is to understand the relationship between variables. It allows us to test hypotheses of the sort:</p>
+<ul>
+<li>Older people have more trust in journalists</li>
+<li>People on the political left have more trust in journalists than people on the political right</li>
+</ul>
+<p>You might be wondering: can’t we already do the first one with a correlation test, and the second one with a t-test? The answer is yes, and one benefit of regression analysis is that it can do both these things in the same model. But <strong>more importantly</strong>, regression analysis can test both of these things <strong>at the same time</strong>, and account for the fact that age and political orientation are related to each other! If we know that younger people are more likely to be on the political left, then in order to test the effect of age on trust, we need to somehow account for political orientation.</p>
+<p>In this tutorial we will show you how to use regression analysis to predict a person’s <code>trust in journalists</code> based on <code>age</code> and <code>political orientation</code>. The model we will be working towards looks like this:</p>
+<p><span class="math display">\[ \large  \color{Green} Y_i = \color{Blue} b_0 + b_1 X_{age} + b_2 X_{political\_left} + b_3 X_{political\_right} + \color{Red} \epsilon_i \]</span></p>
+<p>Don’t worry if this doesn’t make sense yet! We’ll take it step by step.</p>
+<ul>
+<li>We’ll first show you how to do a simple linear regression, where we predict <code>trust</code> based on <code>age</code>.</li>
+<li>Then we’ll show you how to include a categorical variable in the model, by predicting <code>trust</code> based on <code>political orientation</code>.</li>
+<li>Finally, we’ll show you how to include both <code>age</code> and <code>political orientation</code> in the model at the same time.</li>
+</ul>
+<!-- Regression analysis allows you to find a mathematical formula that predicts trust based on a combination of these variables.
+This can help you understand complex relationships between two or more variables. -->
+<!-- We refer to the variable that we want to predict (trust) as the **dependent variable**, and the variables that we use to make the prediction (age) as the **independent variables**. -->
+<!-- In the current tutorial you will first learn about simple linear regression, where we use one independent variable to predict the dependent variable.
+As you progress, you will learn about [multiple regression](../tests/multiple-regression.qmd), where we use more than one independent variable at once. -->
 </section>
 </section>
-<section id="regression-with-categorical-independent-variable" class="level2">
-<h2 class="anchored" data-anchor-id="regression-with-categorical-independent-variable">Regression with categorical independent variable</h2>
-<p>The <strong>independent variable</strong> in a regression model can also be categorical. This allows us to include categorical variables in the model, similar to the t-test and ANOVA. Let’s see what this looks like when we predict <code>trust_t1</code> based on the <code>np_subscription</code> variable, which has the values <code>yes</code> and <code>no</code> to indicate if a person has a newspaper subscription.</p>
-<p>We cannot do calculations with the values “yes” and “no”, but we can make this possible by creating a so-called <strong>dummy variable</strong>. In a dummy variable, we assign a value of <code>1</code> to one of the categories, and <code>0</code> to the other categories. In our case we’ll assign <code>1</code> to the category <code>yes</code>, and <code>0</code> to the category <code>no</code>. R can actually do this for us, but we’ll first show you how to do it yourself to understand what’s happening. Here we create a new variable <code>has_subscription</code> that has the value <code>1</code> if the person has a subscription, and <code>0</code> if they don’t.</p>
+<section id="how-to-use-it" class="level1">
+<h1>How to use it</h1>
+<p>We’ll be using our standard (simulated) practice data, and a bit of <code>tidyverse</code> to load and clean the data. We’ll also be using the <code>sjPlot</code> package, which can create nice tables and plots of regression models.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> <span class="fu">mutate</span>(d, <span class="at">has_subscription =</span> <span class="fu">if_else</span>(np_subscription <span class="sc">==</span> <span class="st">"yes"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, np_subscription, has_subscription)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 600 × 2
-   np_subscription has_subscription
-   &lt;chr&gt;                      &lt;dbl&gt;
- 1 no                             0
- 2 no                             0
- 3 yes                            1
- 4 yes                            1
- 5 no                             0
- 6 no                             0
- 7 yes                            1
- 8 yes                            1
- 9 yes                            1
-10 no                             0
-# ℹ 590 more rows</code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">2024</span> <span class="sc">-</span> age, age)) <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(age, political_orientation, trust_t1)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>Now we can use this variable in the regression model.</p>
+<p>The <strong>dependent</strong> variable in the regression model has to be numeric. For our examples we’ll use the <code>trust_t1</code> variable, which measures a person’s trust in journalists on a scale from 1 to 10. A regression model can have <strong>one or multiple independent</strong> variables, which can be numeric or categorical. This makes regression analysis a very flexible tool that can be used in many different situations. In this example we’ll demonstrate this with both a numeric (<code>age</code>) and a categorical (<code>political_orientation</code>) independent variable.</p>
+<section id="regression-with-numerical-independent-variable" class="level2">
+<h2 class="anchored" data-anchor-id="regression-with-numerical-independent-variable">Regression with numerical independent variable</h2>
+<p>Let’s start with the example of predicting <code>trust</code> in journalists based on <code>age</code>. For this we’ll be using the <code>trust_t1</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> variable as the dependent variable, and the <code>age</code> variable as the independent variable. We can use the <code>lm()</code> function to create a linear regression model. Inside the <code>lm()</code> function we specify the formula for the regression, which has the format <code>dependent ~ independent</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> has_subscription, <span class="at">data =</span> d)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> age, <span class="at">data =</span> d) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <em>standard</em> way to inspect the results is using the <code>summary(m)</code> function. This gives you all the information you need, but not in a very nice and readable format. We will therefore be using the <code>tab_model()</code> function from the <code>sjPlot</code> package to get a nice (APA ready) table of the results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">trust_t1</td>
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">trust_t1</th>
 </tr>
-<tr class="even">
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">3.68</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">3.56&nbsp;–&nbsp;3.80</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.28</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.04&nbsp;–&nbsp;2.51</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">has subscription</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.37</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.22&nbsp;–&nbsp;0.53</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">age</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.03&nbsp;–&nbsp;0.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">600</td>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">595</td>
 </tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.035 / 0.033</td>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.261 / 0.260</td>
 </tr>
-</tbody>
-</table>
 
+</tbody></table>
 
 </div>
 </div>
-<p>We now get a <strong>slope</strong> for the <code>has_subscription</code> variable. Before we saw that the slope tells us how much the dependent variable changes for every unit increase in the independent variable. This is still true! We only need to remember that the <code>has_subscription</code> variable is binary, so it can only take the values <code>0</code> and <code>1</code>. So given a coefficient of <code>0.37</code>, we can say that people with a subscription have on average a trust score that is <code>0.37</code> points higher than people without a subscription.</p>
-<p>Now let’s do this again, but this time we’ll let R create the dummy variable. This time we’ll just directly use the <code>np_subscription</code> variable in the regression model.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Backup plan if tab_model doesn't work">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Backup plan if tab_model doesn’t work
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>tab_model</code> function by default shows the regression table in your <code>viewer</code> pane. If this for some reason doesn’t work, you can also use the <code>use.viewer=F</code> argument to show the table in your default web browser. This has the additional benefit that you can directly copy-paste the table into most text editors.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> np_subscription, <span class="at">data =</span> d)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">trust_t1</td>
-</tr>
-<tr class="even">
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">3.68</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">3.56&nbsp;–&nbsp;3.80</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">np subscription [yes]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.37</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.22&nbsp;–&nbsp;0.53</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">600</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.035 / 0.033</td>
-</tr>
-</tbody>
-</table>
-
-
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m, <span class="at">use.viewer=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>Notice that the results are identical! The only difference is that the label for the <code>np_subscription</code> variable is <code>np_subscription [yes]</code>. This is R’s way of telling us that it created a dummy variable for us in which the value <code>1</code> corresponds to the category <code>yes</code>.</p>
-<p>An additional benefit of letting R create the dummy variable is that it now knows that the variable is categorical. If we now use the <code>plot_model()</code> function to visualize the prediction, it will</p>
+</div>
+</div>
+<p>The output of the regression analysis gives us values for the two coefficients: the <strong>(intercept)</strong> and the <strong>age</strong> variable. We get the coefficient <strong>estimates</strong>, and also the <strong>p-values</strong> that tell us if these coefficients are statistically significant. With <code>tab_model</code> we also get the <strong>confidence interval</strong>.</p>
+<p>The coefficient for <code>age</code> tells us how much <code>trust_t1</code> changes for every <em>unit increase</em> in <code>age</code>. Our <code>age</code> variable is in years, so the coefficient <code>0.04</code> tells us that for every year of age, trust in journalists increases on average by 0.04 points.</p>
+<p>To get a better view of what this means in practice, it can be helpful to plot the regression line. The <code>sjPlot</code> package has a function <code>plot_model()</code> that can do this for us. Here we visualize the prediction (<code>type = "pred"</code>) for the <code>age</code> variable (<code>terms = "age"</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">terms =</span> <span class="st">"np_subscription"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">terms =</span> <span class="st">"age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Just like before, we get an <strong>intercept</strong> and a <strong>slope</strong>. The interpretation is mostly the same, but we need to keep in mind that the np_subscription variable is binary.</p>
-<p>Notice that the label for the <code>np_subscription</code> variable is <code>np_subscription [yes]</code>. This tells us that R</p>
+<p>Here the <em>regression line</em> shows the predicted values. At age 20 the predicted trust is around 3.05. For every year of age the predicted trust increases by 0.04 points, so by the time a person is 40 years old, the predicted trust is around 3.85. Visualizing effects like this can give readers (and yourself) a better understanding of how strong the effect really is.</p>
+</section>
+<section id="regression-with-categorical-independent-variable" class="level2">
+<h2 class="anchored" data-anchor-id="regression-with-categorical-independent-variable">Regression with categorical independent variable</h2>
+<p>The <strong>independent variable</strong> in a regression model can also be categorical. This allows us to include categorical variables in the model, similar to the t-test and ANOVA. Let’s see what this looks like when we predict <code>trust_t1</code> based on the <code>political_orientation</code> variable, which has the values <code>left</code>, <code>right</code> and <code>center</code>.</p>
+<p>We cannot directly use the values “left”, “right” and “center” in the regression equation, but we create so-called <strong>dummy variables</strong>. A dummy variable is a <em>binary</em> variable (i.e., it can only take the values <code>0</code> and <code>1</code>) that represents whether something is the case or not. So if we want to test whether people that lean to the left have more trust in journalists, we can create a dummy variable that is <code>1</code> for people with orientation <code>left</code>, and <code>0</code> for all other people (i.e., <code>right</code> and <code>center</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> <span class="fu">mutate</span>(d, <span class="at">political_left =</span> <span class="fu">if_else</span>(political_orientation <span class="sc">==</span> <span class="st">"left"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, political_orientation, political_left)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can use this variable in the regression model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_left, <span class="at">data =</span> d)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">trust_t1</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.83</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.73&nbsp;–&nbsp;3.93</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">political left</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.21</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.03&nbsp;–&nbsp;0.38</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.019</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">600</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.009 / 0.008</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<p>The interpretation of the results is almost identical to the previous example with the <code>age</code> variable. The only thing we need to keep in mind is that the <code>political_left</code> variable is binary, so it can only take the values <code>0</code> and <code>1</code>. Accordingly, we don’t say that the trust in journalists increases by <code>0.21</code> points for every unit increase in <code>political_left</code>. Instead, we just say that people on the political left (<code>political_left = 1</code>) have on average a trust score that is <code>0.21</code> points higher than people that are not on the political left (<code>political_left = 0</code>).</p>
+<!-- Note that in this case we can actually interpret the **intercept**.
+The intercept is the predicted value of the dependent variable when the independent variable is zero.
+So in this case, the intercept (`3.83`) is the predicted trust in journalists for people that are NOT `political_left`. -->
+<section id="categories-with-more-than-two-levels" class="level3">
+<h3 class="anchored" data-anchor-id="categories-with-more-than-two-levels">Categories with more than two levels</h3>
+<p>In the previous example we created the dummy variable ourselves, but we can also let R do this for us. This is especially convenient if we have more than two categories. In addition, this also has the benefit that <code>lm</code> <em>knows</em> that the variable is categorical, which enables us (among other things) to visualize the model propertly.</p>
+<p>If an independent variable is of the <code>character</code> or <code>factor</code> type, R will automatically create dummy variables for us.</p>
+<p>We first need to make sure that our variable is of the <code>factor</code> type<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. The difference between a <code>character</code> and a <code>factor</code> is that in a <code>factor</code> we explicitly tell R what the categories are, and what the <em>order</em> of the categories is. The order is important, because the first category will be the <strong>reference category</strong> (more on this later) in the regression model. To transform our <code>political_orientation</code> variable to a <code>factor</code> we can use the <code>factor()</code> function, and provide the <code>levels</code> argument to specify the order of the categories.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">political_orientation =</span> <span class="fu">factor</span>(political_orientation, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'center'</span>,<span class="st">'left'</span>,<span class="st">'right'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, when we use the <code>political_orientation</code> variable in the regression model, R will automatically create the dummy variables for us.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation, <span class="at">data =</span> d)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">trust_t1</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.91</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.77&nbsp;–&nbsp;4.05</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">political orientation<br>[left]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.12</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.07&nbsp;–&nbsp;0.32</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.220</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">political orientation<br>[right]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.17</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.36&nbsp;–&nbsp;0.03</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.100</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">600</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.014 / 0.010</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<p>Notice that there are now two coefficients for the <code>political_orientation</code> variable: one for <code>left</code> and one for <code>right</code>. Why 2, and not 3? This is because when we have a categorical variable with <code>k</code> levels, we only need <code>k-1</code> coefficients to represent all the levels. If we know that a person is not in the <code>left</code> category, and not in the <code>right</code> category, then we know that the person must be in the <code>center</code> category.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>political_orientation</th>
+<th>is_left</th>
+<th>is_right</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>left</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>right</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>center</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>center</code> category is now the <strong>reference category</strong>. That is, the <code>center</code> category is the category that all other categories are compared to. So the <code>political_orientation [left]</code> coefficient tells us that <code>trust</code> is for people in the <code>left</code> category is 0.12 points higher than for people in the <code>center</code> category, but this difference is not significant (p = 0.220) The <code>political_orientation [right]</code> coefficient tells us that <code>trust</code> is for people in the <code>right</code> category is 0.17 points lower than for people in the <code>center</code> category, but this difference is also not significant (p = 0.100).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Determining what reference category to use">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Determining what reference category to use
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In the current model we cannot directly compare the <code>left</code> and <code>right</code> categories, because the <code>center</code> category is the reference category. This makes it important to choose a reference category that makes sense for your research question. To determine the reference category, you can change the order of the levels in the <code>factor()</code> function. The first level will always be the reference category. So in the following example, the <code>left</code> category is the reference category.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">political_orientation =</span> <span class="fu">factor</span>(political_orientation, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'left'</span>,<span class="st">'center'</span>,<span class="st">'right'</span>)))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation, <span class="at">data =</span> d2) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_model</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">trust_t1</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.89&nbsp;–&nbsp;4.18</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">political orientation<br>[center]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.12</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.32&nbsp;–&nbsp;0.07</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.220</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">political orientation<br>[right]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.29</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.49&nbsp;–&nbsp;-0.09</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.004</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">600</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.014 / 0.010</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>When we visualize the prediction for a categorical variable, we get a plot that shows the predicted value for each category, with the confidence interval.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">terms =</span> <span class="st">"political_orientation"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here we see that (in our simulated data) people on the political left have the highest trust in journalists, followed by people in the center, and then people on the political right. However, based on the model we know that the difference between <code>left</code> and <code>center</code> is not significant, and neither is the difference between <code>center</code> and <code>right</code>.</p>
+</section>
+</section>
+<section id="regression-with-multiple-independent-variables" class="level2">
+<h2 class="anchored" data-anchor-id="regression-with-multiple-independent-variables">Regression with multiple independent variables</h2>
+<p>Now, we can finally get to the most interesting part: using multiple independent variables in the regression model. This is called <strong>multiple regression</strong>, and it allows us to test the effect of multiple variables on the dependent variable at the same time. The formula for using multiple independent variables is: <code>dependent ~ independent1 + independent2 + ...</code>.</p>
+<p>We’ll be using both the <code>age</code> and <code>political_orientation</code> variables. As we mentioned earlier, by including both variables in the model we can test the effect of <code>age</code> on <code>trust</code> while controlling for <code>political_orientation</code>, and vice versa. To show you how this works, we’ll create two models, and show them side by side by plugging them both into the <code>tab_model()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation, <span class="at">data =</span> d)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation <span class="sc">+</span> age, <span class="at">data =</span> d)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">trust_t1</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">trust_t1</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.91</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.77&nbsp;–&nbsp;4.05</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.11</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.87&nbsp;–&nbsp;2.35</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">political orientation<br>[left]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.12</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.07&nbsp;–&nbsp;0.32</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.220</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.26</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.09&nbsp;–&nbsp;0.42</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>0.003</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">political orientation<br>[right]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.17</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.36&nbsp;–&nbsp;0.03</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.100</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.42</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.59&nbsp;–&nbsp;-0.25</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">age</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.04&nbsp;–&nbsp;0.05</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">600</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">595</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.014 / 0.010</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.330 / 0.327</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<p>In the first model, we did not see any effect of having a <code>left</code> or <code>right</code> political orientation compared to the <code>center</code> (reference) category. But once we include the <code>age</code> variable in the model, both the <code>left</code> and <code>right</code> categories show do show a significant effect on <code>trust</code>!</p>
+<p>The reason for this is that the <code>age</code> variable is related to both the <code>political_orientation</code> variable and the <code>trust</code> variable.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Younger people have less trust in journalists, but are also more likely to be on the political left. Therefore, if we do not control for <code>age</code>, the positive effect of being on the political left is suppressed by the negative effect of being younger.</p>
+<p>If this sounds confusing, don’t worry, because you’re in good company! Thinking about how the effect of independent variables <em>on</em> the dependent variable depends on the relation <em>between</em> the independent variables can make your head spin. But for better or worse, this is how the world works, and this is why we need sophisticated statistical tools to help us understand it.</p>
+<!-- ```{r}
+plot_model(m2, type = "pred", terms = c("age", "political_orientation"))
+``` -->
 
 
 </section>
@@ -761,12 +1007,12 @@ How intercept and slope make the regression line
 
 <ol>
 <li id="fn1"><p>We use the <code>trust_t1</code> variable here, because for the current analysis we are not interested in the effect of the experimental group. Since <code>trust_t1</code> is measured before the experiment, it is not influenced by the experiment.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Often, the intercept doesn’t have a meaningful interpretation, because the independent variable can’t be zero. For example, there are no people with age zero in our data. We therefore often do not interpret the intercept by itself, but we still need it to make the model work.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Jitter is a visualization technique that randomly moves the data points a bit, so that they don’t overlap. If we don’t do this, then data points with identical values are plotted on top of each other, and we can’t see how many data points there are.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>You <em>can</em> also use a <code>character</code> variable directly, but the <code>factor</code> type is more appropriate for categorical variables. It also let’s you specify the order of the categories, which is important for regression analysis because it let’s you specify the reference category.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Remember that this is a simulated dataset, so in this case we know the true relationships between the variables. But these types of complex relationships are very common in real data.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBpbnRlcmNlcHQgPSBJbnB1dHMucmFuZ2UoXG4gIFstMTAsIDEwXSwgXG4gIHt2YWx1ZTogLTUsIHN0ZXA6IDAuMDEsIGxhYmVsOiBcIkludGVyY2VwdFwifVxuKVxudmlld29mIHNsb3BlID0gSW5wdXRzLnJhbmdlKFxuICBbLTIsMl0sIFxuICB7dmFsdWU6IDAuMSwgc3RlcDogMC4wMSwgbGFiZWw6IFwiU2xvcGVcIn1cbilcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxueF92YWx1ZXMgPSBBcnJheS5mcm9tKHsgbGVuZ3RoOiAxMDAgfSwgKF8sIGkpID0+IGkpO1xueV92YWx1ZXMgPSB4X3ZhbHVlcy5tYXAoeCA9PiBzbG9wZSAqIHggKyBpbnRlcmNlcHQpO1xuXG4vLyBOb3csIHBsb3QgdGhlIHJlZ3Jlc3Npb24gbGluZVxuUGxvdC5wbG90KHtcbiAgbWFya3M6IFtcbiAgICBQbG90LmxpbmVZKHlfdmFsdWVzLCB7eDogeF92YWx1ZXN9KSAvLyBFeHBsaWNpdGx5IHBhc3MgeCBhbmQgeSB2YWx1ZXNcbiAgXSxcbiAgeDoge1xuICAgIGxhYmVsOiBcIkluZGVwZW5kZW50IHZhcmlhYmxlIChhZ2UpXCIsXG4gICAgZG9tYWluOiBbMCwgMTAwXVxuICB9LFxuICB5OiB7XG4gICAgbGFiZWw6IFwiRGVwZW5kZW50IHZhcmlhYmxlICh0cnVzdClcIixcbiAgICBkb21haW46IFstMTAsIDEwXVxuICB9LFxuICB3aWR0aDogNjAwLFxuICBoZWlnaHQ6IDQwMFxufSlcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdpbnRlcmNlcHQnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2xvcGUnKSJ9XX0=
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBpbnRlcmNlcHQgPSBJbnB1dHMucmFuZ2UoXG4gIFstOCwgNl0sIFxuICB7dmFsdWU6IDMsIHN0ZXA6IDAuMDAxLCBsYWJlbDogXCJJbnRlcmNlcHRcIn1cbilcbnZpZXdvZiBzbG9wZSA9IElucHV0cy5yYW5nZShcbiAgWzAuNSwxLjhdLCBcbiAge3ZhbHVlOiAwLjUsIHN0ZXA6IDAuMDAxLCBsYWJlbDogXCJTbG9wZVwifVxuKVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoieF9saW5lID0gQXJyYXkuZnJvbSh7IGxlbmd0aDogMTAwIH0sIChfLCBpKSA9PiBpLTUpO1xueV9saW5lID0geF9saW5lLm1hcCh4ID0+IHNsb3BlICogeCArIGludGVyY2VwdCk7XG5tdXRhYmxlIGVycm9yID0gMFxuXG51cGRhdGVfZXJyb3IgPSB7XG4gIGxldCBzc2UgPSAwXG4gIHguZm9yRWFjaCgoZCwgaSkgPT4ge1xuICAgIHNzZSArPSBNYXRoLnBvdyh5W2ldIC0gKHNsb3BlICogeFtpXSArIGludGVyY2VwdCksIDIpXG4gIH0pXG4gIG11dGFibGUgZXJyb3IgPSBOdW1iZXIoc3NlLnRvRml4ZWQoMikpXG59XG5cbi8vIE5vdywgcGxvdCB0aGUgcmVncmVzc2lvbiBsaW5lXG5QbG90LnBsb3Qoe1xuICBtYXJrczogW1xuICAgIFBsb3QubGluZVkoeV9saW5lLCB7eDogeF9saW5lLCBzdHJva2U6IFwiYmx1ZVwifSksXG4gICAgUGxvdC5kb3QoeCwge3g6IHgsIHk6IHksIGZpbGw6IFwiZGFya2dyZWVuXCJ9KSxcbiAgICBQbG90LnRleHQoW3tpbnRlcmNlcHQsc2xvcGV9XSwge3g6IDEwLCB5OiAzLCB0ZXh0OiBkID0+IGBwcmVkaWN0aW9uID0gJHtkLmludGVyY2VwdC50b0ZpeGVkKDIpfSArICR7ZC5zbG9wZS50b0ZpeGVkKDIpfSAqIFhgLCBmaWxsOiBcImJsYWNrXCIsIGZvbnRTaXplOiAxNiwgZmlsbDogXCJibHVlXCIsIHRleHRBbmNob3I6IFwic3RhcnRcIn0pLFxuICAgIFBsb3QudGV4dChbZXJyb3JdLCB7eDogMTAsIHk6IDAsIHRleHQ6IGQgPT4gYFNTRSA9ICR7ZH1gLCBmaWxsOiBcImJsYWNrXCIsIGZvbnRTaXplOiAxNiwgZmlsbDogXCJyZWRcIiwgdGV4dEFuY2hvcjogXCJzdGFydFwifSlcbiAgXSxcbiAgeDoge1xuICAgIGxhYmVsOiBcIlhcIixcbiAgICBkb21haW46IFstNSwgMjBdXG4gIH0sXG4gIHk6IHtcbiAgICBsYWJlbDogXCJZXCIsXG4gICAgZG9tYWluOiBbLTUsMjJdXG4gIH0sXG4gIGhlaWdodDogMzAwXG59KVxuXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2ludGVyY2VwdCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzbG9wZScpIn1dfQ==
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }

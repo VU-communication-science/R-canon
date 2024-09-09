@@ -1,36 +1,183 @@
 
 ---
-title: Simple linear regression
+title: Linear regression
 subtitle: "Predicting one variable from another"
+format:
+  html:
+    df-print: kable
 ---
 
 # What is regression analysis?
 
-In the tutorial on [correlation](../tests/correlation.qmd) we learned how to test if there is a relationship between two numeric variables.
-We saw that the correlation does not have a direction, and that it only tells us if there is a relationship between the variables, and how strong it is.
-With simple linear regression we can take this one step further, and try to *predict* the value of one variable based on the value of another variable.
+Regression analysis is a statistical technique for *predicting* a `dependent variable` based on one or more `independent variables`.
+We use *predict* in a statistical sense, meaning that we are estimating how well we can guess the dependent variable given knowledge of the independent variable(s).
+The reason we want to do this is usually not to make actual predictions, but to understand the relationship between the variables.
+If one variable can predict another, it tells us something about how they might be related.
 
-In this context, the term *predict* is used in a statistical sense.
-It refers to estimating how well one can infer the value of one variable given knowledge of another. 
-We are often not actually interested in the prediction itself!
-Instead, we are interested in the relationship between the variables, and what this relationship can tell us about the world. 
-If one variable can predict another, it may for instance suggest a causal relationship.
+Let's first look a how this prediction works for a single independent variable.
+This is also called **simple linear regression**.
+We have a dependent variable `Y` and an independent variable `X`, and we want to predict `Y` based on `X`.
+The goal is to find a mathematical formula that best describes their relationship.
+You can visually think of this as a scatterplot, where we draw a `regression line`  such that the distance between the line and the data points is as small as possible.
 
-For example, imagine that you want to be able to predict for a random person how much trust they have in journalists.
-What information would you use to make this prediction?
-You could perhaps use their age and political orientation, as there is some data that suggests that older people and people that lean to the political left have more trust in journalists.
+```{r, echo=F, message=F, fig.height=3,out.width='100%',  warning=F}
+# Load required libraries
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
 
-Regression analysis allows you to find a mathematical formula that predicts trust based on a combination of these variables.
-This can help you understand complex relationships between two or more variables.
+# Create a sample dataset
+set.seed(123)
+df <- data.frame(
+  x = 1:20,
+  y = 1:20 + rnorm(20, mean = 0, sd = 3) # Linear relation with noise
+)
+ojs_define(x = df$x, y = df$y)
+
+# m <- lm(y ~ x, data = df)
+# summary(m)
+# sum((predict(m) - df$y)^2)
+
+# Fit a linear model
+model <- lm(y ~ x, data = df)
+
+# Get the predicted values from the model
+df <- df %>%
+  mutate(predicted = predict(model))
+
+# Create the scatter plot with regression line
+gg1 = ggplot(df, aes(x = x, y = y)) +
+  geom_point(size = 2) +  # Scatter points
+  labs(title = "Scatterplot of X and Y",
+       x = "X", y = "Y") +
+  theme_minimal()
+gg2 = ggplot(df, aes(x = x, y = y)) +
+  geom_smooth(method = "lm", color = "blue", se=F) +  # Regression line
+  geom_segment(aes(x = x, xend = x, y = y, yend = predicted), 
+               color = "red", size = 0.7) +  # Error lines
+  geom_point(size = 2, color='darkgreen') +  # Scatter points
+  labs(title = "Regression model",
+       x = "X (independent variable)", y = "Y (dependent variable)") +
+  theme_minimal()
+
+grid.arrange(gg1, gg2, ncol=2)
+```
+
+This model can be described by a classic formula, called the **regression equation**.
+We've coloured the different parts of the equation according to the colours used in the visualization. 
+
+
+$$ \Large  \color{Green} Y_i = \color{Blue} b_0 + b_1 X_i + \color{Red} \epsilon_i $$
+
+* $\color{Green} Y_i$ represents the real values of the dependent variable ($Y_1, Y_2, ... Y_n$) that we want to predict.
+* $\color{Blue} b_0 + b_1 X_i$ represents our prediction of y. It has two coefficients: 
+  * $\color{Blue} b_0$ is the **intercept**. This is the value of Y when X is zero.
+  * $\color{Blue} b_1$ is the **slope**. This tells us how much Y changes for every unit increase in X.
+* $\color{Red} \epsilon_i$ represents the **error**. This is the distance between the <span style="color:blue;">predicted</span> and the <span style="color:green">real</span> value of Y.
+
+For example, at $X = 10$, the blue line predicting Y passes through the point $Y = 10.45$.
+However, the real value of Y at this point is 8.66. 
+So the error $\epsilon_i$ at this point is $8.66 - 10.45 = -1.79$.
+
+The point of regression analysis is to find the values of $b_0$ (intercept) and $b_1$ (slope) that minimize the error.
+More specifically, it minimizes the sum of the squared errors (SSE), which is why this method is called **least squares regression**.
+
+$$  SSE = \large \sum_{i=1}^{n} {\color{red} \epsilon_i^2} $$
+
+Try it yourself! 
+Change the values of the intercept and slope in the interactive widget below, and see how the regression line changes.
+The goal is to get the lowest possible SSE, which means that the line is as close as possible to the data points.
+
+
+```{ojs}
+//| echo: false
+viewof intercept = Inputs.range(
+  [-8, 6], 
+  {value: 3, step: 0.001, label: "Intercept"}
+)
+viewof slope = Inputs.range(
+  [0.5,1.8], 
+  {value: 0.5, step: 0.001, label: "Slope"}
+)
+```
+
+```{ojs}
+//| echo: false
+x_line = Array.from({ length: 100 }, (_, i) => i-5);
+y_line = x_line.map(x => slope * x + intercept);
+mutable error = 0
+
+update_error = {
+  let sse = 0
+  x.forEach((d, i) => {
+    sse += Math.pow(y[i] - (slope * x[i] + intercept), 2)
+  })
+  mutable error = Number(sse.toFixed(2))
+}
+
+// Now, plot the regression line
+Plot.plot({
+  marks: [
+    Plot.lineY(y_line, {x: x_line, stroke: "blue"}),
+    Plot.dot(x, {x: x, y: y, fill: "darkgreen"}),
+    Plot.text([{intercept,slope}], {x: 10, y: 3, text: d => `prediction = ${d.intercept.toFixed(2)} + ${d.slope.toFixed(2)} * X`, fill: "black", fontSize: 16, fill: "blue", textAnchor: "start"}),
+    Plot.text([error], {x: 10, y: 0, text: d => `SSE = ${d}`, fill: "black", fontSize: 16, fill: "red", textAnchor: "start"})
+  ],
+  x: {
+    label: "X",
+    domain: [-5, 20]
+  },
+  y: {
+    label: "Y",
+    domain: [-5,22]
+  },
+  height: 300
+})
+
+```
+
+::: {.callout-tip title="Spoiler" collapse="true"}
+
+The optimal values for the intercept and slope are $b_0 = 0.930$ and $b_1 = 0.952$.
+This should give you an SSE of $160.24$.
+
+
+:::
+
+## What can we do with it?
+
+The primary goal of regression analysis is to understand the relationship between variables.
+It allows us to test hypotheses of the sort:
+
+* Older people have more trust in journalists
+* People on the political left have more trust in journalists than people on the political right
+
+You might be wondering: can't we already do the first one with a correlation test, and the second one with a t-test?
+The answer is yes, and one benefit of regression analysis is that it can do both these things in the same model.
+But **more importantly**, regression analysis can test both of these things **at the same time**, and account for the fact that age and political orientation are related to each other!
+If we know that younger people are more likely to be on the political left, then in order to test the effect of age on trust, we need to somehow account for political orientation.
+
+In this tutorial we will show you how to use regression analysis to predict a person's `trust in journalists` based on `age` and `political orientation`.
+The model we will be working towards looks like this:
+
+$$ \large  \color{Green} Y_i = \color{Blue} b_0 + b_1 X_{age} + b_2 X_{political\_left} + b_3 X_{political\_right} + \color{Red} \epsilon_i $$
+
+Don't worry if this doesn't make sense yet! We'll take it step by step.
+
+* We'll first show you how to do a simple linear regression, where we predict `trust` based on `age`.
+* Then we'll show you how to include a categorical variable in the model, by predicting `trust` based on `political orientation`.
+* Finally, we'll show you how to include both `age` and `political orientation` in the model at the same time.
+
+<!-- Regression analysis allows you to find a mathematical formula that predicts trust based on a combination of these variables.
+This can help you understand complex relationships between two or more variables. -->
 
 <!-- We refer to the variable that we want to predict (trust) as the **dependent variable**, and the variables that we use to make the prediction (age) as the **independent variables**. -->
 <!-- In the current tutorial you will first learn about simple linear regression, where we use one independent variable to predict the dependent variable.
 As you progress, you will learn about [multiple regression](../tests/multiple-regression.qmd), where we use more than one independent variable at once. -->
 
-
 # How to use it
 
-For this tutorial we'll be using our standard practice data, and a bit of `tidyverse` to load and clean the data.
+We'll be using our standard (simulated) practice data, and a bit of `tidyverse` to load and clean the data.
 We'll also be using the `sjPlot` package, which can create nice tables and plots of regression models.
 
 ```{r, message=F, results='hide'}
@@ -44,190 +191,200 @@ d <- read_csv("https://tinyurl.com/R-practice-data") |>
 d
 ```
 
-The **dependent** variable in the regression model has to be numeric.
-For our examples we'll use the `trust_t1` variable, which measures a person's trust in journalists on a scale from 1 to 10. 
-A regression model can have **one or multiple independent** variables, which can be numeric or categorical.
-This makes regression analysis a very flexible tool that can be used in many different situations.
-In this example we'll demonstrate this with both a numeric (`age`) and a categorical (`political_orientation`) independent variable.
 
 ## Regression with numerical independent variable
 
 Let's start with the example of predicting `trust` in journalists based on `age`.
 For this we'll be using the `trust_t1`[^1] variable as the dependent variable, and the `age` variable as the independent variable.
-We'll use the `lm()` function to run the regression, and the `tab_model()` function from the `sjPlot` package to show the results in a nice table.
-Inside the `lm()` function we specify the formula for the regression, which has the format `dependent ~ independent` (just like in the t-test and ANOVA).
+We can use the `lm()` function to create a linear regression model.
+Inside the `lm()` function we specify the formula for the regression, which has the format `dependent ~ independent`. 
 
 [^1]: We use the `trust_t1` variable here, because for the current analysis we are not interested in the effect of the experimental group. Since `trust_t1` is measured before the experiment, it is not influenced by the experiment.
 
 ```{r}
-#| html-table-processing: none
 m <- lm(trust_t1 ~ age, data = d) 
+```
 
+The *standard* way to inspect the results is using the `summary(m)` function.
+This gives you all the information you need, but not in a very nice and readable format.
+We will therefore be using the `tab_model()` function from the `sjPlot` package to get a nice (APA ready) table of the results.
+
+```{r}
+#| html-table-processing: none
 tab_model(m)
 ```
 
-The output of the regression analysis gives us values for two **predictors**: the **(intercept)** and the **age** variable.
-The **(intercept)** tells us what the average value of the dependent variable (`trust_t1`) is when the independent variable (`age`) is zero.
-The **age** predictor tells us how much the dependent variable (`trust_t1`) changes for every unit increase in age. 
-For each of these predictors we **estimate**, a **confidence interval**, and a **p-value**.
+::: {.callout-caution title="Backup plan if tab_model doesn't work" collapse="true"}
 
-This could already be all the information we need!
-If our hypothesis was that trust in journalists increases with age, we could now report that this hypothesis is supported by the data (b = 0.04, p < 0.001).
-But let's not stop there, and see how we can interpret these results in more detail!
+The `tab_model` function by default shows the regression table in your `viewer` pane.
+If this for some reason doesn't work, you can also use the `use.viewer=F` argument to show the table in your default web browser.
+This has the additional benefit that you can directly copy-paste the table into most text editors.
 
-### Interpreting the intercept and the effect of age 
-
-So why do we get two predictors, when we only specified one variable?
-Why do we need the intercept?
-This is because our prediction of `trust_t1` is based on two pieces of information:
-
-* What is the average trust in journalists regardless of age?
-* How does trust in journalists change as people get older?
-
-The **intercept** (2.21) tells us the average value of the dependent variable when age is zero.[^2]
-The coefficient for the **age** variable (0.04) tells us how much this trust increases for every year of age.
-Together, these values allow us to predict the trust in journalists for any age, using the following formula:
-
-[^2]: Often, the intercept doesn't have a meaningful interpretation, because the independent variable can't be zero. For example, there are no people with age zero in our data. We therefore often do not interpret the intercept by itself, but we still need it to make the model work.
-
-$$ trust\_t1 = intercept + slope_{age} \times age $$
-
-If we plug in the values from our model, we get: 
-
-$$ trust\_t1 = 2.21 + 0.04 \times age $$
-
-We can for instance calculate the predicted trust in journalists for a 20 year old:
-
-```{r}
-2.21 + 0.04 * 20
+```{r, eval=F}
+tab_model(m, use.viewer=F)
 ```
+:::
 
+The output of the regression analysis gives us values for the two coefficients: the **(intercept)** and the **age** variable.
+We get the coefficient **estimates**, and also the **p-values** that tell us if these coefficients are statistically significant.
+With `tab_model` we also get the **confidence interval**. 
 
-### Visualizing the intercept and slope
+The coefficient for `age` tells us how much `trust_t1` changes for every *unit increase* in `age`.
+Our `age` variable is in years, so the coefficient `0.04` tells us that for every year of age, trust in journalists increases on average by 0.04 points.
 
-We can also visualize how the predicted trust in journalists changes with age.
+To get a better view of what this means in practice, it can be helpful to plot the regression line.
 The `sjPlot` package has a function `plot_model()` that can do this for us.
-Here we visualize the prediction (`type = "pred"`) for the `age` variable (`terms = "age"`). 
-To show you how the prediction relates to the actual data, we'll also include a scatterplot of the data points (`show.data = T`), and add a bit of jitter[^3] to the data points so they don't overlap (`jitter = T`)
-
-[^3]: Jitter is a visualization technique that randomly moves the data points a bit, so that they don't overlap. If we don't do this, then data points with identical values are plotted on top of each other, and we can't see how many data points there are.
+Here we visualize the prediction (`type = "pred"`) for the `age` variable (`terms = "age"`).
 
 ```{r}
-plot_model(m, type = "pred", terms = "age", show.data = T, jitter=T)
+plot_model(m, type = "pred", terms = "age")
 ```
 
 Here the *regression line* shows the predicted values. 
-You can check that at age 20 the predicted trust is indeed 3.01, as we calculated before. 
-We can now see very clearly how average trust in journalists increases with age!
+At age 20 the predicted trust is around 3.05.
+For every year of age the predicted trust increases by 0.04 points, so by the time a person is 40 years old, the predicted trust is around 3.85.
+Visualizing effects like this can give readers (and yourself) a better understanding of how strong the effect really is.
 
-This should also clarify why the effect of age is called a **slope**.
-Since we have a positive effect, the regression line slopes upwards as age increases.
-The stronger the effect, the steeper the slope.
-If there was no effect of age, the regression line would be flat (i.e. no slope), because the predicted value would not change with age. 
-If the effect was negative, the regression line would slope downwards.
-Note that this is identical to the **direction** and **strength** of [covariance and correlation measures](../concepts/covariance-and-correlation.qmd#visualizing-correlation).
-
-
-::: {.callout-note title="How intercept and slope make the regression line" collapse="true"}
-
-The **intercept** is the value of the dependent variable when the independent variable is zero, which determines at what value the regression line crosses the y-axis.
-The coefficient for an independent variable tells us how much the dependent variable changes for every unit increase in the independent variable, which determines the **slope** of the regression line.
-The regression model finds the values for the intercept and slope that draws a line through the data points that best fits the data.
-To get a feel for this, try changing the values of the intercept and slope in the interactive widget below, and see how the regression line changes.
-
-```{ojs}
-//| echo: false
-viewof intercept = Inputs.range(
-  [-10, 10], 
-  {value: -5, step: 0.01, label: "Intercept"}
-)
-viewof slope = Inputs.range(
-  [-2,2], 
-  {value: 0.1, step: 0.01, label: "Slope"}
-)
-```
-
-```{ojs}
-//| echo: false
-
-x_values = Array.from({ length: 100 }, (_, i) => i);
-y_values = x_values.map(x => slope * x + intercept);
-
-// Now, plot the regression line
-Plot.plot({
-  marks: [
-    Plot.lineY(y_values, {x: x_values}) // Explicitly pass x and y values
-  ],
-  x: {
-    label: "Independent variable (age)",
-    domain: [0, 100]
-  },
-  y: {
-    label: "Dependent variable (trust)",
-    domain: [-10, 10]
-  },
-  width: 600,
-  height: 400
-})
-
-```
-:::
 
 ## Regression with categorical independent variable
 
 The **independent variable** in a regression model can also be categorical.
 This allows us to include categorical variables in the model, similar to the t-test and ANOVA.
-Let's see what this looks like when we predict `trust_t1` based on the `np_subscription` variable, which has the values `yes` and `no` to indicate if a person has a newspaper subscription.
+Let's see what this looks like when we predict `trust_t1` based on the `political_orientation` variable, which has the values `left`, `right` and `center`.
 
-We cannot do calculations with the values "yes" and "no", but we can make this possible by creating a so-called **dummy variable**.
-In a dummy variable, we assign a value of `1` to one of the categories, and `0` to the other categories.
-In our case we'll assign `1` to the category `yes`, and `0` to the category `no`.
-R can actually do this for us, but we'll first show you how to do it yourself to understand what's happening.
-Here we create a new variable `has_subscription` that has the value `1` if the person has a subscription, and `0` if they don't.
+We cannot directly use the values "left", "right" and "center" in the regression equation, but we create so-called **dummy variables**.
+A dummy variable is a *binary* variable (i.e., it can only take the values `0` and `1`) that represents whether something is the case or not.
+So if we want to test whether people that lean to the left have more trust in journalists, we can create a dummy variable that is `1` for people with orientation `left`, and `0` for all other people (i.e., `right` and `center`).
 
-```{r}
-d = mutate(d, has_subscription = if_else(np_subscription == "yes", 1, 0))
+```{r, results=F}
+d = mutate(d, political_left = if_else(political_orientation == "left", 1, 0))
 
-select(d, np_subscription, has_subscription)
+select(d, political_orientation, political_left)
 ```
 
 Now we can use this variable in the regression model.
 
 ```{r}
-m <- lm(trust_t1 ~ has_subscription, data = d)
+#| html-table-processing: none
+m <- lm(trust_t1 ~ political_left, data = d)
 
 tab_model(m)
 ```
 
-We now get a **slope** for the `has_subscription` variable.
-Before we saw that the slope tells us how much the dependent variable changes for every unit increase in the independent variable.
-This is still true!
-We only need to remember that the `has_subscription` variable is binary, so it can only take the values `0` and `1`.
-So given a coefficient of `0.37`, we can say that people with a subscription have on average a trust score that is `0.37` points higher than people without a subscription.
+The interpretation of the results is almost identical to the previous example with the `age` variable.
+The only thing we need to keep in mind is that the `political_left` variable is binary, so it can only take the values `0` and `1`.
+Accordingly, we don't say that the trust in journalists increases by `0.21` points for every unit increase in `political_left`.
+Instead, we just say that people on the political left (`political_left = 1`) have on average a trust score that is `0.21` points higher than people that are not on the political left (`political_left = 0`).
 
-Now let's do this again, but this time we'll let R create the dummy variable.
-This time we'll just directly use the `np_subscription` variable in the regression model.
+<!-- Note that in this case we can actually interpret the **intercept**.
+The intercept is the predicted value of the dependent variable when the independent variable is zero.
+So in this case, the intercept (`3.83`) is the predicted trust in journalists for people that are NOT `political_left`. -->
+
+### Categories with more than two levels
+
+In the previous example we created the dummy variable ourselves, but we can also let R do this for us.
+This is especially convenient if we have more than two categories.
+In addition, this also has the benefit that `lm` *knows* that the variable is categorical, which enables us (among other things) to visualize the model propertly.
+
+If an independent variable is of the `character` or `factor` type, R will automatically create dummy variables for us.
+
+We first need to make sure that our variable is of the `factor` type[^3].
+The difference between a `character` and a `factor` is that in a `factor` we explicitly tell R what the categories are, and what the *order* of the categories is.
+The order is important, because the first category will be the **reference category** (more on this later) in the regression model.
+To transform our `political_orientation` variable to a `factor` we can use the `factor()` function, and provide the `levels` argument to specify the order of the categories.
+
+[^3]: You *can* also use a `character` variable directly, but the `factor` type is more appropriate for categorical variables. It also let's you specify the order of the categories, which is important for regression analysis because it let's you specify the reference category.
 
 ```{r}
-m <- lm(trust_t1 ~ np_subscription, data = d)
+d <- mutate(d, political_orientation = factor(political_orientation, levels=c('center','left','right')))
+```
 
+Now, when we use the `political_orientation` variable in the regression model, R will automatically create the dummy variables for us.
+
+```{r}
+#| html-table-processing: none
+m <- lm(trust_t1 ~ political_orientation, data = d)
 tab_model(m)
 ```
 
-Notice that the results are identical! 
-The only difference is that the label for the `np_subscription` variable is `np_subscription [yes]`.
-This is R's way of telling us that it created a dummy variable for us in which the value `1` corresponds to the category `yes`.
+Notice that there are now two coefficients for the `political_orientation` variable: one for `left` and one for `right`.
+Why 2, and not 3?
+This is because when we have a categorical variable with `k` levels, we only need `k-1` coefficients to represent all the levels.
+If we know that a person is not in the `left` category, and not in the `right` category, then we know that the person must be in the `center` category.
 
-An additional benefit of letting R create the dummy variable is that it now knows that the variable is categorical. 
-If we now use the `plot_model()` function to visualize the prediction, it will 
+| political_orientation | is_left | is_right |
+|-----------------------|---------|----------|
+| left                  | 1       | 0        |
+| right                 | 0       | 1        |
+| center                | 0       | 0        |
+
+The `center` category is now the **reference category**.
+That is, the `center` category is the category that all other categories are compared to.
+So the `political_orientation [left]` coefficient tells us that `trust` is for people in the `left` category is 0.12 points higher than for people in the `center` category, but this difference is not significant (p = 0.220)
+The `political_orientation [right]` coefficient tells us that `trust` is for people in the `right` category is 0.17 points lower than for people in the `center` category, but this difference is also not significant (p = 0.100).
+
+::: {.callout-note title="Determining what reference category to use" collapse="true"}
+
+In the current model we cannot directly compare the `left` and `right` categories, because the `center` category is the reference category.
+This makes it important to choose a reference category that makes sense for your research question.
+To determine the reference category, you can change the order of the levels in the `factor()` function.
+The first level will always be the reference category.
+So in the following example, the `left` category is the reference category.
 
 ```{r}
-plot_model(m, type = "pred", terms = "np_subscription")
+#| html-table-processing: none
+d2 <- mutate(d, political_orientation = factor(political_orientation, levels=c('left','center','right')))
+
+lm(trust_t1 ~ political_orientation, data = d2) |>
+    tab_model()
+```
+:::
+
+When we visualize the prediction for a categorical variable, we get a plot that shows the predicted value for each category, with the confidence interval.
+
+```{r}
+plot_model(m, type = "pred", terms = "political_orientation")
 ```
 
+Here we see that (in our simulated data) people on the political left have the highest trust in journalists, followed by people in the center, and then people on the political right.
+However, based on the model we know that the difference between `left` and `center` is not significant, and neither is the difference between `center` and `right`.
 
-Just like before, we get an **intercept** and a **slope**.
-The interpretation is mostly the same, but we need to keep in mind that the np_subscription variable is binary.
+## Regression with multiple independent variables
 
-Notice that the label for the `np_subscription` variable is `np_subscription [yes]`.
-This tells us that R 
+Now, we can finally get to the most interesting part: using multiple independent variables in the regression model.
+This is called **multiple regression**, and it allows us to test the effect of multiple variables on the dependent variable at the same time.
+The formula for using multiple independent variables is: `dependent ~ independent1 + independent2 + ...`.
+
+We'll be using both the `age` and `political_orientation` variables.
+As we mentioned earlier, by including both variables in the model we can test the effect of `age` on `trust` while controlling for `political_orientation`, and vice versa.
+To show you how this works, we'll create two models, and show them side by side by plugging them both into the `tab_model()` function.
+
+```{r}
+#| html-table-processing: none
+m1 <- lm(trust_t1 ~ political_orientation, data = d)
+m2 <- lm(trust_t1 ~ political_orientation + age, data = d)
+
+tab_model(m1, m2)
+```
+
+In the first model, we did not see any effect of having a `left` or `right` political orientation compared to the `center` (reference) category.
+But once we include the `age` variable in the model, both the `left` and `right` categories show do show a significant effect on `trust`!
+
+The reason for this is that the `age` variable is related to both the `political_orientation` variable and the `trust` variable.[^4]
+Younger people have less trust in journalists, but are also more likely to be on the political left.
+Therefore, if we do not control for `age`, the positive effect of being on the political left is suppressed by the negative effect of being younger.
+
+[^4]: Remember that this is a simulated dataset, so in this case we know the true relationships between the variables. 
+But these types of complex relationships are very common in real data.
+
+If this sounds confusing, don't worry, because you're in good company!
+Thinking about how the effect of independent variables *on* the dependent variable depends on the relation *between* the independent variables can make your head spin.
+But for better or worse, this is how the world works, and this is why we need sophisticated statistical tools to help us understand it.
+
+
+
+
+<!-- ```{r}
+plot_model(m2, type = "pred", terms = c("age", "political_orientation"))
+``` -->
+
