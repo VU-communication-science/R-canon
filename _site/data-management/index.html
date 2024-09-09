@@ -330,6 +330,12 @@ div.csl-indent {
  <span class="menu-text">Scale construction</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/techniques/controlling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Controlling for confounders</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -345,6 +351,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="../analysis/tests/correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Correlation test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/tests/linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simple linear regression</span></a>
   </div>
 </li>
       </ul>
@@ -460,36 +472,41 @@ div.csl-indent {
 <td>Age of the participant in years</td>
 </tr>
 <tr class="odd">
+<td><strong>political_orientation</strong></td>
+<td><code>character</code></td>
+<td>Political orientation of the participant (<code>left</code>, <code>center</code>, <code>right</code>)</td>
+</tr>
+<tr class="even">
 <td><strong>np_subscription</strong></td>
 <td><code>factor</code></td>
 <td>Whether the participant has a newspaper subscription (<code>yes</code>, <code>no</code>)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><strong>news consumption</strong></td>
 <td><code>numeric</code></td>
 <td>Average number of hours per week the participant consumes news</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><strong>experiment_group</strong></td>
 <td><code>factor</code></td>
 <td>Type of movie shown: <code>neutral</code> (control group), <code>positive</code> (positive portrayal of journalism), <code>negative</code> (negative portrayal of journalism)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><strong>trust_t1</strong></td>
 <td><code>numeric</code></td>
 <td>Trust in journalists before the experiment (range: 1-10)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><strong>trust_t2</strong></td>
 <td><code>numeric</code></td>
 <td>Trust in journalists after the experiment (range: 1-10)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><strong>trust_t1_item[1-5]</strong></td>
 <td><code>numeric</code></td>
 <td>Scale items for trust_t1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><strong>trust_t2_item[1-5]</strong></td>
 <td><code>numeric</code></td>
 <td>Scale items for trust_t2</td>
@@ -624,7 +641,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

@@ -54,9 +54,20 @@ trust_t2[trust_t2 < 1] <- 1
 trust_t2[trust_t2 > 10] <- 10
 # plot(trust_t2 ~ experiment_group)
 
+# We'll also add political orientation, which is a factor with 3 levels (left, center, right)
+# We'll make it so that left is more likely for younger people and people with high trust_t1.
+# right is not related to age, but is related to trust_t1.
+left_odds = exp(-0.10*age + 0.9*trust_t1 + 5)
+right_odds = exp(-0.1*trust_t1 + 6)
+center_odds = (left_odds + right_odds) / 2
+political_orientation = sapply(1:n, function(i) sample(c("left", "center", "right"), 1, prob = c(left_odds[i], center_odds[i], right_odds[i])))
+table(political_orientation)
+
+
 # create tibble and randomize order
 d = tibble(
     age = age,
+    political_orientation = political_orientation,
     np_subscription = factor(np_subscription, labels = c("no", "yes")),
     news_consumption = news_consumption,
     experiment_group = experiment_group,
@@ -146,9 +157,22 @@ function() {
   d |>
     select(trust_t1_item1:trust_t1_item5) |>
     tab_corr()
+
+  m1 <- lm(trust_t1 ~ age, data = d)
+  m2 <- lm(trust_t1 ~ political_orientation, data = d)
+  m3 <- lm(trust_t1 ~ age + political_orientation, data = d)
+  tab_model(m1,m2,m3)
+
+  d |>
+    group_by(political_orientation) |>
+    summarize(m = mean(trust_t1), sd = sd(trust_t1), n = n(), m_age = mean(age))
+
+  plot_model(m2, type = "pred", terms = c("age", "political_orientation"))
+
 }
 
 ## adding some missing values and noise, and then saving
+set.seed(1)
 
 # Some people entered age as birthyear, and one person is too young
 ds = d
@@ -164,6 +188,5 @@ i = sample(1:n, 4)
 ## we need the specific birthyears to be deterministic for the tutorials
 ds$age[i] = c(1987, 1970, 1967, 17)
 
-write_csv(d, )
 write_csv(ds, "data/fake_demo_data.csv")
 

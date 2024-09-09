@@ -12,14 +12,16 @@ With simple linear regression we can take this one step further, and try to *pre
 
 In this context, the term *predict* is used in a statistical sense.
 It refers to estimating how well one can infer the value of one variable given knowledge of another. 
-The goal often is not to generate accurate predictions, but to make inferences about the relationship between the variables.
+We are often not actually interested in the prediction itself!
+Instead, we are interested in the relationship between the variables, and what this relationship can tell us about the world. 
 If one variable can predict another, it may for instance suggest a causal relationship.
 
-For example, imagine that you want to be able to predict for a random person on the street how much trust they have in journalists.
+For example, imagine that you want to be able to predict for a random person how much trust they have in journalists.
 What information would you use to make this prediction?
-You could perhaps use their age, their level of education, and their political orientation.
+You could perhaps use their age and political orientation, as there is some data that suggests that older people and people that lean to the political left have more trust in journalists.
+
 Regression analysis allows you to find a mathematical formula that predicts trust based on a combination of these variables.
-This can help you understand complex relationships between multiple variables.
+This can help you understand complex relationships between two or more variables.
 
 <!-- We refer to the variable that we want to predict (trust) as the **dependent variable**, and the variables that we use to make the prediction (age) as the **independent variables**. -->
 <!-- In the current tutorial you will first learn about simple linear regression, where we use one independent variable to predict the dependent variable.
@@ -37,7 +39,7 @@ library(sjPlot)
 
 d <- read_csv("https://tinyurl.com/R-practice-data") |>
         mutate(age = if_else(age > 100, 2024 - age, age)) |>
-        rename(news_consumption = `news consumption`)
+        select(age, political_orientation, trust_t1)
 
 d
 ```
@@ -46,6 +48,7 @@ The **dependent** variable in the regression model has to be numeric.
 For our examples we'll use the `trust_t1` variable, which measures a person's trust in journalists on a scale from 1 to 10. 
 A regression model can have **one or multiple independent** variables, which can be numeric or categorical.
 This makes regression analysis a very flexible tool that can be used in many different situations.
+In this example we'll demonstrate this with both a numeric (`age`) and a categorical (`political_orientation`) independent variable.
 
 ## Regression with numerical independent variable
 

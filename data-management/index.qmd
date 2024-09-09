@@ -58,6 +58,7 @@ The items are:
 |---------------|------|-------------|
 | **id** | `numeric` | Unique identifier for each participant |
 | **age** | `numeric` | Age of the participant in years |
+| **political_orientation** | `character` | Political orientation of the participant (`left`, `center`, `right`) |
 | **np_subscription** | `factor` | Whether the participant has a newspaper subscription (`yes`, `no`) |
 | **news consumption** | `numeric` | Average number of hours per week the participant consumes news |
 | **experiment_group** | `factor` | Type of movie shown: `neutral` (control group), `positive` (positive portrayal of journalism), `negative` (negative portrayal of journalism) |
