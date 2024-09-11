@@ -9,10 +9,12 @@ format:
 
 # What is regression analysis?
 
-Regression analysis is a statistical technique for *predicting* a `dependent variable` based on one or more `independent variables`.
+Regression analysis is a statistical technique for *predicting* a `dependent variable` (DV) based on one or more `independent variables` (IVs)
 We use *predict* in a statistical sense, meaning that we are estimating how well we can guess the dependent variable given knowledge of the independent variable(s).
-The reason we want to do this is usually not to make actual predictions, but to understand the relationship between the variables.
-If one variable can predict another, it tells us something about how they might be related.
+The reason we want to do this is usually not to make actual predictions, but to understand the world better.
+If we can model how a variable is predicted by one or more other variables, we can make inferences about the relationship between these variables.
+
+## How does it work? 
 
 Let's first look a how this prediction works for a single independent variable.
 This is also called **simple linear regression**.
@@ -71,33 +73,85 @@ $$ \Large  \color{Green} Y_i = \color{Blue} b_0 + b_1 X_i + \color{Red} \epsilon
 
 * $\color{Green} Y_i$ represents the real values of the dependent variable ($Y_1, Y_2, ... Y_n$) that we want to predict.
 * $\color{Blue} b_0 + b_1 X_i$ represents our prediction of y. It has two coefficients: 
-  * $\color{Blue} b_0$ is the **intercept**. This is the value of Y when X is zero.
-  * $\color{Blue} b_1$ is the **slope**. This tells us how much Y changes for every unit increase in X.
-* $\color{Red} \epsilon_i$ represents the **error**. This is the distance between the <span style="color:blue;">predicted</span> and the <span style="color:green">real</span> value of Y.
+  * **intercept** $\color{Blue} b_0$: The value of Y when X is zero.
+  * **slope** $\color{Blue} b_1$: How much Y changes for every unit increase in X.
+* $\color{Red} \epsilon_i$ represents the **residual**. This is the distance between the <span style="color:blue;">predicted</span> and the <span style="color:green">real</span> value of Y.[^error]
 
-For example, at $X = 10$, the blue line predicting Y passes through the point $Y = 10.45$.
+[^error]: For example, at $X = 10$, the blue line predicting Y passes through the point $Y = 10.45$.
 However, the real value of Y at this point is 8.66. 
-So the error $\epsilon_i$ at this point is $8.66 - 10.45 = -1.79$.
+So the residual $\epsilon_i$ at this point is $8.66 - 10.45 = -1.79$.
 
-The point of regression analysis is to find the values of $b_0$ (intercept) and $b_1$ (slope) that minimize the error.
-More specifically, it minimizes the sum of the squared errors (SSE), which is why this method is called **least squares regression**.
+Based on this equation, we can learn two important things about the relationship between X and Y:
 
-$$  SSE = \large \sum_{i=1}^{n} {\color{red} \epsilon_i^2} $$
+1. **The effect of X on Y**: The slope $b_1$ tells us how much Y changes for every unit increase in X.
+2. **The model fit**: Based on the residual $\epsilon_i$ we can calculate how well the model fits the data.
 
-Try it yourself! 
-Change the values of the intercept and slope in the interactive widget below, and see how the regression line changes.
-The goal is to get the lowest possible SSE, which means that the line is as close as possible to the data points.
+### The effect of X on Y
+
+Based on the coefficients of the regression model, we can make inferences about the relationship between the variables.
+In the example, we see that there is a positive relationship between `X` and `Y`, because the slope is positive.
+If X goes up, then Y tends to go up as well. 
+This relation is expressed by the coefficient $b_1$, which in our example is 0.95.
+For every unit increase in X, Y increases by 0.95.
+
+We can also interpret the intercept ($b_0$), which is the value of Y when X is zero.
+However, this is not always meaningful.
+For example, if the independent variable is `age`, then the intercept would be the predicted value of Y for a person that is 0 years old.
+This is why the intercept is often not interpreted. 
+
+### Model fit
+
+Based on the coefficient of the independent variable we can say something about the relation between X and Y.
+However, this is not the full story.
+Based on the coefficients we can make a prediction of Y, but we don't yet know how good this prediction is.
+This is why we also report the **coefficent of determination** ($R^2$), which tells us how well the model fits the data.
+
+We can calculate this based on the residual $\epsilon_i$.
+The residual tells us how bad our prediction is for each data point.
+To get a single score for how bad our prediction is for all data points, we can calculate the **residual sum of squares** ($SS_R$).
+As the name implies, we take the sum of the squared residuals.
+
+$$  SS_R = \large \sum_{i=1}^{n} {\color{red} \epsilon_i^2} $$
+
+You can think of the $SS_R$ as the variance of the real values of Y around the predicted values of Y.
+If our model is perfect, then the $SS_R$ would be zero. 
+But how do we know how not-perfect our model is? how high is too high?
+For this, we can look at the **total sum of squares** ($SS_T$), which is the sum of the squared differences between the real values of Y and the mean of Y.
+
+$$ SS_T = \sum_{i=1}^{n} (Y_i - \bar{Y})^2 $$
+
+The $SS_T$ is the **total variance** in Y.
+Notice that the calculation is similar to the $SS_R$, but instead of the predicted values of Y, we use the mean of Y.
+So now we can use this to see how much better our prediction is than just using the mean of Y.
+By subtracting the variance that we did not explain ($SS_R$) from the total variance ($SS_T$), we get the variance that we did explain, called the **model sum of squares** ($SS_M$).
+$$ SS_M = SS_T - SS_R $$
+
+And now we can calculate the $R^2$ value: the proportion of the total variance that has been explained by our model.
+$$ R^2 = \frac{SS_M}{SS_T} $$
+
+The $R^2$ is a value between 0 and 1, that tells us how much of the variance in the dependent variable is explained by the independent variable(s).
+In our example the $R^2$ is 0.79, which means that 79% of the variance in Y can be explained by the variance in X.
+This is **very high**, especially for social science data.
+When we're trying to predict human behaviour, we're usually already happy if we can explain a few percent of the variance.
+
+::: {.callout-tip title="Interactive widget for building intuition" collapse="true"}
+
+Try for yourself how the regression line changes when you change the values of the intercept and slope!
+The goal is to get the lowest possible SSE (and the highest possible R2), which means that the line is as close as possible to the data points.
+
+Note that because you're manually tweaking the intercept and slope, you might actually create a model that is worse than the mean of Y, which is why you can get a negative $R^2$.
+In a regression model this is not possible, because it will always find a model that is at least as good as the mean of Y.
 
 
 ```{ojs}
 //| echo: false
 viewof intercept = Inputs.range(
   [-8, 6], 
-  {value: 3, step: 0.001, label: "Intercept"}
+  {value: 3, step: 0.001, label: "b0 Intercept"}
 )
 viewof slope = Inputs.range(
   [0.5,1.8], 
-  {value: 0.5, step: 0.001, label: "Slope"}
+  {value: 0.5, step: 0.001, label: "b1 Slope"}
 )
 ```
 
@@ -105,14 +159,28 @@ viewof slope = Inputs.range(
 //| echo: false
 x_line = Array.from({ length: 100 }, (_, i) => i-5);
 y_line = x_line.map(x => slope * x + intercept);
-mutable error = 0
+mutable SSR = 0
+mutable R2 = 0
 
-update_error = {
-  let sse = 0
-  x.forEach((d, i) => {
-    sse += Math.pow(y[i] - (slope * x[i] + intercept), 2)
+SST = {
+  let sst = 0
+  let mean = 0
+  y.forEach((d, i) => {
+    mean += y[i] / y.length
   })
-  mutable error = Number(sse.toFixed(2))
+  y.forEach((d, i) => {
+    sst += Math.pow(y[i] - mean, 2)
+  })
+  return(Number(sst.toFixed(2)))
+}
+
+update_SSR = {
+  let ssr = 0
+  x.forEach((d, i) => {
+    ssr += Math.pow(y[i] - (slope * x[i] + intercept), 2)
+  })
+  mutable SSR = Number(ssr.toFixed(2))
+  mutable R2 = Number((1 - SSR / SST).toFixed(2))
 }
 
 // Now, plot the regression line
@@ -121,7 +189,7 @@ Plot.plot({
     Plot.lineY(y_line, {x: x_line, stroke: "blue"}),
     Plot.dot(x, {x: x, y: y, fill: "darkgreen"}),
     Plot.text([{intercept,slope}], {x: 10, y: 3, text: d => `prediction = ${d.intercept.toFixed(2)} + ${d.slope.toFixed(2)} * X`, fill: "black", fontSize: 16, fill: "blue", textAnchor: "start"}),
-    Plot.text([error], {x: 10, y: 0, text: d => `SSE = ${d}`, fill: "black", fontSize: 16, fill: "red", textAnchor: "start"})
+    Plot.text([{SSR, R2}], {x: 10, y: 0, text: d => `R2 = ${d.R2} = ${(SST - d.SSR).toFixed(2)} / ${SST}`, fill: "black", fontSize: 16, fill: "black", textAnchor: "start"})
   ],
   x: {
     label: "X",
@@ -139,10 +207,12 @@ Plot.plot({
 ::: {.callout-tip title="Spoiler" collapse="true"}
 
 The optimal values for the intercept and slope are $b_0 = 0.930$ and $b_1 = 0.952$.
-This should give you an SSE of $160.24$.
+This should give you an $R^2$ of $0.79$.
 
 
 :::
+:::
+
 
 ## What can we do with it?
 
@@ -157,23 +227,25 @@ The answer is yes, and one benefit of regression analysis is that it can do both
 But **more importantly**, regression analysis can test both of these things **at the same time**, and account for the fact that age and political orientation are related to each other!
 If we know that younger people are more likely to be on the political left, then in order to test the effect of age on trust, we need to somehow account for political orientation.
 
-In this tutorial we will show you how to use regression analysis to predict a person's `trust in journalists` based on `age` and `political orientation`.
-The model we will be working towards looks like this:
+In this tutorial we'll show you how to use regression analysis in several steps:
 
-$$ \large  \color{Green} Y_i = \color{Blue} b_0 + b_1 X_{age} + b_2 X_{political\_left} + b_3 X_{political\_right} + \color{Red} \epsilon_i $$
+* First, we'll look at **simple linear regression** with a single numeric independent variable.
+* Then, we'll perform a **multiple regression** with two numeric independent variables.
+* In the third step we'll show you how to use a **categorical independent variable** in the regression model.
+* We conclude with a **multiple regression** model that includes both numeric and categorical independent variables.
 
-Don't worry if this doesn't make sense yet! We'll take it step by step.
 
-* We'll first show you how to do a simple linear regression, where we predict `trust` based on `age`.
-* Then we'll show you how to include a categorical variable in the model, by predicting `trust` based on `political orientation`.
-* Finally, we'll show you how to include both `age` and `political orientation` in the model at the same time.
+## When can we use it?
 
-<!-- Regression analysis allows you to find a mathematical formula that predicts trust based on a combination of these variables.
-This can help you understand complex relationships between two or more variables. -->
+Regression analysis is a very versatile tool that can be used in many different situations.
+However, there are some assumptions that need to be met in order to use it correctly.
+The most important assumptions are:
 
-<!-- We refer to the variable that we want to predict (trust) as the **dependent variable**, and the variables that we use to make the prediction (age) as the **independent variables**. -->
-<!-- In the current tutorial you will first learn about simple linear regression, where we use one independent variable to predict the dependent variable.
-As you progress, you will learn about [multiple regression](../tests/multiple-regression.qmd), where we use more than one independent variable at once. -->
+1. **Linearity**: The relationship between the independent and dependent variable(s) should be linear.
+2. **Independence**: The observations should be independent of each other.
+3. **Homoscedasticity**: The variance of the residuals should be constant.
+4. **Normality**: The residuals should be normally distributed.
+5. **No multicollinearity**: The independent variables should not be too highly correlated with each other.
 
 # How to use it
 
@@ -186,15 +258,16 @@ library(sjPlot)
 
 d <- read_csv("https://tinyurl.com/R-practice-data") |>
         mutate(age = if_else(age > 100, 2024 - age, age)) |>
-        select(age, political_orientation, trust_t1)
+        select(age, political_orientation, trust_t1, 
+               news_consumption = `news consumption`)
 
 d
 ```
 
 
-## Regression with numerical independent variable
+## Simple linear regression 
 
-Let's start with the example of predicting `trust` in journalists based on `age`.
+We start with the example of predicting `trust` in journalists based on `age`.
 For this we'll be using the `trust_t1`[^1] variable as the dependent variable, and the `age` variable as the independent variable.
 We can use the `lm()` function to create a linear regression model.
 Inside the `lm()` function we specify the formula for the regression, which has the format `dependent ~ independent`. 
@@ -225,31 +298,76 @@ tab_model(m, use.viewer=F)
 ```
 :::
 
-The output of the regression analysis gives us values for the two coefficients: the **(intercept)** and the **age** variable.
+The output of the regression analysis gives us values for the two coefficients: the **(intercept)** and the **age** variable (like $b_0$ and $b_1$ in the regression equation).
 We get the coefficient **estimates**, and also the **p-values** that tell us if these coefficients are statistically significant.
 With `tab_model` we also get the **confidence interval**. 
 
-The coefficient for the `intercept` tells us the predicted value of `trust_t1` when `age` is zero.
+* The coefficient for the `intercept` tells us the predicted value of `trust_t1` when `age` is zero.
 This is not very meaningful in this case, because we don't have any people with an age of zero in our data.
+* The coefficient for `age` tells us how much `trust_t1` changes for every *unit increase* in `age`. Our `age` variable is in years, so the coefficient `0.04` tells us that for every year of age, trust in journalists increases on average by 0.04 points.
+  * The p-value of `< 0.001` tells us that this effect is statistically significant.
+  * The confidence interval tells us that we are 95% confident that the true effect of `age` on `trust_t1` is between 0.04 and 0.05.
 
-The coefficient for `age` tells us how much `trust_t1` changes for every *unit increase* in `age`.
-Our `age` variable is in years, so the coefficient `0.04` tells us that for every year of age, trust in journalists increases on average by 0.04 points.
+We also get the $R^2$ value, which tells us how well the model fits the data.
+Here we see that the $R^2$ is 0.281, which means that 28.1% of the variance in `trust_t1` can be explained by the variance in `age`, which is huge.
+
+In conclusion, this model shows that (in our simulated data) there is a strong effect of `age` on `trust_t1`.
+
+::: {.callout-note title="Visualizing the regression line" collapse="true"}
 
 To get a better view of what this means in practice, it can be helpful to plot the regression line.
+This might also help you better draw the connection between the regression equation and our actual model.
 The `sjPlot` package has a function `plot_model()` that can do this for us.
 Here we visualize the prediction (`type = "pred"`) for the `age` variable (`terms = "age"`).
+We can also plot the data points with `show.data = T` and `jitter = T` (jitter only adds some noice to prevent overlap, which makes it easier to interpret).
 
 ```{r}
-plot_model(m, type = "pred", terms = "age")
+plot_model(m, type = "pred", terms = "age", show.data = T, jitter = T)
 ```
 
-Here the *regression line* shows the predicted values. 
-At age 20 the predicted trust is around 3.05.
-For every year of age the predicted trust increases by 0.04 points, so by the time a person is 40 years old, the predicted trust is around 3.85.
-Visualizing effects like this can give readers (and yourself) a better understanding of how strong the effect really is.
+:::
 
+## Multiple regression
 
-## Regression with categorical independent variable
+In the previous example we used a single independent variable (`age`) to predict the dependent variable.
+Now we'll add a second numeric independent variable (`news_consumption`) to the model.
+This is called **multiple regression**, and it allows us to test the effect of multiple variables on the dependent variable at the same time.
+The formula for using multiple independent variables is: `dependent ~ independent1 + independent2 + ...`.
+
+As we mentioned earlier, by including both variables in the model we can test the effect of `news_consumption` on `trust` while controlling for `age`, and vice versa.
+To better investigate the effects of controlling, it is good practise to show multiple versions of the model side by side. 
+With the `tab_model()` function we can do this by simply providing both models as arguments.
+
+```{r}
+#| html-table-processing: none
+m1 <- lm(trust_t1 ~ news_consumption, data = d)
+m2 <- lm(trust_t1 ~ news_consumption + age, data = d)
+
+tab_model(m1, m2)
+```
+
+If we look at the first model, we see a significant effect of `news_consumption` on `trust_t1` ($b = 0.03$, $p < 0.05$). 
+We do also see that the $R^2$ value is very low (0.009): only 0.9% of the variance in `trust_t1` can be explained by `news_consumption`.
+Still, if this was all the information we had, we might have concluded that there is at least a small effect of `news_consumption` on `trust_t1`.
+
+But when we include the `age` variable in the model, we see that the effect of `news_consumption` is no longer significant ($p = 0.699$).
+Also note that the $R^2$ value (0.281) is identical to when we only included the `age` variable (in the simple linear regression).
+So this suggests that the effect of `news_consumption` on `trust_t1` is actually explained by the effect of `age`.
+
+What we're witnessing here is a form of **confounding**.
+There is a relation between the `news_consumption` and `trust_t1` variables, but this relation is likely *spurious*.
+`age` has an effect on both `news_consumption` and `trust_t1`: older people consume more news, and have more trust in journalists.
+By controlling for `age`, the spurious relation between `news_consumption` and `trust_t1` disappears.
+For a more detailed explanation of confounding, see the [confounding tutorial](../tests/confounding.qmd).
+
+This is also a good time to talk about the **$R^2$ adjusted** value.
+This is the $R^2$ value, but corrected for the number of independent variables in the model.
+This is important, because the $R^2$ value will always increase when you add more independent variables to the model, because this adds an additional parameter that it can use to fit the data (in our case the increase was just so small that it didn't show after rounding).
+The $R^2$ adjusted value corrects for this, which is why it's actually lower in our model with both `age` and `news_consumption` than in the model with just `age`.
+In practice, the $R^2$ adjusted value is very similar to the $R^2$ value, and the regular $R^2$ is then often reported.
+But always check the $R^2$ adjusted value if you're adding multiple independent variables to the model to see if you're not just adding noise.
+
+## Categorical IVs
 
 The **independent variable** in a regression model can also be categorical.
 This allows us to include categorical variables in the model, similar to the t-test and ANOVA.
@@ -342,24 +460,10 @@ lm(trust_t1 ~ political_orientation, data = d2) |>
 ```
 :::
 
-When we visualize the prediction for a categorical variable, we get a plot that shows the predicted value for each category, with the confidence interval.
+## Numeric and categorical IVs
 
-```{r}
-plot_model(m, type = "pred", terms = "political_orientation")
-```
-
-Here we see that (in our simulated data) people on the political left have the highest trust in journalists, followed by people in the center, and then people on the political right.
-However, based on the model we know that the difference between `left` and `center` is not significant, and neither is the difference between `center` and `right`.
-
-## Regression with multiple independent variables
-
-Now, we can finally get to the most interesting part: using multiple independent variables in the regression model.
-This is called **multiple regression**, and it allows us to test the effect of multiple variables on the dependent variable at the same time.
-The formula for using multiple independent variables is: `dependent ~ independent1 + independent2 + ...`.
-
-We'll be using both the `age` and `political_orientation` variables.
-As we mentioned earlier, by including both variables in the model we can test the effect of `age` on `trust` while controlling for `political_orientation`, and vice versa.
-To show you how this works, we'll create two models, and show them side by side by plugging them both into the `tab_model()` function.
+You've already seen how multiple regression works, AND how to include categorical variables in the model.
+Let's conclude with a model that includes both numeric and categorical variables.
 
 ```{r}
 #| html-table-processing: none
@@ -372,7 +476,8 @@ tab_model(m1, m2)
 In the first model, we did not see any effect of having a `left` or `right` political orientation compared to the `center` (reference) category.
 But once we include the `age` variable in the model, both the `left` and `right` categories do show a significant effect on `trust`!
 
-The reason for this is that the `age` variable is related to both the `political_orientation` variable and the `trust` variable.
+This is again a form of **confounding**.
+However, this time the confounder `age` **suppresses** the effect.
 Younger people have less trust in journalists, but are also more likely to be on the political left.
 Therefore, if we do not control for `age`, the positive effect of being on the political left is suppressed by the negative effect of being younger.
 
@@ -380,10 +485,4 @@ If this sounds confusing, don't worry, because you're in good company!
 Thinking about how the effect of independent variables *on* the dependent variable depends on the relation *between* the independent variables can make your head spin.
 But for better or worse, this is how the world works, and this is why we need sophisticated statistical tools to help us understand it.
 
-
-
-
-<!-- ```{r}
-plot_model(m2, type = "pred", terms = c("age", "political_orientation"))
-``` -->
-
+# 

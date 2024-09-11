@@ -71,7 +71,6 @@ political_leftright = round(rescale(political_leftright) * 9) + 1
 d = tibble(
     age = age,
     political_orientation = political_orientation,
-    political_leftright = political_leftright,
     np_subscription = factor(np_subscription, labels = c("no", "yes")),
     news_consumption = news_consumption,
     experiment_group = experiment_group,
