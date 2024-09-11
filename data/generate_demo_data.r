@@ -63,11 +63,15 @@ center_odds = (left_odds + right_odds) / 2
 political_orientation = sapply(1:n, function(i) sample(c("left", "center", "right"), 1, prob = c(left_odds[i], center_odds[i], right_odds[i])))
 table(political_orientation)
 
+political_leftright = age*0.1 + trust_t1*0.2 + rnorm(n, 0, 1)
+rescale = function(x) (x - min(x)) / (max(x) - min(x))
+political_leftright = round(rescale(political_leftright) * 9) + 1
 
 # create tibble and randomize order
 d = tibble(
     age = age,
     political_orientation = political_orientation,
+    political_leftright = political_leftright,
     np_subscription = factor(np_subscription, labels = c("no", "yes")),
     news_consumption = news_consumption,
     experiment_group = experiment_group,
@@ -189,4 +193,3 @@ i = sample(1:n, 4)
 ds$age[i] = c(1987, 1970, 1967, 17)
 
 write_csv(ds, "data/fake_demo_data.csv")
-
