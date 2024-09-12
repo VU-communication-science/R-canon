@@ -466,13 +466,13 @@ window.Quarto = {
     Pearson's product-moment correlation
 
 data:  d$news_consumption and d$trust_t1
-t = 2.6273, df = 598, p-value = 0.008827
+t = 2.3387, df = 598, p-value = 0.01968
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- 0.02700997 0.18528348
+ 0.01527442 0.17392142
 sample estimates:
       cor 
-0.1068234 </code></pre>
+0.0952024 </code></pre>
 </div>
 </div>
 <p>The output gives us the correlation coefficient under the <code>sample estimates</code>, which in our case is <span class="math inline">\(r = 0.107\)</span>. This means that the correlation is positive (&gt; 0), but quite weak. The test also reports a p-value (<code>0.009</code>), which tells us that the correlation is significant at the <span class="math inline">\(99\%\)</span> (<code>&lt; 0.01</code>) confidence level. Also note that the degrees of freedom are reported as <code>598</code>, which is the number of observations minus 2.</p>
@@ -518,41 +518,41 @@ cor.test using the formula notation
 <tr class="even">
 <td style="font-style: italic">trust_t1_item1</td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">0.268<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.730<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.724<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.848<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.328<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.740<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.735<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.828<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 </tr>
 <tr class="odd">
 <td style="font-style: italic">trust_t1_item2</td>
-<td style="text-align: center; padding: 0.2cm;">0.268<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.328<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">-0.273<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.252<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.289<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.297<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.283<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.308<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 </tr>
 <tr class="even">
 <td style="font-style: italic">trust_t1_item3</td>
-<td style="text-align: center; padding: 0.2cm;">-0.730<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.273<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.740<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.297<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">-0.673<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.764<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.687<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.781<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 </tr>
 <tr class="odd">
 <td style="font-style: italic">trust_t1_item4</td>
-<td style="text-align: center; padding: 0.2cm;">0.724<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.252<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.673<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.735<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.283<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.687<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">0.753<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.771<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 </tr>
 <tr class="even">
 <td style="font-style: italic">trust_t1_item5</td>
-<td style="text-align: center; padding: 0.2cm;">0.848<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.289<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.764<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.753<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.828<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.308<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.781<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.771<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
 </tr>
 <tr class="odd">
@@ -567,14 +567,15 @@ cor.test using the formula notation
 </section>
 <section id="when-can-you-use-it" class="level1">
 <h1>When can you use it?</h1>
-<p>The correlation test is used when you have two <code>numeric</code> variables and you want to know if there is a relationship between them. There is no <code>dependent</code> or <code>independent</code> variable in the correlation test, because we are just looking at the relationship between the variables.</p>
-<p>There are three main conditions that need to be met for the correlation test to be valid:</p>
+<p>The correlation test can be used when you have two <code>numeric</code> variables and you want to know if there is a relationship between them. There is no <code>dependent</code> or <code>independent</code> variable in the correlation test, because we are just looking at the relationship between the variables.</p>
+<p>There are four main conditions that need to be met for the correlation test to be valid:</p>
 <ol type="1">
 <li><strong>Continuous variables</strong>: Both variables should be numeric, and measured on a interval or ratio scale.</li>
 <li><strong>Linearity</strong>: The relationship between the variables should be linear.</li>
-<li><strong>Normality</strong>: The variables should be (roughly) normally distributed. Correlation is particularly sensitive to outliers.</li>
+<li><strong>Normality</strong>: The variables should be (roughly) normally distributed.</li>
+<li><strong>No outliers</strong>: Extreme values can have a big impact on the correlation coefficient.</li>
 </ol>
-<p>If these conditions are not met, you might want to use Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span> instead of the Pearson correlation coefficient.</p>
+<p>If these conditions are not met, you might want to use Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span> instead of the Pearson correlation coefficienta Spearman’s <span class="math inline">\(\rho\)</span> looks as the rank order of the variables instead of the specific scores, which makes it suitable for ordinal data, and makes it more robust to outliers, non-linear relationships, and non-normality. Kenall’s <span class="math inline">\(\tau\)</span> is similar to Spearman’s $`, but can be preferable if there are many ties in the data (when two or more observations have the same value, due to which they can’t be ranked perfectly).</p>
 <section id="spearmans-rho-and-kendalls-tau" class="level2">
 <h2 class="anchored" data-anchor-id="spearmans-rho-and-kendalls-tau">Spearman’s <span class="math inline">\(\rho\)</span> and Kendall’s <span class="math inline">\(\tau\)</span></h2>
 <p>To use the Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span> correlation, you need to specify the <code>method</code> argument in the <code>cor.test</code> function, or the <code>corr.method</code> argument in the <code>tab_corr</code> function.</p>

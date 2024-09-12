@@ -13,22 +13,30 @@ Regression analysis is a statistical technique for *predicting* a `dependent var
 We use *predict* in a statistical sense, meaning that we are estimating how well we can guess the dependent variable given knowledge of the independent variable(s).
 The reason we want to do this is usually not to make actual predictions, but to understand the world better.
 If we can model how a variable is predicted by one or more other variables, we can make inferences about the relationship between these variables.
-
-Regression analysis allows us to test hypotheses of the sort:
+Specifically, regression analysis allows us to test hypotheses of the sort:
 
 * Older people have more trust in journalists
 * People on the political left have more trust in journalists than people on the political right
 
 Individually, you could test these hypotheses with a correlation test and a t-test, respectively.
-Regression analysis can do both these things in the same model.
-But **more importantly**, it can measure the effect of **multiple** independent variables at once, and control for relations between the independent variables.
-If we know that younger people are more likely to be on the political left, then in order to test the effect of political orientation on trust, we need to somehow account for age.
+With regression analysis, you can test these hypotheses in the same model, while also **controlling** for the relations between the independent variables.
+This allows us to deal with **confounding**, which can be critical when working with observational data.
+For instance, if younger people are more likely to be on the political left, then in order to test the effect of political orientation on trust, we need to somehow control for age.
+
+This is a long tutorial, split up in three parts.
+We first discuss how regression analysis works under the hood. 
+We won't go deep into the math, but a basic understanding of the regression equation and the $R^2$ value is helpful for understanding when and how to use regression analysis.
+If you already familiar with regression, and are just here to learn how to do it in R, you can safely skip this part.
+Second, we'll show you how to use regression analysis in practice, where we go over a number of examples.
+If you're new to regression, but you're the learning by doing type, you might want to start here.
+Finally, we'll talk about when you can use regression analysis, and what the assumptions are that you need to meet.
+Understanding the assumptions is important, but requires a good understanding of the basics. 
+So we advice first getting comfortable with the previous parts before diving in.
 
 # How does it work? 
 
 While you don't need to understand the math behind regression analysis to use it, it is helpful to have a basic understanding of how it works.
-Here we'll give a brief overview of the main concepts.
-In **simple linear regression** have a dependent variable `Y` and an independent variable `X`, and we want to predict `Y` based on `X`.
+In **simple linear regression** we have a dependent variable `Y` and an independent variable `X`, and we want to predict `Y` based on `X`.
 The goal is to find a mathematical formula that best describes their relationship.
 You can visually think of this as a scatterplot, where we draw a `regression line`  such that the distance between the line and the data points is as small as possible.
 
@@ -75,7 +83,7 @@ gg2 = ggplot(df, aes(x = x, y = y)) +
 grid.arrange(gg1, gg2, ncol=2)
 ```
 
-This model can be described by a classic formula, called the **regression equation**.
+This visualization corresponds to the **regression equation**.
 We've coloured the different parts of the equation according to the colours used in the visualization. 
 
 
