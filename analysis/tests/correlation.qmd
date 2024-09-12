@@ -80,16 +80,19 @@ If you need to get the exact p-values, you can also use `tab_corr(p.numeric = TR
 
 # When can you use it?
 
-The correlation test is used when you have two `numeric` variables and you want to know if there is a relationship between them.
+The correlation test can be used when you have two `numeric` variables and you want to know if there is a relationship between them.
 There is no `dependent` or `independent` variable in the correlation test, because we are just looking at the relationship between the variables.   
 
-There are three main conditions that need to be met for the correlation test to be valid:
+There are four main conditions that need to be met for the correlation test to be valid:
 
 1. **Continuous variables**: Both variables should be numeric, and measured on a interval or ratio scale.
 2. **Linearity**: The relationship between the variables should be linear.
-3. **Normality**: The variables should be (roughly) normally distributed. Correlation is particularly sensitive to outliers.
+3. **Normality**: The variables should be (roughly) normally distributed. 
+4. **No outliers**: Extreme values can have a big impact on the correlation coefficient.
 
-If these conditions are not met, you might want to use Spearman's $\rho$ or Kendall's $\tau$ instead of the Pearson correlation coefficient.
+If these conditions are not met, you might want to use Spearman's $\rho$ or Kendall's $\tau$ instead of the Pearson correlation coefficienta
+Spearman's $\rho$ looks as the rank order of the variables instead of the specific scores, which makes it suitable for ordinal data, and makes it more robust to outliers, non-linear relationships, and non-normality.
+Kenall's $\tau$ is similar to Spearman's $\rho`, but can be preferable if there are many ties in the data (when two or more observations have the same value, due to which they can't be ranked perfectly).
 
 ## Spearman's $\rho$ and Kendall's $\tau$
 
@@ -102,7 +105,6 @@ cor.test(d$news_consumption, d$trust_t1, method = "kendall")
 d |> select(trust_t1_item1:trust_t1_item5) |> tab_corr(corr.method="spearman")
 d |> select(trust_t1_item1:trust_t1_item5) |> tab_corr(corr.method="kendall")
 ```
-
 
 
 # How to report it
