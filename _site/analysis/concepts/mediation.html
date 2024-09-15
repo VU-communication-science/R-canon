@@ -408,11 +408,8 @@ window.Quarto = {
   <li><a href="#what-is-mediation" id="toc-what-is-mediation" class="nav-link" data-scroll-target="#what-is-mediation">What is mediation?</a></li>
   <li><a href="#packages-and-simulated-data" id="toc-packages-and-simulated-data" class="nav-link" data-scroll-target="#packages-and-simulated-data">Packages and simulated data</a></li>
   </ul></li>
-  <li><a href="#simple-regression-analyses" id="toc-simple-regression-analyses" class="nav-link" data-scroll-target="#simple-regression-analyses">Simple regression analyses</a>
-  <ul class="collapse">
-  <li><a href="#full-mediation" id="toc-full-mediation" class="nav-link" data-scroll-target="#full-mediation">Full mediation</a></li>
-  <li><a href="#no-mediation" id="toc-no-mediation" class="nav-link" data-scroll-target="#no-mediation">No mediation</a></li>
-  </ul></li>
+  <li><a href="#simple-regression-analyses" id="toc-simple-regression-analyses" class="nav-link" data-scroll-target="#simple-regression-analyses">Simple regression analyses</a></li>
+  <li><a href="#testing-mediation-using-process" id="toc-testing-mediation-using-process" class="nav-link" data-scroll-target="#testing-mediation-using-process">Testing mediation using PROCESS</a></li>
   </ul>
 </nav>
     </div>
@@ -629,22 +626,36 @@ window.Quarto = {
 </div>
 <p>We can see that all paths are significant, suggesting that there is both a direct and indirect effect of <code>X</code> on <code>Y</code>. In other words, this is a <strong>partial mediation</strong>.</p>
 <p>We can calculate the indirect effect by multiplying the coefficients of the two paths:</p>
-<p><span class="math display">\[a \times b = 0.48 \times 0.3 = 0.14\]</span></p>
-<!-- And notice that if we add up the direct and indirect effects, we get the total effect:
-
-
-
-
-::: {.cell}
-
-:::
-
-
-
-
-$$ indirect + direct = total $$
-$$ 0.14 + 0.92 = 1.06$$ -->
-<section id="full-mediation" class="level2">
+<p><span class="math display">\[a \times b = 0.482 \times 0.301 = 0.145\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Testing the significance of the indirect effect">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Testing the significance of the indirect effect
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If both parts of the indirect effect (<strong>a * b</strong>) are significant, there is a good chance that the indirect effect is significant. And similarly, if one part is not significant, the indirect effect is likely not significant. However, this is not always the case, so it is better to explicitly test the significance of the indirect effect.</p>
+<p>This is not straightforward, and requires more advanced techniques, such as bootstrapping or Monte-Carlo simulations. We will not cover these techniques in this tutorial, because it distracts from the goal of teaching the basic concept of mediation. Just be aware that this is a limitation of the simple mediation analyses we have shown here, and that it is therefore better to use advanced techniques or specialized packages for mediation analyses in actual research.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Full mediation example">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Full mediation example
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<section id="full-mediation" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="full-mediation">Full mediation</h2>
 <p>Since we’re working with simulated data, we can make a small adjustment to our code to simulate a scenario where <code>M</code> fully mediates the effect of <code>X</code> on <code>Y</code>. Notice that our simulation is almost identical, except that we set the coefficient of <code>X</code> on <code>Y</code> to 0.</p>
 <div class="cell">
@@ -653,13 +664,13 @@ $$ 0.14 + 0.92 = 1.06$$ -->
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">3</span>, <span class="dv">1</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">2</span>)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fl">0.3</span><span class="sc">*</span>M <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X,M,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>d_full <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X,M,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To nicely interpret the models side-by-side, we’ll add some labels and drop the confidence intervals.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, d)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(M <span class="sc">~</span> X, d)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X <span class="sc">+</span> M, d)</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, d_full)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(M <span class="sc">~</span> X, d_full)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X <span class="sc">+</span> M, d_full)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m_total, m1, m2,  </span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">dv.labels=</span><span class="fu">c</span>(<span class="st">"Y ~ X"</span>, <span class="st">"M ~ X"</span>, <span class="st">"Y ~ X + M"</span>), <span class="at">show.ci =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -729,27 +740,40 @@ $$ 0.14 + 0.92 = 1.06$$ -->
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="mediation_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p><img src="mediation_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Here we do have an effect of <code>X</code> on <code>Y</code>, but when we control for <code>M</code>, the effect of <code>X</code> on <code>Y</code> is no longer significant. Since both the effect of <code>X</code> on <code>M</code> and <code>M</code> on <code>Y</code> are significant, this is a case of <strong>full mediation</strong>.</p>
 </section>
-<section id="no-mediation" class="level2">
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="No mediation example">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+No mediation example
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<section id="no-mediation" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="no-mediation">No mediation</h2>
-<p>Finally, we can also simulate a scenario where <code>M</code> has no effect on <code>Y</code>. We do not make the effect of <code>M</code> on <code>Y</code> zero, but we set the coefficient to a very small value, so that it is not significant.</p>
+<p>We can also simulate a scenario where <code>M</code> has no effect on <code>Y</code>. We do not make the effect of <code>M</code> on <code>Y</code> zero, but we set the coefficient to a very small value, so that it is not significant.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">3</span>, <span class="dv">1</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">2</span>)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fl">0.05</span><span class="sc">*</span>M <span class="sc">+</span> <span class="fl">0.8</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X,M,Y)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>d_no_mediation <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X,M,Y)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, d)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(M <span class="sc">~</span> X, d)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X <span class="sc">+</span> M, d)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, d_no_mediation)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(M <span class="sc">~</span> X, d_no_mediation)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X <span class="sc">+</span> M, d_no_mediation)</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m_total, m1, m2,  </span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">dv.labels=</span><span class="fu">c</span>(<span class="st">"Y ~ X"</span>, <span class="st">"M ~ X"</span>, <span class="st">"Y ~ X + M"</span>), <span class="at">show.ci =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -819,31 +843,105 @@ $$ 0.14 + 0.92 = 1.06$$ -->
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="mediation_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p><img src="mediation_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>In this case, the effect of <code>X</code> on <code>Y</code> is significant, but the effect of <code>X</code> on <code>M</code> is not. So there is no mediation effect. The full effect of <code>X</code> on <code>Y</code> is direct.</p>
-<div class="callout callout-style-default callout-warning callout-titled" title="Testing the significance of the indirect effect">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Testing the significance of the indirect effect
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>In this case we concluded that there was no indirect effect, because one part of the indirect effect (<code>M -&gt; Y</code>) was not significant. If one part is not significant, it is <em>often</em> the case that the indirect effect is not significant, but this is not always true. A better way is to explicitly test the significance of the indirect effect. However, this is not straightforward, and requires more advanced techniques, such as bootstrapping or Monte-Carlo simulations. We will not cover these techniques in this tutorial, because it only distracts from the goal of teaching the basic concept of mediation. Just be aware that this is a limitation of the simple mediation analyses we have shown here, and that it is therefore better to use advanced techniques or specialized packages for mediation analyses in actual research.</p>
-</div>
-</div>
-</div>
-
-
 </section>
+</div>
+</div>
+</section>
+<section id="testing-mediation-using-process" class="level1">
+<h1>Testing mediation using PROCESS</h1>
+<p>The <code>PROCESS</code> macro for SPSS and SAS is a popular tool for mediation analyses. It is also available in R, using the <code>bruceR</code> package. Here we show you how to use PROCESS, using the same simulated data (<code>d</code>) as before. If you compare the results with our own manual analysis, you’ll see that the direct, total and indirect (a*b) effects are the same. But one important difference is that PROCESS also provides an explicit confidence interval for the indirect effect, based on bootstrapping.</p>
+<p>To use <code>PROCESS</code>, you simply provide the data frame, and specify the column names for the dependent variable (<code>y = "Y"</code>), the independent variable (<code>x = "X"</code>), and the mediator (<code>meds = "M"</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bruceR)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fl">0.3</span><span class="sc">*</span>M <span class="sc">+</span> <span class="fl">0.8</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X,M,Y)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">PROCESS</span>(d, <span class="at">y=</span><span class="st">"Y"</span>, <span class="at">x=</span><span class="st">"X"</span>, <span class="at">meds=</span><span class="st">"M"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+****************** PART 1. Regression Model Summary ******************
+
+PROCESS Model Code : 4 (Hayes, 2018; www.guilford.com/p/hayes3)
+PROCESS Model Type : Simple Mediation
+-    Outcome (Y) : Y
+-  Predictor (X) : X
+-  Mediators (M) : M
+- Moderators (W) : -
+- Covariates (C) : -
+-   HLM Clusters : -
+
+All numeric predictors have been grand-mean centered.
+(For details, please see the help page of PROCESS.)
+
+Formula of Mediator:
+-    M ~ X
+Formula of Outcome:
+-    Y ~ X + M
+
+CAUTION:
+  Fixed effect (coef.) of a predictor involved in an interaction
+  denotes its "simple effect/slope" at the other predictor = 0.
+  Only when all predictors in an interaction are mean-centered
+  can the fixed effect denote the "main effect"!
+  
+Model Summary
+
+──────────────────────────────────────────────────
+             (1) Y        (2) M        (3) Y      
+──────────────────────────────────────────────────
+(Intercept)    2.684 ***    1.442 ***    2.684 ***
+              (0.133)      (0.092)      (0.130)   
+X              1.065 ***    0.482 ***    0.919 ***
+              (0.137)      (0.095)      (0.137)   
+M                                        0.301 ***
+                                        (0.063)   
+──────────────────────────────────────────────────
+R^2            0.109        0.049        0.148    
+Adj. R^2       0.107        0.047        0.145    
+Num. obs.    500          500          500        
+──────────────────────────────────────────────────
+Note. * p &lt; .05, ** p &lt; .01, *** p &lt; .001.
+
+************ PART 2. Mediation/Moderation Effect Estimate ************
+
+Package Use : ‘mediation’ (v4.5.0)
+Effect Type : Simple Mediation (Model 4)
+Sample Size : 500
+Random Seed : set.seed()
+Simulations : 100 (Bootstrap)
+
+Running 100 simulations...
+Indirect Path: "X" (X) ==&gt; "M" (M) ==&gt; "Y" (Y)
+────────────────────────────────────────────────────────────
+               Effect    S.E.     z     p      [Boot 95% CI]
+────────────────────────────────────────────────────────────
+Indirect (ab)   0.145 (0.041) 3.546 &lt;.001 *** [0.075, 0.214]
+Direct (c')     0.919 (0.117) 7.843 &lt;.001 *** [0.657, 1.087]
+Total (c)       1.065 (0.115) 9.245 &lt;.001 *** [0.826, 1.230]
+────────────────────────────────────────────────────────────
+Percentile Bootstrap Confidence Interval
+(SE and CI are estimated based on 100 Bootstrap samples.)
+
+Note. The results based on bootstrapping or other random processes
+are unlikely identical to other statistical software (e.g., SPSS).
+To make results reproducible, you need to set a seed (any number).
+Please see the help page for details: help(PROCESS)
+Ignore this note if you have already set a seed. :)</code></pre>
+</div>
+</div>
+
+
 </section>
 
 

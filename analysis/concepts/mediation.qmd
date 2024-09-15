@@ -121,7 +121,7 @@ get_coef <- function(m, var) {
     if (p < 0.05) stars = "*"
     if (p < 0.01) stars = "**"
     if (p < 0.001) stars = "***"
-    return (sprintf("%.2f%s", coef, stars))
+    return (sprintf("%.3f%s", coef, stars))
 }
 
 dagify(Y ~ X, coords = coords) |> 
@@ -170,10 +170,10 @@ In other words, this is a **partial mediation**.
 We can calculate the indirect effect by multiplying the coefficients of the two paths: 
 
 ```{r, echo=F, results=F}
-a <- summary(m1)$coef[2,1] |> round(2)
-b <- summary(m2)$coef[3,1] |> round(2)
+a <- summary(m1)$coef[2,1] |> round(3)
+b <- summary(m2)$coef[3,1] |> round(3)
 ```
-$$a \times b = `r a` \times `r b` = `r round(a*b,2)`$$
+$$a \times b = `r a` \times `r b` = `r round(a*b,3)`$$
 
 
 ::: {.callout-warning title="Testing the significance of the indirect effect" collapse="true"}
@@ -187,7 +187,7 @@ We will not cover these techniques in this tutorial, because it distracts from t
 Just be aware that this is a limitation of the simple mediation analyses we have shown here, and that it is therefore better to use advanced techniques or specialized packages for mediation analyses in actual research.
 :::
 
-
+::: {.callout-tip title="Full mediation example" collapse="true"}
 ## Full mediation
 
 Since we're working with simulated data, we can make a small adjustment to our code to simulate a scenario where `M` fully mediates the effect of `X` on `Y`.
@@ -199,7 +199,7 @@ n <- 500
 X <- rnorm(n, 3, 1)
 M <- 2*X + rnorm(n, 0, 2)
 Y <- 0.3*M + 0*X + rnorm(n, 0, 3)
-d <- tibble(X,M,Y)
+d_full <- tibble(X,M,Y)
 
 ```
 
@@ -207,9 +207,9 @@ d <- tibble(X,M,Y)
 To nicely interpret the models side-by-side, we'll add some labels and drop the confidence intervals.
 
 ```{r}
-m_total <- lm(Y ~ X, d)
-m1 <- lm(M ~ X, d)
-m2 <- lm(Y ~ X + M, d)
+m_total <- lm(Y ~ X, d_full)
+m1 <- lm(M ~ X, d_full)
+m2 <- lm(Y ~ X + M, d_full)
 tab_model(m_total, m1, m2,  
           dv.labels=c("Y ~ X", "M ~ X", "Y ~ X + M"), show.ci = FALSE)
 ```
@@ -242,10 +242,12 @@ grid.arrange(total,mediated,  ncol=2)
 
 Here we do have an effect of `X` on `Y`, but when we control for `M`, the effect of `X` on `Y` is no longer significant.
 Since both the effect of `X` on `M` and `M` on `Y` are significant, this is a case of **full mediation**.
+:::
 
+::: {.callout-tip title="No mediation example" collapse="true"}
 ## No mediation
 
-Finally, we can also simulate a scenario where `M` has no effect on `Y`.
+We can also simulate a scenario where `M` has no effect on `Y`.
 We do not make the effect of `M` on `Y` zero, but we set the coefficient to a very small value, so that it is not significant.
 
 ```{r}
@@ -254,11 +256,11 @@ n <- 500
 X <- rnorm(n, 3, 1)
 M <- 0.5*X + rnorm(n, 0, 2)
 Y <- 0.05*M + 0.8*X + rnorm(n, 0, 3)
-d <- tibble(X,M,Y)
+d_no_mediation <- tibble(X,M,Y)
 
-m_total <- lm(Y ~ X, d)
-m1 <- lm(M ~ X, d)
-m2 <- lm(Y ~ X + M, d)
+m_total <- lm(Y ~ X, d_no_mediation)
+m1 <- lm(M ~ X, d_no_mediation)
+m2 <- lm(Y ~ X + M, d_no_mediation)
 tab_model(m_total, m1, m2,  
           dv.labels=c("Y ~ X", "M ~ X", "Y ~ X + M"), show.ci = FALSE)
 ```
@@ -290,16 +292,19 @@ grid.arrange(total,mediated,  ncol=2)
 
 In this case, the effect of `X` on `Y` is significant, but the effect of `X` on `M` is not. So there is no mediation effect.
 The full effect of `X` on `Y` is direct.
+:::
 
 # Testing mediation using PROCESS
 
 The `PROCESS` macro for SPSS and SAS is a popular tool for mediation analyses.
 It is also available in R, using the `bruceR` package.
-Here we show you how to use PROCESS, using the same simulated data as before.
+Here we show you how to use PROCESS, using the same simulated data (`d`) as before.
+If you compare the results with our own manual analysis, you'll see that the direct, total and indirect (a*b) effects are the same.
+But one important difference is that PROCESS also provides an explicit confidence interval for the indirect effect, based on bootstrapping.
 
-```{r}
-install.packages('lavaan')
-install.packages('bruceR')
+To use `PROCESS`, you simply provide the data frame, and specify the column names for the dependent variable (`y = "Y"`), the independent variable (`x = "X"`), and the mediator (`meds = "M"`).
+
+```{r, message=F}
 library(bruceR)
 
 set.seed(42)
@@ -307,8 +312,7 @@ n <- 500
 X <- rnorm(n, 3, 1)
 M <- 0.5*X + rnorm(n, 0, 2)
 Y <- 0.3*M + 0.8*X + rnorm(n, 0, 3)
-
 d <- tibble(X,M,Y)
 
-m <- PROCESS(d, y="Y", x="X", meds="M")
+PROCESS(d, y="Y", x="X", meds="M")
 ```
