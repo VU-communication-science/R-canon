@@ -84,25 +84,75 @@
     ]
   },
   {
-    "objectID": "data-management/filter-and-arrange.html",
-    "href": "data-management/filter-and-arrange.html",
-    "title": "Filter and Arrange",
+    "objectID": "analysis/concepts/mediation.html",
+    "href": "analysis/concepts/mediation.html",
+    "title": "Mediation Analyses",
     "section": "",
-    "text": "Required packages and data for this tutorial\n\n\n\nIn this tutorial we use the tidyverse package and the simulated practice data.\n\nlibrary(tidyverse)\nd &lt;- read_csv(\"https://tinyurl.com/R-practice-data\")",
+    "text": "In this tutorial, we will give a preliminary introduction on how to conduct simple mediation analyses in R. We will focus on running multiple regression analyses manually, to explain the concept of mediation and how to test for its significance. In practice, it is often recommended to use specialized packages for mediation analyses, such as lavaan or mediation, but to develop a good intuition for the concept, you should first understand the basics.\n\n\nWe are often interested in explaining a relationship or causal effect between two variables (e.g., X and Y). Many theories suggest that X does not necessarily directly influence Y, but that this effect is mediated by a third variable, which we can call M (for Mediation). We can visualize this interplay between the three variables like so:\n\n\n\n\n\n\n\n\n\nIn the left figure we see the total effect of X on Y. Here we only have one path from X to Y. In mediation analysis, the total effect is referred to as c.\nIn the right figure, we see a mediation model, where the effect of X on Y is mediated by M. This gives us two different paths for how X to have an effect on Y:\n\ndirect effect. The direct path X -&gt; Y, referred to as c’.\nindirect effect. The indirect path X -&gt; M and M -&gt; Y, referred to as a and b respectively. We can calculate the indirect effect by multiplying both arrows (a * b)\n\nThe mediated model can help us distinguish between different scenarios:\n\nFull mediation: Only the indirect effect (a * b) is significant.\nNo mediation: Only the direct effect (c’) is significant.\nPartial mediation: Both the direct and indirect effects are significant\nNo effect: Neither the direct nor the indirect effect is significant.\n\nNote of caution: Theoretically, mediation models almost always suggest some sort of “causal chain”. Yet, the analysis itself cannot prove causality. The same caution applies as discussed in the causality section.\n\n\n\n\nlibrary(tidyverse)\nlibrary(sjPlot)\n\nFor this tutorial we are going to simulate some data that align with the Figure presented above. You don’t need to understand this process, and can just run the code to create the data. But if you are interested, here is what we are doing:\n\nSet a seed to make our simulation reproducible. This ensures that even though we are creating random data, the outcome is the same every time we run the code.\nCreate a variable X that is normally distributed (mean = 3, sd = 1).\nCreate a variable M that is influenced by X (\\(b = 2\\)), with random noise.1\nCreate a variable Y that is influenced by M (\\(b = 0.3\\)), and X (\\(b = 0.8\\)), with random noise.\nThis gives us a data set in which X influences Y both directly and indirectly through M.\n\n\nset.seed(42)\nn &lt;- 500\nX &lt;- rnorm(n, 3, 1)\nM &lt;- 0.5*X + rnorm(n, 0, 2)\nY &lt;- 0.3*M + 0.8*X + rnorm(n, 0, 3)\n\nd &lt;- tibble(X,M,Y)",
     "crumbs": [
-      "Data management",
-      "Filter and Arrange"
+      "Analysis",
+      "Key concepts",
+      "Mediation Analyses"
     ]
   },
   {
-    "objectID": "data-management/filter-and-arrange.html#the-condition-is-a-logical-expression",
-    "href": "data-management/filter-and-arrange.html#the-condition-is-a-logical-expression",
-    "title": "Filter and Arrange",
-    "section": "The condition is a logical expression",
-    "text": "The condition is a logical expression\nThe condition in filter can be any logical expression. A logical expression is simply a statement that is either TRUE or FALSE. When we use a logical expression in the filter function, we are asking R to evaluate this expression for each row in the tibble. Each row for which the expression evaluates to TRUE is then included in the subset.\nIf you know a bit about how logical expressions work, you will have great control over what rows are included in your subset. Here is an overview of the most important operators for logical expressions.\n\nComparison operators\nComparison operators are used to compare two values.\n\n== equal to\n!= not equal to\n&gt; greater than\n&gt;= greater than or equal to\n&lt; less than\n&lt;= less than or equal to\n%in% is in a list of values (second value must be a list or vector)\n\nExample:\n\n5 &gt; 1    # TRUE:  5 is greater than 1\n\n[1] TRUE\n\n5 &lt; 1    # FALSE: 5 is less than 1\n\n[1] FALSE\n\n\"A\" %in% c(\"A\", \"B\", \"C\")  # TRUE: \"A\" is in the list\n\n[1] TRUE\n\n\"A\" %in% c(\"B\", \"C\", \"D\")  # FALSE: \"A\" is not in the list\n\n[1] FALSE\n\n\n\n\nLogical operators\nLogical operators are used to combine multiple conditions.\n\n& and\n| or\n! not\n\nExample:\n\n5 &gt; 1 | 5 &lt; 1   # TRUE: 5 is greater than 1 OR 5 is less than 1\n\n[1] TRUE\n\n5 &gt; 1 & 5 &lt; 1   # FALSE: 5 is greater than 1 AND 5 is less than 1\n\n[1] FALSE\n\n!5 &lt; 1          # TRUE: it is not the case that 5 is smaller than 1\n\n[1] TRUE\n\n\n\n\nUsing equations\nYou can also use equations in your conditions. For example, to select all rows where the absolute difference between trust_t1 and trust_t2 is greater than 2:\n\nfilter(d, abs(trust_t2 - trust_t1) &gt; 2)\n\n\n\nParentheses\nFor complex conditions, you can use parentheses to group conditions, similar to how you would in a mathematical expression. For example, say that you want to inspect surprising cases where trust in journalists decreased after watching the positive movie, or increased after watching the negative movie.\n\nfilter(d, (experiment_group == 'positive' & trust_t2 &lt; trust_t1) |\n          (experiment_group == 'negative' & trust_t2 &gt; trust_t1))",
+    "objectID": "analysis/concepts/mediation.html#what-is-mediation",
+    "href": "analysis/concepts/mediation.html#what-is-mediation",
+    "title": "Mediation Analyses",
+    "section": "",
+    "text": "We are often interested in explaining a relationship or causal effect between two variables (e.g., X and Y). Many theories suggest that X does not necessarily directly influence Y, but that this effect is mediated by a third variable, which we can call M (for Mediation). We can visualize this interplay between the three variables like so:\n\n\n\n\n\n\n\n\n\nIn the left figure we see the total effect of X on Y. Here we only have one path from X to Y. In mediation analysis, the total effect is referred to as c.\nIn the right figure, we see a mediation model, where the effect of X on Y is mediated by M. This gives us two different paths for how X to have an effect on Y:\n\ndirect effect. The direct path X -&gt; Y, referred to as c’.\nindirect effect. The indirect path X -&gt; M and M -&gt; Y, referred to as a and b respectively. We can calculate the indirect effect by multiplying both arrows (a * b)\n\nThe mediated model can help us distinguish between different scenarios:\n\nFull mediation: Only the indirect effect (a * b) is significant.\nNo mediation: Only the direct effect (c’) is significant.\nPartial mediation: Both the direct and indirect effects are significant\nNo effect: Neither the direct nor the indirect effect is significant.\n\nNote of caution: Theoretically, mediation models almost always suggest some sort of “causal chain”. Yet, the analysis itself cannot prove causality. The same caution applies as discussed in the causality section.",
     "crumbs": [
-      "Data management",
-      "Filter and Arrange"
+      "Analysis",
+      "Key concepts",
+      "Mediation Analyses"
+    ]
+  },
+  {
+    "objectID": "analysis/concepts/mediation.html#packages-and-simulated-data",
+    "href": "analysis/concepts/mediation.html#packages-and-simulated-data",
+    "title": "Mediation Analyses",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(sjPlot)\n\nFor this tutorial we are going to simulate some data that align with the Figure presented above. You don’t need to understand this process, and can just run the code to create the data. But if you are interested, here is what we are doing:\n\nSet a seed to make our simulation reproducible. This ensures that even though we are creating random data, the outcome is the same every time we run the code.\nCreate a variable X that is normally distributed (mean = 3, sd = 1).\nCreate a variable M that is influenced by X (\\(b = 2\\)), with random noise.1\nCreate a variable Y that is influenced by M (\\(b = 0.3\\)), and X (\\(b = 0.8\\)), with random noise.\nThis gives us a data set in which X influences Y both directly and indirectly through M.\n\n\nset.seed(42)\nn &lt;- 500\nX &lt;- rnorm(n, 3, 1)\nM &lt;- 0.5*X + rnorm(n, 0, 2)\nY &lt;- 0.3*M + 0.8*X + rnorm(n, 0, 3)\n\nd &lt;- tibble(X,M,Y)",
+    "crumbs": [
+      "Analysis",
+      "Key concepts",
+      "Mediation Analyses"
+    ]
+  },
+  {
+    "objectID": "analysis/concepts/mediation.html#full-mediation",
+    "href": "analysis/concepts/mediation.html#full-mediation",
+    "title": "Mediation Analyses",
+    "section": "Full mediation",
+    "text": "Full mediation\nSince we’re working with simulated data, we can make a small adjustment to our code to simulate a scenario where M fully mediates the effect of X on Y. Notice that our simulation is almost identical, except that we set the coefficient of X on Y to 0.\n\nset.seed(42)\nn &lt;- 500\nX &lt;- rnorm(n, 3, 1)\nM &lt;- 2*X + rnorm(n, 0, 2)\nY &lt;- 0.3*M + 0*X + rnorm(n, 0, 3)\nd_full &lt;- tibble(X,M,Y)\n\nTo nicely interpret the models side-by-side, we’ll add some labels and drop the confidence intervals.\n\nm_total &lt;- lm(Y ~ X, d_full)\nm1 &lt;- lm(M ~ X, d_full)\nm2 &lt;- lm(Y ~ X + M, d_full)\ntab_model(m_total, m1, m2,  \n          dv.labels=c(\"Y ~ X\", \"M ~ X\", \"Y ~ X + M\"), show.ci = FALSE)\n\n\n\n\n \nY ~ X\nM ~ X\nY ~ X + M\n\n\nPredictors\nEstimates\np\nEstimates\np\nEstimates\np\n\n\n(Intercept)\n-0.48\n0.263\n0.01\n0.973\n-0.48\n0.250\n\n\nX\n0.71\n&lt;0.001\n1.98\n&lt;0.001\n0.12\n0.522\n\n\nM\n\n\n\n\n0.30\n&lt;0.001\n\n\nObservations\n500\n500\n500\n\n\nR2 / R2 adjusted\n0.052 / 0.050\n0.465 / 0.464\n0.094 / 0.090\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHere we do have an effect of X on Y, but when we control for M, the effect of X on Y is no longer significant. Since both the effect of X on M and M on Y are significant, this is a case of full mediation.",
+    "crumbs": [
+      "Analysis",
+      "Key concepts",
+      "Mediation Analyses"
+    ]
+  },
+  {
+    "objectID": "analysis/concepts/mediation.html#no-mediation",
+    "href": "analysis/concepts/mediation.html#no-mediation",
+    "title": "Mediation Analyses",
+    "section": "No mediation",
+    "text": "No mediation\nWe can also simulate a scenario where M has no effect on Y. We do not make the effect of M on Y zero, but we set the coefficient to a very small value, so that it is not significant.\n\nset.seed(42)\nn &lt;- 500\nX &lt;- rnorm(n, 3, 1)\nM &lt;- 0.5*X + rnorm(n, 0, 2)\nY &lt;- 0.05*M + 0.8*X + rnorm(n, 0, 3)\nd_no_mediation &lt;- tibble(X,M,Y)\n\nm_total &lt;- lm(Y ~ X, d_no_mediation)\nm1 &lt;- lm(M ~ X, d_no_mediation)\nm2 &lt;- lm(Y ~ X + M, d_no_mediation)\ntab_model(m_total, m1, m2,  \n          dv.labels=c(\"Y ~ X\", \"M ~ X\", \"Y ~ X + M\"), show.ci = FALSE)\n\n\n\n\n \nY ~ X\nM ~ X\nY ~ X + M\n\n\nPredictors\nEstimates\np\nEstimates\np\nEstimates\np\n\n\n(Intercept)\n-0.48\n0.250\n0.01\n0.973\n-0.48\n0.250\n\n\nX\n0.94\n&lt;0.001\n0.48\n&lt;0.001\n0.92\n&lt;0.001\n\n\nM\n\n\n\n\n0.05\n0.414\n\n\nObservations\n500\n500\n500\n\n\nR2 / R2 adjusted\n0.091 / 0.089\n0.049 / 0.047\n0.092 / 0.089\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIn this case, the effect of X on Y is significant, but the effect of X on M is not. So there is no mediation effect. The full effect of X on Y is direct.",
+    "crumbs": [
+      "Analysis",
+      "Key concepts",
+      "Mediation Analyses"
+    ]
+  },
+  {
+    "objectID": "analysis/concepts/mediation.html#footnotes",
+    "href": "analysis/concepts/mediation.html#footnotes",
+    "title": "Mediation Analyses",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nNote that what we’re doing here is simulating data using the regression equation. With 2*X we say that for every unit increase in X, M should go up by 2. With rnorm(n, 0, 2) we add a residual (mean = 0, sd = 2) to the equation. We could also have added an intercept, but we left it out for simplicity.↩︎",
+    "crumbs": [
+      "Analysis",
+      "Key concepts",
+      "Mediation Analyses"
     ]
   },
   {
@@ -1023,75 +1073,25 @@
     ]
   },
   {
-    "objectID": "analysis/concepts/mediation.html",
-    "href": "analysis/concepts/mediation.html",
-    "title": "Mediation Analyses",
+    "objectID": "data-management/filter-and-arrange.html",
+    "href": "data-management/filter-and-arrange.html",
+    "title": "Filter and Arrange",
     "section": "",
-    "text": "In this tutorial, we will give a preliminary introduction on how to conduct simple mediation analyses in R. We will focus on running multiple regression analyses manually, to explain the concept of mediation and how to test for its significance. In practice, it is often recommended to use specialized packages for mediation analyses, such as lavaan or mediation, but to develop a good intuition for the concept, you should first understand the basics.\n\n\nWe are often interested in explaining a relationship or causal effect between two variables (e.g., X and Y). Many theories suggest that X does not necessarily directly influence Y, but that this effect is mediated by a third variable, which we can call M (for Mediation). We can visualize this interplay between the three variables like so:\n\n\n\n\n\n\n\n\n\nIn the left figure we see the total effect of X on Y. Here we only have one path from X to Y.\nIn the right figure, we see a mediation model, where the effect of X on Y is mediated by M. This gives us two different paths for how X to have an effect on Y:\n\ndirect effect. The direct path X -&gt; Y.\nindirect effect. The indirect path X -&gt; M and M -&gt; Y. We can calculate the indirect effect by multiplying both arrows (a * b)\n\nThe mediated model can help us distinguish between different scenarios:\n\nFull mediation: Only the indirect effect of X on Y through M is significant.\nNo mediation: Only the direct effect of X on Y is significant.\nPartial mediation: Both the direct and indirect effects of X on Y are significant.\nNo effect: Neither the direct nor the indirect effect of X on Y is significant.\n\nNote of caution: Theoretically, mediation models almost always suggest some sort of “causal chain”. Yet, the analysis itself cannot prove causality. The same caution applies as discussed in the causality section.\n\n\n\n\nlibrary(tidyverse)\nlibrary(sjPlot)\n\nFor this tutorial we are going to simulate some data that align with the Figure presented above. You don’t need to understand this process, and can just run the code to create the data. But if you are interested, here is what we are doing:\n\nSet a seed to make our simulation reproducible. This ensures that even though we are creating random data, the outcome is the same every time we run the code.\nCreate a variable X that is normally distributed (mean = 3, sd = 1).\nCreate a variable M that is influenced by X (\\(b = 2\\)), with random noise.1\nCreate a variable Y that is influenced by M (\\(b = 0.3\\)), and X (\\(b = 0.8\\)), with random noise.\nThis gives us a data set in which X influences Y both directly and indirectly through M.\n\n\nset.seed(42)\nn &lt;- 500\nX &lt;- rnorm(n, 3, 1)\nM &lt;- 0.5*X + rnorm(n, 0, 2)\nY &lt;- 0.3*M + 0.8*X + rnorm(n, 0, 3)\n\nd &lt;- tibble(X,M,Y)",
+    "text": "Required packages and data for this tutorial\n\n\n\nIn this tutorial we use the tidyverse package and the simulated practice data.\n\nlibrary(tidyverse)\nd &lt;- read_csv(\"https://tinyurl.com/R-practice-data\")",
     "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Mediation Analyses"
+      "Data management",
+      "Filter and Arrange"
     ]
   },
   {
-    "objectID": "analysis/concepts/mediation.html#what-is-mediation",
-    "href": "analysis/concepts/mediation.html#what-is-mediation",
-    "title": "Mediation Analyses",
-    "section": "",
-    "text": "We are often interested in explaining a relationship or causal effect between two variables (e.g., X and Y). Many theories suggest that X does not necessarily directly influence Y, but that this effect is mediated by a third variable, which we can call M (for Mediation). We can visualize this interplay between the three variables like so:\n\n\n\n\n\n\n\n\n\nIn the left figure we see the total effect of X on Y. Here we only have one path from X to Y.\nIn the right figure, we see a mediation model, where the effect of X on Y is mediated by M. This gives us two different paths for how X to have an effect on Y:\n\ndirect effect. The direct path X -&gt; Y.\nindirect effect. The indirect path X -&gt; M and M -&gt; Y. We can calculate the indirect effect by multiplying both arrows (a * b)\n\nThe mediated model can help us distinguish between different scenarios:\n\nFull mediation: Only the indirect effect of X on Y through M is significant.\nNo mediation: Only the direct effect of X on Y is significant.\nPartial mediation: Both the direct and indirect effects of X on Y are significant.\nNo effect: Neither the direct nor the indirect effect of X on Y is significant.\n\nNote of caution: Theoretically, mediation models almost always suggest some sort of “causal chain”. Yet, the analysis itself cannot prove causality. The same caution applies as discussed in the causality section.",
+    "objectID": "data-management/filter-and-arrange.html#the-condition-is-a-logical-expression",
+    "href": "data-management/filter-and-arrange.html#the-condition-is-a-logical-expression",
+    "title": "Filter and Arrange",
+    "section": "The condition is a logical expression",
+    "text": "The condition is a logical expression\nThe condition in filter can be any logical expression. A logical expression is simply a statement that is either TRUE or FALSE. When we use a logical expression in the filter function, we are asking R to evaluate this expression for each row in the tibble. Each row for which the expression evaluates to TRUE is then included in the subset.\nIf you know a bit about how logical expressions work, you will have great control over what rows are included in your subset. Here is an overview of the most important operators for logical expressions.\n\nComparison operators\nComparison operators are used to compare two values.\n\n== equal to\n!= not equal to\n&gt; greater than\n&gt;= greater than or equal to\n&lt; less than\n&lt;= less than or equal to\n%in% is in a list of values (second value must be a list or vector)\n\nExample:\n\n5 &gt; 1    # TRUE:  5 is greater than 1\n\n[1] TRUE\n\n5 &lt; 1    # FALSE: 5 is less than 1\n\n[1] FALSE\n\n\"A\" %in% c(\"A\", \"B\", \"C\")  # TRUE: \"A\" is in the list\n\n[1] TRUE\n\n\"A\" %in% c(\"B\", \"C\", \"D\")  # FALSE: \"A\" is not in the list\n\n[1] FALSE\n\n\n\n\nLogical operators\nLogical operators are used to combine multiple conditions.\n\n& and\n| or\n! not\n\nExample:\n\n5 &gt; 1 | 5 &lt; 1   # TRUE: 5 is greater than 1 OR 5 is less than 1\n\n[1] TRUE\n\n5 &gt; 1 & 5 &lt; 1   # FALSE: 5 is greater than 1 AND 5 is less than 1\n\n[1] FALSE\n\n!5 &lt; 1          # TRUE: it is not the case that 5 is smaller than 1\n\n[1] TRUE\n\n\n\n\nUsing equations\nYou can also use equations in your conditions. For example, to select all rows where the absolute difference between trust_t1 and trust_t2 is greater than 2:\n\nfilter(d, abs(trust_t2 - trust_t1) &gt; 2)\n\n\n\nParentheses\nFor complex conditions, you can use parentheses to group conditions, similar to how you would in a mathematical expression. For example, say that you want to inspect surprising cases where trust in journalists decreased after watching the positive movie, or increased after watching the negative movie.\n\nfilter(d, (experiment_group == 'positive' & trust_t2 &lt; trust_t1) |\n          (experiment_group == 'negative' & trust_t2 &gt; trust_t1))",
     "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Mediation Analyses"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/mediation.html#packages-and-simulated-data",
-    "href": "analysis/concepts/mediation.html#packages-and-simulated-data",
-    "title": "Mediation Analyses",
-    "section": "",
-    "text": "library(tidyverse)\nlibrary(sjPlot)\n\nFor this tutorial we are going to simulate some data that align with the Figure presented above. You don’t need to understand this process, and can just run the code to create the data. But if you are interested, here is what we are doing:\n\nSet a seed to make our simulation reproducible. This ensures that even though we are creating random data, the outcome is the same every time we run the code.\nCreate a variable X that is normally distributed (mean = 3, sd = 1).\nCreate a variable M that is influenced by X (\\(b = 2\\)), with random noise.1\nCreate a variable Y that is influenced by M (\\(b = 0.3\\)), and X (\\(b = 0.8\\)), with random noise.\nThis gives us a data set in which X influences Y both directly and indirectly through M.\n\n\nset.seed(42)\nn &lt;- 500\nX &lt;- rnorm(n, 3, 1)\nM &lt;- 0.5*X + rnorm(n, 0, 2)\nY &lt;- 0.3*M + 0.8*X + rnorm(n, 0, 3)\n\nd &lt;- tibble(X,M,Y)",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Mediation Analyses"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/mediation.html#full-mediation",
-    "href": "analysis/concepts/mediation.html#full-mediation",
-    "title": "Mediation Analyses",
-    "section": "Full mediation",
-    "text": "Full mediation\nSince we’re working with simulated data, we can make a small adjustment to our code to simulate a scenario where M fully mediates the effect of X on Y. Notice that our simulation is almost identical, except that we set the coefficient of X on Y to 0.\n\nset.seed(42)\nn &lt;- 500\nX &lt;- rnorm(n, 3, 1)\nM &lt;- 2*X + rnorm(n, 0, 2)\nY &lt;- 0.3*M + 0*X + rnorm(n, 0, 3)\nd_full &lt;- tibble(X,M,Y)\n\nTo nicely interpret the models side-by-side, we’ll add some labels and drop the confidence intervals.\n\nm_total &lt;- lm(Y ~ X, d_full)\nm1 &lt;- lm(M ~ X, d_full)\nm2 &lt;- lm(Y ~ X + M, d_full)\ntab_model(m_total, m1, m2,  \n          dv.labels=c(\"Y ~ X\", \"M ~ X\", \"Y ~ X + M\"), show.ci = FALSE)\n\n\n\n\n \nY ~ X\nM ~ X\nY ~ X + M\n\n\nPredictors\nEstimates\np\nEstimates\np\nEstimates\np\n\n\n(Intercept)\n-0.48\n0.263\n0.01\n0.973\n-0.48\n0.250\n\n\nX\n0.71\n&lt;0.001\n1.98\n&lt;0.001\n0.12\n0.522\n\n\nM\n\n\n\n\n0.30\n&lt;0.001\n\n\nObservations\n500\n500\n500\n\n\nR2 / R2 adjusted\n0.052 / 0.050\n0.465 / 0.464\n0.094 / 0.090\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHere we do have an effect of X on Y, but when we control for M, the effect of X on Y is no longer significant. Since both the effect of X on M and M on Y are significant, this is a case of full mediation.",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Mediation Analyses"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/mediation.html#no-mediation",
-    "href": "analysis/concepts/mediation.html#no-mediation",
-    "title": "Mediation Analyses",
-    "section": "No mediation",
-    "text": "No mediation\nWe can also simulate a scenario where M has no effect on Y. We do not make the effect of M on Y zero, but we set the coefficient to a very small value, so that it is not significant.\n\nset.seed(42)\nn &lt;- 500\nX &lt;- rnorm(n, 3, 1)\nM &lt;- 0.5*X + rnorm(n, 0, 2)\nY &lt;- 0.05*M + 0.8*X + rnorm(n, 0, 3)\nd_no_mediation &lt;- tibble(X,M,Y)\n\nm_total &lt;- lm(Y ~ X, d_no_mediation)\nm1 &lt;- lm(M ~ X, d_no_mediation)\nm2 &lt;- lm(Y ~ X + M, d_no_mediation)\ntab_model(m_total, m1, m2,  \n          dv.labels=c(\"Y ~ X\", \"M ~ X\", \"Y ~ X + M\"), show.ci = FALSE)\n\n\n\n\n \nY ~ X\nM ~ X\nY ~ X + M\n\n\nPredictors\nEstimates\np\nEstimates\np\nEstimates\np\n\n\n(Intercept)\n-0.48\n0.250\n0.01\n0.973\n-0.48\n0.250\n\n\nX\n0.94\n&lt;0.001\n0.48\n&lt;0.001\n0.92\n&lt;0.001\n\n\nM\n\n\n\n\n0.05\n0.414\n\n\nObservations\n500\n500\n500\n\n\nR2 / R2 adjusted\n0.091 / 0.089\n0.049 / 0.047\n0.092 / 0.089\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIn this case, the effect of X on Y is significant, but the effect of X on M is not. So there is no mediation effect. The full effect of X on Y is direct.",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Mediation Analyses"
-    ]
-  },
-  {
-    "objectID": "analysis/concepts/mediation.html#footnotes",
-    "href": "analysis/concepts/mediation.html#footnotes",
-    "title": "Mediation Analyses",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nNote that what we’re doing here is simulating data using the regression equation. With 2*X we say that for every unit increase in X, M should go up by 2. With rnorm(n, 0, 2) we add a residual (mean = 0, sd = 2) to the equation. We could also have added an intercept, but we left it out for simplicity.↩︎",
-    "crumbs": [
-      "Analysis",
-      "Key concepts",
-      "Mediation Analyses"
+      "Data management",
+      "Filter and Arrange"
     ]
   },
   {
