@@ -78,27 +78,26 @@ library(sjPlot)
 
 For this tutorial we are going to simulate some data that align with the Figure presented above. 
 You don't need to understand this process, and can just run the code to create the data.
-But if you are interested, here is what we are doing:
-
-* Set a seed to make our simulation reproducible. This ensures that even though we are creating random data, the outcome is the same every time we run the code.
-* Create a variable `X` that is normally distributed (mean = 3, sd = 1).
-* Create a variable `M` that is influenced by `X` ($b = 2$), with random noise.[^inversed_regression]
-* Create a variable `Y` that is influenced by `M` ($b = 0.3$), and `X` ($b = 0.8$), with random noise. 
-* This gives us a data set in which `X` influences `Y` both directly and indirectly through `M`.
-
-[^inversed_regression]: Note that what we're doing here is simulating data using the regression equation. With `2*X` we say that for every unit increase in X, M should go up by 2. With `rnorm(n, 0, 2)` we add a residual (mean = 0, sd = 2) to the equation.
-We could also have added an intercept, but we left it out for simplicity.
-
 
 ```{r}
 set.seed(42)
 n <- 500
-X <- rnorm(n, 3, 1)
+X <- rnorm(n, mean=3, sd=1)
 M <- 0.5*X + rnorm(n, 0, 2)
 Y <- 0.3*M + 0.8*X + rnorm(n, 0, 3)
 
 d <- tibble(X,M,Y)
 ```
+::: {.callout-note title="If you want to know how this simulation works" collapse="true"}
+Here is a brief explanation of the data simulation code:
+
+* A seed is a starting point of the random number generator. Think of a random process in a computer as a jump in a random direction: as long as you're starting point is the same, you'll end up in the same place. By setting a specific seed, we thus ensure that the random data we generate is the same for everyone running this code. The number `42` is a common but arbitrary choice (it's a pop-culture reference)
+* Create a random variable `X` that is normally distributed (mean = 3, sd = 1).
+* Create a variable `M` that is based on `X`, but with random noise. Note that we're actually using the regression equation here. With `0.5*X` we say that for every unit increase in X, M should go up by 0.5 (so $b = 0.5$)). With `rnorm(n, 0, 2)` we add a residual (mean = 0, sd = 2) to the equation. We could also have added an intercept, but we left it out for sake of simplicity.
+* Create a random variable `Y` that is based on `M` ($b = 0.3$) and `X` ($b = 0.8$), with random noise.
+* This gives us a data set in which `X` influences `Y` both directly and indirectly through `M`.
+:::
+
 
 
 # Simple regression analyses
