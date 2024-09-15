@@ -451,18 +451,18 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>In the left figure we see the <strong>total effect</strong> of <code>X</code> on <code>Y</code>. Here we only have one <strong>path</strong> from <code>X</code> to <code>Y</code>.</p>
+<p>In the left figure we see the <strong>total effect</strong> of <code>X</code> on <code>Y</code>. Here we only have one <strong>path</strong> from <code>X</code> to <code>Y</code>. In mediation analysis, the total effect is referred to as <strong>c</strong>.</p>
 <p>In the right figure, we see a mediation model, where the effect of <code>X</code> on <code>Y</code> is mediated by <code>M</code>. This gives us two different <strong>paths</strong> for how X to have an effect on Y:</p>
 <ul>
-<li><strong>direct effect</strong>. The direct path <code>X -&gt; Y</code>.</li>
-<li><strong>indirect effect</strong>. The indirect path <code>X -&gt; M</code> and <code>M -&gt; Y</code>. We can calculate the indirect effect by multiplying both arrows (<strong>a * b</strong>)</li>
+<li><strong>direct effect</strong>. The direct path <code>X -&gt; Y</code>, referred to as <strong>c’</strong>.</li>
+<li><strong>indirect effect</strong>. The indirect path <code>X -&gt; M</code> and <code>M -&gt; Y</code>, referred to as <strong>a</strong> and <strong>b</strong> respectively. We can calculate the indirect effect by multiplying both arrows (<strong>a * b</strong>)</li>
 </ul>
 <p>The mediated model can help us distinguish between different scenarios:</p>
 <ul>
-<li><strong>Full mediation</strong>: Only the indirect effect of <code>X</code> on <code>Y</code> through <code>M</code> is significant.</li>
-<li><strong>No mediation</strong>: Only the direct effect of <code>X</code> on <code>Y</code> is significant.</li>
-<li><strong>Partial mediation</strong>: Both the direct and indirect effects of <code>X</code> on <code>Y</code> are significant.</li>
-<li><strong>No effect</strong>: Neither the direct nor the indirect effect of <code>X</code> on <code>Y</code> is significant.</li>
+<li><strong>Full mediation</strong>: Only the indirect effect (<strong>a * b</strong>) is significant.</li>
+<li><strong>No mediation</strong>: Only the direct effect (<strong>c’</strong>) is significant.</li>
+<li><strong>Partial mediation</strong>: Both the direct and indirect effects are significant</li>
+<li><strong>No effect</strong>: Neither the direct nor the indirect effect is significant.</li>
 </ul>
 <p><strong>Note of caution:</strong> Theoretically, mediation models almost always suggest some sort of “causal chain”. Yet, the analysis itself cannot prove causality. The same caution applies as discussed in the <a href="../../analysis/concepts/causality.html">causality</a> section.</p>
 </section>
@@ -555,62 +555,60 @@ window.Quarto = {
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">M</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Y</td>
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">M</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Y</th>
 </tr>
-<tr class="even">
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
-<td style="text-align: center;">p</td>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">p</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.01</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.57&nbsp;–&nbsp;0.59</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.973</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.48</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-1.30&nbsp;–&nbsp;0.34</td>
-<td style="text-align: center;">0.250</td>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.01</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.57&nbsp;–&nbsp;0.59</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.973</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.48</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-1.30&nbsp;–&nbsp;0.34</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.250</td>
 </tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">X</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.48</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.30&nbsp;–&nbsp;0.67</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.92</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.65&nbsp;–&nbsp;1.19</td>
-<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">X</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.48</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.30&nbsp;–&nbsp;0.67</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.92</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.65&nbsp;–&nbsp;1.19</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
 </tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">M</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.30</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.18&nbsp;–&nbsp;0.43</td>
-<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">M</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.30</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.18&nbsp;–&nbsp;0.43</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
 </tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">500</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">500</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.049 / 0.047</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.148 / 0.145</td>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.049 / 0.047</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.148 / 0.145</td>
 </tr>
-</tbody>
-</table>
 
+</tbody></table>
 
 </div>
 </div>
@@ -625,7 +623,7 @@ window.Quarto = {
 </div>
 </div>
 <p>We can see that all paths are significant, suggesting that there is both a direct and indirect effect of <code>X</code> on <code>Y</code>. In other words, this is a <strong>partial mediation</strong>.</p>
-<p>We can calculate the indirect effect by multiplying the coefficients of the two paths:</p>
+<p>We can calculate the <strong>indirect effect</strong> by multiplying the coefficients of the two paths:</p>
 <p><span class="math display">\[a \times b = 0.482 \times 0.301 = 0.145\]</span></p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Testing the significance of the indirect effect">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -640,7 +638,7 @@ Testing the significance of the indirect effect
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>If both parts of the indirect effect (<strong>a * b</strong>) are significant, there is a good chance that the indirect effect is significant. And similarly, if one part is not significant, the indirect effect is likely not significant. However, this is not always the case, so it is better to explicitly test the significance of the indirect effect.</p>
-<p>This is not straightforward, and requires more advanced techniques, such as bootstrapping or Monte-Carlo simulations. We will not cover these techniques in this tutorial, because it distracts from the goal of teaching the basic concept of mediation. Just be aware that this is a limitation of the simple mediation analyses we have shown here, and that it is therefore better to use advanced techniques or specialized packages for mediation analyses in actual research.</p>
+<p>This is not straightforward, and requires more advanced techniques, such as bootstrapping or Monte-Carlo simulations. We will not cover these techniques in this tutorial, because it distracts from the goal of teaching the basic concept of mediation. Just be aware that this is a limitation of the simple mediation analyses we have shown here, and that it is therefore better to use advanced techniques or specialized packages for mediation analyses in actual research. At the end of this tutorial we also show you how to use the <code>PROCESS</code> package to test for mediation, which implements the bootstrapping technique.</p>
 </div>
 </div>
 </div>
@@ -855,19 +853,12 @@ No mediation example
 </section>
 <section id="testing-mediation-using-process" class="level1">
 <h1>Testing mediation using PROCESS</h1>
-<p>The <code>PROCESS</code> macro for SPSS and SAS is a popular tool for mediation analyses. It is also available in R, using the <code>bruceR</code> package. Here we show you how to use PROCESS, using the same simulated data (<code>d</code>) as before. If you compare the results with our own manual analysis, you’ll see that the direct, total and indirect (a*b) effects are the same. But one important difference is that PROCESS also provides an explicit confidence interval for the indirect effect, based on bootstrapping.</p>
-<p>To use <code>PROCESS</code>, you simply provide the data frame, and specify the column names for the dependent variable (<code>y = "Y"</code>), the independent variable (<code>x = "X"</code>), and the mediator (<code>meds = "M"</code>).</p>
+<p>The <code>PROCESS</code> macro for SPSS and SAS is a popular tool for mediation analyses. It is also available in R, using the <code>bruceR</code> package. Here we show you how to use PROCESS, using the same simulated data (<code>d</code>) as before. To use <code>PROCESS</code>, you simply provide the data frame, and specify the column names for the dependent variable (<code>y = "Y"</code>), the independent variable (<code>x = "X"</code>), and the mediator (<code>meds = "M"</code>).</p>
+<p>The output is a bit overwhelming, but you should recognize the same components as we discussed before. The <strong>Model Summary</strong> shows the three regression models. The <strong>Part 2. Mediation/Moderation Effect Estimate</strong> shows the total (<strong>c</strong>), direct (<strong>c’</strong>) and indirect (<strong>a * b</strong>) effects. If you compare the effect sizes with the ones we calculated manually, you will see that they are the same. But one important difference is that PROCESS also provides an explicit confidence interval for the indirect effect, based on bootstrapping.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bruceR)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">3</span>, <span class="dv">1</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">2</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fl">0.3</span><span class="sc">*</span>M <span class="sc">+</span> <span class="fl">0.8</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X,M,Y)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">PROCESS</span>(d, <span class="at">y=</span><span class="st">"Y"</span>, <span class="at">x=</span><span class="st">"X"</span>, <span class="at">meds=</span><span class="st">"M"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">PROCESS</span>(d, <span class="at">y=</span><span class="st">"Y"</span>, <span class="at">x=</span><span class="st">"X"</span>, <span class="at">meds=</span><span class="st">"M"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ****************** PART 1. Regression Model Summary ******************
@@ -926,9 +917,9 @@ Indirect Path: "X" (X) ==&gt; "M" (M) ==&gt; "Y" (Y)
 ────────────────────────────────────────────────────────────
                Effect    S.E.     z     p      [Boot 95% CI]
 ────────────────────────────────────────────────────────────
-Indirect (ab)   0.145 (0.041) 3.546 &lt;.001 *** [0.075, 0.214]
-Direct (c')     0.919 (0.117) 7.843 &lt;.001 *** [0.657, 1.087]
-Total (c)       1.065 (0.115) 9.245 &lt;.001 *** [0.826, 1.230]
+Indirect (ab)   0.145 (0.041) 3.540 &lt;.001 *** [0.082, 0.232]
+Direct (c')     0.919 (0.146) 6.308 &lt;.001 *** [0.643, 1.186]
+Total (c)       1.065 (0.140) 7.609 &lt;.001 *** [0.798, 1.328]
 ────────────────────────────────────────────────────────────
 Percentile Bootstrap Confidence Interval
 (SE and CI are estimated based on 100 Bootstrap samples.)
