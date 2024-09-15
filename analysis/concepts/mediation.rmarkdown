@@ -3,6 +3,9 @@ title: 'Mediation Analyses'
 subtitle: 'Conducting simple mediation analyses in R'
 ---
 
+
+
+
 # Introduction
 
 In this tutorial, we will give a preliminary introduction on how to conduct simple mediation analyses in R. 
@@ -12,6 +15,9 @@ In practice, it is often recommended to use specialized packages for mediation a
 ## What is mediation?
 
 We are often interested in explaining a relationship or causal effect between two variables (e.g., `X` and `Y`). Many theories suggest that `X` does not necessarily *directly* influence `Y`, but that this effect is *mediated* by a third variable, which we can call `M` (for **M**ediation). We can visualize this interplay between the three variables like so:
+
+
+
 
 ```{r, echo=F, fig.height=3.4, out.width='100%', message=F, warning=F}
 library(grid)
@@ -49,6 +55,9 @@ total <- dagify(Y ~ X, coords = coords) |>
 grid.arrange(total,mediated,  ncol=2)
 ```
 
+
+
+
 In the left figure we see the **total effect** of `X` on `Y`. 
 Here we only have one **path** from `X` to `Y`.
 
@@ -70,10 +79,16 @@ The mediated model can help us distinguish between different scenarios:
 
 ## Packages and simulated data
 
+
+
+
 ```{r, message=F}
 library(tidyverse)
 library(sjPlot)
 ```
+
+
+
 
 For this tutorial we are going to simulate some data that align with the Figure presented above. 
 You don't need to understand this process, and can just run the code to create the data.
@@ -89,6 +104,9 @@ But if you are interested, here is what we are doing:
 We could also have added an intercept, but we left it out for simplicity.
 
 
+
+
+
 ```{r}
 set.seed(42)
 n <- 500
@@ -100,9 +118,15 @@ d <- tibble(X,M,Y)
 ```
 
 
+
+
+
 # Simple regression analyses
 
 Let's first look at the model without the mediator `M`. 
+
+
+
 
 ```{r}
 #| html-table-processing: none
@@ -111,7 +135,13 @@ tab_model(m_total)
 ```
 
 
+
+
+
 This gives us the total effect of `X` on `Y`.
+
+
+
 
 ```{r, fig.height=1.3, echo=F, out.width='100%', message=F, warning=F}
 get_coef <- function(m, var) {
@@ -135,11 +165,17 @@ dagify(Y ~ X, coords = coords) |>
     geom_dag_edges_fan(aes(label=edge,vjust=vjust), angle_calc="along", arrow=NULL, edge_width=0)
 ```
 
+
+
+
 Now let's look at the model with the mediator `M`.
 We can break this model down into two separate regression models:
 
 * Model 1: `M` predicted by `X`.
 * Model 2: `Y` predicted by `X` and `M`.
+
+
+
 
 ```{r}
 m1 <- lm(M ~ X, d)
@@ -148,7 +184,13 @@ m2 <- lm(Y ~ X + M, d)
 tab_model(m1, m2)
 ```
 
+
+
+
 Let's visualize the paths in the mediation model:
+
+
+
 
 ```{r, fig.height=3.4, echo=F, out.width='100%', message=F, warning=F}
 dagify(Y ~ X + M, M ~ X, Y ~ M, coords = coords) |> 
@@ -164,15 +206,24 @@ dagify(Y ~ X + M, M ~ X, Y ~ M, coords = coords) |>
     geom_dag_edges_fan(aes(label=edge,vjust=vjust), angle_calc="along", arrow=NULL, edge_width=0)
 ```
 
+
+
+
 We can see that all paths are significant, suggesting that there is both a direct and indirect effect of `X` on `Y`. 
 In other words, this is a **partial mediation**.
 
 We can calculate the indirect effect by multiplying the coefficients of the two paths: 
 
+
+
+
 ```{r, echo=F, results=F}
 a <- summary(m1)$coef[2,1] |> round(2)
 b <- summary(m2)$coef[3,1] |> round(2)
 ```
+
+
+
 $$a \times b = `r a` \times `r b` = `r round(a*b,2)`$$
 
 
@@ -187,11 +238,29 @@ We will not cover these techniques in this tutorial, because it distracts from t
 Just be aware that this is a limitation of the simple mediation analyses we have shown here, and that it is therefore better to use advanced techniques or specialized packages for mediation analyses in actual research.
 :::
 
+<!-- And notice that if we add up the direct and indirect effects, we get the total effect:
+
+
+
+
+```{r, echo=F, results=F}
+total <- summary(m_total)$coef[2,1] |> round(2)
+direct <- summary(m2)$coef[2,1] |> round(2)
+```
+
+
+
+
+$$ indirect + direct = total $$
+$$ `r round(a*b, 2)` + `r direct` = `r total`$$ -->
 
 ## Full mediation
 
 Since we're working with simulated data, we can make a small adjustment to our code to simulate a scenario where `M` fully mediates the effect of `X` on `Y`.
 Notice that our simulation is almost identical, except that we set the coefficient of `X` on `Y` to 0.
+
+
+
 
 ```{r out.width='100%'}
 set.seed(42)
@@ -204,7 +273,13 @@ d <- tibble(X,M,Y)
 ```
 
 
+
+
+
 To nicely interpret the models side-by-side, we'll add some labels and drop the confidence intervals.
+
+
+
 
 ```{r}
 m_total <- lm(Y ~ X, d)
@@ -240,6 +315,9 @@ mediated <- dagify(Y ~ X + M, M ~ X, Y ~ M, coords = coords) |>
 grid.arrange(total,mediated,  ncol=2)
 ```
 
+
+
+
 Here we do have an effect of `X` on `Y`, but when we control for `M`, the effect of `X` on `Y` is no longer significant.
 Since both the effect of `X` on `M` and `M` on `Y` are significant, this is a case of **full mediation**.
 
@@ -247,6 +325,9 @@ Since both the effect of `X` on `M` and `M` on `Y` are significant, this is a ca
 
 Finally, we can also simulate a scenario where `M` has no effect on `Y`.
 We do not make the effect of `M` on `Y` zero, but we set the coefficient to a very small value, so that it is not significant.
+
+
+
 
 ```{r}
 set.seed(42)
@@ -264,6 +345,7 @@ tab_model(m_total, m1, m2,
 ```
 
 ```{r, fig.height=3.4, echo=F, out.width='100%', message=F, warning=F}
+
 total <- dagify(Y ~ X, coords = coords) |> 
     tidy_dagitty() |> 
     mutate(edge = case_when(
@@ -288,6 +370,9 @@ mediated <- dagify(Y ~ X + M, M ~ X, Y ~ M, coords = coords) |>
 grid.arrange(total,mediated,  ncol=2)
 ```
 
+
+
+
 In this case, the effect of `X` on `Y` is significant, but the effect of `X` on `M` is not. So there is no mediation effect.
 The full effect of `X` on `Y` is direct.
 
@@ -297,8 +382,10 @@ The `PROCESS` macro for SPSS and SAS is a popular tool for mediation analyses.
 It is also available in R, using the `bruceR` package.
 Here we show you how to use PROCESS, using the same simulated data as before.
 
+
+
+
 ```{r}
-install.packages('lavaan')
 install.packages('bruceR')
 library(bruceR)
 
@@ -312,3 +399,4 @@ d <- tibble(X,M,Y)
 
 m <- PROCESS(d, y="Y", x="X", meds="M")
 ```
+

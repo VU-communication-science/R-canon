@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../analysis/techniques/index.html" rel="next">
-<link href="../../analysis/concepts/mean_and_variance.html" rel="prev">
+<link href="../../analysis/concepts/causality.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -316,12 +316,6 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../analysis/concepts/mean_and_variance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mean and Variance</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../analysis/concepts/mediation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Mediation Analyses</span></a>
   </div>
@@ -412,10 +406,13 @@ window.Quarto = {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#what-is-mediation" id="toc-what-is-mediation" class="nav-link" data-scroll-target="#what-is-mediation">What is mediation?</a></li>
-  <li><a href="#packages-and-simulating-some-data" id="toc-packages-and-simulating-some-data" class="nav-link" data-scroll-target="#packages-and-simulating-some-data">Packages and simulating some data</a></li>
+  <li><a href="#packages-and-simulated-data" id="toc-packages-and-simulated-data" class="nav-link" data-scroll-target="#packages-and-simulated-data">Packages and simulated data</a></li>
   </ul></li>
-  <li><a href="#simple-regression-analyses" id="toc-simple-regression-analyses" class="nav-link" data-scroll-target="#simple-regression-analyses">Simple regression analyses</a></li>
-  <li><a href="#where-to-go-next" id="toc-where-to-go-next" class="nav-link" data-scroll-target="#where-to-go-next">Where to go next?</a></li>
+  <li><a href="#simple-regression-analyses" id="toc-simple-regression-analyses" class="nav-link" data-scroll-target="#simple-regression-analyses">Simple regression analyses</a>
+  <ul class="collapse">
+  <li><a href="#full-mediation" id="toc-full-mediation" class="nav-link" data-scroll-target="#full-mediation">Full mediation</a></li>
+  <li><a href="#no-mediation" id="toc-no-mediation" class="nav-link" data-scroll-target="#no-mediation">No mediation</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -458,10 +455,10 @@ window.Quarto = {
 </div>
 </div>
 <p>In the left figure we see the <strong>total effect</strong> of <code>X</code> on <code>Y</code>. Here we only have one <strong>path</strong> from <code>X</code> to <code>Y</code>.</p>
-<p>In the right figure, we see a mediation model, where the effect of <code>X</code> on <code>Y</code> is mediated by <code>M</code>. This gives us two different <strong>paths</strong> for how X can influence Y:</p>
+<p>In the right figure, we see a mediation model, where the effect of <code>X</code> on <code>Y</code> is mediated by <code>M</code>. This gives us two different <strong>paths</strong> for how X to have an effect on Y:</p>
 <ul>
-<li><strong>direct path</strong>. The arrow <code>X -&gt; Y</code> represents the <strong>direct</strong> effect of <code>X</code> on <code>Y</code>.</li>
-<li><strong>indirect path</strong>. The arrows <code>X -&gt; M</code> and <code>M -&gt; Y</code> together represent the <strong>indirect</strong> effect of <code>X</code> on <code>Y</code> through <code>M</code>. We can calculate the indirect effect by multiplying both arrows (<strong>a * b</strong>)</li>
+<li><strong>direct effect</strong>. The direct path <code>X -&gt; Y</code>.</li>
+<li><strong>indirect effect</strong>. The indirect path <code>X -&gt; M</code> and <code>M -&gt; Y</code>. We can calculate the indirect effect by multiplying both arrows (<strong>a * b</strong>)</li>
 </ul>
 <p>The mediated model can help us distinguish between different scenarios:</p>
 <ul>
@@ -472,8 +469,8 @@ window.Quarto = {
 </ul>
 <p><strong>Note of caution:</strong> Theoretically, mediation models almost always suggest some sort of “causal chain”. Yet, the analysis itself cannot prove causality. The same caution applies as discussed in the <a href="../../analysis/concepts/causality.html">causality</a> section.</p>
 </section>
-<section id="packages-and-simulating-some-data" class="level2">
-<h2 class="anchored" data-anchor-id="packages-and-simulating-some-data">Packages and simulating some data</h2>
+<section id="packages-and-simulated-data" class="level2">
+<h2 class="anchored" data-anchor-id="packages-and-simulated-data">Packages and simulated data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -481,19 +478,19 @@ window.Quarto = {
 <p>For this tutorial we are going to simulate some data that align with the Figure presented above. You don’t need to understand this process, and can just run the code to create the data. But if you are interested, here is what we are doing:</p>
 <ul>
 <li>Set a seed to make our simulation reproducible. This ensures that even though we are creating random data, the outcome is the same every time we run the code.</li>
-<li>Creating a variable <code>x</code> that is normally distributed with a mean of 3 and a standard deviation of 1.</li>
-<li>Creating a variable <code>m</code> so that it is to some extent influenced by <code>x</code> (with a coefficient of <code>2</code>), but also has some random noise.</li>
-<li>Creating a variable <code>y</code> that is influenced by <code>m</code> (with a coefficient of <code>2</code>), but also by <code>x</code> (with a coefficient of <code>0.5</code>), and some random noise.</li>
-<li>This gives us a data set in which <code>x</code> influences <code>y</code> both directly and indirectly through <code>m</code>.</li>
+<li>Create a variable <code>X</code> that is normally distributed (mean = 3, sd = 1).</li>
+<li>Create a variable <code>M</code> that is influenced by <code>X</code> (<span class="math inline">\(b = 2\)</span>), with random noise.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>Create a variable <code>Y</code> that is influenced by <code>M</code> (<span class="math inline">\(b = 0.3\)</span>), and <code>X</code> (<span class="math inline">\(b = 0.8\)</span>), with random noise.</li>
+<li>This gives us a data set in which <code>X</code> influences <code>Y</code> both directly and indirectly through <code>M</code>.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">3</span>, <span class="dv">1</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>m <span class="sc">+</span> <span class="fl">0.5</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fl">0.3</span><span class="sc">*</span>M <span class="sc">+</span> <span class="fl">0.8</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(x,m,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X,M,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -501,13 +498,13 @@ window.Quarto = {
 <h1>Simple regression analyses</h1>
 <p>Let’s first look at the model without the mediator <code>M</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, d)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, d)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m_total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table style="border-collapse:collapse; border:none;">
 <tbody><tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
-<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">y</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Y</th>
 </tr>
 <tr>
 <td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
@@ -517,14 +514,14 @@ window.Quarto = {
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.35</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.70&nbsp;–&nbsp;2.00</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.48</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-1.32&nbsp;–&nbsp;0.36</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.263</td>
 </tr>
 <tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">x</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.52</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.32&nbsp;–&nbsp;4.73</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">X</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.06</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.80&nbsp;–&nbsp;1.33</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
@@ -533,14 +530,14 @@ window.Quarto = {
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.788 / 0.787</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.109 / 0.107</td>
 </tr>
 
 </tbody></table>
 
 </div>
 </div>
-<p>This gives us the total effect of <code>X</code> on <code>Y</code> (<span class="math inline">\(b = 4.52\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). So this is the effect of <code>X</code> on <code>Y</code> without considering the mediator <code>M</code>.</p>
+<p>This gives us the total effect of <code>X</code> on <code>Y</code>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -550,27 +547,23 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>This is the</p>
-<p>The simplest way to conduct mediation analyses is to run a simple regression for each endogeneous variable in our model. For this simple mediation model, we thus have to create one that estimates the path <em>a</em> and one that estimates <em>b</em> and <em>c’</em> simultaneously.</p>
+<p>Now let’s look at the model with the mediator <code>M</code>. We can break this model down into two separate regression models:</p>
+<ul>
+<li>Model 1: <code>M</code> predicted by <code>X</code>.</li>
+<li>Model 2: <code>Y</code> predicted by <code>X</code> and <code>M</code>.</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Total effect of x on y</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, d)</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(M <span class="sc">~</span> X, d)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X <span class="sc">+</span> M, d)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Effect a, x on m</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>m_a <span class="ot">&lt;-</span> <span class="fu">lm</span>(m <span class="sc">~</span> x, d)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Effects b and c', x and m on y</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>m_bc <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> m <span class="sc">+</span> x, d)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m_total, m_a, m_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">y</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">m</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">y</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">M</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Y</td>
 </tr>
 <tr class="even">
 <td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
@@ -580,57 +573,43 @@ window.Quarto = {
 <td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
 <td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
 <td style="text-align: center;">p</td>
-<td style="text-align: center;">Estimates</td>
-<td style="text-align: center;">CI</td>
-<td style="text-align: center;">p</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.35</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.70&nbsp;–&nbsp;2.00</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.50</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.21&nbsp;–&nbsp;0.80</td>
-<td style="text-align: center;"><strong>0.001</strong></td>
-<td style="text-align: center;">0.34</td>
-<td style="text-align: center;">0.06&nbsp;–&nbsp;0.62</td>
-<td style="text-align: center;"><strong>0.016</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.01</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.57&nbsp;–&nbsp;0.59</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.973</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.48</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-1.30&nbsp;–&nbsp;0.34</td>
+<td style="text-align: center;">0.250</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">x</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">4.52</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">4.32&nbsp;–&nbsp;4.73</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">X</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.48</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.30&nbsp;–&nbsp;0.67</td>
 <td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.99</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.90&nbsp;–&nbsp;2.08</td>
-<td style="text-align: center;"><strong>&lt;0.001</strong></td>
-<td style="text-align: center;">0.54</td>
-<td style="text-align: center;">0.35&nbsp;–&nbsp;0.72</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.92</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.65&nbsp;–&nbsp;1.19</td>
 <td style="text-align: center;"><strong>&lt;0.001</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">m</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">M</td>
 <td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
 <td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
 <td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">2.00</td>
-<td style="text-align: center;">1.92&nbsp;–&nbsp;2.08</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.30</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.18&nbsp;–&nbsp;0.43</td>
 <td style="text-align: center;"><strong>&lt;0.001</strong></td>
 </tr>
 <tr class="even">
 <td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
 <td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
 <td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.788 / 0.787</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.778 / 0.778</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.962 / 0.962</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.049 / 0.047</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.148 / 0.145</td>
 </tr>
 </tbody>
 </table>
@@ -638,30 +617,242 @@ window.Quarto = {
 
 </div>
 </div>
-<p>We can see that all paths are significant, suggesting that there is both a direct and indirect effect of <code>X</code> on <code>Y</code>. The indirect effect can be computed by multiply the estimate of path <em>a</em> with the estimate of path <em>b</em>.</p>
-<p>In the second model, we can see that the effect of <code>X</code> on <code>M</code> is significant, suggesting that there is a direct effect of <code>X</code> on <code>M</code> (<span class="math inline">\(b = 1.99\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). In the third model, we can see that the effect of <code>M</code> on <code>Y</code> is significant, suggesting that there is a direct effect of <code>M</code> on <code>Y</code> (<span class="math inline">\(b = 2.00\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>).</p>
-<p>To calculate</p>
+<p>Let’s visualize the paths in the mediation model:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">summary</span>(m_a)<span class="sc">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">summary</span>(m_bc)<span class="sc">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>(indirect <span class="ot">&lt;-</span> a<span class="sc">*</span>b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.984083</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="mediation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
 </div>
 </div>
+</div>
+<p>We can see that all paths are significant, suggesting that there is both a direct and indirect effect of <code>X</code> on <code>Y</code>. In other words, this is a <strong>partial mediation</strong>.</p>
+<p>We can calculate the indirect effect by multiplying the coefficients of the two paths:</p>
+<p><span class="math display">\[a \times b = 0.48 \times 0.3 = 0.14\]</span></p>
+<!-- And notice that if we add up the direct and indirect effects, we get the total effect:
+
+
+
+
+::: {.cell}
+
+:::
+
+
+
+
+$$ indirect + direct = total $$
+$$ 0.14 + 0.92 = 1.06$$ -->
+<section id="full-mediation" class="level2">
+<h2 class="anchored" data-anchor-id="full-mediation">Full mediation</h2>
+<p>Since we’re working with simulated data, we can make a small adjustment to our code to simulate a scenario where <code>M</code> fully mediates the effect of <code>X</code> on <code>Y</code>. Notice that our simulation is almost identical, except that we set the coefficient of <code>X</code> on <code>Y</code> to 0.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fl">0.3</span><span class="sc">*</span>M <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X,M,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To nicely interpret the models side-by-side, we’ll add some labels and drop the confidence intervals.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, d)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(M <span class="sc">~</span> X, d)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X <span class="sc">+</span> M, d)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m_total, m1, m2,  </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">dv.labels=</span><span class="fu">c</span>(<span class="st">"Y ~ X"</span>, <span class="st">"M ~ X"</span>, <span class="st">"Y ~ X + M"</span>), <span class="at">show.ci =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Y ~ X</td>
+<td colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">M ~ X</td>
+<td colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Y ~ X + M</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center;">p</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.48</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.263</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.01</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.973</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.48</td>
+<td style="text-align: center;">0.250</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">X</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.71</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.98</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.12</td>
+<td style="text-align: center;">0.522</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">M</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.30</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.052 / 0.050</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.465 / 0.464</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.094 / 0.090</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="mediation_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here we do have an effect of <code>X</code> on <code>Y</code>, but when we control for <code>M</code>, the effect of <code>X</code> on <code>Y</code> is no longer significant. Since both the effect of <code>X</code> on <code>M</code> and <code>M</code> on <code>Y</code> are significant, this is a case of <strong>full mediation</strong>.</p>
 </section>
-<section id="where-to-go-next" class="level1">
-<h1>Where to go next?</h1>
-<p>This tutorial only exemplified simple mediation models. The framework can be extended to more complex models such as parallel mediation models, serial mediation models, or even moderated mediation models. For further information on such models, consider checking out the following books and resources:</p>
-<ul>
-<li>Hayes, A. (2022). Introduction to Mediation, Moderation, and Conditional Process Analysis. A Regression-Based Approach. Guilford Press.</li>
-</ul>
+<section id="no-mediation" class="level2">
+<h2 class="anchored" data-anchor-id="no-mediation">No mediation</h2>
+<p>Finally, we can also simulate a scenario where <code>M</code> has no effect on <code>Y</code>. We do not make the effect of <code>M</code> on <code>Y</code> zero, but we set the coefficient to a very small value, so that it is not significant.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fl">0.05</span><span class="sc">*</span>M <span class="sc">+</span> <span class="fl">0.8</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X,M,Y)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, d)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(M <span class="sc">~</span> X, d)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X <span class="sc">+</span> M, d)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m_total, m1, m2,  </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">dv.labels=</span><span class="fu">c</span>(<span class="st">"Y ~ X"</span>, <span class="st">"M ~ X"</span>, <span class="st">"Y ~ X + M"</span>), <span class="at">show.ci =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Y ~ X</td>
+<td colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">M ~ X</td>
+<td colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Y ~ X + M</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center;">p</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.48</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.250</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.01</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.973</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.48</td>
+<td style="text-align: center;">0.250</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">X</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.94</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.48</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.92</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">M</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.05</td>
+<td style="text-align: center;">0.414</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.091 / 0.089</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.049 / 0.047</td>
+<td colspan="2" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.092 / 0.089</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="mediation_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this case, the effect of <code>X</code> on <code>Y</code> is significant, but the effect of <code>X</code> on <code>M</code> is not. So there is no mediation effect. The full effect of <code>X</code> on <code>Y</code> is direct.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Testing the significance of the indirect effect">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Testing the significance of the indirect effect
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In this case we concluded that there was no indirect effect, because one part of the indirect effect (<code>M -&gt; Y</code>) was not significant. If one part is not significant, it is <em>often</em> the case that the indirect effect is not significant, but this is not always true. A better way is to explicitly test the significance of the indirect effect. However, this is not straightforward, and requires more advanced techniques, such as bootstrapping or Monte-Carlo simulations. We will not cover these techniques in this tutorial, because it only distracts from the goal of teaching the basic concept of mediation. Just be aware that this is a limitation of the simple mediation analyses we have shown here, and that it is therefore better to use advanced techniques or specialized packages for mediation analyses in actual research.</p>
+</div>
+</div>
+</div>
 
 
 </section>
+</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Note that what we’re doing here is simulating data using the regression equation. With <code>2*X</code> we say that for every unit increase in X, M should go up by 2. With <code>rnorm(n, 0, 2)</code> we add a residual (mean = 0, sd = 2) to the equation. We could also have added an intercept, but we left it out for simplicity.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1084,8 +1275,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../analysis/concepts/mean_and_variance.html" class="pagination-link" aria-label="Mean and Variance">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Mean and Variance</span>
+      <a href="../../analysis/concepts/causality.html" class="pagination-link" aria-label="Causality">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Causality</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
