@@ -378,7 +378,7 @@ What we're witnessing here is a form of **confounding**.
 There is a relation between the `news_consumption` and `trust_t1` variables, but this relation is likely *spurious*.
 `age` has an effect on both `news_consumption` and `trust_t1`: older people consume more news, and have more trust in journalists.
 By controlling for `age`, the spurious relation between `news_consumption` and `trust_t1` disappears.
-For a more detailed explanation of confounding, see the [confounding tutorial](../tests/confounding.qmd).
+For a more detailed explanation of confounding, see the [confounding tutorial](../techniques/controlling.qmd).
 
 Let's take a second to **interpret the std. Beta values**.
 These are the coefficients of the model if all variables are standardized.
@@ -608,7 +608,7 @@ diag_plots[[2]]
 ### No outliers in the residuals
 
 Outliers can have a large effect on the model.
-Usually outliers in the residuals are related to outliers in the variables, which can be detected when [inspecting and cleaning](../tests/data-cleaning.qmd) the data.
+Usually outliers in the residuals are related to outliers in the variables, which can be detected when [inspecting and cleaning](../techniques/data-cleaning.qmd) the data.
 For detecting outliers in the residuals, the **Non-normality of residuals and outliers** plot can be helpful.
 If there are outliers, they will show up as points that are far away from the line.
 

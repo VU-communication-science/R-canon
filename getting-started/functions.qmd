@@ -93,7 +93,7 @@ Then once you get the hang of things, have a look at the [Use ?function help pag
 There is another common way to use functions in R using the **pipe** syntax.
 With the pipe syntax, you can *pipe* the first argument into the function, instead of putting it inside the parentheses.
 As you will see below, this allows you to create a pipeline of functions, which is often easier to read.
-The pipe syntax uses the `|>` operator, which is used as follows:
+<!-- The pipe syntax uses the `|>` operator, which is used as follows: -->
 
 ```{r, eval=F}
 argument1 |> function_name(argument2, ...)

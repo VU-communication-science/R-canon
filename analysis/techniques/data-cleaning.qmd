@@ -10,7 +10,7 @@ format:
 
 ::: {.callout-note title="Required packages and data for this tutorial"}
 
-In this tutorial we use the `tidyverse` and `summarytools` packages, and the simulated [practice data](../../data-management/index.qmd#practice-data).
+In this tutorial we use the `tidyverse` and `summarytools` packages, and the simulated [practice data](../../data-management/index.qmd#practice-data)
 
 ```{r, message=FALSE}
 library(tidyverse)

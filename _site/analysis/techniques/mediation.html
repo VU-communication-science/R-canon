@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../analysis/techniques/index.html" rel="next">
-<link href="../../analysis/concepts/causality.html" rel="prev">
+<link href="../../analysis/tests/index.html" rel="next">
+<link href="../../analysis/techniques/controlling.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/index.html">Key concepts</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/mediation.html">Mediation Analyses</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/index.html">Techniques</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/mediation.html">Mediation Analyses</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -291,11 +291,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../analysis/concepts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Key concepts</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
@@ -314,23 +314,17 @@ window.Quarto = {
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../analysis/concepts/mediation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Mediation Analyses</span></a>
-  </div>
-</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../analysis/techniques/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Techniques</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../analysis/techniques/data-cleaning.html" class="sidebar-item-text sidebar-link">
@@ -347,6 +341,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../analysis/techniques/controlling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Controlling for confounders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/techniques/mediation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Mediation Analyses</span></a>
   </div>
 </li>
       </ul>
@@ -416,7 +416,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/index.html">Key concepts</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/mediation.html">Mediation Analyses</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/index.html">Techniques</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/mediation.html">Mediation Analyses</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Mediation Analyses</h1>
 <p class="subtitle lead">Conducting simple mediation analyses in R</p>
@@ -917,9 +917,9 @@ Indirect Path: "X" (X) ==&gt; "M" (M) ==&gt; "Y" (Y)
 ────────────────────────────────────────────────────────────
                Effect    S.E.     z     p      [Boot 95% CI]
 ────────────────────────────────────────────────────────────
-Indirect (ab)   0.145 (0.041) 3.540 &lt;.001 *** [0.082, 0.232]
-Direct (c')     0.919 (0.146) 6.308 &lt;.001 *** [0.643, 1.186]
-Total (c)       1.065 (0.140) 7.609 &lt;.001 *** [0.798, 1.328]
+Indirect (ab)   0.145 (0.041) 3.503 &lt;.001 *** [0.068, 0.233]
+Direct (c')     0.919 (0.150) 6.129 &lt;.001 *** [0.649, 1.182]
+Total (c)       1.065 (0.154) 6.903 &lt;.001 *** [0.789, 1.319]
 ────────────────────────────────────────────────────────────
 Percentile Bootstrap Confidence Interval
 (SE and CI are estimated based on 100 Bootstrap samples.)
@@ -1034,7 +1034,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1364,13 +1364,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../analysis/concepts/causality.html" class="pagination-link" aria-label="Causality">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Causality</span>
+      <a href="../../analysis/techniques/controlling.html" class="pagination-link" aria-label="Controlling for confounders">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Controlling for confounders</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../analysis/techniques/index.html" class="pagination-link" aria-label="Techniques">
-        <span class="nav-page-text">Techniques</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../analysis/tests/index.html" class="pagination-link" aria-label="Statistical tests">
+        <span class="nav-page-text">Statistical tests</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
