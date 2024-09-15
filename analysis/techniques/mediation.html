@@ -472,22 +472,38 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>For this tutorial we are going to simulate some data that align with the Figure presented above. You don’t need to understand this process, and can just run the code to create the data. But if you are interested, here is what we are doing:</p>
-<ul>
-<li>Set a seed to make our simulation reproducible. This ensures that even though we are creating random data, the outcome is the same every time we run the code.</li>
-<li>Create a variable <code>X</code> that is normally distributed (mean = 3, sd = 1).</li>
-<li>Create a variable <code>M</code> that is influenced by <code>X</code> (<span class="math inline">\(b = 2\)</span>), with random noise.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
-<li>Create a variable <code>Y</code> that is influenced by <code>M</code> (<span class="math inline">\(b = 0.3\)</span>), and <code>X</code> (<span class="math inline">\(b = 0.8\)</span>), with random noise.</li>
-<li>This gives us a data set in which <code>X</code> influences <code>Y</code> both directly and indirectly through <code>M</code>.</li>
-</ul>
+<p>For this tutorial we are going to simulate some data that align with the Figure presented above. You don’t need to understand this process, and can just run the code to create the data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">2</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fl">0.3</span><span class="sc">*</span>M <span class="sc">+</span> <span class="fl">0.8</span><span class="sc">*</span>X <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X,M,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="If you want to know how this simulation works">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+If you want to know how this simulation works
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here is a brief explanation of the data simulation code:</p>
+<ul>
+<li>A seed is a starting point of the random number generator. Think of a random process in a computer as a jump in a random direction: as long as you’re starting point is the same, you’ll end up in the same place. By setting a specific seed, we thus ensure that the random data we generate is the same for everyone running this code. The number <code>42</code> is a common but arbitrary choice (it’s a pop-culture reference)</li>
+<li>Create a random variable <code>X</code> that is normally distributed (mean = 3, sd = 1).</li>
+<li>Create a variable <code>M</code> that is based on <code>X</code>, but with random noise. Note that we’re actually using the regression equation here. With <code>0.5*X</code> we say that for every unit increase in X, M should go up by 0.5 (so <span class="math inline">\(b = 0.5\)</span>)). With <code>rnorm(n, 0, 2)</code> we add a residual (mean = 0, sd = 2) to the equation. We could also have added an intercept, but we left it out for sake of simplicity.</li>
+<li>Create a random variable <code>Y</code> that is based on <code>M</code> (<span class="math inline">\(b = 0.3\)</span>) and <code>X</code> (<span class="math inline">\(b = 0.8\)</span>), with random noise.</li>
+<li>This gives us a data set in which <code>X</code> influences <code>Y</code> both directly and indirectly through <code>M</code>.</li>
+</ul>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -626,7 +642,7 @@ window.Quarto = {
 <p>We can calculate the <strong>indirect effect</strong> by multiplying the coefficients of the two paths:</p>
 <p><span class="math display">\[a \times b = 0.482 \times 0.301 = 0.145\]</span></p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Testing the significance of the indirect effect">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -635,7 +651,7 @@ Testing the significance of the indirect effect
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>If both parts of the indirect effect (<strong>a * b</strong>) are significant, there is a good chance that the indirect effect is significant. And similarly, if one part is not significant, the indirect effect is likely not significant. However, this is not always the case, so it is better to explicitly test the significance of the indirect effect.</p>
 <p>This is not straightforward, and requires more advanced techniques, such as bootstrapping or Monte-Carlo simulations. We will not cover these techniques in this tutorial, because it distracts from the goal of teaching the basic concept of mediation. Just be aware that this is a limitation of the simple mediation analyses we have shown here, and that it is therefore better to use advanced techniques or specialized packages for mediation analyses in actual research. At the end of this tutorial we also show you how to use the <code>PROCESS</code> package to test for mediation, which implements the bootstrapping technique.</p>
@@ -643,7 +659,7 @@ Testing the significance of the indirect effect
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Full mediation example">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -652,7 +668,7 @@ Full mediation example
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <section id="full-mediation" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="full-mediation">Full mediation</h2>
 <p>Since we’re working with simulated data, we can make a small adjustment to our code to simulate a scenario where <code>M</code> fully mediates the effect of <code>X</code> on <code>Y</code>. Notice that our simulation is almost identical, except that we set the coefficient of <code>X</code> on <code>Y</code> to 0.</p>
@@ -748,7 +764,7 @@ Full mediation example
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="No mediation example">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -757,7 +773,7 @@ No mediation example
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <section id="no-mediation" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="no-mediation">No mediation</h2>
 <p>We can also simulate a scenario where <code>M</code> has no effect on <code>Y</code>. We do not make the effect of <code>M</code> on <code>Y</code> zero, but we set the coefficient to a very small value, so that it is not significant.</p>
@@ -917,9 +933,9 @@ Indirect Path: "X" (X) ==&gt; "M" (M) ==&gt; "Y" (Y)
 ────────────────────────────────────────────────────────────
                Effect    S.E.     z     p      [Boot 95% CI]
 ────────────────────────────────────────────────────────────
-Indirect (ab)   0.145 (0.041) 3.503 &lt;.001 *** [0.068, 0.233]
-Direct (c')     0.919 (0.150) 6.129 &lt;.001 *** [0.649, 1.182]
-Total (c)       1.065 (0.154) 6.903 &lt;.001 *** [0.789, 1.319]
+Indirect (ab)   0.145 (0.046) 3.130  .002 **  [0.070, 0.242]
+Direct (c')     0.919 (0.133) 6.925 &lt;.001 *** [0.681, 1.175]
+Total (c)       1.065 (0.134) 7.932 &lt;.001 *** [0.847, 1.309]
 ────────────────────────────────────────────────────────────
 Percentile Bootstrap Confidence Interval
 (SE and CI are estimated based on 100 Bootstrap samples.)
@@ -935,13 +951,7 @@ Ignore this note if you have already set a seed. :)</code></pre>
 
 </section>
 
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Note that what we’re doing here is simulating data using the regression equation. With <code>2*X</code> we say that for every unit increase in X, M should go up by 2. With <code>rnorm(n, 0, 2)</code> we add a residual (mean = 0, sd = 2) to the equation. We could also have added an intercept, but we left it out for simplicity.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
