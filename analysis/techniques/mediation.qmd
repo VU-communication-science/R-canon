@@ -7,7 +7,8 @@ subtitle: 'Conducting simple mediation analyses in R'
 
 In this tutorial, we will give a preliminary introduction on how to conduct simple mediation analyses in R. 
 We will focus on running multiple regression analyses manually, to explain the concept of mediation and how to test for its significance.
-In practice, it is often recommended to use specialized packages for mediation analyses, such as `lavaan` or `mediation`, but to develop a good intuition for the concept, you should first understand the basics.
+In practice, it is often recommended to use specialized packages for mediation analyses, but to develop a good intuition for the concept, you should first understand the basics.
+At the end of this tutorial we will show an example of how to use the `bruceR` package to use the **PROCESS** approach.
 
 ## What is mediation?
 

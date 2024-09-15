@@ -144,18 +144,6 @@
     ]
   },
   {
-    "objectID": "analysis/techniques/mediation.html#footnotes",
-    "href": "analysis/techniques/mediation.html#footnotes",
-    "title": "Mediation Analyses",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nNote that what we’re doing here is simulating data using the regression equation. With 2*X we say that for every unit increase in X, M should go up by 2. With rnorm(n, 0, 2) we add a residual (mean = 0, sd = 2) to the equation. We could also have added an intercept, but we left it out for simplicity.↩︎",
-    "crumbs": [
-      "Analysis",
-      "Techniques",
-      "Mediation Analyses"
-    ]
-  },
-  {
     "objectID": "analysis/concepts/covariance-and-correlation.html",
     "href": "analysis/concepts/covariance-and-correlation.html",
     "title": "Covariance and correlation",
