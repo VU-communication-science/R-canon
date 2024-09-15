@@ -1,0 +1,165 @@
+---
+title: 'Mediation Analyses'
+subtitle: 'Conducting simple mediation analyses in R'
+---
+
+# Introduction
+
+In this tutorial, we will give a preliminary introduction on how to conduct simple mediation analyses in R. 
+We will focus on running multiple regression analyses manually, to explain the concept of mediation and how to test for its significance.
+In practice, it is often recommended to use specialized packages for mediation analyses, such as `lavaan` or `mediation`, but to develop a good intuition for the concept, you should first understand the basics.
+
+## What is mediation?
+
+We are often interested in explaining a relationship or causal effect between two variables (e.g., `X` and `Y`). Many theories suggest that `X` does not necessarily *directly* influence `Y`, but that this effect is *mediated* by a third variable, which we can call `M` (for **M**ediation). We can visualize this interplay between the three variables like so:
+
+```{r, echo=F, fig.height=3.4, out.width='100%', message=F, warning=F}
+library(grid)
+library(ggdag)
+library(gridExtra)
+library(tidyverse)
+
+coords <- list(
+    x = c(X=1, M=2, Y=3),
+    y = c(X=1, M=2, Y=1)
+)
+
+mediated <- dagify(Y ~ X + M, M ~ X, Y ~ M, coords = coords) |> 
+    tidy_dagitty() |> 
+    mutate(edge = case_when(
+        name == "X" & to == "M" ~ "indirect a",
+        name == "M" & to == "Y" ~ "indirect b",
+        name == "X" & to == "Y" ~ "direct effect",
+        TRUE ~ NA_character_
+    )) |>
+    mutate(vjust = if_else(name == 'X' & to == 'Y', 2, 0.5)) |>
+    ggdag() + theme_dag() +
+    geom_dag_edges_fan(aes(label=edge,vjust=vjust), angle_calc="along", arrow=NULL, edge_width=0)
+
+total <- dagify(Y ~ X, coords = coords) |> 
+    tidy_dagitty() |> 
+    mutate(edge = case_when(
+        name == "X" & to == "Y" ~ "total effect",
+        TRUE ~ NA_character_
+    )) |>
+    mutate(vjust = 2) |>
+    ggdag() + theme_dag() +
+    geom_dag_edges_fan(aes(label=edge,vjust=vjust), angle_calc="along", arrow=NULL, edge_width=0)
+
+grid.arrange(total,mediated,  ncol=2)
+```
+
+In the left figure we see the **total effect** of `X` on `Y`. 
+Here we only have one **path** from `X` to `Y`.
+
+In the right figure, we see a mediation model, where the effect of `X` on `Y` is mediated by `M`. 
+This gives us two different **paths** for how X can influence Y:
+
+* **direct path**. The arrow `X -> Y` represents the **direct** effect of `X` on `Y`.
+* **indirect path**. The arrows `X -> M` and `M -> Y` together represent the **indirect** effect of `X` on `Y` through `M`.
+We can calculate the indirect effect by multiplying both arrows (**a * b**)
+
+The mediated model can help us distinguish between different scenarios:
+
+* **Full mediation**: Only the indirect effect of `X` on `Y` through `M` is significant.
+* **No mediation**: Only the direct effect of `X` on `Y` is significant.
+* **Partial mediation**: Both the direct and indirect effects of `X` on `Y` are significant.
+* **No effect**: Neither the direct nor the indirect effect of `X` on `Y` is significant.
+  
+**Note of caution:** Theoretically, mediation models almost always suggest some sort of "causal chain". Yet, the analysis itself cannot prove causality. The same caution applies as discussed in the [causality](../concepts/causality.qmd) section.
+
+## Packages and simulating some data
+
+```{r, message=F}
+library(tidyverse)
+library(sjPlot)
+```
+
+For this tutorial we are going to simulate some data that align with the Figure presented above. 
+You don't need to understand this process, and can just run the code to create the data.
+But if you are interested, here is what we are doing:
+
+* Set a seed to make our simulation reproducible. This ensures that even though we are creating random data, the outcome is the same every time we run the code.
+* Creating a variable `X` that is normally distributed with a mean of 3 and a standard deviation of 1.
+* Creating a variable `M` so that it is to some extent influenced by `X` (with a coefficient of `2`), but also has some random noise.
+* Creating a variable `Y` that is influenced by `M` (with a coefficient of `2`), but also by `X` (with a coefficient of `0.5`), and some random noise. 
+* This gives us a data set in which `X` influences `Y` both directly and indirectly through `M`.
+
+```{r}
+set.seed(42)
+n <- 500
+X <- rnorm(n, 3, 1)
+M <- 0.5 + 2*X + rnorm(n, 0, 1)
+Y <- 0.5 + 2*M + 0.5*X + rnorm(n, 0, 1)
+
+d <- tibble(X,M,Y)
+```
+
+
+# Simple regression analyses
+
+Let's first look at the model without the mediator `M`. 
+
+```{r}
+#| html-table-processing: none
+m_total <- lm(Y ~ X, d)
+tab_model(m_total)
+```
+
+This gives us the total effect of `X` on `Y` ($b = 4.52$, $p < 0.001$). 
+So this is the effect of `X` on `Y` without considering the mediator `M`.
+
+```{r, fig.height=1.3, echo=F, out.width='100%', message=F, warning=F}
+coef = summary(m_total)$coef[2,1]
+xy_label = sprintf("total effect = %.2f", coef)
+dagify(Y ~ X, coords = coords) |> 
+    tidy_dagitty() |> 
+    mutate(edge = case_when(
+        name == "X" & to == "Y" ~ xy_label,
+        TRUE ~ NA_character_
+    )) |>
+    mutate(vjust = 2) |>
+    ggdag() + theme_dag() +
+    geom_dag_edges_fan(aes(label=edge,vjust=vjust), angle_calc="along", arrow=NULL, edge_width=0)
+```
+
+Now let's look at the model with the mediator `M`.
+We need two regression models to estimate the direct and indirect effects of `X` on `Y` through `M`.
+
+* Model 1: The effect of `X` on `M`.
+* Model 2: The effect of `X` and `M` on `Y`.
+
+```{r}
+m1 <- lm(m ~ x, d)
+m2 <- lm(y ~ x + m, d)
+
+tab_model(m1, m2)
+```
+
+Let's visualize the paths in the mediation model:
+
+```{r, fig.height=3.4, echo=F, out.width='100%', message=F, warning=F}
+a <- summary(m1)$coef[2,1]
+b <- summary(m2)$coef[3,1]
+c <- summary(m2)$coef[2,1]
+
+dagify(Y ~ X + M, M ~ X, Y ~ M, coords = coords) |> 
+    tidy_dagitty() |> 
+    mutate(edge = case_when(
+        name == "X" & to == "M" ~ sprintf("indirect a = %.2f***", a),
+        name == "M" & to == "Y" ~ sprintf("indirect b = %.2f***", b),
+        name == "X" & to == "Y" ~ sprintf("direct effect = %.2f***", c),
+        TRUE ~ NA_character_
+    )) |>
+    mutate(vjust = if_else(name == 'X' & to == 'Y', 2, 0.5)) |>
+    ggdag() + theme_dag() +
+    geom_dag_edges_fan(aes(label=edge,vjust=vjust), angle_calc="along", arrow=NULL, edge_width=0)
+```
+
+We can see that all paths are significant, suggesting that there is both a direct and indirect effect of `X` on `Y`. 
+In other words, this is a **partial mediation**.
+
+We can calculate the indirect effect by multiplying the coefficients of the two paths: 
+
+$$a \times b = 1.99 \times 2.00 = 3.98$$
+

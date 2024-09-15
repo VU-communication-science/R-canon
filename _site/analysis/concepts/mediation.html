@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causality – Communication Science R Book</title>
+<title>Mediation Analyses – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,8 +64,8 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../analysis/concepts/mean_and_variance.html" rel="next">
-<link href="../../analysis/concepts/covariance-and-correlation.html" rel="prev">
+<link href="../../analysis/techniques/index.html" rel="next">
+<link href="../../analysis/concepts/mean_and_variance.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/index.html">Key concepts</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/causality.html">Causality</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/index.html">Key concepts</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/mediation.html">Mediation Analyses</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -296,7 +310,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
@@ -308,7 +322,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../analysis/concepts/mediation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/concepts/mediation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Mediation Analyses</span></a>
   </div>
 </li>
@@ -395,28 +409,23 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#testing-causal-relations" id="toc-testing-causal-relations" class="nav-link active" data-scroll-target="#testing-causal-relations">Testing causal relations</a></li>
-  <li><a href="#why-correlation-does-not-imply-causation" id="toc-why-correlation-does-not-imply-causation" class="nav-link" data-scroll-target="#why-correlation-does-not-imply-causation">Why correlation does not imply causation</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
-  <li><a href="#visualizing-causation" id="toc-visualizing-causation" class="nav-link" data-scroll-target="#visualizing-causation">Visualizing causation</a></li>
+  <li><a href="#what-is-mediation" id="toc-what-is-mediation" class="nav-link" data-scroll-target="#what-is-mediation">What is mediation?</a></li>
+  <li><a href="#packages-and-simulating-some-data" id="toc-packages-and-simulating-some-data" class="nav-link" data-scroll-target="#packages-and-simulating-some-data">Packages and simulating some data</a></li>
   </ul></li>
-  <li><a href="#how-to-better-establish-causation" id="toc-how-to-better-establish-causation" class="nav-link" data-scroll-target="#how-to-better-establish-causation">How to (better) establish causation</a>
-  <ul class="collapse">
-  <li><a href="#theoretical-foundation" id="toc-theoretical-foundation" class="nav-link" data-scroll-target="#theoretical-foundation">Theoretical foundation</a></li>
-  <li><a href="#if-possible-conduct-an-experiment" id="toc-if-possible-conduct-an-experiment" class="nav-link" data-scroll-target="#if-possible-conduct-an-experiment">If possible, conduct an experiment</a></li>
-  <li><a href="#for-observational-data-control-for-confounders" id="toc-for-observational-data-control-for-confounders" class="nav-link" data-scroll-target="#for-observational-data-control-for-confounders">For observational data, control for confounders</a></li>
-  <li><a href="#triangulation" id="toc-triangulation" class="nav-link" data-scroll-target="#triangulation">Triangulation</a></li>
-  </ul></li>
+  <li><a href="#simple-regression-analyses" id="toc-simple-regression-analyses" class="nav-link" data-scroll-target="#simple-regression-analyses">Simple regression analyses</a></li>
+  <li><a href="#where-to-go-next" id="toc-where-to-go-next" class="nav-link" data-scroll-target="#where-to-go-next">Where to go next?</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/index.html">Key concepts</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/causality.html">Causality</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/index.html">Key concepts</a></li><li class="breadcrumb-item"><a href="../../analysis/concepts/mediation.html">Mediation Analyses</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Causality</h1>
-<p class="subtitle lead">How to find evidence for causal relations?</p>
+<h1 class="title">Mediation Analyses</h1>
+<p class="subtitle lead">Conducting simple mediation analyses in R</p>
 </div>
 
 
@@ -433,130 +442,226 @@ window.Quarto = {
 </header>
 
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://imgs.xkcd.com/comics/correlation.png" class="img-fluid figure-img"></p>
-<figcaption>xkcd: correlation</figcaption>
-</figure>
-</div>
-<section id="testing-causal-relations" class="level1">
-<h1>Testing causal relations</h1>
-<p>In communication science we are often concerned with <strong>causal relations</strong>. Consider the following two examples:</p>
-<ul>
-<li>When news media focus heavily on certain issues, it enhances the public’s perception of their importance <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>.</li>
-<li>More screen time among children and adolescents is associated with lower psychological well-being <span class="citation" data-cites="twenge18">(<a href="#ref-twenge18" role="doc-biblioref">Twenge and Campbell 2018</a>)</span>.</li>
-</ul>
-<p>Research into such causal relations is important, because by understanding causal mechanisms, we can develop strategies to change the outcomes for the better. If more screen time causes lower psychological well-being, we should advice parents to limit children’s screen time.</p>
-<p>In order to determine whether we should really incur the wrath of our children by taking away their smartphones, we need to test our theory with empirical data. As usual, we can <a href="../../analysis/concepts/hypotheses.html">derive hypotheses</a> that predict relationships between variables, and then test these hypotheses with <strong>statistical methods</strong>. However, when testing causal relations, we need to particularly careful!</p>
-<p>A common mistake is to assume that a correlation between two variables implies a causal relationship. Even if we find strong evidence that people that have more screen time also have lower psychological well-being, this does not prove that screen time causes lower well-being! There is a famous saying in statistics: <strong>correlation does not imply causation</strong>. In this tutorial you will learn why this is the case, and how to deal with it.</p>
-</section>
-<section id="why-correlation-does-not-imply-causation" class="level1">
-<h1>Why correlation does not imply causation</h1>
-<p><strong>Causation</strong> implies a cause-effect relationship, where a change in one variable (the cause) leads to a change in the other (the effect). The cause does not need to be the <em>only</em> cause of the effect (there are many things that affect well-being), nor does it <em>always</em> need to lead to the effect (some people with high screen time will be happier than other with low screen time). It is enough that the cause increases the likelihood of the effect. If we were to somehow manipulate the cause, we would expect the likelihood of the effect to change.</p>
-<p><a href="../../analysis/concepts/covariance-and-correlation.html">Correlation</a>, on the other hand, only indicates an association or relationship between two variables. It makes sense why people can confuse this for a causal relationship. If we see that people that that are often on their phone are overall less happy, it is easy to assume that the phone is the cause of their unhappiness. But in order to establish whether a correlation is due to a causal relationship, we need address three issues:</p>
-<ul>
-<li><strong>Confounding</strong>: A correlation could be due to a third variable that causes both of them to change. Both screen time and psychological well-being could for instance be influenced by parental involvement. If the relation between two variables is not because they are causally related, but because they are both influenced by a third variable, we call this a <strong>spurious correlation</strong>. The third variable that causes the correlation is called a <strong>confounding variable</strong>.</li>
-<li><strong>Directionality</strong>: A correlation does not tell us which variable causes the other. It could be that more screen time causes lower psychological well-being, but it could also be that children with lower psychological well-being spend more time on screens. If this is the case, taking away their phone would not help!</li>
-<li><strong>Coincidence</strong>: A correlation is also <strong>spurious</strong> if it is just a coincidence. This is something we can address with statistical tests, but it bears keeping in mind. (See the box below for some famous examples of spurious correlations.)</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Famous spurious correlations">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Famous spurious correlations
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A <a href="http://www.brixtonhealth.com/storksBabies.pdf">famous example</a> is that across European countries the number of storks is quite strongly correlated with the number of newborn babies (<span class="math inline">\(\rho = 0.62\)</span>). A naive interpretation would be that this provides evidence for the folk theory that storks deliver babies. The real reason in this case is due to a confounding variable: the size of the country. Larger countries simply have more storks and more babies.</p>
-<p>There is also a website called <a href="https://www.tylervigen.com/spurious-correlations">Spurious Correlations</a>, that is dedicated to finding coincidental spurious correlations, such as the correlation between the number of people who drowned by falling into a pool and the number of films Nicolas Cage appeared in.</p>
-</div>
-</div>
-</div>
-<section id="visualizing-causation" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-causation">Visualizing causation</h2>
-<p>To develop a good intuition for the difference between correlation and causation, it helps to have a good mental model of what a causal relationship looks like. A good way to do this is to use <strong>Directed Acyclic Graphs</strong> (DAGs), which are a visual way to represent causal relationships. Simply put, these are graphs where the arrows indicate the direction of the causal relationship. Here are three DAGs that show different reasons for a correlation between X and Y. X represents what we believe to be the cause (e.g., screen time), and Y the effect (e.g., well-being). Z represents a confounding variable (e.g., parental involvement).</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In this tutorial, we will give a preliminary introduction on how to conduct simple mediation analyses in R. We will focus on running multiple regression analyses manually, to explain the concept of mediation and how to test for its significance. In practice, it is often recommended to use specialized packages for mediation analyses, such as <code>lavaan</code> or <code>mediation</code>, but to develop a good intuition for the concept, you should first understand the basics.</p>
+<section id="what-is-mediation" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-mediation">What is mediation?</h2>
+<p>We are often interested in explaining a relationship or causal effect between two variables (e.g., <code>X</code> and <code>Y</code>). Many theories suggest that <code>X</code> does not necessarily <em>directly</em> influence <code>Y</code>, but that this effect is <em>mediated</em> by a third variable, which we can call <code>M</code> (for <strong>M</strong>ediation). We can visualize this interplay between the three variables like so:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="causality_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="mediation_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>This shows why a correlation between X and Y is not enough to establish causation. Each of these DAGs shows a different reason for the correlation between X and Y, but only the first one supports our hypothesis that X causes Y. Our job as researchers is to figure out which of these DAGs is best supported by empirical evidence.</p>
-</section>
-</section>
-<section id="how-to-better-establish-causation" class="level1">
-<h1>How to (better) establish causation</h1>
-<p>Let’s first acknowledge that establishing causation is hard (see <span class="citation" data-cites="pearl09">Pearl (<a href="#ref-pearl09" role="doc-biblioref">2009</a>)</span>). But this should not deter us from doing our best to build evidence for causal relationships! Luckily, we have a number of strategies at our disposal to build evidence for causation.</p>
-<section id="theoretical-foundation" class="level2">
-<h2 class="anchored" data-anchor-id="theoretical-foundation">Theoretical foundation</h2>
-<p>The most important thing is to have a <strong>theoretical foundation</strong> for a causal relationship. This means that we have a good reason to believe that that a change in one variable will lead to a change in the other.</p>
-<p>Ideally, this theory should be based on <strong>a priori</strong> reasoning, meaning that you develop your theory before you collect data. This avoids the risks of <strong>post hoc</strong> (Latin for “after this”) reasoning, which is also known as <strong>HARKing</strong> (Hypothesizing After the Results are Known). The prime risk of post hoc reasoning is that you end up shaping a theory to fit the data, rather than using theory to guide your data collection and analysis. Many scientific journals therefore require you to pre-register your hypotheses before you start collecting data. This doesn’t mean that there is no room for exploration in your data, but it does mean that you should be transparent about what you were looking for based on <strong>a priori</strong> reasoning, and what you learned from <strong>post hoc</strong> reasoning about your data.</p>
-<p>Theory also helps us to identify possible confounding variables. Consider for example the <strong>gender gap in chess</strong>. Women are underrepresented in chess, with especially few women at the top levels <span class="citation" data-cites="christopher07">(<a href="#ref-christopher07" role="doc-biblioref">Chabris and Glickman 2006</a>)</span>. A naive interpretation would be that this is because, as grandmaster Garry Kasparov said in 1989: “Men are hardwired to be better chess players than women”. To properly understand where this gap comes from, we need to build theory that takes alternative explanations into account. If you have time for a tangent, try reading <a href="https://slate.com/technology/2020/12/why-are-the-best-chess-players-men.html">this Slate Magazine article</a> and see if you can identify some of the confounding variables that the author mentions.</p>
-</section>
-<section id="if-possible-conduct-an-experiment" class="level2">
-<h2 class="anchored" data-anchor-id="if-possible-conduct-an-experiment">If possible, conduct an experiment</h2>
-<p>The gold standard for establishing causation is the <strong>randomized controlled experiment</strong>, in which the researcher <em>manipulates the cause</em> and observes the effect, while keeping all other variables constant. In order to manipulate the cause, the researcher creates different experimental conditions. The classic example comes from the field of medicine: you give some participants a medicine you want to test, where others get a placebo (i.e.&nbsp;a fake medicine that only looks the same). The people that got the real medicine are then the <em>treatment group</em>, and the people that got the placebo are the <em>control group</em> To test if the medicine works, you compare the treatment group to the control group.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>The experimental design helps to adress both <strong>confounding</strong> and <strong>directionality</strong>.</p>
+<p>In the left figure we see the <strong>total effect</strong> of <code>X</code> on <code>Y</code>. Here we only have one <strong>path</strong> from <code>X</code> to <code>Y</code>.</p>
+<p>In the right figure, we see a mediation model, where the effect of <code>X</code> on <code>Y</code> is mediated by <code>M</code>. This gives us two different <strong>paths</strong> for how X can influence Y:</p>
 <ul>
-<li>By randomly assigning people to the treatment or control group, the people in both groups are <em>statistically identical</em>. If the randomization is done correctly, any possible confounding variables are equally distributed between the two groups, and so any difference in the outcome can be attributed to the treatment.</li>
-<li>By comparing the treatment group to the control group, you can account for confounding variables that have to do with the process of appyling the treatment. A well known example of this is the <em>placebo effect</em>, where people feel better just because they <em>think</em> they’re taking a medicine (control group), and not because of the actual medicine (treatment group). If the medicine works, the treatment group should see a stronger effect than the control group.</li>
+<li><strong>direct path</strong>. The arrow <code>X -&gt; Y</code> represents the <strong>direct</strong> effect of <code>X</code> on <code>Y</code>.</li>
+<li><strong>indirect path</strong>. The arrows <code>X -&gt; M</code> and <code>M -&gt; Y</code> together represent the <strong>indirect</strong> effect of <code>X</code> on <code>Y</code> through <code>M</code>. We can calculate the indirect effect by multiplying both arrows (<strong>a * b</strong>)</li>
 </ul>
-<p>This ability to eliminate the influence of confounders makes experiments a powerful tool for establishing causation. However, in the field of communication science it is often not possible (or ethical) to conduct valid experiments. For many of the causes that we are interested in, it is simply not possible to manipulate it in a controlled setting that is still sufficiently similar to the real world.</p>
+<p>The mediated model can help us distinguish between different scenarios:</p>
+<ul>
+<li><strong>Full mediation</strong>: Only the indirect effect of <code>X</code> on <code>Y</code> through <code>M</code> is significant.</li>
+<li><strong>No mediation</strong>: Only the direct effect of <code>X</code> on <code>Y</code> is significant.</li>
+<li><strong>Partial mediation</strong>: Both the direct and indirect effects of <code>X</code> on <code>Y</code> are significant.</li>
+<li><strong>No effect</strong>: Neither the direct nor the indirect effect of <code>X</code> on <code>Y</code> is significant.</li>
+</ul>
+<p><strong>Note of caution:</strong> Theoretically, mediation models almost always suggest some sort of “causal chain”. Yet, the analysis itself cannot prove causality. The same caution applies as discussed in the <a href="../../analysis/concepts/causality.html">causality</a> section.</p>
 </section>
-<section id="for-observational-data-control-for-confounders" class="level2">
-<h2 class="anchored" data-anchor-id="for-observational-data-control-for-confounders">For observational data, control for confounders</h2>
-<p>If we cannot conduct an experiment, we can to some extend control for confounding variables using <strong>statistical methods</strong>. This is not as powerful as an experiment, but it does allow us to establish some level of evidence for causation from observational data. In fact, many well supported causal theories in communication science have only been supported this way, such as the relationship between media coverage and public opinion <span class="citation" data-cites="mccombs72">(<a href="#ref-mccombs72" role="doc-biblioref">Mccombs and Shaw 1972</a>)</span>. And even well established causal relations like “smoking causes cancer” rely heavily on evidence from observational studies. Given that many communication science theories cannot be tested with experiments, being able to gather evidence for causal relations from observational data is an essential part of the communication scientist’s toolkit.</p>
-<p>The trick behind statistically controlling for confounders lies in <strong>multivariate analysis</strong> (i.e.&nbsp;analyzing more than two variables at the same time). If we are worried that a correlation between a <strong>dependent variable</strong> and <strong>independent variable</strong> is due to a third variable, we can add this <strong>confounding variable</strong> to the analysis. Using techniques like <a href="../tests/multiple-regression_WIP.qmd">multiple regression</a>, we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant. We also call this <strong>controlling for</strong> the confounder.</p>
-<p>The main limitation of this approach is that we can only control for the variables that we have measured. This puts an even greater burden on having a solid theoretical foundation for the relationships we test.</p>
+<section id="packages-and-simulating-some-data" class="level2">
+<h2 class="anchored" data-anchor-id="packages-and-simulating-some-data">Packages and simulating some data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For this tutorial we are going to simulate some data that align with the Figure presented above. You don’t need to understand this process, and can just run the code to create the data. But if you are interested, here is what we are doing:</p>
+<ul>
+<li>Set a seed to make our simulation reproducible. This ensures that even though we are creating random data, the outcome is the same every time we run the code.</li>
+<li>Creating a variable <code>x</code> that is normally distributed with a mean of 3 and a standard deviation of 1.</li>
+<li>Creating a variable <code>m</code> so that it is to some extent influenced by <code>x</code> (with a coefficient of <code>2</code>), but also has some random noise.</li>
+<li>Creating a variable <code>y</code> that is influenced by <code>m</code> (with a coefficient of <code>2</code>), but also by <code>x</code> (with a coefficient of <code>0.5</code>), and some random noise.</li>
+<li>This gives us a data set in which <code>x</code> influences <code>y</code> both directly and indirectly through <code>m</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>m <span class="sc">+</span> <span class="fl">0.5</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(x,m,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="triangulation" class="level2">
-<h2 class="anchored" data-anchor-id="triangulation">Triangulation</h2>
-<p>It is generally the case that we cannot determine causality from a single study, and need to build a body of evidence from multiple studies that point in the same direction. An experiment might be able to establish causality, but only for a very specific context and short term effects. An observational study might be able to find correlations that are consistent across many different contexts and time periods, but it cannot establish causality. To build theory on complicated issues such as the relationship between screen time and well-being, we need to combine both types of studies.</p>
-<p>For example, in their study on screen time and well-being, Twenge and Campbell presented valuable data on the correlation between these variables, but emphasized that based on their data they cannot determine the direction of the relationship <span class="citation" data-cites="twenge18">(<a href="#ref-twenge18" role="doc-biblioref">Twenge and Campbell 2018, 281</a>)</span>. So to build a stronger case for the causal relationship, they also discussed literature that looked at this from other angles. One study they mention is an experiment that showed that people that took a one week break from Facebook showed higher well-being than people that continued using Facebook <span class="citation" data-cites="tromholt16">(<a href="#ref-tromholt16" role="doc-biblioref">Tromholt 2016</a>)</span>. By itself this experiment does not prove that the problem is screen time, but if multiple similar experiments show that manipulating different forms of screen time has a positive effect on well-being, it strengthens the argument that the correlation between screen time and well-being is due to a causal relationship.</p>
-<!-- An an example, consider the *agenda-setting theory* [@mccombs72], which posits that the media influence the public's perception of the importance of issues.
-Initially, the primary evidence for this theory came from a study that showed a correlation between the amount of media coverage of an issue and the public's perception of its importance.
-At the time, news media were one of the few sources of information for the public, so *on theoretical grounds* it was reasonable to assume that the media were the cause of the public's perception.
-But today, with the rise of social media and other information sources, the relationship between media coverage and public opinion is more complex.
-To test the theory today, we would need to control for other sources of information, such as social media, to see if the relationship between media coverage and public opinion still holds.
+</section>
+<section id="simple-regression-analyses" class="level1">
+<h1>Simple regression analyses</h1>
+<p>Let’s first look at the model without the mediator <code>M</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, d)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m_total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">y</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.35</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.70&nbsp;–&nbsp;2.00</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">x</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.52</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.32&nbsp;–&nbsp;4.73</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">500</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.788 / 0.787</td>
+</tr>
 
-This also emphasizes that statistics are never a substitute for theory.
-Statistics allow us to build stronger empirical evidence for our theories, but we need theory to guide us in what to measure and how to interpret the results. -->
+</tbody></table>
 
+</div>
+</div>
+<p>This gives us the total effect of <code>X</code> on <code>Y</code> (<span class="math inline">\(b = 4.52\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). So this is the effect of <code>X</code> on <code>Y</code> without considering the mediator <code>M</code>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="mediation_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is the</p>
+<p>The simplest way to conduct mediation analyses is to run a simple regression for each endogeneous variable in our model. For this simple mediation model, we thus have to create one that estimates the path <em>a</em> and one that estimates <em>b</em> and <em>c’</em> simultaneously.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Total effect of x on y</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>m_total <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, d)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Effect a, x on m</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>m_a <span class="ot">&lt;-</span> <span class="fu">lm</span>(m <span class="sc">~</span> x, d)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Effects b and c', x and m on y</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>m_bc <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> m <span class="sc">+</span> x, d)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m_total, m_a, m_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">y</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">m</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">y</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center;">p</td>
+<td style="text-align: center;">Estimates</td>
+<td style="text-align: center;">CI</td>
+<td style="text-align: center;">p</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.35</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.70&nbsp;–&nbsp;2.00</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.50</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.21&nbsp;–&nbsp;0.80</td>
+<td style="text-align: center;"><strong>0.001</strong></td>
+<td style="text-align: center;">0.34</td>
+<td style="text-align: center;">0.06&nbsp;–&nbsp;0.62</td>
+<td style="text-align: center;"><strong>0.016</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">x</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">4.52</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">4.32&nbsp;–&nbsp;4.73</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.99</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.90&nbsp;–&nbsp;2.08</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+<td style="text-align: center;">0.54</td>
+<td style="text-align: center;">0.35&nbsp;–&nbsp;0.72</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">m</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.00</td>
+<td style="text-align: center;">1.92&nbsp;–&nbsp;2.08</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.788 / 0.787</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.778 / 0.778</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.962 / 0.962</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>We can see that all paths are significant, suggesting that there is both a direct and indirect effect of <code>X</code> on <code>Y</code>. The indirect effect can be computed by multiply the estimate of path <em>a</em> with the estimate of path <em>b</em>.</p>
+<p>In the second model, we can see that the effect of <code>X</code> on <code>M</code> is significant, suggesting that there is a direct effect of <code>X</code> on <code>M</code> (<span class="math inline">\(b = 1.99\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). In the third model, we can see that the effect of <code>M</code> on <code>Y</code> is significant, suggesting that there is a direct effect of <code>M</code> on <code>Y</code> (<span class="math inline">\(b = 2.00\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>).</p>
+<p>To calculate</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">summary</span>(m_a)<span class="sc">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">summary</span>(m_bc)<span class="sc">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>(indirect <span class="ot">&lt;-</span> a<span class="sc">*</span>b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.984083</code></pre>
+</div>
+</div>
+</section>
+<section id="where-to-go-next" class="level1">
+<h1>Where to go next?</h1>
+<p>This tutorial only exemplified simple mediation models. The framework can be extended to more complex models such as parallel mediation models, serial mediation models, or even moderated mediation models. For further information on such models, consider checking out the following books and resources:</p>
+<ul>
+<li>Hayes, A. (2022). Introduction to Mediation, Moderation, and Conditional Process Analysis. A Regression-Based Approach. Guilford Press.</li>
+</ul>
 
 
 </section>
-</section>
 
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-christopher07" class="csl-entry" role="listitem">
-Chabris, Christopher F., and Mark E. Glickman. 2006. <span>“Sex Differences in Intellectual Performance: Analysis of a Large Cohort of Competitive Chess Players.”</span> <em>Psychological Science</em> 17 (12): 1040–46. <a href="https://doi.org/10.1111/j.1467-9280.2006.01828.x">https://doi.org/10.1111/j.1467-9280.2006.01828.x</a>.
-</div>
-<div id="ref-mccombs72" class="csl-entry" role="listitem">
-Mccombs, Maxwell, and Donald Shaw. 1972. <span>“The Agenda-Setting Function of Mass Media.”</span> <em>Public Opinion Quarterly</em> 36 (June): 176–87. <a href="https://doi.org/10.1086/267990">https://doi.org/10.1086/267990</a>.
-</div>
-<div id="ref-pearl09" class="csl-entry" role="listitem">
-Pearl, Judea. 2009. <em>Causality</em>. Cambridge university press.
-</div>
-<div id="ref-tromholt16" class="csl-entry" role="listitem">
-Tromholt, Morten. 2016. <span>“The Facebook Experiment: Quitting Facebook Leads to Higher Levels of Well-Being.”</span> <em>Cyberpsychology, Behavior, and Social Networking</em> 19 (11): 661–66.
-</div>
-<div id="ref-twenge18" class="csl-entry" role="listitem">
-Twenge, Jean M., and W. Keith Campbell. 2018. <span>“Associations Between Screen Time and Lower Psychological Well-Being Among Children and Adolescents: Evidence from a Population-Based Study.”</span> <em>Preventive Medicine Reports</em> 12: 271–83. https://doi.org/<a href="https://doi.org/10.1016/j.pmedr.2018.10.003">https://doi.org/10.1016/j.pmedr.2018.10.003</a>.
-</div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>A similar example from communication science could be that you want to test the effictiveness of a new persuasion strategy. You could then show the treatment group a persuasive message that uses the new strategy, and the control group a message that doesn’t.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -979,13 +1084,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../analysis/concepts/covariance-and-correlation.html" class="pagination-link" aria-label="Covariance and correlation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Covariance and correlation</span>
+      <a href="../../analysis/concepts/mean_and_variance.html" class="pagination-link" aria-label="Mean and Variance">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Mean and Variance</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../analysis/concepts/mean_and_variance.html" class="pagination-link" aria-label="Mean and Variance">
-        <span class="nav-page-text">Mean and Variance</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../analysis/techniques/index.html" class="pagination-link" aria-label="Techniques">
+        <span class="nav-page-text">Techniques</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
