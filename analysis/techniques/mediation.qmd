@@ -8,7 +8,7 @@ subtitle: 'Conducting simple mediation analyses in R'
 In this tutorial, we will give a preliminary introduction on how to conduct simple mediation analyses in R. 
 We will focus on running multiple regression analyses manually, to explain the concept of mediation and how to test for its significance.
 In practice, it is often recommended to use specialized packages for mediation analyses, but to develop a good intuition for the concept, you should first understand the basics.
-At the end of this tutorial we will show an example of how to use the `bruceR` package to use the **PROCESS** approach.
+<!-- At the end of this tutorial we will show an example of how to use the `bruceR` package to use the **PROCESS** approach. -->
 
 ## What is mediation?
 
@@ -107,7 +107,7 @@ Let's first look at the model without the mediator `M`.
 
 ```{r}
 #| html-table-processing: none
-m_total <- lm(Y ~ X, d)
+m_total <- lm(Y ~ X, data = d)
 tab_model(m_total)
 ```
 
@@ -122,7 +122,7 @@ get_coef <- function(name, m, var) {
     if (p < 0.05) stars = "*"
     if (p < 0.01) stars = "**"
     if (p < 0.001) stars = "***"
-    return (sprintf("%s = %.3f%s", name,coef, stars))
+    return (sprintf("%s = %.2f%s", name,coef, stars))
 }
 
 dagify(Y ~ X, coords = coords) |> 
@@ -144,8 +144,8 @@ We can break this model down into two separate regression models:
 
 ```{r}
 #| html-table-processing: none
-m1 <- lm(M ~ X, d)
-m2 <- lm(Y ~ X + M, d)
+m1 <- lm(M ~ X, data = d)
+m2 <- lm(Y ~ X + M, data = d)
 
 tab_model(m1, m2)
 ```
@@ -175,19 +175,33 @@ We can calculate the **indirect effect** by multiplying the coefficients of the 
 a <- summary(m1)$coef[2,1] |> round(3)
 b <- summary(m2)$coef[3,1] |> round(3)
 ```
-$$a \times b = `r a` \times `r b` = `r round(a*b,3)`$$
+$$a \times b = `r a` \times `r b` = `r round(a*b,2)`$$
 
 
-::: {.callout-warning title="Testing the significance of the indirect effect" collapse="true"}
+::: {.callout-warning title="Testing the significance of the indirect effect using PROCESS" collapse="true"}
 
-If both parts of the indirect effect (**a * b**) are significant, there is a good chance that the indirect effect is significant.
-And similarly, if one part is not significant, the indirect effect is likely not significant.
-However, this is not always the case, so it is better to explicitly test the significance of the indirect effect.
+The indirect effect consists of two parts: **a** and **b**.
+We have shown that we can calculate the indirect effect by multiplying these two parts.
+But how can we calculate the confidence interval for this indirect effect, and test if it is significant?
 
-This is not straightforward, and requires more advanced techniques, such as bootstrapping or Monte-Carlo simulations.
-We will not cover these techniques in this tutorial, because it distracts from the goal of teaching the basic concept of mediation.
-Just be aware that this is a limitation of the simple mediation analyses we have shown here, and that it is therefore better to use advanced techniques or specialized packages for mediation analyses in actual research.
-At the end of this tutorial we also show you how to use the `PROCESS` package to test for mediation, which implements the bootstrapping technique.
+Calculating the required confidence interval for the indirect effect properly is not straightforward, and requires more advanced techniques like *bootstrapping* or *Monte Carlo simulations*, that we won't cover here.
+Instead, we will show you how to use **PROCESS** in R, using the `bruceR` package.
+This will basically perform the same steps we did above, fitting three regression models to calculate the total, direct, and indirect effects.
+But in addition, it will also provide a confidence intervals based on bootstrapping.
+
+To use `PROCESS`, you simply provide the data frame, and specify the column names for the dependent variable (`y = "Y"`), the independent variable (`x = "X"`), and the mediator (`meds = "M"`).
+The output might seem overwhelming at first, but if you look through it you should recognize the same components as we discussed before.
+The **Model Summary** shows the three regression models.
+The **Part 2. Mediation/Moderation Effect Estimate** shows the total (**c**), direct (**c'**) and indirect (**a * b**) effects.
+If you compare the effect sizes with the ones we calculated manually, you will see that they are the same.
+But the confidence intervalls are different, and we also get a confidence interval for the indirect effect.
+
+```{r, message=F}
+library(bruceR)
+
+PROCESS(d, y="Y", x="X", meds="M")
+```
+
 :::
 
 ::: {.callout-tip title="Full mediation example" collapse="true"}
@@ -210,9 +224,9 @@ d_full <- tibble(X,M,Y)
 To nicely interpret the models side-by-side, we'll add some labels and drop the confidence intervals.
 
 ```{r}
-m_total <- lm(Y ~ X, d_full)
-m1 <- lm(M ~ X, d_full)
-m2 <- lm(Y ~ X + M, d_full)
+m_total <- lm(Y ~ X, data=d_full)
+m1 <- lm(M ~ X, data=d_full)
+m2 <- lm(Y ~ X + M, data=d_full)
 tab_model(m_total, m1, m2,  
           dv.labels=c("Y ~ X", "M ~ X", "Y ~ X + M"), show.ci = FALSE)
 ```
@@ -261,9 +275,9 @@ M <- 0.5*X + rnorm(n, 0, 2)
 Y <- 0.05*M + 0.8*X + rnorm(n, 0, 3)
 d_no_mediation <- tibble(X,M,Y)
 
-m_total <- lm(Y ~ X, d_no_mediation)
-m1 <- lm(M ~ X, d_no_mediation)
-m2 <- lm(Y ~ X + M, d_no_mediation)
+m_total <- lm(Y ~ X, data=d_no_mediation)
+m1 <- lm(M ~ X, data=d_no_mediation)
+m2 <- lm(Y ~ X + M, data=d_no_mediation)
 tab_model(m_total, m1, m2,  
           dv.labels=c("Y ~ X", "M ~ X", "Y ~ X + M"), show.ci = FALSE)
 ```
@@ -297,21 +311,3 @@ In this case, the effect of `X` on `Y` is significant, but the effect of `X` on 
 The full effect of `X` on `Y` is direct.
 :::
 
-# Testing mediation using PROCESS
-
-The `PROCESS` macro for SPSS and SAS is a popular tool for mediation analyses.
-It is also available in R, using the `bruceR` package.
-Here we show you how to use PROCESS, using the same simulated data (`d`) as before.
-To use `PROCESS`, you simply provide the data frame, and specify the column names for the dependent variable (`y = "Y"`), the independent variable (`x = "X"`), and the mediator (`meds = "M"`).
-
-The output is a bit overwhelming, but you should recognize the same components as we discussed before.
-The **Model Summary** shows the three regression models.
-The **Part 2. Mediation/Moderation Effect Estimate** shows the total (**c**), direct (**c'**) and indirect (**a * b**) effects.
-If you compare the effect sizes with the ones we calculated manually, you will see that they are the same.
-But one important difference is that PROCESS also provides an explicit confidence interval for the indirect effect, based on bootstrapping.
-
-```{r, message=F}
-library(bruceR)
-
-PROCESS(d, y="Y", x="X", meds="M")
-```

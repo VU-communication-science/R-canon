@@ -30,17 +30,21 @@ In this section we'll show you some techniques for inspecting your data, and how
 
 
 
-## Just ...look
+## First, get to know your data
 
-It never hurts to just take a first general look at your data.
-Especially when you're working with a new dataset, just looking at what columns you have, and what the first few rows look like, can give you a decent first impression.
-For a tibble with a few columns you can just print it to the console:
+When you start working with a new dataset, the first thing you should do is get to know it.
+What columns are in there? What is the data type? How many rows are there? 
+
+If you're tibble doesn't have a huge number of columns, you can just print it to the console to get a quick overview.
 
 ```{r, results="hide"}
 d
 ```
 
-But another nice way to look at the data is to use the `View` function in RStudio (or clicking on the name of the tibble in the Environment tab in the top-right corner of RStudio).
+Another nice way to look at the data is to use the `View` function in RStudio (or clicking on the name of the tibble in the Environment tab in the top-right corner of RStudio).
+This will open a new tab in RStudio where you can see the data in a nice table.
+Here you can also filter and sort on columns, and search for specific values.
+Do note that if there are many columns, RStudio might not show them all at once, but you can click to see more.
 
 ```{r, eval=FALSE}
 View(d)
@@ -185,29 +189,43 @@ d_clean = mutate(d_clean, age = recode(age, `1987` = 37, `1970` = 51, `1967` = 5
 ```
 
 
-### The nuclear option: just remove them
+## Removing missing values
 
-In this case we were able to correct the data, but sometimes that's not an option.
-In that case you'd have to remove the rows with incorrect data (which is the same as selecting the rows that are correct).
+It is often a good idea to explicitly remove missing values from your data.
+If you run any statistical analyses using variables with missing data, R will often just ignore these cases.
+But it's better to remove them yourself, and be transparent about this in your report.
+
+In R we refer to missing values as `NA` (Not Available).
+Let's look at two ways to remove rows with missing values.
+The first one is to use the `drop_na` function from the `tidyverse`, which will remove **any rows** that have missing values in at least one column.
+To demonstrate that this works, we use the `nrow` function to count the number of rows before and after removing missing values.
 
 ```{r}
-d_clean <- filter(d_clean, age < 200)
+nrow(d_clean)
+drop_na(d_clean) |> nrow()
 ```
 
+The `drop_na` function works well if you only have columns in your tibble that you want to use in your analysis. 
+But note it will remove the entire row even if only one column has a missing value.
+So sometimes you want to remove rows only if a specific column has a missing value.
+
+In the current data, we know that only the `age` column has missing values.
+We can then use the `filter` function with the expression: `!is.na(age)`.
+This means: select all rows where it is **not** (`!`) the case that the value of the `age` column is missing (`is.na(age)`).
+
+
+```{r}
+d_clean <- filter(d_clean, !is.na(age))
+```
 
 ## Filtering rows
 
-Finally, we'll remove any rows that we do want to use.
-This can be because we do not want to include missing values in our analysis, but also because there might be data we do not want to use.
-Let's say that we want to remove participants with missing values, and participants that are younger than 18.
-
-To remove cases, we can use the `filter` function to select the cases we do want to keep.
-To filter out people below 17, we can use the `age >= 18` condition.
-For filtering out missing values, we can use the `is.na` function to check whether a value is missing, and then say that it should NOT (`!`) be missing: `!is.na(age)`. 
-We can then combine these two conditions with the `&` (AND) operator.
+Next to missing values, there might also be other conditions for removing rows from your data.
+For example, you might only want to include participants that at least 18 years old.
+We can do this with the `filter` function, where we specify the condition in which we want to select the rows.
 
 ```{r}
-d_clean <- filter(d_clean, !is.na(age) & age >= 18)
+d_clean <- filter(d_clean, age >= 18)
 ```
 
 # Check again!

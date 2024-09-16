@@ -31,7 +31,7 @@ Just do keep in mind that **this data is not real**, and should not be used for 
 ## Description of the data
 
 The practice data describes a fictional study about how entertainment media might influence people's attitudes.
-In this study, **600** participants were shown holywood movies that portray journalism in different ways, and we measured their trust in journalists before (`trust_t1`) and after (`trust_t2`) the experiment.[^1]
+In an experiment, **600** participants were shown hollywood movies with a **positive**, **negative** or **neutral** portrayal of journalists, and we measure whether this affects the participants' trust in journalists before (`trust_t1`) and after (`trust_t2`) the experiment.[^1]
 
 [^1]: The `t1` in `trust_t1` stands for "time 1". This is a common notation in studies where you measure the same construct at different points in time. Here `t1` and `t2` refer to the time before and after the experiment, respectively.
 

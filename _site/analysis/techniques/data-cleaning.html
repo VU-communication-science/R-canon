@@ -378,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#inspect-and-clean-your-data" id="toc-inspect-and-clean-your-data" class="nav-link active" data-scroll-target="#inspect-and-clean-your-data">Inspect and clean your data</a>
   <ul class="collapse">
-  <li><a href="#just-look" id="toc-just-look" class="nav-link" data-scroll-target="#just-look">Just …look</a></li>
+  <li><a href="#first-get-to-know-your-data" id="toc-first-get-to-know-your-data" class="nav-link" data-scroll-target="#first-get-to-know-your-data">First, get to know your data</a></li>
   <li><a href="#viewing-a-summary-of-every-column" id="toc-viewing-a-summary-of-every-column" class="nav-link" data-scroll-target="#viewing-a-summary-of-every-column">Viewing a summary of every column</a>
   <ul class="collapse">
   <li><a href="#what-to-look-for-in-the-summary" id="toc-what-to-look-for-in-the-summary" class="nav-link" data-scroll-target="#what-to-look-for-in-the-summary">What to look for in the summary</a></li>
@@ -391,8 +391,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#option-1-subtract-the-birth-year-from-the-year-of-the-study" id="toc-option-1-subtract-the-birth-year-from-the-year-of-the-study" class="nav-link" data-scroll-target="#option-1-subtract-the-birth-year-from-the-year-of-the-study">Option 1: Subtract the birth year from the year of the study</a></li>
   <li><a href="#option-2-recode-specific-values" id="toc-option-2-recode-specific-values" class="nav-link" data-scroll-target="#option-2-recode-specific-values">Option 2: Recode specific values</a></li>
-  <li><a href="#the-nuclear-option-just-remove-them" id="toc-the-nuclear-option-just-remove-them" class="nav-link" data-scroll-target="#the-nuclear-option-just-remove-them">The nuclear option: just remove them</a></li>
   </ul></li>
+  <li><a href="#removing-missing-values" id="toc-removing-missing-values" class="nav-link" data-scroll-target="#removing-missing-values">Removing missing values</a></li>
   <li><a href="#filtering-rows" id="toc-filtering-rows" class="nav-link" data-scroll-target="#filtering-rows">Filtering rows</a></li>
   </ul></li>
   <li><a href="#check-again" id="toc-check-again" class="nav-link" data-scroll-target="#check-again">Check again!</a></li>
@@ -444,13 +444,14 @@ Required packages and data for this tutorial
 <h1>Inspect and clean your data</h1>
 <p>An wise saying in data science is “garbage in, garbage out”.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> If you don’t take the time to inspect your data, and clean it up if necessary, you run the risk of ending up with incorrect results.</p>
 <p>In this section we’ll show you some techniques for inspecting your data, and how you can <em>tidy</em> it up using the data management techniques we’ve learned so far.</p>
-<section id="just-look" class="level2">
-<h2 class="anchored" data-anchor-id="just-look">Just …look</h2>
-<p>It never hurts to just take a first general look at your data. Especially when you’re working with a new dataset, just looking at what columns you have, and what the first few rows look like, can give you a decent first impression. For a tibble with a few columns you can just print it to the console:</p>
+<section id="first-get-to-know-your-data" class="level2">
+<h2 class="anchored" data-anchor-id="first-get-to-know-your-data">First, get to know your data</h2>
+<p>When you start working with a new dataset, the first thing you should do is get to know it. What columns are in there? What is the data type? How many rows are there?</p>
+<p>If you’re tibble doesn’t have a huge number of columns, you can just print it to the console to get a quick overview.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>But another nice way to look at the data is to use the <code>View</code> function in RStudio (or clicking on the name of the tibble in the Environment tab in the top-right corner of RStudio).</p>
+<p>Another nice way to look at the data is to use the <code>View</code> function in RStudio (or clicking on the name of the tibble in the Environment tab in the top-right corner of RStudio). This will open a new tab in RStudio where you can see the data in a nice table. Here you can also filter and sort on columns, and search for specific values. Do note that if there are many columns, RStudio might not show them all at once, but you can click to see more.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -532,7 +533,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">600 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAEoSURBVHja7d27DcIwFEBRjDIdGzAhG2Q9UmIkN7eIAtI5Vb5ydCWnfeN9o7hf/QH/RrBIsGibT15+aEvP8Tnevm89li/sy+v7zzx99pozWzISLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsGvMcYUOF1+ahwkOjxpaMBIsEiw62khPbaCoxfgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAEoSURBVHja7d27DcIwFEBRjDIdGzAhG2Q9UmIkN7eIAtI5Vb5ydCWnfeN9o7hf/QH/RrBIsGibT15+aEvP8Tnevm89li/sy+v7zzx99pozWzISLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsGvMcYUOF1+ahwkOjxpaMBIsEiw62khPbaCoxfgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -556,7 +557,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">52 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAEpSURBVHja7d3BCcJAEEBRV1KdFWiF6SDtxesKKvzTKrx3CyEw+bB7nXFeKK6rB/g3gkWCRdv8sH+90O5j9bCrzD++vb66ffzoWD31j3AkI8EiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwaIx7xHebUl/6zFtFR4aNY5kJFgkWPQE6V0I25GhmOUAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAEpSURBVHja7d3BCcJAEEBRV1KdFWiF6SDtxesKKvzTKrx3CyEw+bB7nXFeKK6rB/g3gkWCRdv8sH+90O5j9bCrzD++vb66ffzoWD31j3AkI8EiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwaIx7xHebUl/6zFtFR4aNY5kJFgkWPQE6V0I25GhmOUAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">595 (99.2%)</td>
 <td style="text-align: center;">5 (0.8%)</td>
 </tr>
@@ -598,7 +599,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAABOCAQAAAA9KAYwAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAACSSURBVGje7dlBCoAwDETRVDydJ9AT6gl6Pd2mhW4KTsT82XXjA1NhguW2yCyhenJ+9YdTchGOMuDNttfx2pxyzx4eHh4eHh7+/3xXturcU6ZTfLvUrByuaUa//Nx8c/UuwfB3P3r1mtF/WblnDw8PDw8PDy8IPT8wuXl5z+d3Ajw8PDw8PDy8LF9aM/TJPftg/gFQlxHK2306FQAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAABOCAQAAAA9KAYwAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAACSSURBVGje7dlBCoAwDETRVDydJ9AT6gl6Pd2mhW4KTsT82XXjA1NhguW2yCyhenJ+9YdTchGOMuDNttfx2pxyzx4eHh4eHh7+/3xXturcU6ZTfLvUrByuaUa//Nx8c/UuwfB3P3r1mtF/WblnDw8PDw8PDy8IPT8wuXl5z+d3Ajw8PDw8PDy8LF9aM/TJPftg/gFQlxHK2306FQAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -631,7 +632,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAGEAAAA3CAQAAAC22OzCAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAACiSURBVGje7ZjBDYAgEATFWJ0VaIVage3p9/BF+DBcZl4QIGGSPRKuvMvsrKMvoEIOhS1OLkBhHKVlV9y01Uv7YIGn40yCIKlAQAUCKhBQgYAKBFQgoAIBFQioQOD3d+75u46mxKYFoIHReu0wThCkBApVLdzTJOkMSYK1wtqoH50EQVKBgAoEVCCgAgEVCKhAQAUCKhBQgUC2VticJAiSCgQ+3GML4s4eEPoAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAGEAAAA3CAQAAAC22OzCAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAACiSURBVGje7ZjBDYAgEATFWJ0VaIVage3p9/BF+DBcZl4QIGGSPRKuvMvsrKMvoEIOhS1OLkBhHKVlV9y01Uv7YIGn40yCIKlAQAUCKhBQgYAKBFQgoAIBFQioQOD3d+75u46mxKYFoIHReu0wThCkBApVLdzTJOkMSYK1wtqoH50EQVKBgAoEVCCgAgEVCKhAQAUCKhBQgUC2VticJAiSCgQ+3GML4s4eEPoAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -655,7 +656,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">18 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAF6SURBVHja7dxRTsJAFEBRa1idK9AV6grcnv5WQ1qPLUNL7vkjBmhueDC2DNPXU8TzvQ/gbAqGCoYu8xvHfT/7WD201+l2zz5/6Mu/H2Wwl8W/fg47jkYSFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwdZifI+uaYLfffb2PNYYItb45Z3xqz7d5/10iigqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqFhF0G2XhU6ioFXjY7yk2nbNJKoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYGjH0zuPcsZr2a7nw0Z9k/meGklUMFQwVDBUMESfkuddOOy3dQuXFWddOOx33I0k+vEKO+/IjfNrJB/j6vQtNZKoYKhgqGCoYKhgqGCoYGiaL+7fW+lf9Tb753yqkWkkUcFQwdA380YdMhvCngEAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAF6SURBVHja7dxRTsJAFEBRa1idK9AV6grcnv5WQ1qPLUNL7vkjBmhueDC2DNPXU8TzvQ/gbAqGCoYu8xvHfT/7WD201+l2zz5/6Mu/H2Wwl8W/fg47jkYSFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwdZifI+uaYLfffb2PNYYItb45Z3xqz7d5/10iigqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqFhF0G2XhU6ioFXjY7yk2nbNJKoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYGjH0zuPcsZr2a7nw0Z9k/meGklUMFQwVDBUMESfkuddOOy3dQuXFWddOOx33I0k+vEKO+/IjfNrJB/j6vQtNZKoYKhgqGCoYKhgqGCoYGiaL+7fW+lf9Tb753yqkWkkUcFQwdA380YdMhvCngEAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -697,7 +698,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAABOCAQAAAA9KAYwAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAACHSURBVGje7dexDcAgDERRHGW6bJAJwwSsl7QmUhokfBH+17nhSUBxtrsos0n15PzuhyvkI5z2wZdyTMdbN+V+e3h4eHh4ePj1+VfZamOnDMd8u4xZOVzTVF9+br77epU1IzTw8PDw8PDw6/P0fGFy8/R8YeDh4eHh4eHhJ+dPa0Z8cr+9mH8AZlURy0jxTXIAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAABOCAQAAAA9KAYwAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAACHSURBVGje7dexDcAgDERRHGW6bJAJwwSsl7QmUhokfBH+17nhSUBxtrsos0n15PzuhyvkI5z2wZdyTMdbN+V+e3h4eHh4ePj1+VfZamOnDMd8u4xZOVzTVF9+br77epU1IzTw8PDw8PDw6/P0fGFy8/R8YeDh4eHh4eHhJ+dPa0Z8cr+9mH8AZlURy0jxTXIAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -721,7 +722,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">28 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAGnSURBVHja7d1bDsFAGEBhla7OClihrsD2eK38I50zaTsX53sjInKY32WK6X0Rca19A3pjMMhg0Lw+ceQ8W5JXfp9qB8ixvpFz8bVgt3DOq3aJAi5JyGCQwSCDQQaDDAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0EGgwwGGQwyGHTiRm6O1P54W7vjjQWL++Ot7Y67JCGDQbssyfYnz352mmGlk2fp7ojRykO/9REfOcMgg0EGgwwGHTb0+3v+y3NYsP6e//K4JCGDQQaDDAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0EGgwwGGQwyGGQwyGCQwSCDQQaDDAYZDDIYZDDIYJDBoOa+nBXFgz9rfsukg2BtHfxZEGzUw33zFD3C2rrPz+XQhwwGGQwyGGQwyGCQwSCDQR28NYpq/opBl8Fq/ruISxIyGLS5JP/7s4koY4b982cTkUsSMhhkMMhgkMGgLl/pp5y1GTdMsLNe/LgkIYNBwyzJ6Jip9hVsrPeNJVMtXeCxCj2tL/EcKth+fgbTNoc+ZDDIYNAHb/kqRVMecnQAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAGnSURBVHja7d1bDsFAGEBhla7OClihrsD2eK38I50zaTsX53sjInKY32WK6X0Rca19A3pjMMhg0Lw+ceQ8W5JXfp9qB8ixvpFz8bVgt3DOq3aJAi5JyGCQwSCDQQaDDAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0EGgwwGGQwyGHTiRm6O1P54W7vjjQWL++Ot7Y67JCGDQbssyfYnz352mmGlk2fp7ojRykO/9REfOcMgg0EGgwwGHTb0+3v+y3NYsP6e//K4JCGDQQaDDAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0EGgwwGGQwyGGQwyGCQwSCDQQaDDAYZDDIYZDDIYJDBoOa+nBXFgz9rfsukg2BtHfxZEGzUw33zFD3C2rrPz+XQhwwGGQwyGGQwyGCQwSCDQR28NYpq/opBl8Fq/ruISxIyGLS5JP/7s4koY4b982cTkUsSMhhkMMhgkMGgLl/pp5y1GTdMsLNe/LgkIYNBwyzJ6Jip9hVsrPeNJVMtXeCxCj2tL/EcKth+fgbTNoc+ZDDIYNAHb/kqRVMecnQAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -745,7 +746,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">34 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAGySURBVHja7dxRUoMwFEDR0mF1rEBXKCvo9vQX7bNwU0he4J4/ddTOHZJAGh2+byLurV9AbwwGGQwalx/UmM/m8Jd8DK1DvLJ8cWPxTyk2PX3m0a4F1iDYFnmvw6TB8l6HTvqQwSCDQQaDDAYZDDIYZDDIYJDBIINBBoMMBhkMOnR7Zz7hW1IH74dl3dUq55CEDAYZDDIYtNuk/96K2M96uuMq+c6KOBV/Z20OSchgkMEgg0EGgwwGGQwyGGQwyGCQwSCDQQaDDAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0Grh1Hy/vV1GxtO70Sncvo5nrS3wuNO5zvsu5VzGJT23zBEoomg9mzaVbAME4FDEjIYZDDIYJDBIINBBoMMBhkM6upOP1L7celXsB43bWo/Lv25wjI8reXmHAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0EGg7rfoo4cuW19ymBH7hs7JCGDQacckpG95rXLBNt6Fnwt4mWCRUoWB+cwyGCQwSCDQQaDLr1KRqJbjc/Frcaw/PpXh8edavg3mNY5h0EGgwwG/QCk7C5H1B/68QAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAGySURBVHja7dxRUoMwFEDR0mF1rEBXKCvo9vQX7bNwU0he4J4/ddTOHZJAGh2+byLurV9AbwwGGQwalx/UmM/m8Jd8DK1DvLJ8cWPxTyk2PX3m0a4F1iDYFnmvw6TB8l6HTvqQwSCDQQaDDAYZDDIYZDDIYJDBIINBBoMMBhkMOnR7Zz7hW1IH74dl3dUq55CEDAYZDDIYtNuk/96K2M96uuMq+c6KOBV/Z20OSchgkMEgg0EGgwwGGQwyGGQwyGCQwSCDQQaDDAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0Grh1Hy/vV1GxtO70Sncvo5nrS3wuNO5zvsu5VzGJT23zBEoomg9mzaVbAME4FDEjIYZDDIYJDBIINBBoMMBhkM6upOP1L7celXsB43bWo/Lv25wjI8reXmHAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0EGg7rfoo4cuW19ymBH7hs7JCGDQacckpG95rXLBNt6Fnwt4mWCRUoWB+cwyGCQwSCDQQaDLr1KRqJbjc/Frcaw/PpXh8edavg3mNY5h0EGgwwG/QCk7C5H1B/68QAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -836,7 +837,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAEAAAADECAQAAACFQe+bAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAEnSURBVHja7d1RisIwFAXQRmZ1swJdobOC2V79baVqAk1uwPP6JYg95DXwLra0rEu2LuHzA+wB93VdRhzzrgAAAAAAAAAAAECiynZEHBVSykwrEAf8bD/8vejBtdT81AmAZfk9+Mp/1xWItwAAAAAAAAAAIA54Gsn6jl9HJRfEAVW5oKVaM0RFLmip9os43gIAAAAAAAAAAGN5vAUAp+eCmrptLoKTc0FN7XdavAUAAAAAAAAAAHJBvAUAnXJB/b8GXXJBy16KtwAAAAAAAAAAQC6ItwCgIRf0ecqgOhf02h/xFgAAAAAAAAAAyAXxFsQBB2N5z4d8P67AiNt43gLGFwAAAAAAAADAbAC5YHzNBRh1e/+8KwAAAAAAAAAAAJCo4v0FXw94ABSYXUAR795uAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAEAAAADECAQAAACFQe+bAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAEnSURBVHja7d1RisIwFAXQRmZ1swJdobOC2V79baVqAk1uwPP6JYg95DXwLra0rEu2LuHzA+wB93VdRhzzrgAAAAAAAAAAAECiynZEHBVSykwrEAf8bD/8vejBtdT81AmAZfk9+Mp/1xWItwAAAAAAAAAAIA54Gsn6jl9HJRfEAVW5oKVaM0RFLmip9os43gIAAAAAAAAAAGN5vAUAp+eCmrptLoKTc0FN7XdavAUAAAAAAAAAAHJBvAUAnXJB/b8GXXJBy16KtwAAAAAAAAAAQC6ItwCgIRf0ecqgOhf02h/xFgAAAAAAAAAAyAXxFsQBB2N5z4d8P67AiNt43gLGFwAAAAAAAADAbAC5YHzNBRh1e/+8KwAAAAAAAAAAAJCo4v0FXw94ABSYXUAR795uAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -919,7 +920,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADUAAACsCAQAAABxhixwAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAD8SURBVHja7dxBCsIwEIXhjHg6T6AntCfo9erCTZSmJpmxNs//7YLQjzoDPorUlrRXTrtJotQ5P9zDB3ezApXSJRSaX06as4KCgoKCghqBevvBn/uuUhXLm0t8/cxazD/ManJ/g1crfxbaA7eXSnNWUFBQUFBQI1D0QGfG7YHPrLfBLzwPLK2W5qygoKCgoKC6QzlzRpNy9cCtp38fqLYe2LqtmrOCgoKCgoLqDj3QGU2qqge29b0qar0HRm2l5qygoKCgoKC6Qw905hjlLKaSFai8nMUviOasoKCgoKCgRqDogc78ipqWqL/tHemuoKCgoKCgoDQp470xw1APE9Uo/1PgsWEAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADUAAACsCAQAAABxhixwAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAD8SURBVHja7dxBCsIwEIXhjHg6T6AntCfo9erCTZSmJpmxNs//7YLQjzoDPorUlrRXTrtJotQ5P9zDB3ezApXSJRSaX06as4KCgoKCghqBevvBn/uuUhXLm0t8/cxazD/ManJ/g1crfxbaA7eXSnNWUFBQUFBQI1D0QGfG7YHPrLfBLzwPLK2W5qygoKCgoKC6QzlzRpNy9cCtp38fqLYe2LqtmrOCgoKCgoLqDj3QGU2qqge29b0qar0HRm2l5qygoKCgoKC6Qw905hjlLKaSFai8nMUviOasoKCgoKCgRqDogc78ipqWqL/tHemuoKCgoKCgoDQp470xw1APE9Uo/1PgsWEAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1018,7 +1019,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADkAAADbCAQAAAB9nfGHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAEpSURBVHja7d1BUsJAEAXQHovTeQI9oZyA68WFC6NlaoCkMyb9Pis2vBq6F58ikDbF3nnZXaxIfkxT5Dz+0ymRSCQSiUQWJtu8l+R12jb2lAXJ63Td4SPK6FMikUgkEoksTOqx5yEv8yffLfatPf5ST5ERrxERcUs9ZY1ZIpFIJBJ5OPJXK8jtA1/RY5OyUCp7WVM6/yyVvaxbshqzRCKRSCQS2Y8em5TRs9z2K/6lrvtUj70ny4tYY5ZIJBKJRCL70WOTMnqWeZeqvs/e2bQeO8/PpawxSyQSiUQikf3osUkZPcs1Pfb+Kw026rGPrF2NWSKRSCQSeThSqUxKDbLbY7f/+VWnx2ZscI1ZIpFIJBJ5OFKPTUpB0p9gIZFIJBKJPDnZ3JTgNOQnh7ReImq+efoAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADkAAADbCAQAAAB9nfGHAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAEpSURBVHja7d1BUsJAEAXQHovTeQI9oZyA68WFC6NlaoCkMyb9Pis2vBq6F58ikDbF3nnZXaxIfkxT5Dz+0ymRSCQSiUQWJtu8l+R12jb2lAXJ63Td4SPK6FMikUgkEoksTOqx5yEv8yffLfatPf5ST5ERrxERcUs9ZY1ZIpFIJBJ5OPJXK8jtA1/RY5OyUCp7WVM6/yyVvaxbshqzRCKRSCQS2Y8em5TRs9z2K/6lrvtUj70ny4tYY5ZIJBKJRCL70WOTMnqWeZeqvs/e2bQeO8/PpawxSyQSiUQikf3osUkZPcs1Pfb+Kw026rGPrF2NWSKRSCQSeThSqUxKDbLbY7f/+VWnx2ZscI1ZIpFIJBJ5OFKPTUpB0p9gIZFIJBKJPDnZ3JTgNOQnh7ReImq+efoAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1109,7 +1110,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAEAAAADECAQAAACFQe+bAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAEiSURBVHja7d1NDoIwGARQajwdJ9AT6gm8nm5MLETxB+iQ+L4dG3nptAmTQCzXLju78P0Bun19cbpviENZ96b1z49WoO/6xisQjwAAAAAAAAAAIA7YDy8vzQGlLiatSsrEQ2n7iQMGe+D8QQZLd4bRJnzXCpbfpPEIAAAAAAAAAADiAL0gHkEc8HUv+H2eN4ove8Hv82p7xyMAAAAAAAAAAPBYHo8AoGEveMyx2gTNesFjhictHgEAAAAAAAAAgF4QjwBgdi+Y+17RzF4w/9TEIwAAAAAAAAAA0AviEQBM9IK1vz5+Aqh7QavzEI8AAAAAAAAAAEAviEewLUCr13i2uwIAAAAAAAAAAACJ0Qu2BdALAAAAAAAAAAAAElP8f8HfA25vkCrAPnjvIAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAEAAAADECAQAAACFQe+bAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAEiSURBVHja7d1NDoIwGARQajwdJ9AT6gm8nm5MLETxB+iQ+L4dG3nptAmTQCzXLju78P0Bun19cbpviENZ96b1z49WoO/6xisQjwAAAAAAAAAAIA7YDy8vzQGlLiatSsrEQ2n7iQMGe+D8QQZLd4bRJnzXCpbfpPEIAAAAAAAAAADiAL0gHkEc8HUv+H2eN4ove8Hv82p7xyMAAAAAAAAAAPBYHo8AoGEveMyx2gTNesFjhictHgEAAAAAAAAAgF4QjwBgdi+Y+17RzF4w/9TEIwAAAAAAAAAA0AviEQBM9IK1vz5+Aqh7QavzEI8AAAAAAAAAAEAviEewLUCr13i2uwIAAAAAAAAAAACJ0Qu2BdALAAAAAAAAAAAAElP8f8HfA25vkCrAPnjvIAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1208,7 +1209,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADgAAADbCAQAAACSX5q5AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAEeSURBVHja7dxRasJAEIDhiXi6nkBP2J7A69kHoaziSmwzdnf85s0XP5JZyA9Bl3O8dnYv9t4A3LcfPs8Rh2V7pP3K+rcUCAQCgUDgP4BL26VZjappUueqS79+lphRp3fAiI+IiDglXmH9HQKBQCAQOCB488TPfNZfRpfOD3a6dO083693u3Tt/OZM198hEAgEAoEDgrp085ktE/vTC8g/ZWJ/+oev/g6BQCAQCATq0oSp06XtHJt7mtSl7VwfxPo7BAKBQCAQqEsTZu4uXfOSfcMuXXfg6u8QCAQCgUCgLk2Ysbo048dID7o05wDV3yEQCAQCgQOCMnHzeTMw6z3+OFcIBAKBQCCwKKhLi4G6FAgEAoFA4KTg4m/upwe/AdcGL1wxexNaAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADgAAADbCAQAAACSX5q5AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAEeSURBVHja7dxRasJAEIDhiXi6nkBP2J7A69kHoaziSmwzdnf85s0XP5JZyA9Bl3O8dnYv9t4A3LcfPs8Rh2V7pP3K+rcUCAQCgUDgP4BL26VZjappUueqS79+lphRp3fAiI+IiDglXmH9HQKBQCAQOCB488TPfNZfRpfOD3a6dO083693u3Tt/OZM198hEAgEAoEDgrp085ktE/vTC8g/ZWJ/+oev/g6BQCAQCATq0oSp06XtHJt7mtSl7VwfxPo7BAKBQCAQqEsTZu4uXfOSfcMuXXfg6u8QCAQCgUCgLk2Ysbo048dID7o05wDV3yEQCAQCgQOCMnHzeTMw6z3+OFcIBAKBQCCwKKhLi4G6FAgEAoFA4KTg4m/upwe/AdcGL1wxexNaAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1299,7 +1300,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADEAAADECAQAAACcygE9AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAEJSURBVHja7dxRDoIwEIRhazidJ9ATygm4Hj66NLGZlkXI5J8nDIEvsE2YRKWst6NzP1wwIab44V0N5llGTxsPnLa7HmF7SboKj1lAQEBAQEAoqR6sWQ/TmBIbQV5ti/XAcBazfKd6GlajR/1O36LwmAUEBAQEBIQSepSY6/aoOq1eNdSj6rQXiccsICAgICAMCEqOGA8iqUfVeYVhpPSoOtt16TELCAgICAgDgh4lxoOgR4mBgICAgIBQQo8S40F09aix35139KjR1eYxCwgICAgIA4IeJebMkjP+R7om8S05mWP3mAUEBAQEBIQSepSYfxPzmve123lXAQEBAQEBAbEvhfdHXYb4AJhzLuuOeySnAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADEAAADECAQAAACcygE9AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAEJSURBVHja7dxRDoIwEIRhazidJ9ATygm4Hj66NLGZlkXI5J8nDIEvsE2YRKWst6NzP1wwIab44V0N5llGTxsPnLa7HmF7SboKj1lAQEBAQEAoqR6sWQ/TmBIbQV5ti/XAcBazfKd6GlajR/1O36LwmAUEBAQEBIQSepSY6/aoOq1eNdSj6rQXiccsICAgICAMCEqOGA8iqUfVeYVhpPSoOtt16TELCAgICAgDgh4lxoOgR4mBgICAgIBQQo8S40F09aix35139KjR1eYxCwgICAgIA4IeJebMkjP+R7om8S05mWP3mAUEBAQEBIQSepSYfxPzmve123lXAQEBAQEBAbEvhfdHXYb4AJhzLuuOeySnAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1390,7 +1391,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADkAAADECAQAAACPHUHJAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAEQSURBVHja7dzBDYJAEEBR1lidFWiFWoHt6RVNgBWYJeu8uZEYXnD28EOM5TW0nlNzMQl5Hl/cwxZ7KxPkMFxCwOfHVY5dIpFIJBKJXJ6vEHmuu8tPU8aFFZfRo9rKuMvHpm/2Wuo+t1vH1h+8HLtEIpFIJBK5PDo2aI7e5baOrS3ZHd/H1h69HLtEIpFIJLI7UlQGTQ5yQ8fWvn+dJX/p2PVnO8cukUgkEonsjtSxQZODrO7YtdW6QE537J4nOccukUgkEonsjtSxQZODnO3Y/dp1kvzs2KjTm2OXSCQSiUR2R+rYoDmafLy2/ly1h6dEIpFIJBKJbDk6tgXZomKPf0okEolEIpHIllP8f+zfkG8IYyzUsj97gAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADkAAADECAQAAACPHUHJAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAEQSURBVHja7dzBDYJAEEBR1lidFWiFWoHt6RVNgBWYJeu8uZEYXnD28EOM5TW0nlNzMQl5Hl/cwxZ7KxPkMFxCwOfHVY5dIpFIJBKJXJ6vEHmuu8tPU8aFFZfRo9rKuMvHpm/2Wuo+t1vH1h+8HLtEIpFIJBK5PDo2aI7e5baOrS3ZHd/H1h69HLtEIpFIJLI7UlQGTQ5yQ8fWvn+dJX/p2PVnO8cukUgkEonsjtSxQZODrO7YtdW6QE537J4nOccukUgkEonsjtSxQZODnO3Y/dp1kvzs2KjTm2OXSCQSiUR2R+rYoDmafLy2/ly1h6dEIpFIJBKJbDk6tgXZomKPf0okEolEIpHIllP8f+zfkG8IYyzUsj97gAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1497,7 +1498,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADAAAADzCAQAAABqd10WAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAE1SURBVHja7dtRjoIwFAXQh5nVuQJd4bgCt8d8TAzMKLaEVn3kXL784YS+Jr0JOIzRN4fO998b8D2O0eLa8RIBAAAAANArw/wEbdWRhlc+wc6Ay3hpXlV3tkQAAAAAAPSKXvR+4Gv+Y2pFp2H9rSqAiGNERFwbPkH+GQAAAAAgBfDvRGt5lv1GLypmobbcsr2+PKwtt7QYef4ZAAAAAAAQoRdV5N296D5rm9LTXnSf9Zsg/wwAAAAAAIjQiyryeb1oOY8b08petJyl7ZF/BgAAAAAAROhFFcnUi6acZ2vUrBdN+btR8s8AAAAAAIAIvagiGXrR8zdrm3tRaVvknwEAAAAAUgBqSzH5Ad8XAQAAAABQFb2omPxAsRdt/UdaoRdt31X5ZwAAAACAFMBre1GP5J9Bd+AHh5BbgzVRkUQAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADAAAADzCAQAAABqd10WAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAE1SURBVHja7dtRjoIwFAXQh5nVuQJd4bgCt8d8TAzMKLaEVn3kXL784YS+Jr0JOIzRN4fO998b8D2O0eLa8RIBAAAAANArw/wEbdWRhlc+wc6Ay3hpXlV3tkQAAAAAAPSKXvR+4Gv+Y2pFp2H9rSqAiGNERFwbPkH+GQAAAAAgBfDvRGt5lv1GLypmobbcsr2+PKwtt7QYef4ZAAAAAAAQoRdV5N296D5rm9LTXnSf9Zsg/wwAAAAAAIjQiyryeb1oOY8b08petJyl7ZF/BgAAAAAAROhFFcnUi6acZ2vUrBdN+btR8s8AAAAAAIAIvagiGXrR8zdrm3tRaVvknwEAAAAAUgBqSzH5Ad8XAQAAAABQFb2omPxAsRdt/UdaoRdt31X5ZwAAAACAFMBre1GP5J9Bd+AHh5BbgzVRkUQAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1588,7 +1589,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADoAAADECAQAAABkKvrKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAEkSURBVHja7dxRDsFAFAVQFauzAlbICmyPL8lUKdV5WvPO/RPipO5I7kfprpvfZ7uAmQjdlQ9OTws+dDWg8k12/af2gxdfAq40T6dQKBQKhULn52GuRIyTYbpyi0UO73KYJe30PPnz/W4Tv929Y/n22OXpFAqFQqFQ6PzYvaFZvtPpu3eYT5bwrN07zGcHMU+nUCgUCoU2hpqgocmDVt+9r3IsSq28e1+l/63I0ykUCoVCoY2hdm9o8qBVdu/Uux0q7N7pJz5Pp1AoFAqFNobavaHJg47s3jq/Z3uLlrs38hzn6RQKhUKh0MZQuzc0y3d6n6Bx4/Pple7DbjoYQX8TKBQKhUKhf4ravaFZHj1fI2+2XdOVQqFQKBQKha4P7fx/b3PoDc5GLnz04qhFAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADoAAADECAQAAABkKvrKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAEkSURBVHja7dxRDsFAFAVQFauzAlbICmyPL8lUKdV5WvPO/RPipO5I7kfprpvfZ7uAmQjdlQ9OTws+dDWg8k12/af2gxdfAq40T6dQKBQKhULn52GuRIyTYbpyi0UO73KYJe30PPnz/W4Tv929Y/n22OXpFAqFQqFQ6PzYvaFZvtPpu3eYT5bwrN07zGcHMU+nUCgUCoU2hpqgocmDVt+9r3IsSq28e1+l/63I0ykUCoVCoY2hdm9o8qBVdu/Uux0q7N7pJz5Pp1AoFAqFNobavaHJg47s3jq/Z3uLlrs38hzn6RQKhUKh0MZQuzc0y3d6n6Bx4/Pple7DbjoYQX8TKBQKhUKhf4ravaFZHj1fI2+2XdOVQqFQKBQKha4P7fx/b3PoDc5GLnz04qhFAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1687,7 +1688,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADMAAADbCAQAAABqv2FOAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAEwSURBVHja7dtRCsJADEXRqXR1XYGuUFfg9vRHIS3TEjJpdDL3/YgIPUwT6IPi9CoRuYQoyZhZfrmLQV2n1kvLC8zrn5bP59P5NLlmAwMDAwMzOLN5eno/Nb+ZZE/z7WyyC+SazS9W4HEwnLbettPTtmndwFyzgYGBgYEZnKGnGZKLUfe0vej6m7Kn7UW7mblmAwMDAwMzOENPM6SXAlWKpkQ1FqhSdGuTazYwMDAwMDARoacZ0lNPq+cm7ppDT6tnvUy5ZgMDAwMDAxMRepohvfQ0XkjCwMDAwMB0zdDTDPmfntb+l0xFT/NZilyzgYGBgYEZnKFAGZKLqfY0j2Z2eJrF8c3nAXNWYGBgYGBgIkJPMyQXU+lp/i2t0tPOSa7ZwMDAwMDAyIT0tLDTwGjyBjcLNBgghlWBAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADMAAADbCAQAAABqv2FOAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAEwSURBVHja7dtRCsJADEXRqXR1XYGuUFfg9vRHIS3TEjJpdDL3/YgIPUwT6IPi9CoRuYQoyZhZfrmLQV2n1kvLC8zrn5bP59P5NLlmAwMDAwMzOLN5eno/Nb+ZZE/z7WyyC+SazS9W4HEwnLbettPTtmndwFyzgYGBgYEZnKGnGZKLUfe0vej6m7Kn7UW7mblmAwMDAwMzOENPM6SXAlWKpkQ1FqhSdGuTazYwMDAwMDARoacZ0lNPq+cm7ppDT6tnvUy5ZgMDAwMDAxMRepohvfQ0XkjCwMDAwMB0zdDTDPmfntb+l0xFT/NZilyzgYGBgYEZnKFAGZKLqfY0j2Z2eJrF8c3nAXNWYGBgYGBgIkJPMyQXU+lp/i2t0tPOSa7ZwMDAwMDAyIT0tLDTwGjyBjcLNBgghlWBAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1695,7 +1696,7 @@ Required packages and data for this tutorial
 </table>
 
 </div>
-<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.4.1)<br>2024-09-15</p>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.4.1)<br>2024-09-16</p>
 </div>
 </div>
 </div>
@@ -1777,20 +1778,36 @@ Using summarytools in Quarto or RMarkdown
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d_clean <span class="ot">=</span> <span class="fu">mutate</span>(d_clean, <span class="at">age =</span> <span class="fu">recode</span>(age, <span class="st">`</span><span class="at">1987</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">37</span>, <span class="st">`</span><span class="at">1970</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">51</span>, <span class="st">`</span><span class="at">1967</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">54</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-nuclear-option-just-remove-them" class="level3">
-<h3 class="anchored" data-anchor-id="the-nuclear-option-just-remove-them">The nuclear option: just remove them</h3>
-<p>In this case we were able to correct the data, but sometimes that’s not an option. In that case you’d have to remove the rows with incorrect data (which is the same as selecting the rows that are correct).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d_clean <span class="ot">&lt;-</span> <span class="fu">filter</span>(d_clean, age <span class="sc">&lt;</span> <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
+<section id="removing-missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="removing-missing-values">Removing missing values</h2>
+<p>It is often a good idea to explicitly remove missing values from your data. If you run any statistical analyses using variables with missing data, R will often just ignore these cases. But it’s better to remove them yourself, and be transparent about this in your report.</p>
+<p>In R we refer to missing values as <code>NA</code> (Not Available). Let’s look at two ways to remove rows with missing values. The first one is to use the <code>drop_na</code> function from the <code>tidyverse</code>, which will remove <strong>any rows</strong> that have missing values in at least one column. To demonstrate that this works, we use the <code>nrow</code> function to count the number of rows before and after removing missing values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(d_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 600</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_na</span>(d_clean) <span class="sc">|&gt;</span> <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 595</code></pre>
+</div>
+</div>
+<p>The <code>drop_na</code> function works well if you only have columns in your tibble that you want to use in your analysis. But note it will remove the entire row even if only one column has a missing value. So sometimes you want to remove rows only if a specific column has a missing value.</p>
+<p>In the current data, we know that only the <code>age</code> column has missing values. We can then use the <code>filter</code> function with the expression: <code>!is.na(age)</code>. This means: select all rows where it is <strong>not</strong> (<code>!</code>) the case that the value of the <code>age</code> column is missing (<code>is.na(age)</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>d_clean <span class="ot">&lt;-</span> <span class="fu">filter</span>(d_clean, <span class="sc">!</span><span class="fu">is.na</span>(age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="filtering-rows" class="level2">
 <h2 class="anchored" data-anchor-id="filtering-rows">Filtering rows</h2>
-<p>Finally, we’ll remove any rows that we do want to use. This can be because we do not want to include missing values in our analysis, but also because there might be data we do not want to use. Let’s say that we want to remove participants with missing values, and participants that are younger than 18.</p>
-<p>To remove cases, we can use the <code>filter</code> function to select the cases we do want to keep. To filter out people below 17, we can use the <code>age &gt;= 18</code> condition. For filtering out missing values, we can use the <code>is.na</code> function to check whether a value is missing, and then say that it should NOT (<code>!</code>) be missing: <code>!is.na(age)</code>. We can then combine these two conditions with the <code>&amp;</code> (AND) operator.</p>
+<p>Next to missing values, there might also be other conditions for removing rows from your data. For example, you might only want to include participants that at least 18 years old. We can do this with the <code>filter</code> function, where we specify the condition in which we want to select the rows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>d_clean <span class="ot">&lt;-</span> <span class="fu">filter</span>(d_clean, <span class="sc">!</span><span class="fu">is.na</span>(age) <span class="sc">&amp;</span> age <span class="sc">&gt;=</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">is.na</span>(d_clean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>d_clean <span class="ot">&lt;-</span> <span class="fu">filter</span>(d_clean, age <span class="sc">&gt;=</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -1798,7 +1815,7 @@ Using summarytools in Quarto or RMarkdown
 <h1>Check again!</h1>
 <p>After cleaning your data, it’s always a good idea to check if everything went as planned. So just use the same tricks to inspect your data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dfSummary</span>(d_clean) <span class="sc">|&gt;</span> <span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dfSummary</span>(d_clean) <span class="sc">|&gt;</span> <span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -1852,7 +1869,7 @@ Using summarytools in Quarto or RMarkdown
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">594 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAFfSURBVHja7d1LbsIwAEDBpsrpOAE9IZyA69GtKyUSI8yn4s2OIBzryTZLL9eviO9XT+C/KRgqGFrHDyc80I7L1tPzhFF0DJvhtv13/gyjrH+/Omz+4LL5/LL76sPNY+yPIjPxGdo7R+stA+2ZtQ4eZ/4M7wpma+YV5q/HDn1UMHTXlpzj/U/C0RsEm/H/9jxtSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDC0jHcV6qXCn2K8VHipkWlLooKhgqFfElYe2M4UWtgAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAFfSURBVHja7d1LbsIwAEDBpsrpOAE9IZyA69GtKyUSI8yn4s2OIBzryTZLL9eviO9XT+C/KRgqGFrHDyc80I7L1tPzhFF0DJvhtv13/gyjrH+/Omz+4LL5/LL76sPNY+yPIjPxGdo7R+stA+2ZtQ4eZ/4M7wpma+YV5q/HDn1UMHTXlpzj/U/C0RsEm/H/9jxtSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDC0jHcV6qXCn2K8VHipkWlLooKhgqFfElYe2M4UWtgAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">594 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1876,7 +1893,7 @@ Using summarytools in Quarto or RMarkdown
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">48 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAGCSURBVHja7dzBTcMwAEBRgjodE8CEdALWg2tApOqrkjiB/25Vpdb6qu2oVjJ9PkU8jx7A2RQMFQxd5i/2Xs+uN7/wddq9xoL5QC4Pf8oqXhbf+Rg7sEVNSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDC0+V/U1z928Hl3sMcPLPb83377YxX4hZ3jwGLrUbaGoYKhweeSR3F77XubrX0rBTv/Xnjv2rdSsOPshFs78JRcDjNyvz5wsKUsYy9i2iVRwVDBUMHQgRf99a1xQfKvgq1xOdKURAVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQ99ubDj/fbXb+3EnyDketTBSUxIVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDE3zs9v3DnJ/NX8W9VQj05REBUMFQ192zyLeSoUwcAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAGCSURBVHja7dzBTcMwAEBRgjodE8CEdALWg2tApOqrkjiB/25Vpdb6qu2oVjJ9PkU8jx7A2RQMFQxd5i/2Xs+uN7/wddq9xoL5QC4Pf8oqXhbf+Rg7sEVNSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDC0+V/U1z928Hl3sMcPLPb83377YxX4hZ3jwGLrUbaGoYKhweeSR3F77XubrX0rBTv/Xnjv2rdSsOPshFs78JRcDjNyvz5wsKUsYy9i2iVRwVDBUMHQgRf99a1xQfKvgq1xOdKURAVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQ99ubDj/fbXb+3EnyDketTBSUxIVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDE3zs9v3DnJ/NX8W9VQj05REBUMFQ192zyLeSoUwcAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">594 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1900,7 +1917,7 @@ Using summarytools in Quarto or RMarkdown
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">18 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJDxE6Jonw06sAAAF+SURBVHja7dxBTsJAAEBRazidJ9AT6gm8nm6rISXPlrFD/tsRklJ+mLZ0GJavp4jn/96B2RQMFQxd1g/Oezz7uLlrr8v9Xn296cuftzLYy+azn8P2oyGJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoamWQlyy/bimuMW1pwm2O3VRNu2ltYcubDmNMHGveV9OoahgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqFhkyB7Z4XOYuCs0Vn+Y26fhiQqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGDrw9s6j3PHaduj9sDl+B71PQxIVDBUMFQzRQX/e8+BxS7fwLDnrefC4/W5Ioh+fsHmH3Di/huRjTLbeU0MSFQwVDBUMFQwVDBUMFQwt64v79670r3pbfTlfamQakqhgqGDoG/+sHTTrWJMYAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gJEBE2MjflDxMAAAF+SURBVHja7dxBTsJAAEBRazidJ9AT6gm8nm6rISXPlrFD/tsRklJ+mLZ0GJavp4jn/96B2RQMFQxd1g/Oezz7uLlrr8v9Xn296cuftzLYy+azn8P2oyGJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoamWQlyy/bimuMW1pwm2O3VRNu2ltYcubDmNMHGveV9OoahgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqFhkyB7Z4XOYuCs0Vn+Y26fhiQqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGDrw9s6j3PHaduj9sDl+B71PQxIVDBUMFQzRQX/e8+BxS7fwLDnrefC4/W5Ioh+fsHmH3Di/huRjTLbeU0MSFQwVDBUMFQwVDBUMFQwt64v79670r3pbfTlfamQakqhgqGDoG/+sHTTrWJMYAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">594 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1908,7 +1925,7 @@ Using summarytools in Quarto or RMarkdown
 </table>
 
 </div>
-<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.4.1)<br>2024-09-15</p>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.4.1)<br>2024-09-16</p>
 </div>
 </div>
 </div>
@@ -2017,7 +2034,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
