@@ -334,6 +334,12 @@ window.Quarto = {
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/concepts/standardization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Standardization</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -793,7 +799,7 @@ trust_t1_item5     0.007 0.027 0.165 0.252 0.292 0.207 0.047 0.003 0.002    0</c
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>           trust_t1_item5) <span class="sc">|&gt;</span> </span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">alpha</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can verify that the <code>raw_alpha</code> is now 0.92. So now we can choose between either using the 4-item scale with an alpha of 0.92, or keeping the 5-item scale with an alpha of 0.85. This is a judgement call, and depends on the context of your research. Generally speaking, if you have sufficient items, it’s a good idea to remove items that are not working well, because this will make your scale more reliable and valid.</p>
+<p>You can verify that the <code>raw_alpha</code> is now 0.92. So now we can choose between either using the 4-item scale with an alpha of 0.92, or keeping the 5-item scale with an alpha of 0.85. This is a judgement call, and depends on the context of your research. Generally speaking, if you have sufficient items left and the improvement in the alpha is not very small, it’s a good idea to remove items to increase the reliability.</p>
 <p>If you decide to remove an item, you should test the scale again, because it is possible that you could further improve the reliability by removing another item. In the output of <code>alpha()</code> for our four item scale we see that this is not the case.</p>
 </section>
 <section id="calculate-the-scale-score" class="level3">
@@ -804,12 +810,9 @@ trust_t1_item5     0.007 0.027 0.165 0.252 0.292 0.207 0.047 0.003 0.002    0</c
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">trust_t1_scale =</span> (trust_t1_item1 <span class="sc">+</span> trust_t1_item3_inv <span class="sc">+</span> trust_t1_item4 <span class="sc">+</span> trust_t1_item5) <span class="sc">/</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>So now we have a new column <code>trust_t1_scale</code> that contains the scale score.</p>
-<p>Remember that in the practice data we already had a column <code>trust_t1</code> for the 5-item scale. So this is how that column was created. You can verify this by checking whether the new column is identical to the old one:</p>
+<p>Remember that in the practice data we already had a column <code>trust_t1</code> for the scale. This is how that column was created. You can verify this by correlating the new scale with the old one. If you did everything correctly, the correlation should be 1.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(d<span class="sc">$</span>trust_t1, d<span class="sc">$</span>trust_t1_scale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(d<span class="sc">$</span>trust_t1, d<span class="sc">$</span>trust_t1_scale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -915,7 +918,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

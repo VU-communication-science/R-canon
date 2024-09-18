@@ -314,6 +314,12 @@ window.Quarto = {
  <span class="menu-text">Causality</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/concepts/standardization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Standardization</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -466,16 +472,16 @@ window.Quarto = {
     Pearson's product-moment correlation
 
 data:  d$news_consumption and d$trust_t1
-t = 2.3387, df = 598, p-value = 0.01968
+t = 2.3604, df = 598, p-value = 0.01858
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- 0.01527442 0.17392142
+ 0.01615611 0.17477652
 sample estimates:
-      cor 
-0.0952024 </code></pre>
+       cor 
+0.09607624 </code></pre>
 </div>
 </div>
-<p>The output gives us the correlation coefficient under the <code>sample estimates</code>, which in our case is <span class="math inline">\(r = 0.095\)</span>. This means that the correlation is positive (&gt; 0), but quite weak. The test also reports a p-value (0.020), which tells us that the correlation is significant at the <span class="math inline">\(95\%\)</span> (<code>&lt; 0.05</code>) confidence level. Also note that the degrees of freedom are reported as 598, which is the number of observations minus 2.</p>
+<p>The output gives us the correlation coefficient under the <code>sample estimates</code>, which in our case is <span class="math inline">\(r = 0.096\)</span>. This means that the correlation is positive (&gt; 0), but quite weak. The test also reports a p-value (0.019), which tells us that the correlation is significant at the <span class="math inline">\(95\%\)</span> (<code>&lt; 0.05</code>) confidence level. Also note that the degrees of freedom are reported as 598, which is the number of observations minus 2.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="cor.test using the formula notation">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -704,7 +710,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

@@ -208,7 +208,7 @@ d |>
 You can verify that the `raw_alpha` is now 0.92.
 So now we can choose between either using the 4-item scale with an alpha of 0.92, or keeping the 5-item scale with an alpha of 0.85.
 This is a judgement call, and depends on the context of your research.
-Generally speaking, if you have sufficient items, it's a good idea to remove items that are not working well, because this will make your scale more reliable and valid.
+Generally speaking, if you have sufficient items left and the improvement in the alpha is not very small, it's a good idea to remove items to increase the reliability.
 
 If you decide to remove an item, you should test the scale again, because it is possible that you could further improve the reliability by removing another item.
 In the output of `alpha()` for our four item scale we see that this is not the case.
@@ -227,10 +227,11 @@ d <- d |>
 
 So now we have a new column `trust_t1_scale` that contains the scale score.
 
-Remember that in the practice data we already had a column `trust_t1` for the 5-item scale.
-So this is how that column was created.
-You can verify this by checking whether the new column is identical to the old one:
+Remember that in the practice data we already had a column `trust_t1` for the scale.
+This is how that column was created.
+You can verify this by correlating the new scale with the old one.
+If you did everything correctly, the correlation should be 1.
 
-```{r}
-identical(d$trust_t1, d$trust_t1_scale)
+```{r, results=F}
+cor.test(d$trust_t1, d$trust_t1_scale)
 ```
