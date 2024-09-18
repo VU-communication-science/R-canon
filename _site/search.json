@@ -883,38 +883,38 @@
     ]
   },
   {
-    "objectID": "analysis/concepts/standardization.html",
-    "href": "analysis/concepts/standardization.html",
+    "objectID": "analysis/techniques/standardization.html",
+    "href": "analysis/techniques/standardization.html",
     "title": "Standardization",
     "section": "",
     "text": "Standardization is a technique for transforming data into a consistent scale. It involves two key components: centering and scaling.\n\nCentering shifts the data so that its mean becomes zero.\nScaling adjusts the data’s range by dividing it by the standard deviation.\n\nThe result is that the data is transformed to have a mean of zero and a standard deviation of one. We then also refer to the values of the transformed data as z-scoreds. Standardizing a variable to z-scores has a number of benefits, and you’ll see that we use standardization in different contexts throughout this book:\n\nInterpretability: Standardized variables can be interpreted in the same way. Since zero is the mean, positive values indicate that the observation is above average, and negative values indicate that it is below average. A value of 1 means that the observation is one standard deviation above the mean.\nComparability: Standardization allows you to compare variables that have different units or scales. It allows us to compare age and income, even if one is measured in years and the other in euros.\nCorrelation analysis: If you calculate the covariance of two standardized variables, you get the correlation coefficient, which is a useful measure of the strength and direction of the relationship between two variables.\nMultiple regression: Standardization can help you compare the strength of the effects of different independent variables in a multiple regression model.",
     "crumbs": [
       "Analysis",
-      "Key concepts",
+      "Techniques",
       "Standardization"
     ]
   },
   {
-    "objectID": "analysis/concepts/standardization.html#alternative-use-the-scale-function",
-    "href": "analysis/concepts/standardization.html#alternative-use-the-scale-function",
+    "objectID": "analysis/techniques/standardization.html#alternative-use-the-scale-function",
+    "href": "analysis/techniques/standardization.html#alternative-use-the-scale-function",
     "title": "Standardization",
     "section": "Alternative: use the scale() function",
     "text": "Alternative: use the scale() function\nThere is also a built-in function in R that standardizes variables for you. This function is called scale().\n\nscale(x)\n\n           [,1]\n[1,] -0.9680365\n[2,]  0.7402632\n[3,] -0.2847166\n[4,] -1.3096965\n[5,]  0.7402632\n[6,]  1.0819232\nattr(,\"scaled:center\")\n[1] 6.833333\nattr(,\"scaled:scale\")\n[1] 2.926887\n\n\nThis actually gives us a bit more than we need2. To just get a vector of z-scores, we can wrap the scale() function in as.vector().\n\nas.vector(scale(x))\n\n[1] -0.9680365  0.7402632 -0.2847166 -1.3096965  0.7402632  1.0819232\n\n\nWe can use this as follows to standardize a variable in a tibble:\n\nlibrary(tidyverse)\n\ntibble(x=x) |&gt;\n  mutate(x_z = as.vector(scale(x)))\n\n# A tibble: 6 × 2\n      x    x_z\n  &lt;dbl&gt;  &lt;dbl&gt;\n1     4 -0.968\n2     9  0.740\n3     6 -0.285\n4     3 -1.31 \n5     9  0.740\n6    10  1.08",
     "crumbs": [
       "Analysis",
-      "Key concepts",
+      "Techniques",
       "Standardization"
     ]
   },
   {
-    "objectID": "analysis/concepts/standardization.html#footnotes",
-    "href": "analysis/concepts/standardization.html#footnotes",
+    "objectID": "analysis/techniques/standardization.html#footnotes",
+    "href": "analysis/techniques/standardization.html#footnotes",
     "title": "Standardization",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nNote that instead of a clean zero, you might see a weird number like 9.253666e-16. This is because computer’s have limited precision, and in this case the best it could to is to get reaaaaally close to zero. The number is in scientific notation, which is used to express really small or really large numbers. You can interpret it as: \\(9.253666 \\times 10^{-17}\\).↩︎\nThe scale() function doesn’t just return the z-scores, but also the mean and standard deviation. Also, the z-scores are returned as a matrix, which is similar but different from a vector. This can cause issues in some functions. Wrapping it in as.vector() ensures that we only get a vector with the z-scores.↩︎",
+    "text": "Footnotes\n\n\nNote that instead of a clean zero, you might see a weird number like 9.253666e-16. This is because computer’s have limited precision, and in this case the best it could to is to get reaaaaally close to zero. The number is in scientific notation, which is used to express really small or really large numbers. The notation can be read as: \\(9.253666 \\times 10^{-17}\\).↩︎\nThe scale() function doesn’t just return the z-scores, but also the mean and standard deviation. Also, the z-scores are returned as a matrix, which is similar but different from a vector. This can cause issues in some functions. Wrapping it in as.vector() ensures that we only get a vector with the z-scores.↩︎",
     "crumbs": [
       "Analysis",
-      "Key concepts",
+      "Techniques",
       "Standardization"
     ]
   },

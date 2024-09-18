@@ -36,9 +36,10 @@ sd(x)
 To standardize it, we subtract the mean ($\bar{x}$) from each value, and then divide by the standard deviation ($S_x$):
 $$ z = \frac{x - \bar{x}}{S_x} $$
 
-You can think of this process as shifting and stretching the data.
-By subtracting the mean, we shift the data so that the mean becomes zero.
-By dividing by the standard deviation, we stretch (or squeeze) the data so that the standard deviation becomes one.
+You can think of this process as **shifting the center** and **stretching the scale** of the data.
+By subtracting the mean, we shift the center so that the mean becomes zero.
+By dividing by the standard deviation, we stretch (or squeeze) the scale so that the standard deviation becomes one.
+Try changing the mean and standard deviation in this widget to see this shifting and stretching in action:
 
 
 ```{ojs}
@@ -119,7 +120,7 @@ But other than that, the distribution of the data is the same!
 You can see that they're perfectly correlated:
 
 [^almostzero]: Note that instead of a clean zero, you might see a weird number like `9.253666e-16`. This is because computer's have limited precision, and in this case the best it could to is to get *reaaaaally* close to zero.
-The number is in **scientific notation**, which is used to express really small or really large numbers. You can interpret it as: $9.253666 \times 10^{-17}$. 
+The number is in **scientific notation**, which is used to express really small or really large numbers. The notation can be read as: $9.253666 \times 10^{-17}$. 
 
 
 ```{r}

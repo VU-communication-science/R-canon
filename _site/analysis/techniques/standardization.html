@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Controlling for confounders – Communication Science R Book</title>
+<title>Standardization – Communication Science R Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../analysis/techniques/mediation.html" rel="next">
-<link href="../../analysis/techniques/scale-construction.html" rel="prev">
+<link href="../../analysis/tests/index.html" rel="next">
+<link href="../../analysis/techniques/mediation.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -102,6 +102,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -144,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/index.html">Techniques</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/controlling.html">Controlling for confounders</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/index.html">Techniques</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/standardization.html">Standardization</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -339,7 +341,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../analysis/techniques/controlling.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../analysis/techniques/controlling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Controlling for confounders</span></a>
   </div>
 </li>
@@ -351,7 +353,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../analysis/techniques/standardization.html" class="sidebar-item-text sidebar-link">
+  <a href="../../analysis/techniques/standardization.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Standardization</span></a>
   </div>
 </li>
@@ -409,23 +411,21 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#controlling-for-spurious-correlations" id="toc-controlling-for-spurious-correlations" class="nav-link active" data-scroll-target="#controlling-for-spurious-correlations">Controlling for spurious correlations</a>
+  <li><a href="#what-is-standardization" id="toc-what-is-standardization" class="nav-link active" data-scroll-target="#what-is-standardization">What is standardization?</a></li>
+  <li><a href="#how-to-standardize-variables" id="toc-how-to-standardize-variables" class="nav-link" data-scroll-target="#how-to-standardize-variables">How to standardize variables</a>
   <ul class="collapse">
-  <li><a href="#do-storks-deliver-babies" id="toc-do-storks-deliver-babies" class="nav-link" data-scroll-target="#do-storks-deliver-babies">Do storks deliver babies?</a></li>
-  <li><a href="#correlation-analysis" id="toc-correlation-analysis" class="nav-link" data-scroll-target="#correlation-analysis">Correlation analysis</a></li>
-  <li><a href="#multiple-regression-analysis" id="toc-multiple-regression-analysis" class="nav-link" data-scroll-target="#multiple-regression-analysis">Multiple regression analysis</a></li>
+  <li><a href="#alternative-use-the-scale-function" id="toc-alternative-use-the-scale-function" class="nav-link" data-scroll-target="#alternative-use-the-scale-function">Alternative: use the <code>scale()</code> function</a></li>
   </ul></li>
-  <li><a href="#why-controlling-for-confounding-is-important" id="toc-why-controlling-for-confounding-is-important" class="nav-link" data-scroll-target="#why-controlling-for-confounding-is-important">Why controlling for confounding is important</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/index.html">Techniques</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/controlling.html">Controlling for confounders</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/index.html">Techniques</a></li><li class="breadcrumb-item"><a href="../../analysis/techniques/standardization.html">Standardization</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Controlling for confounders</h1>
-<p class="subtitle lead">Using multiple regression to better test causal relationships</p>
+<h1 class="title">Standardization</h1>
+<p class="subtitle lead">Transforming variables to a common scale</p>
 </div>
 
 
@@ -442,149 +442,207 @@ window.Quarto = {
 </header>
 
 
-<section id="controlling-for-spurious-correlations" class="level1">
-<h1>Controlling for spurious correlations</h1>
-<p>In the section about <a href="../../analysis/concepts/causality.html">causality</a> we discussed the difference between correlation and causation, and what techniques we can use to distinguish between the two. One of those techniques is to use <strong>multivariate analysis</strong> techniques, such as <strong>multiple regression</strong>. In this tutorial we will show you how to use multiple regression to control for <strong>confounding variables</strong>, and how this helps us deal with <strong>spurious correlations</strong>. As example data we’ll be using a famous example of a spurious correlation: the number of storks and the birth rate of a country.</p>
-<section id="do-storks-deliver-babies" class="level2">
-<h2 class="anchored" data-anchor-id="do-storks-deliver-babies">Do storks deliver babies?</h2>
-<p>There is a <a href="http://www.brixtonhealth.com/storksBabies.pdf">famous example</a> of confounding, that points at the surprisingly high correlation between the number of storks and the number of newborn babies across European countries (<span class="math inline">\(\rho = 0.62\)</span>). Based on this empirical finding, could one actually argue that the might be some truth to the old folk tale that storks deliver babies? The answer to this questions is obviously no, but it does raise an important issue: how can we distinguish between correlation and causation? The example of storks and babies is sufficiently ridiculous to make it clear that this is a spurious correlation, but how can we be sure in more realistic cases?</p>
-<p>One of the techniques in our tool belt is to control for confounding variables in a multiple regression model. Let’s see how this works in practice using the storks and babies data from the article.</p>
+<section id="what-is-standardization" class="level1">
+<h1>What is standardization?</h1>
+<p>Standardization is a technique for transforming data into a consistent scale. It involves two key components: <strong>centering</strong> and <strong>scaling</strong>.</p>
+<ul>
+<li>Centering shifts the data so that its mean becomes zero.</li>
+<li>Scaling adjusts the data’s range by dividing it by the standard deviation.</li>
+</ul>
+<p>The result is that the data is transformed to have a mean of zero and a standard deviation of one. We then also refer to the values of the transformed data as <strong>z-scoreds</strong>. Standardizing a variable to z-scores has a number of benefits, and you’ll see that we use standardization in different contexts throughout this book:</p>
+<ul>
+<li><strong>Interpretability</strong>: Standardized variables can be interpreted in the same way. Since zero is the mean, positive values indicate that the observation is above average, and negative values indicate that it is below average. A value of 1 means that the observation is one standard deviation above the mean.</li>
+<li><strong>Comparability</strong>: Standardization allows you to compare variables that have different units or scales. It allows us to compare <em>age</em> and <em>income</em>, even if one is measured in years and the other in euros.</li>
+<li><strong>Correlation analysis</strong>: If you calculate the covariance of two standardized variables, you get the <a href="../../analysis/concepts/covariance-and-correlation.html">correlation coefficient</a>, which is a useful measure of the strength and direction of the relationship between two variables.</li>
+<li><strong>Multiple regression</strong>: Standardization can help you compare the strength of the effects of different independent variables in a <a href="../../analysis/tests/linear-regression.html">multiple regression model</a>.</li>
+</ul>
+</section>
+<section id="how-to-standardize-variables" class="level1">
+<h1>How to standardize variables</h1>
+<p>Let’s first create a simple numeric variable <code>x</code> with some values, and calculate its mean and standard deviation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>storks <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="at">storks =</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">300</span>,<span class="dv">1</span>,<span class="dv">5000</span>,<span class="dv">9</span>,<span class="dv">140</span>,<span class="dv">3300</span>,<span class="dv">2500</span>,<span class="dv">4</span>,<span class="dv">5000</span>,<span class="dv">5</span>,<span class="dv">30000</span>,<span class="dv">1500</span>,<span class="dv">5000</span>,<span class="dv">8000</span>,<span class="dv">150</span>,<span class="dv">25000</span>),</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="at">birth_rate =</span> <span class="fu">c</span>(<span class="dv">83</span>,<span class="dv">87</span>,<span class="dv">118</span>,<span class="dv">117</span>,<span class="dv">59</span>,<span class="dv">774</span>,<span class="dv">901</span>,<span class="dv">106</span>,<span class="dv">188</span>,<span class="dv">124</span>,<span class="dv">551</span>,<span class="dv">610</span>,<span class="dv">120</span>,<span class="dv">367</span>,<span class="dv">439</span>,<span class="dv">82</span>,<span class="dv">1576</span>),</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="at">area_km2 =</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">84</span>,<span class="dv">31</span>,<span class="dv">111</span>,<span class="dv">43</span>,<span class="dv">544</span>,<span class="dv">357</span>,<span class="dv">132</span>,<span class="dv">42</span>,<span class="dv">93</span>,<span class="dv">301</span>,<span class="dv">312</span>,<span class="dv">92</span>,<span class="dv">237</span>,<span class="dv">505</span>,<span class="dv">41</span>,<span class="dv">779</span>) </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">10</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.833333</code></pre>
 </div>
-</section>
-<section id="correlation-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="correlation-analysis">Correlation analysis</h2>
-<p>The data we have here is about the number of <code>storks</code>, the <code>birth_rate</code>, and the <code>area_km2</code> of the country. Let’s first have a look at the correlations.</p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.926887</code></pre>
+</div>
+</div>
+<p>To standardize it, we subtract the mean (<span class="math inline">\(\bar{x}\)</span>) from each value, and then divide by the standard deviation (<span class="math inline">\(S_x\)</span>): <span class="math display">\[ z = \frac{x - \bar{x}}{S_x} \]</span></p>
+<p>You can think of this process as <strong>shifting the center</strong> and <strong>stretching the scale</strong> of the data. By subtracting the mean, we shift the center so that the mean becomes zero. By dividing by the standard deviation, we stretch (or squeeze) the scale so that the standard deviation becomes one. Try changing the mean and standard deviation in this widget to see this shifting and stretching in action:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_corr</span>(storks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">&nbsp;</td>
-<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">storks</td>
-<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">birth_rate</td>
-<td data-quarto-table-cell-role="th" style="font-style: italic; font-weight: normal; border-top: double black; border-bottom: 1px solid black; padding: 0.2cm">area_km2</td>
-</tr>
-<tr class="even">
-<td style="font-style: italic">storks</td>
-<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">0.620<span style="vertical-align:super;font-size:0.8em;">**</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.579<span style="vertical-align:super;font-size:0.8em;">*</span></td>
-</tr>
-<tr class="odd">
-<td style="font-style: italic">birth_rate</td>
-<td style="text-align: center; padding: 0.2cm;">0.620<span style="vertical-align:super;font-size:0.8em;">**</span></td>
-<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">0.922<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-</tr>
-<tr class="even">
-<td style="font-style: italic">area_km2</td>
-<td style="text-align: center; padding: 0.2cm;">0.579<span style="vertical-align:super;font-size:0.8em;">*</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.922<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-</tr>
-<tr class="odd">
-<td colspan="4" style="text-align: right; border-bottom: double black; border-top: 1px solid black; font-style: italic; font-size: 0.9em;">Computed correlation used pearson-method with listwise-deletion.</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="47" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 46;"><span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>viewof numberLine <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="fl">6.83</span>]<span class="op">,</span> </span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="fl">6.83</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.01</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"MEAN"</span>}</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>viewof standardDeviation <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">1</span><span class="op">,</span> <span class="fl">2.93</span>]<span class="op">,</span> </span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="fl">2.93</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.01</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"SD"</span>}</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a> {</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> width <span class="op">=</span> <span class="dv">600</span><span class="op">;</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> height <span class="op">=</span> <span class="dv">150</span><span class="op">;</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> margin <span class="op">=</span> { <span class="dt">left</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">top</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">20</span> }<span class="op">;</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> meanValue <span class="op">=</span> numberLine<span class="op">;</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> stddevValue <span class="op">=</span> standardDeviation<span class="op">;</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Scale based on mean and standard deviation</span></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> scaleX <span class="op">=</span> d3<span class="op">.</span><span class="fu">scaleLinear</span>()</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">domain</span>([meanValue<span class="op">-</span><span class="dv">10</span> <span class="op">*</span> stddevValue<span class="op">/</span><span class="dv">5</span><span class="op">,</span> meanValue<span class="op">+</span><span class="dv">10</span> <span class="op">*</span> stddevValue<span class="op">/</span><span class="dv">5</span>])</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">range</span>([margin<span class="op">.</span><span class="at">left</span><span class="op">,</span> width <span class="op">-</span> margin<span class="op">.</span><span class="at">right</span>])<span class="op">;</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> axis <span class="op">=</span> d3<span class="op">.</span><span class="fu">axisBottom</span>(scaleX)</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">ticks</span>(<span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> svg <span class="op">=</span> d3<span class="op">.</span><span class="fu">create</span>(<span class="st">"svg"</span>)</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"width"</span><span class="op">,</span> width)</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"height"</span><span class="op">,</span> height)<span class="op">;</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Draw the number line axis</span></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>  svg<span class="op">.</span><span class="fu">append</span>(<span class="st">"g"</span>)</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"transform"</span><span class="op">,</span> <span class="vs">`translate(0, </span><span class="sc">${</span>height <span class="op">/</span> <span class="dv">2</span><span class="sc">}</span><span class="vs">)`</span>)</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">call</span>(axis)<span class="op">;</span></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Add some data points centered around the mean</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> dataPoints <span class="op">=</span> [meanValue <span class="op">-</span> stddevValue<span class="op">,</span> meanValue<span class="op">,</span> meanValue <span class="op">+</span> stddevValue]<span class="op">;</span></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> labels  <span class="op">=</span> [<span class="st">"-1 SD"</span><span class="op">,</span> <span class="st">"Mean"</span><span class="op">,</span> <span class="st">"+1 SD"</span>]<span class="op">;</span></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>  svg<span class="op">.</span><span class="fu">selectAll</span>(<span class="st">".dot"</span>)</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">data</span>(dataPoints)</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">enter</span>()<span class="op">.</span><span class="fu">append</span>(<span class="st">"circle"</span>)</span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"dot"</span>)</span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"cx"</span><span class="op">,</span> d <span class="kw">=&gt;</span> <span class="fu">scaleX</span>(d))  <span class="co">// Position based on scaled value</span></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"cy"</span><span class="op">,</span> height <span class="op">/</span> <span class="dv">2</span>)      <span class="co">// Place them on the number line</span></span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"r"</span><span class="op">,</span> <span class="dv">5</span>)</span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"fill"</span><span class="op">,</span> <span class="st">"red"</span>)<span class="op">;</span></span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Label the points</span></span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>  svg<span class="op">.</span><span class="fu">selectAll</span>(<span class="st">".label"</span>)</span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">data</span>(dataPoints)</span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">enter</span>()<span class="op">.</span><span class="fu">append</span>(<span class="st">"text"</span>)</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"x"</span><span class="op">,</span> d <span class="kw">=&gt;</span> <span class="fu">scaleX</span>(d))</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"y"</span><span class="op">,</span> height <span class="op">/</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">10</span>)</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">"text-anchor"</span><span class="op">,</span> <span class="st">"middle"</span>)</span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">text</span>((d<span class="op">,</span>i) <span class="kw">=&gt;</span> labels[i])<span class="op">;</span></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> svg<span class="op">.</span><span class="fu">node</span>()<span class="op">;</span></span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
 </div>
 </div>
-<p>As reported in the article, the correlation between the number of storks and the birth rate is high at <span class="math inline">\(r = 0.62\)</span>. But we also see that the area of the country is correlated with both the number of storks and the birth rate (<span class="math inline">\(r = 0.58\)</span> and <span class="math inline">\(r = 0.92\)</span> respectively). This is a good indication that the area of the country is likely a confounding variable.</p>
-</section>
-<section id="multiple-regression-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="multiple-regression-analysis">Multiple regression analysis</h2>
-<p>Now let’s see what happens when we put the number of storks into a regression model. Our dependent variable is the <code>birth_rate</code>, our independent variable is the <code>storks</code>, and we’ll control for the <code>area_km2</code>. The variables are standardized first, so that you can see the relation to the correlation coefficients. We’ll run two models: without and with the control variable.</p>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<p>Now let’s do this in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  standardize all variables</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>storks_z <span class="ot">&lt;-</span> storks <span class="sc">|&gt;</span> <span class="fu">scale</span>() <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(birth_rate <span class="sc">~</span> storks,            <span class="at">data =</span> storks_z)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(birth_rate <span class="sc">~</span> storks <span class="sc">+</span> area_km2, <span class="at">data =</span> storks_z)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">birth_rate</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">birth_rate</td>
-</tr>
-<tr class="even">
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
-<td style="text-align: center;">p</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.00</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.42&nbsp;–&nbsp;0.42</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.000</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.00</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.21&nbsp;–&nbsp;0.21</td>
-<td style="text-align: center;">1.000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">storks</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.62</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.19&nbsp;–&nbsp;1.05</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.008</strong></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.13</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.13&nbsp;–&nbsp;0.39</td>
-<td style="text-align: center;">0.304</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">area km2</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.85</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.59&nbsp;–&nbsp;1.11</td>
-<td style="text-align: center;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">17</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">17</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.385 / 0.344</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.862 / 0.842</td>
-</tr>
-</tbody>
-</table>
-
-
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.253666e-17</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
 </div>
 </div>
-<p>In the first model we see a positive effect of the number of storks on the birth rate (<span class="math inline">\(\beta = 0.62\)</span>). The effect is significant (p &lt; 0.01) and the standardized coefficient is the same as the correlation coefficient. So here you see firsthand a spurious effect.</p>
-<p>In the second model, where we control for the area of the country, the effect of the number of storks on the birth rate is no longer significant (p = 0.304). Instead, we see a very strong effect of the area of the country on the birth rate (<span class="math inline">\(\beta = 0.85\)</span>, p &lt; 0.001). So here you see the power of multiple regression in action: by controlling for <code>area_km2</code>, the spurious effect of <code>storks</code> on <code>birth_rate</code> disappears.</p>
-</section>
-</section>
-<section id="why-controlling-for-confounding-is-important" class="level1">
-<h1>Why controlling for confounding is important</h1>
-<p>If we do not control for confounding variables, the coefficients in our regression model might be biased. Sometimes the effect is overestimated, as we saw here with the effect of storks on the birth rate. But the effect can also be suppressed, or even reversed!</p>
-<p>Being able to control for confounding variables enables us to better explore possible <a href="../../analysis/concepts/causality.html">causal relationships</a> between variables. Based on the first model, we might have concluded that if the number of storks increases or decreases, the birth rate of the country will follow. Imagine the policy implications of such a finding! If a government would want to increase the birth rate, they would simply have to breed more storks.</p>
-<p>The second model however shows that this relation between storks and birth rate is spurious. This suggests that our stork breeding program would not have the desired effect. Instead, the model gives reason to believe that the birth rate is influenced by the size of the country, which is a much more plausible explanation. If a government would want to increase the birth rate, they would have to increase the size of the country. And this is why we have too many wars, and too few storks.</p>
+<p>As you can see, the mean and standard deviation are now zero<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and one, respectively. But other than that, the distribution of the data is the same! You can see that they’re perfectly correlated:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x, z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<section id="alternative-use-the-scale-function" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-use-the-scale-function">Alternative: use the <code>scale()</code> function</h2>
+<p>There is also a built-in function in R that standardizes variables for you. This function is called <code>scale()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scale</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]
+[1,] -0.9680365
+[2,]  0.7402632
+[3,] -0.2847166
+[4,] -1.3096965
+[5,]  0.7402632
+[6,]  1.0819232
+attr(,"scaled:center")
+[1] 6.833333
+attr(,"scaled:scale")
+[1] 2.926887</code></pre>
+</div>
+</div>
+<p>This actually gives us a bit more than we need<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. To just get a vector of z-scores, we can wrap the <code>scale()</code> function in <code>as.vector()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.vector</span>(<span class="fu">scale</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.9680365  0.7402632 -0.2847166 -1.3096965  0.7402632  1.0819232</code></pre>
+</div>
+</div>
+<p>We can use this as follows to standardize a variable in a tibble:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">x=</span>x) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">x_z =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+      x    x_z
+  &lt;dbl&gt;  &lt;dbl&gt;
+1     4 -0.968
+2     9  0.740
+3     6 -0.285
+4     3 -1.31 
+5     9  0.740
+6    10  1.08 </code></pre>
+</div>
+</div>
 
 
 </section>
+</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Note that instead of a clean zero, you might see a weird number like <code>9.253666e-16</code>. This is because computer’s have limited precision, and in this case the best it could to is to get <em>reaaaaally</em> close to zero. The number is in <strong>scientific notation</strong>, which is used to express really small or really large numbers. The notation can be read as: <span class="math inline">\(9.253666 \times 10^{-17}\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The <code>scale()</code> function doesn’t just return the z-scores, but also the mean and standard deviation. Also, the z-scores are returned as a matrix, which is similar but different from a vector. This can cause issues in some functions. Wrapping it in <code>as.vector()</code> ensures that we only get a vector with the z-scores.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBudW1iZXJMaW5lID0gSW5wdXRzLnJhbmdlKFxuICBbMCwgNi44M10sIFxuICB7dmFsdWU6IDYuODMsIHN0ZXA6IDAuMDEsIGxhYmVsOiBcIk1FQU5cIn1cbilcbnZpZXdvZiBzdGFuZGFyZERldmlhdGlvbiA9IElucHV0cy5yYW5nZShcbiAgWzEsIDIuOTNdLCBcbiAge3ZhbHVlOiAyLjkzLCBzdGVwOiAwLjAxLCBsYWJlbDogXCJTRFwifVxuKVxuXG4ge1xuICBjb25zdCB3aWR0aCA9IDYwMDtcbiAgY29uc3QgaGVpZ2h0ID0gMTUwO1xuICBjb25zdCBtYXJnaW4gPSB7IGxlZnQ6IDUwLCByaWdodDogNTAsIHRvcDogMjAsIGJvdHRvbTogMjAgfTtcbiAgXG4gIGNvbnN0IG1lYW5WYWx1ZSA9IG51bWJlckxpbmU7XG4gIGNvbnN0IHN0ZGRldlZhbHVlID0gc3RhbmRhcmREZXZpYXRpb247XG4gIFxuICAvLyBTY2FsZSBiYXNlZCBvbiBtZWFuIGFuZCBzdGFuZGFyZCBkZXZpYXRpb25cbiAgY29uc3Qgc2NhbGVYID0gZDMuc2NhbGVMaW5lYXIoKVxuICAgICAgLmRvbWFpbihbbWVhblZhbHVlLTEwICogc3RkZGV2VmFsdWUvNSwgbWVhblZhbHVlKzEwICogc3RkZGV2VmFsdWUvNV0pXG4gICAgICAucmFuZ2UoW21hcmdpbi5sZWZ0LCB3aWR0aCAtIG1hcmdpbi5yaWdodF0pO1xuXG4gIGNvbnN0IGF4aXMgPSBkMy5heGlzQm90dG9tKHNjYWxlWClcbiAgICAgIC50aWNrcygxMCk7XG5cbiAgY29uc3Qgc3ZnID0gZDMuY3JlYXRlKFwic3ZnXCIpXG4gICAgICAuYXR0cihcIndpZHRoXCIsIHdpZHRoKVxuICAgICAgLmF0dHIoXCJoZWlnaHRcIiwgaGVpZ2h0KTtcblxuICAvLyBEcmF3IHRoZSBudW1iZXIgbGluZSBheGlzXG4gIHN2Zy5hcHBlbmQoXCJnXCIpXG4gICAgICAuYXR0cihcInRyYW5zZm9ybVwiLCBgdHJhbnNsYXRlKDAsICR7aGVpZ2h0IC8gMn0pYClcbiAgICAgIC5jYWxsKGF4aXMpO1xuICBcbiAgLy8gQWRkIHNvbWUgZGF0YSBwb2ludHMgY2VudGVyZWQgYXJvdW5kIHRoZSBtZWFuXG4gIGNvbnN0IGRhdGFQb2ludHMgPSBbbWVhblZhbHVlIC0gc3RkZGV2VmFsdWUsIG1lYW5WYWx1ZSwgbWVhblZhbHVlICsgc3RkZGV2VmFsdWVdO1xuICBjb25zdCBsYWJlbHMgID0gW1wiLTEgU0RcIiwgXCJNZWFuXCIsIFwiKzEgU0RcIl07XG5cbiAgc3ZnLnNlbGVjdEFsbChcIi5kb3RcIilcbiAgICAgIC5kYXRhKGRhdGFQb2ludHMpXG4gICAgLmVudGVyKCkuYXBwZW5kKFwiY2lyY2xlXCIpXG4gICAgICAuYXR0cihcImNsYXNzXCIsIFwiZG90XCIpXG4gICAgICAuYXR0cihcImN4XCIsIGQgPT4gc2NhbGVYKGQpKSAgLy8gUG9zaXRpb24gYmFzZWQgb24gc2NhbGVkIHZhbHVlXG4gICAgICAuYXR0cihcImN5XCIsIGhlaWdodCAvIDIpICAgICAgLy8gUGxhY2UgdGhlbSBvbiB0aGUgbnVtYmVyIGxpbmVcbiAgICAgIC5hdHRyKFwiclwiLCA1KVxuICAgICAgLmF0dHIoXCJmaWxsXCIsIFwicmVkXCIpO1xuXG4gIC8vIExhYmVsIHRoZSBwb2ludHNcbiAgc3ZnLnNlbGVjdEFsbChcIi5sYWJlbFwiKVxuICAgICAgLmRhdGEoZGF0YVBvaW50cylcbiAgICAuZW50ZXIoKS5hcHBlbmQoXCJ0ZXh0XCIpXG4gICAgICAuYXR0cihcInhcIiwgZCA9PiBzY2FsZVgoZCkpXG4gICAgICAuYXR0cihcInlcIiwgaGVpZ2h0IC8gMiAtIDEwKVxuICAgICAgLmF0dHIoXCJ0ZXh0LWFuY2hvclwiLCBcIm1pZGRsZVwiKVxuICAgICAgLnRleHQoKGQsaSkgPT4gbGFiZWxzW2ldKTtcblxuICByZXR1cm4gc3ZnLm5vZGUoKTtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbnVtYmVyTGluZScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzdGFuZGFyZERldmlhdGlvbicpIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../analysis/techniques";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -677,7 +735,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1007,13 +1065,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../analysis/techniques/scale-construction.html" class="pagination-link" aria-label="Scale construction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Scale construction</span>
+      <a href="../../analysis/techniques/mediation.html" class="pagination-link" aria-label="Mediation Analyses">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Mediation Analyses</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../analysis/techniques/mediation.html" class="pagination-link" aria-label="Mediation Analyses">
-        <span class="nav-page-text">Mediation Analyses</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../analysis/tests/index.html" class="pagination-link" aria-label="Statistical tests">
+        <span class="nav-page-text">Statistical tests</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
