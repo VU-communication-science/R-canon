@@ -475,7 +475,7 @@ sample estimates:
 0.0952024 </code></pre>
 </div>
 </div>
-<p>The output gives us the correlation coefficient under the <code>sample estimates</code>, which in our case is <span class="math inline">\(r = 0.107\)</span>. This means that the correlation is positive (&gt; 0), but quite weak. The test also reports a p-value (<code>0.009</code>), which tells us that the correlation is significant at the <span class="math inline">\(99\%\)</span> (<code>&lt; 0.01</code>) confidence level. Also note that the degrees of freedom are reported as <code>598</code>, which is the number of observations minus 2.</p>
+<p>The output gives us the correlation coefficient under the <code>sample estimates</code>, which in our case is <span class="math inline">\(r = 0.095\)</span>. This means that the correlation is positive (&gt; 0), but quite weak. The test also reports a p-value (0.020), which tells us that the correlation is significant at the <span class="math inline">\(95\%\)</span> (<code>&lt; 0.05</code>) confidence level. Also note that the degrees of freedom are reported as 598, which is the number of observations minus 2.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="cor.test using the formula notation">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -575,7 +575,7 @@ cor.test using the formula notation
 <li><strong>Normality</strong>: The variables should be (roughly) normally distributed.</li>
 <li><strong>No outliers</strong>: Extreme values can have a big impact on the correlation coefficient.</li>
 </ol>
-<p>If these conditions are not met, you might want to use Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span> instead of the Pearson correlation coefficienta Spearman’s <span class="math inline">\(\rho\)</span> looks as the rank order of the variables instead of the specific scores, which makes it suitable for ordinal data, and makes it more robust to outliers, non-linear relationships, and non-normality. Kenall’s <span class="math inline">\(\tau\)</span> is similar to Spearman’s $`, but can be preferable if there are many ties in the data (when two or more observations have the same value, due to which they can’t be ranked perfectly).</p>
+<p>If these conditions are not met, you might want to use Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span> instead of the Pearson correlation coefficienta Spearman’s <span class="math inline">\(\rho\)</span> looks as the rank order of the variables instead of the specific scores, which makes it suitable for ordinal data, and makes it more robust to outliers, non-linear relationships, and non-normality. Kenall’s <span class="math inline">\(\tau\)</span> is similar to Spearman’s <span class="math inline">\(\rho\)</span>, but can be preferable if there are many ties in the data (when two or more observations have the same value, due to which they can’t be ranked perfectly).</p>
 <section id="spearmans-rho-and-kendalls-tau" class="level2">
 <h2 class="anchored" data-anchor-id="spearmans-rho-and-kendalls-tau">Spearman’s <span class="math inline">\(\rho\)</span> and Kendall’s <span class="math inline">\(\tau\)</span></h2>
 <p>To use the Spearman’s <span class="math inline">\(\rho\)</span> or Kendall’s <span class="math inline">\(\tau\)</span> correlation, you need to specify the <code>method</code> argument in the <code>cor.test</code> function, or the <code>corr.method</code> argument in the <code>tab_corr</code> function.</p>
@@ -597,9 +597,9 @@ cor.test using the formula notation
 <li>the <code>correlation coefficient</code> is rounded to two decimal places, and the number before the decimal point is ommited if zero (<code>.11</code> instead of <code>0.11</code>).</li>
 <li>The <code>p-value</code> is reported for the smallest significant level (<code>p &lt; 0.05</code>, <code>p &lt; 0.01</code> or <code>p &lt; 0.001</code>), or in full with three decimal places if not significant (<code>p = 0.123</code>).</li>
 </ul>
-<p>In our example above we observed a correlation coefficient of <span class="math inline">\(r = 0.107\)</span> with a p-value of <span class="math inline">\(p = 0.009\)</span>, and <span class="math inline">\(598\)</span> degrees of freedom. So we would report this as:</p>
+<p>For example, if we observe a correlation coefficient of <span class="math inline">\(r = 0.107\)</span> with a p-value of <span class="math inline">\(p = 0.009\)</span>, and <span class="math inline">\(298\)</span> degrees of freedom. We would report this as:</p>
 <blockquote class="blockquote">
-<p>There is a positive correlation between age and trust in journalists, <span class="math inline">\(r(598) = .12\)</span>, <span class="math inline">\(p &lt; 0.01\)</span>.</p>
+<p>There is a positive correlation between age and trust in journalists, <span class="math inline">\(r(298) = .12\)</span>, <span class="math inline">\(p &lt; 0.01\)</span>.</p>
 </blockquote>
 
 
@@ -704,7 +704,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

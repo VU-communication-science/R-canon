@@ -42,10 +42,17 @@ So here we access the `news_consumption` and `trust_t1` variables from the `d` d
 cor.test(d$news_consumption, d$trust_t1)
 ```
 
-The output gives us the correlation coefficient under the `sample estimates`, which in our case is $r = 0.107$.
+```{r, echo=F, results=F}
+m = cor.test(d$news_consumption, d$trust_t1)
+r = sprintf("%.3f", m$estimate)
+p = sprintf("%.3f", m$p.value)
+df = m$parameter
+```
+
+The output gives us the correlation coefficient under the `sample estimates`, which in our case is $r = `r r`$.
 This means that the correlation is positive (> 0), but quite weak.
-The test also reports a p-value (`0.009`), which tells us that the correlation is significant at the $99\%$ (`< 0.01`) confidence level. 
-Also note that the degrees of freedom are reported as `598`, which is the number of observations minus 2.
+The test also reports a p-value (`r p`), which tells us that the correlation is significant at the $95\%$ (`< 0.05`) confidence level. 
+Also note that the degrees of freedom are reported as `r df`, which is the number of observations minus 2.
 
 ::: {.callout-note title="cor.test using the formula notation" collapse="true"}
 
@@ -92,7 +99,7 @@ There are four main conditions that need to be met for the correlation test to b
 
 If these conditions are not met, you might want to use Spearman's $\rho$ or Kendall's $\tau$ instead of the Pearson correlation coefficienta
 Spearman's $\rho$ looks as the rank order of the variables instead of the specific scores, which makes it suitable for ordinal data, and makes it more robust to outliers, non-linear relationships, and non-normality.
-Kenall's $\tau$ is similar to Spearman's $\rho`, but can be preferable if there are many ties in the data (when two or more observations have the same value, due to which they can't be ranked perfectly).
+Kenall's $\tau$ is similar to Spearman's $\rho$, but can be preferable if there are many ties in the data (when two or more observations have the same value, due to which they can't be ranked perfectly).
 
 ## Spearman's $\rho$ and Kendall's $\tau$
 
@@ -124,9 +131,9 @@ r(`degrees of freedom`) = `correlation coefficient`, p = `p-value`.
 
 
 
-In our example above we observed a correlation coefficient of $r = 0.107$ with a p-value of $p = 0.009$, and $598$ degrees of freedom. 
-So we would report this as:
+For example, if we observe a correlation coefficient of $r = 0.107$ with a p-value of $p = 0.009$, and $298$ degrees of freedom. 
+We would report this as:
 
-> There is a positive correlation between age and trust in journalists, $r(598) = .12$, $p < 0.01$.
+> There is a positive correlation between age and trust in journalists, $r(298) = .12$, $p < 0.01$.
 
 

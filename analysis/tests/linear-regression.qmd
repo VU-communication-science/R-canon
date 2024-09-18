@@ -306,15 +306,22 @@ The output of the regression analysis gives us values for two coefficients: the 
 We get the coefficient **estimates** and **p-values** that tell us if these coefficients are statistically significant.
 With `tab_model` we also get the **confidence interval**. 
 
+```{r, echo=F, results=F}
+b_age = coef(m)[2] |> round(2)
+p_age = summary(m)$coefficients[2,4] |> round(3)
+r2 = summary(m)$r.squared |> round(3)
+ci_age = confint(m)[2,] |> round(2)
+```
+
 
 * The coefficient for the `intercept` tells us the predicted value of `trust_t1` when `age` is zero.
 This is not very meaningful in this case, because we don't have any people with an age of zero in our data.
-* The coefficient for `age` tells us how much `trust_t1` changes for every *unit increase* in `age`. Our `age` variable is in years, so the coefficient `0.04` tells us that for every year of age, trust in journalists increases on average by 0.04 points.
+* The coefficient for `age` tells us how much `trust_t1` changes for every *unit increase* in `age`. Our `age` variable is in years, so the coefficient `r b_age` tells us that for every year of age, trust in journalists increases on average by `r b_age` points.
   * The p-value of `< 0.001` tells us that this effect is statistically significant.
-  * The confidence interval tells us that we are 95% confident that the true effect of `age` on `trust_t1` is between 0.04 and 0.05.
+  * The confidence interval tells us that we are 95% confident that the true effect of `age` on `trust_t1` is between `r ci_age[1]` and `r ci_age[2]`.
 
 We also get the $R^2$ value, which tells us how well the model fits the data.
-Here we see that the $R^2$ is 0.281, which means that 28.1% of the variance in `trust_t1` can be explained by the variance in `age`, which is huge.
+Here we see that the $R^2$ is `r r2`, which means that `r round(r2*100,1)`% of the variance in `trust_t1` can be explained by the variance in `age`, which is huge.
 
 In conclusion, this model shows that (in our simulated data) there is a strong effect of `age` on `trust_t1`.
 
@@ -352,7 +359,8 @@ This will give you a new model with standardized coefficients, which you can the
 Using `show.std = T` in the `tab_model()` function actually does the same thing behind the scenes, so in practice this is often easier.
 But when first learning about regression analysis, it can be helpful to perform this step yourself to better understand what's going on.
 
-```{r, eval=F}library(rockchalk)
+```{r, results=F, message=F}
+library(rockchalk)
 m_std <- standardize(m)
 tab_model(m_std)
 ```
@@ -366,12 +374,28 @@ m2 <- lm(trust_t1 ~ news_consumption + age, data = d)
 tab_model(m1, m2, show.std = T)
 ```
 
-If we look at the first model, we see a significant effect of `news_consumption` on `trust_t1` ($b = 0.03$, $p < 0.05$). 
-The $R^2$ value is very low (0.009): only 0.9% of the variance in `trust_t1` can be explained by `news_consumption`.
+```{r, echo=F, results=F}
+zm1 = standardize(m1)
+zm2 = standardize(m2)
+b_age_2 = coef(m2)[3] |> round(2)
+b_age_2z = coef(zm2)[2] |> round(2)
+
+b_nc_1 = coef(m1)[2] |> round(2)
+b_nc_1z = coef(zm1)[1] |> round(2)
+b_nc_2z = coef(zm2)[1] |> round(2)
+b_nc_2 = coef(m2)[2] |> round(2)
+p_nc_2 = summary(m2)$coefficients[2,4] |> round(3)
+r2_1 = summary(m1)$r.squared |> round(3)
+r2_2 = summary(m2)$r.squared |> round(3)
+```
+
+
+If we look at the first model, we see a significant effect of `news_consumption` on `trust_t1` ($b = `r b_nc_1`$, $p < 0.05$). 
+The $R^2$ value is very low ($`r r2_1`$): only `r round(r2_1*100,1)`% of the variance in `trust_t1` can be explained by `news_consumption`.
 Still, if this was all the information we had, we might have concluded that there is at least a small effect of `news_consumption` on `trust_t1`.
 
-But when we include the `age` variable in the model, we see that the effect of `news_consumption` is no longer significant ($p = 0.699$).
-Also note that the $R^2$ value (0.281) is identical to when we only included the `age` variable (in the simple linear regression).
+But when we include the `age` variable in the model, we see that the effect of `news_consumption` is no longer significant ($b = `r b_nc_2`, p = `r p_nc_2`$).
+Also note that the $R^2$ value ($`r r2_2`$) is identical to when we only included the `age` variable (in the simple linear regression).
 So this suggests that the effect of `news_consumption` on `trust_t1` is actually explained by the effect of `age`.
 
 What we're witnessing here is a form of **confounding**.
@@ -382,13 +406,12 @@ For a more detailed explanation of confounding, see the [confounding tutorial](.
 
 Let's take a second to **interpret the std. Beta values**.
 These are the coefficients of the model if all variables are standardized.
-So the regular coefficient of `age` tells us that for every year increase in `age`, `trust_t1` increases by 0.04 points.
-From this value it's hard to say how big this effect is, and how it compares to other effects.
-For instance, in the first model we saw that `news_consumption` had a coefficient of 0.10, which would seem larger than the coefficient of `age`.
-But this is not a fair comparison, because the `age` variable is in years, and the `news_consumption` variable is in hours per day.
+So the regular coefficient of `age` tells us that for every year increase in `age`, `trust_t1` increases by `r b_age_2` points.
+How does this compare to the effect of `news_consumption`?
+This is an impossible mental exercise, because a 1 unit increase in `age` is not the same as a 1 unit increase in `news_consumption`.
 By standardizing the variables, we can compare the effects in terms of standard deviations instead.
-For every standard deviation increase in `age`, `trust_t1` increases by 0.53 standard deviations.
-For every standard deviation increase in `news_consumption`, `trust_t1` only increases by 0.10 standard deviations, and after controlling for `age` only by 0.01 standard deviations (which is also no longer significant).
+For every standard deviation increase in `age`, `trust_t1` increases by `r b_age_2z` standard deviations.
+For every standard deviation increase in `news_consumption`, `trust_t1` only increases by `r b_nc_1z` standard deviations, and after controlling for `age` only by `r b_nc_2z` standard deviations (which is also no longer significant).
 
 This is also a good time to talk about the **$R^2$ adjusted** value.
 This is the $R^2$ value, but corrected for the number of independent variables in the model.
@@ -422,10 +445,14 @@ m <- lm(trust_t1 ~ political_left, data = d)
 tab_model(m)
 ```
 
+```{r, echo=F, results=F}
+b_pl = coef(m)[2] |> round(2)
+```
+
 The interpretation of the results is almost identical to the previous example with the `age` variable.
 The only thing we need to keep in mind is that the `political_left` variable is binary, so it can only take the values `0` and `1`.
-Accordingly, we don't say that the trust in journalists increases by `0.21` points for every unit increase in `political_left`.
-Instead, we just say that people on the political left (`political_left = 1`) have on average a trust score that is `0.21` points higher than people that are not on the political left (`political_left = 0`).
+Accordingly, we don't say that the trust in journalists increases by `r b_pl` points for every unit increase in `political_left`.
+Instead, we just say that people on the political left (`political_left = 1`) have on average a trust score that is `r b_pl` points higher than people that are not on the political left (`political_left = 0`).
 
 <!-- Note that in this case we can actually interpret the **intercept**.
 The intercept is the predicted value of the dependent variable when the independent variable is zero.
@@ -468,10 +495,18 @@ You can see how this works in the following table:
 | right                 | 0       | 1        |
 | center                | 0       | 0        |
 
+```{r, echo=F, results=F}
+b_left = coef(m)[2] |> round(2)
+b_right = coef(m)[3] |> round(2)
+p_left = summary(m)$coefficients[2,4] |> round(3)
+p_right = summary(m)$coefficients[3,4] |> round(3)
+```
+
+
 The `center` category is now the **reference category**.
 That is, the `center` category is the category that all other categories are compared to.
-So the `political_orientation [left]` coefficient tells us that `trust` is for people in the `left` category is 0.12 points higher than for people in the `center` category, but this difference is not significant (p = 0.220)
-The `political_orientation [right]` coefficient tells us that `trust` is for people in the `right` category is 0.17 points lower than for people in the `center` category, but this difference is also not significant (p = 0.100).
+So the `political_orientation [left]` coefficient tells us that `trust` is for people in the `left` category is `r b_left` points higher than for people in the `center` category, but this difference is not significant (p = `r p_left`)
+The `political_orientation [right]` coefficient tells us that `trust` is for people in the `right` category is `r b_right` points lower than for people in the `center` category, but this difference is also not significant (p = `r p_right`).
 
 ::: {.callout-note title="Determining what reference category to use" collapse="true"}
 

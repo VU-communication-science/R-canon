@@ -114,8 +114,10 @@ t1_items_alligned$trust_t1_item3 = 11 - t1_items_alligned$trust_t1_item3
 t2_items_alligned = t2_items
 t2_items_alligned$trust_t2_item3 = 11 - t2_items_alligned$trust_t2_item3
 
-new_trust_t1 = rowMeans(t1_items_alligned)
-new_trust_t2 = rowMeans(t2_items_alligned)
+## create scales using only items 1,3,4,5.
+scale_items = c('trust_t1_item1', 'trust_t1_item3', 'trust_t1_item4', 'trust_t1_item5')
+new_trust_t1 = rowMeans(t1_items_alligned[, scale_items])
+new_trust_t2 = rowMeans(t2_items_alligned[, scale_items])
 
 ## check if the correlations are still there
 cor.test(d$trust_t1, new_trust_t1)$estimate

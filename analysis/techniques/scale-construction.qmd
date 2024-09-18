@@ -20,7 +20,7 @@ This is also called a **Likert scale**, and it's a common way to gather data on 
 
 You will also hear scales referred to as **latent variables**.
 The word **latent** means hidden or concealed, and it refers here to the fact that the construct we are trying to measure is not directly observable.
-We can only measure it propertly by looking at multiple observable indicators (items) that are related to the construct.
+We can only measure it properly by looking at multiple observable indicators (items) that are related to the construct.
 
 ## How to create a scale {#create-scale}
 
@@ -208,19 +208,21 @@ d |>
 You can verify that the `raw_alpha` is now 0.92.
 So now we can choose between either using the 4-item scale with an alpha of 0.92, or keeping the 5-item scale with an alpha of 0.85.
 This is a judgement call, and depends on the context of your research.
-You might also consider why an items is not working as well as the others (e.g. is it measuring a different aspect of the construct?, or might there be a problem with the item itself, such as confusing formulation?).
-Generally speaking, if you're alpha is on the lower end (< 0.7) and you have items to spare (> 3), it's a good idea to remove some items.
+Generally speaking, if you have sufficient items, it's a good idea to remove items that are not working well, because this will make your scale more reliable and valid.
+
+If you decide to remove an item, you should test the scale again, because it is possible that you could further improve the reliability by removing another item.
+In the output of `alpha()` for our four item scale we see that this is not the case.
 
 ### 7. Calculate the scale score
 
 Finally, once you have a reliable scale, you can calculate the scale score.
 This is usually done by taking the average of the items in the scale.
 The simplest way to do so is to just add up the items and divide by the number of items.
-Let's do this for the 5-item scale ($\alpha = 0.85$) that we tested above (mind the parentheses!):
+Let's do this for the 4-item scale ($\alpha = 0.92$) that we tested above (mind the parentheses!):
 
 ```{r}
 d <- d |> 
-    mutate(trust_t1_scale = (trust_t1_item1 + trust_t1_item2 + trust_t1_item3_inv + trust_t1_item4 + trust_t1_item5) / 5)
+    mutate(trust_t1_scale = (trust_t1_item1 + trust_t1_item3_inv + trust_t1_item4 + trust_t1_item5) / 4)
 ```
 
 So now we have a new column `trust_t1_scale` that contains the scale score.

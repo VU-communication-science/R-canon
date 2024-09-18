@@ -16,18 +16,17 @@ Consider the following two examples:
 - When news media focus heavily on certain issues, it enhances the public's perception of their importance [@mccombs72].
 - More screen time among children and adolescents is associated with lower psychological well-being [@twenge18].
 
-Research into such causal relations is important, because by understanding causal mechanisms, we can develop strategies to change the outcomes for the better.
-If more screen time causes lower psychological well-being, we should advice parents to limit children's screen time.
+In the first example, the authors use clear causal language: media coverage **enhances** the public's perception of issue importance.
+In the second example, the authors are more careful: they only say that screen time is **associated** with lower psychological well-being.
+But if you read the article, you see that they do argue that this association is due to a causal relationship.
 
-In order to determine whether we should really incur the wrath of our children by taking away their smartphones, we need to test our theory with empirical data.
-As usual, we can [derive hypotheses](../concepts/hypotheses.qmd) that predict relationships between variables, and then test these hypotheses with **statistical methods**.
-However, when testing causal relations, we need to particularly careful!
-
+As you'll see in this tutorial, being this delicate about causal language is highly appropriate!
+If we know for a fact that more screen time causes lower psychological well-being, we should take action.
+But in practice, it is often very hard if not impossible to provide definitive proof of a causal relationship.
 A common mistake is to assume that a correlation between two variables implies a causal relationship.
 Even if we find strong evidence that people that have more screen time also have lower psychological well-being, this does not prove that screen time causes lower well-being!
 There is a famous saying in statistics: **correlation does not imply causation**.
-In this tutorial you will learn why this is the case, and how to deal with it.
-
+In this tutorial you will learn why this is the case, and what we can do go to beyond correlation to build evidence for causal relationships.
 
 # Why correlation does not imply causation
 
@@ -39,7 +38,7 @@ If we were to somehow manipulate the cause, we would expect the likelihood of th
 [Correlation](../concepts/covariance-and-correlation.qmd), on the other hand, only indicates an association or relationship between two variables.
 It makes sense why people can confuse this for a causal relationship.
 If we see that people that that are often on their phone are overall less happy, it is easy to assume that the phone is the cause of their unhappiness.
-But in order to establish whether a correlation is due to a causal relationship, we need address three issues:
+But in order to establish whether a correlation is due to a causal relationship, we need address two issues:
 
 * **Confounding**: A correlation could be due to a third variable that causes both of them to change. 
     Both screen time and psychological well-being could for instance be influenced by parental involvement.
@@ -48,13 +47,14 @@ But in order to establish whether a correlation is due to a causal relationship,
 * **Directionality**: A correlation does not tell us which variable causes the other.
     It could be that more screen time causes lower psychological well-being, but it could also be that children with lower psychological well-being spend more time on screens.
     If this is the case, taking away their phone would not help!
-* **Coincidence**: A correlation is also **spurious** if it is just a coincidence.
-    This is something we can address with statistical tests, but it bears keeping in mind. (See the box below for some famous examples of spurious correlations.)
+<!-- * **Coincidence**: A correlation is also **spurious** if it is just a coincidence.
+    This is something we can address with statistical tests, but it bears keeping in mind. (See the box below for some famous examples of spurious correlations.) -->
     
 ::: {.callout-tip title="Famous spurious correlations" collapse="true"}
 A [famous example](http://www.brixtonhealth.com/storksBabies.pdf) is that across European countries the number of storks is quite strongly correlated with the number of newborn babies ($\rho = 0.62$). A naive interpretation would be that this provides evidence for the folk theory that storks deliver babies. The real reason in this case is due to a confounding variable: the size of the country. Larger countries simply have more storks and more babies.
 
-There is also a website called [Spurious Correlations](https://www.tylervigen.com/spurious-correlations), that is dedicated to finding coincidental spurious correlations, such as the correlation between the number of people who drowned by falling into a pool and the number of films Nicolas Cage appeared in.
+There is also a website called [Spurious Correlations](https://www.tylervigen.com/spurious-correlations), that is dedicated to finding spurious correlations, such as the correlation between the number of people who drowned by falling into a pool per year, and the number of films Nicolas Cage appeared in that year
+Some of these correlations are due to confounding variables, but many are also just coincidences.
 :::
 
 ## Visualizing causation 
@@ -120,13 +120,13 @@ The prime risk of post hoc reasoning is that you end up shaping a theory to fit 
 Many scientific journals therefore require you to pre-register your hypotheses before you start collecting data.
 This doesn't mean that there is no room for exploration in your data, but it does mean that you should be transparent about what you were looking for based on **a priori** reasoning, and what you learned from **post hoc** reasoning about your data.
 
-Theory also helps us to identify possible confounding variables.
+<!-- Theory also helps us to identify possible confounding variables.
 Consider for example the **gender gap in chess**.
 Women are underrepresented in chess, with especially few women at the top levels [@christopher07].
 A naive interpretation would be that this is because, as grandmaster Garry Kasparov said in 1989: "Men are hardwired to be better chess players than women". 
 To properly understand where this gap comes from, we need to build theory that takes alternative explanations into account.
 If you have time for a tangent, try reading [this Slate Magazine article](https://slate.com/technology/2020/12/why-are-the-best-chess-players-men.html) and see if you can identify some of the confounding variables that the author mentions.
-
+ -->
 
 
 ## If possible, conduct an experiment
@@ -143,7 +143,7 @@ You could then show the treatment group a persuasive message that uses the new s
 The experimental design helps to adress both **confounding** and **directionality**.
 
 * By randomly assigning people to the treatment or control group, the people in both groups are *statistically identical*. If the randomization is done correctly, any possible confounding variables are equally distributed between the two groups, and so any difference in the outcome can be attributed to the treatment. 
-* By comparing the treatment group to the control group, you can account for confounding variables that have to do with the process of appyling the treatment. A well known example of this is the *placebo effect*, where people feel better just because they *think* they're taking a medicine (control group), and not because of the actual medicine (treatment group). If the medicine works, the treatment group should see a stronger effect than the control group. 
+* By comparing the treatment group to the control group, you can account for variables that are a consequence of appyling the treatment. A well known example of this is the *placebo effect*, where people feel better just because they *think* they're taking a medicine (control group), and not because of the actual medicine (treatment group). If the medicine works, the treatment group should see a stronger effect than the control group. 
 
 This ability to eliminate the influence of confounders makes experiments a powerful tool for establishing causation.
 However, in the field of communication science it is often not possible (or ethical) to conduct valid experiments.
@@ -167,9 +167,10 @@ This puts an even greater burden on having a solid theoretical foundation for th
 
 ## Triangulation
 
-It is generally the case that we cannot determine causality from a single study, and need to build a body of evidence from multiple studies that point in the same direction.
-An experiment might be able to establish causality, but only for a very specific context and short term effects.
-An observational study might be able to find correlations that are consistent across many different contexts and time periods, but it cannot establish causality.
+Triangulation means using multiple methods to study the same phenomenon.
+It is generally the case that we cannot determine causality from a single study, and need to build a body of evidence by looking at the same relationship from different angles.
+An experiment might be able to establish causality, but only within the confines of a specific experimental setting, that is often a simplification of the real world.
+An observational study might be able to find correlations in the real-world that are consistent across many different contexts and time periods, but there can always be confounding variables that we have not measured and controlled for.
 To build theory on complicated issues such as the relationship between screen time and well-being, we need to combine both types of studies.
 
 For example, in their study on screen time and well-being, Twenge and Campbell presented valuable data on the correlation between these variables, but emphasized that based on their data they cannot determine the direction of the relationship [@twenge18, p. 281].

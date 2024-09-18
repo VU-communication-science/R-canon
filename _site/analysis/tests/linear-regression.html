@@ -779,7 +779,7 @@ Confidence intervalls without tab_model
 <p>The output of the regression analysis gives us values for two coefficients: the <strong>(intercept)</strong> and the <strong>age</strong> variable (like <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> in the regression equation). We get the coefficient <strong>estimates</strong> and <strong>p-values</strong> that tell us if these coefficients are statistically significant. With <code>tab_model</code> we also get the <strong>confidence interval</strong>.</p>
 <ul>
 <li>The coefficient for the <code>intercept</code> tells us the predicted value of <code>trust_t1</code> when <code>age</code> is zero. This is not very meaningful in this case, because we don’t have any people with an age of zero in our data.</li>
-<li>The coefficient for <code>age</code> tells us how much <code>trust_t1</code> changes for every <em>unit increase</em> in <code>age</code>. Our <code>age</code> variable is in years, so the coefficient <code>0.04</code> tells us that for every year of age, trust in journalists increases on average by 0.04 points.
+<li>The coefficient for <code>age</code> tells us how much <code>trust_t1</code> changes for every <em>unit increase</em> in <code>age</code>. Our <code>age</code> variable is in years, so the coefficient 0.04 tells us that for every year of age, trust in journalists increases on average by 0.04 points.
 <ul>
 <li>The p-value of <code>&lt; 0.001</code> tells us that this effect is statistically significant.</li>
 <li>The confidence interval tells us that we are 95% confident that the true effect of <code>age</code> on <code>trust_t1</code> is between 0.04 and 0.05.</li>
@@ -808,14 +808,18 @@ Standardized coefficients
 <p>Think for a second why this makes sense. If you have a variable that goes from 0 to 100, and another variable that goes from 0 to 1, then the coefficients of these variables will be on completely different scales. Recall that the coefficient tells us how much the dependent variable changes for every <strong>unit increase</strong> in the independent variable. A <strong>unit increase</strong> of 1 on a scale from 0 to 100 is very different from a <strong>unit increase</strong> of 1 on a scale from 0 to 1. And even if two variables are both on a scale from 0 to 1, the effect of a unit increase can still be different if the variables have a different standard deviation. By standardizing the variables, a <strong>unit increase</strong> is now an increase of one <strong>standard deviation</strong>, which is the same for all variables.</p>
 <p>You can request the standardized coefficients with the <code>show.std = T</code> argument in the <code>tab_model()</code> function. This will report the standardized coefficients (<code>std. Beta</code>) next to the regular coefficients (<code>Estimates</code>).</p>
 <p>Alternatively, you can also use the <code>rockchalk</code> package to standardize the entire model. This will give you a new model with standardized coefficients, which you can then use to interpret the effect sizes. Using <code>show.std = T</code> in the <code>tab_model()</code> function actually does the same thing behind the scenes, so in practice this is often easier. But when first learning about regression analysis, it can be helpful to perform this step yourself to better understand what’s going on.</p>
-<p><code>{r, eval=F}library(rockchalk) m_std &lt;- standardize(m) tab_model(m_std)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rockchalk)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>m_std <span class="ot">&lt;-</span> <span class="fu">standardize</span>(m)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m_std)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> news_consumption, <span class="at">data =</span> d)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> news_consumption <span class="sc">+</span> age, <span class="at">data =</span> d)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2, <span class="at">show.std =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> news_consumption, <span class="at">data =</span> d)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> news_consumption <span class="sc">+</span> age, <span class="at">data =</span> d)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2, <span class="at">show.std =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table style="border-collapse:collapse; border:none;">
 <tbody><tr>
@@ -890,10 +894,10 @@ Standardized coefficients
 
 </div>
 </div>
-<p>If we look at the first model, we see a significant effect of <code>news_consumption</code> on <code>trust_t1</code> (<span class="math inline">\(b = 0.03\)</span>, <span class="math inline">\(p &lt; 0.05\)</span>). The <span class="math inline">\(R^2\)</span> value is very low (0.009): only 0.9% of the variance in <code>trust_t1</code> can be explained by <code>news_consumption</code>. Still, if this was all the information we had, we might have concluded that there is at least a small effect of <code>news_consumption</code> on <code>trust_t1</code>.</p>
-<p>But when we include the <code>age</code> variable in the model, we see that the effect of <code>news_consumption</code> is no longer significant (<span class="math inline">\(p = 0.699\)</span>). Also note that the <span class="math inline">\(R^2\)</span> value (0.281) is identical to when we only included the <code>age</code> variable (in the simple linear regression). So this suggests that the effect of <code>news_consumption</code> on <code>trust_t1</code> is actually explained by the effect of <code>age</code>.</p>
+<p>If we look at the first model, we see a significant effect of <code>news_consumption</code> on <code>trust_t1</code> (<span class="math inline">\(b = 0.03\)</span>, <span class="math inline">\(p &lt; 0.05\)</span>). The <span class="math inline">\(R^2\)</span> value is very low (<span class="math inline">\(0.009\)</span>): only 0.9% of the variance in <code>trust_t1</code> can be explained by <code>news_consumption</code>. Still, if this was all the information we had, we might have concluded that there is at least a small effect of <code>news_consumption</code> on <code>trust_t1</code>.</p>
+<p>But when we include the <code>age</code> variable in the model, we see that the effect of <code>news_consumption</code> is no longer significant (<span class="math inline">\(b = 0, p = 0.699\)</span>). Also note that the <span class="math inline">\(R^2\)</span> value (<span class="math inline">\(0.281\)</span>) is identical to when we only included the <code>age</code> variable (in the simple linear regression). So this suggests that the effect of <code>news_consumption</code> on <code>trust_t1</code> is actually explained by the effect of <code>age</code>.</p>
 <p>What we’re witnessing here is a form of <strong>confounding</strong>. There is a relation between the <code>news_consumption</code> and <code>trust_t1</code> variables, but this relation is likely <em>spurious</em>. <code>age</code> has an effect on both <code>news_consumption</code> and <code>trust_t1</code>: older people consume more news, and have more trust in journalists. By controlling for <code>age</code>, the spurious relation between <code>news_consumption</code> and <code>trust_t1</code> disappears. For a more detailed explanation of confounding, see the <a href="../../analysis/techniques/controlling.html">confounding tutorial</a>.</p>
-<p>Let’s take a second to <strong>interpret the std. Beta values</strong>. These are the coefficients of the model if all variables are standardized. So the regular coefficient of <code>age</code> tells us that for every year increase in <code>age</code>, <code>trust_t1</code> increases by 0.04 points. From this value it’s hard to say how big this effect is, and how it compares to other effects. For instance, in the first model we saw that <code>news_consumption</code> had a coefficient of 0.10, which would seem larger than the coefficient of <code>age</code>. But this is not a fair comparison, because the <code>age</code> variable is in years, and the <code>news_consumption</code> variable is in hours per day. By standardizing the variables, we can compare the effects in terms of standard deviations instead. For every standard deviation increase in <code>age</code>, <code>trust_t1</code> increases by 0.53 standard deviations. For every standard deviation increase in <code>news_consumption</code>, <code>trust_t1</code> only increases by 0.10 standard deviations, and after controlling for <code>age</code> only by 0.01 standard deviations (which is also no longer significant).</p>
+<p>Let’s take a second to <strong>interpret the std. Beta values</strong>. These are the coefficients of the model if all variables are standardized. So the regular coefficient of <code>age</code> tells us that for every year increase in <code>age</code>, <code>trust_t1</code> increases by 0.04 points. How does this compare to the effect of <code>news_consumption</code>? This is an impossible mental exercise, because a 1 unit increase in <code>age</code> is not the same as a 1 unit increase in <code>news_consumption</code>. By standardizing the variables, we can compare the effects in terms of standard deviations instead. For every standard deviation increase in <code>age</code>, <code>trust_t1</code> increases by 0.53 standard deviations. For every standard deviation increase in <code>news_consumption</code>, <code>trust_t1</code> only increases by 0.1 standard deviations, and after controlling for <code>age</code> only by 0.01 standard deviations (which is also no longer significant).</p>
 <p>This is also a good time to talk about the <strong><span class="math inline">\(R^2\)</span> adjusted</strong> value. This is the <span class="math inline">\(R^2\)</span> value, but corrected for the number of independent variables in the model. This is important, because the <span class="math inline">\(R^2\)</span> value will always increase when you add more independent variables to the model, because this adds an additional parameter that it can use to fit the data (in our case the increase was just so small that it didn’t show after rounding). The <span class="math inline">\(R^2\)</span> adjusted value corrects for this, which is why it’s actually lower in our model with both <code>age</code> and <code>news_consumption</code> than in the model with just <code>age</code>. In practice, the <span class="math inline">\(R^2\)</span> adjusted value is very similar to the <span class="math inline">\(R^2\)</span> value, and the regular <span class="math inline">\(R^2\)</span> is then often reported. But always check the <span class="math inline">\(R^2\)</span> adjusted value if you’re adding multiple independent variables to the model to see if you’re not just adding noise.</p>
 </section>
 <section id="categorical-ivs" class="level2">
@@ -901,15 +905,15 @@ Standardized coefficients
 <p>The <strong>independent variable</strong> in a regression model can also be categorical. This allows us to include categorical variables in the model, similar to the t-test and ANOVA. Let’s see what this looks like when we predict <code>trust_t1</code> based on the <code>political_orientation</code> variable, which has the values <code>left</code>, <code>right</code> and <code>center</code>.</p>
 <p>We cannot directly use the values “left”, “right” and “center” in the regression equation, but we create so-called <strong>dummy variables</strong>. A dummy variable is a <em>binary</em> variable (i.e., it can only take the values <code>0</code> and <code>1</code>) that represents whether something is the case or not. So if we want to test whether people that lean to the left have more trust in journalists, we can create a dummy variable that is <code>1</code> for people with orientation <code>left</code>, and <code>0</code> for all other people (i.e., <code>right</code> and <code>center</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> <span class="fu">mutate</span>(d, <span class="at">political_left =</span> <span class="fu">if_else</span>(political_orientation <span class="sc">==</span> <span class="st">"left"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, political_orientation, political_left) <span class="do">## check the result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> <span class="fu">mutate</span>(d, <span class="at">political_left =</span> <span class="fu">if_else</span>(political_orientation <span class="sc">==</span> <span class="st">"left"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, political_orientation, political_left) <span class="do">## check the result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can use this variable in the regression model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_left, <span class="at">data =</span> d)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_left, <span class="at">data =</span> d)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table style="border-collapse:collapse; border:none;">
 <tbody><tr>
@@ -947,7 +951,7 @@ Standardized coefficients
 
 </div>
 </div>
-<p>The interpretation of the results is almost identical to the previous example with the <code>age</code> variable. The only thing we need to keep in mind is that the <code>political_left</code> variable is binary, so it can only take the values <code>0</code> and <code>1</code>. Accordingly, we don’t say that the trust in journalists increases by <code>0.21</code> points for every unit increase in <code>political_left</code>. Instead, we just say that people on the political left (<code>political_left = 1</code>) have on average a trust score that is <code>0.21</code> points higher than people that are not on the political left (<code>political_left = 0</code>).</p>
+<p>The interpretation of the results is almost identical to the previous example with the <code>age</code> variable. The only thing we need to keep in mind is that the <code>political_left</code> variable is binary, so it can only take the values <code>0</code> and <code>1</code>. Accordingly, we don’t say that the trust in journalists increases by 0.22 points for every unit increase in <code>political_left</code>. Instead, we just say that people on the political left (<code>political_left = 1</code>) have on average a trust score that is 0.22 points higher than people that are not on the political left (<code>political_left = 0</code>).</p>
 <!-- Note that in this case we can actually interpret the **intercept**.
 The intercept is the predicted value of the dependent variable when the independent variable is zero.
 So in this case, the intercept (`3.83`) is the predicted trust in journalists for people that are NOT `political_left`. -->
@@ -956,12 +960,12 @@ So in this case, the intercept (`3.83`) is the predicted trust in journalists fo
 <p>In the previous example we created the dummy variable ourselves, but we can also let R do this for us. This is especially convenient if we have more than two categories. In addition, this also has the benefit that <code>lm</code> <em>knows</em> that the variable is categorical, which enables us (among other things) to visualize the model propertly.</p>
 <p>We first need to make sure that our variable is of the <code>factor</code> type<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. The difference between a <code>character</code> and a <code>factor</code> is that in a <code>factor</code> we explicitly tell R what the categories are, and what the <em>order</em> of the categories is. The order is important, because the first category will be the <strong>reference category</strong> (more on this later) in the regression model. To transform our <code>political_orientation</code> variable to a <code>factor</code> we can use the <code>factor()</code> function, and provide the <code>levels</code> argument to specify the order of the categories.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">political_orientation =</span> <span class="fu">factor</span>(political_orientation, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'center'</span>,<span class="st">'left'</span>,<span class="st">'right'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">political_orientation =</span> <span class="fu">factor</span>(political_orientation, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'center'</span>,<span class="st">'left'</span>,<span class="st">'right'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, when we use the <code>political_orientation</code> variable in the regression model, R will automatically create the dummy variables for us.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation, <span class="at">data =</span> d)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation, <span class="at">data =</span> d)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table style="border-collapse:collapse; border:none;">
 <tbody><tr>
@@ -1032,7 +1036,7 @@ So in this case, the intercept (`3.83`) is the predicted trust in journalists fo
 </tr>
 </tbody>
 </table>
-<p>The <code>center</code> category is now the <strong>reference category</strong>. That is, the <code>center</code> category is the category that all other categories are compared to. So the <code>political_orientation [left]</code> coefficient tells us that <code>trust</code> is for people in the <code>left</code> category is 0.12 points higher than for people in the <code>center</code> category, but this difference is not significant (p = 0.220) The <code>political_orientation [right]</code> coefficient tells us that <code>trust</code> is for people in the <code>right</code> category is 0.17 points lower than for people in the <code>center</code> category, but this difference is also not significant (p = 0.100).</p>
+<p>The <code>center</code> category is now the <strong>reference category</strong>. That is, the <code>center</code> category is the category that all other categories are compared to. So the <code>political_orientation [left]</code> coefficient tells us that <code>trust</code> is for people in the <code>left</code> category is 0.14 points higher than for people in the <code>center</code> category, but this difference is not significant (p = 0.175) The <code>political_orientation [right]</code> coefficient tells us that <code>trust</code> is for people in the <code>right</code> category is -0.17 points lower than for people in the <code>center</code> category, but this difference is also not significant (p = 0.094).</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Determining what reference category to use">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1047,10 +1051,10 @@ Determining what reference category to use
 <div class="callout-body-container callout-body">
 <p>In the current model we cannot directly compare the <code>left</code> and <code>right</code> categories, because the <code>center</code> category is the reference category. This makes it important to choose a reference category that makes sense for your research question. To determine the reference category, you can change the order of the levels in the <code>factor()</code> function. The first level will always be the reference category. So in the following example, the <code>left</code> category is the reference category.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">political_orientation =</span> <span class="fu">factor</span>(political_orientation, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'left'</span>,<span class="st">'center'</span>,<span class="st">'right'</span>)))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation, <span class="at">data =</span> d2) <span class="sc">|&gt;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_model</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">political_orientation =</span> <span class="fu">factor</span>(political_orientation, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'left'</span>,<span class="st">'center'</span>,<span class="st">'right'</span>)))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation, <span class="at">data =</span> d2) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_model</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table style="border-collapse:collapse; border:none;">
 <tbody><tr>
@@ -1103,10 +1107,10 @@ Determining what reference category to use
 <h2 class="anchored" data-anchor-id="numeric-and-categorical-ivs">Numeric and categorical IVs</h2>
 <p>You’ve already seen how multiple regression works, AND how to include categorical variables in the model. Let’s conclude with a model that includes both numeric and categorical variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation, <span class="at">data =</span> d)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation <span class="sc">+</span> age, <span class="at">data =</span> d)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation, <span class="at">data =</span> d)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> political_orientation <span class="sc">+</span> age, <span class="at">data =</span> d)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(m1, m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table style="border-collapse:collapse; border:none;">
 <tbody><tr>
@@ -1195,17 +1199,17 @@ Determining what reference category to use
 <h3 class="anchored" data-anchor-id="linearity">Linearity</h3>
 <p>Remember that we are trying to fit a straight line through the data. If the relationship between the independent and dependent variable is not linear, then the model will not fit the data well. To check this assumption, you can plot the data and see if a straight line is a good fit. With the <code>plot_model()</code> function from the <code>sjPlot</code> package you can plot the predicted (<code>type = "pred"</code>) values for an independent variable (<code>terms = "age"</code>) on top of the data points (<code>show.data = T, jitter = T</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> age, <span class="at">data =</span> d)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">terms =</span> <span class="st">"age"</span>, </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">show.data =</span> T, <span class="at">jitter =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> age, <span class="at">data =</span> d)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">terms =</span> <span class="st">"age"</span>, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">show.data =</span> T, <span class="at">jitter =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you check this plot for our practice data, you’ll see that the relationship between <code>age</code> and <code>trust_t1</code> is indeed linear. Let’s instead look at an example where the relationship is not linear. In the following plot the relation between <code>age</code> and <code>happiness</code> is quadratic, following a u-shape. Younger and older people tend to be happier than middle-aged people. A regular linear model (left) will not be able to capture this relationship well, and will therefore not fit the data well. On the right we fit a regression line to the actual relation.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1216,7 +1220,7 @@ Determining what reference category to use
 <p>The residuals of the model should be normally distributed. If you look at the figure of the regression model at the top of this tutorial, you can see how the residuals (the red lines) are distributed around the regression line. This distribution should be normal.</p>
 <p>You can to some extend see whether this is the case using the same plot as above. But there are also special diagnostics plots that can help you with this. With the <code>plot_model()</code> function you can plot the residuals (<code>type = "diag"</code>) of the model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>diag_plots <span class="ot">&lt;-</span> <span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"diag"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>diag_plots <span class="ot">&lt;-</span> <span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"diag"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This creates a series of plots that show the residuals in different ways. What diagnostics plots are produced depends on the type of model you have. For regression we get three plots:</p>
 <ul>
@@ -1226,12 +1230,12 @@ Determining what reference category to use
 </ul>
 <p>Let’s first focus on the second plot, which shows just the distribution of the residuals. The coloured area is a smoothed density plot of the residuals, and the blue line shows a proper bell curve for reference. If there is a clear difference between the two, then the residuals are not normally distributed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>diag_plots <span class="ot">=</span> <span class="fu">plot_model</span>(m, <span class="at">type=</span><span class="st">"diag"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>diag_plots[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>diag_plots <span class="ot">=</span> <span class="fu">plot_model</span>(m, <span class="at">type=</span><span class="st">"diag"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>diag_plots[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1241,11 +1245,11 @@ Determining what reference category to use
 <h3 class="anchored" data-anchor-id="no-outliers-in-the-residuals">No outliers in the residuals</h3>
 <p>Outliers can have a large effect on the model. Usually outliers in the residuals are related to outliers in the variables, which can be detected when <a href="../../analysis/techniques/data-cleaning.html">inspecting and cleaning</a> the data. For detecting outliers in the residuals, the <strong>Non-normality of residuals and outliers</strong> plot can be helpful. If there are outliers, they will show up as points that are far away from the line.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>diag_plots[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>diag_plots[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1256,11 +1260,11 @@ Determining what reference category to use
 <p>The residuals should have a constant variance. What we mean by this is that among the fitted values in the model, the variance of the residuals should not systematically increase or decrease. For instance, if in our model of <strong>age</strong> predicting <strong>trust</strong> the residuals are very small for young people, and very large for old people, then the model is not homoscedastic.</p>
 <p>This can be checked with the <strong>Homoscedasticity</strong> plot. If the residuals are homoscedastic, then the residuals should be randomly distributed around the horizontal line.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>diag_plots[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>diag_plots[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1270,7 +1274,7 @@ Determining what reference category to use
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1301,7 +1305,7 @@ The variance inflation factor
 <p>A more appropriate way to check for multicolinearity is to use the <strong>variance inflation factor</strong> (VIF). Looking just at correlations is actually not good enough. The more accurate definition of multicolinearity is that one independent variable can be predicted by the other independent variables in the model. So looking at bi-variate correlations is not enough, because the prediction of one variable can be spread out over multiple other variables.</p>
 <p>In R we can calculate the VIF of the variables in a model with the <code>vif()</code> function from the <code>car</code> package. This returns the VIF score for each independent variable. If the VIF is 1 or lower, we don’t have to worry about multicolinearity. If it’s higher than 5, we very likely have a problem. If it’s between 1 and 5, it’s a grey area, and you (as always) have to use your judgement.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: carData</code></pre>
 </div>
@@ -1319,8 +1323,8 @@ Attaching package: 'car'</code></pre>
 
     recode</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> age <span class="sc">+</span> news_consumption, <span class="at">data =</span> d)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(trust_t1 <span class="sc">~</span> age <span class="sc">+</span> news_consumption, <span class="at">data =</span> d)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             age news_consumption 
         1.024159         1.024159 </code></pre>
@@ -1462,7 +1466,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

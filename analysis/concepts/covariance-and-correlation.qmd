@@ -18,10 +18,9 @@ For example, it allows us to measure: *to what extent is a person's social media
 The **correlation** is a standardized version of the covariance, which expresses the **strength** and **direction** of the relationship between two variables on a scale from -1 to 1.
 This makes it easier to interpret. Consider the following example:
 
-* if the correlation between a person's social media use and their feelings of loneliness is positive (`> 0`), it means that people that spend more time on social media tend to feel more lonely.
-* If the correlation is negative (`< 0`), it means that people that spend more time on social media tend to feel *less* lonely.
-* If the correlation is (close to) `-1` or `1`, it means that the relationship is strong.
-* If the correlation is (close to) `0`, it means that the relationship is weak or absent.
+* if the correlation between a person's social media use and their feelings of loneliness is positive (`> 0`), it means that both variables tend to **move in the same direction**. People that spend more time on social media tend to feel more lonely, and people that spend less time on social media tend to feel less lonely. 
+* If the correlation is negative (`< 0`), it means that the variables tend to **move in opposite directions**. People that spend more time on social media tend to feel less lonely, and visa versa.
+* The farther the correlation is from `0`, the **stronger** the relationship between the variables. A common rule of thumb is Cohen's classification: `0.1` is weak, `0.3` is moderate, and `0.5` is strong. (and the same for `-0.1`, `-0.3`, and `-0.5`).
 
 Developing a good intuition for covariance and correlation is important, because it helps you to understand relationships between variables, and to interpret the results of statistical tests.
 In this tutorial we'll develop this intuition by looking at visualizations, and calculating the covariance and correlation ourselves.
@@ -36,7 +35,6 @@ This way you can see how the variables **move together**.
 * If the correlation is positive, the points will tend to form a line that goes up, because when x goes up, y goes up as well.
 * If the correlation is negative, the points will tend to form a line that goes down, because when x goes up, y goes down.
 * If the relation is strong, the points will clearly form a line.
-* If the relation is weak, the points will be more scattered.
 
 Let's first plot three scenarios, for a **strong positive**, **strong negative**, and **weak correlation**.
 We'll pretend this is data about **social media use** in hours per day and **feelings of loneliness**.
@@ -49,9 +47,9 @@ set.seed(2)
 
 n = 30
 V1 = rnorm(n, 3, 1)
-V2_1_positive = V1 + 1 + rnorm(n, 0, 0.5)
-V2_2_negative = -V1 + 9 + rnorm(n, 0, 0.5)
-V2_3_weak = 5  + rnorm(n, 0, 1)
+V2_1_positive = V1 + 1 + rnorm(n, 0, 1.4)
+V2_2_negative = -V1 + 9 + rnorm(n, 0, 1.5)
+V2_3_weak = 4  + rnorm(n, 0, 3)
 
 d = tibble(V1, V2_1_positive, V2_2_negative, V2_3_weak)
 dl = pivot_longer(d, cols = c(V2_1_positive, V2_2_negative, V2_3_weak), names_to = "correlation", values_to = "V2")
@@ -80,17 +78,17 @@ ggplot(dl, aes(x=V1, y=V2, color=color)) +
 
 
 
-**Strong positive correlation** ($r = 0.887$).
+**Strong positive correlation** ($r = `r round(pos_cor,3)`$).
 On the left we see a clear, positive relation between social media use and feelings of loneliness.
 When social media use goes up, feelings of loneliness go up as well.
 
-**Strong negative correlation** ($r = -0.907$).
+**Strong negative correlation** ($r = `r round(neg_cor,3)`$).
 Here the relation is negative (when social media use goes up, feelings of loneliness go down), but it's still a **strong** relation.
 They still **move together**, only in the opposite direction.
 
-**Weak correlation** ($r = -0.188$).
-Here we see that there is a weak, negative relation.
-When social media use goes up, there is a very minor decrease in feelings of loneliness.
+**Weak correlation** ($r = `r round(weak_cor,3)`$).
+Here we see that there is a weak relation.
+Since the coefficient is negative, we could say a negative relation, but if we were to [test this statistically](../tests/correlation.qmd), we would find that the relation is not significant, so it could also be argued that there is no relation at all.
 
 
 ## The difference between covariance and correlation
@@ -119,7 +117,7 @@ n = 30
 V1_normal = rnorm(n, 3, 1)
 V1_scaled = V1_normal * 60
 V1_z = scale(V1_normal)
-V2 = V1_normal + 1 + rnorm(n, 0, 0.5)
+V2 = V1_normal + 1 + rnorm(n, 0, 1.4)
 
 d = tibble(V1_normal, V1_scaled, V1_z, V2)
 dl = pivot_longer(d, cols = c(V1_normal, V1_scaled, V1_z), names_to = "covariance", values_to = "V1")
@@ -149,11 +147,11 @@ ggplot(dl, aes(x=V1, y=V2)) +
 
 As we can see, the direction and strength of the relation is the same in all three plots.
 The only thing that changed is the scale of the variables, which you can see in the X and Y axis.
-This doesn't affect the correlation ($r = 0.887$ in all three cases), but it does affect the covariance:
+This doesn't affect the correlation ($r = `r round(cor1,3)`$ in all three cases), but it does affect the covariance:
 
-* For the original data, the covariance is $1.287$, as we saw before
-* For the data where we increased the scale of X by a factor 60 (to go from hours to minutes), the covariance increased to $76.683$.
-* In the final plot we standardized both the X and Y variables. As a result, the covariance is now identical to the correlation ($r = 0.887, cov = 0.887$). This is what we mean when we say that the correlation is the standardized version of the covariance!
+* For the original data, the covariance is $`r round(cov1,3)`$, as we saw before
+* For the data where we increased the scale of X by a factor 60 (to go from hours to minutes), the covariance increased to $`r round(cov2,3)`$.
+* In the final plot we standardized both the X and Y variables. As a result, the covariance is now identical to the correlation ($r = `r round(cor1,3)`, cov = `r round(cov3,3)`$). This is what we mean when we say that the correlation is the standardized version of the covariance!
 
 
 # Calculating covariance and correlation

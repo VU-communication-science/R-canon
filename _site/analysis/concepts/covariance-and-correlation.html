@@ -450,10 +450,9 @@ window.Quarto = {
 <p>The <strong>covariance</strong> of two variables tells us something about the extent to which they <strong>change together</strong>. If one variable goes up, does the other variable go up as well? This information is the foundation for many statistical methods, because it enables us to quantify relationships between phenomena. For example, it allows us to measure: <em>to what extent is a person’s social media use related to their feelings of loneliness?</em></p>
 <p>The <strong>correlation</strong> is a standardized version of the covariance, which expresses the <strong>strength</strong> and <strong>direction</strong> of the relationship between two variables on a scale from -1 to 1. This makes it easier to interpret. Consider the following example:</p>
 <ul>
-<li>if the correlation between a person’s social media use and their feelings of loneliness is positive (<code>&gt; 0</code>), it means that people that spend more time on social media tend to feel more lonely.</li>
-<li>If the correlation is negative (<code>&lt; 0</code>), it means that people that spend more time on social media tend to feel <em>less</em> lonely.</li>
-<li>If the correlation is (close to) <code>-1</code> or <code>1</code>, it means that the relationship is strong.</li>
-<li>If the correlation is (close to) <code>0</code>, it means that the relationship is weak or absent.</li>
+<li>if the correlation between a person’s social media use and their feelings of loneliness is positive (<code>&gt; 0</code>), it means that both variables tend to <strong>move in the same direction</strong>. People that spend more time on social media tend to feel more lonely, and people that spend less time on social media tend to feel less lonely.</li>
+<li>If the correlation is negative (<code>&lt; 0</code>), it means that the variables tend to <strong>move in opposite directions</strong>. People that spend more time on social media tend to feel less lonely, and visa versa.</li>
+<li>The farther the correlation is from <code>0</code>, the <strong>stronger</strong> the relationship between the variables. A common rule of thumb is Cohen’s classification: <code>0.1</code> is weak, <code>0.3</code> is moderate, and <code>0.5</code> is strong. (and the same for <code>-0.1</code>, <code>-0.3</code>, and <code>-0.5</code>).</li>
 </ul>
 <p>Developing a good intuition for covariance and correlation is important, because it helps you to understand relationships between variables, and to interpret the results of statistical tests. In this tutorial we’ll develop this intuition by looking at visualizations, and calculating the covariance and correlation ourselves.</p>
 </section>
@@ -464,7 +463,6 @@ window.Quarto = {
 <li>If the correlation is positive, the points will tend to form a line that goes up, because when x goes up, y goes up as well.</li>
 <li>If the correlation is negative, the points will tend to form a line that goes down, because when x goes up, y goes down.</li>
 <li>If the relation is strong, the points will clearly form a line.</li>
-<li>If the relation is weak, the points will be more scattered.</li>
 </ul>
 <p>Let’s first plot three scenarios, for a <strong>strong positive</strong>, <strong>strong negative</strong>, and <strong>weak correlation</strong>. We’ll pretend this is data about <strong>social media use</strong> in hours per day and <strong>feelings of loneliness</strong>. At the top we report the correlation coefficient as <strong>r</strong> and the covariance as <strong>cov</strong>.</p>
 <div class="cell">
@@ -476,9 +474,9 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p><strong>Strong positive correlation</strong> (<span class="math inline">\(r = 0.887\)</span>). On the left we see a clear, positive relation between social media use and feelings of loneliness. When social media use goes up, feelings of loneliness go up as well.</p>
-<p><strong>Strong negative correlation</strong> (<span class="math inline">\(r = -0.907\)</span>). Here the relation is negative (when social media use goes up, feelings of loneliness go down), but it’s still a <strong>strong</strong> relation. They still <strong>move together</strong>, only in the opposite direction.</p>
-<p><strong>Weak correlation</strong> (<span class="math inline">\(r = -0.188\)</span>). Here we see that there is a weak, negative relation. When social media use goes up, there is a very minor decrease in feelings of loneliness.</p>
+<p><strong>Strong positive correlation</strong> (<span class="math inline">\(r = 0.508\)</span>). On the left we see a clear, positive relation between social media use and feelings of loneliness. When social media use goes up, feelings of loneliness go up as well.</p>
+<p><strong>Strong negative correlation</strong> (<span class="math inline">\(r = -0.581\)</span>). Here the relation is negative (when social media use goes up, feelings of loneliness go down), but it’s still a <strong>strong</strong> relation. They still <strong>move together</strong>, only in the opposite direction.</p>
+<p><strong>Weak correlation</strong> (<span class="math inline">\(r = -0.188\)</span>). Here we see that there is a weak relation. Since the coefficient is negative, we could say a negative relation, but if we were to <a href="../../analysis/tests/correlation.html">test this statistically</a>, we would find that the relation is not significant, so it could also be argued that there is no relation at all.</p>
 <section id="the-difference-between-covariance-and-correlation" class="level2">
 <h2 class="anchored" data-anchor-id="the-difference-between-covariance-and-correlation">The difference between covariance and correlation</h2>
 <p>If we look at the plots above, we see that the covariance and correlation are closely related. The difference is that the correlation is <strong>standardized</strong>, while the covariance is not. This means that:</p>
@@ -502,11 +500,11 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>As we can see, the direction and strength of the relation is the same in all three plots. The only thing that changed is the scale of the variables, which you can see in the X and Y axis. This doesn’t affect the correlation (<span class="math inline">\(r = 0.887\)</span> in all three cases), but it does affect the covariance:</p>
+<p>As we can see, the direction and strength of the relation is the same in all three plots. The only thing that changed is the scale of the variables, which you can see in the X and Y axis. This doesn’t affect the correlation (<span class="math inline">\(r = 0.508\)</span> in all three cases), but it does affect the covariance:</p>
 <ul>
-<li>For the original data, the covariance is <span class="math inline">\(1.287\)</span>, as we saw before</li>
-<li>For the data where we increased the scale of X by a factor 60 (to go from hours to minutes), the covariance increased to <span class="math inline">\(76.683\)</span>.</li>
-<li>In the final plot we standardized both the X and Y variables. As a result, the covariance is now identical to the correlation (<span class="math inline">\(r = 0.887, cov = 0.887\)</span>). This is what we mean when we say that the correlation is the standardized version of the covariance!</li>
+<li>For the original data, the covariance is <span class="math inline">\(1.099\)</span>, as we saw before</li>
+<li>For the data where we increased the scale of X by a factor 60 (to go from hours to minutes), the covariance increased to <span class="math inline">\(65.931\)</span>.</li>
+<li>In the final plot we standardized both the X and Y variables. As a result, the covariance is now identical to the correlation (<span class="math inline">\(r = 0.508, cov = 0.508\)</span>). This is what we mean when we say that the correlation is the standardized version of the covariance!</li>
 </ul>
 </section>
 </section>
@@ -743,7 +741,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
