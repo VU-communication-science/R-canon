@@ -1226,15 +1226,17 @@ Interpreting main effects with interaction terms
 <ul>
 <li><code>pol_ori [left]</code>: The effect of <code>political_orientation</code> on <code>trust_t1</code> when <code>political_interest</code> is zero is not significant.</li>
 <li><code>pol_ori [right]</code>: The effect of <code>political_orientation</code> on <code>trust_t1</code> when <code>political_interest</code> is zero is not significant.</li>
-<li>This doesn’t really make sense, because <code>political_interest</code> is measured on a scale from 1 to 7.</li>
 </ul></li>
+</ul>
+<p>These effects should not be interpreted, because <code>political_interest</code> is a scale from 1 to 7, so a value of zero is not meaningful. It just <em>happens</em> to be the case that as you extrapolate to a <code>political_interest</code> of zero (i.e.&nbsp;go to the left on the plot below) there is no expected difference in <code>trust_t1</code> between people with different <code>political_orientation</code>.</p>
+<ul>
 <li>Standardized coefficients:
 <ul>
 <li><code>pol_ori [left]</code>: The effect of <code>political_orientation</code> on <code>trust_t1</code> at the mean of <code>political_interest</code> is significant.</li>
 <li><code>pol_ori [right]</code>: The effect of <code>political_orientation</code> on <code>trust_t1</code> at the mean of <code>political_interest</code> is not significant.</li>
-<li>This does make sense. Based on our analysis we can see that for people with low <code>political_interest</code>, there is no significant effect of <code>political_orientation</code> on <code>trust_t1</code>. If you look at the plot below, you see that the lines overlap at the left. As <code>political_interest</code> increases (towards the right), the lines start diverging, indicating that the effect becomes significant at some point. The main effect simply tells us that for the average value of <code>political_interest</code>, the effect is already significant.</li>
 </ul></li>
 </ul>
+<p>These coefficients do have a meaningful interpretation. Based on our analysis we can see that for people with low <code>political_interest</code>, there is no significant effect of <code>political_orientation</code> on <code>trust_t1</code>. If you look at the plot below, you see that the lines overlap at the left. As <code>political_interest</code> increases (towards the right), the lines start diverging, indicating that the effect becomes significant at some point. The main effect simply tells us that for the average value of <code>political_interest</code>, the effect is already significant.</p>
 </div>
 </div>
 </div>
