@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://vu-communication-science.github.io/R-canon/analysis/tests/linear-regression.html</loc>
-    <lastmod>2024-09-18T10:47:39.209Z</lastmod>
+    <lastmod>2024-09-20T12:35:43.868Z</lastmod>
   </url>
   <url>
     <loc>https://vu-communication-science.github.io/R-canon/analysis/techniques/mediation.html</loc>
@@ -17,8 +17,8 @@
     <lastmod>2024-09-15T17:57:39.163Z</lastmod>
   </url>
   <url>
-    <loc>https://vu-communication-science.github.io/R-canon/data-management/select-and-rename.html</loc>
-    <lastmod>2024-09-04T11:03:30.765Z</lastmod>
+    <loc>https://vu-communication-science.github.io/R-canon/analysis/techniques/scale-construction.html</loc>
+    <lastmod>2024-09-20T12:41:02.852Z</lastmod>
   </url>
   <url>
     <loc>https://vu-communication-science.github.io/R-canon/getting-started/types-of-objects.html</loc>
@@ -98,19 +98,19 @@
   </url>
   <url>
     <loc>https://vu-communication-science.github.io/R-canon/analysis/tests/correlation.html</loc>
-    <lastmod>2024-09-18T10:59:01.140Z</lastmod>
+    <lastmod>2024-09-20T09:56:02.496Z</lastmod>
   </url>
   <url>
     <loc>https://vu-communication-science.github.io/R-canon/analysis/techniques/standardization.html</loc>
-    <lastmod>2024-09-18T15:12:25.154Z</lastmod>
+    <lastmod>2024-09-18T15:29:45.123Z</lastmod>
   </url>
   <url>
     <loc>https://vu-communication-science.github.io/R-canon/getting-started/names-and-objects.html</loc>
     <lastmod>2024-09-04T11:03:30.765Z</lastmod>
   </url>
   <url>
-    <loc>https://vu-communication-science.github.io/R-canon/analysis/techniques/scale-construction.html</loc>
-    <lastmod>2024-09-18T11:04:36.863Z</lastmod>
+    <loc>https://vu-communication-science.github.io/R-canon/data-management/select-and-rename.html</loc>
+    <lastmod>2024-09-04T11:03:30.765Z</lastmod>
   </url>
   <url>
     <loc>https://vu-communication-science.github.io/R-canon/data-management/mutate.html</loc>
