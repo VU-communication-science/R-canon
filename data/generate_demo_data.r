@@ -9,6 +9,10 @@ library(sjPlot)
 library(tidyverse)
 set.seed(1)
 
+rescale <- function(x, new_min = 1, new_max = 10) {
+  (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE)) * (new_max - new_min) + new_min
+}
+
 # number of participants. Make sure to use multiple of 3 for equal distribution of groups
 n <- 600
 
@@ -27,13 +31,25 @@ subscription_prob = subscription_odds / (1 + subscription_odds)
 
 # create variable for average hours of news consumption per week, and make it so that it's higher for people with
 # newspaper subscription, but people without subscription have higher variance (for showing levene's test)
-news_consumption <- rnorm(n, mean = 8 + np_subscription*4, sd = 3 - np_subscription*1.5)
+news_consumption <- rnorm(n, mean = 8 + np_subscription*4 + age*0.1, sd = 3 - np_subscription*1.5)
 news_consumption[news_consumption < 0] <- 0
 news_consumption = round(news_consumption)
 # plot(news_consumption ~ as.factor(np_subscription))
 
-# simulate trust_t1 to increase slightly with age. Force 10 pt scale
-trust_t1 <- rnorm(n, mean = 3 + 0.05 * age, sd = 1)
+
+left_odds = exp(-0.10*age + 5)
+right_odds = exp(0.02*age)
+center_odds = (left_odds + right_odds) / 2
+political_orientation = sapply(1:n, function(i) sample(c("left", "center", "right"), 1, prob = c(left_odds[i], center_odds[i], right_odds[i])))
+
+political_interest = rnorm(n, mean = 5, sd = 2.5) |> rescale(1,7)
+
+
+# simulate trust_t1.
+is_left = political_orientation == "left"
+is_right = political_orientation == "right"
+
+trust_t1 <- rnorm(n, mean = 3 + 0.02 * age + news_consumption*0.07 + political_interest*0.1 +  is_left*-0.2 + is_left*political_interest*0.2 + is_right*0.35 + is_right*political_interest*-0.3, sd = 1)
 trust_t1[trust_t1 < 1] <- 1
 trust_t1[trust_t1 > 10] <- 10
 # plot(age, trust_t1)
@@ -60,7 +76,6 @@ trust_t2[trust_t2 > 10] <- 10
 left_odds = exp(-0.10*age + 0.9*trust_t1 + 5)
 right_odds = exp(-0.1*trust_t1 + 6)
 center_odds = (left_odds + right_odds) / 2
-political_orientation = sapply(1:n, function(i) sample(c("left", "center", "right"), 1, prob = c(left_odds[i], center_odds[i], right_odds[i])))
 table(political_orientation)
 
 political_leftright = age*0.1 + trust_t1*0.2 + rnorm(n, 0, 1)
@@ -71,6 +86,7 @@ political_leftright = round(rescale(political_leftright) * 9) + 1
 d = tibble(
     age = age,
     political_orientation = political_orientation,
+    political_interest = political_interest,
     np_subscription = factor(np_subscription, labels = c("no", "yes")),
     news_consumption = news_consumption,
     experiment_group = experiment_group,

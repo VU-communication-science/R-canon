@@ -184,6 +184,14 @@ Note that this way of setting the nr of digits is specific to the `psych` packag
 
 :::
 
+
+```{r, echo=F, results=F}
+alpha = d |> 
+    select(trust_t1_item1, trust_t1_item2, trust_t1_item3_inv, trust_t1_item4, trust_t1_item5) |> 
+    alpha()
+ca = alpha$total$raw_alpha
+```
+
 This gives quite a lot of output. These are the most important parts to consider:
 
 1. **Cronbach's alpha**: At the top we have a row that says `raw_alpha`, `std.alpha`, etc. Here we are just interested in the `raw_alpha`, which is the value of Cronbach's alpha. In this case it's 0.85, which is already very good. 

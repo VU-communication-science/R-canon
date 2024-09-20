@@ -16,7 +16,7 @@ What the correlation test **does not** tell us is why the relationship exists.
 If we find that there is a correlation between social media use and loneliness, it does not mean that social media use causes loneliness.
 For more detail on this, see the [causality](../concepts/causality.qmd) section.
 
-# How to use it
+# How to use
 
 We'll show two ways of conducting the correlation test: using the `cor.test` function and using the `tab_corr` function from the `sjPlot` package.
 The `cor.test` function is part of the base R package, and is usefull if you just have two variables.
@@ -85,7 +85,7 @@ This is great for getting a quick overview of the relationships between multiple
 If you need to get the exact p-values, you can also use `tab_corr(p.numeric = TRUE)`.
 
 
-# When can you use it?
+# Conditions and assumptions
 
 The correlation test can be used when you have two `numeric` variables and you want to know if there is a relationship between them.
 There is no `dependent` or `independent` variable in the correlation test, because we are just looking at the relationship between the variables.   
@@ -114,7 +114,7 @@ d |> select(trust_t1_item1:trust_t1_item5) |> tab_corr(corr.method="kendall")
 ```
 
 
-# How to report it
+# How to report
 
 For APA style reporting of the correlation test you need to know the `correlation coefficient`, `p-value`, and the `degrees of freedom`. 
 You can find all these values in the output of the `cor.test` function.[^1] 

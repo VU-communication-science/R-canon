@@ -7,6 +7,16 @@ format:
     df-print: kable
 ---
 
+```{r, echo=F}
+## convenience functions
+p_thres <- function(p) {
+  if (p < 0.001) return("p < 0.001")
+  if (p < 0.01) return(paste0("p < 0.01"))
+  if (p < 0.05) return(paste0("p < 0.05"))
+  sprintf("p = %.3f", p)
+}
+```
+
 # What is regression analysis?
 
 Regression analysis is a statistical technique for *predicting* a `dependent variable` (DV) based on one or more `independent variables` (IVs)
@@ -232,14 +242,14 @@ This should give you an $R^2$ of $0.79$.
 
 
 
-# How to use it
+# How to use
 
 We'll show you how to use regression analysis in several steps:
 
 * First, we'll look at **simple linear regression** with a single numeric independent variable.
-* Then, we'll perform a **multiple regression** with two numeric independent variables.
+* Then, we'll perform a **multiple regression** with two numeric independent variables, and show you how this allows you to **control** for the relations between the independent variables.
 * In the third step we'll show you how to use a **categorical independent variable** in the regression model.
-* We conclude with a **multiple regression** model that includes both numeric and categorical independent variables.
+* Finally, we'll show you how to use **interaction effects** in the regression model, and how you can use this to test **moderation**.
 
 We'll be using our standard (simulated) practice data, and a bit of `tidyverse` to load and clean the data.
 We'll also be using the `sjPlot` package, which can create nice tables and plots of regression models.
@@ -250,9 +260,8 @@ library(sjPlot)
 
 d <- read_csv("https://tinyurl.com/R-practice-data") |>
         mutate(age = if_else(age > 100, 2024 - age, age)) |>
-        select(age, political_orientation, trust_t1, 
+        select(age, political_orientation, political_interest, trust_t1, 
                news_consumption = `news consumption`)
-
 d
 ```
 
@@ -316,14 +325,15 @@ ci_age = confint(m)[2,] |> round(2)
 
 * The coefficient for the `intercept` tells us the predicted value of `trust_t1` when `age` is zero.
 This is not very meaningful in this case, because we don't have any people with an age of zero in our data.
-* The coefficient for `age` tells us how much `trust_t1` changes for every *unit increase* in `age`. Our `age` variable is in years, so the coefficient `r b_age` tells us that for every year of age, trust in journalists increases on average by `r b_age` points.
+* The coefficient for `age` tells us how much `trust_t1` changes for every *unit increase* in `age`. 
+  * Our `age` variable is in years, so the coefficient `r b_age` tells us that for every year of age, trust in journalists increases on average by `r b_age` points.
   * The p-value of `< 0.001` tells us that this effect is statistically significant.
   * The confidence interval tells us that we are 95% confident that the true effect of `age` on `trust_t1` is between `r ci_age[1]` and `r ci_age[2]`.
 
 We also get the $R^2$ value, which tells us how well the model fits the data.
-Here we see that the $R^2$ is `r r2`, which means that `r round(r2*100,1)`% of the variance in `trust_t1` can be explained by the variance in `age`, which is huge.
+Here we see that the $R^2$ is `r r2`, which means that `r round(r2*100,1)`% of the variance in `trust_t1` can be explained by the variance in `age`.
 
-In conclusion, this model shows that (in our simulated data) there is a strong effect of `age` on `trust_t1`.
+In conclusion, this model shows that (in our simulated data) there is a positive effect of `age` on `trust_t1`.
 
   
 ## Multiple regression
@@ -333,10 +343,10 @@ Now we'll add a second numeric independent variable (`news_consumption`) to the 
 This is called **multiple regression**, and it allows us to test the effect of multiple variables on the dependent variable at the same time.
 The formula for using multiple independent variables is: `dependent ~ independent1 + independent2 + ...`.
 
-As we mentioned earlier, by including both variables in the model we can test the effect of `news_consumption` on `trust` while controlling for `age`, and vice versa.
-To better investigate the effects of controlling, it is good practise to show multiple versions of the model side by side. 
-With the `tab_model()` function we can do this by simply providing both models as arguments.
-Also, if we want to compare effect sizes, it helps to include the standardized coefficients in the table, which we can do with `show.std = T` in the `tab_model()` function.
+As we mentioned earlier, by including both variables in the model we can test the effect of `news_consumption` on `trust` while *controlling* for `age`, and vice versa.
+To better investigate the effects of controlling, it is good practise to show multiple versions of the model side by side, which we can do by passing multiple models to the `tab_model()` function.
+To better compare effect sizes, we also include the **standardized coefficients**, which we can do with `show.std = T` in the `tab_model()` function.
+To keep the table simple, we won't show the confidence intervalls this time (`show.ci = F`).
 
 ::: {.callout-tip title="Standardized coefficients" collapse="true"}
 
@@ -371,7 +381,7 @@ tab_model(m_std)
 #| html-table-processing: none
 m1 <- lm(trust_t1 ~ news_consumption, data = d)
 m2 <- lm(trust_t1 ~ news_consumption + age, data = d)
-tab_model(m1, m2, show.std = T)
+tab_model(m1, m2, show.std = T, show.ci=F)
 ```
 
 ```{r, echo=F, results=F}
@@ -391,34 +401,40 @@ r2_2 = summary(m2)$r.squared |> round(3)
 
 
 If we look at the first model, we see a significant effect of `news_consumption` on `trust_t1` ($b = `r b_nc_1`$, $p < 0.05$). 
-The $R^2$ value is very low ($`r r2_1`$): only `r round(r2_1*100,1)`% of the variance in `trust_t1` can be explained by `news_consumption`.
-Still, if this was all the information we had, we might have concluded that there is at least a small effect of `news_consumption` on `trust_t1`.
+The $R^2$ value of `r r2_1` suggests that `news_consumption` explains `r r2_1*100`% of the variance in `trust_t1`.
 
-But when we include the `age` variable in the model, we see that the effect of `news_consumption` is no longer significant ($b = `r b_nc_2`, p = `r p_nc_2`$).
-Also note that the $R^2$ value ($`r r2_2`$) is identical to when we only included the `age` variable (in the simple linear regression).
-So this suggests that the effect of `news_consumption` on `trust_t1` is actually explained by the effect of `age`.
+However, when we include the `age` variable in the model, we see that the effect of `news_consumption` becomes much weaker ($b = `r b_nc_2`$, $p = `r p_nc_2`$).
+Also, notice that the explained variance ($R^2 = `r r2_2`$) isn't much higher than in the model with just the `age` variable that we saw earlier.
+This suggests that the effect of `news_consumption` on `trust_t1` is partially explained by `age`.
+
 
 What we're witnessing here is a form of **confounding**.
-There is a relation between the `news_consumption` and `trust_t1` variables, but this relation is likely *spurious*.
+There is a relation between the `news_consumption` and `trust_t1` variables, but a part of this relation is **spurious**.
 `age` has an effect on both `news_consumption` and `trust_t1`: older people consume more news, and have more trust in journalists.
-By controlling for `age`, the spurious relation between `news_consumption` and `trust_t1` disappears.
+By controlling for `age`, we can see the real effect of `news_consumption` on `trust_t1` (though we can never be sure that we've controlled for all possible confounders).
 For a more detailed explanation of confounding, see the [confounding tutorial](../techniques/controlling.qmd).
 
-Let's take a second to **interpret the std. Beta values**.
-These are the coefficients of the model if all variables are standardized.
-So the regular coefficient of `age` tells us that for every year increase in `age`, `trust_t1` increases by `r b_age_2` points.
-How does this compare to the effect of `news_consumption`?
-This is an impossible mental exercise, because a 1 unit increase in `age` is not the same as a 1 unit increase in `news_consumption`.
+#### Standardized coefficients
+
+In the second model we now have two significant effects: `age` and `news_consumption`.
+So how can we tell which effect is stronger?
+If we look at the regular coefficients, we see that `age` (`r b_age_2`) is quite similar to `news_consumption` (`r b_nc_2`).
+However, this is not a good way to compare the effects, because the variables are on different scales.
+A 1 unit increase in `age` is not the same as a 1 unit increase in `news_consumption`.
 By standardizing the variables, we can compare the effects in terms of standard deviations instead.
 For every standard deviation increase in `age`, `trust_t1` increases by `r b_age_2z` standard deviations.
-For every standard deviation increase in `news_consumption`, `trust_t1` only increases by `r b_nc_1z` standard deviations, and after controlling for `age` only by `r b_nc_2z` standard deviations (which is also no longer significant).
+For every standard deviation increase in `news_consumption`, `trust_t1` increases by `r b_nc_2z` standard deviations.
+So this suggests that the effect of `age` is stronger.[^test_difference]
+
+[^test_difference]: Note that we have not tested if the difference between the two coefficients is significant. We will not go into this here, but note that the confidence intervalls of the standardized coefficients can provide more confidence in this comparison.
+
+#### Adjusted $R^2$
 
 This is also a good time to talk about the **$R^2$ adjusted** value.
 This is the $R^2$ value, but corrected for the number of independent variables in the model.
-This is important, because the $R^2$ value will always increase when you add more independent variables to the model, because this adds an additional parameter that it can use to fit the data (in our case the increase was just so small that it didn't show after rounding).
-The $R^2$ adjusted value corrects for this, which is why it's actually lower in our model with both `age` and `news_consumption` than in the model with just `age`.
-In practice, the $R^2$ adjusted value is very similar to the $R^2$ value, and the regular $R^2$ is then often reported.
-But always check the $R^2$ adjusted value if you're adding multiple independent variables to the model to see if you're not just adding noise.
+This is important, because the $R^2$ value will always increase when you add more independent variables (i.e. more information) to the model.
+The $R^2$ adjusted value corrects for this, which is why it's slightly lower.
+So when you're adding more independent variables to the model, you can use the $R^2$ adjusted value to see if you're not just adding noise.
 
 ## Categorical IVs
 
@@ -485,8 +501,7 @@ tab_model(m)
 
 Notice that there are now two coefficients for the `political_orientation` variable: one for `left` and one for `right`.
 Why 2, and not 3?
-This is because when we have a categorical variable with `k` levels, we only need `k-1` coefficients to represent all the levels.
-If we know that a person is not in the `left` category, and not in the `right` category, then we know that the person must be in the `center` category.
+This is because we only need two dummy variables to represent three categories.
 You can see how this works in the following table:
 
 | political_orientation | is_left | is_right |
@@ -494,6 +509,11 @@ You can see how this works in the following table:
 | left                  | 1       | 0        |
 | right                 | 0       | 1        |
 | center                | 0       | 0        |
+
+The `center` category is now the **reference category**.
+Recall that the intercept is the predicted value of the dependent variable when the independent variables are zero.
+In this model, the intercept therefore represents the predicted value of `trust_t1` for people in the `center` category.
+
 
 ```{r, echo=F, results=F}
 b_left = coef(m)[2] |> round(2)
@@ -503,16 +523,15 @@ p_right = summary(m)$coefficients[3,4] |> round(3)
 ```
 
 
-The `center` category is now the **reference category**.
-That is, the `center` category is the category that all other categories are compared to.
-So the `political_orientation [left]` coefficient tells us that `trust` is for people in the `left` category is `r b_left` points higher than for people in the `center` category, but this difference is not significant (p = `r p_left`)
-The `political_orientation [right]` coefficient tells us that `trust` is for people in the `right` category is `r b_right` points lower than for people in the `center` category, but this difference is also not significant (p = `r p_right`).
+The effects of the `left` and `right` categories only tell us how much the trust in journalists changes for people in these categories **compared to people in the reference category**.
+So the `political_orientation [left]` coefficient tells us that `trust` is for people in the `left` category is `r b_left` points higher than for people in the `center` category.
+The `political_orientation [right]` coefficient tells us that `trust` is for people in the `right` category is `r b_right` points lower than for people in the `center` category.
+Based on this model, we cannot directly compare the `left` and `right` categories, because the `center` category is the reference category.
 
 ::: {.callout-note title="Determining what reference category to use" collapse="true"}
 
-In the current model we cannot directly compare the `left` and `right` categories, because the `center` category is the reference category.
-This makes it important to choose a reference category that makes sense for your research question.
-To determine the reference category, you can change the order of the levels in the `factor()` function.
+Depending on your hypotheses, you might want to use a specific category as the reference category.
+You can do this by changing the order of the levels in the `factor()` function.
 The first level will always be the reference category.
 So in the following example, the `left` category is the reference category.
 
@@ -523,34 +542,97 @@ d2 <- mutate(d, political_orientation = factor(political_orientation, levels=c('
 lm(trust_t1 ~ political_orientation, data = d2) |>
     tab_model()
 ```
+
 :::
 
-## Numeric and categorical IVs
+## Interaction effects
 
-You've already seen how multiple regression works, AND how to include categorical variables in the model.
-Let's conclude with a model that includes both numeric and categorical variables.
+One of the strengths of regression analysis is that it allows you to test **interaction effects**.
+This is when the effect of one independent variable depends on the value of another independent variable.
 
-```{r}
+For example, in the previous model we saw that `political_orientation` has an effect on `trust_t1`.
+But we might theorize that this effect depends on a person's overall `political_interest`.
+If people are not really interested in politics, then their political orientation might not have a big effect on their trust in journalists.
+So we can test if the effect of `political_orientation` on `trust_t1` depends on `political_interest`.
+We then also say that `political_interest` **moderates** the effect of `political_orientation` on `trust_t1`.
+
+To test this, we can include an **interaction term** in the regression model.
+That is, we add an extra term to the formula in which we **multiply** the two independent variables.
+Here we fit two models: one without the interaction term, and one with the interaction term.
+To keep the table readable, we'll first rename the variables to shorter names.
+
+```{r, out.width="100%", tab.width="100%"}
 #| html-table-processing: none
-m1 <- lm(trust_t1 ~ political_orientation, data = d)
-m2 <- lm(trust_t1 ~ political_orientation + age, data = d)
+ds <- rename(d, pol_ori = political_orientation, 
+                pol_int = political_interest) 
 
-tab_model(m1, m2)
+m1 <- lm(trust_t1 ~ pol_ori + pol_int, data = ds)
+m2 <- lm(trust_t1 ~ pol_ori + pol_int + pol_ori*pol_int, data = ds)
+
+tab_model(m1, m2, show.std=T, show.ci=F)
 ```
 
-In the first model, we did not see any effect of having a `left` or `right` political orientation compared to the `center` (reference) category.
-But once we include the `age` variable in the model, both the `left` and `right` categories do show a significant effect on `trust`!
+```{r, echo=F, results=F}
+b_pol_int = coef(m1)[4] |> round(2)
+p_pol_int = summary(m1)$coefficients[4,4] 
+```
 
-This is again a form of **confounding**.
-However, this time the confounder `age` **suppresses** the effect.
-Younger people have less trust in journalists, but are also more likely to be on the political left.
-Therefore, if we do not control for `age`, the positive effect of being on the political left is suppressed by the negative effect of being younger.
+In the first model we see roughly the same effects as before for `political_orientation`.
+We also see that `political_interest` has a significant effect on `trust_t1` ($b = `r b_pol_int`$, $`r p_thres(p_pol_int)`$).
 
-If this sounds confusing, don't worry, because you're in good company!
-Thinking about how the effect of independent variables *on* the dependent variable depends on the relation *between* the independent variables can make your head spin.
-But for better or worse, this is how the world works, and this is why we need sophisticated statistical tools to help us understand it.
+In the second model we added the interaction terms.
+One important thing to note is that this changes the interpretation of the main effects.
+When you add an interaction term, the main effects of the variables are now the effect of the variable **when the other variable is zero**.
+This doesn't always make sense.
+For instance, the effect of `pol ori [left]` now tells us the effect of `political_orientation` when `political_interest` is zero, but this is impossible because `political_interest` is measured on a scale from 1 to 7.
+Often, we therefore don't report the main effects when we have an interaction term.
+We'll also skip this for now (but see the optional block if you're interested)
 
-# When can you use it?
+::: {.callout-note title="Interpreting main effects with interaction terms" collapse="true"}
+
+When you add an interaction term, the main effects of the variables used in this term are now the effect of the variable **when the other variable is zero**.
+As we mentioned, sometimes this doesn't make sense.
+However, we can **make it make sense**, if we rescale the variables so that the value zero is meaningful.
+We could for instance **center** the variables.
+This way, zero is the mean of the variable, and the main effects are the effect of the variable at the mean of the other variable.
+
+This is also why in the model we see very different results for the **unstandardized** and **standardized** coefficients.
+Standardized coefficients are centered, so they are the effect of the variable at the mean of the other variable.
+This is also why we now get an additional `std. p` column, which gives us the p-value of the standardized coefficients.
+In our model, the unstandardized coefficients are not significant, but the standardized coefficients are.
+Let's separately interpret the unstandardized and standardized coefficients for the `political_orientation` effects.
+
+* Unstandardized coefficients:
+  * `pol_ori [left]`: The effect of `political_orientation` on `trust_t1` when `political_interest` is zero is not significant.
+  * `pol_ori [right]`: The effect of `political_orientation` on `trust_t1` when `political_interest` is zero is not significant.
+  * This doesn't really make sense, because `political_interest` is measured on a scale from 1 to 7.
+* Standardized coefficients:
+  * `pol_ori [left]`: The effect of `political_orientation` on `trust_t1` at the mean of `political_interest` is significant.
+  * `pol_ori [right]`: The effect of `political_orientation` on `trust_t1` at the mean of `political_interest` is not significant.
+  * This does make sense. Based on our analysis we can see that for people with low `political_interest`, there is no significant effect of `political_orientation` on `trust_t1`. If you look at the plot below, you see that the lines overlap at the left. As `political_interest` increases (towards the right), the lines start diverging, indicating that the effect becomes significant at some point. The main effect simply tells us that for the average value of `political_interest`, the effect is already significant.
+:::
+
+
+Our main interest is in the interaction terms.
+The `pol ori [left] x pol int` coefficient tells us how much the **effect** of `political_orientation` on `trust_t1` changes for every unit increase in `political_interest`.
+This is positive, which means that the effect of `political_orientation` on `trust_t1` becomes stronger as `political_interest` increases.
+We see the opposite effect for the `pol ori [right] x pol int` coefficient, which is negative.
+
+This is notoriously difficult to interpret, so a good technique for interpreting interaction effects is to **plot** the interaction.
+The `sjPlot` package has the `plot_model()` function, which can plot the predicted values (`type = "pred"`) for a selection of terms (`terms = c('pol_int','pol_ori')`).
+This will show you how the effect of `political_orientation` on `trust_t1` changes as `political_interest` increases.
+
+```{r}
+plot_model(m2, type='pred', terms = c('pol_int','pol_ori'), 
+           show.data = T, jitter = T)
+```
+
+On the left side of the plot, where political interest is low, we see that there is not yet a significant effect of political orientation on trust in journalists.
+This makes sense: if you're not interested in politics, then your political orientation might not matter that much.
+However, as political interest increases, we see that the line diverge, indicating an increasingly large effect of political orientation.
+We can thus conclude that **the effect of political orientation on trust in journalists is *moderated* by (i.e. depends on) political interest**.
+
+# Conditions and assumptions
 
 Regression analysis is a very versatile tool that can be used in many different situations.
 However, there are some assumptions that need to be met in order to use it correctly.
