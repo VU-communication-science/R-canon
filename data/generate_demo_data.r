@@ -22,6 +22,7 @@ age <- round(runif(n, 18, 65))
 # assign groups in repetitions to ensure equal distribution (data is random anyway)
 experiment_group <- rep(1:3, length.out=n) |> factor(labels = c("control", "negative", "positive"))
 
+
 # simulate subscription to have likelihood increase with age, using a logistic function
 subscription_odds <- 1 / (1 + exp(-0.06*age + 2))
 np_subscription <- rbinom(n, 1, subscription_odds)
@@ -41,7 +42,6 @@ left_odds = exp(-0.10*age + 5)
 right_odds = exp(0.02*age)
 center_odds = (left_odds + right_odds) / 2
 political_orientation = sapply(1:n, function(i) sample(c("left", "center", "right"), 1, prob = c(left_odds[i], center_odds[i], right_odds[i])))
-
 political_interest = rnorm(n, mean = 5, sd = 2.5) |> rescale(1,7)
 
 
@@ -69,18 +69,6 @@ trust_t2 <- trust_t1 +
 trust_t2[trust_t2 < 1] <- 1
 trust_t2[trust_t2 > 10] <- 10
 # plot(trust_t2 ~ experiment_group)
-
-# We'll also add political orientation, which is a factor with 3 levels (left, center, right)
-# We'll make it so that left is more likely for younger people and people with high trust_t1.
-# right is not related to age, but is related to trust_t1.
-left_odds = exp(-0.10*age + 0.9*trust_t1 + 5)
-right_odds = exp(-0.1*trust_t1 + 6)
-center_odds = (left_odds + right_odds) / 2
-table(political_orientation)
-
-political_leftright = age*0.1 + trust_t1*0.2 + rnorm(n, 0, 1)
-rescale = function(x) (x - min(x)) / (max(x) - min(x))
-political_leftright = round(rescale(political_leftright) * 9) + 1
 
 # create tibble and randomize order
 d = tibble(

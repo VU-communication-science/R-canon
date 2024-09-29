@@ -553,8 +553,7 @@ This is when the effect of one independent variable depends on the value of anot
 For example, in the previous model we saw that `political_orientation` has an effect on `trust_t1`.
 But we might theorize that this effect depends on a person's overall `political_interest`.
 If people are not really interested in politics, then their political orientation might not have a big effect on their trust in journalists.
-So we can test if the effect of `political_orientation` on `trust_t1` depends on `political_interest`.
-We then also say that `political_interest` **moderates** the effect of `political_orientation` on `trust_t1`.
+In other words, we expect that `political_interest` **moderates** the effect of `political_orientation` on `trust_t1`.
 
 To test this, we can include an **interaction term** in the regression model.
 That is, we add an extra term to the formula in which we **multiply** the two independent variables.
@@ -605,11 +604,18 @@ Let's separately interpret the unstandardized and standardized coefficients for 
 * Unstandardized coefficients:
   * `pol_ori [left]`: The effect of `political_orientation` on `trust_t1` when `political_interest` is zero is not significant.
   * `pol_ori [right]`: The effect of `political_orientation` on `trust_t1` when `political_interest` is zero is not significant.
-  * This doesn't really make sense, because `political_interest` is measured on a scale from 1 to 7.
+
+These effects should not be interpreted, because `political_interest` is a scale from 1 to 7, so a value of zero is not meaningful.
+It just *happens* to be the case that as you extrapolate to a `political_interest` of zero (i.e. go to the left on the plot below) there is no expected difference in `trust_t1` between people with different `political_orientation`.
+
 * Standardized coefficients:
   * `pol_ori [left]`: The effect of `political_orientation` on `trust_t1` at the mean of `political_interest` is significant.
   * `pol_ori [right]`: The effect of `political_orientation` on `trust_t1` at the mean of `political_interest` is not significant.
-  * This does make sense. Based on our analysis we can see that for people with low `political_interest`, there is no significant effect of `political_orientation` on `trust_t1`. If you look at the plot below, you see that the lines overlap at the left. As `political_interest` increases (towards the right), the lines start diverging, indicating that the effect becomes significant at some point. The main effect simply tells us that for the average value of `political_interest`, the effect is already significant.
+
+These coefficients do have a meaningful interpretation. Based on our analysis we can see that for people with low `political_interest`, there is no significant effect of `political_orientation` on `trust_t1`. 
+If you look at the plot below, you see that the lines overlap at the left. 
+As `political_interest` increases (towards the right), the lines start diverging, indicating that the effect becomes significant at some point. 
+The main effect simply tells us that for the average value of `political_interest`, the effect is already significant.
 :::
 
 

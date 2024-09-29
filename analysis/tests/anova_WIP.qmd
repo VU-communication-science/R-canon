@@ -1,0 +1,348 @@
+---
+title: ANOVA
+summary: Analysis of variance
+---
+
+
+# What is an ANOVA?
+
+ANOVA stands for **Analysis of Variance**, which can refer to a number of different statistical tests that are used to compare means between two or more groups.[^ttest]
+It is a commonly used test in experimental research, where the key independent variable is usually categorical (e.g., treatment groups, control group).
+There are different types of ANOVA to cover a wide range of research designs.
+The most common ones are:
+
+* **One-way ANOVA**. 
+  * **Purpose**. Compare means *between-subjects* in different groups.[^independent_samples] 
+  * **Example**. We want to know how the design of a health care robot affects how *comfortable* people feel about interacting with the robot. To test this we divide participants into three groups, that are shown three different designs ([Alice, Nao](https://vu.nl/nl/onderzoek/meer-over/sociale-robots-voor-de-samenleving-mediapsychologie), and RoboCop). They then answer multiple questions based on which we measure a *comfort rating* [scale](../techniques/scale-construction.qmd). We can now use One-way ANOVA to compare the mean comfort rating between the three groups.
+* **Two-way ANOVA**. 
+  * **Purpose**. Compare means *between-subjects* in different groups, for two independent variables. 
+  * **Example**. In addition to comparing three different designs, we could also compare between using a *male* or *female* voice. We can then divide participants over six groups (3 designs * 2 voices), and use two-way ANOVA to test whether the design and voice have an effect on the perceived attractiveness. We can then also test whether there is an *interaction* between the two variables, to see if specific combinations of design and voice are particularly comforting.
+* **Repeated measures ANOVA**. 
+  * **Purpose**. Compare means *within-subjects* measured at different timepoints.[^repeated_measures] 
+  * **Example**. Instead of the self-reporting comfort rating, we could measure how people react to interacting with a health care robot by measuring their *heart rate*. We could then measure the *heart rate* of participants *before*, *during*, and *after* interacting with the robot. We can then use repeated measures ANOVA to compare the *heart rate* at each stage.
+* **Mixed-design ANOVA**.
+  * **Purpose**. Combine *between-subjects* and *within-subjects* factors. 
+  * **Example**. This allows us to measure the effect of the design (one-way anova example) on the change in *heart rate* (repeated measures example). We divide participants into three groups that are shown the three different designs, and measure the *heart rate* of participants *before*, *during*, and *after* interacting with the robot. We can then use mixed-design ANOVA to test the effect of the design on the change in *heart rate*.
+
+
+[^ttest]: If you are familiar with the t-test, you can think of ANOVA as a generalization of the t-test, which can only compare two groups.
+
+[^independent_samples]: This is similar to an independent samples t-test, but can be used for more than two groups.
+
+[^repeated_measures]: This is similar to a paired samples t-test, but can be used for more than two groups. This is primarily used for within-subjects designs, where the same participants are measured multiple times. 
+
+
+<!-- # How does it work
+
+Underneath the hood, ANOVA is a linear model just like [regression analysis](../tests/regression.qmd).
+If you have not yet read the regression tutorial, you can skip this section, and focus first on how to use ANOVA in practice.
+
+You can think of ANOVA as a special case of regression where the independent variables are categorical.
+In the regression tutorial we showed you how you can use categorical independent variables in a regression model using dummy variables.
+You might recall that it's not straightforward to compare all of the groups, or to test overall whether there is a difference between the groups.
+ANOVA is a more specialized tool for this purpose.
+
+To understand how ANOVA is *different* from *regular regression*, you need to understand two concepts.[^not_different]
+
+[^not_different]: We emphasize *different* and *regular regression*, because technically ANOVA is still just a type of regression. By different we here refer to how ANOVA and regression are most commonly used in our field.
+
+* **Contrast coding**. In regression we usually use **dummy coding** for categorical variables, which compares each group to a single reference group. But we can also use **effect coding** to compare each group to the *grand mean* (the mean of all groups). 
+* **Sum of squares**. In a linear model we use sum of squares to assess how much variance is explained by the model. ANOVA allows using different types of sum of squares (Type I, II, III) for different purposes. In most cases researchers use Type III sums of squares (which is the default in popular statistics software like SPSS).
+
+
+
+In the social sciences, when researchers use ANOVA, they usually use Type III sums of squares and effect coding. In popular statistics software like SPSS, this is also the default approach.
+In this tutorial we will also stick to this default.
+But as you'll see in the code, we do need to specify ourselves that we want to use Type II sums of squares and effect coding (specifically we'll use Helmert coding). -->
+
+
+# How to use it
+
+We'll use the `afex` package to perform ANOVA tests, and we'll use the `sjPlot` package to visualize the results.
+To prepare the data we'll again use the `tidyverse` package.
+
+```{r}
+library(afex)
+library(sjPlot)
+library(tidyverse)
+```
+
+For our examples we'll use our [Practice data](../../data-management/index.qmd#practice-data).
+In this data have a (fictional) experiment where we study the effect of popular media on people's trust in journalists.
+Specifically, we're using the following variables:
+
+* **id**. A unique identifier for each participant.
+* **experiment_group**. The group that participants were assigned to. Each group viewed a different movie about journalism that was either *neutral*, *positive*, or *negative*.
+* **np_subscription**. Whether participants have a subscription to a national newspaper, with values *yes* or *no*.
+* **trust_t1** and **trust_t2**. The trust in journalists, measured before (t1) and after (t2) watching a movie about journalism.
+
+The **experiment_group** and **np_subscription** variables are our independent variable. To use these in the ANOVA, we'll explicitly convert them to factors, to indicate that they are categorical variables.
+
+```{r}
+d <- read_csv("https://tinyurl.com/R-practice-data") |>
+        mutate(experiment_group = as.factor(experiment_group),
+               np_subscription = as.factor(np_subscription))
+```
+
+## One-way ANOVA
+
+In one-way ANOVA we compare the means of a dependent variable between two or more groups in a single independent variable.
+We can use this to test the main question of our experiment: whether the movie (*experimental_group*) has an effect on the trust in journalists (*trust_t2*).[^trust_t2]
+
+[^trust_t2]: We're using the trust score *after* watching the movie. It is *ok* to ignore the trust score before watching the movie, because we've randomly assigned participants to the different groups. This means that the trust score before watching the movie should be the same in each group. However, as we'll show below, we could also use a repeated measures ANOVA to compare the trust score before and after watching the movie.
+
+We use the `aov_car` function from the `afex` package to fit the ANOVA model.
+The formula that we use in this function is, as usual, `dependent_variable ~ independent_variable`.
+However, we also need to specify the unique user id (`id`) using the `Error` function.
+This way we clarify which rows in the data belong to the same participant (you'll see why this matters once we get to *repeated measures*).
+So the full formula is `dependent_variable ~ independent_variable + Error(id)`.
+
+```{r}
+m = aov_car(trust_t2 ~ experiment_group + Error(id), data=d)
+m
+```
+
+`afex` has a built-in plot function, but throughout this book we often use the flexible `plot_model` function from the `sjPlot` package, and we can use this here as well!
+We can get the linear model from the `aov_car` output using `$lm`, and then use the `plot_model` function to visualize the results.
+
+```{r}
+plot_model(m$lm, type='pred', terms='experiment_group')
+```
+
+
+
+afex_plot(m)
+plot(m)
+
+
+
+get_anova_table(m) |> plot_model(type='pred', title="experiment_group")
+anova_summary(m)
+anova_test(m)
+
+?anova_test
+
+m = anova_test()
+
+m = lm(trust_t2 ~ experiment_group * np_subscription, data=d,
+       contrasts = list(experiment_group="contr.helmert", 
+                        np_subscription='contr.helmert'))
+summary(m)
+?Anova(m, type='III')
+
+
+eta_squared(m)
+```
+
+There are two ways in which ANOVA makes compared to *regular regression*[^regression_vs_anova]:
+
+[^not_different]: We emphasize *different* and *regular regression*, because technically ANOVA is still just a type of regression. By different we here refer to how ANOVA and regression are most commonly used in our field.
+
+ You *can* also use different types of contrast coding in regression. But in the way that regression and ANOVA are most often used, 
+
+[^regression_vs_anova]: Note that
+
+technically ANOVA is still just a type of regression. You can also use *contrast coding* in regression.
+
+
+* **Contrast coding**. When we use categorical variables in regression we often use dummy coding to compare each group to a reference group. 
+* 
+* In regression we use dummy coding to compare each group to a reference group. In ANOVA we use contrast coding to compare all groups to each other.
+* **Sum of squares**. In a linear model we use sum of squares to assess how much variance is explained by the model. ANOVA allows using different types of sum of squares (Type I, II, III) to handle the effects of factors in more complex designs. 
+  
+In most cases, when researcher use ANOVA, they use Type III sums of squares and contrast coding.
+
+[^not_best]: This doesn't mean that it's also always the best approach.
+In most cases researchers use Type III sums of squares (which is the default in popular statistics software like SPSS).
+
+
+
+
+
+There are different ways of using ANOVA, and knowing which one to use requires some understanding of how the different types (I, II and III) of sums of squares are calculated, and how contrast coding works. 
+Here we will first focus on a common approach, which is to use Type III sums of squares and contrast coding.
+This is also the default approach in SPSS, which has had a big impact on how ANOVA is used in practice.[^not_best]
+
+[^not_best]: This doesn't mean that it's also always the best approach. 
+
+
+
+
+```{r}
+library(tidyverse)
+library(car)
+?contr.sum
+
+```
+
+   gender alcohol attractiveness
+
+```{r}
+data = tribble(
+    ~gender, ~alcohol, ~attractiveness, ~id,
+1, 1, 65, 1, 
+1, 1, 70, 2,
+1, 1, 60, 3,
+1, 1, 60, 4,
+1, 1, 60, 5,
+1, 1, 55, 6,
+1, 1, 60, 7,
+1, 1, 55, 8,
+1, 2, 70, 1,
+1, 2, 65, 2,
+1, 2, 60, 3,
+1, 2, 70, 4,
+1, 2, 65, 5,
+1, 2, 60, 6,
+1, 2, 60, 7,
+1, 2, 50, 8,
+1, 3, 55, 1,
+1, 3, 65, 2,
+1, 3, 70, 3,
+1, 3, 55, 4,
+1, 3, 55, 5,
+1, 3, 60, 6,
+1, 3, 50, 7,
+1, 3, 50, 8,
+2, 1, 50, 9,
+2, 1, 55, 10,
+2, 1, 80, 11,
+2, 1, 65, 12,
+2, 1, 70, 13,
+2, 1, 75, 14,
+2, 1, 75, 15,
+2, 1, 65, 16,
+2, 2, 45, 9,
+2, 2, 60, 10,
+2, 2, 85, 11,
+2, 2, 65, 12,
+2, 2, 70, 13,
+2, 2, 70, 14,
+2, 2, 80, 15,
+2, 2, 60, 16,
+2, 3, 30, 9,
+2, 3, 30, 10,
+2, 3, 30, 11,
+2, 3, 55, 12,
+2, 3, 35, 13,
+2, 3, 20, 14,
+2, 3, 45, 15,
+2, 3, 40, 16
+)
+
+library(rstatix)
+library(afex)
+library(tidyverse)
+library(car)
+library(sjPlot)
+install.packages('afex')
+
+data = mutate(data, 
+              gender = factor(gender, labels=c("Female","Male")),
+              alcohol = factor(alcohol, labels=c("None","2_pints", "4_pints"))) 
+```
+
+```{r, eval=F}
+# compare different versions of anova
+
+
+
+
+# one way doesn't matter
+m = lm(attractiveness ~ gender, data=data)
+car::Anova(m)
+rstatix::anova_test(data=data, formula=attractiveness ~ gender)
+
+# two way requires contrasts and type III
+m = lm(attractiveness ~ gender*alcohol, data=data,
+       contrasts = list(gender = "contr.sum", alcohol = "contr.sum"))
+car::Anova(m, type='III')
+rstatix::anova_test(data=data, formula=attractiveness ~ gender*alcohol, type="III")
+
+d2 = data |> mutate(id = 1:nrow(data))
+afex::aov_4(attractiveness ~ gender*alcohol + (1|id), data=d2)
+afex::aov_car(attractiveness ~ gender*alcohol + Error(id), data=d2)
+?aov_car
+
+a = afex::aov_4(attractiveness ~ gender * alcohol + (1|id), data=d2)
+afex_plot(a, 'alcohol','gender')
+# repeated one way
+
+car::Anova()
+
+m = lm(attractiveness ~ alcohol + Error(id/alcohol), data=data)
+m = aov(attractiveness ~ alcohol + Error(id/alcohol), data=data)
+car::Anova(m, type='III')
+
+rstatix::anova_test(data=data, formula=attractiveness ~ alcohol + Error(id/alcohol), type="III")
+afex::aov_car(attractiveness ~ alcohol + Error(id/alcohol), data=data)
+afex::aov_4(attractiveness ~ alcohol + (alcohol | id), data=data)
+
+a = afex::aov_car(attractiveness ~ alcohol + (alcohol | id), data=data)
+summary(a)
+plot_model(a$lm, type='pred', terms=c('alcohol'))
+
+afex_plot(a, "alcohol")
+```
+
+
+
+```{r}
+# options("contrasts" = c("contr.sum", "contr.poly"))
+# options("contrasts" = c("contr.treatment", "contr.poly"))
+library(emmeans)
+
+
+m <- lm(attractiveness ~ gender, data=data)
+Anova(m, type='III')
+jmv::ANOVA(formula = attractiveness ~ gender * alcohol, data = data)
+anova_test(attractiveness ~ gender * alcohol, data = data, type="III")
+
+m <- lm(attractiveness ~ gender * alcohol, data=data)
+Anova(m, type='III')
+jmv::ANOVA(formula = attractiveness ~ gender * alcohol, data = data)
+anova_test(attractiveness ~ gender * alcohol, data = data, type="III")
+
+m <- lm(attractiveness ~ gender * alcohol, data=data, 
+        contrasts = list(gender="contr.helmert", alcohol='contr.helmert'))
+Anova(m, type='III')
+jmv::ANOVA(formula = attractiveness ~ gender * alcohol, data = data)
+anova_test(m, type="III")
+
+## easiest approach? use this
+m = anova_test(attractiveness ~ gender * alcohol, data = data, type="III")
+
+str(m)
+plot(m)
+
+# Correct type I anova. Same results as Anova(m, type='III') with 
+# effect coding IF DATA IS BALANCED (so not a good default to teach)
+m <- lm(attractiveness ~ gender * alcohol, data=data)
+anova(m)
+stats:::anova.lm
+
+install.packages('report')
+library(report)
+report(m) |> to_table()
+
+plot_model(m, type='pred', terms=c('gender', 'alcohol'))
+
+library(effectsize)
+eta_squared(m)
+plot_model(m, type='pred', terms=c('gender', 'alcohol'))
+
+
+m <- lm(attractiveness ~ alcohol, data=data)
+Anova(m)
+Anova(m, type='III')
+summary(aov(m))
+jmv::ANOVA(formula = attractiveness ~ alcohol, data = data)
+
+m <- lm(attractiveness ~ gender + alcohol, data=data,
+        contrasts = list(gender="contr.helmert", alcohol='contr.helmert'))
+Anova(m, type='III')
+jmv::ANOVA(formula = attractiveness ~ gender + alcohol, data = data)
+
+?jmv::ANOVA
+?jmv:::anovaOptions
+```

@@ -189,19 +189,20 @@ Note that this way of setting the nr of digits is specific to the `psych` packag
 alpha = d |> 
     select(trust_t1_item1, trust_t1_item2, trust_t1_item3_inv, trust_t1_item4, trust_t1_item5) |> 
     alpha()
-ca = alpha$total$raw_alpha
+ca = sprintf("%.2f", alpha$total$raw_alpha)
+ca_drop = sprintf("%.2f", alpha$alpha.drop[2,1])
 ```
 
 This gives quite a lot of output. These are the most important parts to consider:
 
-1. **Cronbach's alpha**: At the top we have a row that says `raw_alpha`, `std.alpha`, etc. Here we are just interested in the `raw_alpha`, which is the value of Cronbach's alpha. In this case it's 0.85, which is already very good. 
-2. **Reliability if an item is dropped**: This part shows you what would happen to the `raw_alpha` (and the other reliability measures) if you would drop one of the items from the scale. In our data we see that if `item2` would be dropped, the `raw_alpha` would go up to `0.92` (from 0.85). In other words, if we would use a 4-item scale with `item2` dropped, the scale would be more reliable.  
-3. **Item statistics**: This part shows you some usefull statistics about the items, like the mean and standard deviation (sd). More importantly, it also shows several scores for `item-total correlation` (the `r` in `raw.r`, `std.r`, `r.cor` and `r.drop` stands for correlation). This indicate how strongly the item is correlated to the total scale (i.e. the combination of the other items). The recommended correlation measure to look at is the `r.cor` (correlation corrected for item overlap). In our data we see that `item5` has the strongest correlation with the total scale, whereas `item2` has the weakets. Notice how this is in line with the `Reliability if an item is dropped` part: if we would drop `item2`, the scale would become more reliable. (Think about why that makes sense!)
+1. **Cronbach's alpha**: At the top we have a row that says `raw_alpha`, `std.alpha`, etc. Here we are just interested in the `raw_alpha`, which is the value of Cronbach's alpha. In this case it's `r ca`, which is already very good. 
+3. **Reliability if an item is dropped**: This part shows you what would happen to the `raw_alpha` (and the other reliability measures) if you would drop one of the items from the scale. In our data we see that if `item2` would be dropped, the `raw_alpha` would go up to `r ca_drop` (from `r ca`). In other words, if we would use a 4-item scale with `item2` dropped, the scale would be more reliable.  
+4. **Item statistics**: This part shows you some usefull statistics about the items, like the mean and standard deviation (sd). More importantly, it also shows several scores for `item-total correlation` (the `r` in `raw.r`, `std.r`, `r.cor` and `r.drop` stands for correlation). This indicate how strongly the item is correlated to the total scale (i.e. the combination of the other items). The recommended correlation measure to look at is the `r.cor` (correlation corrected for item overlap). In our data we see that `item5` has the strongest correlation with the total scale, whereas `item2` has the weakets. Notice how this is in line with the `Reliability if an item is dropped` part: if we would drop `item2`, the scale would become more reliable. (Think about why that makes sense!)
 
 ### 6. Remove items if necessary
 
 If the reliability of your scale is too low, you might want to consider removing some items (if you have enough items to spare).
-Above we saw that if we would drop `item2`, the reliability of the scale would go up to 0.92.
+Above we saw that if we would drop `item2`, the reliability of the scale would go up to `r ca_drop`.
 You can verify that this is indeed what happens:
 
 ```{r, results='hide'}
@@ -213,8 +214,8 @@ d |>
     alpha()
 ```
 
-You can verify that the `raw_alpha` is now 0.92.
-So now we can choose between either using the 4-item scale with an alpha of 0.92, or keeping the 5-item scale with an alpha of 0.85.
+You can verify that the `raw_alpha` is now `r ca_drop`.
+So now we can choose between either using the 4-item scale with an alpha of `r ca_drop`, or keeping the 5-item scale with an alpha of `r ca`.
 This is a judgement call, and depends on the context of your research.
 Generally speaking, if you have sufficient items left and the improvement in the alpha is not very small, it's a good idea to remove items to increase the reliability.
 
@@ -226,7 +227,7 @@ In the output of `alpha()` for our four item scale we see that this is not the c
 Finally, once you have a reliable scale, you can calculate the scale score.
 This is usually done by taking the average of the items in the scale.
 The simplest way to do so is to just add up the items and divide by the number of items.
-Let's do this for the 4-item scale ($\alpha = 0.92$) that we tested above (mind the parentheses!):
+Let's do this for the 4-item scale ($\alpha = `r ca_drop`$) that we tested above (mind the parentheses!):
 
 ```{r}
 d <- d |> 
