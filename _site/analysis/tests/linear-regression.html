@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1103,7 +1103,7 @@ Determining what reference category to use
 <section id="interaction-effects" class="level2">
 <h2 class="anchored" data-anchor-id="interaction-effects">Interaction effects</h2>
 <p>One of the strengths of regression analysis is that it allows you to test <strong>interaction effects</strong>. This is when the effect of one independent variable depends on the value of another independent variable.</p>
-<p>For example, in the previous model we saw that <code>political_orientation</code> has an effect on <code>trust_t1</code>. But we might theorize that this effect depends on a person’s overall <code>political_interest</code>. If people are not really interested in politics, then their political orientation might not have a big effect on their trust in journalists. So we can test if the effect of <code>political_orientation</code> on <code>trust_t1</code> depends on <code>political_interest</code>. We then also say that <code>political_interest</code> <strong>moderates</strong> the effect of <code>political_orientation</code> on <code>trust_t1</code>.</p>
+<p>For example, in the previous model we saw that <code>political_orientation</code> has an effect on <code>trust_t1</code>. But we might theorize that this effect depends on a person’s overall <code>political_interest</code>. If people are not really interested in politics, then their political orientation might not have a big effect on their trust in journalists. In other words, we expect that <code>political_interest</code> <strong>moderates</strong> the effect of <code>political_orientation</code> on <code>trust_t1</code>.</p>
 <p>To test this, we can include an <strong>interaction term</strong> in the regression model. That is, we add an extra term to the formula in which we <strong>multiply</strong> the two independent variables. Here we fit two models: one without the interaction term, and one with the interaction term. To keep the table readable, we’ll first rename the variables to shorter names.</p>
 <div class="cell" data-tab.width="100%">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">rename</span>(d, <span class="at">pol_ori =</span> political_orientation, </span>
@@ -1540,7 +1540,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

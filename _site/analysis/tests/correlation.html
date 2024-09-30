@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -410,16 +410,16 @@ window.Quarto = {
    
   <ul>
   <li><a href="#what-is-the-correlation-test" id="toc-what-is-the-correlation-test" class="nav-link active" data-scroll-target="#what-is-the-correlation-test">What is the correlation test?</a></li>
-  <li><a href="#how-to-use-it" id="toc-how-to-use-it" class="nav-link" data-scroll-target="#how-to-use-it">How to use it</a>
+  <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a>
   <ul class="collapse">
   <li><a href="#between-two-variables-cor.test" id="toc-between-two-variables-cor.test" class="nav-link" data-scroll-target="#between-two-variables-cor.test">Between two variables: cor.test</a></li>
   <li><a href="#between-more-variables-tab_corr" id="toc-between-more-variables-tab_corr" class="nav-link" data-scroll-target="#between-more-variables-tab_corr">Between more variables: tab_corr</a></li>
   </ul></li>
-  <li><a href="#when-can-you-use-it" id="toc-when-can-you-use-it" class="nav-link" data-scroll-target="#when-can-you-use-it">When can you use it?</a>
+  <li><a href="#conditions-and-assumptions" id="toc-conditions-and-assumptions" class="nav-link" data-scroll-target="#conditions-and-assumptions">Conditions and assumptions</a>
   <ul class="collapse">
   <li><a href="#spearmans-rho-and-kendalls-tau" id="toc-spearmans-rho-and-kendalls-tau" class="nav-link" data-scroll-target="#spearmans-rho-and-kendalls-tau">Spearman’s <span class="math inline">\(\rho\)</span> and Kendall’s <span class="math inline">\(\tau\)</span></a></li>
   </ul></li>
-  <li><a href="#how-to-report-it" id="toc-how-to-report-it" class="nav-link" data-scroll-target="#how-to-report-it">How to report it</a></li>
+  <li><a href="#how-to-report" id="toc-how-to-report" class="nav-link" data-scroll-target="#how-to-report">How to report</a></li>
   </ul>
 </nav>
     </div>
@@ -452,8 +452,8 @@ window.Quarto = {
 <p>The relation is expressed as a measure (the correlation coefficient) on a scale from -1 to 1, that tells us how strong the relationship is, and whether it is positive or negative. We also get a p-value that tells us if the relationship is significant. In this tutorial we focus on conducting the test. For more details on the concept of correlation and how to interpret the correlation coefficient <span class="math inline">\(r\)</span>, see the <a href="../../analysis/concepts/covariance-and-correlation.html">covariance and correlation</a> section.</p>
 <p>What the correlation test <strong>does not</strong> tell us is why the relationship exists. If we find that there is a correlation between social media use and loneliness, it does not mean that social media use causes loneliness. For more detail on this, see the <a href="../../analysis/concepts/causality.html">causality</a> section.</p>
 </section>
-<section id="how-to-use-it" class="level1">
-<h1>How to use it</h1>
+<section id="how-to-use" class="level1">
+<h1>How to use</h1>
 <p>We’ll show two ways of conducting the correlation test: using the <code>cor.test</code> function and using the <code>tab_corr</code> function from the <code>sjPlot</code> package. The <code>cor.test</code> function is part of the base R package, and is usefull if you just have two variables. The <code>tab_corr</code> function is part of the <code>sjPlot</code> package, and is useful if you have multiple variables and want to see the correlations between all of them.</p>
 <p>To demonstrate the correlation test, we’ll use the practice data that we’ve used before.</p>
 <div class="cell">
@@ -472,16 +472,16 @@ window.Quarto = {
     Pearson's product-moment correlation
 
 data:  d$news_consumption and d$trust_t1
-t = 2.3604, df = 598, p-value = 0.01858
+t = 3.334, df = 598, p-value = 0.000909
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- 0.01615611 0.17477652
+ 0.05564478 0.21283051
 sample estimates:
-       cor 
-0.09607624 </code></pre>
+      cor 
+0.1350875 </code></pre>
 </div>
 </div>
-<p>The output gives us the correlation coefficient under the <code>sample estimates</code>, which in our case is <span class="math inline">\(r = 0.096\)</span>. This means that the correlation is positive (&gt; 0), but quite weak. The test also reports a p-value (0.019), which tells us that the correlation is significant at the <span class="math inline">\(95\%\)</span> (<code>&lt; 0.05</code>) confidence level. Also note that the degrees of freedom are reported as 598, which is the number of observations minus 2.</p>
+<p>The output gives us the correlation coefficient under the <code>sample estimates</code>, which in our case is <span class="math inline">\(r = 0.135\)</span>. This means that the correlation is positive (&gt; 0), but quite weak. The test also reports a p-value (0.001), which tells us that the correlation is significant at the <span class="math inline">\(95\%\)</span> (<code>&lt; 0.05</code>) confidence level. Also note that the degrees of freedom are reported as 598, which is the number of observations minus 2.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="cor.test using the formula notation">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -524,41 +524,41 @@ cor.test using the formula notation
 <tr class="even">
 <td style="font-style: italic">trust_t1_item1</td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">0.328<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.740<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.735<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.828<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.335<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.707<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.715<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.801<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 </tr>
 <tr class="odd">
 <td style="font-style: italic">trust_t1_item2</td>
-<td style="text-align: center; padding: 0.2cm;">0.328<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.335<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">-0.297<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.283<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.308<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.301<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.288<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.321<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 </tr>
 <tr class="even">
 <td style="font-style: italic">trust_t1_item3</td>
-<td style="text-align: center; padding: 0.2cm;">-0.740<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.297<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.707<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.301<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">-0.687<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.781<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.633<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.756<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 </tr>
 <tr class="odd">
 <td style="font-style: italic">trust_t1_item4</td>
-<td style="text-align: center; padding: 0.2cm;">0.735<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.283<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.687<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.715<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.288<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.633<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
-<td style="text-align: center; padding: 0.2cm;">0.771<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.744<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 </tr>
 <tr class="even">
 <td style="font-style: italic">trust_t1_item5</td>
-<td style="text-align: center; padding: 0.2cm;">0.828<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.308<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">-0.781<span style="vertical-align:super;font-size:0.8em;">***</span></td>
-<td style="text-align: center; padding: 0.2cm;">0.771<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.801<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.321<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">-0.756<span style="vertical-align:super;font-size:0.8em;">***</span></td>
+<td style="text-align: center; padding: 0.2cm;">0.744<span style="vertical-align:super;font-size:0.8em;">***</span></td>
 <td style="text-align: center; padding: 0.2cm;">&nbsp;</td>
 </tr>
 <tr class="odd">
@@ -571,8 +571,8 @@ cor.test using the formula notation
 <p>This is great for getting a quick overview of the relationships between multiple variables. If you need to get the exact p-values, you can also use <code>tab_corr(p.numeric = TRUE)</code>.</p>
 </section>
 </section>
-<section id="when-can-you-use-it" class="level1">
-<h1>When can you use it?</h1>
+<section id="conditions-and-assumptions" class="level1">
+<h1>Conditions and assumptions</h1>
 <p>The correlation test can be used when you have two <code>numeric</code> variables and you want to know if there is a relationship between them. There is no <code>dependent</code> or <code>independent</code> variable in the correlation test, because we are just looking at the relationship between the variables.</p>
 <p>There are four main conditions that need to be met for the correlation test to be valid:</p>
 <ol type="1">
@@ -594,8 +594,8 @@ cor.test using the formula notation
 </div>
 </section>
 </section>
-<section id="how-to-report-it" class="level1">
-<h1>How to report it</h1>
+<section id="how-to-report" class="level1">
+<h1>How to report</h1>
 <p>For APA style reporting of the correlation test you need to know the <code>correlation coefficient</code>, <code>p-value</code>, and the <code>degrees of freedom</code>. You can find all these values in the output of the <code>cor.test</code> function.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>The formula for reporting the results of a correlation test in APA style is:</p>
 <p>r(<code>degrees of freedom</code>) = <code>correlation coefficient</code>, p = <code>p-value</code>.</p>
@@ -710,7 +710,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
