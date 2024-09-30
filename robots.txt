@@ -1,1 +1,1 @@
-Sitemap: https://vu-communication-science.github.io/R-canon/sitemap.xml
+Sitemap: https://kasperwelbers.github.io/r-canon/sitemap.xml
