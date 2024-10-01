@@ -1,6 +1,9 @@
 ---
 title: ANOVA
 summary: Analysis of variance
+format:
+  html:
+    df-print: paged
 ---
 
 
@@ -58,14 +61,12 @@ But as you'll see in the code, we do need to specify ourselves that we want to u
 
 # How to use it
 
-We'll use the `afex` and `emmeans` packages to perform ANOVA tests, and we'll use the `sjPlot` package to visualize the results.
-To prepare the data we'll again use the `tidyverse` package.
+We'll use the `afex` and `emmeans` packages to perform ANOVA tests and compare means, and we'll use the `sjPlot` package to visualize the results.
 
 ```{r, message=F}
 library(afex)
 library(emmeans)
 library(sjPlot)
-library(tidyverse)
 ```
 
 For our examples we'll use our [Practice data](../../data-management/index.qmd#practice-data).
@@ -80,9 +81,12 @@ Specifically, we're using the following variables:
 The **experiment_group** and **np_subscription** variables are our independent variable. To use these in the ANOVA, we'll explicitly convert them to factors, to indicate that they are categorical variables.
 
 ```{r, message=F}
+library(tidyverse)
 d <- read_csv("https://tinyurl.com/R-practice-data") |>
         mutate(experiment_group = as.factor(experiment_group),
-               np_subscription = as.factor(np_subscription))
+               np_subscription = as.factor(np_subscription)) |>
+        select(id, experiment_group, np_subscription, trust_t1, trust_t2)
+d
 ```
 
 ## One-way ANOVA
@@ -115,8 +119,10 @@ In this one-way ANOVA we have a single independent variable, which is the `exper
 The output shows us the results of the F-test ($F_{`r num_df`, `r den_df`} = `r f`, p < 0.001$) which tells us that the difference between the groups is **significant**.
 In other words, the movie that participants watched had a significant effect on their trust in journalists.
 
-We also get an $eta^2$ (eta squared) value in the `ges` column (generalized eta squared),
+We also get an $eta^2$ (eta squared) value in the `ges` column (generalized eta squared[^ges]),
 This is a measure of **effect size** that tells us how much variance in the dependent variable is explained by the independent variable (similar to the $R^2$ value in regression).
+
+[^ges]: The generalized $eta2$ is a generalization of the (partial) $eta2$ value that is often reported in ANOVA output. It was proposed by @olejnik03 because regular partial $eta2$ values can be misleading when comparing between studies with different designs. Specifically, it allows taking into account whether factors in the model are *experimentally manipulated* or *observed*. In the **When factors are observed** subsection below we show how to specify this in the `aov_car` function.
 
 ### Comparing between groups
 
@@ -133,12 +139,9 @@ Now we can see that the lowest trust score is in the *negative* group, and the h
 However, we do not yet know whether the diffences between all the groups are significant.
 It could be that the *positive* group is significantly higher than the *negative* group, but not significantly higher than the *control* group.
 To test this we can use the `pairs` function to get the pairwise comparisons for the means we just computed.
-With `adjust = 'bon'` we use the Bonferroni correction to adjust for multiple comparisons[^multiple_comparisons].
-
-[^multiple_comparisons]: When you compare multiple groups, the chance of finding a significant difference by random chance increases. The Bonferroni correction adjusts the p-values to account for this.
 
 ```{r}
-pairs(means, adjust='bon')
+pairs(means)
 ```
 
 Here we see all possible combinations of groups.
@@ -152,16 +155,35 @@ We can get the linear model from the `aov_car` output using `$lm`, and then use 
 plot_model(m$lm, type='pred', terms='experiment_group')
 ```
 
+### When factors are *observed*
+
+In the previous example our independent variable was *experimentally manipulated*: we randomly assigned participants to the three groups.
+However, in some cases we might have an independent variable that is *observed*, meaning that we did not manipulate it, but only *observed* a value that was already there.
+This is the case for variables like *age* and *gender*, and in our case also for *np_subscribed* (whether participants have a newspaper subscription).
+
+When factors are observed, we need to correct the $eta^2$ value to get more reliable effect sizes.
+The `afex` package does this automatically for us by using the generalized $eta^2$ value (`ges` column in the output).
+However, we do need to tell it when a factor is observed, using the `observed` argument in the `aov_car` function.
+
+```{r, message=F}
+aov_car(trust_t2 ~ np_subscription + Error(id), observed='np_subscription', data=d)
+```
+
+Long story short: **when you have an observed factor, make sure to specify** it in the `aov_car` function using the `observed` argument.
+
+
 ## Two-way ANOVA
 
 In a two-way ANOVA we compare the means of a dependent variable between two or more groups in two independent variables.
 To demonstrate this we'll use the `np_subscription` variable as a second independent variable.
 
-The formula for a two-way ANOVA is `dependent_variable ~ independent_variable_1 * independent_variable_2 + Error(id)`.
+The formula for a two-way ANOVA is `dependent_variable ~ independent_variable_1*independent_variable_2 + Error(id)`.
 The `*` symbol is a shorthand for including both the main effects and the interaction effect between the two independent variables.
+Note that we also again specify that `np_subscription` is an observed factor.
 
 ```{r, message=F}
-m = aov_car(trust_t2 ~ experiment_group * np_subscription + Error(id), data=d)
+m = aov_car(trust_t2 ~ experiment_group*np_subscription + Error(id), 
+            observed='np_subscription', data=d)
 ```
 
 Now our output shows three F-tests: one for the main effect of `experiment_group`, one for the main effect of `np_subscription`, and one for the interaction effect between the two. We also get three $eta^2$ values, one for each effect, which tell us how much variance is explained by each effect.
@@ -183,12 +205,28 @@ It seems that overall people that watched a *negative* movie have a lower trust 
 In other words, people that have a newspaper subscription might not be as affected by the negative movie.
 
 We can now use the `emmeans` function to test these differences.
-To see how the effect of `experimental_group` is different for people that do or do not have a newspaper subscription, we can look at means of the `experiment_group` variable conditional on (`by`) the `np_subscription` variable.
+To see how the effect of `experimental_group` is different for people that do or do not have a newspaper subscription, we can look at means of the `experiment_group` variable **conditional on** (`by`) the `np_subscription` variable.
 
 ```{r}
 means = emmeans(m, 'experiment_group', by='np_subscription')
 means
-pairs(means, adjust='bon')
+pairs(means)
 ```
 
 We can now compare how the movie affects the trust in journalists, while taking into account how this is conditional on whether people have a newspaper subscription.
+
+Likewise, we could also compare how the newspaper subscription affects the trust in journalists, while taking into account how this is conditional on the movie that people watched.
+
+```{r, results=F, message=F}
+means = emmeans(m, 'np_subscription', by='experiment_group')
+means
+pairs(means)
+```
+
+And finally, we could also compare between ALL the groups. 
+
+```{r, results=F, message=F}
+means = emmeans(m, c('experiment_group', 'np_subscription'))
+means
+pairs(means)
+```
