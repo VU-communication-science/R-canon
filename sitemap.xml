@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kasperwelbers.github.io/r-canon/analysis/tests/linear-regression.html</loc>
-    <lastmod>2024-09-30T07:09:09.754Z</lastmod>
+    <lastmod>2024-10-01T06:35:20.536Z</lastmod>
   </url>
   <url>
     <loc>https://kasperwelbers.github.io/r-canon/analysis/techniques/mediation.html</loc>
     <lastmod>2024-09-30T07:09:09.752Z</lastmod>
   </url>
   <url>
-    <loc>https://kasperwelbers.github.io/r-canon/analysis/concepts/covariance-and-correlation.html</loc>
-    <lastmod>2024-09-30T07:09:09.752Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kasperwelbers.github.io/r-canon/getting-started/functions.html</loc>
-    <lastmod>2024-09-30T07:09:09.757Z</lastmod>
-  </url>
-  <url>
     <loc>https://kasperwelbers.github.io/r-canon/analysis/tests/anova.html</loc>
-    <lastmod>2024-09-30T15:51:57.690Z</lastmod>
+    <lastmod>2024-10-01T07:11:55.992Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kasperwelbers.github.io/r-canon/good-to-know/function-documentation.html</loc>
+    <lastmod>2024-09-30T07:09:09.759Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kasperwelbers.github.io/r-canon/data-management/mutate.html</loc>
+    <lastmod>2024-09-30T07:09:09.755Z</lastmod>
   </url>
   <url>
     <loc>https://kasperwelbers.github.io/r-canon/data-management/select-and-rename.html</loc>
@@ -117,12 +117,12 @@
     <lastmod>2024-09-30T07:09:09.752Z</lastmod>
   </url>
   <url>
-    <loc>https://kasperwelbers.github.io/r-canon/data-management/mutate.html</loc>
-    <lastmod>2024-09-30T07:09:09.755Z</lastmod>
+    <loc>https://kasperwelbers.github.io/r-canon/getting-started/functions.html</loc>
+    <lastmod>2024-09-30T07:09:09.757Z</lastmod>
   </url>
   <url>
-    <loc>https://kasperwelbers.github.io/r-canon/good-to-know/function-documentation.html</loc>
-    <lastmod>2024-09-30T07:09:09.759Z</lastmod>
+    <loc>https://kasperwelbers.github.io/r-canon/analysis/concepts/covariance-and-correlation.html</loc>
+    <lastmod>2024-09-30T07:09:09.752Z</lastmod>
   </url>
   <url>
     <loc>https://kasperwelbers.github.io/r-canon/data-management/filter-and-arrange.html</loc>
