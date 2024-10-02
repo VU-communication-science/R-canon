@@ -124,7 +124,7 @@ This is a measure of **effect size** that tells us how much variance in the depe
 
 [^ges]: The generalized $eta2$ is a generalization of the (partial) $eta2$ value that is often reported in ANOVA output. It was proposed by @olejnik03 because regular partial $eta2$ values can be misleading when comparing between studies with different designs. Specifically, it allows taking into account whether factors in the model are *experimentally manipulated* or *observed*. In the **When factors are observed** subsection below we show how to specify this in the `aov_car` function.
 
-### Comparing between groups
+::: {.callout-note title="Comparing between groups" collapse="true"}
 
 The $eta^2$ and F-test only tell us that there is a difference between the groups, but not *where* the difference is.
 To compare bewteen the groups, we can first of all look at their means.
@@ -154,6 +154,7 @@ We can get the linear model from the `aov_car` output using `$lm`, and then use 
 ```{r, fig.height=3}
 plot_model(m$lm, type='pred', terms='experiment_group')
 ```
+::: 
 
 ### When factors are *observed*
 
@@ -188,7 +189,8 @@ m = aov_car(trust_t2 ~ experiment_group*np_subscription + Error(id),
 
 Now our output shows three F-tests: one for the main effect of `experiment_group`, one for the main effect of `np_subscription`, and one for the interaction effect between the two. We also get three $eta^2$ values, one for each effect, which tell us how much variance is explained by each effect.
 
-### Comparing between groups
+::: {.callout-note title="Comparing between groups" collapse="true"}
+
 
 We can again use the `emmeans` function to get the means for each group.
 However, we have quite a lot of combinations now.
@@ -229,4 +231,36 @@ And finally, we could also compare between ALL the groups.
 means = emmeans(m, c('experiment_group', 'np_subscription'))
 means
 pairs(means)
+```
+:::
+
+# Conditions and assumptions
+
+ANOVA is a parametric test, which means that it makes assumptions about the data.
+If these assumptions are violated, the results of the ANOVA can be unreliable.
+The most important assumptions are:
+
+1. **Normality**. The dependent variable should be normally distributed in each group.
+2. **Homogeneity of variance**. The variance of the dependent variable should (approximately) be equal in each group.
+3. **Independence**. Observations should be independent of each other. 
+
+Here we will only discuss the assumption of **homogeneity of variance**, because it is more specific to ANOVA.
+For the other assumptions, which are more general to linear models, we refer to the [regression tutorial](../tests/linear-regression.qmd).
+If you have not yet learned about regression, you can ignore the details of these other assumptions for now.
+
+### Homogeneity of variance
+
+Homogeneity of variance means that the variance of the dependent variable should be (approximately) equal in each group.
+In our one-way ANOVA example, this means that the variance of the trust score should be equal in the *control*, *positive*, and *negative* groups.
+
+We can test this with the Levene's test, which is a test for homogeneity of variance.
+The null hypothesis of the Levene's test is that the variance is equal in each group.
+If the p-value of the test is less than 0.05, we reject the null hypothesis and conclude that the variance is not equal in each group.
+
+To perform the Levene's test we can use the `leveneTest` function from the `car` package.
+To test whether the variance of the trust score (dependent variable) is equal in each group of the independent variable, we use the formula `dependent_variable ~ independent_variable`.
+
+```{r, message=F}
+library(car)
+leveneTest(trust_t2 ~ experiment_group, data=d)
 ```

@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -422,12 +442,13 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#one-way-anova" id="toc-one-way-anova" class="nav-link" data-scroll-target="#one-way-anova">One-way ANOVA</a>
   <ul class="collapse">
-  <li><a href="#comparing-between-groups" id="toc-comparing-between-groups" class="nav-link" data-scroll-target="#comparing-between-groups">Comparing between groups</a></li>
+  <li><a href="#when-factors-are-observed" id="toc-when-factors-are-observed" class="nav-link" data-scroll-target="#when-factors-are-observed">When factors are <em>observed</em></a></li>
   </ul></li>
-  <li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link" data-scroll-target="#two-way-anova">Two-way ANOVA</a>
+  <li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link" data-scroll-target="#two-way-anova">Two-way ANOVA</a></li>
+  </ul></li>
+  <li><a href="#conditions-and-assumptions" id="toc-conditions-and-assumptions" class="nav-link" data-scroll-target="#conditions-and-assumptions">Conditions and assumptions</a>
   <ul class="collapse">
-  <li><a href="#comparing-between-groups-1" id="toc-comparing-between-groups-1" class="nav-link" data-scroll-target="#comparing-between-groups-1">Comparing between groups</a></li>
-  </ul></li>
+  <li><a href="#homogeneity-of-variance" id="toc-homogeneity-of-variance" class="nav-link" data-scroll-target="#homogeneity-of-variance">Homogeneity of variance</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -551,9 +572,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>When we print the output of the <code>aov_car</code> function, we get the main results of the ANOVA test. In this one-way ANOVA we have a single independent variable, which is the <code>experiment_group</code>. The output shows us the results of the F-test (<span class="math inline">\(F_{2, 597} = 34.13, p &lt; 0.001\)</span>) which tells us that the difference between the groups is <strong>significant</strong>. In other words, the movie that participants watched had a significant effect on their trust in journalists.</p>
-<p>We also get an <span class="math inline">\(eta^2\)</span> (eta squared) value in the <code>ges</code> column (generalized eta squared), This is a measure of <strong>effect size</strong> that tells us how much variance in the dependent variable is explained by the independent variable (similar to the <span class="math inline">\(R^2\)</span> value in regression).</p>
-<section id="comparing-between-groups" class="level3">
-<h3 class="anchored" data-anchor-id="comparing-between-groups">Comparing between groups</h3>
+<p>We also get an <span class="math inline">\(eta^2\)</span> (eta squared) value in the <code>ges</code> column (generalized eta squared<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>), This is a measure of <strong>effect size</strong> that tells us how much variance in the dependent variable is explained by the independent variable (similar to the <span class="math inline">\(R^2\)</span> value in regression).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Comparing between groups">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comparing between groups
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>The <span class="math inline">\(eta^2\)</span> and F-test only tell us that there is a difference between the groups, but not <em>where</em> the difference is. To compare bewteen the groups, we can first of all look at their means. For this we’ll use the <code>emmeans</code> function from the <code>emmeans</code> package.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">=</span> <span class="fu">emmeans</span>(m, <span class="st">"experiment_group"</span>)</span>
@@ -567,16 +598,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 Confidence level used: 0.95 </code></pre>
 </div>
 </div>
-<p>Now we can see that the lowest trust score is in the <em>negative</em> group, and the highest in the <em>positive</em> group. However, we do not yet know whether the diffences between all the groups are significant. It could be that the <em>positive</em> group is significantly higher than the <em>negative</em> group, but not significantly higher than the <em>control</em> group. To test this we can use the <code>pairs</code> function to get the pairwise comparisons for the means we just computed. With <code>adjust = 'bon'</code> we use the Bonferroni correction to adjust for multiple comparisons<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<p>Now we can see that the lowest trust score is in the <em>negative</em> group, and the highest in the <em>positive</em> group. However, we do not yet know whether the diffences between all the groups are significant. It could be that the <em>positive</em> group is significantly higher than the <em>negative</em> group, but not significantly higher than the <em>control</em> group. To test this we can use the <code>pairs</code> function to get the pairwise comparisons for the means we just computed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(means, <span class="at">adjust=</span><span class="st">'bon'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast            estimate    SE  df t.ratio p.value
  control - negative     1.047 0.172 597   6.097  &lt;.0001
- control - positive    -0.306 0.172 597  -1.780  0.2265
+ control - positive    -0.306 0.172 597  -1.780  0.1770
  negative - positive   -1.352 0.172 597  -7.877  &lt;.0001
 
-P value adjustment: bonferroni method for 3 tests </code></pre>
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
 </div>
 </div>
 <p>Here we see all possible combinations of groups. The <strong>control - negative</strong> (control <em>minus</em> negative) row tells us how much the trust score in the control group is higher than in the negative group, and whether this difference is significant.</p>
@@ -586,27 +617,58 @@ P value adjustment: bonferroni method for 3 tests </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="anova_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="anova_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+<section id="when-factors-are-observed" class="level3">
+<h3 class="anchored" data-anchor-id="when-factors-are-observed">When factors are <em>observed</em></h3>
+<p>In the previous example our independent variable was <em>experimentally manipulated</em>: we randomly assigned participants to the three groups. However, in some cases we might have an independent variable that is <em>observed</em>, meaning that we did not manipulate it, but only <em>observed</em> a value that was already there. This is the case for variables like <em>age</em> and <em>gender</em>, and in our case also for <em>np_subscribed</em> (whether participants have a newspaper subscription).</p>
+<p>When factors are observed, we need to correct the <span class="math inline">\(eta^2\)</span> value to get more reliable effect sizes. The <code>afex</code> package does this automatically for us by using the generalized <span class="math inline">\(eta^2\)</span> value (<code>ges</code> column in the output). However, we do need to tell it when a factor is observed, using the <code>observed</code> argument in the <code>aov_car</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov_car</span>(trust_t2 <span class="sc">~</span> np_subscription <span class="sc">+</span> <span class="fu">Error</span>(id), <span class="at">observed=</span><span class="st">'np_subscription'</span>, <span class="at">data=</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type 3 tests)
+
+Response: trust_t2
+           Effect     df  MSE         F  ges p.value
+1 np_subscription 1, 598 3.16 21.99 *** .035   &lt;.001
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Long story short: <strong>when you have an observed factor, make sure to specify</strong> it in the <code>aov_car</code> function using the <code>observed</code> argument.</p>
 </section>
 </section>
 <section id="two-way-anova" class="level2">
 <h2 class="anchored" data-anchor-id="two-way-anova">Two-way ANOVA</h2>
 <p>In a two-way ANOVA we compare the means of a dependent variable between two or more groups in two independent variables. To demonstrate this we’ll use the <code>np_subscription</code> variable as a second independent variable.</p>
-<p>The formula for a two-way ANOVA is <code>dependent_variable ~ independent_variable_1 * independent_variable_2 + Error(id)</code>. The <code>*</code> symbol is a shorthand for including both the main effects and the interaction effect between the two independent variables.</p>
+<p>The formula for a two-way ANOVA is <code>dependent_variable ~ independent_variable_1*independent_variable_2 + Error(id)</code>. The <code>*</code> symbol is a shorthand for including both the main effects and the interaction effect between the two independent variables. Note that we also again specify that <code>np_subscription</code> is an observed factor.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">aov_car</span>(trust_t2 <span class="sc">~</span> experiment_group <span class="sc">*</span> np_subscription <span class="sc">+</span> <span class="fu">Error</span>(id), <span class="at">data=</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">aov_car</span>(trust_t2 <span class="sc">~</span> experiment_group<span class="sc">*</span>np_subscription <span class="sc">+</span> <span class="fu">Error</span>(id), </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">observed=</span><span class="st">'np_subscription'</span>, <span class="at">data=</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now our output shows three F-tests: one for the main effect of <code>experiment_group</code>, one for the main effect of <code>np_subscription</code>, and one for the interaction effect between the two. We also get three <span class="math inline">\(eta^2\)</span> values, one for each effect, which tell us how much variance is explained by each effect.</p>
-<section id="comparing-between-groups-1" class="level3">
-<h3 class="anchored" data-anchor-id="comparing-between-groups-1">Comparing between groups</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Comparing between groups">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comparing between groups
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>We can again use the <code>emmeans</code> function to get the means for each group. However, we have quite a lot of combinations now. We have 6 groups (3 groups * 2 subscription types), which makes 15 pairwise comparisons.</p>
 <p>Let’s visualize the results first to get a better idea of how the two independent variables interact to affect the trust in journalists.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m<span class="sc">$</span>lm, <span class="at">type=</span><span class="st">'pred'</span>, <span class="at">terms=</span><span class="fu">c</span>(<span class="st">'experiment_group'</span>, <span class="st">'np_subscription'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m<span class="sc">$</span>lm, <span class="at">type=</span><span class="st">'pred'</span>, <span class="at">terms=</span><span class="fu">c</span>(<span class="st">'experiment_group'</span>, <span class="st">'np_subscription'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -616,10 +678,10 @@ P value adjustment: bonferroni method for 3 tests </code></pre>
 </div>
 </div>
 <p>Here we see that the effect of <code>np_subscription</code> (having a newspaper subscription) mostly matters for the <em>negative</em> group. It seems that overall people that watched a <em>negative</em> movie have a lower trust in journalists, but this is mostly true for people that do not have a newspaper subscription. In other words, people that have a newspaper subscription might not be as affected by the negative movie.</p>
-<p>We can now use the <code>emmeans</code> function to test these differences. To see how the effect of <code>experimental_group</code> is different for people that do or do not have a newspaper subscription, we can look at means of the <code>experiment_group</code> variable conditional on (<code>by</code>) the <code>np_subscription</code> variable.</p>
+<p>We can now use the <code>emmeans</code> function to test these differences. To see how the effect of <code>experimental_group</code> is different for people that do or do not have a newspaper subscription, we can look at means of the <code>experiment_group</code> variable <strong>conditional on</strong> (<code>by</code>) the <code>np_subscription</code> variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">=</span> <span class="fu">emmeans</span>(m, <span class="st">'experiment_group'</span>, <span class="at">by=</span><span class="st">'np_subscription'</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">=</span> <span class="fu">emmeans</span>(m, <span class="st">'experiment_group'</span>, <span class="at">by=</span><span class="st">'np_subscription'</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>np_subscription = no:
  experiment_group emmean    SE  df lower.CL upper.CL
@@ -635,39 +697,85 @@ np_subscription = yes:
 
 Confidence level used: 0.95 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(means, <span class="at">adjust=</span><span class="st">'bon'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>np_subscription = no:
  contrast            estimate    SE  df t.ratio p.value
  control - negative     1.860 0.252 594   7.393  &lt;.0001
- control - positive    -0.452 0.250 594  -1.804  0.2153
+ control - positive    -0.452 0.250 594  -1.804  0.1692
  negative - positive   -2.312 0.244 594  -9.491  &lt;.0001
 
 np_subscription = yes:
  contrast            estimate    SE  df t.ratio p.value
- control - negative     0.360 0.217 594   1.656  0.2947
- control - positive    -0.208 0.218 594  -0.951  1.0000
- negative - positive   -0.568 0.223 594  -2.550  0.0330
+ control - negative     0.360 0.217 594   1.656  0.2232
+ control - positive    -0.208 0.218 594  -0.951  0.6079
+ negative - positive   -0.568 0.223 594  -2.550  0.0296
 
-P value adjustment: bonferroni method for 3 tests </code></pre>
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
 </div>
 </div>
 <p>We can now compare how the movie affects the trust in journalists, while taking into account how this is conditional on whether people have a newspaper subscription.</p>
+<p>Likewise, we could also compare how the newspaper subscription affects the trust in journalists, while taking into account how this is conditional on the movie that people watched.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">=</span> <span class="fu">emmeans</span>(m, <span class="st">'np_subscription'</span>, <span class="at">by=</span><span class="st">'experiment_group'</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>means</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And finally, we could also compare between ALL the groups.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">=</span> <span class="fu">emmeans</span>(m, <span class="fu">c</span>(<span class="st">'experiment_group'</span>, <span class="st">'np_subscription'</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>means</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conditions-and-assumptions" class="level1">
+<h1>Conditions and assumptions</h1>
+<p>ANOVA is a parametric test, which means that it makes assumptions about the data. If these assumptions are violated, the results of the ANOVA can be unreliable. The most important assumptions are:</p>
+<ol type="1">
+<li><strong>Normality</strong>. The dependent variable should be normally distributed in each group.</li>
+<li><strong>Homogeneity of variance</strong>. The variance of the dependent variable should (approximately) be equal in each group.</li>
+<li><strong>Independence</strong>. Observations should be independent of each other.</li>
+</ol>
+<p>Here we will only discuss the assumption of <strong>homogeneity of variance</strong>, because it is more specific to ANOVA. For the other assumptions, which are more general to linear models, we refer to the <a href="../../analysis/tests/linear-regression.html">regression tutorial</a>. If you have not yet learned about regression, you can ignore the details of these other assumptions for now.</p>
+<section id="homogeneity-of-variance" class="level3">
+<h3 class="anchored" data-anchor-id="homogeneity-of-variance">Homogeneity of variance</h3>
+<p>Homogeneity of variance means that the variance of the dependent variable should be (approximately) equal in each group. In our one-way ANOVA example, this means that the variance of the trust score should be equal in the <em>control</em>, <em>positive</em>, and <em>negative</em> groups.</p>
+<p>We can test this with the Levene’s test, which is a test for homogeneity of variance. The null hypothesis of the Levene’s test is that the variance is equal in each group. If the p-value of the test is less than 0.05, we reject the null hypothesis and conclude that the variance is not equal in each group.</p>
+<p>To perform the Levene’s test we can use the <code>leveneTest</code> function from the <code>car</code> package. To test whether the variance of the trust score (dependent variable) is equal in each group of the independent variable, we use the formula <code>dependent_variable ~ independent_variable</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(trust_t2 <span class="sc">~</span> experiment_group, <span class="at">data=</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["F value"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"1.117857","3":"0.3276631","_rn_":"group"},{"1":"597","2":"NA","3":"NA","_rn_":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+
 
 
 </section>
 </section>
-</section>
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-olejnik03" class="csl-entry" role="listitem">
+Olejnik, Stephen, and James Algina. 2003. <span>“Generalized Eta and Omega Squared Statistics: Measures of Effect Size for Some Common Research Designs.”</span> <em>Psychological Methods</em> 8 (4): 434.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>If you are familiar with the t-test, you can think of ANOVA as a generalization of the t-test, which can only compare two groups.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This is similar to an independent samples t-test, but can be used for more than two groups.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>This is similar to a paired samples t-test, but can be used for more than two groups. This is primarily used for within-subjects designs, where the same participants are measured multiple times.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>We’re using the trust score <em>after</em> watching the movie. It is <em>ok</em> to ignore the trust score before watching the movie, because we’ve randomly assigned participants to the different groups. This means that the trust score before watching the movie should be the same in each group. However, as we’ll show below, we could also use a repeated measures ANOVA to compare the trust score before and after watching the movie.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>When you compare multiple groups, the chance of finding a significant difference by random chance increases. The Bonferroni correction adjusts the p-values to account for this.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>The generalized <span class="math inline">\(eta2\)</span> is a generalization of the (partial) <span class="math inline">\(eta2\)</span> value that is often reported in ANOVA output. It was proposed by <span class="citation" data-cites="olejnik03">Olejnik and Algina (<a href="#ref-olejnik03" role="doc-biblioref">2003</a>)</span> because regular partial <span class="math inline">\(eta2\)</span> values can be misleading when comparing between studies with different designs. Specifically, it allows taking into account whether factors in the model are <em>experimentally manipulated</em> or <em>observed</em>. In the <strong>When factors are observed</strong> subsection below we show how to specify this in the <code>aov_car</code> function.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
