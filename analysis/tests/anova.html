@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -442,13 +442,13 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#one-way-anova" id="toc-one-way-anova" class="nav-link" data-scroll-target="#one-way-anova">One-way ANOVA</a>
   <ul class="collapse">
-  <li><a href="#comparing-between-groups" id="toc-comparing-between-groups" class="nav-link" data-scroll-target="#comparing-between-groups">Comparing between groups</a></li>
   <li><a href="#when-factors-are-observed" id="toc-when-factors-are-observed" class="nav-link" data-scroll-target="#when-factors-are-observed">When factors are <em>observed</em></a></li>
   </ul></li>
-  <li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link" data-scroll-target="#two-way-anova">Two-way ANOVA</a>
-  <ul class="collapse">
-  <li><a href="#comparing-between-groups-1" id="toc-comparing-between-groups-1" class="nav-link" data-scroll-target="#comparing-between-groups-1">Comparing between groups</a></li>
+  <li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link" data-scroll-target="#two-way-anova">Two-way ANOVA</a></li>
   </ul></li>
+  <li><a href="#conditions-and-assumptions" id="toc-conditions-and-assumptions" class="nav-link" data-scroll-target="#conditions-and-assumptions">Conditions and assumptions</a>
+  <ul class="collapse">
+  <li><a href="#homogeneity-of-variance" id="toc-homogeneity-of-variance" class="nav-link" data-scroll-target="#homogeneity-of-variance">Homogeneity of variance</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -573,8 +573,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 </div>
 <p>When we print the output of the <code>aov_car</code> function, we get the main results of the ANOVA test. In this one-way ANOVA we have a single independent variable, which is the <code>experiment_group</code>. The output shows us the results of the F-test (<span class="math inline">\(F_{2, 597} = 34.13, p &lt; 0.001\)</span>) which tells us that the difference between the groups is <strong>significant</strong>. In other words, the movie that participants watched had a significant effect on their trust in journalists.</p>
 <p>We also get an <span class="math inline">\(eta^2\)</span> (eta squared) value in the <code>ges</code> column (generalized eta squared<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>), This is a measure of <strong>effect size</strong> that tells us how much variance in the dependent variable is explained by the independent variable (similar to the <span class="math inline">\(R^2\)</span> value in regression).</p>
-<section id="comparing-between-groups" class="level3">
-<h3 class="anchored" data-anchor-id="comparing-between-groups">Comparing between groups</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Comparing between groups">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comparing between groups
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>The <span class="math inline">\(eta^2\)</span> and F-test only tell us that there is a difference between the groups, but not <em>where</em> the difference is. To compare bewteen the groups, we can first of all look at their means. For this we’ll use the <code>emmeans</code> function from the <code>emmeans</code> package.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">=</span> <span class="fu">emmeans</span>(m, <span class="st">"experiment_group"</span>)</span>
@@ -612,7 +622,9 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </div>
 </div>
 </div>
-</section>
+</div>
+</div>
+</div>
 <section id="when-factors-are-observed" class="level3">
 <h3 class="anchored" data-anchor-id="when-factors-are-observed">When factors are <em>observed</em></h3>
 <p>In the previous example our independent variable was <em>experimentally manipulated</em>: we randomly assigned participants to the three groups. However, in some cases we might have an independent variable that is <em>observed</em>, meaning that we did not manipulate it, but only <em>observed</em> a value that was already there. This is the case for variables like <em>age</em> and <em>gender</em>, and in our case also for <em>np_subscribed</em> (whether participants have a newspaper subscription).</p>
@@ -641,8 +653,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">observed=</span><span class="st">'np_subscription'</span>, <span class="at">data=</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now our output shows three F-tests: one for the main effect of <code>experiment_group</code>, one for the main effect of <code>np_subscription</code>, and one for the interaction effect between the two. We also get three <span class="math inline">\(eta^2\)</span> values, one for each effect, which tell us how much variance is explained by each effect.</p>
-<section id="comparing-between-groups-1" class="level3">
-<h3 class="anchored" data-anchor-id="comparing-between-groups-1">Comparing between groups</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Comparing between groups">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comparing between groups
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>We can again use the <code>emmeans</code> function to get the means for each group. However, we have quite a lot of combinations now. We have 6 groups (3 groups * 2 subscription types), which makes 15 pairwise comparisons.</p>
 <p>Let’s visualize the results first to get a better idea of how the two independent variables interact to affect the trust in journalists.</p>
 <div class="cell">
@@ -705,10 +727,39 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>means</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
-
-
+</div>
+</div>
+</div>
 </section>
+</section>
+<section id="conditions-and-assumptions" class="level1">
+<h1>Conditions and assumptions</h1>
+<p>ANOVA is a parametric test, which means that it makes assumptions about the data. If these assumptions are violated, the results of the ANOVA can be unreliable. The most important assumptions are:</p>
+<ol type="1">
+<li><strong>Normality</strong>. The dependent variable should be normally distributed in each group.</li>
+<li><strong>Homogeneity of variance</strong>. The variance of the dependent variable should (approximately) be equal in each group.</li>
+<li><strong>Independence</strong>. Observations should be independent of each other.</li>
+</ol>
+<p>Here we will only discuss the assumption of <strong>homogeneity of variance</strong>, because it is more specific to ANOVA. For the other assumptions, which are more general to linear models, we refer to the <a href="../../analysis/tests/linear-regression.html">regression tutorial</a>. If you have not yet learned about regression, you can ignore the details of these other assumptions for now.</p>
+<section id="homogeneity-of-variance" class="level3">
+<h3 class="anchored" data-anchor-id="homogeneity-of-variance">Homogeneity of variance</h3>
+<p>Homogeneity of variance means that the variance of the dependent variable should be (approximately) equal in each group. In our one-way ANOVA example, this means that the variance of the trust score should be equal in the <em>control</em>, <em>positive</em>, and <em>negative</em> groups.</p>
+<p>We can test this with the Levene’s test, which is a test for homogeneity of variance. The null hypothesis of the Levene’s test is that the variance is equal in each group. If the p-value of the test is less than 0.05, we reject the null hypothesis and conclude that the variance is not equal in each group.</p>
+<p>To perform the Levene’s test we can use the <code>leveneTest</code> function from the <code>car</code> package. To test whether the variance of the trust score (dependent variable) is equal in each group of the independent variable, we use the formula <code>dependent_variable ~ independent_variable</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(trust_t2 <span class="sc">~</span> experiment_group, <span class="at">data=</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["F value"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"1.117857","3":"0.3276631","_rn_":"group"},{"1":"597","2":"NA","3":"NA","_rn_":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+
+
+
 </section>
 </section>
 
@@ -819,7 +870,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/kasperwelbers\.github\.io\/r-canon\/");
+      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
