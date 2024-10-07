@@ -124,6 +124,13 @@ This is a measure of **effect size** that tells us how much variance in the depe
 
 [^ges]: The generalized $eta2$ is a generalization of the (partial) $eta2$ value that is often reported in ANOVA output. It was proposed by @olejnik03 because regular partial $eta2$ values can be misleading when comparing between studies with different designs. Specifically, it allows taking into account whether factors in the model are *experimentally manipulated* or *observed*. In the **When factors are observed** subsection below we show how to specify this in the `aov_car` function.
 
+Inside of the output of the `aov_car` function (which we named `m`) we also have the linear model (`lm`) that was fitted to the data, and the ANOVA table (`Anova`) that shows the results of the F-test.
+
+```{r}
+m$lm
+m$Anova
+```
+
 ::: {.callout-note title="Comparing between groups" collapse="true"}
 
 The $eta^2$ and F-test only tell us that there is a difference between the groups, but not *where* the difference is.
@@ -191,11 +198,7 @@ Now our output shows three F-tests: one for the main effect of `experiment_group
 
 ::: {.callout-note title="Comparing between groups" collapse="true"}
 
-
 We can again use the `emmeans` function to get the means for each group.
-However, we have quite a lot of combinations now.
-We have 6 groups (3 groups * 2 subscription types), which makes 15 pairwise comparisons.
-
 Let's visualize the results first to get a better idea of how the two independent variables interact to affect the trust in journalists.
 
 ```{r, fig.height=3}
@@ -231,6 +234,18 @@ And finally, we could also compare between ALL the groups.
 means = emmeans(m, c('experiment_group', 'np_subscription'))
 means
 pairs(means)
+
+iris$id = 1:nrow(iris)
+ds = iris[1:130,]
+m = aov_car(Sepal.Length ~ Species + Error(id), data=ds)
+table(ds$Species)
+
+ds |>
+    group_by(Species) |>
+    summarise(mean = mean(Sepal.Length), sd = sd(Sepal.Length), se = sd/sqrt(n()))
+emmeans(m, 'Species')
+
+
 ```
 :::
 

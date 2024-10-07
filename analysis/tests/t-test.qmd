@@ -1,0 +1,39 @@
+
+---
+title: t-test
+summary: Comparing two means
+format:
+  html:
+    df-print: paged
+---
+
+
+# What is a t-test?
+
+A t-test is a statistical test used to determine if there is a significant difference between two means. It is typically used when the data is approximately normally distributed. The t-test is based on the t-distribution, which is similar to the normal distribution.
+The key differences are that a normal distribution assumes that the population standard deviation is known, while a t-distribution assumes that the population standard deviation is unknown and must be estimated from the sample data.
+By adjusting for the uncertainty in the estimate of the population standard deviation, the t-distribution provides a more accurate estimate of the standard error of the mean when the sample size is small.
+
+The t-test can be used for testing simple hypotheses that concern the difference between two means. 
+There are tree main types of t-tests:
+
+* **One-sample t-test**: 
+  * **Purpose**. Compare the mean of a single sample to a known value (e.g., a population mean).
+  * **Example**. You have a sample of students and you want to test if the average score is significantly different from the national average.
+* **Independent samples t-test**: 
+  * **Purpose**. Compare the means *between* two independent groups. 
+  * **Example**. You conducted an experiment where you measured a variable in two groups (e.g., a *treatment* and a *control* group) and you want to test if the means are significantly different.
+* **Paired samples t-test**: 
+  * **Purpose**. Compare the means *within subjects* (e.g., within a person) at two different time points or under two different conditions. In this case the samples are not independent, because the two observations are *paired*.
+  * **Example**. You measured a variable in the same group of subjects before and after an intervention, and you want to test if the mean difference is significant.
+
+You will also encounter the t-test in other contexts, such as testing the significance of individual coefficients in a regression model (i.e. is the coefficient significantly different from zero?).
+In this tutorial we will focus on t-test as a standalone test for comparing two means.
+
+# How to use 
+
+
+
+
+
+
