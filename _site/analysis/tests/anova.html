@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -406,6 +406,12 @@ window.Quarto = {
  <span class="menu-text">Linear regression</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/tests/t-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">t-test</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -477,17 +483,18 @@ window.Quarto = {
 
 <section id="what-is-an-anova" class="level1">
 <h1>What is an ANOVA?</h1>
-<p>ANOVA stands for <strong>Analysis of Variance</strong>, which can refer to a number of different statistical tests that are used to compare means between two or more groups.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It is a commonly used test in experimental research, where the key independent variable is usually categorical (e.g., treatment groups, control group). There are different types of ANOVA to cover a wide range of research designs. The most common ones are:</p>
+<p>This makes it particularly suitable for experimental research, where participants are randomly assigned to different groups, and the researcher wants to know whether the groups differ on some outcome variable. Because of the random assignment, all possible confounding variables should be equally distributed over the groups, which allows us to make causal inferences about the effect of the independent variable on the dependent variable.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>There are different types of ANOVA to cover a wide range of research designs. The most common ones are:</p>
 <ul>
 <li><strong>One-way ANOVA</strong>.
 <ul>
 <li><strong>Purpose</strong>. Compare means <em>between-subjects</em> in different groups.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
-<li><strong>Example</strong>. We want to know how the design of a health care robot affects how <em>comfortable</em> people feel about interacting with the robot. To test this we divide participants into three groups, that are shown three different designs (<a href="https://vu.nl/nl/onderzoek/meer-over/sociale-robots-voor-de-samenleving-mediapsychologie">Alice, Nao</a>, and RoboCop). They then answer multiple questions based on which we measure a <em>comfort rating</em> <a href="../../analysis/techniques/scale-construction.html">scale</a>. We can now use One-way ANOVA to compare the mean comfort rating between the three groups.</li>
+<li><strong>Example</strong>. We want to know how the design of a health care robot affects how <em>comfortable</em> people feel about interacting with the robot. To test this we <em>randomly</em> asign participants to three experimental groups, that are shown three different robot designs (<a href="https://vu.nl/nl/onderzoek/meer-over/sociale-robots-voor-de-samenleving-mediapsychologie">Alice, Nao</a>, and RoboCop). They then answer multiple questions based on which we measure a <em>comfort rating</em> <a href="../../analysis/techniques/scale-construction.html">scale</a>. We can now use One-way ANOVA to compare the mean comfort rating between the three groups.</li>
 </ul></li>
 <li><strong>Two-way ANOVA</strong>.
 <ul>
 <li><strong>Purpose</strong>. Compare means <em>between-subjects</em> in different groups, for two independent variables.</li>
-<li><strong>Example</strong>. In addition to comparing three different designs, we could also compare between using a <em>male</em> or <em>female</em> voice. We can then divide participants over six groups (3 designs * 2 voices), and use two-way ANOVA to test whether the design and voice have an effect on the perceived attractiveness, and whether there is an <strong>interaction</strong> between the two.</li>
+<li><strong>Example</strong>. In addition to comparing three different designs of a health care robot, we could also compare between using a <em>male</em> or <em>female</em> voice. We then randomly assign participants to six groups (3 designs * 2 voices), and use two-way ANOVA to test whether the design and voice have an effect on the perceived attractiveness. We can then also test whether there is an <em>interaction</em> between the two variables, to see if specific combinations of design and voice are particularly comforting.</li>
 </ul></li>
 <li><strong>Repeated measures ANOVA</strong>.
 <ul>
@@ -497,7 +504,7 @@ window.Quarto = {
 <li><strong>Mixed-design ANOVA</strong>.
 <ul>
 <li><strong>Purpose</strong>. Combine <em>between-subjects</em> and <em>within-subjects</em> factors.</li>
-<li><strong>Example</strong>. This allows us to measure the effect of the design (one-way anova example) on the change in <em>heart rate</em> (repeated measures example). We divide participants into three groups that are shown the three different designs, and measure the <em>heart rate</em> of participants <em>before</em>, <em>during</em>, and <em>after</em> interacting with the robot. We can then use mixed-design ANOVA to test the effect of the design on the change in <em>heart rate</em>.</li>
+<li><strong>Example</strong>. This allows us to measure simultaneously the effect of the design of a health care robot (one-way anova example) on the change in <em>heart rate</em> (repeated measures example). We divide participants into three groups that are shown the three different designs, and measure the <em>heart rate</em> of participants <em>before</em>, <em>during</em>, and <em>after</em> interacting with the robot. We can then use mixed-design ANOVA to test whether the three designs of a health care robot affect the change in hearthrate differently.</li>
 </ul></li>
 </ul>
 <!-- # How does it work
@@ -627,8 +634,14 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </div>
 <section id="when-factors-are-observed" class="level3">
 <h3 class="anchored" data-anchor-id="when-factors-are-observed">When factors are <em>observed</em></h3>
-<p>In the previous example our independent variable was <em>experimentally manipulated</em>: we randomly assigned participants to the three groups. However, in some cases we might have an independent variable that is <em>observed</em>, meaning that we did not manipulate it, but only <em>observed</em> a value that was already there. This is the case for variables like <em>age</em> and <em>gender</em>, and in our case also for <em>np_subscribed</em> (whether participants have a newspaper subscription).</p>
-<p>When factors are observed, we need to correct the <span class="math inline">\(eta^2\)</span> value to get more reliable effect sizes. The <code>afex</code> package does this automatically for us by using the generalized <span class="math inline">\(eta^2\)</span> value (<code>ges</code> column in the output). However, we do need to tell it when a factor is observed, using the <code>observed</code> argument in the <code>aov_car</code> function.</p>
+<p>In the previous example our independent variable was <em>experimentally manipulated</em>: we randomly assigned participants to the three groups. Accordingly, any effects that we find are likely to represent causal relationships. If people with different opinions about journalism were randomly distributed over the groups, we can be confident that the differences we find after showing them different movies are due to the movies themselves.</p>
+<p>However, in some cases we might have an independent variable that is <em>observed</em>, meaning that we did not manipulate it, but only <em>observed</em> a value that was already there. This is the case for variables like <em>age</em> and <em>gender</em>, and in our case also for <em>np_subscribed</em> (whether participants have a newspaper subscription).</p>
+<p>When factors are observed, it has two implications for the ANOVA test:</p>
+<ul>
+<li><strong>Causality</strong>. It limits the ability to make causal inferences about the effect of the independent variable on the dependent variable. For instance, if we find that people with a newspaper subscription have a higher trust in journalists,</li>
+<li><strong>Effect size</strong>. When factors are observed, we need to correct the <span class="math inline">\(eta^2\)</span> value to get more reliable effect sizes. The <code>afex</code> package does this automatically for us by using the generalized <span class="math inline">\(eta^2\)</span> value (<code>ges</code> column in the output).However, we do need to tell it when a factor is observed, using the <code>observed</code> argument in the <code>aov_car</code> function.</li>
+</ul>
+<p>Let’s see how this works in practice, using the <code>np_subscription</code> variable as an observed factor. With <code>observed='np_subscription'</code> we tell the <code>aov_car</code> function that the <code>np_subscription</code> variable is an observed factor.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov_car</span>(trust_t2 <span class="sc">~</span> np_subscription <span class="sc">+</span> <span class="fu">Error</span>(id), <span class="at">observed=</span><span class="st">'np_subscription'</span>, <span class="at">data=</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -641,7 +654,7 @@ Response: trust_t2
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Long story short: <strong>when you have an observed factor, make sure to specify</strong> it in the <code>aov_car</code> function using the <code>observed</code> argument.</p>
+<p>In this case our results only tell us that there is a significant difference between people with and without a newspaper subscription. We cannot conclude that this is because having a newspaper subscription causes people to trust journalists more. We are no longer certain about the order of the effect (trust in journalists might also cause people to get a newspaper subscription), and there can be confounding variables that influence both (e.g., education level, socio-economic status).</p>
 </section>
 </section>
 <section id="two-way-anova" class="level2">
@@ -665,8 +678,7 @@ Comparing between groups
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We can again use the <code>emmeans</code> function to get the means for each group. However, we have quite a lot of combinations now. We have 6 groups (3 groups * 2 subscription types), which makes 15 pairwise comparisons.</p>
-<p>Let’s visualize the results first to get a better idea of how the two independent variables interact to affect the trust in journalists.</p>
+<p>We can again use the <code>emmeans</code> function to get the means for each group. Let’s visualize the results first to get a better idea of how the two independent variables interact to affect the trust in journalists.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m<span class="sc">$</span>lm, <span class="at">type=</span><span class="st">'pred'</span>, <span class="at">terms=</span><span class="fu">c</span>(<span class="st">'experiment_group'</span>, <span class="st">'np_subscription'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -725,7 +737,17 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">=</span> <span class="fu">emmeans</span>(m, <span class="fu">c</span>(<span class="st">'experiment_group'</span>, <span class="st">'np_subscription'</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>means</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(means)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>id <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(iris)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">=</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">130</span>,]</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">aov_car</span>(Sepal.Length <span class="sc">~</span> Species <span class="sc">+</span> <span class="fu">Error</span>(id), <span class="at">data=</span>ds)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(ds<span class="sc">$</span>Species)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>ds <span class="sc">|&gt;</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Species) <span class="sc">|&gt;</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Sepal.Length), <span class="at">sd =</span> <span class="fu">sd</span>(Sepal.Length), <span class="at">se =</span> sd<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">n</span>()))</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(m, <span class="st">'Species'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -771,7 +793,7 @@ Olejnik, Stephen, and James Algina. 2003. <span>“Generalized Eta and Omega Squ
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>If you are familiar with the t-test, you can think of ANOVA as a generalization of the t-test, which can only compare two groups.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>It is also possible to use ANOVA with non-experimental (i.e.&nbsp;observational) data. However, this limits our ability to make causal inferences. For observational data it is more common to use <a href="../tests/regression.qmd">regression analysis</a>, because this provides more flexibility to control for confounding variables. (This is also possible with more advanced forms of ANOVA, like ANCOVA and MANOVA).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This is similar to an independent samples t-test, but can be used for more than two groups.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>This is similar to a paired samples t-test, but can be used for more than two groups. This is primarily used for within-subjects designs, where the same participants are measured multiple times.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>We’re using the trust score <em>after</em> watching the movie. It is <em>ok</em> to ignore the trust score before watching the movie, because we’ve randomly assigned participants to the different groups. This means that the trust score before watching the movie should be the same in each group. However, as we’ll show below, we could also use a repeated measures ANOVA to compare the trust score before and after watching the movie.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
