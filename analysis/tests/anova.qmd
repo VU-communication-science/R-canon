@@ -244,18 +244,6 @@ And finally, we could also compare between ALL the groups.
 means = emmeans(m, c('experiment_group', 'np_subscription'))
 means
 pairs(means)
-
-iris$id = 1:nrow(iris)
-ds = iris[1:130,]
-m = aov_car(Sepal.Length ~ Species + Error(id), data=ds)
-table(ds$Species)
-
-ds |>
-    group_by(Species) |>
-    summarise(mean = mean(Sepal.Length), sd = sd(Sepal.Length), se = sd/sqrt(n()))
-emmeans(m, 'Species')
-
-
 ```
 :::
 
@@ -289,3 +277,45 @@ To test whether the variance of the trust score (dependent variable) is equal in
 library(car)
 leveneTest(trust_t2 ~ experiment_group, data=d)
 ```
+
+In this case the Levene's test is not significant, which means that we can assume that the variance of the trust score is sufficiently equal in each group.
+
+For two-way anova, we can also perform the Levene's test for each combination of the two independent variables.
+
+```{r, message=F}
+leveneTest(trust_t2 ~ experiment_group*np_subscription, data=d)
+```
+
+#### What if the variance is not equal?
+
+If Levene's test is significant, we would need to look more carefully into the variance across groups.
+ANOVA is fairly robust to violations of the assumption of homogeneity of variance, but if the variance is very different between groups, the results of the ANOVA can be unreliable.
+
+So how much difference in variance is too much?
+One strategy is to look at the ratio of the largest to the smallest variance across the groups.
+A common rule of thumb is that this ratio should not be more than 3.[^maxratio]
+However, note that this is just a rule of thumb, and if the sample size is small (less than 30 per group), or the groups are very unbalanced (i.e. one group has much more observations than the others), it is better to be more conservative.
+
+[^maxratio]: By 'rule of thumb', we mean that it's a general guideline, and not a number that is set in stone. Different authors have also proposed different values for this ratio. One source for the 3:1 ratio is @dean00. There is also Hartley's Fmax test, which is a more formal test that looks at the ratio of the largest to the smallest variance, and can take sample size and number of groups into account. However, this test is in turn sensitive to normal distribution of data, and requires groups to be balanced. Ultimately, there is no simple solution answer to the question "how much difference in variance is too much?". 
+
+In any case, it is always a good starting point to look at the sample size and variances across groups to see where potential problems might be.
+
+```{r, message=F}
+d |>
+  group_by(experiment_group, np_subscription) |>
+  summarize(n = n(), variance = var(trust_t2)) 
+```
+
+If there are strong differences in variance (like ratio > 3) and Levene's test is significant, we might need to use a different model, like ANOVA with Welch's correction, or a non-parametric test like the Kruskal-Wallis test.
+But perhaps more importantly, if you do find such strong differences, it is also a good idea to look more closely at the data to see what might be causing these differences.
+Why is the variance higher in one group than in the other? 
+Is there perhaps a confounding variable or moderator that you have not yet taken into account?
+Perhaps an experimental treatment was not applied correctly, or it might only have an effect in a specific subgroup of participants.
+
+Most importantly, do not think of testing these assumptions as a *hurdle* that you need to pass before you can use ANOVA.
+At the end of the day, the purpose of statistics is to help us better understand our data.
+If you find that your data does not meet the assumptions of ANOVA, this is not a failure, but an observation in itself that might warrant exploration.
+When in doubt, you can still use ANOVA, as long as you're transparent about the assumptions that are violated, and exert caution in your interpretation of the results.
+
+
+
