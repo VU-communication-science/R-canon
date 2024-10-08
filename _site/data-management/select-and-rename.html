@@ -450,22 +450,40 @@ Required packages and data for this tutorial
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "id"               "age"              "np_subscription"  "news consumption"
- [5] "experiment_group" "trust_t1"         "trust_t2"         "trust_t1_item1"  
- [9] "trust_t1_item2"   "trust_t1_item3"   "trust_t1_item4"   "trust_t1_item5"  
-[13] "trust_t2_item1"   "trust_t2_item2"   "trust_t2_item3"   "trust_t2_item4"  
-[17] "trust_t2_item5"  </code></pre>
+<pre><code> [1] "id"                    "age"                   "political_orientation"
+ [4] "political_interest"    "np_subscription"       "news consumption"     
+ [7] "experiment_group"      "trust_t1"              "trust_t2"             
+[10] "trust_t1_item1"        "trust_t1_item2"        "trust_t1_item3"       
+[13] "trust_t1_item4"        "trust_t1_item5"        "trust_t2_item1"       
+[16] "trust_t2_item2"        "trust_t2_item3"        "trust_t2_item4"       
+[19] "trust_t2_item5"       </code></pre>
 </div>
 </div>
 <section id="selecting-specific-columns" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-specific-columns">Selecting specific columns</h3>
-<p>The simplest way of using <code>select</code> is to explicitly specify the columns you want to keep:</p>
+<p>The simplest way of using <code>select</code> is to explicitly specify the columns you want to keep: The following code creates a new tibble with only the columns <code>id</code>, <code>age</code>, and <code>np_subscription</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">select</span>(d, age, np_subscription)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, id, age, np_subscription)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 600 × 3
+      id   age np_subscription
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;          
+ 1     1    52 yes            
+ 2     2    49 yes            
+ 3     3    44 yes            
+ 4     4    34 no             
+ 5     5    28 no             
+ 6     6    58 yes            
+ 7     7    32 yes            
+ 8     8    57 yes            
+ 9     9    36 yes            
+10    10    29 no             
+# ℹ 590 more rows</code></pre>
 </div>
-<p>This will return a new tibble with only the columns <code>id</code>, <code>age</code>, and <code>np_subscription</code>. We assigned this new tibble to the variable <code>ds</code> (short for “data subset”). Sometimes you want to overwrite the original data frame with the new selection. You can do this by assigning the result to the same name as the input (<code>d</code> in this case):</p>
+</div>
+<p>You can also overwrite the original data frame with the new selection. You can do this by assigning the result to the same name as the input (<code>d</code> in this case):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">select</span>(d, age, np_subscription)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">select</span>(ds, id, age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Just be carefull with this. One of the nice things about R is that you can have multiple versions of your data in different tibbles. It is often smart to at least keep the original (raw) data frame intact.</p>
 </section>
@@ -473,7 +491,7 @@ Required packages and data for this tutorial
 <h3 class="anchored" data-anchor-id="selecting-a-range-of-columns">Selecting a range of columns</h3>
 <p>You can also specify a range of columns using the syntax <code>first_column:last_column</code>. For example, to select all columns from <code>experiment_group</code> to <code>trust_t2</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, experiment_group<span class="sc">:</span>trust_t2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, experiment_group<span class="sc">:</span>trust_t2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will return a new tibble with only the columns <code>experiment_group</code>, <code>trust_t1</code>, and <code>trust_t2</code>.</p>
 <p>Note that here we did not assign the result to anything. So in this case R will just print the result to the console, but not store it in a variable.</p>
@@ -482,23 +500,23 @@ Required packages and data for this tutorial
 <h3 class="anchored" data-anchor-id="selecting-and-renaming-columns">Selecting and renaming columns</h3>
 <p>When you select a column, you can also rename it using the syntax <code>new_name = old_name</code>. The following code selects the columns <code>experiment_group</code>, <code>trust_t1</code>, and <code>trust_t2</code>, and renames them to <code>group</code>, <code>trust_before</code>, and <code>trust_after</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, <span class="at">group =</span> experiment_group, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">trust_before =</span> trust_t1, </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">trust_after =</span> trust_t2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, <span class="at">group =</span> experiment_group, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">trust_before =</span> trust_t1, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">trust_after =</span> trust_t2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="selecting-columns-that-have-spaces-in-the-name" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-columns-that-have-spaces-in-the-name">Selecting columns that have spaces in the name</h3>
 <p>Sometimes columns names have spaces in them. This is a bit annoying to work with in R, because you need to then tell R where a name starts and ends. You can do this by using backticks (reverse quotes) around the column name. In our practice data, we need this to select the <code>news consumption</code> column. It is then often smart to immediately rename the column to something without spaces, such as just replacing them with underscores:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, <span class="at">news_consumption =</span> <span class="st">`</span><span class="at">news consumption</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, <span class="at">news_consumption =</span> <span class="st">`</span><span class="at">news consumption</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dropping-columns" class="level3">
 <h3 class="anchored" data-anchor-id="dropping-columns">Dropping columns</h3>
 <p>Instead of selecting which column to keep, you can also specify which columns to drop. You can do this by adding a minus sign in front of the column name. The following code drops the columns <code>np_subscription</code> and <code>trust_t1</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, <span class="sc">-</span>np_subscription, <span class="sc">-</span>trust_t1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, <span class="sc">-</span>np_subscription, <span class="sc">-</span>trust_t1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will return a new tibble with all columns except <code>np_subscription</code> and <code>trust_t1</code>.</p>
 </section>
@@ -507,9 +525,9 @@ Required packages and data for this tutorial
 <h1>Renaming columns with <code>rename</code></h1>
 <p>Sometimes you only want to rename columns without selecting or dropping any. You can do this with the <code>rename</code> function, which works similarly to how you rename columns with <code>select</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(d, <span class="at">group =</span> experiment_group, </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">trust_before =</span> trust_t1, </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">trust_after =</span> trust_t2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(d, <span class="at">group =</span> experiment_group, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">trust_before =</span> trust_t1, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">trust_after =</span> trust_t2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this case, we do rename the columns, but without dropping all the other columns.</p>
 
@@ -609,7 +627,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/vu-communication-science\.github\.io\/R-canon\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

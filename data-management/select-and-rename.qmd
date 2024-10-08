@@ -1,7 +1,6 @@
 ---
 title: 'Select and rename'
 order: 1
-
 ---
 
 ::: {.callout-note title="Required packages and data for this tutorial"}
@@ -27,24 +26,24 @@ colnames(d)
 
 ### Selecting specific columns
 
-The simplest way of using `select` is to explicitly specify the columns you want to keep:
+The simplest way of using `select` is to explicitly specify the columns you want to keep.
+The first argument is the tibble (data frame) you want to select from, and the following arguments are the columns you want to keep.
+The following code returns a new tibble with only the columns `id`, `age`, and `np_subscription`.
 
-```{r, results='hide'}
-ds <- select(d, age, np_subscription)
+```{r}
+select(d, id, age, np_subscription)
 ```
 
-This will return a new tibble with only the columns `id`, `age`, and `np_subscription`.
-We assigned this new tibble to the variable `ds` (short for "data subset").
-Sometimes you want to overwrite the original data frame with the new selection.
-You can do this by assigning the result to the same name as the input (`d` in this case):
+As with any output, you can assign it to a variable to store the result.
 
 ```{r, results='hide', eval=FALSE}
-d <- select(d, age, np_subscription)
+ds <- select(d, id, age, np_subscription)
 ```
 
-Just be carefull with this. 
-One of the nice things about R is that you can have multiple versions of your data in different tibbles.
-It is often smart to at least keep the original (raw) data frame intact.
+Here we create a new tibble `ds` that only contains the columns `id`, `age`, and `np_subscription`.
+Whenever you import data into R, it is often a good idea to first select only the columns you need.
+While you could also overwrite the original tibble (`d <- select(d, ...)`) it is usually better to create a new tibble.
+There is no harm in having multiple tibbles in your environment, and if you give clear names to your tibbles, it will make your code more readable.
 
 ### Selecting a range of columns
 

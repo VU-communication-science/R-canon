@@ -12,8 +12,8 @@ order: 1
 # What is a t-test?
 
 A t-test is a statistical test used to determine if there is a significant difference between two means. 
-It is comparable to the z-test, but is more appropriate when the sample size is small or the population standard deviation is unknown.
-Where the z-test is based on the z-=istribution (i.e. the normal distribution), the t-test is based on the t-distribution, which takes into account the uncertainty in the estimate of the population standard deviation.
+It is comparable to the z-test, but is more appropriate when population standard deviation is unknown, and has to be estimated from the sample.
+Where the z-test is based on the z-distribution (i.e. the normal distribution), the t-test is based on the t-distribution, which takes into account the uncertainty in the estimate of the standard deviation.
 If the sample size is small, the t-distribution has heavier tails than the z-distribution, which makes it less likely to make a Type I error (i.e., rejecting the null hypothesis when it is true).
 
 In the following plot we show the normal (z) and t-distributions for two different sample sizes: 5 and 30.
@@ -48,7 +48,7 @@ plot1 <- ggplot(data_df4, aes(x = x, y = y, color = Distribution)) +
   geom_line(size = 1) +
   labs(
     title = "Sample size = 5",
-    x = "score (z or t)",
+    x = "x",
     y = "Density"
   ) +
   theme_minimal() +
@@ -98,7 +98,7 @@ In this tutorial we focus on the t-test as a standalone statistical test, but th
 
 The t-test is included in base R, but we'll also need the `car` package for the Levene's test (as you'll see later).
 
-```{r}
+```{r, message=F}
 library(car)
 ```
 
