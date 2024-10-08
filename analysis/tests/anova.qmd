@@ -35,8 +35,6 @@ The most common ones are:
   * **Example**. This allows us to measure simultaneously the effect of the design of a health care robot (one-way anova example) on the change in *heart rate* (repeated measures example). We divide participants into three groups that are shown the three different designs, and measure the *heart rate* of participants *before*, *during*, and *after* interacting with the robot. We can then use mixed-design ANOVA to test whether the three designs of a health care robot affect the change in hearthrate differently.
 
 
-[^ttest]: If you are familiar with the t-test, you can think of ANOVA as a generalization of the t-test, which can only compare two groups.
-
 [^independent_samples]: This is similar to an independent samples t-test, but can be used for more than two groups.
 
 [^repeated_measures]: This is similar to a paired samples t-test, but can be used for more than two groups. This is primarily used for within-subjects designs, where the same participants are measured multiple times. 

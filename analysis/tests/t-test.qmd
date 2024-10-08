@@ -17,10 +17,11 @@ Where the z-test is based on the z-=istribution (i.e. the normal distribution), 
 If the sample size is small, the t-distribution has heavier tails than the z-distribution, which makes it less likely to make a Type I error (i.e., rejecting the null hypothesis when it is true).
 
 In the following plot we show the normal (z) and t-distributions for two different sample sizes: 5 and 30.
-You see that in the left plot, with a sample size of 5, the t-distribution has heavier tails than the normal distribution, and so the critical values (p-value thresholds) are further apart.
+The dotted lines represent the critical values for a $95%$ confidence interval (CI).
+You see that in the left plot, with a sample size of 5, the t-distribution (blue) has heavier tails than the normal distribution, and so the confidence interval is wider.
 As the sample size increases, the t-distribution approaches the normal distribution, and the critical values converge.
 
-```{r, echo=F, warning=F}
+```{r, echo=F, warning=F, fig.height=4}
 # Load the required libraries
 library(ggplot2)
 library(gridExtra)
@@ -47,13 +48,13 @@ plot1 <- ggplot(data_df4, aes(x = x, y = y, color = Distribution)) +
   geom_line(size = 1) +
   labs(
     title = "Sample size = 5",
-    x = "x",
+    x = "score (z or t)",
     y = "Density"
   ) +
   theme_minimal() +
   scale_color_manual(values = c("blue", "red")) +
-  geom_vline(xintercept = c(-normal_threshold, normal_threshold), linetype = "dashed", color = "blue") +  # Normal thresholds
-  geom_vline(xintercept = c(-t_threshold_df4, t_threshold_df4), linetype = "dashed", color = "red") +  # t-distribution thresholds
+  geom_vline(xintercept = c(-normal_threshold, normal_threshold), linetype = "dashed", color = "red") +  # Normal thresholds
+  geom_vline(xintercept = c(-t_threshold_df4, t_threshold_df4), linetype = "dashed", color = "blue") +  # t-distribution thresholds
   theme(legend.position = "top")
 
 plot2 <- ggplot(data_df29, aes(x = x, y = y, color = Distribution)) +
@@ -65,8 +66,8 @@ plot2 <- ggplot(data_df29, aes(x = x, y = y, color = Distribution)) +
   ) +
   theme_minimal() +
   scale_color_manual(values = c("blue", "red")) +
-  geom_vline(xintercept = c(-normal_threshold, normal_threshold), linetype = "dashed", color = "blue") +  # Normal thresholds
-  geom_vline(xintercept = c(-t_threshold_df29, t_threshold_df29), linetype = "dashed", color = "red") +  # t-distribution thresholds
+  geom_vline(xintercept = c(-normal_threshold, normal_threshold), linetype = "dashed", color = "red") +  # Normal thresholds
+  geom_vline(xintercept = c(-t_threshold_df29, t_threshold_df29), linetype = "dashed", color = "blue") +  # t-distribution thresholds
   theme(legend.position = "top")
 
 grid.arrange(plot1, plot2, ncol = 2)
@@ -265,7 +266,7 @@ If you have a specific hypothesis about the direction of the difference, you can
 By doing so, you increase the power of the test, because you only need to reject the null hypothesis in one direction.
 The following figures show how a one-sided t-test puts all the probability in one tail of the distribution, which means that with the same level of significance (e.g., $\alpha = 0.05$), you can reject the null hypothesis with a smaller t-value.
 
-```{r, echo=F}
+```{r, echo=F, fig.height=4}
 # Load the required libraries
 library(ggplot2)
 library(gridExtra)
