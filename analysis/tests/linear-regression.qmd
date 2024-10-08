@@ -5,6 +5,7 @@ subtitle: "Predicting one variable from another"
 format:
   html:
     df-print: kable
+order: 3
 ---
 
 ```{r, echo=F}

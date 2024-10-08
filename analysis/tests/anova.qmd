@@ -4,6 +4,7 @@ summary: Analysis of variance
 format:
   html:
     df-print: paged
+order: 4
 ---
 
 
@@ -17,16 +18,19 @@ Because of the random assignment, all possible confounding variables should be e
 There are different types of ANOVA to cover a wide range of research designs.
 The most common ones are:
 
-* **One-way ANOVA**. 
+### One-way ANOVA
   * **Purpose**. Compare means *between-subjects* in different groups.[^independent_samples] 
   * **Example**. We want to know how the design of a health care robot affects how *comfortable* people feel about interacting with the robot. To test this we *randomly* asign participants to three experimental groups, that are shown three different robot designs ([Alice, Nao](https://vu.nl/nl/onderzoek/meer-over/sociale-robots-voor-de-samenleving-mediapsychologie), and RoboCop). They then answer multiple questions based on which we measure a *comfort rating* [scale](../techniques/scale-construction.qmd). We can now use One-way ANOVA to compare the mean comfort rating between the three groups.
-* **Two-way ANOVA**. 
+
+### Two-way ANOVA
   * **Purpose**. Compare means *between-subjects* in different groups, for two independent variables. 
   * **Example**. In addition to comparing three different designs of a health care robot, we could also compare between using a *male* or *female* voice. We then randomly assign participants to six groups (3 designs * 2 voices), and use two-way ANOVA to test whether the design and voice have an effect on the perceived attractiveness. We can then also test whether there is an *interaction* between the two variables, to see if specific combinations of design and voice are particularly comforting.
-* **Repeated measures ANOVA**. 
+
+### Repeated measures ANOVA
   * **Purpose**. Compare means *within-subjects* measured at different timepoints.[^repeated_measures] 
   * **Example**. Instead of the self-reporting comfort rating, we could measure how people react to interacting with a health care robot by measuring their *heart rate*. We could then measure the *heart rate* of participants *before*, *during*, and *after* interacting with the robot. We can then use repeated measures ANOVA to compare the *heart rate* at each stage.
-* **Mixed-design ANOVA**.
+
+### Mixed-design ANOVA
   * **Purpose**. Combine *between-subjects* and *within-subjects* factors. 
   * **Example**. This allows us to measure simultaneously the effect of the design of a health care robot (one-way anova example) on the change in *heart rate* (repeated measures example). We divide participants into three groups that are shown the three different designs, and measure the *heart rate* of participants *before*, *during*, and *after* interacting with the robot. We can then use mixed-design ANOVA to test whether the three designs of a health care robot affect the change in hearthrate differently.
 

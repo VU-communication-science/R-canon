@@ -1,6 +1,7 @@
 ---
 title: Correlation test
 subtitle: Testing the relationship between numeric variables
+order: 2
 ---
 
 # What is the correlation test?

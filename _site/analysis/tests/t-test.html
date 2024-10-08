@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../good-to-know/function-documentation.html" rel="next">
-<link href="../../analysis/tests/linear-regression.html" rel="prev">
+<link href="../../analysis/tests/correlation.html" rel="next">
+<link href="../../analysis/tests/index.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,7 +102,38 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -305,8 +370,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../analysis/tests/anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ANOVA</span></a>
+  <a href="../../analysis/tests/t-test.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">t-test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -323,8 +388,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../analysis/tests/t-test.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">t-test</span></a>
+  <a href="../../analysis/tests/anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA</span></a>
   </div>
 </li>
       </ul>
@@ -358,8 +423,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-a-t-test" id="toc-what-is-a-t-test" class="nav-link active" data-scroll-target="#what-is-a-t-test">What is a t-test?</a></li>
-  <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a></li>
+  <li><a href="#what-is-a-t-test" id="toc-what-is-a-t-test" class="nav-link active" data-scroll-target="#what-is-a-t-test">What is a t-test?</a>
+  <ul class="collapse">
+  <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link" data-scroll-target="#one-sample-t-test">One-sample t-test</a></li>
+  <li><a href="#independent-samples-t-test" id="toc-independent-samples-t-test" class="nav-link" data-scroll-target="#independent-samples-t-test">Independent samples t-test</a></li>
+  <li><a href="#paired-samples-t-test" id="toc-paired-samples-t-test" class="nav-link" data-scroll-target="#paired-samples-t-test">Paired samples t-test</a></li>
+  </ul></li>
+  <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a>
+  <ul class="collapse">
+  <li><a href="#one-sample-t-test-1" id="toc-one-sample-t-test-1" class="nav-link" data-scroll-target="#one-sample-t-test-1">One-sample t-test</a></li>
+  <li><a href="#independent-samples-t-test-1" id="toc-independent-samples-t-test-1" class="nav-link" data-scroll-target="#independent-samples-t-test-1">Independent samples t-test</a></li>
+  <li><a href="#paired-samples-t-test-1" id="toc-paired-samples-t-test-1" class="nav-link" data-scroll-target="#paired-samples-t-test-1">Paired samples t-test</a></li>
+  <li><a href="#two-sided-vs-one-sided-t-test" id="toc-two-sided-vs-one-sided-t-test" class="nav-link" data-scroll-target="#two-sided-vs-one-sided-t-test">Two-sided vs one-sided t-test</a>
+  <ul class="collapse">
+  <li><a href="#word-of-caution" id="toc-word-of-caution" class="nav-link" data-scroll-target="#word-of-caution">Word of caution</a></li>
+  <li><a href="#how-to-use-a-one-sided-t-test" id="toc-how-to-use-a-one-sided-t-test" class="nav-link" data-scroll-target="#how-to-use-a-one-sided-t-test">How to use a one-sided t-test</a></li>
+  <li><a href="#one-sided-test-in-independent-and-paired-samples-t-test" id="toc-one-sided-test-in-independent-and-paired-samples-t-test" class="nav-link" data-scroll-target="#one-sided-test-in-independent-and-paired-samples-t-test">one-sided test in independent and paired samples t-test</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -387,34 +468,276 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-is-a-t-test" class="level1">
 <h1>What is a t-test?</h1>
-<p>A t-test is a statistical test used to determine if there is a significant difference between two means. It is typically used when the data is approximately normally distributed. The t-test is based on the t-distribution, which is similar to the normal distribution. The key differences are that a normal distribution assumes that the population standard deviation is known, while a t-distribution assumes that the population standard deviation is unknown and must be estimated from the sample data. By adjusting for the uncertainty in the estimate of the population standard deviation, the t-distribution provides a more accurate estimate of the standard error of the mean when the sample size is small.</p>
-<p>The t-test can be used for testing simple hypotheses that concern the difference between two means. There are tree main types of t-tests:</p>
-<ul>
-<li><strong>One-sample t-test</strong>:
+<p>A t-test is a statistical test used to determine if there is a significant difference between two means. It is comparable to the z-test, but is more appropriate when the sample size is small or the population standard deviation is unknown. Where the z-test is based on the z-=istribution (i.e.&nbsp;the normal distribution), the t-test is based on the t-distribution, which takes into account the uncertainty in the estimate of the population standard deviation. If the sample size is small, the t-distribution has heavier tails than the z-distribution, which makes it less likely to make a Type I error (i.e., rejecting the null hypothesis when it is true).</p>
+<p>In the following plot we show the normal (z) and t-distributions for two different sample sizes: 5 and 30. You see that in the left plot, with a sample size of 5, the t-distribution has heavier tails than the normal distribution, and so the critical values (p-value thresholds) are further apart. As the sample size increases, the t-distribution approaches the normal distribution, and the critical values converge.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="t-test_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In practice, the t-test is generally preferred when the population standard deviation is unknown (even if the sample size is large). There are three main types of t-tests: the one-sample t-test, the independent samples t-test, and the paired samples t-test.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<section id="one-sample-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="one-sample-t-test">One-sample t-test</h3>
 <ul>
 <li><strong>Purpose</strong>. Compare the mean of a single sample to a known value (e.g., a population mean).</li>
-<li><strong>Example</strong>. You have a sample of students and you want to test if the average score is significantly different from the national average.</li>
-</ul></li>
-<li><strong>Independent samples t-test</strong>:
+<li><strong>Example</strong>. You have a sample of students and you want to test if the average time they spend on social media is significantly different from the national average (which we would then need to know in advance).</li>
+</ul>
+</section>
+<section id="independent-samples-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="independent-samples-t-test">Independent samples t-test</h3>
 <ul>
 <li><strong>Purpose</strong>. Compare the means <em>between</em> two independent groups.</li>
-<li><strong>Example</strong>. You conducted an experiment where you measured a variable in two groups (e.g., a <em>treatment</em> and a <em>control</em> group) and you want to test if the means are significantly different.</li>
-</ul></li>
-<li><strong>Paired samples t-test</strong>:
+<li><strong>Example</strong>. You conducted an experiment where you randomly assign participants to play either a <em>violent</em> or <em>non-violent</em> video game, and you want to test if the hearth rate in the <em>violent</em> group is significantly higher than in the <em>non-violent</em> group after playing the game.</li>
+</ul>
+</section>
+<section id="paired-samples-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="paired-samples-t-test">Paired samples t-test</h3>
 <ul>
 <li><strong>Purpose</strong>. Compare the means <em>within subjects</em> (e.g., within a person) at two different time points or under two different conditions. In this case the samples are not independent, because the two observations are <em>paired</em>.</li>
-<li><strong>Example</strong>. You measured a variable in the same group of subjects before and after an intervention, and you want to test if the mean difference is significant.</li>
-</ul></li>
+<li><strong>Example</strong>. You measured the hearth rate of the same participants before and after playing a video game, and you want to test if there is a significant increase.</li>
 </ul>
-<p>You will also encounter the t-test in other contexts, such as testing the significance of individual coefficients in a regression model (i.e.&nbsp;is the coefficient significantly different from zero?). In this tutorial we will focus on t-test as a standalone test for comparing two means.</p>
+</section>
 </section>
 <section id="how-to-use" class="level1">
 <h1>How to use</h1>
+<p>The t-test is included in base R, but we’ll also need the <code>car</code> package for the Levene’s test (as you’ll see later).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+</div>
+<p>For the examples we’ll use our <a href="../../data-management/index.html#practice-data">practice dataset</a>. We’ll use the following variables:</p>
+<ul>
+<li><strong>news_consumption</strong>. A continuous variable measuring the number of hours per week that a person spends consuming news.</li>
+<li><strong>np_subscription</strong>. A binary variable indicating whether the person has a subscription to a national newspaper (1 = yes, 0 = no).</li>
+<li><strong>experiment_group</strong>. A categorical variable indicating the group to which the participant was assigned in an experiment. Each group viewed a different movie that was either <em>neutral</em>, <em>positive</em>, or <em>negative</em> about journalism.</li>
+<li><strong>trust_t1 &amp; trust_t2</strong>. Two continuous variables measuring a participant’s trust in journalism before and after the experiment.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="at">news_consumption =</span> <span class="st">`</span><span class="at">news consumption</span><span class="st">`</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               np_subscription, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               experiment_group, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>               trust_t1, </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>               trust_t2)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["news_consumption"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["np_subscription"],"name":[2],"type":["chr"],"align":["left"]},{"label":["experiment_group"],"name":[3],"type":["chr"],"align":["left"]},{"label":["trust_t1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["trust_t2"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"17","2":"yes","3":"positive","4":"3.00","5":"2.824978"},{"1":"17","2":"yes","3":"negative","4":"5.00","5":"5.354581"},{"1":"18","2":"yes","3":"positive","4":"3.25","5":"3.368898"},{"1":"12","2":"no","3":"negative","4":"4.25","5":"2.882763"},{"1":"12","2":"no","3":"negative","4":"4.00","5":"3.256695"},{"1":"16","2":"yes","3":"control","4":"3.75","5":"6.460656"},{"1":"14","2":"yes","3":"control","4":"3.75","5":"6.380898"},{"1":"16","2":"yes","3":"positive","4":"2.75","5":"4.833257"},{"1":"14","2":"yes","3":"control","4":"4.25","5":"6.817680"},{"1":"11","2":"no","3":"negative","4":"5.75","5":"6.227435"},{"1":"18","2":"yes","3":"positive","4":"3.00","5":"4.625826"},{"1":"15","2":"yes","3":"control","4":"4.50","5":"3.749982"},{"1":"14","2":"yes","3":"positive","4":"4.25","5":"5.668970"},{"1":"14","2":"yes","3":"positive","4":"4.25","5":"4.595916"},{"1":"10","2":"no","3":"control","4":"4.00","5":"4.693604"},{"1":"16","2":"no","3":"positive","4":"3.25","5":"4.626647"},{"1":"9","2":"no","3":"negative","4":"4.00","5":"3.515036"},{"1":"12","2":"no","3":"control","4":"5.75","5":"7.857036"},{"1":"11","2":"yes","3":"control","4":"4.00","5":"5.065938"},{"1":"13","2":"no","3":"negative","4":"3.75","5":"2.966268"},{"1":"15","2":"no","3":"control","4":"3.50","5":"3.031485"},{"1":"16","2":"no","3":"positive","4":"5.50","5":"6.313042"},{"1":"14","2":"yes","3":"control","4":"4.75","5":"6.178895"},{"1":"15","2":"no","3":"negative","4":"4.75","5":"4.289748"},{"1":"16","2":"yes","3":"positive","4":"3.50","5":"7.303969"},{"1":"16","2":"yes","3":"positive","4":"5.00","5":"7.411312"},{"1":"17","2":"yes","3":"positive","4":"5.50","5":"6.497374"},{"1":"13","2":"no","3":"control","4":"4.00","5":"5.721720"},{"1":"10","2":"no","3":"positive","4":"5.50","5":"6.974339"},{"1":"19","2":"yes","3":"negative","4":"3.50","5":"3.349274"},{"1":"16","2":"yes","3":"positive","4":"4.75","5":"7.836750"},{"1":"8","2":"no","3":"control","4":"3.00","5":"3.441744"},{"1":"10","2":"no","3":"positive","4":"6.25","5":"7.719089"},{"1":"14","2":"yes","3":"negative","4":"3.25","5":"4.677334"},{"1":"13","2":"no","3":"positive","4":"3.50","5":"4.340828"},{"1":"18","2":"yes","3":"control","4":"5.50","5":"6.739357"},{"1":"21","2":"yes","3":"positive","4":"3.50","5":"5.479072"},{"1":"19","2":"yes","3":"negative","4":"5.25","5":"5.637100"},{"1":"16","2":"yes","3":"control","4":"5.00","5":"8.944965"},{"1":"19","2":"yes","3":"negative","4":"4.75","5":"5.636468"},{"1":"8","2":"no","3":"negative","4":"5.50","5":"2.115650"},{"1":"18","2":"no","3":"positive","4":"5.50","5":"7.095705"},{"1":"15","2":"yes","3":"negative","4":"4.25","5":"5.696713"},{"1":"17","2":"yes","3":"control","4":"4.00","5":"4.387470"},{"1":"17","2":"yes","3":"negative","4":"5.25","5":"5.775667"},{"1":"17","2":"no","3":"positive","4":"6.50","5":"8.359841"},{"1":"18","2":"yes","3":"positive","4":"4.00","5":"5.993076"},{"1":"8","2":"no","3":"positive","4":"2.50","5":"3.197211"},{"1":"13","2":"yes","3":"positive","4":"2.50","5":"2.728577"},{"1":"10","2":"no","3":"positive","4":"3.75","5":"5.340899"},{"1":"16","2":"yes","3":"positive","4":"4.50","5":"8.375465"},{"1":"16","2":"yes","3":"negative","4":"3.75","5":"4.147598"},{"1":"18","2":"yes","3":"negative","4":"4.50","5":"5.322031"},{"1":"19","2":"yes","3":"control","4":"3.75","5":"6.284208"},{"1":"19","2":"yes","3":"positive","4":"4.25","5":"6.197204"},{"1":"17","2":"yes","3":"negative","4":"5.25","5":"7.424373"},{"1":"18","2":"yes","3":"positive","4":"5.50","5":"7.392493"},{"1":"15","2":"yes","3":"negative","4":"4.50","5":"4.476418"},{"1":"19","2":"no","3":"negative","4":"3.00","5":"1.200073"},{"1":"8","2":"no","3":"control","4":"7.00","5":"6.517363"},{"1":"15","2":"no","3":"positive","4":"3.50","5":"6.175327"},{"1":"16","2":"no","3":"negative","4":"3.75","5":"4.231543"},{"1":"14","2":"no","3":"control","4":"4.25","5":"5.444230"},{"1":"17","2":"yes","3":"negative","4":"3.25","5":"2.732212"},{"1":"16","2":"yes","3":"control","4":"4.50","5":"5.876735"},{"1":"15","2":"yes","3":"positive","4":"4.75","5":"6.471384"},{"1":"17","2":"yes","3":"negative","4":"4.25","5":"4.851863"},{"1":"16","2":"yes","3":"positive","4":"3.50","5":"3.148748"},{"1":"13","2":"yes","3":"negative","4":"4.50","5":"5.116448"},{"1":"14","2":"no","3":"positive","4":"3.25","5":"3.952229"},{"1":"9","2":"no","3":"control","4":"4.50","5":"4.545750"},{"1":"18","2":"yes","3":"control","4":"5.25","5":"6.432647"},{"1":"19","2":"yes","3":"positive","4":"4.50","5":"6.089041"},{"1":"17","2":"no","3":"control","4":"1.75","5":"1.982712"},{"1":"18","2":"yes","3":"positive","4":"5.50","5":"6.999044"},{"1":"21","2":"yes","3":"control","4":"4.00","5":"4.264509"},{"1":"13","2":"no","3":"negative","4":"4.00","5":"3.120222"},{"1":"18","2":"yes","3":"control","4":"6.25","5":"7.695243"},{"1":"11","2":"no","3":"negative","4":"4.75","5":"4.875016"},{"1":"12","2":"no","3":"control","4":"4.50","5":"6.082364"},{"1":"15","2":"no","3":"control","4":"3.25","5":"6.223672"},{"1":"14","2":"yes","3":"positive","4":"5.25","5":"5.827604"},{"1":"17","2":"yes","3":"negative","4":"5.50","5":"4.352723"},{"1":"12","2":"no","3":"positive","4":"3.25","5":"5.351926"},{"1":"14","2":"no","3":"control","4":"2.75","5":"5.171587"},{"1":"15","2":"no","3":"negative","4":"5.75","5":"7.578029"},{"1":"15","2":"yes","3":"control","4":"5.75","5":"7.532928"},{"1":"12","2":"no","3":"negative","4":"3.25","5":"2.851782"},{"1":"19","2":"yes","3":"positive","4":"3.25","5":"5.993305"},{"1":"19","2":"yes","3":"control","4":"5.25","5":"6.134566"},{"1":"13","2":"no","3":"positive","4":"3.00","5":"6.628292"},{"1":"13","2":"no","3":"control","4":"4.75","5":"7.156260"},{"1":"14","2":"yes","3":"negative","4":"4.75","5":"6.941121"},{"1":"12","2":"no","3":"negative","4":"3.75","5":"3.474990"},{"1":"15","2":"yes","3":"control","4":"4.25","5":"3.990403"},{"1":"11","2":"no","3":"control","4":"5.25","5":"6.909764"},{"1":"18","2":"yes","3":"control","4":"4.75","5":"5.250589"},{"1":"17","2":"yes","3":"positive","4":"4.75","5":"4.623103"},{"1":"17","2":"yes","3":"negative","4":"3.00","5":"6.118921"},{"1":"11","2":"no","3":"control","4":"4.00","5":"4.916206"},{"1":"18","2":"yes","3":"negative","4":"2.00","5":"1.000000"},{"1":"14","2":"yes","3":"control","4":"6.00","5":"6.316840"},{"1":"1","2":"no","3":"negative","4":"2.75","5":"1.462389"},{"1":"18","2":"yes","3":"negative","4":"5.50","5":"6.061523"},{"1":"11","2":"no","3":"positive","4":"3.00","5":"4.620474"},{"1":"12","2":"no","3":"control","4":"4.00","5":"4.633540"},{"1":"17","2":"yes","3":"control","4":"3.50","5":"5.122722"},{"1":"11","2":"no","3":"positive","4":"3.00","5":"3.950663"},{"1":"15","2":"yes","3":"negative","4":"4.75","5":"4.416138"},{"1":"11","2":"no","3":"positive","4":"4.50","5":"6.541928"},{"1":"10","2":"no","3":"negative","4":"4.00","5":"2.683608"},{"1":"16","2":"yes","3":"control","4":"4.75","5":"4.963798"},{"1":"5","2":"no","3":"positive","4":"5.75","5":"8.512563"},{"1":"10","2":"no","3":"positive","4":"4.25","5":"2.170991"},{"1":"8","2":"no","3":"negative","4":"4.00","5":"1.000000"},{"1":"15","2":"yes","3":"positive","4":"3.00","5":"2.763689"},{"1":"17","2":"yes","3":"negative","4":"3.25","5":"1.854345"},{"1":"15","2":"yes","3":"negative","4":"5.25","5":"4.383383"},{"1":"17","2":"yes","3":"negative","4":"4.00","5":"4.394819"},{"1":"11","2":"no","3":"negative","4":"4.00","5":"3.959485"},{"1":"18","2":"yes","3":"control","4":"3.50","5":"6.343413"},{"1":"16","2":"yes","3":"positive","4":"5.50","5":"7.042022"},{"1":"14","2":"yes","3":"positive","4":"6.50","5":"7.961551"},{"1":"17","2":"yes","3":"positive","4":"3.50","5":"5.668190"},{"1":"21","2":"yes","3":"positive","4":"3.50","5":"6.141086"},{"1":"9","2":"no","3":"control","4":"4.00","5":"3.575320"},{"1":"11","2":"no","3":"control","4":"3.00","5":"3.519456"},{"1":"9","2":"no","3":"control","4":"5.00","5":"7.021623"},{"1":"15","2":"no","3":"positive","4":"6.50","5":"8.085269"},{"1":"19","2":"yes","3":"control","4":"6.25","5":"7.084477"},{"1":"16","2":"yes","3":"positive","4":"2.75","5":"2.206308"},{"1":"16","2":"yes","3":"positive","4":"2.00","5":"4.791258"},{"1":"18","2":"yes","3":"positive","4":"5.25","5":"8.182959"},{"1":"16","2":"no","3":"positive","4":"4.75","5":"6.481829"},{"1":"7","2":"no","3":"control","4":"3.25","5":"3.821793"},{"1":"18","2":"yes","3":"positive","4":"3.25","5":"3.886707"},{"1":"17","2":"no","3":"positive","4":"4.75","5":"5.243956"},{"1":"16","2":"yes","3":"positive","4":"4.25","5":"7.274479"},{"1":"13","2":"yes","3":"control","4":"3.00","5":"2.527853"},{"1":"18","2":"yes","3":"control","4":"5.00","5":"5.729213"},{"1":"15","2":"yes","3":"control","4":"6.00","5":"7.694568"},{"1":"16","2":"yes","3":"negative","4":"4.00","5":"5.367550"},{"1":"14","2":"yes","3":"negative","4":"5.25","5":"5.810933"},{"1":"18","2":"no","3":"control","4":"2.75","5":"1.773107"},{"1":"16","2":"yes","3":"control","4":"4.50","5":"3.835568"},{"1":"19","2":"yes","3":"negative","4":"2.25","5":"1.769015"},{"1":"5","2":"no","3":"positive","4":"3.25","5":"3.050349"},{"1":"18","2":"yes","3":"negative","4":"5.50","5":"6.155585"},{"1":"16","2":"yes","3":"control","4":"2.50","5":"4.084005"},{"1":"13","2":"no","3":"negative","4":"1.50","5":"1.835718"},{"1":"15","2":"yes","3":"control","4":"3.75","5":"3.914796"},{"1":"5","2":"no","3":"control","4":"3.00","5":"4.844133"},{"1":"5","2":"no","3":"control","4":"4.25","5":"4.945848"},{"1":"17","2":"yes","3":"control","4":"3.25","5":"2.702555"},{"1":"16","2":"no","3":"control","4":"7.00","5":"10.000000"},{"1":"14","2":"yes","3":"control","4":"4.00","5":"4.056673"},{"1":"16","2":"yes","3":"control","4":"5.50","5":"4.653024"},{"1":"18","2":"yes","3":"negative","4":"4.75","5":"4.636781"},{"1":"7","2":"no","3":"control","4":"5.50","5":"5.547250"},{"1":"10","2":"no","3":"control","4":"3.25","5":"4.617935"},{"1":"15","2":"yes","3":"negative","4":"4.75","5":"4.588614"},{"1":"14","2":"no","3":"control","4":"5.50","5":"7.154327"},{"1":"8","2":"no","3":"negative","4":"4.25","5":"1.137742"},{"1":"15","2":"yes","3":"negative","4":"4.00","5":"1.751485"},{"1":"10","2":"no","3":"positive","4":"4.50","5":"5.869801"},{"1":"17","2":"yes","3":"positive","4":"4.00","5":"4.398392"},{"1":"7","2":"no","3":"positive","4":"4.25","5":"6.678895"},{"1":"17","2":"yes","3":"control","4":"6.00","5":"8.286313"},{"1":"17","2":"yes","3":"control","4":"3.00","5":"3.910157"},{"1":"18","2":"yes","3":"negative","4":"5.75","5":"5.619188"},{"1":"8","2":"no","3":"control","4":"3.25","5":"4.352709"},{"1":"7","2":"no","3":"control","4":"3.25","5":"2.728237"},{"1":"17","2":"yes","3":"negative","4":"4.50","5":"7.012092"},{"1":"13","2":"no","3":"positive","4":"4.00","5":"5.758558"},{"1":"23","2":"yes","3":"positive","4":"5.50","5":"8.037619"},{"1":"15","2":"yes","3":"positive","4":"4.00","5":"4.980741"},{"1":"14","2":"yes","3":"negative","4":"4.75","5":"5.950005"},{"1":"15","2":"yes","3":"control","4":"5.00","5":"6.204879"},{"1":"14","2":"no","3":"positive","4":"3.50","5":"1.479750"},{"1":"19","2":"yes","3":"control","4":"6.00","5":"7.068938"},{"1":"12","2":"yes","3":"control","4":"2.50","5":"3.108798"},{"1":"15","2":"no","3":"positive","4":"4.00","5":"5.309824"},{"1":"15","2":"yes","3":"control","4":"5.25","5":"7.751116"},{"1":"14","2":"yes","3":"positive","4":"2.00","5":"2.652934"},{"1":"15","2":"no","3":"negative","4":"3.75","5":"1.768034"},{"1":"13","2":"no","3":"positive","4":"3.75","5":"2.390063"},{"1":"20","2":"yes","3":"negative","4":"3.00","5":"4.252119"},{"1":"17","2":"yes","3":"positive","4":"4.00","5":"6.136307"},{"1":"17","2":"yes","3":"negative","4":"4.75","5":"4.029761"},{"1":"15","2":"yes","3":"negative","4":"4.00","5":"5.735141"},{"1":"18","2":"yes","3":"negative","4":"4.75","5":"6.247456"},{"1":"15","2":"yes","3":"control","4":"4.50","5":"5.072741"},{"1":"13","2":"yes","3":"negative","4":"2.75","5":"2.140178"},{"1":"17","2":"yes","3":"negative","4":"6.25","5":"7.372685"},{"1":"17","2":"yes","3":"positive","4":"4.00","5":"6.151249"},{"1":"11","2":"no","3":"control","4":"5.00","5":"6.332064"},{"1":"16","2":"no","3":"positive","4":"4.75","5":"6.386775"},{"1":"19","2":"yes","3":"control","4":"5.50","5":"7.008749"},{"1":"8","2":"no","3":"negative","4":"4.75","5":"5.007537"},{"1":"19","2":"yes","3":"negative","4":"4.00","5":"4.325757"},{"1":"19","2":"yes","3":"positive","4":"3.25","5":"4.560664"},{"1":"9","2":"no","3":"positive","4":"3.25","5":"5.301583"},{"1":"11","2":"no","3":"control","4":"5.50","5":"7.142415"},{"1":"17","2":"yes","3":"control","4":"4.50","5":"7.288590"},{"1":"19","2":"yes","3":"positive","4":"7.25","5":"10.000000"},{"1":"12","2":"no","3":"positive","4":"3.75","5":"5.567391"},{"1":"12","2":"no","3":"negative","4":"2.75","5":"4.002713"},{"1":"18","2":"yes","3":"control","4":"4.50","5":"6.267628"},{"1":"18","2":"yes","3":"negative","4":"2.75","5":"1.591352"},{"1":"12","2":"no","3":"positive","4":"3.50","5":"5.420867"},{"1":"17","2":"yes","3":"negative","4":"4.25","5":"6.327989"},{"1":"15","2":"yes","3":"negative","4":"5.00","5":"6.010028"},{"1":"19","2":"yes","3":"negative","4":"3.75","5":"4.976351"},{"1":"16","2":"no","3":"negative","4":"4.50","5":"5.816395"},{"1":"16","2":"yes","3":"control","4":"6.00","5":"8.940256"},{"1":"17","2":"yes","3":"control","4":"4.75","5":"5.375664"},{"1":"17","2":"no","3":"positive","4":"4.50","5":"6.234840"},{"1":"8","2":"no","3":"control","4":"2.75","5":"2.745730"},{"1":"12","2":"yes","3":"control","4":"3.50","5":"2.808001"},{"1":"16","2":"yes","3":"positive","4":"4.50","5":"4.833959"},{"1":"15","2":"no","3":"control","4":"3.00","5":"2.609233"},{"1":"16","2":"no","3":"positive","4":"4.75","5":"5.817862"},{"1":"8","2":"no","3":"control","4":"5.75","5":"8.007690"},{"1":"15","2":"yes","3":"control","4":"4.50","5":"5.799799"},{"1":"14","2":"yes","3":"control","4":"5.25","5":"6.770935"},{"1":"12","2":"no","3":"negative","4":"5.75","5":"3.393202"},{"1":"18","2":"yes","3":"control","4":"4.75","5":"6.854968"},{"1":"17","2":"yes","3":"negative","4":"4.50","5":"7.877185"},{"1":"17","2":"yes","3":"negative","4":"3.00","5":"3.928530"},{"1":"16","2":"yes","3":"control","4":"3.00","5":"4.648448"},{"1":"15","2":"yes","3":"negative","4":"3.75","5":"4.282463"},{"1":"15","2":"yes","3":"control","4":"3.50","5":"4.128321"},{"1":"15","2":"yes","3":"negative","4":"4.50","5":"5.102619"},{"1":"15","2":"no","3":"negative","4":"4.75","5":"1.834901"},{"1":"4","2":"no","3":"negative","4":"4.00","5":"4.046865"},{"1":"11","2":"no","3":"negative","4":"4.50","5":"2.464420"},{"1":"18","2":"yes","3":"control","4":"3.00","5":"2.612521"},{"1":"14","2":"yes","3":"control","4":"4.25","5":"4.438139"},{"1":"8","2":"no","3":"positive","4":"4.50","5":"5.670909"},{"1":"10","2":"no","3":"control","4":"3.75","5":"4.345202"},{"1":"10","2":"no","3":"negative","4":"4.00","5":"4.025968"},{"1":"14","2":"yes","3":"negative","4":"5.25","5":"5.809696"},{"1":"17","2":"yes","3":"control","4":"4.00","5":"5.853488"},{"1":"10","2":"no","3":"negative","4":"4.25","5":"2.846640"},{"1":"14","2":"yes","3":"negative","4":"5.50","5":"5.993879"},{"1":"15","2":"yes","3":"positive","4":"4.25","5":"5.787301"},{"1":"16","2":"yes","3":"positive","4":"3.00","5":"4.558428"},{"1":"13","2":"yes","3":"negative","4":"5.75","5":"7.029757"},{"1":"15","2":"no","3":"negative","4":"4.50","5":"3.369911"},{"1":"14","2":"yes","3":"control","4":"5.50","5":"5.998080"},{"1":"11","2":"no","3":"positive","4":"4.25","5":"5.820974"},{"1":"14","2":"no","3":"negative","4":"5.00","5":"4.061854"},{"1":"14","2":"yes","3":"control","4":"2.75","5":"2.891384"},{"1":"7","2":"no","3":"negative","4":"4.00","5":"4.642953"},{"1":"11","2":"no","3":"control","4":"2.75","5":"2.374020"},{"1":"17","2":"yes","3":"control","4":"3.50","5":"5.542766"},{"1":"12","2":"no","3":"negative","4":"5.25","5":"4.852981"},{"1":"19","2":"yes","3":"control","4":"5.00","5":"7.493793"},{"1":"10","2":"no","3":"control","4":"5.00","5":"6.313676"},{"1":"15","2":"yes","3":"negative","4":"5.50","5":"6.184897"},{"1":"7","2":"no","3":"control","4":"5.00","5":"6.196171"},{"1":"18","2":"no","3":"negative","4":"3.75","5":"4.208125"},{"1":"17","2":"no","3":"positive","4":"5.50","5":"6.991875"},{"1":"13","2":"no","3":"negative","4":"3.75","5":"2.671960"},{"1":"16","2":"yes","3":"control","4":"5.50","5":"6.496267"},{"1":"12","2":"no","3":"positive","4":"4.00","5":"5.006706"},{"1":"17","2":"yes","3":"negative","4":"5.00","5":"5.928143"},{"1":"10","2":"no","3":"negative","4":"4.50","5":"1.987325"},{"1":"15","2":"yes","3":"positive","4":"2.75","5":"5.306442"},{"1":"15","2":"yes","3":"negative","4":"3.50","5":"2.603075"},{"1":"15","2":"yes","3":"control","4":"4.25","5":"5.619073"},{"1":"16","2":"yes","3":"positive","4":"4.00","5":"4.897040"},{"1":"16","2":"no","3":"negative","4":"3.00","5":"3.210468"},{"1":"18","2":"yes","3":"positive","4":"7.00","5":"8.155126"},{"1":"9","2":"no","3":"negative","4":"5.25","5":"5.350983"},{"1":"18","2":"yes","3":"control","4":"4.50","5":"3.964301"},{"1":"15","2":"yes","3":"negative","4":"2.75","5":"4.392203"},{"1":"15","2":"no","3":"control","4":"3.25","5":"4.146906"},{"1":"16","2":"no","3":"positive","4":"7.50","5":"10.000000"},{"1":"16","2":"yes","3":"negative","4":"4.50","5":"5.519414"},{"1":"9","2":"no","3":"positive","4":"4.25","5":"6.119183"},{"1":"18","2":"yes","3":"control","4":"6.50","5":"6.318267"},{"1":"19","2":"yes","3":"negative","4":"5.75","5":"6.849301"},{"1":"14","2":"yes","3":"negative","4":"4.75","5":"6.406149"},{"1":"14","2":"no","3":"positive","4":"5.75","5":"7.924148"},{"1":"8","2":"no","3":"negative","4":"5.25","5":"6.658999"},{"1":"14","2":"no","3":"positive","4":"3.50","5":"4.936396"},{"1":"15","2":"no","3":"control","4":"2.25","5":"1.000000"},{"1":"10","2":"no","3":"control","4":"3.75","5":"4.123743"},{"1":"18","2":"yes","3":"negative","4":"2.75","5":"3.871325"},{"1":"14","2":"yes","3":"control","4":"3.75","5":"3.082417"},{"1":"17","2":"yes","3":"control","4":"3.75","5":"4.700358"},{"1":"16","2":"yes","3":"control","4":"3.25","5":"4.501737"},{"1":"10","2":"no","3":"positive","4":"5.50","5":"6.546874"},{"1":"11","2":"no","3":"negative","4":"4.75","5":"5.738714"},{"1":"14","2":"yes","3":"control","4":"3.75","5":"1.849618"},{"1":"18","2":"yes","3":"control","4":"5.00","5":"5.290361"},{"1":"18","2":"yes","3":"positive","4":"4.50","5":"7.371075"},{"1":"13","2":"no","3":"negative","4":"3.25","5":"3.907558"},{"1":"16","2":"yes","3":"negative","4":"4.00","5":"4.234866"},{"1":"11","2":"no","3":"control","4":"2.75","5":"2.114546"},{"1":"20","2":"yes","3":"negative","4":"5.25","5":"3.136907"},{"1":"7","2":"no","3":"negative","4":"4.00","5":"4.672823"},{"1":"13","2":"yes","3":"positive","4":"4.00","5":"5.949233"},{"1":"16","2":"no","3":"control","4":"2.75","5":"2.403313"},{"1":"16","2":"yes","3":"positive","4":"5.50","5":"7.070405"},{"1":"19","2":"no","3":"positive","4":"4.50","5":"4.724807"},{"1":"17","2":"yes","3":"positive","4":"7.00","5":"9.398812"},{"1":"9","2":"no","3":"control","4":"6.00","5":"6.581820"},{"1":"13","2":"no","3":"positive","4":"4.75","5":"4.270891"},{"1":"6","2":"no","3":"negative","4":"3.50","5":"2.489996"},{"1":"11","2":"no","3":"control","4":"4.75","5":"6.111681"},{"1":"13","2":"no","3":"control","4":"6.00","5":"8.339752"},{"1":"6","2":"no","3":"control","4":"3.00","5":"3.606132"},{"1":"16","2":"yes","3":"positive","4":"5.50","5":"6.526716"},{"1":"16","2":"yes","3":"control","4":"4.50","5":"5.035256"},{"1":"18","2":"yes","3":"positive","4":"3.25","5":"3.866240"},{"1":"10","2":"no","3":"control","4":"4.25","5":"7.230517"},{"1":"18","2":"yes","3":"negative","4":"3.50","5":"3.667156"},{"1":"7","2":"no","3":"positive","4":"2.25","5":"1.310174"},{"1":"11","2":"no","3":"control","4":"4.75","5":"6.347251"},{"1":"17","2":"yes","3":"control","4":"5.00","5":"6.541694"},{"1":"17","2":"yes","3":"positive","4":"4.00","5":"5.846384"},{"1":"16","2":"yes","3":"negative","4":"2.25","5":"2.238402"},{"1":"9","2":"no","3":"negative","4":"3.00","5":"2.681164"},{"1":"14","2":"no","3":"control","4":"5.00","5":"7.433464"},{"1":"15","2":"yes","3":"control","4":"4.00","5":"5.198604"},{"1":"16","2":"yes","3":"positive","4":"2.50","5":"2.538843"},{"1":"13","2":"no","3":"positive","4":"4.50","5":"5.094593"},{"1":"16","2":"yes","3":"negative","4":"2.75","5":"4.489576"},{"1":"18","2":"yes","3":"control","4":"4.75","5":"7.761462"},{"1":"18","2":"yes","3":"positive","4":"3.75","5":"4.585051"},{"1":"14","2":"yes","3":"negative","4":"5.25","5":"4.365277"},{"1":"18","2":"yes","3":"positive","4":"3.50","5":"5.277698"},{"1":"13","2":"no","3":"positive","4":"4.00","5":"4.184738"},{"1":"15","2":"yes","3":"negative","4":"2.75","5":"2.982358"},{"1":"16","2":"yes","3":"positive","4":"5.50","5":"6.141235"},{"1":"15","2":"no","3":"negative","4":"3.75","5":"1.706067"},{"1":"19","2":"yes","3":"positive","4":"6.00","5":"7.505538"},{"1":"19","2":"yes","3":"control","4":"4.75","5":"6.715460"},{"1":"13","2":"no","3":"positive","4":"3.25","5":"5.296886"},{"1":"3","2":"no","3":"negative","4":"2.50","5":"1.238477"},{"1":"11","2":"no","3":"negative","4":"5.00","5":"4.844318"},{"1":"16","2":"yes","3":"control","4":"2.25","5":"2.317574"},{"1":"15","2":"no","3":"positive","4":"4.75","5":"7.151195"},{"1":"18","2":"yes","3":"control","4":"5.00","5":"5.425042"},{"1":"21","2":"yes","3":"positive","4":"2.75","5":"4.562125"},{"1":"11","2":"no","3":"positive","4":"3.00","5":"2.788964"},{"1":"15","2":"yes","3":"control","4":"4.25","5":"5.234731"},{"1":"9","2":"no","3":"positive","4":"3.00","5":"5.852368"},{"1":"15","2":"no","3":"positive","4":"6.50","5":"6.992390"},{"1":"14","2":"yes","3":"negative","4":"6.00","5":"7.227884"},{"1":"15","2":"yes","3":"positive","4":"5.50","5":"7.692990"},{"1":"20","2":"yes","3":"negative","4":"7.75","5":"10.000000"},{"1":"17","2":"yes","3":"negative","4":"4.00","5":"6.110274"},{"1":"14","2":"no","3":"control","4":"3.75","5":"4.786212"},{"1":"17","2":"yes","3":"negative","4":"5.00","5":"4.000628"},{"1":"12","2":"no","3":"negative","4":"4.00","5":"2.793378"},{"1":"16","2":"yes","3":"positive","4":"4.00","5":"5.334913"},{"1":"14","2":"yes","3":"positive","4":"4.25","5":"3.294563"},{"1":"15","2":"yes","3":"negative","4":"3.25","5":"3.713328"},{"1":"16","2":"yes","3":"negative","4":"3.50","5":"2.825348"},{"1":"16","2":"yes","3":"positive","4":"5.00","5":"4.797853"},{"1":"18","2":"yes","3":"control","4":"4.00","5":"4.975132"},{"1":"10","2":"no","3":"positive","4":"1.75","5":"2.645935"},{"1":"15","2":"yes","3":"positive","4":"5.00","5":"8.175462"},{"1":"10","2":"no","3":"negative","4":"3.00","5":"1.559648"},{"1":"14","2":"no","3":"negative","4":"3.75","5":"3.550596"},{"1":"18","2":"yes","3":"negative","4":"4.50","5":"6.811079"},{"1":"17","2":"yes","3":"negative","4":"3.50","5":"5.646206"},{"1":"17","2":"yes","3":"control","4":"3.25","5":"5.277303"},{"1":"16","2":"yes","3":"positive","4":"4.00","5":"5.377978"},{"1":"14","2":"no","3":"control","4":"4.00","5":"3.312699"},{"1":"10","2":"no","3":"negative","4":"3.25","5":"2.917811"},{"1":"10","2":"no","3":"control","4":"3.75","5":"4.927604"},{"1":"19","2":"yes","3":"positive","4":"3.50","5":"6.297673"},{"1":"19","2":"yes","3":"control","4":"3.75","5":"7.792462"},{"1":"18","2":"yes","3":"positive","4":"4.50","5":"5.341631"},{"1":"4","2":"no","3":"negative","4":"3.25","5":"1.000000"},{"1":"15","2":"no","3":"negative","4":"3.75","5":"3.021541"},{"1":"17","2":"yes","3":"control","4":"3.25","5":"5.411968"},{"1":"12","2":"no","3":"positive","4":"4.00","5":"6.246341"},{"1":"21","2":"yes","3":"control","4":"4.25","5":"7.437452"},{"1":"17","2":"yes","3":"positive","4":"4.00","5":"6.496936"},{"1":"10","2":"no","3":"negative","4":"4.25","5":"4.342733"},{"1":"11","2":"no","3":"positive","4":"4.50","5":"7.348594"},{"1":"14","2":"no","3":"control","4":"6.00","5":"9.329498"},{"1":"6","2":"no","3":"positive","4":"3.50","5":"6.075901"},{"1":"13","2":"no","3":"positive","4":"3.25","5":"5.014028"},{"1":"19","2":"yes","3":"negative","4":"4.75","5":"5.461092"},{"1":"16","2":"yes","3":"control","4":"4.75","5":"3.302036"},{"1":"17","2":"no","3":"negative","4":"4.50","5":"3.127521"},{"1":"15","2":"no","3":"positive","4":"4.25","5":"6.325022"},{"1":"10","2":"no","3":"control","4":"5.25","5":"6.412055"},{"1":"15","2":"yes","3":"positive","4":"2.75","5":"3.374514"},{"1":"17","2":"yes","3":"positive","4":"3.25","5":"4.180109"},{"1":"13","2":"no","3":"positive","4":"3.50","5":"2.688703"},{"1":"18","2":"yes","3":"negative","4":"4.25","5":"5.622933"},{"1":"9","2":"no","3":"negative","4":"4.75","5":"2.886261"},{"1":"15","2":"no","3":"control","4":"3.75","5":"3.883550"},{"1":"16","2":"yes","3":"positive","4":"4.25","5":"6.335078"},{"1":"10","2":"no","3":"negative","4":"5.25","5":"3.939259"},{"1":"13","2":"no","3":"negative","4":"3.50","5":"3.529489"},{"1":"17","2":"yes","3":"negative","4":"2.75","5":"4.016810"},{"1":"16","2":"yes","3":"negative","4":"3.00","5":"3.563214"},{"1":"13","2":"no","3":"control","4":"5.00","5":"6.294166"},{"1":"13","2":"no","3":"negative","4":"2.75","5":"2.545488"},{"1":"15","2":"no","3":"negative","4":"4.75","5":"4.086781"},{"1":"18","2":"yes","3":"control","4":"4.50","5":"5.345021"},{"1":"16","2":"yes","3":"control","4":"5.25","5":"7.555472"},{"1":"14","2":"yes","3":"control","4":"3.00","5":"3.938185"},{"1":"17","2":"yes","3":"positive","4":"5.00","5":"5.555334"},{"1":"17","2":"yes","3":"negative","4":"4.75","5":"4.963669"},{"1":"17","2":"yes","3":"control","4":"4.00","5":"4.681328"},{"1":"14","2":"yes","3":"positive","4":"4.50","5":"5.148700"},{"1":"13","2":"no","3":"negative","4":"4.75","5":"4.356163"},{"1":"12","2":"no","3":"positive","4":"4.75","5":"8.057127"},{"1":"17","2":"yes","3":"negative","4":"4.00","5":"4.689057"},{"1":"20","2":"yes","3":"control","4":"4.25","5":"6.209530"},{"1":"16","2":"yes","3":"negative","4":"5.75","5":"5.666832"},{"1":"19","2":"yes","3":"control","4":"5.50","5":"7.957438"},{"1":"17","2":"yes","3":"positive","4":"3.50","5":"4.498674"},{"1":"19","2":"yes","3":"positive","4":"4.25","5":"5.391407"},{"1":"19","2":"yes","3":"control","4":"4.00","5":"4.295877"},{"1":"17","2":"no","3":"positive","4":"4.75","5":"5.181682"},{"1":"11","2":"no","3":"negative","4":"3.00","5":"1.000000"},{"1":"18","2":"yes","3":"positive","4":"6.00","5":"8.106811"},{"1":"12","2":"no","3":"positive","4":"3.50","5":"6.590869"},{"1":"14","2":"yes","3":"positive","4":"4.00","5":"5.563063"},{"1":"17","2":"yes","3":"control","4":"3.25","5":"2.715957"},{"1":"17","2":"no","3":"positive","4":"4.00","5":"5.743442"},{"1":"17","2":"yes","3":"negative","4":"4.00","5":"4.770749"},{"1":"17","2":"yes","3":"positive","4":"3.25","5":"4.205387"},{"1":"11","2":"no","3":"positive","4":"3.50","5":"7.102065"},{"1":"15","2":"yes","3":"negative","4":"3.75","5":"6.464528"},{"1":"16","2":"yes","3":"control","4":"5.75","5":"6.811115"},{"1":"8","2":"no","3":"positive","4":"3.25","5":"3.988123"},{"1":"20","2":"yes","3":"positive","4":"3.25","5":"5.255100"},{"1":"16","2":"no","3":"positive","4":"3.75","5":"4.636838"},{"1":"21","2":"yes","3":"positive","4":"4.00","5":"5.866802"},{"1":"16","2":"yes","3":"control","4":"3.50","5":"4.367423"},{"1":"12","2":"no","3":"control","4":"5.00","5":"6.842548"},{"1":"14","2":"yes","3":"control","4":"5.00","5":"7.403783"},{"1":"12","2":"no","3":"negative","4":"3.75","5":"3.735139"},{"1":"7","2":"no","3":"control","4":"2.50","5":"2.301165"},{"1":"17","2":"yes","3":"negative","4":"5.25","5":"4.414882"},{"1":"17","2":"yes","3":"negative","4":"3.00","5":"5.047734"},{"1":"14","2":"yes","3":"negative","4":"4.00","5":"4.273408"},{"1":"14","2":"no","3":"control","4":"5.75","5":"5.505137"},{"1":"14","2":"yes","3":"control","4":"4.75","5":"6.233301"},{"1":"19","2":"yes","3":"positive","4":"4.00","5":"7.097395"},{"1":"12","2":"no","3":"negative","4":"2.25","5":"1.155648"},{"1":"15","2":"no","3":"positive","4":"4.50","5":"5.795221"},{"1":"16","2":"yes","3":"positive","4":"2.75","5":"4.788544"},{"1":"8","2":"no","3":"negative","4":"3.75","5":"2.013893"},{"1":"12","2":"no","3":"positive","4":"6.00","5":"7.090021"},{"1":"8","2":"no","3":"control","4":"5.00","5":"6.589034"},{"1":"10","2":"no","3":"control","4":"4.25","5":"4.392529"},{"1":"15","2":"yes","3":"negative","4":"3.75","5":"2.558263"},{"1":"18","2":"yes","3":"control","4":"4.50","5":"6.744933"},{"1":"17","2":"no","3":"control","4":"4.00","5":"5.917828"},{"1":"7","2":"no","3":"positive","4":"4.50","5":"7.573499"},{"1":"12","2":"no","3":"negative","4":"3.25","5":"1.601779"},{"1":"14","2":"yes","3":"positive","4":"4.50","5":"7.642767"},{"1":"12","2":"no","3":"positive","4":"3.75","5":"5.330771"},{"1":"7","2":"no","3":"negative","4":"4.25","5":"2.956369"},{"1":"11","2":"no","3":"negative","4":"5.25","5":"6.878939"},{"1":"8","2":"no","3":"control","4":"3.25","5":"3.933378"},{"1":"15","2":"yes","3":"positive","4":"4.25","5":"5.778823"},{"1":"13","2":"no","3":"negative","4":"5.00","5":"4.732006"},{"1":"18","2":"yes","3":"positive","4":"5.75","5":"7.170590"},{"1":"12","2":"no","3":"positive","4":"5.50","5":"5.589805"},{"1":"6","2":"no","3":"negative","4":"2.75","5":"1.580373"},{"1":"13","2":"no","3":"positive","4":"4.75","5":"6.760043"},{"1":"14","2":"no","3":"negative","4":"2.75","5":"1.000000"},{"1":"18","2":"yes","3":"control","4":"3.50","5":"5.130432"},{"1":"6","2":"no","3":"negative","4":"3.25","5":"2.789426"},{"1":"14","2":"yes","3":"negative","4":"5.75","5":"8.121209"},{"1":"16","2":"yes","3":"negative","4":"4.75","5":"5.361397"},{"1":"12","2":"no","3":"negative","4":"5.50","5":"5.682970"},{"1":"13","2":"no","3":"control","4":"5.00","5":"5.395141"},{"1":"18","2":"yes","3":"control","4":"5.25","5":"5.267099"},{"1":"19","2":"yes","3":"control","4":"4.25","5":"6.474832"},{"1":"7","2":"no","3":"positive","4":"3.75","5":"4.806693"},{"1":"15","2":"yes","3":"negative","4":"3.50","5":"4.936246"},{"1":"16","2":"yes","3":"negative","4":"4.75","5":"6.774041"},{"1":"11","2":"no","3":"negative","4":"3.75","5":"4.355263"},{"1":"17","2":"yes","3":"negative","4":"3.50","5":"4.877094"},{"1":"11","2":"no","3":"control","4":"3.25","5":"5.160009"},{"1":"17","2":"yes","3":"control","4":"3.50","5":"5.099011"},{"1":"8","2":"no","3":"negative","4":"2.25","5":"1.000000"},{"1":"19","2":"yes","3":"positive","4":"5.50","5":"8.044984"},{"1":"11","2":"no","3":"positive","4":"4.25","5":"5.228126"},{"1":"16","2":"yes","3":"negative","4":"4.25","5":"5.501536"},{"1":"9","2":"no","3":"positive","4":"4.50","5":"6.250516"},{"1":"10","2":"no","3":"positive","4":"2.75","5":"2.574248"},{"1":"2","2":"no","3":"positive","4":"4.00","5":"5.718363"},{"1":"20","2":"yes","3":"control","4":"4.00","5":"4.028561"},{"1":"9","2":"no","3":"positive","4":"5.00","5":"5.430161"},{"1":"11","2":"no","3":"negative","4":"4.50","5":"4.886423"},{"1":"12","2":"no","3":"negative","4":"4.25","5":"2.691592"},{"1":"16","2":"yes","3":"control","4":"4.75","5":"8.685453"},{"1":"18","2":"yes","3":"positive","4":"6.25","5":"5.856230"},{"1":"11","2":"no","3":"negative","4":"5.75","5":"2.387690"},{"1":"20","2":"yes","3":"positive","4":"5.75","5":"8.394679"},{"1":"6","2":"no","3":"positive","4":"5.00","5":"5.546165"},{"1":"18","2":"yes","3":"negative","4":"4.75","5":"6.764307"},{"1":"5","2":"no","3":"control","4":"5.00","5":"6.180635"},{"1":"18","2":"yes","3":"control","4":"4.00","5":"3.935280"},{"1":"17","2":"yes","3":"control","4":"4.00","5":"3.974702"},{"1":"17","2":"yes","3":"negative","4":"5.25","5":"3.931147"},{"1":"10","2":"no","3":"negative","4":"5.75","5":"3.990470"},{"1":"18","2":"yes","3":"positive","4":"4.50","5":"5.655197"},{"1":"13","2":"no","3":"negative","4":"3.25","5":"1.955259"},{"1":"10","2":"no","3":"negative","4":"2.75","5":"2.661602"},{"1":"16","2":"yes","3":"positive","4":"6.25","5":"7.033872"},{"1":"17","2":"yes","3":"negative","4":"3.75","5":"5.605718"},{"1":"16","2":"no","3":"positive","4":"4.00","5":"6.804893"},{"1":"13","2":"yes","3":"positive","4":"2.25","5":"3.310555"},{"1":"15","2":"yes","3":"control","4":"3.75","5":"5.020263"},{"1":"9","2":"no","3":"control","4":"4.50","5":"5.901529"},{"1":"15","2":"yes","3":"control","4":"5.25","5":"6.638662"},{"1":"10","2":"no","3":"control","4":"5.25","5":"6.519300"},{"1":"9","2":"no","3":"control","4":"4.00","5":"4.933640"},{"1":"17","2":"yes","3":"negative","4":"3.50","5":"2.643269"},{"1":"19","2":"yes","3":"control","4":"5.25","5":"6.936383"},{"1":"13","2":"yes","3":"positive","4":"3.25","5":"5.683358"},{"1":"19","2":"yes","3":"negative","4":"6.50","5":"8.748777"},{"1":"12","2":"no","3":"negative","4":"4.75","5":"2.717786"},{"1":"19","2":"yes","3":"negative","4":"2.50","5":"4.360039"},{"1":"17","2":"yes","3":"control","4":"3.50","5":"4.265381"},{"1":"13","2":"no","3":"positive","4":"4.50","5":"6.393520"},{"1":"15","2":"yes","3":"control","4":"6.50","5":"7.082540"},{"1":"17","2":"yes","3":"control","4":"5.25","5":"6.209874"},{"1":"17","2":"yes","3":"negative","4":"4.75","5":"6.575522"},{"1":"17","2":"yes","3":"control","4":"4.50","5":"3.000576"},{"1":"13","2":"yes","3":"positive","4":"3.25","5":"2.496913"},{"1":"17","2":"yes","3":"positive","4":"3.25","5":"3.201963"},{"1":"18","2":"yes","3":"positive","4":"4.00","5":"4.806228"},{"1":"14","2":"yes","3":"negative","4":"5.00","5":"6.624262"},{"1":"16","2":"no","3":"negative","4":"2.50","5":"1.678209"},{"1":"19","2":"yes","3":"control","4":"4.50","5":"2.478041"},{"1":"19","2":"yes","3":"negative","4":"6.50","5":"7.135388"},{"1":"9","2":"no","3":"control","4":"3.50","5":"5.099300"},{"1":"15","2":"yes","3":"positive","4":"3.25","5":"5.930034"},{"1":"16","2":"yes","3":"positive","4":"3.75","5":"7.315202"},{"1":"16","2":"yes","3":"positive","4":"3.75","5":"4.939468"},{"1":"15","2":"yes","3":"control","4":"4.00","5":"3.972892"},{"1":"10","2":"no","3":"control","4":"4.75","5":"8.530662"},{"1":"16","2":"yes","3":"control","4":"4.75","5":"7.378405"},{"1":"11","2":"no","3":"negative","4":"5.00","5":"4.870092"},{"1":"16","2":"yes","3":"control","4":"3.50","5":"4.165499"},{"1":"4","2":"no","3":"control","4":"3.25","5":"2.357299"},{"1":"8","2":"no","3":"control","4":"6.00","5":"5.875934"},{"1":"16","2":"yes","3":"negative","4":"4.25","5":"6.073045"},{"1":"11","2":"no","3":"control","4":"3.25","5":"4.685541"},{"1":"11","2":"no","3":"control","4":"3.00","5":"3.065955"},{"1":"15","2":"yes","3":"control","4":"3.75","5":"4.935506"},{"1":"12","2":"no","3":"negative","4":"5.00","5":"2.627988"},{"1":"8","2":"no","3":"control","4":"4.75","5":"7.192335"},{"1":"5","2":"no","3":"negative","4":"3.00","5":"3.439418"},{"1":"15","2":"yes","3":"control","4":"3.25","5":"2.573040"},{"1":"10","2":"no","3":"negative","4":"3.25","5":"3.666294"},{"1":"12","2":"no","3":"positive","4":"5.00","5":"5.871287"},{"1":"15","2":"yes","3":"positive","4":"4.75","5":"4.804418"},{"1":"16","2":"yes","3":"control","4":"5.00","5":"6.517382"},{"1":"19","2":"yes","3":"positive","4":"6.00","5":"7.323796"},{"1":"15","2":"yes","3":"negative","4":"3.50","5":"4.417015"},{"1":"12","2":"no","3":"positive","4":"4.25","5":"3.411787"},{"1":"13","2":"no","3":"control","4":"5.75","5":"7.253936"},{"1":"15","2":"yes","3":"positive","4":"3.25","5":"3.072896"},{"1":"7","2":"no","3":"positive","4":"2.25","5":"2.513720"},{"1":"16","2":"yes","3":"positive","4":"5.25","5":"6.873633"},{"1":"19","2":"yes","3":"negative","4":"4.75","5":"5.859310"},{"1":"15","2":"yes","3":"negative","4":"3.50","5":"3.833097"},{"1":"12","2":"no","3":"positive","4":"4.00","5":"5.407823"},{"1":"7","2":"no","3":"negative","4":"6.00","5":"5.310486"},{"1":"16","2":"yes","3":"positive","4":"4.25","5":"5.603346"},{"1":"13","2":"no","3":"control","4":"2.00","5":"1.839702"},{"1":"10","2":"no","3":"positive","4":"3.00","5":"5.188950"},{"1":"15","2":"no","3":"positive","4":"5.00","5":"9.433706"},{"1":"14","2":"no","3":"positive","4":"4.75","5":"7.069216"},{"1":"11","2":"no","3":"positive","4":"5.25","5":"7.670233"},{"1":"15","2":"yes","3":"negative","4":"3.25","5":"5.310485"},{"1":"14","2":"yes","3":"control","4":"4.25","5":"4.747775"},{"1":"17","2":"yes","3":"negative","4":"4.00","5":"3.530102"},{"1":"16","2":"yes","3":"control","4":"3.00","5":"4.090011"},{"1":"17","2":"yes","3":"positive","4":"4.25","5":"5.448243"},{"1":"16","2":"yes","3":"positive","4":"4.50","5":"5.289513"},{"1":"15","2":"yes","3":"positive","4":"3.75","5":"2.836264"},{"1":"15","2":"yes","3":"positive","4":"3.50","5":"3.187367"},{"1":"18","2":"yes","3":"control","4":"5.50","5":"4.804216"},{"1":"17","2":"yes","3":"control","4":"5.00","5":"5.240247"},{"1":"7","2":"no","3":"control","4":"4.75","5":"6.127947"},{"1":"10","2":"no","3":"positive","4":"5.00","5":"6.033116"},{"1":"12","2":"no","3":"control","4":"4.75","5":"4.840261"},{"1":"9","2":"no","3":"positive","4":"4.50","5":"6.808615"},{"1":"16","2":"yes","3":"negative","4":"5.25","5":"7.439035"},{"1":"17","2":"yes","3":"negative","4":"4.75","5":"7.469343"},{"1":"9","2":"no","3":"negative","4":"3.75","5":"3.090023"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<section id="one-sample-t-test-1" class="level2">
+<h2 class="anchored" data-anchor-id="one-sample-t-test-1">One-sample t-test</h2>
+<p>The one-sample t-test is used to compare the mean of a single sample to a known value (e.g., a population mean). In this example, we’ll test if the average number of hours per week that people spend consuming news is significantly different from 14 hours (there is no particular reason for this value, it’s just an example).</p>
+<p>First, let’s look at the mean and standard deviation of <code>news_consumption</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">M =</span> <span class="fu">mean</span>(news_consumption),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(news_consumption))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["M"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["SD"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"14.25667","2":"3.649153"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>This shows that the mean number of hours spent consuming news per week is higher than 10. With the one-sample t-test we can test if this difference is statistically significant. The formula for the one-sample t-test is <code>dependent_variable ~ 1</code>, where <code>1</code> indicates that there is no grouping variable (this will make sense when you see the formula for the independent samples t-test).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(news_consumption <span class="sc">~</span> <span class="dv">1</span>, <span class="at">mu =</span> <span class="dv">14</span>, <span class="at">data=</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  news_consumption
+t = 1.7229, df = 599, p-value = 0.08543
+alternative hypothesis: true mean is not equal to 14
+95 percent confidence interval:
+ 13.96409 14.54925
+sample estimates:
+mean of x 
+ 14.25667 </code></pre>
+</div>
+</div>
+<p>The results show that the mean number of hours spent consuming news (<span class="math inline">\(M = 14.26, SD = 3.65\)</span>) is not significantly different from 14 hours, <span class="math inline">\(t(599) = 1.72, p = 0.085\)</span>. So even though the mean is higher than 14 hours, based on our data we cannot conclude that this difference is statistically significant.</p>
+</section>
+<section id="independent-samples-t-test-1" class="level2">
+<h2 class="anchored" data-anchor-id="independent-samples-t-test-1">Independent samples t-test</h2>
+<p>The independent samples t-test is used to compare the means between two independent groups. Here we compare <code>news_consumption</code> <em>between</em> people who have a subscription to a newspaper and those who don’t (<code>np_subscription</code>).</p>
+<p>Let’s first look at the means and standard deviations for each group.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(np_subscription) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">M =</span> <span class="fu">mean</span>(news_consumption),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(news_consumption))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["np_subscription"],"name":[1],"type":["chr"],"align":["left"]},{"label":["M"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SD"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"no","2":"11.33840","3":"3.290561"},{"1":"yes","2":"16.53412","3":"1.851526"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>This shows that the mean number of hours spent consuming news is higher for people with a subscription than for those without. With the independent samples t-test we can test if this difference is statistically significant.</p>
+<p>However, we need to check one thing first! For the independent samples t-test, we need to indicate whether the variances between the two groups are equal. From the standard deviations we already know that they are not identical. To test this formally, we can use Levene’s test. The formula for Levene’s test is <code>dependent_variable ~ grouping_variable</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(news_consumption <span class="sc">~</span> np_subscription, <span class="at">data =</span> d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["F value"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"70.62746","3":"3.156186e-16","_rn_":"group"},{"1":"598","2":"NA","3":"NA","_rn_":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The Levene’s test is significant (p &lt; 0.001), which means that the variances are not equal. Now, we can perform the independent samples t-test with the argument <code>var.equal = FALSE</code>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The formula for the independent samples t-test is <code>dependent_variable ~ grouping_variable</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(news_consumption <span class="sc">~</span> np_subscription, <span class="at">data =</span> d, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  news_consumption by np_subscription
+t = -22.93, df = 388.95, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means between group no and group yes is not equal to 0
+95 percent confidence interval:
+ -5.641215 -4.750228
+sample estimates:
+ mean in group no mean in group yes 
+         11.33840          16.53412 </code></pre>
+</div>
+</div>
+<p>The results show that the mean number of hours spent consuming news is significantly different between people with ( <span class="math inline">\(M_1 = 16.53, SD = 1.85\)</span>) and without (<span class="math inline">\(M_0 = 11.34, SD = 3.29\)</span>) a subscription to a national newspaper, <span class="math inline">\(t(388.95) = -22.93, p &lt; 0.001\)</span>.</p>
+</section>
+<section id="paired-samples-t-test-1" class="level2">
+<h2 class="anchored" data-anchor-id="paired-samples-t-test-1">Paired samples t-test</h2>
+<p>The paired samples t-test is used to compare the means within subjects at two different time points or under two different conditions. In this example, we’ll test if the trust in journalism (<code>trust_t1</code> and <code>trust_t2</code>) significantly changed after the experiment. We focusing on the group that watched the <em>positive</em> movie, to see if this had a positive effect on trust.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>d_positive <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, experiment_group <span class="sc">==</span> <span class="st">"positive"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>First, let’s look at the means and standard deviations for each time point.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d_positive <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">M1 =</span> <span class="fu">mean</span>(trust_t1),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD1 =</span> <span class="fu">sd</span>(trust_t1),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">M2 =</span> <span class="fu">mean</span>(trust_t2),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD2 =</span> <span class="fu">sd</span>(trust_t2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["M1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["SD1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["M2"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["SD2"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"4.23","2":"1.077511","3":"5.633776","4":"1.659792"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Now, let’s perform the paired samples t-test. Notice that this time we don’t have a grouping variable, like <code>np_subscription</code> above. Instead, our observations are <em>paired</em> within the same row (i.e.&nbsp;participant), so we need to specify the two variables that we want to compare. The formula for this is <code>Pair(t1, t2) ~ 1</code>. We use the argument <code>paired = TRUE</code> to indicate that the observations are paired.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">Pair</span>(trust_t1, trust_t2) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> d_positive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  Pair(trust_t1, trust_t2)
+t = -17.724, df = 199, p-value &lt; 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.559961 -1.247592
+sample estimates:
+mean difference 
+      -1.403776 </code></pre>
+</div>
+</div>
+<p>The results show that the trust in journalism significantly increased<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> after watching the <em>positive</em> movie, <span class="math inline">\(t(199.00) = -17.72, p &lt; 0.001\)</span>.</p>
+</section>
+<section id="two-sided-vs-one-sided-t-test" class="level2">
+<h2 class="anchored" data-anchor-id="two-sided-vs-one-sided-t-test">Two-sided vs one-sided t-test</h2>
+<p>By default, the t-test is two-sided, which means that we don’t care about the direction of difference between the means. Our one-sample t-test tested whether the mean was <em>less OR greater</em> than 10 hours. Our independent samples t-test tested whether the first mean was <em>less OR greater</em> than the second mean. And our paired samples t-test tested whether the difference between the two means (trust_t1 - trust_t2) was <em>less OR greater</em> than zero.</p>
+<p>If you have a specific hypothesis about the direction of the difference, you can also perform a one-sided t-test. By doing so, you increase the power of the test, because you only need to reject the null hypothesis in one direction. The following figures show how a one-sided t-test puts all the probability in one tail of the distribution, which means that with the same level of significance (e.g., <span class="math inline">\(\alpha = 0.05\)</span>), you can reject the null hypothesis with a smaller t-value.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="t-test_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="word-of-caution" class="level3">
+<h3 class="anchored" data-anchor-id="word-of-caution">Word of caution</h3>
+<p>Using a one-sided test is only valid if you have a strong, justifiable reason to expect that the difference will be in a specific direction. This expectation should be grounded in theory, and formulated a priori, before you look at the data.</p>
+<p>Using a one-sided test after examining the data, or simply to achieve statistical significance, is a serious violation of research ethics. It artificially inflates the chances of rejecting the null hypothesis by ignoring potential effects in the other direction. This increases the risk of Type I error (a false positive) and can lead to misleading or exaggerated conclusions. In most cases, the more conservative two-sided test is recommended.</p>
+</section>
+<section id="how-to-use-a-one-sided-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-use-a-one-sided-t-test">How to use a one-sided t-test</h3>
+<p>To perform a one-sided t-test, you need to specify the alternative hypothesis in the <code>alternative</code> argument in the <code>t.test()</code> function. The following code shows how to perform the same one-sample t-test as above, but this time as a one-sided test. We’ll test if the mean number of hours spent consuming news is significantly greater than 14 hours.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(news_consumption <span class="sc">~</span> <span class="dv">1</span>, <span class="at">mu =</span> <span class="dv">14</span>, <span class="at">data =</span> d, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  news_consumption
+t = 1.7229, df = 599, p-value = 0.04271
+alternative hypothesis: true mean is greater than 14
+95 percent confidence interval:
+ 14.01124      Inf
+sample estimates:
+mean of x 
+ 14.25667 </code></pre>
+</div>
+</div>
+<p>When we tested this with a two-sided test, we found that the mean number of hours spent consuming news was not significantly <em>different</em> from 14 hours based on a <span class="math inline">\(95%\)</span> confidence level. But with a one-sided test, we find that the mean number of hours spent consuming news is significantly <em>greater</em> than 14 hours. Also note that the confidence interval is now one-sided, which you can see by the upper bound being <code>Inf</code> (infite). Note that in this case the use of a one-sided test is clearly not justified (see the word of caution above). This is purely to demonstrate how using a one-sided test affects the p-value.</p>
+<p>Similarly, we could test whether the mean number of hours spent consuming news is significantly <em>less</em> than 14 hours by setting <code>alternative = "less"</code>. We’ll skip the output here, but you can run it yourself to verify that this test is not significant.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(news_consumption <span class="sc">~</span> <span class="dv">1</span>, <span class="at">mu =</span> <span class="dv">14</span>, <span class="at">data =</span> d, <span class="at">alternative =</span> <span class="st">"less"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  news_consumption
+t = 1.7229, df = 599, p-value = 0.9573
+alternative hypothesis: true mean is less than 14
+95 percent confidence interval:
+     -Inf 14.50209
+sample estimates:
+mean of x 
+ 14.25667 </code></pre>
+</div>
+</div>
+</section>
+<section id="one-sided-test-in-independent-and-paired-samples-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="one-sided-test-in-independent-and-paired-samples-t-test">one-sided test in independent and paired samples t-test</h3>
+<p>In the independent samples t-test and paired samples t-test you can specify the alternative hypothesis in the same way as in the one-sample t-test.</p>
+<ul>
+<li>In the independent samples t-test, you can test if the mean of the first group is significantly <em>greater</em> or <em>less</em> than the mean of the second group.</li>
+<li>In the paired samples t-test, you can test if the mean difference is significantly <em>greater</em> or <em>less</em> than zero. Be carefull (!!) that this difference is calculated as <code>trust_t1 - trust_t2</code>, so a positive difference means that the <code>trust_t1</code> is <strong>greater</strong> than <code>trust_t2</code>. In other words, if you test <code>alternative = "greater"</code>, you are testing if trust <strong>decreased</strong>.</li>
+</ul>
 
 
 </section>
+</section>
+</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>You may also encounter the t-distribution in other contexts, such as for testing the significance of individual coefficients in a regression model (i.e.&nbsp;is the coefficient significantly different from zero?). In this tutorial we focus on the t-test as a standalone statistical test, but the t-distribution has many other uses in statistics.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>If the variances are equal, you set <code>var.equal = TRUE</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>We focus on one group, because we expect trust to change in different directions depending on the movie (e.g., increase after watching a positive movie, decrease after watching a negative movie). Note that in reality, when you have both repeated measures and multiple groups, you might want to use a mixed design <a href="../../analysis/tests/anova.html">ANOVA</a> instead.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>We know that it increased from the means that we calculated above. What might be confusing is that the t-test reports a negative value for the mean difference. This is because the t-test is based on the difference between the two means, and the difference is calculated as <code>trust_t1 - trust_t2</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -837,13 +1160,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../analysis/tests/linear-regression.html" class="pagination-link" aria-label="Linear regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Linear regression</span>
+      <a href="../../analysis/tests/index.html" class="pagination-link" aria-label="Statistical tests">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Statistical tests</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../good-to-know/function-documentation.html" class="pagination-link" aria-label="Function Documentation">
-        <span class="nav-page-text">Function Documentation</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../analysis/tests/correlation.html" class="pagination-link" aria-label="Correlation test">
+        <span class="nav-page-text">Correlation test</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

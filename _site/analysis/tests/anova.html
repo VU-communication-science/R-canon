@@ -84,8 +84,8 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../analysis/tests/correlation.html" rel="next">
-<link href="../../analysis/tests/index.html" rel="prev">
+<link href="../../good-to-know/function-documentation.html" rel="next">
+<link href="../../analysis/tests/linear-regression.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -390,8 +390,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../analysis/tests/anova.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">ANOVA</span></a>
+  <a href="../../analysis/tests/t-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">t-test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -408,8 +408,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../analysis/tests/t-test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">t-test</span></a>
+  <a href="../../analysis/tests/anova.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ANOVA</span></a>
   </div>
 </li>
       </ul>
@@ -443,14 +443,20 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-an-anova" id="toc-what-is-an-anova" class="nav-link active" data-scroll-target="#what-is-an-anova">What is an ANOVA?</a></li>
+  <li><a href="#what-is-an-anova" id="toc-what-is-an-anova" class="nav-link active" data-scroll-target="#what-is-an-anova">What is an ANOVA?</a>
+  <ul class="collapse">
+  <li><a href="#one-way-anova" id="toc-one-way-anova" class="nav-link" data-scroll-target="#one-way-anova">One-way ANOVA</a></li>
+  <li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link" data-scroll-target="#two-way-anova">Two-way ANOVA</a></li>
+  <li><a href="#repeated-measures-anova" id="toc-repeated-measures-anova" class="nav-link" data-scroll-target="#repeated-measures-anova">Repeated measures ANOVA</a></li>
+  <li><a href="#mixed-design-anova" id="toc-mixed-design-anova" class="nav-link" data-scroll-target="#mixed-design-anova">Mixed-design ANOVA</a></li>
+  </ul></li>
   <li><a href="#how-to-use-it" id="toc-how-to-use-it" class="nav-link" data-scroll-target="#how-to-use-it">How to use it</a>
   <ul class="collapse">
-  <li><a href="#one-way-anova" id="toc-one-way-anova" class="nav-link" data-scroll-target="#one-way-anova">One-way ANOVA</a>
+  <li><a href="#one-way-anova-1" id="toc-one-way-anova-1" class="nav-link" data-scroll-target="#one-way-anova-1">One-way ANOVA</a>
   <ul class="collapse">
-  <li><a href="#when-factors-are-observed" id="toc-when-factors-are-observed" class="nav-link" data-scroll-target="#when-factors-are-observed">When factors are <em>observed</em></a></li>
+  <li><a href="#experimental-versus-observed-factors" id="toc-experimental-versus-observed-factors" class="nav-link" data-scroll-target="#experimental-versus-observed-factors"><em>Experimental</em> versus <em>observed</em> factors</a></li>
   </ul></li>
-  <li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link" data-scroll-target="#two-way-anova">Two-way ANOVA</a></li>
+  <li><a href="#two-way-anova-1" id="toc-two-way-anova-1" class="nav-link" data-scroll-target="#two-way-anova-1">Two-way ANOVA</a></li>
   </ul></li>
   <li><a href="#conditions-and-assumptions" id="toc-conditions-and-assumptions" class="nav-link" data-scroll-target="#conditions-and-assumptions">Conditions and assumptions</a>
   <ul class="collapse">
@@ -485,27 +491,32 @@ window.Quarto = {
 <h1>What is an ANOVA?</h1>
 <p>This makes it particularly suitable for experimental research, where participants are randomly assigned to different groups, and the researcher wants to know whether the groups differ on some outcome variable. Because of the random assignment, all possible confounding variables should be equally distributed over the groups, which allows us to make causal inferences about the effect of the independent variable on the dependent variable.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>There are different types of ANOVA to cover a wide range of research designs. The most common ones are:</p>
-<ul>
-<li><strong>One-way ANOVA</strong>.
+<section id="one-way-anova" class="level3">
+<h3 class="anchored" data-anchor-id="one-way-anova">One-way ANOVA</h3>
 <ul>
 <li><strong>Purpose</strong>. Compare means <em>between-subjects</em> in different groups.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 <li><strong>Example</strong>. We want to know how the design of a health care robot affects how <em>comfortable</em> people feel about interacting with the robot. To test this we <em>randomly</em> asign participants to three experimental groups, that are shown three different robot designs (<a href="https://vu.nl/nl/onderzoek/meer-over/sociale-robots-voor-de-samenleving-mediapsychologie">Alice, Nao</a>, and RoboCop). They then answer multiple questions based on which we measure a <em>comfort rating</em> <a href="../../analysis/techniques/scale-construction.html">scale</a>. We can now use One-way ANOVA to compare the mean comfort rating between the three groups.</li>
-</ul></li>
-<li><strong>Two-way ANOVA</strong>.
+</ul>
+</section>
+<section id="two-way-anova" class="level3">
+<h3 class="anchored" data-anchor-id="two-way-anova">Two-way ANOVA</h3>
 <ul>
 <li><strong>Purpose</strong>. Compare means <em>between-subjects</em> in different groups, for two independent variables.</li>
 <li><strong>Example</strong>. In addition to comparing three different designs of a health care robot, we could also compare between using a <em>male</em> or <em>female</em> voice. We then randomly assign participants to six groups (3 designs * 2 voices), and use two-way ANOVA to test whether the design and voice have an effect on the perceived attractiveness. We can then also test whether there is an <em>interaction</em> between the two variables, to see if specific combinations of design and voice are particularly comforting.</li>
-</ul></li>
-<li><strong>Repeated measures ANOVA</strong>.
+</ul>
+</section>
+<section id="repeated-measures-anova" class="level3">
+<h3 class="anchored" data-anchor-id="repeated-measures-anova">Repeated measures ANOVA</h3>
 <ul>
 <li><strong>Purpose</strong>. Compare means <em>within-subjects</em> measured at different timepoints.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
 <li><strong>Example</strong>. Instead of the self-reporting comfort rating, we could measure how people react to interacting with a health care robot by measuring their <em>heart rate</em>. We could then measure the <em>heart rate</em> of participants <em>before</em>, <em>during</em>, and <em>after</em> interacting with the robot. We can then use repeated measures ANOVA to compare the <em>heart rate</em> at each stage.</li>
-</ul></li>
-<li><strong>Mixed-design ANOVA</strong>.
+</ul>
+</section>
+<section id="mixed-design-anova" class="level3">
+<h3 class="anchored" data-anchor-id="mixed-design-anova">Mixed-design ANOVA</h3>
 <ul>
 <li><strong>Purpose</strong>. Combine <em>between-subjects</em> and <em>within-subjects</em> factors.</li>
 <li><strong>Example</strong>. This allows us to measure simultaneously the effect of the design of a health care robot (one-way anova example) on the change in <em>heart rate</em> (repeated measures example). We divide participants into three groups that are shown the three different designs, and measure the <em>heart rate</em> of participants <em>before</em>, <em>during</em>, and <em>after</em> interacting with the robot. We can then use mixed-design ANOVA to test whether the three designs of a health care robot affect the change in hearthrate differently.</li>
-</ul></li>
 </ul>
 <!-- # How does it work
 
@@ -529,6 +540,7 @@ To understand how ANOVA is *different* from *regular regression*, you need to un
 In the social sciences, when researchers use ANOVA, they usually use Type III sums of squares and effect coding. In popular statistics software like SPSS, this is also the default approach.
 In this tutorial we will also stick to this default.
 But as you'll see in the code, we do need to specify ourselves that we want to use Type II sums of squares and effect coding (specifically we'll use Helmert coding). -->
+</section>
 </section>
 <section id="how-to-use-it" class="level1">
 <h1>How to use it</h1>
@@ -561,8 +573,8 @@ But as you'll see in the code, we do need to specify ourselves that we want to u
 </div>
 </div>
 </div>
-<section id="one-way-anova" class="level2">
-<h2 class="anchored" data-anchor-id="one-way-anova">One-way ANOVA</h2>
+<section id="one-way-anova-1" class="level2">
+<h2 class="anchored" data-anchor-id="one-way-anova-1">One-way ANOVA</h2>
 <p>In one-way ANOVA we compare the means of a dependent variable between two or more groups in a single independent variable. We can use this to test the main question of our experiment: whether the movie (<em>experimental_group</em>) has an effect on the trust in journalists (<em>trust_t2</em>).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p>We use the <code>aov_car</code> function from the <code>afex</code> package to fit the ANOVA model. The formula that we use in this function is, as usual, <code>dependent_variable ~ independent_variable</code>. However, we also need to specify the unique user id (<code>id</code>) using the <code>Error</code> function. This way we explicitly clarify that each row in the data belongs to a unique participant in the study, which prevents you from mixing up between-subjects and within-subjects effects (more on this in the <em>repeated measures</em> section) So the full formula is <code>dependent_variable ~ independent_variable + Error(id)</code>.</p>
 <div class="cell">
@@ -632,14 +644,14 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </div>
 </div>
 </div>
-<section id="when-factors-are-observed" class="level3">
-<h3 class="anchored" data-anchor-id="when-factors-are-observed">When factors are <em>observed</em></h3>
+<section id="experimental-versus-observed-factors" class="level3">
+<h3 class="anchored" data-anchor-id="experimental-versus-observed-factors"><em>Experimental</em> versus <em>observed</em> factors</h3>
 <p>In the previous example our independent variable was <em>experimentally manipulated</em>: we randomly assigned participants to the three groups. Accordingly, any effects that we find are likely to represent causal relationships. If people with different opinions about journalism were randomly distributed over the groups, we can be confident that the differences we find after showing them different movies are due to the movies themselves.</p>
 <p>However, in some cases we might have an independent variable that is <em>observed</em>, meaning that we did not manipulate it, but only <em>observed</em> a value that was already there. This is the case for variables like <em>age</em> and <em>gender</em>, and in our case also for <em>np_subscribed</em> (whether participants have a newspaper subscription).</p>
 <p>When factors are observed, it has two implications for the ANOVA test:</p>
 <ul>
-<li><strong>Causality</strong>. It limits the ability to make causal inferences about the effect of the independent variable on the dependent variable. For instance, if we find that people with a newspaper subscription have a higher trust in journalists,</li>
-<li><strong>Effect size</strong>. When factors are observed, we need to correct the <span class="math inline">\(eta^2\)</span> value to get more reliable effect sizes. The <code>afex</code> package does this automatically for us by using the generalized <span class="math inline">\(eta^2\)</span> value (<code>ges</code> column in the output).However, we do need to tell it when a factor is observed, using the <code>observed</code> argument in the <code>aov_car</code> function.</li>
+<li><strong>Causality</strong>. It limits the ability to make causal inferences about the effect of the independent variable on the dependent variable.</li>
+<li><strong>Effect size</strong>. We need to correct the <span class="math inline">\(eta^2\)</span> value to get more reliable effect sizes. The <code>afex</code> package does this automatically for us by using the generalized <span class="math inline">\(eta^2\)</span> value (<code>ges</code> column in the output).However, we do need to tell it when a factor is observed, using the <code>observed</code> argument in the <code>aov_car</code> function.</li>
 </ul>
 <p>Let’s see how this works in practice, using the <code>np_subscription</code> variable as an observed factor. With <code>observed='np_subscription'</code> we tell the <code>aov_car</code> function that the <code>np_subscription</code> variable is an observed factor.</p>
 <div class="cell">
@@ -657,8 +669,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 <p>In this case our results only tell us that there is a significant difference between people with and without a newspaper subscription. We cannot conclude that this is because having a newspaper subscription causes people to trust journalists more. We are no longer certain about the order of the effect (trust in journalists might also cause people to get a newspaper subscription), and there can be confounding variables that influence both (e.g., education level, socio-economic status).</p>
 </section>
 </section>
-<section id="two-way-anova" class="level2">
-<h2 class="anchored" data-anchor-id="two-way-anova">Two-way ANOVA</h2>
+<section id="two-way-anova-1" class="level2">
+<h2 class="anchored" data-anchor-id="two-way-anova-1">Two-way ANOVA</h2>
 <p>In a two-way ANOVA we compare the means of a dependent variable between two or more groups in two independent variables. To demonstrate this we’ll use the <code>np_subscription</code> variable as a second independent variable.</p>
 <p>The formula for a two-way ANOVA is <code>dependent_variable ~ independent_variable_1*independent_variable_2 + Error(id)</code>. The <code>*</code> symbol is a shorthand for including both the main effects and the interaction effect between the two independent variables. Note that we also again specify that <code>np_subscription</code> is an observed factor.</p>
 <div class="cell">
@@ -1222,13 +1234,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../analysis/tests/index.html" class="pagination-link" aria-label="Statistical tests">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Statistical tests</span>
+      <a href="../../analysis/tests/linear-regression.html" class="pagination-link" aria-label="Linear regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Linear regression</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../analysis/tests/correlation.html" class="pagination-link" aria-label="Correlation test">
-        <span class="nav-page-text">Correlation test</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../good-to-know/function-documentation.html" class="pagination-link" aria-label="Function Documentation">
+        <span class="nav-page-text">Function Documentation</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
