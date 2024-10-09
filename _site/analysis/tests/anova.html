@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -782,52 +782,44 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </div>
 </div>
 <p>In this case the Levene’s test is not significant, which means that we can assume that the variance of the trust score is sufficiently equal in each group.</p>
+<p>For two-way anova, we can also perform the Levene’s test for each combination of the two independent variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(trust_t2 <span class="sc">~</span> experiment_group<span class="sc">*</span>np_subscription, <span class="at">data=</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["F value"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"5","2":"1.220193","3":"0.2980217","_rn_":"group"},{"1":"594","2":"NA","3":"NA","_rn_":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
 <section id="what-if-the-variance-is-not-equal" class="level4">
 <h4 class="anchored" data-anchor-id="what-if-the-variance-is-not-equal">What if the variance is not equal?</h4>
 <p>If Levene’s test is significant, we would need to look more carefully into the variance across groups. ANOVA is fairly robust to violations of the assumption of homogeneity of variance, but if the variance is very different between groups, the results of the ANOVA can be unreliable.</p>
 <p>So how much difference in variance is too much? One strategy is to look at the ratio of the largest to the smallest variance across the groups. A common rule of thumb is that this ratio should not be more than 3.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> However, note that this is just a rule of thumb, and if the sample size is small (less than 30 per group), or the groups are very unbalanced (i.e.&nbsp;one group has much more observations than the others), it is better to be more conservative.</p>
-<p>In any case, it is always a good idea to look at the sample size and variances across groups to see where potential problems might be.</p>
+<p>In any case, it is always a good starting point to look at the sample size and variances across groups to see where potential problems might be.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>var_per_group <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(experiment_group) <span class="sc">|&gt;</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">variance =</span> <span class="fu">var</span>(trust_t2)) </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>var_per_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">=</span> d <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(experiment_group, np_subscription) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">variance =</span> <span class="fu">var</span>(trust_t2)) </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>vars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["experiment_group"],"name":[1],"type":["fct"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["variance"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"control","2":"200","3":"2.942180"},{"1":"negative","2":"200","3":"3.144437"},{"1":"positive","2":"200","3":"2.754909"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["experiment_group"],"name":[1],"type":["fct"],"align":["left"]},{"label":["np_subscription"],"name":[2],"type":["fct"],"align":["left"]},{"label":["n"],"name":[3],"type":["int"],"align":["right"]},{"label":["variance"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"control","2":"no","3":"81","4":"3.530911"},{"1":"control","2":"yes","3":"119","4":"2.540695"},{"1":"negative","2":"no","3":"90","4":"2.150746"},{"1":"negative","2":"yes","3":"110","4":"2.579939"},{"1":"positive","2":"no","3":"92","4":"2.790451"},{"1":"positive","2":"yes","3":"108","4":"2.750329"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>var_per_group <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ratio =</span> <span class="fu">max</span>(variance) <span class="sc">/</span> <span class="fu">min</span>(variance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["ratio"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"1.141394"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ratio of largest to smallest variance</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(vars<span class="sc">$</span>variance) <span class="sc">/</span> <span class="fu">min</span>(vars<span class="sc">$</span>variance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.641714</code></pre>
 </div>
 </div>
-</div>
-<p>However, this is only a rule of thumb.</p>
-<p>When the N per group is at least 30, then you are probably fine as long as the ratio of the largest to the smallest variance is not more than 3.</p>
-<p>One rule of thumb is that the ratio of the largest to the smallest variance should not be more than 3.</p>
-<p>One of how much difference of variance there is, is the ratio of the largest to the smallest variance. The following code calculates the variance for each group, and then calculates the ratio of the largest to the smallest variance.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(experiment_group) <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">variance =</span> <span class="fu">var</span>(trust_t2)) <span class="sc">|&gt;</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ratio =</span> <span class="fu">max</span>(variance) <span class="sc">/</span> <span class="fu">min</span>(variance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["ratio"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"1.141394"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
-<p>If if was significant, we would need to be carefull with interpreting the results of the ANOVA, and we might need to use a different model, like ANOVA with Welch’s correction, or a non-parametric test like the Kruskal-Wallis test.</p>
+<p>In this case we have quite a lot of observations in each group, so if the ratio of the largest to the smallest variance (<span class="math inline">\(S_{max}^2 / S_{min}^2 = 3.53 / 2.15 =  1.64\)</span>)<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> is less than 3, we can assume that the variance is sufficiently equal in each group (and we already know that the Levene’s test is not significant).</p>
+<p>But what if the homogeneity of variance assumption <em>is</em> violated? One option would be to use a different model, like ANOVA with Welch’s correction, or a non-parametric test like the Kruskal-Wallis test. But perhaps more importantly, if you do find such strong differences in variance, you should look more closely at the data and think about what might be causing these differences. Why is the variance higher in one group than in the other? Is there perhaps a confounding variable or moderator that you have not yet taken into account? Perhaps an experimental treatment was not applied correctly, or it might only have an effect in a specific subgroup of participants.</p>
+<p>Most importantly, do not think of testing these assumptions as a <em>hurdle</em> that you need to pass before you can use ANOVA. At the end of the day, the purpose of statistics is to help us better understand our data. If you find that your data does not meet the assumptions of ANOVA, this is not a failure, but an observation in itself that might warrant exploration. When in doubt, you can still use ANOVA, as long as you’re transparent about the assumptions that are violated, and exert caution in your interpretation of the results.</p>
 
 
 
@@ -851,8 +843,8 @@ Olejnik, Stephen, and James Algina. 2003. <span>“Generalized Eta and Omega Squ
 <li id="fn3"><p>This is similar to a paired samples t-test, but can be used for more than two groups. This is primarily used for within-subjects designs, where the same participants are measured multiple times.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>We’re using the trust score <em>after</em> watching the movie. It is <em>ok</em> to ignore the trust score before watching the movie, because we’ve randomly assigned participants to the different groups. This means that the trust score before watching the movie should be the same in each group. However, as we’ll show below, we could also use a repeated measures ANOVA to compare the trust score before and after watching the movie.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>The generalized <span class="math inline">\(eta2\)</span> is a generalization of the (partial) <span class="math inline">\(eta2\)</span> value that is often reported in ANOVA output. It was proposed by <span class="citation" data-cites="olejnik03">Olejnik and Algina (<a href="#ref-olejnik03" role="doc-biblioref">2003</a>)</span> because regular partial <span class="math inline">\(eta2\)</span> values can be misleading when comparing between studies with different designs. Specifically, it allows taking into account whether factors in the model are <em>experimentally manipulated</em> or <em>observed</em>. In the <strong>When factors are observed</strong> subsection below we show how to specify this in the <code>aov_car</code> function.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>By ‘rule of thumb’, we mean that it’s a general guideline, and not a number that is set in stone. Different authors have also proposed different values for this ratio. One source for the 3:1 ratio is <span class="citation" data-cites="dean00">Dean and Voss (<a href="#ref-dean00" role="doc-biblioref">1999</a>)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>The first <code>summarize</code> uses the groups specified in the <code>group_by</code> function, and calculates the variance for each group. This results in a tibble where each row is a group, and the <code>variance</code> column contains the variance score. The second <code>summarize</code> calculates the largest (max) and smallest (min) variance, and then calculates the ratio between the two.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>By ‘rule of thumb’, we mean that it’s a general guideline, and not a number that is set in stone. Different authors have also proposed different values for this ratio. One source for the 3:1 ratio is <span class="citation" data-cites="dean00">Dean and Voss (<a href="#ref-dean00" role="doc-biblioref">1999</a>)</span>. There is also Hartley’s Fmax test, which is a more formal test that looks at the ratio of the largest to the smallest variance, and can take sample size and number of groups into account. However, this test is in turn sensitive to normal distribution of data, and requires groups to be balanced. Ultimately, there is no simple solution answer to the question “how much difference in variance is too much?”.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>The <span class="math inline">\(S_{max}^2\)</span> and <span class="math inline">\(S_{min}^2\)</span> are the largest and smallest variance across the groups, which you can look up in the data frame above. Note that <span class="math inline">\(S^2\)</span> is just the mathematical notation for variance (<span class="math inline">\(S\)</span> is the standard deviation, so <span class="math inline">\(S^2\)</span> is the variance).<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

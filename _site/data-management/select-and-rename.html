@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -461,7 +461,7 @@ Required packages and data for this tutorial
 </div>
 <section id="selecting-specific-columns" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-specific-columns">Selecting specific columns</h3>
-<p>The simplest way of using <code>select</code> is to explicitly specify the columns you want to keep: The following code creates a new tibble with only the columns <code>id</code>, <code>age</code>, and <code>np_subscription</code>.</p>
+<p>The simplest way of using <code>select</code> is to explicitly specify the columns you want to keep. The first argument is the tibble (data frame) you want to select from, and the following arguments are the columns you want to keep. The following code returns a new tibble with only the columns <code>id</code>, <code>age</code>, and <code>np_subscription</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, id, age, np_subscription)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -481,11 +481,11 @@ Required packages and data for this tutorial
 # ℹ 590 more rows</code></pre>
 </div>
 </div>
-<p>You can also overwrite the original data frame with the new selection. You can do this by assigning the result to the same name as the input (<code>d</code> in this case):</p>
+<p>As with any output, you can assign it to a variable to store the result.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">select</span>(ds, id, age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">select</span>(d, id, age, np_subscription)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Just be carefull with this. One of the nice things about R is that you can have multiple versions of your data in different tibbles. It is often smart to at least keep the original (raw) data frame intact.</p>
+<p>Here we create a new tibble <code>ds</code> that only contains the columns <code>id</code>, <code>age</code>, and <code>np_subscription</code>. Whenever you import data into R, it is often a good idea to first select only the columns you need. While you could also overwrite the original tibble (<code>d &lt;- select(d, ...)</code>) it is usually better to create a new tibble. There is no harm in having multiple tibbles in your environment, and if you give clear names to your tibbles, it will make your code more readable.</p>
 </section>
 <section id="selecting-a-range-of-columns" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-a-range-of-columns">Selecting a range of columns</h3>
