@@ -9,6 +9,7 @@
 
 ### Install Quarto
 
+
 First, [install Quarto](https://quarto.org/docs/get-started/). I'll assume you're using RStudio (otherwise let me know and I'll add instructions)
 
 ### Open the R-canon project
