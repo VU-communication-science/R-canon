@@ -35,7 +35,9 @@ How to mainly use this:
 Open any Quarto file in the project. You should then see the Render button (ctrl + shift + K) in the toolbar of RStudio. This will now automatically render the entire book.
 If you make changes to a chapter, run this again to see the changes in the preview.
 
-If the render is successfull, you've actually updated the book already. If you push it to GitHub, the website will automatically be updated.
+If the render is successfull, you've actually updated the book already (the rendered website is in the /docs directory). 
+If you push it to GitHub, the website will automatically be updated.
+Note that it might take a few minutes after pushing for the change to show up on the website.
 
 ### Adding tutorials
 
