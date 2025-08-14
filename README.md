@@ -1,5 +1,10 @@
 # R Methods book 
 
+## Book link
+
+[https://quarto.org/docs/publishing/github-pages.html](https://quarto.org/docs/publishing/github-pages.html)
+
+
 ## Install Quarto and packages
 
 ### Install Quarto
