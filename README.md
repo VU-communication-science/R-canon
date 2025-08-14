@@ -48,7 +48,7 @@ Notice that the directory names match the sections of the book (e.g. data-manage
 
 
 The index.qmd file is the main file for the section, and it will be rendered as the main page of the section.
-Also notice that the YAML at the top specifies the *title* and *order*. e.g. see analysis/index.qmd.
+Also notice that the YAML at the top specifies the **title** and **order**. e.g. see analysis/index.qmd.
 
 ```
 ---
@@ -60,7 +60,7 @@ Here we could add the main page for the analysis section.
 (empty at the time of writing)
 ```
 
-The *title* setting is obvious. The *order* setting determines where in the order of sections the Analysis section is placed. 
+The **title** setting is obvious. The **order** setting determines where in the order of sections the Analysis section is placed. 
 At the time of writing this is the third section (after `Getting Started` and `Data management`).
 
 #### TLDR
