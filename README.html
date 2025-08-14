@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Communication Science R Book</title>
+<title>readme</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,96 +23,82 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
+<script src="README_files/libs/clipboard/clipboard.min.js"></script>
+<script src="README_files/libs/quarto-html/quarto.js"></script>
+<script src="README_files/libs/quarto-html/popper.min.js"></script>
+<script src="README_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="README_files/libs/quarto-html/anchor.min.js"></script>
+<link href="README_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="README_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="README_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="README_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="README_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
-<body>
+<body class="fullcontent">
 
-<div id="quarto-search-results"></div>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
-<!-- main -->
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Communication Science R Book</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>This is the home page of the Communication Science R Book. We are currently developing this book along with the methods courses of the program. If you were directed to specific chapters by your instructor, these chapters will be ready for you to read.</p>
+<section id="r-methods-book" class="level1">
+<h1>R Methods book</h1>
+<section id="install-quarto-and-packages" class="level2">
+<h2 class="anchored" data-anchor-id="install-quarto-and-packages">Install Quarto and packages</h2>
+<section id="install-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="install-quarto">Install Quarto</h3>
+<p>First, <a href="https://quarto.org/docs/get-started/">install Quarto</a>. I’ll assume you’re using RStudio (otherwise let me know and I’ll add instructions)</p>
+</section>
+<section id="open-the-r-canon-project" class="level3">
+<h3 class="anchored" data-anchor-id="open-the-r-canon-project">Open the R-canon project</h3>
+<p>Open the R-canon project in RStudio (as an actual R project, not just as a working directory)</p>
+</section>
+<section id="manage-packages" class="level3">
+<h3 class="anchored" data-anchor-id="manage-packages">Manage packages</h3>
+<p>To manage packages we use the <code>renv</code> packages. This lets us create a snapshot of all the packages and versions used in this project, and recreate the environment on another machine. Simply put, it maintains a <code>renv.lock</code> file (in the project directory) that lists all the packages and their versions used in the project.</p>
+<p>How to mainly use this:</p>
 <ul>
-<li><a href="./getting-started/">Getting started</a></li>
-<li><a href="./data-management/">Data management</a></li>
-<li><a href="./analysis/">Analysis</a></li>
-<li><a href="./good-to-know/">Good to know</a></li>
+<li>When you cloned the repo or pulled changed from GitHub, run <code>renv::restore()</code> to install the packages and versions defined in the <code>renv.lock</code> file on your device.</li>
+<li>When you added new packages in a tutorial, run <code>renv::snapshot()</code> to update the <code>renv.lock</code> file.</li>
+<li>Every now an then, we should run <code>renv::update()</code> to update all the packages in <code>renv.lock</code> to their latest versions.</li>
+<li>Run <code>renv::status()</code> whenever you like to see if things are up to date.</li>
 </ul>
+</section>
+</section>
+<section id="development" class="level2">
+<h2 class="anchored" data-anchor-id="development">Development</h2>
+<p>Open any Quarto file in the project. You should then see the Render button (ctrl + shift + K) in the toolbar of RStudio. This will now automatically render the entire book. If you make changes to a chapter, run this again to see the changes in the preview.</p>
+<p>If the render is successfull, you’ve actually updated the book already. If you push it to GitHub, the website will automatically be updated.</p>
+<section id="adding-tutorials" class="level3">
+<h3 class="anchored" data-anchor-id="adding-tutorials">Adding tutorials</h3>
+<p>Notice that the directory names match the sections of the book (e.g.&nbsp;data-management, analysis). Inside these directories you see:</p>
+<ul>
+<li>An index.qmd file.</li>
+<li>The .qmd files for the tutorials, or directories for subsections.</li>
+</ul>
+<p>The index.qmd file is the main file for the section, and it will be rendered as the main page of the section. Also notice that the YAML at the top specifies the <em>title</em> and <em>order</em>. e.g.&nbsp;see analysis/index.qmd.</p>
+<pre><code>---
+title: Analysis
+order: 3
+---
 
+Here we could add the main page for the analysis section. (empty at the time of writing)</code></pre>
+<p>The <em>title</em> setting is obvious. The <em>order</em> setting determines where in the order of sections the Analysis section is placed. At the time of writing this is the third section (after <code>Getting Started</code> and <code>Data management</code>).</p>
+<section id="tldr" class="level4">
+<h4 class="anchored" data-anchor-id="tldr">TLDR</h4>
+<p>To add a new tutorial, simply create a new .qmd file in the appropriate directory, and at a YAML at the top that specifies the title and order. To add a new (sub)section, create a new directory, and add an index.qmd file with the title and order.</p>
+</section>
+</section>
+</section>
+</section>
 
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+</main>
+<!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

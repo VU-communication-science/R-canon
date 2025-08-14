@@ -20,7 +20,7 @@ p_thres <- function(p) {
 
 # What is regression analysis?
 
-Regression analysis is a statistical technique for *predicting* a `dependent variable` (DV) based on one or more `independent variables` (IVs)
+Regression analysis is a statistical technique for *predicting* a `dependent variable` (DV) based on one or more `independent variables` (IVs).
 We use *predict* in a statistical sense, meaning that we are estimating how well we can guess the dependent variable given knowledge of the independent variable(s).
 The reason we want to do this is usually not to make actual predictions, but to understand the world better.
 If we can model how a variable is predicted by one or more other variables, we can make inferences about the relationship between these variables.
@@ -35,16 +35,16 @@ This allows us to deal with **confounding**, which can be critical when working 
 For instance, if younger people are more likely to be on the political left, then in order to test the effect of political orientation on trust, we need to somehow control for age.
 
 This is a long tutorial, split up in three parts.
-We first discuss how regression analysis works under the hood. 
+We first discuss how regression analysis works under the hood.
 We won't go deep into the math, but a basic understanding of the regression equation and the $R^2$ value is helpful for understanding when and how to use regression analysis.
 If you already familiar with regression, and are just here to learn how to do it in R, you can safely skip this part.
 Second, we'll show you how to use regression analysis in practice, where we go over a number of examples.
 If you're new to regression, but you're the learning by doing type, you might want to start here.
 Finally, we'll talk about when you can use regression analysis, and what the assumptions are that you need to meet.
-Understanding the assumptions is important, but requires a good understanding of the basics. 
+Understanding the assumptions is important, but requires a good understanding of the basics.
 So we advice first getting comfortable with the previous parts before diving in.
 
-# How does it work? 
+# How does it work?
 
 In **simple linear regression** we have a dependent variable `Y` and an independent variable `X`, and we want to predict `Y` based on `X`.
 The goal is to find a mathematical formula that best describes their relationship.
@@ -83,7 +83,7 @@ gg1 = ggplot(df, aes(x = x, y = y)) +
   theme_minimal()
 gg2 = ggplot(df, aes(x = x, y = y)) +
   geom_smooth(method = "lm", color = "blue", se=F) +  # Regression line
-  geom_segment(aes(x = x, xend = x, y = y, yend = predicted), 
+  geom_segment(aes(x = x, xend = x, y = y, yend = predicted),
                color = "red", size = 0.7) +  # Error lines
   geom_point(size = 2, color='darkgreen') +  # Scatter points
   labs(title = "Regression model",
@@ -94,19 +94,19 @@ grid.arrange(gg1, gg2, ncol=2)
 ```
 
 This visualization corresponds to the **regression equation**.
-We've coloured the different parts of the equation according to the colours used in the visualization. 
+We've coloured the different parts of the equation according to the colours used in the visualization.
 
 
 $$ \Large  \color{Green} Y_i = \color{Blue} b_0 + b_1 X_i + \color{Red} \epsilon_i $$
 
 * $\color{Green} Y_i$ represents the real values of the dependent variable ($Y_1, Y_2, ... Y_n$) that we want to predict.
-* $\color{Blue} b_0 + b_1 X_i$ represents our prediction of y. It has two coefficients: 
+* $\color{Blue} b_0 + b_1 X_i$ represents our prediction of y. It has two coefficients:
   * **intercept** $\color{Blue} b_0$: The value of Y when X is zero.
   * **slope** $\color{Blue} b_1$: How much Y changes for every unit increase in X.
 * $\color{Red} \epsilon_i$ represents the **residual**. This is the distance between the <span style="color:blue;">predicted</span> and the <span style="color:green">real</span> value of Y.[^error]
 
 [^error]: For example, at $X = 10$, the blue line predicting Y passes through the point $Y = 10.45$.
-However, the real value of Y at this point is 8.66. 
+However, the real value of Y at this point is 8.66.
 So the residual $\epsilon_i$ at this point is $8.66 - 10.45 = -1.79$.
 
 Based on this equation, we can learn two important things about the relationship between X and Y:
@@ -118,14 +118,14 @@ Based on this equation, we can learn two important things about the relationship
 
 Based on the coefficients of the regression model, we can make inferences about the relationship between the variables.
 In the example, we see that there is a positive relationship between `X` and `Y`, because the slope is positive.
-If X goes up, then Y tends to go up as well. 
+If X goes up, then Y tends to go up as well.
 This relation is expressed by the coefficient $b_1$, which in our example is 0.95.
 For every unit increase in X, Y increases by 0.95.
 
 We can also interpret the intercept ($b_0$), which is the value of Y when X is zero.
 However, this is not always meaningful.
 For example, if the independent variable is `age`, then the intercept would be the predicted value of Y for a person that is 0 years old.
-This is why the intercept is often not interpreted. 
+This is why the intercept is often not interpreted.
 
 ### Model fit
 
@@ -142,7 +142,7 @@ As the name implies, we take the sum of the squared residuals.
 $$  SS_R = \large \sum_{i=1}^{n} {\color{red} \epsilon_i^2} $$
 
 You can think of the $SS_R$ as the variance of the real values of Y around the predicted values of Y.
-If our model is perfect, then the $SS_R$ would be zero. 
+If our model is perfect, then the $SS_R$ would be zero.
 But how do we know how not-perfect our model is? how high is too high?
 For this, we can look at the **total sum of squares** ($SS_T$), which is the sum of the squared differences between the real values of Y and the mean of Y.
 
@@ -174,11 +174,11 @@ In a regression model this is not possible, because it will always find a model 
 ```{ojs}
 //| echo: false
 viewof intercept = Inputs.range(
-  [-8, 6], 
+  [-8, 6],
   {value: 3, step: 0.001, label: "b0 Intercept"}
 )
 viewof slope = Inputs.range(
-  [0.5,1.8], 
+  [0.5,1.8],
   {value: 0.5, step: 0.001, label: "b1 Slope"}
 )
 ```
@@ -261,23 +261,23 @@ library(sjPlot)
 
 d <- read_csv("https://tinyurl.com/R-practice-data") |>
         mutate(age = if_else(age > 100, 2024 - age, age)) |>
-        select(age, political_orientation, political_interest, trust_t1, 
+        select(age, political_orientation, political_interest, trust_t1,
                news_consumption = `news consumption`)
 d
 ```
 
 
-## Simple linear regression 
+## Simple linear regression
 
 We start with the example of predicting `trust` in journalists based on `age`.
 For this we'll be using the `trust_t1`[^1] variable as the dependent variable, and the `age` variable as the independent variable.
 We can use the `lm()` function to create a linear regression model.
-Inside the `lm()` function we specify the formula for the regression, which has the format `dependent ~ independent`. 
+Inside the `lm()` function we specify the formula for the regression, which has the format `dependent ~ independent`.
 
 [^1]: We use the `trust_t1` variable here, because for the current analysis we are not interested in the effect of the experimental group. Since `trust_t1` is measured before the experiment, it is not influenced by the experiment.
 
 ```{r}
-m <- lm(trust_t1 ~ age, data = d) 
+m <- lm(trust_t1 ~ age, data = d)
 ```
 
 The *standard* way to inspect the results is using the `summary(m)` function.
@@ -314,7 +314,7 @@ confint(m, level = 0.95)
 
 The output of the regression analysis gives us values for two coefficients: the **(intercept)** and the **age** variable (like $b_0$ and $b_1$ in the regression equation).
 We get the coefficient **estimates** and **p-values** that tell us if these coefficients are statistically significant.
-With `tab_model` we also get the **confidence interval**. 
+With `tab_model` we also get the **confidence interval**.
 
 ```{r, echo=F, results=F}
 b_age = coef(m)[2] |> round(2)
@@ -326,7 +326,7 @@ ci_age = confint(m)[2,] |> round(2)
 
 * The coefficient for the `intercept` tells us the predicted value of `trust_t1` when `age` is zero.
 This is not very meaningful in this case, because we don't have any people with an age of zero in our data.
-* The coefficient for `age` tells us how much `trust_t1` changes for every *unit increase* in `age`. 
+* The coefficient for `age` tells us how much `trust_t1` changes for every *unit increase* in `age`.
   * Our `age` variable is in years, so the coefficient `r b_age` tells us that for every year of age, trust in journalists increases on average by `r b_age` points.
   * The p-value of `.210` tells us that this effect is not statistically.
   * The confidence interval tells us that we are 95% confident that the true effect of `age` on `trust_t1` is between `r ci_age[1]` and `r ci_age[2]`.
@@ -336,7 +336,7 @@ Here we see that the $R^2$ is `r r2`, which means that `r round(r2*100,1)`% of t
 
 In conclusion, this model shows that (in our simulated data) there is no significant effect of `age` on `trust_t1`.
 
-  
+
 ## Multiple regression
 
 In the previous example we used a single independent variable (`age`) to predict the dependent variable.
@@ -355,7 +355,7 @@ The **standardized coefficients** are the coefficients of the model if all varia
 This means that the variables are transformed to have a mean of 0 and a standard deviation of 1.
 This makes the coefficients comparable, because they are now in terms of standard deviations.
 
-Think for a second why this makes sense. 
+Think for a second why this makes sense.
 If you have a variable that goes from 0 to 100, and another variable that goes from 0 to 1, then the coefficients of these variables will be on completely different scales.
 Recall that the coefficient tells us how much the dependent variable changes for every **unit increase** in the independent variable.
 A **unit increase** of 1 on a scale from 0 to 100 is very different from a **unit increase** of 1 on a scale from 0 to 1.
@@ -401,7 +401,7 @@ r2_2 = summary(m2)$r.squared |> round(3)
 ```
 
 
-If we look at the first model, we see a significant effect of `news_consumption` on `trust_t1` ($b = `r b_nc_1`$, $p < 0.05$). 
+If we look at the first model, we see a significant effect of `news_consumption` on `trust_t1` ($b = `r b_nc_1`$, $p < 0.05$).
 The $R^2$ value of `r r2_1` suggests that `news_consumption` explains `r r2_1*100`% of the variance in `trust_t1`.
 
 However, when we include the `age` variable in the model, we see that the effect of `news_consumption` becomes much weaker ($b = `r b_nc_2`$, $p = `r p_nc_2`$).
@@ -563,8 +563,8 @@ To keep the table readable, we'll first rename the variables to shorter names.
 
 ```{r, out.width="100%", tab.width="100%"}
 #| html-table-processing: none
-ds <- rename(d, pol_ori = political_orientation, 
-                pol_int = political_interest) 
+ds <- rename(d, pol_ori = political_orientation,
+                pol_int = political_interest)
 
 m1 <- lm(trust_t1 ~ pol_ori + pol_int, data = ds)
 m2 <- lm(trust_t1 ~ pol_ori + pol_int + pol_ori*pol_int, data = ds)
@@ -574,7 +574,7 @@ tab_model(m1, m2, show.std=T, show.ci=F)
 
 ```{r, echo=F, results=F}
 b_pol_int = coef(m1)[4] |> round(2)
-p_pol_int = summary(m1)$coefficients[4,4] 
+p_pol_int = summary(m1)$coefficients[4,4]
 ```
 
 In the first model we see roughly the same effects as before for `political_orientation`.
@@ -613,9 +613,9 @@ It just *happens* to be the case that as you extrapolate to a `political_interes
   * `pol_ori [left]`: The effect of `political_orientation` on `trust_t1` at the mean of `political_interest` is significant.
   * `pol_ori [right]`: The effect of `political_orientation` on `trust_t1` at the mean of `political_interest` is not significant.
 
-These coefficients do have a meaningful interpretation. Based on our analysis we can see that for people with low `political_interest`, there is no significant effect of `political_orientation` on `trust_t1`. 
-If you look at the plot below, you see that the lines overlap at the left. 
-As `political_interest` increases (towards the right), the lines start diverging, indicating that the effect becomes significant at some point. 
+These coefficients do have a meaningful interpretation. Based on our analysis we can see that for people with low `political_interest`, there is no significant effect of `political_orientation` on `trust_t1`.
+If you look at the plot below, you see that the lines overlap at the left.
+As `political_interest` increases (towards the right), the lines start diverging, indicating that the effect becomes significant at some point.
 The main effect simply tells us that for the average value of `political_interest`, the effect is already significant.
 :::
 
@@ -630,7 +630,7 @@ The `sjPlot` package has the `plot_model()` function, which can plot the predict
 This will show you how the effect of `political_orientation` on `trust_t1` changes as `political_interest` increases.
 
 ```{r}
-plot_model(m2, type='pred', terms = c('pol_int','pol_ori'), 
+plot_model(m2, type='pred', terms = c('pol_int','pol_ori'),
            show.data = T, jitter = T)
 ```
 
@@ -668,7 +668,7 @@ With the `plot_model()` function from the `sjPlot` package you can plot the pred
 ```{r, fig.height=3, results=F, fig.show='hide'}
 m <- lm(trust_t1 ~ age, data = d)
 
-plot_model(m, type = "pred", terms = "age", 
+plot_model(m, type = "pred", terms = "age",
               show.data = T, jitter = T)
 ```
 
@@ -677,7 +677,7 @@ Let's instead look at an example where the relationship is not linear.
 In the following plot the relation between `age` and `happiness` is quadratic, following a u-shape.
 Younger and older people tend to be happier than middle-aged people.
 A regular linear model (left) will not be able to capture this relationship well, and will therefore not fit the data well.
-On the right we fit a regression line to the actual relation. 
+On the right we fit a regression line to the actual relation.
 
 ```{r, message=F, warning=F, echo=F, fig.height=3}
 library(gridExtra)
@@ -702,7 +702,7 @@ The residuals of the model should be normally distributed.
 If you look at the figure of the regression model at the top of this tutorial, you can see how the residuals (the red lines) are distributed around the regression line.
 This distribution should be normal.
 
-You can to some extend see whether this is the case using the same plot as above. 
+You can to some extend see whether this is the case using the same plot as above.
 But there are also special diagnostics plots that can help you with this.
 With the `plot_model()` function you can plot the residuals (`type = "diag"`) of the model.
 
@@ -726,7 +726,7 @@ If there is a clear difference between the two, then the residuals are not norma
 #| html-table-processing: none
 diag_plots = plot_model(m, type="diag")
 diag_plots[[2]]
-``` 
+```
 
 
 ### No outliers in the residuals
@@ -777,7 +777,7 @@ There are many ways in which this assumption can be violated.
 One common case is data over time.
 If you're measuring something over time, like a person's number of social media followers, then it is very common that every observations is highly dependent on the previous observation.
 This is called **autocorrelation** (the variable correlates with itself).
-In order to use these data in a regression model, you need to use special techniques that take this autocorrelation into account. 
+In order to use these data in a regression model, you need to use special techniques that take this autocorrelation into account.
 This area of statistics is called **time series analysis**.
 
 Another common case is that your observations are nested within groups.
@@ -794,7 +794,7 @@ This can cause problems in the model, because the model cannot distinguish betwe
 To check for multicolinearity, you can look at the **correlation matrix** of the independent variables (see the [correlation tutorial](../tests/correlation.qmd)).
 A rough rule of thumb is that if the correlation between two variables is higher than 0.5 you should be cautious, and if it's higher than 0.8 you should be very worried.
 
-You should try to avoid high correlations between independent variables where possible. 
+You should try to avoid high correlations between independent variables where possible.
 If you have multiple variables that are highly correlated, they might be measuring a common factor, so you could consider combining them into a single variable (see the [scale construction](../techniques/scale-construction.qmd) tutorial).
 
 ::: {.callout-note title="The variance inflation factor" collapse="true"}
@@ -818,7 +818,7 @@ vif(m)
 :::
 
 
-# How to report 
+# How to report
 
 
 For APA style reporting of regression analysis, we generally report two things:
@@ -830,7 +830,5 @@ For APA style reporting of regression analysis, we generally report two things:
 
 
 
-1. The **coefficients** of the model, which tell us the effect of the independent variables on the dependent variable. 
+1. The **coefficients** of the model, which tell us the effect of the independent variables on the dependent variable.
 2. The **model fit**, which tells us how well the model fits the data.
-
-

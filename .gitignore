@@ -3,4 +3,10 @@
 .RData
 .Ruserdata
 
-/.quarto/
+.quarto/
+_freeze/
+_size/
+_site/
+
+/renv/
+/renv.d/

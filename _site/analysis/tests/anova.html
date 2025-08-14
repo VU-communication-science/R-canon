@@ -799,16 +799,23 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 <p>So how much difference in variance is too much? One strategy is to look at the ratio of the largest to the smallest variance across the groups. A common rule of thumb is that this ratio should not be more than 3.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> However, note that this is just a rule of thumb, and if the sample size is small (less than 30 per group), or the groups are very unbalanced (i.e.&nbsp;one group has much more observations than the others), it is better to be more conservative.</p>
 <p>In any case, it is always a good starting point to look at the sample size and variances across groups to see where potential problems might be.</p>
 <div class="cell">
+<<<<<<< HEAD
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">=</span> d <span class="sc">|&gt;</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(experiment_group, np_subscription) <span class="sc">|&gt;</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">variance =</span> <span class="fu">var</span>(trust_t2)) </span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>vars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(experiment_group, np_subscription) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">variance =</span> <span class="fu">var</span>(trust_t2)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> 01e8e1f (add readme)
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
 {"columns":[{"label":["experiment_group"],"name":[1],"type":["fct"],"align":["left"]},{"label":["np_subscription"],"name":[2],"type":["fct"],"align":["left"]},{"label":["n"],"name":[3],"type":["int"],"align":["right"]},{"label":["variance"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"control","2":"no","3":"81","4":"3.530911"},{"1":"control","2":"yes","3":"119","4":"2.540695"},{"1":"negative","2":"no","3":"90","4":"2.150746"},{"1":"negative","2":"yes","3":"110","4":"2.579939"},{"1":"positive","2":"no","3":"92","4":"2.790451"},{"1":"positive","2":"yes","3":"108","4":"2.750329"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
+<<<<<<< HEAD
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ratio of largest to smallest variance</span></span>
@@ -819,6 +826,12 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </div>
 <p>In this case we have quite a lot of observations in each group, so if the ratio of the largest to the smallest variance (<span class="math inline">\(S_{max}^2 / S_{min}^2 = 3.53 / 2.15 =  1.64\)</span>)<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> is less than 3, we can assume that the variance is sufficiently equal in each group (and we already know that the Levene’s test is not significant).</p>
 <p>But what if the homogeneity of variance assumption <em>is</em> violated? One option would be to use a different model, like ANOVA with Welch’s correction, or a non-parametric test like the Kruskal-Wallis test. But perhaps more importantly, if you do find such strong differences in variance, you should look more closely at the data and think about what might be causing these differences. Why is the variance higher in one group than in the other? Is there perhaps a confounding variable or moderator that you have not yet taken into account? Perhaps an experimental treatment was not applied correctly, or it might only have an effect in a specific subgroup of participants.</p>
+=======
+</div>
+</div>
+</div>
+<p>If there are strong differences in variance (like ratio &gt; 3) and Levene’s test is significant, we might need to use a different model, like ANOVA with Welch’s correction, or a non-parametric test like the Kruskal-Wallis test. But perhaps more importantly, if you do find such strong differences, it is also a good idea to look more closely at the data to see what might be causing these differences. Why is the variance higher in one group than in the other? Is there perhaps a confounding variable or moderator that you have not yet taken into account? Perhaps an experimental treatment was not applied correctly, or it might only have an effect in a specific subgroup of participants.</p>
+>>>>>>> 01e8e1f (add readme)
 <p>Most importantly, do not think of testing these assumptions as a <em>hurdle</em> that you need to pass before you can use ANOVA. At the end of the day, the purpose of statistics is to help us better understand our data. If you find that your data does not meet the assumptions of ANOVA, this is not a failure, but an observation in itself that might warrant exploration. When in doubt, you can still use ANOVA, as long as you’re transparent about the assumptions that are violated, and exert caution in your interpretation of the results.</p>
 
 
@@ -844,7 +857,10 @@ Olejnik, Stephen, and James Algina. 2003. <span>“Generalized Eta and Omega Squ
 <li id="fn4"><p>We’re using the trust score <em>after</em> watching the movie. It is <em>ok</em> to ignore the trust score before watching the movie, because we’ve randomly assigned participants to the different groups. This means that the trust score before watching the movie should be the same in each group. However, as we’ll show below, we could also use a repeated measures ANOVA to compare the trust score before and after watching the movie.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>The generalized <span class="math inline">\(eta2\)</span> is a generalization of the (partial) <span class="math inline">\(eta2\)</span> value that is often reported in ANOVA output. It was proposed by <span class="citation" data-cites="olejnik03">Olejnik and Algina (<a href="#ref-olejnik03" role="doc-biblioref">2003</a>)</span> because regular partial <span class="math inline">\(eta2\)</span> values can be misleading when comparing between studies with different designs. Specifically, it allows taking into account whether factors in the model are <em>experimentally manipulated</em> or <em>observed</em>. In the <strong>When factors are observed</strong> subsection below we show how to specify this in the <code>aov_car</code> function.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>By ‘rule of thumb’, we mean that it’s a general guideline, and not a number that is set in stone. Different authors have also proposed different values for this ratio. One source for the 3:1 ratio is <span class="citation" data-cites="dean00">Dean and Voss (<a href="#ref-dean00" role="doc-biblioref">1999</a>)</span>. There is also Hartley’s Fmax test, which is a more formal test that looks at the ratio of the largest to the smallest variance, and can take sample size and number of groups into account. However, this test is in turn sensitive to normal distribution of data, and requires groups to be balanced. Ultimately, there is no simple solution answer to the question “how much difference in variance is too much?”.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<<<<<<< HEAD
 <li id="fn7"><p>The <span class="math inline">\(S_{max}^2\)</span> and <span class="math inline">\(S_{min}^2\)</span> are the largest and smallest variance across the groups, which you can look up in the data frame above. Note that <span class="math inline">\(S^2\)</span> is just the mathematical notation for variance (<span class="math inline">\(S\)</span> is the standard deviation, so <span class="math inline">\(S^2\)</span> is the variance).<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+=======
+>>>>>>> 01e8e1f (add readme)
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
