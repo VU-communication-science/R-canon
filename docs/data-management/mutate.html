@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Mutate and recode – Communication Science R Book</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../data-management/pipes.html" rel="next">
+<link href="../data-management/filter-and-arrange.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/mutate.html">Mutate and recode</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://vu.nl/en/about-vu/faculties/faculty-of-social-sciences/departments/communication-science" class="sidebar-logo-link">
+      <img src="../data/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Communication Science R Book</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../getting-started/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/install-r-and-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Install R and RStudio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/using-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to use RStudio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/names-and-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Names and Objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/types-of-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Types of Objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Packages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/file-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">File management</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../getting-started/working-in-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in Quarto</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../data-management/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data management</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data-management/the-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The tidyverse</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data-management/read-and-write.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Read and write</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data-management/select-and-rename.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Select and rename</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data-management/filter-and-arrange.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter and Arrange</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data-management/mutate.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Mutate and recode</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data-management/pipes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the pipe syntax</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../analysis/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../analysis/concepts/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Key concepts</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/concepts/hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypotheses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/concepts/covariance-and-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Covariance and correlation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/concepts/causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causality</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../analysis/techniques/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Techniques</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/techniques/data-cleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data cleaning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/techniques/scale-construction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scale construction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/techniques/controlling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Controlling for confounders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/techniques/mediation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mediation Analyses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/techniques/standardization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Standardization</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../analysis/tests/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical tests</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/tests/t-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">t-test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/tests/correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/tests/linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/tests/anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Good to Know</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../good-to-know/function-documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Function Documentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link active" data-scroll-target="#mutate">Creating and modifying columns with mutate()</a>
+  <ul class="collapse">
+  <li><a href="#creating-new-variables" id="toc-creating-new-variables" class="nav-link" data-scroll-target="#creating-new-variables">Creating new variables</a></li>
+  <li><a href="#mutate-existing-variables" id="toc-mutate-existing-variables" class="nav-link" data-scroll-target="#mutate-existing-variables">Mutate existing variables</a></li>
+  </ul></li>
+  <li><a href="#recode" id="toc-recode" class="nav-link" data-scroll-target="#recode">Recoding variables</a>
+  <ul class="collapse">
+  <li><a href="#recode-with-case_match" id="toc-recode-with-case_match" class="nav-link" data-scroll-target="#recode-with-case_match">Recode with <code>case_match</code></a></li>
+  <li><a href="#more-flexible-recoding-with-case_when" id="toc-more-flexible-recoding-with-case_when" class="nav-link" data-scroll-target="#more-flexible-recoding-with-case_when">More flexible recoding with <code>case_when</code></a></li>
+  <li><a href="#binary-cases-with-if_else" id="toc-binary-cases-with-if_else" class="nav-link" data-scroll-target="#binary-cases-with-if_else">Binary cases with <code>if_else</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data-management/index.html">Data management</a></li><li class="breadcrumb-item"><a href="../data-management/mutate.html">Mutate and recode</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Mutate and recode</h1>
+<p class="subtitle lead">Create new variables and recode existing ones</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="Required packages and data for this tutorial">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Required packages and data for this tutorial
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this tutorial we use the <code>tidyverse</code> package and the simulated <a href="../../data-management/index.qmd#practice-data">practice data</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://tinyurl.com/R-practice-data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<section id="mutate" class="level1">
+<h1>Creating and modifying columns with mutate()</h1>
+<p>The <code>mutate</code> function allows you to create or modify columns in a data frame. You just specify which columns you want to create or modify, and then provide an expression for how to compute the new values. In this expression you can refer to other columns in the table, and use any R functions you like, which makes <code>mutate</code> a very powerful tool.</p>
+<section id="creating-new-variables" class="level2">
+<h2 class="anchored" data-anchor-id="creating-new-variables">Creating new variables</h2>
+<p>To create a new variable you use the following syntax:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(d, <span class="at">new_variable =</span> expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The expression can be anything that returns a valid column. For example, in the practice data we have the columns <code>trust_t1</code> and <code>trust_t2</code>, which represent trust in journalists before and after the experiment. We can create a new variable <code>trust_change</code> that represents the change in trust from before to after the experiment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">trust_change =</span> trust_t2 <span class="sc">-</span> trust_t1)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(d, trust_t1, trust_t2, trust_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["trust_t1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["trust_t2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["trust_change"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"3.00","2":"2.824978","3":"-0.175021921"},{"1":"5.00","2":"5.354581","3":"0.354581437"},{"1":"3.25","2":"3.368898","3":"0.118898177"},{"1":"4.25","2":"2.882763","3":"-1.367237157"},{"1":"4.00","2":"3.256695","3":"-0.743305401"},{"1":"3.75","2":"6.460656","3":"2.710656469"},{"1":"3.75","2":"6.380898","3":"2.630897626"},{"1":"2.75","2":"4.833257","3":"2.083257387"},{"1":"4.25","2":"6.817680","3":"2.567679801"},{"1":"5.75","2":"6.227435","3":"0.477435367"},{"1":"3.00","2":"4.625826","3":"1.625825555"},{"1":"4.50","2":"3.749982","3":"-0.750018312"},{"1":"4.25","2":"5.668970","3":"1.418970160"},{"1":"4.25","2":"4.595916","3":"0.345915672"},{"1":"4.00","2":"4.693604","3":"0.693604053"},{"1":"3.25","2":"4.626647","3":"1.376646718"},{"1":"4.00","2":"3.515036","3":"-0.484964030"},{"1":"5.75","2":"7.857036","3":"2.107035529"},{"1":"4.00","2":"5.065938","3":"1.065938464"},{"1":"3.75","2":"2.966268","3":"-0.783732246"},{"1":"3.50","2":"3.031485","3":"-0.468514747"},{"1":"5.50","2":"6.313042","3":"0.813042097"},{"1":"4.75","2":"6.178895","3":"1.428895092"},{"1":"4.75","2":"4.289748","3":"-0.460252306"},{"1":"3.50","2":"7.303969","3":"3.803969093"},{"1":"5.00","2":"7.411312","3":"2.411312295"},{"1":"5.50","2":"6.497374","3":"0.997374422"},{"1":"4.00","2":"5.721720","3":"1.721720076"},{"1":"5.50","2":"6.974339","3":"1.474339118"},{"1":"3.50","2":"3.349274","3":"-0.150725870"},{"1":"4.75","2":"7.836750","3":"3.086749763"},{"1":"3.00","2":"3.441744","3":"0.441744412"},{"1":"6.25","2":"7.719089","3":"1.469089395"},{"1":"3.25","2":"4.677334","3":"1.427333836"},{"1":"3.50","2":"4.340828","3":"0.840827993"},{"1":"5.50","2":"6.739357","3":"1.239357178"},{"1":"3.50","2":"5.479072","3":"1.979072404"},{"1":"5.25","2":"5.637100","3":"0.387100388"},{"1":"5.00","2":"8.944965","3":"3.944965383"},{"1":"4.75","2":"5.636468","3":"0.886467714"},{"1":"5.50","2":"2.115650","3":"-3.384350004"},{"1":"5.50","2":"7.095705","3":"1.595705148"},{"1":"4.25","2":"5.696713","3":"1.446713316"},{"1":"4.00","2":"4.387470","3":"0.387469660"},{"1":"5.25","2":"5.775667","3":"0.525667057"},{"1":"6.50","2":"8.359841","3":"1.859841035"},{"1":"4.00","2":"5.993076","3":"1.993076311"},{"1":"2.50","2":"3.197211","3":"0.697211066"},{"1":"2.50","2":"2.728577","3":"0.228576790"},{"1":"3.75","2":"5.340899","3":"1.590899011"},{"1":"4.50","2":"8.375465","3":"3.875464869"},{"1":"3.75","2":"4.147598","3":"0.397598226"},{"1":"4.50","2":"5.322031","3":"0.822030945"},{"1":"3.75","2":"6.284208","3":"2.534208401"},{"1":"4.25","2":"6.197204","3":"1.947203633"},{"1":"5.25","2":"7.424373","3":"2.174372840"},{"1":"5.50","2":"7.392493","3":"1.892492769"},{"1":"4.50","2":"4.476418","3":"-0.023581524"},{"1":"3.00","2":"1.200073","3":"-1.799927500"},{"1":"7.00","2":"6.517363","3":"-0.482636952"},{"1":"3.50","2":"6.175327","3":"2.675327157"},{"1":"3.75","2":"4.231543","3":"0.481542562"},{"1":"4.25","2":"5.444230","3":"1.194230208"},{"1":"3.25","2":"2.732212","3":"-0.517788469"},{"1":"4.50","2":"5.876735","3":"1.376735206"},{"1":"4.75","2":"6.471384","3":"1.721383640"},{"1":"4.25","2":"4.851863","3":"0.601863251"},{"1":"3.50","2":"3.148748","3":"-0.351251749"},{"1":"4.50","2":"5.116448","3":"0.616447526"},{"1":"3.25","2":"3.952229","3":"0.702228736"},{"1":"4.50","2":"4.545750","3":"0.045749559"},{"1":"5.25","2":"6.432647","3":"1.182647244"},{"1":"4.50","2":"6.089041","3":"1.589040507"},{"1":"1.75","2":"1.982712","3":"0.232711610"},{"1":"5.50","2":"6.999044","3":"1.499043783"},{"1":"4.00","2":"4.264509","3":"0.264509090"},{"1":"4.00","2":"3.120222","3":"-0.879777523"},{"1":"6.25","2":"7.695243","3":"1.445243416"},{"1":"4.75","2":"4.875016","3":"0.125016374"},{"1":"4.50","2":"6.082364","3":"1.582363816"},{"1":"3.25","2":"6.223672","3":"2.973671881"},{"1":"5.25","2":"5.827604","3":"0.577603614"},{"1":"5.50","2":"4.352723","3":"-1.147277040"},{"1":"3.25","2":"5.351926","3":"2.101925997"},{"1":"2.75","2":"5.171587","3":"2.421586816"},{"1":"5.75","2":"7.578029","3":"1.828029067"},{"1":"5.75","2":"7.532928","3":"1.782928074"},{"1":"3.25","2":"2.851782","3":"-0.398218319"},{"1":"3.25","2":"5.993305","3":"2.743304679"},{"1":"5.25","2":"6.134566","3":"0.884566430"},{"1":"3.00","2":"6.628292","3":"3.628292417"},{"1":"4.75","2":"7.156260","3":"2.406260044"},{"1":"4.75","2":"6.941121","3":"2.191121333"},{"1":"3.75","2":"3.474990","3":"-0.275010008"},{"1":"4.25","2":"3.990403","3":"-0.259596952"},{"1":"5.25","2":"6.909764","3":"1.659763545"},{"1":"4.75","2":"5.250589","3":"0.500588740"},{"1":"4.75","2":"4.623103","3":"-0.126896734"},{"1":"3.00","2":"6.118921","3":"3.118921233"},{"1":"4.00","2":"4.916206","3":"0.916206312"},{"1":"2.00","2":"1.000000","3":"-1.000000000"},{"1":"6.00","2":"6.316840","3":"0.316839887"},{"1":"2.75","2":"1.462389","3":"-1.287610951"},{"1":"5.50","2":"6.061523","3":"0.561523481"},{"1":"3.00","2":"4.620474","3":"1.620473559"},{"1":"4.00","2":"4.633540","3":"0.633540109"},{"1":"3.50","2":"5.122722","3":"1.622721757"},{"1":"3.00","2":"3.950663","3":"0.950663021"},{"1":"4.75","2":"4.416138","3":"-0.333862257"},{"1":"4.50","2":"6.541928","3":"2.041928324"},{"1":"4.00","2":"2.683608","3":"-1.316391907"},{"1":"4.75","2":"4.963798","3":"0.213797705"},{"1":"5.75","2":"8.512563","3":"2.762563289"},{"1":"4.25","2":"2.170991","3":"-2.079009122"},{"1":"4.00","2":"1.000000","3":"-3.000000000"},{"1":"3.00","2":"2.763689","3":"-0.236310606"},{"1":"3.25","2":"1.854345","3":"-1.395655017"},{"1":"5.25","2":"4.383383","3":"-0.866617119"},{"1":"4.00","2":"4.394819","3":"0.394819093"},{"1":"4.00","2":"3.959485","3":"-0.040515292"},{"1":"3.50","2":"6.343413","3":"2.843412777"},{"1":"5.50","2":"7.042022","3":"1.542021653"},{"1":"6.50","2":"7.961551","3":"1.461551433"},{"1":"3.50","2":"5.668190","3":"2.168190446"},{"1":"3.50","2":"6.141086","3":"2.641085534"},{"1":"4.00","2":"3.575320","3":"-0.424680415"},{"1":"3.00","2":"3.519456","3":"0.519456421"},{"1":"5.00","2":"7.021623","3":"2.021622923"},{"1":"6.50","2":"8.085269","3":"1.585268793"},{"1":"6.25","2":"7.084477","3":"0.834476584"},{"1":"2.75","2":"2.206308","3":"-0.543692315"},{"1":"2.00","2":"4.791258","3":"2.791258227"},{"1":"5.25","2":"8.182959","3":"2.932959364"},{"1":"4.75","2":"6.481829","3":"1.731829130"},{"1":"3.25","2":"3.821793","3":"0.571792901"},{"1":"3.25","2":"3.886707","3":"0.636706631"},{"1":"4.75","2":"5.243956","3":"0.493955625"},{"1":"4.25","2":"7.274479","3":"3.024479280"},{"1":"3.00","2":"2.527853","3":"-0.472147387"},{"1":"5.00","2":"5.729213","3":"0.729213342"},{"1":"6.00","2":"7.694568","3":"1.694567920"},{"1":"4.00","2":"5.367550","3":"1.367549939"},{"1":"5.25","2":"5.810933","3":"0.560933396"},{"1":"2.75","2":"1.773107","3":"-0.976893112"},{"1":"4.50","2":"3.835568","3":"-0.664432048"},{"1":"2.25","2":"1.769015","3":"-0.480984800"},{"1":"3.25","2":"3.050349","3":"-0.199651147"},{"1":"5.50","2":"6.155585","3":"0.655584722"},{"1":"2.50","2":"4.084005","3":"1.584005068"},{"1":"1.50","2":"1.835718","3":"0.335717654"},{"1":"3.75","2":"3.914796","3":"0.164795697"},{"1":"3.00","2":"4.844133","3":"1.844132777"},{"1":"4.25","2":"4.945848","3":"0.695847754"},{"1":"3.25","2":"2.702555","3":"-0.547445331"},{"1":"7.00","2":"10.000000","3":"3.000000000"},{"1":"4.00","2":"4.056673","3":"0.056672985"},{"1":"5.50","2":"4.653024","3":"-0.846975959"},{"1":"4.75","2":"4.636781","3":"-0.113219136"},{"1":"5.50","2":"5.547250","3":"0.047249921"},{"1":"3.25","2":"4.617935","3":"1.367935365"},{"1":"4.75","2":"4.588614","3":"-0.161386009"},{"1":"5.50","2":"7.154327","3":"1.654327380"},{"1":"4.25","2":"1.137742","3":"-3.112257955"},{"1":"4.00","2":"1.751485","3":"-2.248514981"},{"1":"4.50","2":"5.869801","3":"1.369801192"},{"1":"4.00","2":"4.398392","3":"0.398392392"},{"1":"4.25","2":"6.678895","3":"2.428894889"},{"1":"6.00","2":"8.286313","3":"2.286312820"},{"1":"3.00","2":"3.910157","3":"0.910156871"},{"1":"5.75","2":"5.619188","3":"-0.130812159"},{"1":"3.25","2":"4.352709","3":"1.102708565"},{"1":"3.25","2":"2.728237","3":"-0.521763119"},{"1":"4.50","2":"7.012092","3":"2.512092266"},{"1":"4.00","2":"5.758558","3":"1.758557531"},{"1":"5.50","2":"8.037619","3":"2.537619206"},{"1":"4.00","2":"4.980741","3":"0.980741028"},{"1":"4.75","2":"5.950005","3":"1.200004606"},{"1":"5.00","2":"6.204879","3":"1.204878695"},{"1":"3.50","2":"1.479750","3":"-2.020249934"},{"1":"6.00","2":"7.068938","3":"1.068937988"},{"1":"2.50","2":"3.108798","3":"0.608798456"},{"1":"4.00","2":"5.309824","3":"1.309824341"},{"1":"5.25","2":"7.751116","3":"2.501116159"},{"1":"2.00","2":"2.652934","3":"0.652934021"},{"1":"3.75","2":"1.768034","3":"-1.981965753"},{"1":"3.75","2":"2.390063","3":"-1.359937276"},{"1":"3.00","2":"4.252119","3":"1.252118545"},{"1":"4.00","2":"6.136307","3":"2.136307337"},{"1":"4.75","2":"4.029761","3":"-0.720238943"},{"1":"4.00","2":"5.735141","3":"1.735141229"},{"1":"4.75","2":"6.247456","3":"1.497456155"},{"1":"4.50","2":"5.072741","3":"0.572740857"},{"1":"2.75","2":"2.140178","3":"-0.609821859"},{"1":"6.25","2":"7.372685","3":"1.122684749"},{"1":"4.00","2":"6.151249","3":"2.151249137"},{"1":"5.00","2":"6.332064","3":"1.332064143"},{"1":"4.75","2":"6.386775","3":"1.636775455"},{"1":"5.50","2":"7.008749","3":"1.508749134"},{"1":"4.75","2":"5.007537","3":"0.257537460"},{"1":"4.00","2":"4.325757","3":"0.325756973"},{"1":"3.25","2":"4.560664","3":"1.310663616"},{"1":"3.25","2":"5.301583","3":"2.051582662"},{"1":"5.50","2":"7.142415","3":"1.642415170"},{"1":"4.50","2":"7.288590","3":"2.788589873"},{"1":"7.25","2":"10.000000","3":"2.750000000"},{"1":"3.75","2":"5.567391","3":"1.817390985"},{"1":"2.75","2":"4.002713","3":"1.252713274"},{"1":"4.50","2":"6.267628","3":"1.767627567"},{"1":"2.75","2":"1.591352","3":"-1.158647633"},{"1":"3.50","2":"5.420867","3":"1.920867467"},{"1":"4.25","2":"6.327989","3":"2.077989315"},{"1":"5.00","2":"6.010028","3":"1.010028009"},{"1":"3.75","2":"4.976351","3":"1.226350548"},{"1":"4.50","2":"5.816395","3":"1.316394648"},{"1":"6.00","2":"8.940256","3":"2.940256393"},{"1":"4.75","2":"5.375664","3":"0.625664464"},{"1":"4.50","2":"6.234840","3":"1.734840328"},{"1":"2.75","2":"2.745730","3":"-0.004270411"},{"1":"3.50","2":"2.808001","3":"-0.691999498"},{"1":"4.50","2":"4.833959","3":"0.333958998"},{"1":"3.00","2":"2.609233","3":"-0.390766883"},{"1":"4.75","2":"5.817862","3":"1.067861873"},{"1":"5.75","2":"8.007690","3":"2.257689674"},{"1":"4.50","2":"5.799799","3":"1.299799451"},{"1":"5.25","2":"6.770935","3":"1.520934549"},{"1":"5.75","2":"3.393202","3":"-2.356798154"},{"1":"4.75","2":"6.854968","3":"2.104967834"},{"1":"4.50","2":"7.877185","3":"3.377185228"},{"1":"3.00","2":"3.928530","3":"0.928529787"},{"1":"3.00","2":"4.648448","3":"1.648447633"},{"1":"3.75","2":"4.282463","3":"0.532462605"},{"1":"3.50","2":"4.128321","3":"0.628321201"},{"1":"4.50","2":"5.102619","3":"0.602618870"},{"1":"4.75","2":"1.834901","3":"-2.915099416"},{"1":"4.00","2":"4.046865","3":"0.046865142"},{"1":"4.50","2":"2.464420","3":"-2.035580428"},{"1":"3.00","2":"2.612521","3":"-0.387479074"},{"1":"4.25","2":"4.438139","3":"0.188139452"},{"1":"4.50","2":"5.670909","3":"1.170908960"},{"1":"3.75","2":"4.345202","3":"0.595202366"},{"1":"4.00","2":"4.025968","3":"0.025968370"},{"1":"5.25","2":"5.809696","3":"0.559695637"},{"1":"4.00","2":"5.853488","3":"1.853487983"},{"1":"4.25","2":"2.846640","3":"-1.403360016"},{"1":"5.50","2":"5.993879","3":"0.493879476"},{"1":"4.25","2":"5.787301","3":"1.537301306"},{"1":"3.00","2":"4.558428","3":"1.558428102"},{"1":"5.75","2":"7.029757","3":"1.279757093"},{"1":"4.50","2":"3.369911","3":"-1.130088901"},{"1":"5.50","2":"5.998080","3":"0.498079973"},{"1":"4.25","2":"5.820974","3":"1.570974226"},{"1":"5.00","2":"4.061854","3":"-0.938146404"},{"1":"2.75","2":"2.891384","3":"0.141384004"},{"1":"4.00","2":"4.642953","3":"0.642952827"},{"1":"2.75","2":"2.374020","3":"-0.375979833"},{"1":"3.50","2":"5.542766","3":"2.042766480"},{"1":"5.25","2":"4.852981","3":"-0.397018950"},{"1":"5.00","2":"7.493793","3":"2.493793337"},{"1":"5.00","2":"6.313676","3":"1.313675878"},{"1":"5.50","2":"6.184897","3":"0.684896537"},{"1":"5.00","2":"6.196171","3":"1.196171109"},{"1":"3.75","2":"4.208125","3":"0.458124732"},{"1":"5.50","2":"6.991875","3":"1.491875462"},{"1":"3.75","2":"2.671960","3":"-1.078039615"},{"1":"5.50","2":"6.496267","3":"0.996267374"},{"1":"4.00","2":"5.006706","3":"1.006705580"},{"1":"5.00","2":"5.928143","3":"0.928143098"},{"1":"4.50","2":"1.987325","3":"-2.512675350"},{"1":"2.75","2":"5.306442","3":"2.556441879"},{"1":"3.50","2":"2.603075","3":"-0.896925071"},{"1":"4.25","2":"5.619073","3":"1.369072723"},{"1":"4.00","2":"4.897040","3":"0.897040267"},{"1":"3.00","2":"3.210468","3":"0.210468019"},{"1":"7.00","2":"8.155126","3":"1.155126025"},{"1":"5.25","2":"5.350983","3":"0.100983483"},{"1":"4.50","2":"3.964301","3":"-0.535699089"},{"1":"2.75","2":"4.392203","3":"1.642203087"},{"1":"3.25","2":"4.146906","3":"0.896905722"},{"1":"7.50","2":"10.000000","3":"2.500000000"},{"1":"4.50","2":"5.519414","3":"1.019413710"},{"1":"4.25","2":"6.119183","3":"1.869183234"},{"1":"6.50","2":"6.318267","3":"-0.181733182"},{"1":"5.75","2":"6.849301","3":"1.099301401"},{"1":"4.75","2":"6.406149","3":"1.656149159"},{"1":"5.75","2":"7.924148","3":"2.174147724"},{"1":"5.25","2":"6.658999","3":"1.408998772"},{"1":"3.50","2":"4.936396","3":"1.436395692"},{"1":"2.25","2":"1.000000","3":"-1.250000000"},{"1":"3.75","2":"4.123743","3":"0.373743433"},{"1":"2.75","2":"3.871325","3":"1.121324777"},{"1":"3.75","2":"3.082417","3":"-0.667583455"},{"1":"3.75","2":"4.700358","3":"0.950357892"},{"1":"3.25","2":"4.501737","3":"1.251737291"},{"1":"5.50","2":"6.546874","3":"1.046873691"},{"1":"4.75","2":"5.738714","3":"0.988714188"},{"1":"3.75","2":"1.849618","3":"-1.900382250"},{"1":"5.00","2":"5.290361","3":"0.290361265"},{"1":"4.50","2":"7.371075","3":"2.871075343"},{"1":"3.25","2":"3.907558","3":"0.657557829"},{"1":"4.00","2":"4.234866","3":"0.234865620"},{"1":"2.75","2":"2.114546","3":"-0.635453677"},{"1":"5.25","2":"3.136907","3":"-2.113092547"},{"1":"4.00","2":"4.672823","3":"0.672822589"},{"1":"4.00","2":"5.949233","3":"1.949233403"},{"1":"2.75","2":"2.403313","3":"-0.346687334"},{"1":"5.50","2":"7.070405","3":"1.570404588"},{"1":"4.50","2":"4.724807","3":"0.224807059"},{"1":"7.00","2":"9.398812","3":"2.398811691"},{"1":"6.00","2":"6.581820","3":"0.581820179"},{"1":"4.75","2":"4.270891","3":"-0.479108734"},{"1":"3.50","2":"2.489996","3":"-1.010003521"},{"1":"4.75","2":"6.111681","3":"1.361681252"},{"1":"6.00","2":"8.339752","3":"2.339752261"},{"1":"3.00","2":"3.606132","3":"0.606131501"},{"1":"5.50","2":"6.526716","3":"1.026715934"},{"1":"4.50","2":"5.035256","3":"0.535256431"},{"1":"3.25","2":"3.866240","3":"0.616240378"},{"1":"4.25","2":"7.230517","3":"2.980517061"},{"1":"3.50","2":"3.667156","3":"0.167156289"},{"1":"2.25","2":"1.310174","3":"-0.939825936"},{"1":"4.75","2":"6.347251","3":"1.597251322"},{"1":"5.00","2":"6.541694","3":"1.541693679"},{"1":"4.00","2":"5.846384","3":"1.846383663"},{"1":"2.25","2":"2.238402","3":"-0.011598422"},{"1":"3.00","2":"2.681164","3":"-0.318835641"},{"1":"5.00","2":"7.433464","3":"2.433463882"},{"1":"4.00","2":"5.198604","3":"1.198603606"},{"1":"2.50","2":"2.538843","3":"0.038842767"},{"1":"4.50","2":"5.094593","3":"0.594592818"},{"1":"2.75","2":"4.489576","3":"1.739576375"},{"1":"4.75","2":"7.761462","3":"3.011461615"},{"1":"3.75","2":"4.585051","3":"0.835050689"},{"1":"5.25","2":"4.365277","3":"-0.884722881"},{"1":"3.50","2":"5.277698","3":"1.777698010"},{"1":"4.00","2":"4.184738","3":"0.184738237"},{"1":"2.75","2":"2.982358","3":"0.232357534"},{"1":"5.50","2":"6.141235","3":"0.641235239"},{"1":"3.75","2":"1.706067","3":"-2.043932512"},{"1":"6.00","2":"7.505538","3":"1.505537655"},{"1":"4.75","2":"6.715460","3":"1.965460198"},{"1":"3.25","2":"5.296886","3":"2.046885531"},{"1":"2.50","2":"1.238477","3":"-1.261522950"},{"1":"5.00","2":"4.844318","3":"-0.155682406"},{"1":"2.25","2":"2.317574","3":"0.067573743"},{"1":"4.75","2":"7.151195","3":"2.401194928"},{"1":"5.00","2":"5.425042","3":"0.425041734"},{"1":"2.75","2":"4.562125","3":"1.812124507"},{"1":"3.00","2":"2.788964","3":"-0.211036014"},{"1":"4.25","2":"5.234731","3":"0.984731296"},{"1":"3.00","2":"5.852368","3":"2.852367507"},{"1":"6.50","2":"6.992390","3":"0.492390219"},{"1":"6.00","2":"7.227884","3":"1.227883582"},{"1":"5.50","2":"7.692990","3":"2.192990079"},{"1":"7.75","2":"10.000000","3":"2.250000000"},{"1":"4.00","2":"6.110274","3":"2.110273727"},{"1":"3.75","2":"4.786212","3":"1.036212065"},{"1":"5.00","2":"4.000628","3":"-0.999371515"},{"1":"4.00","2":"2.793378","3":"-1.206622460"},{"1":"4.00","2":"5.334913","3":"1.334913387"},{"1":"4.25","2":"3.294563","3":"-0.955437026"},{"1":"3.25","2":"3.713328","3":"0.463327669"},{"1":"3.50","2":"2.825348","3":"-0.674652209"},{"1":"5.00","2":"4.797853","3":"-0.202147474"},{"1":"4.00","2":"4.975132","3":"0.975132041"},{"1":"1.75","2":"2.645935","3":"0.895935456"},{"1":"5.00","2":"8.175462","3":"3.175462445"},{"1":"3.00","2":"1.559648","3":"-1.440351590"},{"1":"3.75","2":"3.550596","3":"-0.199403993"},{"1":"4.50","2":"6.811079","3":"2.311078993"},{"1":"3.50","2":"5.646206","3":"2.146206132"},{"1":"3.25","2":"5.277303","3":"2.027302577"},{"1":"4.00","2":"5.377978","3":"1.377978030"},{"1":"4.00","2":"3.312699","3":"-0.687300955"},{"1":"3.25","2":"2.917811","3":"-0.332189189"},{"1":"3.75","2":"4.927604","3":"1.177603749"},{"1":"3.50","2":"6.297673","3":"2.797672834"},{"1":"3.75","2":"7.792462","3":"4.042462331"},{"1":"4.50","2":"5.341631","3":"0.841630544"},{"1":"3.25","2":"1.000000","3":"-2.250000000"},{"1":"3.75","2":"3.021541","3":"-0.728458854"},{"1":"3.25","2":"5.411968","3":"2.161968320"},{"1":"4.00","2":"6.246341","3":"2.246340862"},{"1":"4.25","2":"7.437452","3":"3.187451558"},{"1":"4.00","2":"6.496936","3":"2.496935695"},{"1":"4.25","2":"4.342733","3":"0.092732720"},{"1":"4.50","2":"7.348594","3":"2.848594346"},{"1":"6.00","2":"9.329498","3":"3.329497537"},{"1":"3.50","2":"6.075901","3":"2.575901224"},{"1":"3.25","2":"5.014028","3":"1.764027927"},{"1":"4.75","2":"5.461092","3":"0.711092084"},{"1":"4.75","2":"3.302036","3":"-1.447964206"},{"1":"4.50","2":"3.127521","3":"-1.372479496"},{"1":"4.25","2":"6.325022","3":"2.075022464"},{"1":"5.25","2":"6.412055","3":"1.162055015"},{"1":"2.75","2":"3.374514","3":"0.624514121"},{"1":"3.25","2":"4.180109","3":"0.930109260"},{"1":"3.50","2":"2.688703","3":"-0.811296686"},{"1":"4.25","2":"5.622933","3":"1.372932979"},{"1":"4.75","2":"2.886261","3":"-1.863738827"},{"1":"3.75","2":"3.883550","3":"0.133549868"},{"1":"4.25","2":"6.335078","3":"2.085077801"},{"1":"5.25","2":"3.939259","3":"-1.310740909"},{"1":"3.50","2":"3.529489","3":"0.029489010"},{"1":"2.75","2":"4.016810","3":"1.266809750"},{"1":"3.00","2":"3.563214","3":"0.563213603"},{"1":"5.00","2":"6.294166","3":"1.294166480"},{"1":"2.75","2":"2.545488","3":"-0.204512434"},{"1":"4.75","2":"4.086781","3":"-0.663218894"},{"1":"4.50","2":"5.345021","3":"0.845020705"},{"1":"5.25","2":"7.555472","3":"2.305471526"},{"1":"3.00","2":"3.938185","3":"0.938184530"},{"1":"5.00","2":"5.555334","3":"0.555333936"},{"1":"4.75","2":"4.963669","3":"0.213669455"},{"1":"4.00","2":"4.681328","3":"0.681327671"},{"1":"4.50","2":"5.148700","3":"0.648699557"},{"1":"4.75","2":"4.356163","3":"-0.393837125"},{"1":"4.75","2":"8.057127","3":"3.307126959"},{"1":"4.00","2":"4.689057","3":"0.689056580"},{"1":"4.25","2":"6.209530","3":"1.959529689"},{"1":"5.75","2":"5.666832","3":"-0.083167808"},{"1":"5.50","2":"7.957438","3":"2.457437665"},{"1":"3.50","2":"4.498674","3":"0.998674269"},{"1":"4.25","2":"5.391407","3":"1.141407035"},{"1":"4.00","2":"4.295877","3":"0.295876501"},{"1":"4.75","2":"5.181682","3":"0.431681514"},{"1":"3.00","2":"1.000000","3":"-2.000000000"},{"1":"6.00","2":"8.106811","3":"2.106810919"},{"1":"3.50","2":"6.590869","3":"3.090869260"},{"1":"4.00","2":"5.563063","3":"1.563063420"},{"1":"3.25","2":"2.715957","3":"-0.534043096"},{"1":"4.00","2":"5.743442","3":"1.743441939"},{"1":"4.00","2":"4.770749","3":"0.770748916"},{"1":"3.25","2":"4.205387","3":"0.955387018"},{"1":"3.50","2":"7.102065","3":"3.602064921"},{"1":"3.75","2":"6.464528","3":"2.714527784"},{"1":"5.75","2":"6.811115","3":"1.061114583"},{"1":"3.25","2":"3.988123","3":"0.738123460"},{"1":"3.25","2":"5.255100","3":"2.005099533"},{"1":"3.75","2":"4.636838","3":"0.886837525"},{"1":"4.00","2":"5.866802","3":"1.866801995"},{"1":"3.50","2":"4.367423","3":"0.867422721"},{"1":"5.00","2":"6.842548","3":"1.842547937"},{"1":"5.00","2":"7.403783","3":"2.403783091"},{"1":"3.75","2":"3.735139","3":"-0.014860768"},{"1":"2.50","2":"2.301165","3":"-0.198835005"},{"1":"5.25","2":"4.414882","3":"-0.835117814"},{"1":"3.00","2":"5.047734","3":"2.047733928"},{"1":"4.00","2":"4.273408","3":"0.273407561"},{"1":"5.75","2":"5.505137","3":"-0.244862531"},{"1":"4.75","2":"6.233301","3":"1.483300625"},{"1":"4.00","2":"7.097395","3":"3.097395256"},{"1":"2.25","2":"1.155648","3":"-1.094351953"},{"1":"4.50","2":"5.795221","3":"1.295221469"},{"1":"2.75","2":"4.788544","3":"2.038543684"},{"1":"3.75","2":"2.013893","3":"-1.736106933"},{"1":"6.00","2":"7.090021","3":"1.090020697"},{"1":"5.00","2":"6.589034","3":"1.589033772"},{"1":"4.25","2":"4.392529","3":"0.142528892"},{"1":"3.75","2":"2.558263","3":"-1.191737240"},{"1":"4.50","2":"6.744933","3":"2.244932913"},{"1":"4.00","2":"5.917828","3":"1.917827593"},{"1":"4.50","2":"7.573499","3":"3.073499215"},{"1":"3.25","2":"1.601779","3":"-1.648221231"},{"1":"4.50","2":"7.642767","3":"3.142767355"},{"1":"3.75","2":"5.330771","3":"1.580770898"},{"1":"4.25","2":"2.956369","3":"-1.293631214"},{"1":"5.25","2":"6.878939","3":"1.628938515"},{"1":"3.25","2":"3.933378","3":"0.683377932"},{"1":"4.25","2":"5.778823","3":"1.528823197"},{"1":"5.00","2":"4.732006","3":"-0.267993757"},{"1":"5.75","2":"7.170590","3":"1.420590397"},{"1":"5.50","2":"5.589805","3":"0.089804940"},{"1":"2.75","2":"1.580373","3":"-1.169626653"},{"1":"4.75","2":"6.760043","3":"2.010042822"},{"1":"2.75","2":"1.000000","3":"-1.750000000"},{"1":"3.50","2":"5.130432","3":"1.630431937"},{"1":"3.25","2":"2.789426","3":"-0.460574345"},{"1":"5.75","2":"8.121209","3":"2.371209497"},{"1":"4.75","2":"5.361397","3":"0.611396967"},{"1":"5.50","2":"5.682970","3":"0.182970291"},{"1":"5.00","2":"5.395141","3":"0.395141066"},{"1":"5.25","2":"5.267099","3":"0.017098566"},{"1":"4.25","2":"6.474832","3":"2.224831780"},{"1":"3.75","2":"4.806693","3":"1.056692884"},{"1":"3.50","2":"4.936246","3":"1.436245844"},{"1":"4.75","2":"6.774041","3":"2.024041283"},{"1":"3.75","2":"4.355263","3":"0.605263187"},{"1":"3.50","2":"4.877094","3":"1.377094143"},{"1":"3.25","2":"5.160009","3":"1.910008693"},{"1":"3.50","2":"5.099011","3":"1.599010926"},{"1":"2.25","2":"1.000000","3":"-1.250000000"},{"1":"5.50","2":"8.044984","3":"2.544984289"},{"1":"4.25","2":"5.228126","3":"0.978125729"},{"1":"4.25","2":"5.501536","3":"1.251536140"},{"1":"4.50","2":"6.250516","3":"1.750515940"},{"1":"2.75","2":"2.574248","3":"-0.175751516"},{"1":"4.00","2":"5.718363","3":"1.718362640"},{"1":"4.00","2":"4.028561","3":"0.028561440"},{"1":"5.00","2":"5.430161","3":"0.430160530"},{"1":"4.50","2":"4.886423","3":"0.386423388"},{"1":"4.25","2":"2.691592","3":"-1.558407943"},{"1":"4.75","2":"8.685453","3":"3.935452655"},{"1":"6.25","2":"5.856230","3":"-0.393770348"},{"1":"5.75","2":"2.387690","3":"-3.362310417"},{"1":"5.75","2":"8.394679","3":"2.644679421"},{"1":"5.00","2":"5.546165","3":"0.546164794"},{"1":"4.75","2":"6.764307","3":"2.014306872"},{"1":"5.00","2":"6.180635","3":"1.180634583"},{"1":"4.00","2":"3.935280","3":"-0.064719717"},{"1":"4.00","2":"3.974702","3":"-0.025297539"},{"1":"5.25","2":"3.931147","3":"-1.318852772"},{"1":"5.75","2":"3.990470","3":"-1.759530483"},{"1":"4.50","2":"5.655197","3":"1.155196589"},{"1":"3.25","2":"1.955259","3":"-1.294740813"},{"1":"2.75","2":"2.661602","3":"-0.088397600"},{"1":"6.25","2":"7.033872","3":"0.783872408"},{"1":"3.75","2":"5.605718","3":"1.855718451"},{"1":"4.00","2":"6.804893","3":"2.804893039"},{"1":"2.25","2":"3.310555","3":"1.060555380"},{"1":"3.75","2":"5.020263","3":"1.270263352"},{"1":"4.50","2":"5.901529","3":"1.401528606"},{"1":"5.25","2":"6.638662","3":"1.388661502"},{"1":"5.25","2":"6.519300","3":"1.269300259"},{"1":"4.00","2":"4.933640","3":"0.933639683"},{"1":"3.50","2":"2.643269","3":"-0.856731423"},{"1":"5.25","2":"6.936383","3":"1.686383081"},{"1":"3.25","2":"5.683358","3":"2.433357742"},{"1":"6.50","2":"8.748777","3":"2.248776997"},{"1":"4.75","2":"2.717786","3":"-2.032213988"},{"1":"2.50","2":"4.360039","3":"1.860039204"},{"1":"3.50","2":"4.265381","3":"0.765381236"},{"1":"4.50","2":"6.393520","3":"1.893519820"},{"1":"6.50","2":"7.082540","3":"0.582539986"},{"1":"5.25","2":"6.209874","3":"0.959873880"},{"1":"4.75","2":"6.575522","3":"1.825521599"},{"1":"4.50","2":"3.000576","3":"-1.499423857"},{"1":"3.25","2":"2.496913","3":"-0.753086824"},{"1":"3.25","2":"3.201963","3":"-0.048037185"},{"1":"4.00","2":"4.806228","3":"0.806228405"},{"1":"5.00","2":"6.624262","3":"1.624261968"},{"1":"2.50","2":"1.678209","3":"-0.821791260"},{"1":"4.50","2":"2.478041","3":"-2.021958659"},{"1":"6.50","2":"7.135388","3":"0.635387830"},{"1":"3.50","2":"5.099300","3":"1.599299527"},{"1":"3.25","2":"5.930034","3":"2.680034050"},{"1":"3.75","2":"7.315202","3":"3.565201779"},{"1":"3.75","2":"4.939468","3":"1.189468290"},{"1":"4.00","2":"3.972892","3":"-0.027107951"},{"1":"4.75","2":"8.530662","3":"3.780661537"},{"1":"4.75","2":"7.378405","3":"2.628404912"},{"1":"5.00","2":"4.870092","3":"-0.129907590"},{"1":"3.50","2":"4.165499","3":"0.665499420"},{"1":"3.25","2":"2.357299","3":"-0.892700618"},{"1":"6.00","2":"5.875934","3":"-0.124066419"},{"1":"4.25","2":"6.073045","3":"1.823045219"},{"1":"3.25","2":"4.685541","3":"1.435540978"},{"1":"3.00","2":"3.065955","3":"0.065954867"},{"1":"3.75","2":"4.935506","3":"1.185505810"},{"1":"5.00","2":"2.627988","3":"-2.372011882"},{"1":"4.75","2":"7.192335","3":"2.442334519"},{"1":"3.00","2":"3.439418","3":"0.439418305"},{"1":"3.25","2":"2.573040","3":"-0.676959546"},{"1":"3.25","2":"3.666294","3":"0.416294459"},{"1":"5.00","2":"5.871287","3":"0.871286566"},{"1":"4.75","2":"4.804418","3":"0.054417669"},{"1":"5.00","2":"6.517382","3":"1.517382089"},{"1":"6.00","2":"7.323796","3":"1.323795791"},{"1":"3.50","2":"4.417015","3":"0.917014906"},{"1":"4.25","2":"3.411787","3":"-0.838213211"},{"1":"5.75","2":"7.253936","3":"1.503936151"},{"1":"3.25","2":"3.072896","3":"-0.177103725"},{"1":"2.25","2":"2.513720","3":"0.263720454"},{"1":"5.25","2":"6.873633","3":"1.623632577"},{"1":"4.75","2":"5.859310","3":"1.109310330"},{"1":"3.50","2":"3.833097","3":"0.333097410"},{"1":"4.00","2":"5.407823","3":"1.407822587"},{"1":"6.00","2":"5.310486","3":"-0.689513816"},{"1":"4.25","2":"5.603346","3":"1.353345735"},{"1":"2.00","2":"1.839702","3":"-0.160297859"},{"1":"3.00","2":"5.188950","3":"2.188950057"},{"1":"5.00","2":"9.433706","3":"4.433706479"},{"1":"4.75","2":"7.069216","3":"2.319216463"},{"1":"5.25","2":"7.670233","3":"2.420232729"},{"1":"3.25","2":"5.310485","3":"2.060484751"},{"1":"4.25","2":"4.747775","3":"0.497774746"},{"1":"4.00","2":"3.530102","3":"-0.469897896"},{"1":"3.00","2":"4.090011","3":"1.090010903"},{"1":"4.25","2":"5.448243","3":"1.198243256"},{"1":"4.50","2":"5.289513","3":"0.789512738"},{"1":"3.75","2":"2.836264","3":"-0.913735807"},{"1":"3.50","2":"3.187367","3":"-0.312632861"},{"1":"5.50","2":"4.804216","3":"-0.695783784"},{"1":"5.00","2":"5.240247","3":"0.240247036"},{"1":"4.75","2":"6.127947","3":"1.377946958"},{"1":"5.00","2":"6.033116","3":"1.033116439"},{"1":"4.75","2":"4.840261","3":"0.090260633"},{"1":"4.50","2":"6.808615","3":"2.308614954"},{"1":"5.25","2":"7.439035","3":"2.189035461"},{"1":"4.75","2":"7.469343","3":"2.719342696"},{"1":"3.75","2":"3.090023","3":"-0.659976797"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="mutate-existing-variables" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-existing-variables">Mutate existing variables</h2>
+<p>To mutate an existing variable, you can simply overwrite the column with the same name. For example, let’s say that we want to standardize the <code>trust_change</code> variable that we just made. We can standardize a variable with the <code>scale</code> function, so we can use that inside of <code>mutate</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">trust_change =</span> <span class="fu">scale</span>(trust_change))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now the <code>trust_change</code> variable is standardized, which means that it has a mean of 0 and a standard deviation of 1. A nice way to get a quick overview of the distribution of a single variable is to plot a histogram.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d<span class="sc">$</span>trust_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="mutate_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="recode" class="level1">
+<h1>Recoding variables</h1>
+<p>Recoding variables means changing the values of a variable based on some condition. This is a common operation in data management, because often you want to change the values of a variable to make them more interpretable, correct errors, or prepare the data for analysis. To recode variables in R, you can use the <code>mutate</code> function in combination with the <code>case_match</code> and <code>case_when</code> functions.</p>
+<section id="recode-with-case_match" class="level2">
+<h2 class="anchored" data-anchor-id="recode-with-case_match">Recode with <code>case_match</code></h2>
+<p>The <code>case_match</code> function is a simple way to recode specific values into new values. For example, in our practice data we have a column with the experimental groups, which are <code>control</code>, <code>positive</code>, and <code>negative</code>. Let’s say we want to clarify that <code>positive</code> means <code>positive_movie</code>, and <code>negative</code> means <code>negative_movie</code>. We could then use <code>case_match</code> to change these values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">experiment_group =</span> <span class="fu">case_match</span>(experiment_group,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"positive"</span> <span class="sc">~</span> <span class="st">"positive_movie"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"negative"</span> <span class="sc">~</span> <span class="st">"negative_movie"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">.default =</span> experiment_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here we say: overwrite the <code>experiment_group</code> column with output of the <code>case_match</code> function. Inside the <code>case_match</code> function, we specify three things:</p>
+<ol type="1">
+<li>The column we want to recode (<code>experiment_group</code>).</li>
+<li>The conditions for recoding the values. We have two conditions:
+<ol type="1">
+<li>If value is <code>"positive"</code>, recode into <code>"positive_movie"</code>.</li>
+<li>If value is <code>"negative"</code>, recode into <code>"negative_movie"</code>.</li>
+</ol></li>
+<li>We specify a <code>.default</code> value for values that are not matched in the conditions. Here we say that in that case we want to use the current value of the <code>experiment_group</code> column.</li>
+</ol>
+<p>If you check the unique values of the <code>experiment_group</code> column, you will see that <code>positive</code> and <code>negative</code> have been changed to <code>positive_movie</code> and <code>negative_movie</code>, and that <code>control</code> remains the same.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d<span class="sc">$</span>experiment_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "positive_movie" "negative_movie" "control"       </code></pre>
+</div>
+</div>
+</section>
+<section id="more-flexible-recoding-with-case_when" class="level2">
+<h2 class="anchored" data-anchor-id="more-flexible-recoding-with-case_when">More flexible recoding with <code>case_when</code></h2>
+<p>The <code>case_match</code> function is great if you need to recode many values, but sometimes you need more flexibility. For example, if we want to recode the <code>age</code> variable into categories (e.g., <code>&lt;= 20</code>, <code>20-30</code>), it would be really tiresome to recode every individual age value. With the <code>case_when</code> function, we can specify the conditions using <strong>logical expressions</strong>. Each condition is evaluated in order, and the first one that is <code>TRUE</code> is used.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">age_category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"&lt;= 20"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"20-30"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">40</span> <span class="sc">~</span> <span class="st">"30-40"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">"40-50"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"50-60"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="st">"&gt;= 60"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d<span class="sc">$</span>age_category)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+&lt;= 20 &gt;= 60 20-30 30-40 40-50 50-60 
+   12    77   124   139   129   119 </code></pre>
+</div>
+</div>
+</section>
+<section id="binary-cases-with-if_else" class="level2">
+<h2 class="anchored" data-anchor-id="binary-cases-with-if_else">Binary cases with <code>if_else</code></h2>
+<p>If you only have two categories, you can use the <code>if_else</code> function. You could technically also use <code>case_when</code> for this, but <code>if_else</code> is more concise and easier to read. The syntax for <code>if_else</code> is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">if_else</span>(condition, value_if_true, value_if_false)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A common use case is that sometimes you want to perform an operation only on a subset of the data. For example, in our data there are a few participants that accidentally entered their birthyear instead of their age. To correct this, we can use <code>if_else</code> to set the age to <code>2024 - birthyear</code>, but only if the number the participants entered is above 1000 (which is only the case if it’s a birthyear).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;</span> <span class="dv">1000</span>, <span class="dv">2024</span> <span class="sc">-</span> age, age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So this reads: if the age is above 1000, return <code>2024 - age</code>, otherwise return the current age.</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../data-management/filter-and-arrange.html" class="pagination-link" aria-label="Filter and Arrange">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Filter and Arrange</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../data-management/pipes.html" class="pagination-link" aria-label="Using the pipe syntax">
+        <span class="nav-page-text">Using the pipe syntax</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

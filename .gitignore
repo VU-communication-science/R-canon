@@ -10,3 +10,4 @@ _site/
 
 /renv/
 /renv.d/
+/.quarto/
