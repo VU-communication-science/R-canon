@@ -29,7 +29,7 @@ Specifically, regression analysis allows us to test hypotheses of the sort:
 * Older people have more trust in journalists
 * People on the political left have more trust in journalists than people on the political right
 
-Individually, you could test these hypotheses with a correlation test and a t-test, respectively.
+You could test these hypotheses separately with a correlation test and a t-test, respectively.
 With regression analysis, you can test these hypotheses in the same model, while also **controlling** for the relations between the independent variables.
 This allows us to deal with **confounding**, which can be critical when working with observational data.
 For instance, if younger people are more likely to be on the political left, then in order to test the effect of political orientation on trust, we need to somehow control for age.
