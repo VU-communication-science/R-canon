@@ -2,7 +2,7 @@
 
 ## Book link
 
-[https://quarto.org/docs/publishing/github-pages.html](https://quarto.org/docs/publishing/github-pages.html)
+[https://vu-communication-science.github.io/R-canon/getting-started/](https://vu-communication-science.github.io/R-canon/getting-started/)
 
 
 ## Install Quarto and packages
