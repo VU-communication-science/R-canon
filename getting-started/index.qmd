@@ -3,7 +3,7 @@ title: Getting Started
 order: 1
 ---
 
-In the VU Communication Science track, you'll be using the **R statistical software** as a key tool for learning quantitative methods and data analysis techniques. 
+In the VU Communication Science track, you'll be using the **R statistical software** as a tool for learning quantitative methods and data analysis techniques. 
 R is a powerful, open-source programming language that is widely used in academia and industry for statistical analysis, visualization, text analysis, and more. 
 
 Through our courses, you'll get hands-on experience with R, allowing you to analyze real-world data, perform statistical tests, create insightful visualizations, and develop reproducible research workflows. These skills will be invaluable as you move forward in your studies and future career, where data-driven decision-making plays a crucial role.
