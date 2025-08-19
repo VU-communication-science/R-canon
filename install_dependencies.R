@@ -10,5 +10,8 @@ if (!require('yaml', quietly = T)) install.packages('yaml')
 deps <- renv::dependencies()
 udeps <- unique(deps$Package)
 
+udeps <- udeps[!udeps %in% c('renv','yaml')]
+
 ## Install
 install.packages(udeps)
+
