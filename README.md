@@ -2,7 +2,7 @@
 
 ## Book link
 
-[https://vu-communication-science.github.io/R-canon/getting-started/](https://vu-communication-science.github.io/R-canon/getting-started/)
+[dataliteracy.cc](https://dataliteracy.cc)
 
 
 ## Setting things up
