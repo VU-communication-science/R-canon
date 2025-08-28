@@ -37,4 +37,4 @@ execute:
   freeze: auto
 
 resources:
-  - "data/"
+  - "data/*"
