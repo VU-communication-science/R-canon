@@ -9,7 +9,7 @@ In this tutorial we use the `tidyverse` package and the simulated [practice data
 
 ```{r, message=FALSE}
 library(tidyverse)
-d <- read_csv("https://tinyurl.com/R-practice-data")
+d <- read_csv("https://dataliteracy.cc/data/practice_data.csv")
 ```
 :::
 

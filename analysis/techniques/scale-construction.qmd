@@ -55,7 +55,7 @@ First though, let's load our data and select the columns that we're interested i
 
 ```{r, message=F}
 library(tidyverse)
-d = read_csv('https://tinyurl.com/R-practice-data')
+d = read_csv('https://dataliteracy.cc/data/practice_data.csv')
 ```
 
 In the practice data we have two scales: `trust_t1` and `trust_t2`, with each having five items (`trust_t1_item1` to `trust_t1_item5` and `trust_t2_item1` to `trust_t2_item5`).

@@ -2,6 +2,8 @@
 title: "Using the pipe syntax"
 subtitle: "How to make your code more readable"
 order: 6
+editor_options: 
+  chunk_output_type: console
 ---
 
 
@@ -38,7 +40,7 @@ For example, the following code reads a csv file, selects columns, filters rows 
 ```{r, message=F}
 library(tidyverse)
 
-practice_data = read_csv("https://tinyurl.com/R-practice-data")
+practice_data = read_csv("https://dataliteracy.cc/data/practice_data.csv")
 practice_data = select(practice_data, age, experiment_group, trust_t1)
 practice_data = filter(practice_data, age >= 18)
 practice_data = arrange(practice_data, trust_t1)
@@ -47,7 +49,7 @@ practice_data = arrange(practice_data, trust_t1)
 With pipes, we can write the same code in a more readable way:
 
 ```{r, message=F}
-practice_data = read_csv("https://tinyurl.com/R-practice-data") %>%
+practice_data = read_csv("https://dataliteracy.cc/data/practice_data.csv") %>%
   select(age, experiment_group, trust_t1) %>%
   filter(age >= 18) %>%
   arrange(trust_t1)

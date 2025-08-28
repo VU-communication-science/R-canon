@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-ce11b77b0668f5b274fe8226e6d567e1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -335,6 +335,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../analysis/techniques/scale-construction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scale construction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../analysis/techniques/factor-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Factor Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -681,8 +687,8 @@ Testing the significance of the indirect effect using PROCESS
 <pre><code>
 ****************** PART 1. Regression Model Summary ******************
 
-PROCESS Model Code : 4 (Hayes, 2018; www.guilford.com/p/hayes3)
-PROCESS Model Type : Simple Mediation
+PROCESS Model ID : 4
+Model Type : Simple Mediation
 -    Outcome (Y) : Y
 -  Predictor (X) : X
 -  Mediators (M) : M
@@ -702,7 +708,7 @@ CAUTION:
   Fixed effect (coef.) of a predictor involved in an interaction
   denotes its "simple effect/slope" at the other predictor = 0.
   Only when all predictors in an interaction are mean-centered
-  can the fixed effect denote the "main effect"!
+  can the fixed effect be interpreted as "main effect"!
   
 Model Summary
 
@@ -737,9 +743,9 @@ Indirect Path: "X" (X) ==&gt; "M" (M) ==&gt; "Y" (Y)
 ────────────────────────────────────────────────────────────
                Effect    S.E.     z     p      [Boot 95% CI]
 ────────────────────────────────────────────────────────────
-Indirect (ab)   0.145 (0.048) 3.044  .002 **  [0.058, 0.237]
-Direct (c')     0.919 (0.140) 6.588 &lt;.001 *** [0.690, 1.212]
-Total (c)       1.065 (0.138) 7.699 &lt;.001 *** [0.847, 1.365]
+Indirect (ab)   0.145 (0.042) 3.427 &lt;.001 *** [0.077, 0.251]
+Direct (c')     0.919 (0.134) 6.856 &lt;.001 *** [0.705, 1.179]
+Total (c)       1.065 (0.133) 8.031 &lt;.001 *** [0.815, 1.316]
 ────────────────────────────────────────────────────────────
 Percentile Bootstrap Confidence Interval
 (SE and CI are estimated based on 100 Bootstrap samples.)
@@ -1049,8 +1055,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1161,7 +1165,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

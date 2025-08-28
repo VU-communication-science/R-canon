@@ -259,7 +259,7 @@ We'll also be using the `sjPlot` package, which can create nice tables and plots
 library(tidyverse)
 library(sjPlot)
 
-d <- read_csv("https://tinyurl.com/R-practice-data") |>
+d <- read_csv("https://dataliteracy.cc/data/practice_data.csv") |>
         mutate(age = if_else(age > 100, 2024 - age, age)) |>
         select(age, political_orientation, political_interest, trust_t1,
                news_consumption = `news consumption`)

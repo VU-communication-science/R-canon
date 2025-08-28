@@ -44,7 +44,7 @@ In this example we show a pipeline that performs the following steps:
 ```{r}
 library(tidyverse)
 
-d <- read_csv("https://tinyurl.com/R-practice-data") |>
+d <- read_csv("https://dataliteracy.cc/data/practice_data.csv") |>
   select(age, np_subscription, news_consumption = `news consumption`) |>
   mutate(age = ifelse(age > 200, 2024 - age, age)) |>
   filter(!is.na(age) & age >= 18)
