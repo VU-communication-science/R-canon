@@ -35,3 +35,6 @@ format:
 
 execute:
   freeze: auto
+
+resources:
+  - "data/"
