@@ -15,7 +15,7 @@ The syntax for the pipe is `|>`, and it is used like this:
 argument1 |> function(argument2)
 ```
 
-The first argument of a funtion can be *piped into it*. 
+The first argument of a funtion can also be *piped into it*. 
 Between the parentheses of the function we then only need to specify any additional arguments (if needed).
 Often the first argument of a function is the input data, which allows you to chain functions together.
 

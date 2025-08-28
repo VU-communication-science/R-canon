@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ce11b77b0668f5b274fe8226e6d567e1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -332,6 +332,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../analysis/techniques/factor-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Factor Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../analysis/techniques/controlling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Controlling for confounders</span></a>
   </div>
@@ -456,10 +462,10 @@ div.csl-indent {
 <section id="practice-data" class="level1">
 <h1>Practice data</h1>
 <p>Throughout this chapter, and further throughout this book, we’ll use a practice data set that contains <strong>simulated data</strong>. The data looks like real data used in communication science, but it’s entirely made up.</p>
-<p>The benefit of using simulated data is that it’s <strong>tailored to give you the best learning experience</strong>. We can the re-use the same data across the learning material, so that you can focus on learning the concepts, rather than spending energy on getting acquinted with new data all the time. Just do keep in mind that <strong>this data is not real</strong>, and should not be used for any real-world analysis.</p>
+<p>The benefit of using simulated data is that it’s <strong>tailored to give you the best learning experience</strong>. We can the re-use the same data across the learning material, so that you can focus on learning the concepts, rather than spending energy on getting acquainted with new data all the time. Just do keep in mind that <strong>this data is not real</strong>, and should not be used for any real-world analysis.</p>
 <section id="description-of-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="description-of-the-data">Description of the data</h2>
-<p>The practice data describes a fictional study about how entertainment media might influence people’s attitudes. In an experiment, <strong>600</strong> participants were shown hollywood movies with a <strong>positive</strong>, <strong>negative</strong> or <strong>neutral</strong> portrayal of journalists, and we measure whether this affects the participants’ trust in journalists before (<code>trust_t1</code>) and after (<code>trust_t2</code>) the experiment.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The practice data describes a fictional study about how entertainment media might influence people’s attitudes. In an experiment, <strong>600</strong> participants were shown Hollywood movies with a <strong>positive</strong>, <strong>negative</strong> or <strong>neutral</strong> portrayal of journalists, and we measure whether this affects the participants’ trust in journalists before (<code>trust_t1</code>) and after (<code>trust_t2</code>) the experiment.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>There were three types of movies (<code>experiment_group</code>): a control group that watched a <strong>neutral movie</strong>, a group that watched a movie with a <strong>positive portrayal</strong> of journalism, and a group that watched a movie with a <strong>negative portrayal</strong> of journalism. Participants were <strong>randomly assigned</strong> to one of these groups, with <strong>balanced group sizes</strong> (i.e., 200 participants per group). We also collected some demographic information (<code>age</code>), asked whether they have a newspaper subscription (<code>np_subscription</code>), and how much hours of news they consume per week (<code>news consumption</code>).</p>
 <p>Since trust is a complex construct, we measured it with <strong>five items</strong> that participants rated on a scale from 1 to 10. These items are based on the questions proposed by <span class="citation" data-cites="stromback20">Strömbäck et al. (<a href="#ref-stromback20" role="doc-biblioref">2020</a>)</span>, but with some modifications. For example, we <strong>inversed</strong> the scale for one of the items, so that higher values indicate lower trust. The items are:</p>
 <ol type="1">
@@ -655,8 +661,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -767,7 +771,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

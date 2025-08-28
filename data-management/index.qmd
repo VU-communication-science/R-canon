@@ -25,13 +25,13 @@ Throughout this chapter, and further throughout this book, we'll use a practice 
 The data looks like real data used in communication science, but it's entirely made up. 
 
 The benefit of using simulated data is that it's **tailored to give you the best learning experience**. 
-We can the re-use the same data across the learning material, so that you can focus on learning the concepts, rather than spending energy on getting acquinted with new data all the time.
+We can the re-use the same data across the learning material, so that you can focus on learning the concepts, rather than spending energy on getting acquainted with new data all the time.
 Just do keep in mind that **this data is not real**, and should not be used for any real-world analysis.
 
 ## Description of the data
 
 The practice data describes a fictional study about how entertainment media might influence people's attitudes.
-In an experiment, **600** participants were shown hollywood movies with a **positive**, **negative** or **neutral** portrayal of journalists, and we measure whether this affects the participants' trust in journalists before (`trust_t1`) and after (`trust_t2`) the experiment.[^1]
+In an experiment, **600** participants were shown Hollywood movies with a **positive**, **negative** or **neutral** portrayal of journalists, and we measure whether this affects the participants' trust in journalists before (`trust_t1`) and after (`trust_t2`) the experiment.[^1]
 
 [^1]: The `t1` in `trust_t1` stands for "time 1". This is a common notation in studies where you measure the same construct at different points in time. Here `t1` and `t2` refer to the time before and after the experiment, respectively.
 

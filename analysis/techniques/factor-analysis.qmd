@@ -46,7 +46,7 @@ The answer to that question will then guide us further in to process of scale co
 
 ```{r, echo=F}
 library(tidyverse) 
-d <- read_csv("../../data/polcomm_data.csv")
+d <- read_csv("https://dataliteracy.cc/data/polcomm_data.csv")
 ```
 
 We have loaded the dataset `polcomm_data.csv` - which is a simulated dataset (N = 200) containing various variables on media use, democracy and related topics - and names it `d`. 

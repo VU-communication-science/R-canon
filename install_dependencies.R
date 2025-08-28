@@ -8,6 +8,7 @@ if (!length(find.package('yaml', quiet = T))) install.packages('yaml')
 ## Get the unique package names
 deps <- renv::dependencies()
 udeps <- unique(deps$Package)
+udeps <- udeps[!udeps %in% c("renv", "yaml")]
 
 cat("Book currently uses the following packages:\n", 
     paste(paste('-', udeps), collapse='\n'))
@@ -16,3 +17,4 @@ cat("Book currently uses the following packages:\n",
 install.packages(udeps)
 
 
+  
