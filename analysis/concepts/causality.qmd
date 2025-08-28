@@ -159,7 +159,7 @@ Given that many communication science theories cannot be tested with experiments
 
 The trick behind statistically controlling for confounders lies in **multivariate analysis** (i.e. analyzing more than two variables at the same time).
 If we are worried that a correlation between a **dependent variable** and **independent variable** is due to a third variable, we can add this **confounding variable** to the analysis.
-Using techniques like [multiple regression](../tests/multiple-regression_WIP.qmd), we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant.
+Using techniques like [multiple regression](../tests/linear-regression.qmd), we can then measure the effect of the independent variable on the dependent variable while holding the confounding variable constant.
 We also call this **controlling for** the confounder.
 
 The main limitation of this approach is that we can only control for the variables that we have measured.

@@ -42,7 +42,7 @@ The most common ones are:
 
 <!-- # How does it work
 
-Underneath the hood, ANOVA is a linear model just like [regression analysis](../tests/regression.qmd).
+Underneath the hood, ANOVA is a linear model just like [regression analysis](../tests/linear-regression.qmd).
 If you have not yet read the regression tutorial, you can skip this section, and focus first on how to use ANOVA in practice.
 
 You can think of ANOVA as a special case of regression where the independent variables are categorical.

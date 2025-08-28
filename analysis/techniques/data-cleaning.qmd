@@ -138,7 +138,7 @@ This isn't too bad, but we do need to be transparent about how we deal with thes
 # Cleaning up our data
 
 Now that we've identified some issues in our data, we need to clean it up.
-For this we can use the techniques you learned in the [Data Management](../data-management/index.qmd) chapter.
+For this we can use the techniques you learned in the `Data Management` chapter.
 
 ## Selecting columns
 
