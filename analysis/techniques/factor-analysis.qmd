@@ -7,7 +7,7 @@ order: 3
 
 ## Why Factor Analysis?
 
-Many concepts in the social sciences are too complex to be captured with a single question. Think of **academic motivation**, **media literacy**, or even **happiness**. Each of these is a **latent construct**: something that cannot be measured directly, but only through multiple related items. In surveys you won’t encounter a direct statement like: "My academic motivation is high" with a Likert scale. Instead, you might see a range of related statements such as "I look forward to studying," "I keep working even when assignments are difficult," or "I set goals for my learning." Taken together, these items give us a better picture of the underlying latent construct. But what if these items reflect not one, but *multiple* underlying constructs?
+Many concepts in the social sciences are too complex to be captured with a single question. Think of *academic motivation*, *media literacy*, or even *happiness*. Each of these is a **latent construct**: something that cannot be measured directly, but only through multiple related items. In surveys you won’t encounter a direct statement like: "My academic motivation is high" with a Likert scale. Instead, you might see a range of related statements such as "I look forward to studying," "I keep working even when assignments are difficult," or "I set goals for my learning." Taken together, these items give us a better picture of the underlying latent construct. But what if these items reflect not one, but *multiple* underlying constructs?
 
 Exploratory Factor Analysis (EFA) is a statistical technique that helps us figure out **how many underlying dimensions** (factors) exist in our data and **which items belong together**. In other words, it helps us see whether our items really measure one construct, or whether multiple related constructs are at play.
 
@@ -24,9 +24,9 @@ Imagine a researcher wants to capture respondents’ media literacy. Instead of 
 9.  I consider the intention behind a media message.
 10. I discuss political content I see online with others.
 
-Take a moment to read through these ten statements yourself: do you spot any hidden patterns? Do you believe that they all reflect one construct of media literacy, or can you see them group into multiple factors, based on topics they tap into? This is exactly what EFA does, but based on math, rather then substantive interpretation: it looks at the patterns of correlations between items and groups them into meaningful clusters, that you will be able to interpret!
+Take a moment to read through these ten statements yourself: do you spot any hidden patterns? Do you believe that they all reflect one construct of media literacy, or can you see them group into multiple factors (possibly different *kinds* of media literacy), based on the topics they tap into? This is exactly what EFA does, but based on math, rather then substantive interpretation: it looks at the patterns of correlations between items and groups them into meaningful clusters, that you will be able to interpret!
 
-[You might hear about *Principal Component Analysis (PCA)*. While PCA also reduces data into fewer dimensions, it has a different goal (data reduction rather than uncovering latent constructs). In this course, we focus only on **Factor Analysis**.]{style="font-size:70%"}
+[You might have heard about or later on encounter*Principal Component Analysis (PCA)*. While PCA also reduces data into fewer dimensions, it has a different goal (data reduction rather than uncovering latent constructs). In this course, we focus only on **factor analysis**.]{style="font-size:70%"}
 
 ### Principal Axis Factoring
 
@@ -44,32 +44,28 @@ The answer to that question will then guide us further in to process of scale co
 
 ## Step 1: Inspect your data
 
-```{r, echo=F}
-library(tidyverse) 
-d <- read_csv("https://dataliteracy.cc/data/polcomm_data.csv")
-```
+We load the dataset `polcomm_data.csv` - which is a simulated dataset (N = 200) containing various variables on media use, democracy and related topics - and name it `d`.
 
-We have loaded the dataset `polcomm_data.csv` - which is a simulated dataset (N = 200) containing various variables on media use, democracy and related topics - and names it `d`. 
+Before any analysis, it’s good practice to run descriptive statistics. This shows whether the items are coded consistently, whether all answer categories were used, and if there are missing values.
 
-Before any analysis, it’s good practice to run descriptive statistics. This shows whether the items are coded consistently, whether all answer categories were used, and if there are missing values. 
-
-```{r}
+```{r, message=FALSE}
 library(tidyverse) 
 library(summarytools)
 
-# Look at the Media Literacy items
+d <- read_csv("https://dataliteracy.cc/data/polcomm_data.csv")
 
+# Inspect Media Literacy items
 d |> select(ml_1:ml_10) |> descr()
 
 ```
 
-The output shows the means, standard deviations, and ranges. In our case, all items are measured on a 1–5 Likert scale, with no missing values. The averages hover around 3–4, which makes sense for survey data.
+The output shows the means, standard deviations, and ranges. In our case, all items are measured on a 1–5 Likert scale, with no missing values. The averages hover mostly around 3–4, which makes sense for survey data.
 
 # Step 2: Check correlations
 
-Factor analysis is based on **correlations** between items. If items do not correlate, they probably don’t measure the same construct. And if an item shares no correlations with other items, it is probably redundant. On the other hand, if correlations are *too high* (above 0.8), it could also indicate redundancy.
+Factor analysis is based on **correlations** between items. If items do not correlate, they probably don’t measure the same construct. And if an item shares no correlations at all, it has nothing to do with the other items, so does not fit in the measure of the construct. On the other hand, if correlations are *too high* (above 0.8), it could indicate redundancy.
 
-```{r}
+```{r, message = F}
 library(sjPlot)
 
 d |>
@@ -77,7 +73,9 @@ d |>
   tab_corr(p.numeric = TRUE)
 ```
 
-Here we see a healthy mix: many correlations fall between 0.3 and 0.7, which is a sign that these items are related but not identical. At the same time, the output also shows a few very low correlations (close to 0), meaning that some items barely share variance with each other. This is not necessarily a problem, as long as each item correlates with at least some others. We also spot one or two correlations that are quite high (above 0.8), which could indicate that certain items are almost redundant — they may be tapping into exactly the same skill. Together, this pattern suggests that the items can form meaningful clusters, while also raising questions about whether some pairs overlap too much or too little.
+Here we see a healthy mix: many correlations fall between 0.3 and 0.7, which is a sign that these items are related but not identical. At the same time, the output also shows a few very low correlations (close to 0), meaning that some items barely share variance with each other. This is not necessarily a problem, as long as each item correlates with at least some others. In fact: it may point to different dimensions of the concept, which is why we perform factor analysis after all!
+
+We also spot one or two correlations that are quite high (above 0.8), which could indicate that certain items are almost redundant — they may be tapping into exactly the same skill. Together, this pattern suggests that the items can form meaningful clusters, while also raising questions about whether some pairs overlap too much or too little.
 
 # Step 3: How many factors?
 
@@ -85,15 +83,15 @@ Before the actual factor analysis, that will give us information about the conte
 
 For this, we use two common criteria:
 
--   **Scree plot / Cattell criterion**: look at a plot of eigenvalues in descending order. The line will usually flatten out at some point. The "elbow" or kink indicates where meaningful factors stop and noise begins. Following the rule of thumb, you take the kink point minus one as the number of factors to extract.
--   **Kaiser criterion**: check the eigenvalues themselves. Each eigenvalue reflects how much variance a factor explains. According to Kaiser, only factors with an eigenvalue greater than 1 (meaning they explain at least as much variance as a single item) should be kept. Factors below 1 are considered too weak to retain.
+-   **Scree plot / Cattell criterion**: look at a plot of eigenvalues in descending order. The blue line will usually flatten out at some point. The "elbow" or kink indicates where meaningful factors stop and noise begins. Following the rule of thumb, you take the kink point minus one as the number of factors to extract.
+-   **Kaiser criterion**: check the eigenvalues themselves. Each eigenvalue reflects how much variance a factor explains. According to Kaiser, only factors with an eigenvalue greater than 1 (meaning they explain at least as much variance as a single item) should be kept. Factors below 1 are considered too weak to retain. In the output we look at the `eigen values of components`.
 
-```{r}
+```{r, message=F}
 library(psych)
 
 d |>
   select(ml_1:ml_10) |>
-  fa.parallel(fa = "fa", fm = "pa")
+  fa.parallel(fa = "fa", fm = "pa") |> print()
 ```
 
 Both the scree plot and the eigenvalues suggest that a **three-factor solution** is appropriate. If the criteria yield two different outcomes, we prioritize the scree plot. At the same time, remember there is also a third - less formal - criterion: **interpretability**. The mathematical rules give us a suggestion for the number of factors, but as researchers we need to check whether the resulting factors make substantive sense. If we cannot meaningfully interpret the clusters of items, the factor solution is not useful, even if the numbers suggest it is. This highlights that factor analysis is both a statistical and a substantive exercise.
@@ -102,19 +100,19 @@ Both the scree plot and the eigenvalues suggest that a **three-factor solution**
 
 Now we can actually run the factor analysis. We specify:
 
--   **`nfactors = 3`** → we want three factors.
+-   **`nfactors = 3`** → we want R to extract three factors
 
--   **`rotate = "oblimin"`** → an oblique rotation, allowing factors to correlate (realistic in social sciences).
+-   **`rotate = "oblimin"`** → an oblique rotation, allowing factors to correlate (realistic in social sciences)
 
     #### **Rotation**
 
-    Visualize a multi-dimensional space, in which each factor represents an axis (e.g. X or Y-axis). Each item is located somewhere in this space, based on their loadings on the respective factors. Rotation changes how the factors are aligned, which makes the loadings easier to interpret. Without rotation, items might load moderately on multiple factors, making it hard to see clear clusters. By rotating, we maximize loadings on one factor while minimizing them on others.
+    For reasons of interpretability (i.e., to appoint substantive meaning to the factors), factors are (often) **rotated**. Visualize a multi-dimensional space, in which each factor represents an axis (e.g. X or Y-axis). Each item is located somewhere in this space, based on their loadings on the respective factors. Rotation changes how the factors are aligned, which makes the loadings easier to interpret. Without rotation, items might load moderately on multiple factors, making it hard to see clear clusters. By rotating, we maximize loadings on one factor while minimizing them on others.
 
     Broadly, there are two approaches to this: **orthogonal rotation** and **oblique rotation**. Orthogonal rotation (e.g. varimax) keeps the factors uncorrelated, with axes at a 90° angle. Oblique rotation (e.g. oblimin), which we use here, allows factors to correlate with each other. In social sciences, this is usually the more realistic choice, because underlying constructs often overlap to some extent.
 
 -   **`fm = "pa"`** → principal axis factoring (PAF), the method of factor analysis that is very common in EFA.
 
-```{r}
+```{r, message = F}
 fa_result <- d |>
   select(ml_1:ml_10) |>
   fa(nfactors = 3, rotate = "oblimin", fm = "pa")
@@ -122,9 +120,11 @@ fa_result <- d |>
 print(fa_result)
 ```
 
-The output includes a **pattern matrix**, which shows how strongly each item loads onto each factor. In Principal Axis Factoring, an item ‘loading’ strongly on a factor means that the variance in that item can be largely explained by that underlying factor. The loading is essentially a correlation: a high positive loading indicates that when the factor increases, the likelihood of agreeing with that item also increases. In other words, the factor is the hidden thread, and the loading shows how tightly the item is tied to it.
+The output includes a **pattern matrix** (the first table you encounter titled `Standardized loadings`), which shows how strongly each item loads onto each factor. In Principal Axis Factoring, an item ‘loading’ strongly on a factor means that the variance in that item can be largely explained by that underlying factor. The loading is essentially a correlation: a high positive loading indicates that when the factor increases, the likelihood of agreeing with that item also increases. In other words, the factor is the hidden thread, and the loading shows how tightly the item is tied to it. increases,
 
-By default, the pattern matrix includes even very small loadings, which makes interpretation messy. We usually keep only loadings above 0.3. This makes it easier to see clusters of items:
+Note, that when factors are *correlated* (when using oblimin rotation), loadings represents the relationship of an item with the factor, *controlled for* the other factors.
+
+By default, the pattern matrix includes even very small loadings. However, interpretation becomes easier when we would only show the higher factor loadings. We usually keep only loadings above 0.3. This makes it easier to see clusters of items:
 
 ```{r}
 fa_result$loadings |> print(cutoff = 0.3)
@@ -150,17 +150,17 @@ It’s up to the researcher to give meaning to the factors. Take another look at
 
 This is how you might have interpreted the factors:
 
--   **Factor 1** (`ml_1`, `ml_4`, `ml_7`): **Analytical media literacy** includes items about reflecting critically on content (distinguishing fact/opinion, spotting one-sidedness, reflecting on framing).
--   **Factor 2** (`ml_3`, `ml_5`, `ml_8`, `ml_9`): **Source literacy** includes items about judging source credibility (who published it, intention, date, credibility).
--   **Factor 3** (`ml_2`, `ml_6`, `ml_10`): **Active engagement** (as a part of media literacy) includes items about sharing, seeking diverse views, and discussing content online.
+-   *Factor 1* (`ml_1`, `ml_4`, `ml_7`): **Analytical media literacy** includes items about reflecting critically on content (distinguishing fact/opinion, spotting one-sidedness, reflecting on framing).
+-   *Factor 2* (`ml_3`, `ml_5`, `ml_8`, `ml_9`): **Source literacy** includes items about judging source credibility (who published it, intention, date, credibility).
+-   *Factor 3* (`ml_2`, `ml_6`, `ml_10`): **Active engagement** (as a part of media literacy) includes items about sharing, seeking diverse views, and discussing content online.
 
-So, instead of one single Media Literacy scale, our analysis suggests there should be **three distinct but related dimensions**.
+So, instead of one single Media Literacy scale, our analysis suggests there should be **three distinct but related dimensions** that each have a meaningful interpretation.
 
 # Step 6: Reliability of each factor
 
 Once we have identified factors, we need to check whether the items in each factor form a reliable scale, in other words: whether the scales are internally consistent. This is where **Cronbach’s alpha** comes in.
 
-We won’t go into detail here, since we have a full tutorial on [Scale Construction]{.underline}, but here is how you would do it for the scale arising from Factor 1:
+We won’t go into detail here, since we have a full chapter on [Scale construction](https://dataliteracy.cc/analysis/techniques/scale-construction.html), but here is how you would do it for the scale arising from Factor 1:
 
 ```{r}
 # Example for the Analytical factor
@@ -173,7 +173,7 @@ The output will show that all three scales (Analytical, Source, Active) have hig
 
 # Step 7: Construct the scales
 
-Finally, we compute new scale scores by averaging the items in each factor. In practice, this means creating new variables (ml_reflect, ml_source, ml_active) that take the mean of the items belonging to each factor. For example, the variable `ml_reflect` is calculated by summing items `ml_1`, `ml_4`, and `ml_7` and dividing by 3 to compute an average that stays on the same 1–5 scale. This way, each respondent’s answers on individual items are combined into a single, interpretable score that represents their position on that underlying dimension.
+Finally, we compute new scale scores by averaging the items in each factor. In practice, this means creating new variables (`ml_reflect`, `ml_source`, `ml_active`) that take the mean of the items belonging to each factor. For example, the variable `ml_reflect` is calculated by summing items `ml_1`, `ml_4`, and `ml_7` and dividing by 3 to compute an average that stays on the same 1–5 scale. This way, each respondent’s answers on individual items are combined into a single, interpretable score that represents their position on that underlying dimension.
 
 ```{r}
 d <- d |>
