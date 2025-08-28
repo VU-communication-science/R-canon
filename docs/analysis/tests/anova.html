@@ -526,7 +526,7 @@ window.Quarto = {
 </ul>
 <!-- # How does it work
 
-Underneath the hood, ANOVA is a linear model just like [regression analysis](../tests/regression.qmd).
+Underneath the hood, ANOVA is a linear model just like [regression analysis](../tests/linear-regression.qmd).
 If you have not yet read the regression tutorial, you can skip this section, and focus first on how to use ANOVA in practice.
 
 You can think of ANOVA as a special case of regression where the independent variables are categorical.
@@ -844,7 +844,7 @@ Olejnik, Stephen, and James Algina. 2003. <span>“Generalized Eta and Omega Squ
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>It is also possible to use ANOVA with non-experimental (i.e.&nbsp;observational) data. However, this limits our ability to make causal inferences. For observational data it is more common to use <a href="../tests/regression.qmd">regression analysis</a>, because this provides more flexibility to control for confounding variables. (This is also possible with more advanced forms of ANOVA, like ANCOVA and MANOVA).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>It is also possible to use ANOVA with non-experimental (i.e.&nbsp;observational) data. However, this limits our ability to make causal inferences. For observational data it is more common to use <a href="../../analysis/tests/linear-regression.html">regression analysis</a>, because this provides more flexibility to control for confounding variables. (This is also possible with more advanced forms of ANOVA, like ANCOVA and MANOVA).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This is similar to an independent samples t-test, but can be used for more than two groups.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>This is similar to a paired samples t-test, but can be used for more than two groups. This is primarily used for within-subjects designs, where the same participants are measured multiple times.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>We’re using the trust score <em>after</em> watching the movie. It is <em>ok</em> to ignore the trust score before watching the movie, because we’ve randomly assigned participants to the different groups. This means that the trust score before watching the movie should be the same in each group. However, as we’ll show below, we could also use a repeated measures ANOVA to compare the trust score before and after watching the movie.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>

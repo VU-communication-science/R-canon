@@ -13,7 +13,7 @@ order: 4
 This makes it particularly suitable for experimental research, where participants are randomly assigned to different groups, and the researcher wants to know whether the groups differ on some outcome variable.
 Because of the random assignment, all possible confounding variables should be equally distributed over the groups, which allows us to make causal inferences about the effect of the independent variable on the dependent variable.[^observational]
 
-[^observational]: It is also possible to use ANOVA with non-experimental (i.e. observational) data. However, this limits our ability to make causal inferences. For observational data it is more common to use [regression analysis](../tests/regression.qmd), because this provides more flexibility to control for confounding variables. (This is also possible with more advanced forms of ANOVA, like ANCOVA and MANOVA).   
+[^observational]: It is also possible to use ANOVA with non-experimental (i.e. observational) data. However, this limits our ability to make causal inferences. For observational data it is more common to use [regression analysis](../tests/linear-regression.qmd), because this provides more flexibility to control for confounding variables. (This is also possible with more advanced forms of ANOVA, like ANCOVA and MANOVA).   
 
 There are different types of ANOVA to cover a wide range of research designs.
 The most common ones are:
