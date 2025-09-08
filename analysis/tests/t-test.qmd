@@ -1,7 +1,7 @@
 
 ---
-title: t-test
-summary: Comparing two means
+title: The t-test
+subtitle: Comparing two means 
 format:
   html:
     df-print: paged

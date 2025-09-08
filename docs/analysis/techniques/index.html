@@ -32,6 +32,8 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <link href="../../analysis/techniques/data-cleaning.html" rel="next">
 <link href="../../analysis/concepts/causality.html" rel="prev">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,7 +70,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing-1 .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-website','listing-bibliography','listing-cls','listing-format','listing-execute','listing-resources','listing-language','listing-title','listing-subtitle','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count','listing-order',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-website","listing-bibliography","listing-cls","listing-format","listing-execute","listing-resources","listing-language","listing-title","listing-subtitle","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-order"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing-1'] = new List('listing-listing-1', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -312,7 +372,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../analysis/tests/t-test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">t-test</span></a>
+ <span class="menu-text">The t-test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,7 +447,34 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-custom" id="listing-listing-1">
+<div style="margin-top:1.5em">
+<ul style="display:flex;flex-direction:column;gap:0.3em">
+<li style="padding:0.2em;border:1px;border-radius:5px">
+<a href="../../analysis/techniques/data-cleaning.html">Data cleaning</a> <br> <i>garbage in, data out</i>
+</li>
+<li style="padding:0.2em;border:1px;border-radius:5px">
+<a href="../../analysis/techniques/scale-construction.html">Scale construction</a> <br> <i>How to create and validate scales</i>
+</li>
+<li style="padding:0.2em;border:1px;border-radius:5px">
+<a href="../../analysis/techniques/factor-analysis.html">Factor Analysis</a> <br> <i>Identifying latent dimensions in scales</i>
+</li>
+<li style="padding:0.2em;border:1px;border-radius:5px">
+<a href="../../analysis/techniques/controlling.html">Controlling for confounders</a> <br> <i>Using multiple regression to better test causal relationships</i>
+</li>
+<li style="padding:0.2em;border:1px;border-radius:5px">
+<a href="../../analysis/techniques/mediation.html">Mediation Analyses</a> <br> <i>Conducting simple mediation analyses in R</i>
+</li>
+<li style="padding:0.2em;border:1px;border-radius:5px">
+<a href="../../analysis/techniques/standardization.html">Standardization</a> <br> <i>Transforming variables to a common scale</i>
+</li>
+</ul>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

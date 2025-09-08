@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,9 +21,8 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,16 +66,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <link href="../../analysis/techniques/scale-construction.html" rel="next">
 <link href="../../analysis/techniques/index.html" rel="prev">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-34f2f06d33e71b70b9871a5af9c4576e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -110,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar docked quarto-light">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -350,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../analysis/tests/t-test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">t-test</span></a>
+ <span class="menu-text">The t-test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -559,7 +557,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">600 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABK0lEQVR42u3duwnDMBRA0Sh4R++QgbKDp0xKK6AUtwgmcE7lj4zNBbl943WjuF/9Af9GsEiwaJtPnn5oS49xHm+ft/blA8fy+vHD1Ve88/vqmS0ZCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFo15jrChwmvzUOGhUWNLRoJFgkVvnEgT2x9udOQAAAA9dEVYdGljYzpjb3B5cmlnaHQAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC6eZtwpAAAAI3RFWHRpY2M6ZGVzY3JpcHRpb24AR2VuZXJpYyBSR0IgUHJvZmlsZRqnOI4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAEoSURBVHja7d27DcIwFEBRjDIdGzAhG2Q9UmIkN7eIAtI5Vb5ydCWnfeN9o7hf/QH/RrBIsGibT15+aEvP8Tnevm89li/sy+v7zzx99pozWzISLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsGvMcYUOF1+ahwkOjxpaMBIsEiw62khPbaCoxfgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -583,7 +581,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">52 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABLUlEQVR42u3dwQnCQBBAUSPp0SKsx/RglXpdBQPfyyp577YsgeHD5jrL40Rxnj3AvxEsEixax8O2+0O7LrOHnWXMsr5eXT5+dJ899Y/wJCPBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsGitx25e5twb8fdoT6sU16OW+E7nmQkWCRY9ATZbQkd2dw2IQAAAD10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLp5m3CkAAAAjdEVYdGljYzpkZXNjcmlwdGlvbgBHZW5lcmljIFJHQiBQcm9maWxlGqc4jgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAEpSURBVHja7d3BCcJAEEBRV1KdFWiF6SDtxesKKvzTKrx3CyEw+bB7nXFeKK6rB/g3gkWCRdv8sH+90O5j9bCrzD++vb66ffzoWD31j3AkI8EiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwaIx7xHebUl/6zFtFR4aNY5kJFgkWPQE6V0I25GhmOUAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">595 (99.2%)</td>
 <td style="text-align: center;">5 (0.8%)</td>
 </tr>
@@ -625,7 +623,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAEEAAABOCAQAAADVqLMbAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAAAr0lEQVRo3u3XQQqAIBCF4Wd4xw7ReeoOnrIWEqjRIkMd4Z9VSegHbwLHnRpdy2gAhFg+fTkaN8bm7qf0IJ9/tDYEhJd1A0FAgAABAgQIECBMQCgubqFul1/l0oukq97ma6WnGgjCACHrhb3LgLkVeXecI2I9G95AEBAgQIAAAQIECBMQmCMkE0FAkIaMMpKytus+ykjlf2cgCAgQIECAAAEChAkI1kaZMWUgCAiSdAEMbhI3VFrrXwAAAD10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLp5m3CkAAAAjdEVYdGljYzpkZXNjcmlwdGlvbgBHZW5lcmljIFJHQiBQcm9maWxlGqc4jgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAEEAAABOCAQAAADVqLMbAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAACxSURBVGje7ddRCsIwEEXRO9LVuYK6wrqCbk8/ijCNiKA0mcKdryaEcuBNIBMPRtdlNEDCVlNeLAc3xhyvr0i70/7Q9UDA+mG/QBASJEiQIEGCBAknIDQPt/W3v/xVkV+s/caa/HwtEIQEaNrx3qUZ5tivO44yW73fuQJBSJAgQYIECRIkfCvnCCgRhAQYMkcA3FIzdJ8joL13BYKQIEGCBAkSJEg4AaHaKDOmCgQhAeAJcwcRylWuClcAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -649,7 +647,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">600 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABsklEQVR42u3bQXLqMBAAUUxxR+6QnAfuwClhq6RmCrcxGlvut0sWv1xdlr4sKdPzJOJc/QB7YzDIYNCl/WEqeIBbOon+VjxOqH3Ey+J/ZTXX8LeP6sdKOCQhg0EGgwwGGQwyGGQwyGCQwSCDQQaDDAYZDDIYZDDIYJDBoA3suGbizevqjesNB4u2rus3rrsFuw1yYtzxDdvXYUfGSR8yGGQwyGCQwSCDQQaDNrzSj2UL4F6fTLsLVr38dUhCBoMMBhkMMhhkMMhgkMEgg0EGgwwGGQwyGGQwyGCQwSCDQQaDDAYZDDIYZDDIYNAXziVHuWsY+8pB7jZvp65jdyffmV53rocJ1uutdtKHDAYZDDIYZDDIYJDBIINBBoM+WOmP/ZGd+ejTqPpGcwWHJGQwyGCQwSCDQQaDDAYZDDIYZDDIYJDBoGHOJWPr/4X44MHW309xSEIGgwwGzZrDjrkZHZs56Y9844txSEIGgwwGGQwyGPTnf0mXD+/9W1Yc8SybGfzjO7P8kvpBgy1fiB80WCydw5s3z2CNOTO4ywpoat/Cu8uK0E8zJCcbMQ5JyGCQwaAXkzgogDZjDJ0AAAA9dEVYdGljYzpjb3B5cmlnaHQAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC6eZtwpAAAAI3RFWHRpY2M6ZGVzY3JpcHRpb24AR2VuZXJpYyBSR0IgUHJvZmlsZRqnOI4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAGuSURBVHja7dxBkoIwFABRsTwdJ9AT6gm8nm6j9VPSgPwQ+u3GxQzVlWQCYWZ4nUScsy9gbwwGGQy6lF9krGePyg+9DgkXU1FeymX2d1nNGHz2zL6oKqckZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0EGgwwGGQwyGNTAE9dYq4+umw02hp/mP7reLNijkxPjDUdYq2OGcdGHDAYZDDIYZDDIYJDBoGZ3+jXZt0y7C5a9/XVKQgaDDAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0EGgwwGGQwyGGQwyGDQH84le3nXMPaXg9x9/WMFZncn3zXxuF7/BYJugm01ql30IYNBBoMMBhkMMhhkMMhgkMGgBTv9vm+yaxbdGmW/0ZzBKQkZDDIYZDDIYJDBIINBBoMMBhkMMhhkMKibc8nY+n8h3nmw9Z+nOCUhg0EGgyatYcd8GB2buOj3/MYX45SEDAYZDDIYZDDo47ek24ffvrYVRzzLZjq/+a6Z/5L6QYPN34gfNFistobfipFnsMKUFdxtBTSUo/DutiJUTsnBRoxTEjIYZDDoDVZ/KUsgatqeAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -682,7 +680,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAGEAAAA3CAQAAAC22OzCAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAAAoklEQVRo3u3YwQmFMBAAUSPp0SKsR3uwSr1uPIVcMlnm3UQ/ZGD94JZ3W90++wAm5Eio8eIGvBhn6XkqHrS2t47JAc/AbxIMkgkEJhCYQGACgQkEJhCYQGACgQkEv2/nkW/X2UrcBXQtDxDiqRMMUoKE5l24AKuwTmHmYauwPu2fToJBMoHABAITCEwgMIHABAITCEwgMIEg2ypsTQkGyQSCD+pwDFzFQQHIAAAAPXRFWHRpY2M6Y29weXJpZ2h0AENvcHlyaWdodCAyMDA3IEFwcGxlIEluYy4sIGFsbCByaWdodHMgcmVzZXJ2ZWQunmbcKQAAACN0RVh0aWNjOmRlc2NyaXB0aW9uAEdlbmVyaWMgUkdCIFByb2ZpbGUapziOAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAGEAAAA3CAQAAAC22OzCAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAACiSURBVGje7ZjBDYAgEATFWJ0VaIVage3p9/BF+DBcZl4QIGGSPRKuvMvsrKMvoEIOhS1OLkBhHKVlV9y01Uv7YIGn40yCIKlAQAUCKhBQgYAKBFQgoAIBFQioQOD3d+75u46mxKYFoIHReu0wThCkBApVLdzTJOkMSYK1wtqoH50EQVKBgAoEVCCgAgEVCKhAQAUCKhBQgUC2VticJAiSCgQ+3GML4s4eEPoAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -706,7 +704,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">22 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABo0lEQVR42u3dUU7CQBRAUTHs0T3oenAPrlJ/MWECp1Jaxnv+NEbKDdN0HhUP3y8Rr1sfwLMpGCoYOp5/cdj6aK46DU+5Hyse/PmDHhf/lo28Xfzu18MevyWJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhp5u8z1yeY5x/xnGNMEuTTHWmGG0JFHBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDB0G5vFTjt9M/sdhvscXdLmJYkKhgqGCoYKhgqGCoYKhgqGCoYKhgqGNp8873XqcTI5sG2/yQK05JEBUMFQwVDBUMFQwVDBUMFQwVDD9saPdueceSBe8nn2jOOtCTRDqYVaxqdCJZ/AMjkwe5/GmhJooKhgqGCoYKhgqEVLitm2QRdtsp12D5v572PliQqGCoYKhgqGCoYKhgqGCoYKhgqGCoY+sPme+6pxMifphVzvDVrWpKoYGjyN3JHlv9DjJuCzXd6Xz4TvvEVNvPQ2fwKNt8ryQyf/9lSPZz/zOc/DzbyPgqW67qsQAVDBUM/080loF1HrmYAAAA9dEVYdGljYzpjb3B5cmlnaHQAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC6eZtwpAAAAI3RFWHRpY2M6ZGVzY3JpcHRpb24AR2VuZXJpYyBSR0IgUHJvZmlsZRqnOI4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAGiSURBVHja7d1RTsJAFEBRMazOFegKZQVuT38x6UQOUFrGe/40BvCGaTqvVA/fLxGvW7+AZ1MwVDB0PP9i/8ez0/Alvh/We9bzhz5e/SgbeVv87tfDnr8liQqGCoYKhgqGCoYKhgqGCoYKhgqGCoaebvM9sjzHuP8MY5pgS1OMNWYYLUlUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMLTTjwqcdntTyk6DbX/Hx0hLEhUMFQwVDBUMFQwVDBUMFQwVDBUMFQxtvvne71xi2ebBHncPx320JFHBUMFQwVDBUMFQwVDBUMFQwdDDtkbPtmcceeBecq/Xsk1LEu1gWrGm0YHg+j8AMnmw+x8GWpKoYKhgqGCoYKhgaIXTilk2QctWOQ97rgtnpiWJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhm7YfM89lRi5aVoxx6VZ05JEBUOTX8gduf4fYlwUbL7D+/Uz4QvfYTMPnc2vYPO9k8zo9/84W6qH85/5/OfBRobB8rdOK1DBUMHQD5WCJpGaXSt+AAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -748,7 +746,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAABOCAQAAAA9KAYwAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAAAhUlEQVRo3u3XsQ2AQAiFYTDu6A7uozvclNoZNLlCkgMj/+to7iu44qGHZGZK1Yvzsx32kI+waocXWYbj7TbV3j08PDw8PDz8//lH2Wq+V9xR2y7V/cybWJHdX9liDj56Pjw8PDw8PDx8TOj5ianNc2YkBh4eHh4eHh5+cL50ZsSn9u6T+ROGZxDMVaGYpgAAAD10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLp5m3CkAAAAjdEVYdGljYzpkZXNjcmlwdGlvbgBHZW5lcmljIFJHQiBQcm9maWxlGqc4jgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAABOCAQAAAA9KAYwAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAACHSURBVGje7dexDcAgDERRHGW6bJAJwwSsl7QmUhokfBH+17nhSUBxtrsos0n15PzuhyvkI5z2wZdyTMdbN+V+e3h4eHh4ePj1+VfZamOnDMd8u4xZOVzTVF9+br77epU1IzTw8PDw8PDw6/P0fGFy8/R8YeDh4eHh4eHhJ+dPa0Z8cr+9mH8AZlURy0jxTXIAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -772,7 +770,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">25 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABsElEQVR42u3cUXKCMBRAUXHco3vQ9egeXKX+oj4GLhKTR+75a6dT2zskBIgOz4OIY+0/IBuDQQaDTuMvhiIvcZuYJq9lXq6A8T9wWv1bgHPwvUftCis5JCGDQQaDDAYZDDIYZDDIYJDBIINBBoP+ci25VIbL9KaCZbhMrxjslvLueMVg30dTW8dSbNNgOY8ZZuMjrP056FcuKyCDQQaDDAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0EGgwwGGQwyGGQwqLG9FbHoAXGtDSopgrW0qcAhCRkMWj0ke9h4EvlhDmtpZvkfhyRkMMhgkMEgg0EGgwwGGQwyGGQwyGCQwSCDQQaDDAYZDDIYZDDIYJDBIINBKZ58R+LHfOU3EKQNVuvd5Q5JyGCQwSCDQQaDDAYZDDIYZDDIYJDBIINBBoMMBi24vdPrBvPYovth+/9kw+UcklDaO66x8jeudxas/OThkIQMBhkMMhhkMOjtLOmaft7HssI1/ZydrcNiW36MQxfBtnyzdRfBImsvoroNFs/WE6e9UcZh/BN3z5Khy1QwzXPhChkMMhj0AtbkKoB4wt6PAAAAPXRFWHRpY2M6Y29weXJpZ2h0AENvcHlyaWdodCAyMDA3IEFwcGxlIEluYy4sIGFsbCByaWdodHMgcmVzZXJ2ZWQunmbcKQAAACN0RVh0aWNjOmRlc2NyaXB0aW9uAEdlbmVyaWMgUkdCIFByb2ZpbGUapziOAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAGuSURBVHja7dxRroIwFABRMazOFegKdQVuT39Rr6GDYHvpnL9nXoxOaC1QHR4HEcfaLyAbg0EGg8bpH9vMZ7cvT3sear/5UtMXOi5+FuAUPHavXWEhhyRkMMhgkMEgg0EGgwwGGQwyGGQwyGDQX84lS2U4TW8qWIbT9IrBbimvjlcM9nk0tXUsxVYNlvOYYVY+wtqfg37lsgIyGGQwyGCQwSCDQQaDDAYZDDIYZDDIYJDBIINBBoMMBhkMMhhkMMhgkMEgg0EGgxrbWxGLbhDX2qCSIlhLmwockpDBoMVDsoeNJ5Ef5rCWZpb/cUhCBoMMBhkMMhhkMMhgkMEgg0EGgwwGGQwyGGQwyGCQwSCDQQaDDAYZDDIYlOLOdyS+zbf9BoK0wWp9u9whCRkMMhhkMMhgkMEgg0EGgwwGGQwyGGQwyGCQwaCCyzu9bjCPFV0P2/8vG5ZzSEJpr7jGtr9wvbNg208eDknIYJDBIINBBoNePiVd0897W1a4pp+zs3VYbM2fcegi2Jpftu4iWGTpSVS3weLZOs54mWQcpv9x9VMy9DWY5rlwhQwGGQx6AoExK0vgm2NIAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -796,7 +794,7 @@ Required packages and data for this tutorial
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">591 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABj0lEQVR42u3cQUoDMQBA0VZ6x95Bz6N38JS6k1Ekw9Ohk2n/20lBwsckTpP2/HGKeNp7AEdTMFQwdFn+cN5xIK8ri+nLjoNbDu3y59+yuevgtfe9B/elKYkKhgqGCoZutuiv7YJHccNd8jp8dZ59cKwpiQqGCoYKhgqGCoYKhgqGCoYKhgqGJnrHdWyWt7APE2yWR/emJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGNrw5PtebuKPbXpV4BifR/ufpiQqGDrM7Z014xV0u8tQFGzmZf1W6yf+hT3Csj7WGoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoa+HbPNfO44ix/nkrN8O8S8mpKoYKhgqGCoYKhgqGDobm4gjm13P/FBgm13EbApiQqGCoYKhgqGCoYKhgqGCoYe5D/9sdWzjMWjU8FOdpLRlEQFQwVDBUPn5Qbx1sn3r54Xu+S5RqYpiQqGCoY+AernH96HacssAAAAPXRFWHRpY2M6Y29weXJpZ2h0AENvcHlyaWdodCAyMDA3IEFwcGxlIEluYy4sIGFsbCByaWdodHMgcmVzZXJ2ZWQunmbcKQAAACN0RVh0aWNjOmRlc2NyaXB0aW9uAEdlbmVyaWMgUkdCIFByb2ZpbGUapziOAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAGLSURBVHja7dxBTgIxAEBRxnA6TqAn1BN4Pd2Z0ZiSJxOmI//tCIk0P2kLtLJ8nCKe9h7A0RQMFQyd1w/2XM/errz487Lf2NYvff7zX9ncZfDc+96D+9KURAVDBUMFQ3db9K/tgkdxx13yMnx2nn1wrCmJCoYKhgqGCoYKhgqGCoYKhgqGCoYm+sZ1bJavsA8TbJaP7k1JVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwtOHJ93+5iT+26VWBY/w/2m2akqhgqGCI1rCZl/Xx2La7PYaL/rzL+r1G1pREBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVD347ZZj53nMWPc8lZfh1iXk1JVDBUMFQwVDBUMFQwdJjfD7vNdtftHiTYdtftmpKoYKhgqGCoYKhgqGCoYKhg6EHe6Y9dO8t4WX10KtjJTjKakqhgqGCoYGhZbxCvnXz/ar1LLjUyTUlUMFQw9Am1ZyCUWMD+SwAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -887,7 +885,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAADECAQAAACCAzGOAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABGklEQVR42u3cWw6CMBAFUDHskUW4HhfhKvHLpKi8EjolzLl+9esEpiQXU+3GW8vcm+rJ+dtYfJ4hG6EUc998PB6Px+Px+GvzXdkuuxCyFHPf/L5c/Pb8R+V59NPlMFm9ql997tnj8Xg8Ho+/Pv9VturXq2n0/IZZ6fn7s+/NYLHn78/erZt79ng8Ho/H4wOiaDdMbv7wnr8hxRY7uOevZ/ps5Z49Ho/H4/H4gOj5DZObD+v5/7/nD+r5c09U7tnj8Xg8Ho8PiJ7fMLn5DT2/5hn91Z5f91nIPXs8Ho/H4/EB0fMb5kyz/xTt2j9/nb36IeDozAIfHTwej8fj8fjK0fMb5kx80AH5k149Ho/H4/F4PP7YdP4/Py3/Bj48Nex5qypaAAAAPXRFWHRpY2M6Y29weXJpZ2h0AENvcHlyaWdodCAyMDA3IEFwcGxlIEluYy4sIGFsbCByaWdodHMgcmVzZXJ2ZWQunmbcKQAAACN0RVh0aWNjOmRlc2NyaXB0aW9uAEdlbmVyaWMgUkdCIFByb2ZpbGUapziOAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAADECAQAAACCAzGOAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAEfSURBVHja7dxBbsIwEAXQuOJ0nKA9IT0B10tXVRMohKjxjNV5n1U2PJnB0g8yafOUmbdUHf+TyzxP/V+jrh6Px+PxeDwef2zasvrF3HK0cVafzJ+WF593n/57e/2t/sxP03l1de2++tqzx+PxeDwe///5m7LVv16to+cnZqPn78++O4OnPX9/9n51a88ej8fj8Xh8QBTtxNTmD+/52/lYDP/gnr+d9d6qPXs8Ho/H4/EB0fMTU5sP6/m//84f1PMf7ajas8fj8Xg8Hh8QPT8xtfkXen7PM/qbPb/vXqg9ezwej8fj8QHR8xMz0uy/i3bvv78+XP054OjMEz46eDwej8fj8Z2j5ydmJD7mgPyoq8fj8Xg8Ho/HH5vm+fll+S8B5VyN+2zQ5wAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -970,7 +968,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADcAAACsCAQAAAB1c/xNAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAAA+UlEQVR42u3cQQ6CMBBG4dZ4R+8g58E7cEpcWkmYQvND2+mbHRu+mJnEt9G4hjvncavmnHumD59LFvmOO1wILzm2/D353h0cHBwcHFwVbvNtvpS95fDENE9i8WusSQXfu6t5KrOkMyfjBOSdad+2793BwcHBwcFV4ehM4fQcflN2G8LwO3JmvncHBwcHBwc3AkdnCqenzsx3pcmd68ySs/K9Ozg4ODg4uBE4OlM4rXbm+abMcvudqToh37uDg4ODg4MbgaMzhdNKZ2q60uR+nXnVyfjeHRwcHBwc3AgcnSmcmty8an6a0+ang4ODg4ODg4PLTeR/jbrlvqmIKIsbVBxiAAAAPXRFWHRpY2M6Y29weXJpZ2h0AENvcHlyaWdodCAyMDA3IEFwcGxlIEluYy4sIGFsbCByaWdodHMgcmVzZXJ2ZWQunmbcKQAAACN0RVh0aWNjOmRlc2NyaXB0aW9uAEdlbmVyaWMgUkdCIFByb2ZpbGUapziOAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADcAAACsCAQAAAB1c/xNAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAD7SURBVHja7dxNDoIwEIbh1ng6T6AnlBNwPVhSif0BvlKYvrMjJj7RmcW7UT+5M+dxqmace4YP3yqL/PgI59xLjo0/T7Z3BwcHBwcH1wO3iodx37sUjw9rqE7iBmXU0+4Gybf59vHX5J2ZPjbbu4ODg4ODg+uBozOFc+fOTBXmH+5YZ5acme3dwcHBwcHBNeEIP+HY5g51Zr4rk9y2ztxzxbZ3BwcHBwcH14SjM4VjmyvuzO1NmeXinam6WNu7g4ODg4ODa8LRmcK5SvhpQi/JLeFX62Rs7w4ODg4ODq4Hjs4UTktumDQ/zbnmp4ODg4ODg4ODy43nf41uy83DCSj/LAbeIgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1061,7 +1059,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADkAAADECAQAAACPHUHJAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABGUlEQVR42u3cQQ6CQAwF0GK8o4fwPHoHT4kLNwwaCWBR7Pu7Wb1AS/KNhK6PrXPYXCxCHoeHax9x7jKY4cbUuLFIJBKJRCKRj3TDIpTStCKiYt1qeuzl6QdKRqs9tsdTc7qlXGWNWSKRSCQSiZzOqIjkVI82emxSJnrs66xrt2977OusXbEas0QikUgkcnekUpmUGuSiHjsv49a7oMfOy/MzUGOWSCQSiUTujtRjk1KD3KDHRkSzJuk9NmL8HNSYJRKJRCKRuyP12KTUID/SY+e9Z/CBHjt3y2vMEolEIpHI3ZF6bFK+Pcu2VOZ8RuBNqcxbpBqzRCKRSCQSOR09NinfJi994t/8P3OVSCQSiUQikVum8/3YvyHv0a4tULZdmhsAAAA9dEVYdGljYzpjb3B5cmlnaHQAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC6eZtwpAAAAI3RFWHRpY2M6ZGVzY3JpcHRpb24AR2VuZXJpYyBSR0IgUHJvZmlsZRqnOI4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADkAAADECAQAAACPHUHJAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAEaSURBVHja7dzBDYJAEAXQwVidFWiFWoHt4cELC0aCOijO+7e98AKzm/wEQtfH2tmtLhYh98PFuY84dhnM8KI1HiwSiUQikUjkPd2wOufV6Hp1q+mxl8mTzWi1+3Z5aFbXlLusMUskEolEIpHzGRWRnOrRRo9NykyPfZz32u3THvs4726xGrNEIpFIJHJzpFKZlBrkSz12Wcat94UeuyzTM1BjlkgkEolEbo7UY5NSg1yhx0ZEnAbDTO+xEeNzUGOWSCQSiURujtRjk1KD/EiPXfadwQd67NJdXmOWSCQSiURujtRjk/LtWbalMuc3Ak9KZd5GqjFLJBKJRCKR89Fjk/Jt8tLnveb/nbtEIpFIJBKJXDOd/8f+DXkDQYAtMPTjQasAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1144,7 +1142,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAACsCAQAAABmpLy5AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABB0lEQVR42u3cQQqDMBAF0KR4xx6i57F36CntqkWLWNTEhOT9nSA8dGbxBTVOoWRuRfXO+WF+8JxCeMTc5Hzb+r75eDwej8fj8ZkT580re80LIeh61fCLnj/+feBL/RQwLA/vmye/kl9937PH4/F4PB5/QX7aTvo+sx09v2B2Fu0zWSvpu4r2mawvdd+zx+PxeDwe3z6v5xdMTbPP2/O/mc34sp7/yXK5+549Ho/H4/H49nk9v2Bqmv3xnn/0hZokPf/4wvY9ezwej8fj8e3zen7B1DT7Zc/P/0nsRs+/Zgn7nj0ej8fj8fj2eT2/YGrix+miN3eqvHo8Ho/H4/F4fNpE/9Xsln8DOnYnc10e7CAAAAA9dEVYdGljYzpjb3B5cmlnaHQAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC6eZtwpAAAAI3RFWHRpY2M6ZGVzY3JpcHRpb24AR2VuZXJpYyBSR0IgUHJvZmlsZRqnOI4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAD8AAACsCAQAAABmpLy5AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAECSURBVHja7dzRCYMwFAVQU5yuE7QT1gm6nv0SYhGLmibiO/dPEA76ItyAmsauZW5N9eB8nx+8xq57pH+TORD75uPxeDwej8dfm0/5NqPOlkPVnDLr+cPPu196F9DPD++rJ7+LX33s2ePxeDwej78+/1W2ytep9ej5DbOx5x/J0h5hU88/kuVFHXv2eDwej8fjK0TRbpjYfMWeP+WZDb9az58yf7Zizx6Px+PxeHyF6PkNE5sv1PP3vs9TpOfvf15izx6Px+PxeHyF6PkNc6bZz4v2/z+JXSnadRZh7Nnj8Xg8Ho+/Pq/nN8yZ+GGs8+rMOa8ej8fj8Xg8Hl82yX81w/IfhyknRvnJJPAAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1227,7 +1225,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADsAAACsCAQAAABvTxzDAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABFElEQVR42u3bQQoCMRBE0UTmjh7C8+gdPKUuRqSjUUlidQL9aycuHkP1ooQx39KMHKaowdjNfrg8iz7l/1P2irbyq2NKKaWr/GljdQsLCwsLCxuKfVkX+l2xJ9uFIxhQJlaK1e0KJ3Vu+EE0tqSrO/l3Ri8+VrewsLCwsLChWHayQ1botmWwtuR93HYO1pbUzjRWt7CwsLCwsLD6sJMdskK3qp38iOnQYSfvKY81VrewsLCwsLCw+rCTHbJCt307uedViOGd3HeEsbqFhYWFhYWF1Yed7JAVui13suJPdVXW7mTtccXqFhYWFhYWFlYfdrJDVuh238nKffzhaXXvXXxlvQILCwsLCwsbhZ2yk6c9Lawid16nKPoQ9M5jAAAAPXRFWHRpY2M6Y29weXJpZ2h0AENvcHlyaWdodCAyMDA3IEFwcGxlIEluYy4sIGFsbCByaWdodHMgcmVzZXJ2ZWQunmbcKQAAACN0RVh0aWNjOmRlc2NyaXB0aW9uAEdlbmVyaWMgUkdCIFByb2ZpbGUapziOAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADsAAACsCAQAAABvTxzDAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAERSURBVHja7dtRCkIhFIRhjbu6VlArrBW0vXoQQm9WqPcchfnnLYI+bAzm4RafYUZOU1Qxdstf3N5FX+LxVP6RW/nWOYQQwsP8tFrdwsLCwsLCwtpnN2rs50xKzOe57VTPJ5xwt/eGb3lsSVd38v+MXj2tbmFhYWFhYWHtw052yArdtuzklnxu6s6d3JLaNdXqFhYWFhYWVoplsDpEi3XZySnXrFyHnZxS/ka0uoWFhYWFhZVi2ckO0WIP2Mk9T2AM7+S+u6/VLSwsLCwsrBTLTnbICt2Wg9XiT3VVNh+stpdLq1tYWFhYWFhY+7CTHbJCt2knW+7jL6e1ewDiJ+sVWFhYWFhYWBV2yk6edlpYi7wAKDAotDKaRjoAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1326,7 +1324,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADQAAADcCAQAAACVZkqPAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABIUlEQVR42u3cQQrCMBAFUCve0UN4Hr2Dp9SdTYWomUZNh/dXFiGPOoF+pO102/0m+x85CaFDeXBZDOw0rV28XO6w/Or4+HTtfEb5ZgQCgUAg0AjQ06W89wV8zlQWiNVt5Cnl2slndP6oiMf6XrXX1RLdLvlmBAKBQCDQCJBeF87IvW5OS8Nr7nVz2jZOvhmBQCAQCDQCpNeFs41e9zbFLFb0undZbqx8MwKBQCAQaARIrwtnu72u9h9e515X30z5ZgQCgUAg0AiQXhfOFnpd23124V7Xum3yzQgEAoFAoBdRt8LJB73odeufh61CnocFgUAgEKhT9LpwkkPnW/c77P58RiAQCAQCgTpFr+sDfa9spf/pQCAQCAQCdcrkvcTDQ3duFTK//gWeEQAAAD10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLp5m3CkAAAAjdEVYdGljYzpkZXNjcmlwdGlvbgBHZW5lcmljIFJHQiBQcm9maWxlGqc4jgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADQAAADbCAQAAACIY3o3AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAElSURBVHja7dxRboJAFAXQ0rg6V9CusK7A7eFfGZoMOI+pDi/nfmlMOIH3Em6MOM0fr8nni5yE0KV887Ma2Nd09ODlAS7rj66/r+6dzyjfjEAgEAgE2sifO2zv++qSqawJvTte2Rnyzeg9y3B7akixvlftdbVE9zLfjEAgEAgE2oheF04+KNDrlrQ0vOZet6RtQ/PNCAQCgUCgjeh14Zyjbu3lu7h2B+rWXtaLlW9GIBAIBAKNAOl14Zy319W+Wuvc6+rLlG9GIBAIBAKNAOl14Zyh17X9/C3c61rXJt+MQCAQCAQaAdLrwhmh1x1/TLUKeUwVBAKBQKBOUbfCSQ7d5t6/sHv3GYFAIBAIBOoUve5k0P+1uvSXDgQCgUCg7NDk74KHhx6fPDK9zDrUFQAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1425,7 +1423,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADsAAADcCAQAAABkbRECAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABMElEQVR42u3dwW2DQBQEUNZKj+khrifpwVU6Jys4Aptl+Qv2f3PjwhOaPYyQsMt12COnXdRk7Mf44ie06K8yww7DZxh6ubvK1S0Wi8Visdj4/Bs1l3V3qU4Zr7ay+jZLMpYSd/vdsJPPVQ1ttJNrj2KubrFYLBaLxcbHTu6QI3TbspNvWbaXN36fvPRI5uoWi8VisVhsfOzkDjlCtzU7ue798UN2+U5uPXq5usVisVgsFhsfO7lDjtDt3E5u28RP2emdHHHMcnWLxWKxWCw2PnZyhxyh2/FO3n4bz7J/Ozn6aOXqFovFYrHYVKzB2iG52ImdHLuQJ5827vcuHrK9gsVisVgstjtrJ0ckMbvFd3yv87RYLBaLxWKxzbGTe7MGKxaLxWKxWOwrsMX/jLwt+wvFFS/pQFFHzQAAAD10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLp5m3CkAAAAjdEVYdGljYzpkZXNjcmlwdGlvbgBHZW5lcmljIFJHQiBQcm9maWxlGqc4jgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADsAAADbCAQAAAB5aCG6AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAEySURBVHja7d1RasJAFAXQTHF1rqBdoa7A7dmPIqZiNGPmjdO+c/8C4kHuBC4BtZynd+TjLWoydje/OIQW/VUW2Gnah6GnX1e5usVisVgsNhV7sy5Or71Ldcp8PsVu5tmUStbtCEfquKHcz1Lz6kY7ufYOyNUtFovFYrGpWDu5Q3KxzXbyJev2cuPnyWvvhFzdYrFYLBabirWTO2SEbmsGa92D3Ifs+sG69ejl6haLxWKxWGx87OQOGaHbpZ28bRM/Ze/v5IhjlqtbLBaLxWKx8bGTO2SEbuc7uf02XmSvOzn6aOXqFovFYrFYbHzs5A4ZodufnRy7kO9+2rgfnnjI9goWi8VisdjurMEakcRsiy/U/Z1Pi8VisVgsFrs5dnIS1k7GYrFYLBaLrUrxhx//lv0Gk+gwW/YmGjgAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1532,7 +1530,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADEAAADzCAQAAACFtTYoAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABPElEQVR42u3cQW6DQBAEQIj8Rz8i78kj8krnFGmJjZl4F0Ja1T5x2RLMSG5ZyPNt2jtvuwshxHRrPh/DBtOemvGgEAgEAoE4CTG3X9fzsGPbUzMe1NHEuB71l3eBQCAQCEQ0oUedh7i0F9896n3cUO7v4jpdh99FxiwQCAQCEUBclpefOxB6VDEPS84yvZXnx7jvK07/AmTMAoFAIBCISvSoYs7Ro56l0rE2e9Sz1JYjYxYIBAKBQFSiRxVz/h61muaZd/WotSyXJmMWCAQCgUBUokcV89961ONfpwb2qLVVyZgFAoFAIBCV6FHFnLlH1d+aerFH/WYtMmaBQCAQiABCySkmgyj3qNffNi/2qJ5Ny5gFAoFAIAIIPaqYDGKzR/X/QcFGjxqxYRmzQCAQCEQAcXSP2icZsziA+AI/MUGkgFGp5QAAAD10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLp5m3CkAAAAjdEVYdGljYzpkZXNjcmlwdGlvbgBHZW5lcmljIFJHQiBQcm9maWxlGqc4jgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADEAAADzCAQAAACFtTYoAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAE4SURBVHja7dxbDoIwFIRhalgdK9AV6grcXn0yAaUw9gJ18o9PvPClnJM4McQQh9a5NBcciXuMQ52P+YOCgICAgIA4jwjz79l6nSocewpD4tGk4Bo+KAgICAgIiPMIelQ/xDi/ePeoa8i5lXiKaZiqn8JjFhAQEBAQBsS4vHw2IOhRYlZLzjKlledj3N8Vp3wBPGYBAQEBAQGhhB4lpo8etRWlY+32qK1oy+ExCwgICAgICCX0KDH996hUbrMnVdSjUlkujccsICAgICAglNCjxPxbj1r/dapij0qtiscsICAgICAglNCjxPTco/S3pjJ71C9r4TELCAgICAgDgpIjxoOQe1T+2+ZijyrZNI9ZQEBAQEAYEPQoMR7Ebo8q/4OCnR5VY8M8ZgEBAQEBYUAc3aPaxGMWBxAvcElabalW+nIAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1623,7 +1621,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADYAAADECAQAAAB+FhpEAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABF0lEQVR42u3cSw6CQBAFQDHckUN4Hr2Dp9TtiIgO0+OnrbczGiqT7sVLAIfL7n3Zv9FKjI3lh9PCAA9DG1Becrz9apr99Bx6srwzg8FgMBgsAzarBbE1YJ6hLCSN3WYx5fX/ZGbHquJf3yif9MbH2bJKeWcGg8FgMFgGTG8Mya/0xuWstcnNvXE56wuWd2YwGAwGg3WKKheSvFh4b7xLsQjBvXGe2+3OOzMYDAaDwTpFbwxJXqy5N9bcrW7sjXXbm3dmMBgMBoN1it4YkrxYRW9sfUOmojdG7GnemcFgMBgM1il6Y0g+X+XaS9tLJ5vCbx6vYH0Dg8FgMBisMnpjSD6HdXnk8CtOBoPBYDAY7J+xwf83/hx2Bc92LRVy5/zmAAAAPXRFWHRpY2M6Y29weXJpZ2h0AENvcHlyaWdodCAyMDA3IEFwcGxlIEluYy4sIGFsbCByaWdodHMgcmVzZXJ2ZWQunmbcKQAAACN0RVh0aWNjOmRlc2NyaXB0aW9uAEdlbmVyaWMgUkdCIFByb2ZpbGUapziOAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADYAAADECAQAAAB+FhpEAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAEWSURBVHja7dzLDcIwEAVAglIdFUCFUAHtwdVYIWC85rPMu0UQjczu4UkBpsvmfdm+0UqMzeXFcWGA+6kPKG+fb1/aVW89h54s78xgMBgMBsuAVbUgtgbUmcqOM6KwloXnT2Z2avoc2xvlg954P6+sUt6ZwWAwGAyWAdMbQ/IrvXE5a23y5d64nPUFyzszGAwGg8EGRZULSV4svDfWORRDC+6NdW63O+/MYDAYDAYbFL0xJHmx7t7Y8rS6sze2bW/emcFgMBgMNih6Y0jyYg29sfcXMg29MWJP884MBoPBYLBB0RtD8vkq11/anjrZLvzh8Qo2NjAYDAaDwRqjN4bkc9iIrxx+x8lgMBgMBoP9Mzb5/8afw64TOSzVFMdJ6wAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1730,7 +1728,7 @@ Required packages and data for this tutorial
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAC4AAADzCAQAAABTEOxNAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQKH3BtQAAABOElEQVR42u3cUYrCMBQFUDu4Rxcx69E9uEr9sZDWtLQhpn3h3J8ihYO8BHKh1uF1+V3+fmgHxq/ph0eyAP9DGZiu4XV66/a5Ps8/FjgcDof3gc9Oojon0JghPfMKj81JUi/uzNst6H21OO5vMgu95Tsl+yjuzOFwOBzeDNdbsomL7+gtY7b3l829Zcye/RR35nA4HA5vhust2ZytWqxlWjt2V4u1zLdD3JnD4XA4vA9cb8kmUm+5TGZbtbfMN0TcmcPhcDi8D1xvyeb8vWXp4U6F3rK8CeLOHA6Hw+F94HpLNufoLSWvAG3sLWULHXfmcDgcDu8D11uyOaK3lL6ovIKPvaXWssadORwOh8Ob4apFNp3g91eVX7gc8M3hcDgcDm+O6y0H43VbSzdjgcPhcDg8l8Ff2jbH35XGOJp3JZW3AAAAPXRFWHRpY2M6Y29weXJpZ2h0AENvcHlyaWdodCAyMDA3IEFwcGxlIEluYy4sIGFsbCByaWdodHMgcmVzZXJ2ZWQunmbcKQAAACN0RVh0aWNjOmRlc2NyaXB0aW9uAEdlbmVyaWMgUkdCIFByb2ZpbGUapziOAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAC4AAADzCAQAAABTEOxNAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAE6SURBVHja7dxRisIwFAXQVlzdrEBXqCuY7Tk/FmInLW2IaV8496eI9CAvgVzQOr6G7+XyRTswfk1fPJIFuI1lYHrb9fOtn/f19/xjgcPhcHgf+OwkqnMCTRnT3lKjw6RnaNyZt1vQ5+rQ9zeZhd7yPyX7KO7M4XA4HN4M11uyiYvv6C1TtveXzb1lyp79FHfmcDgcDm+G6y3ZnK1arOWzduyuFmuZb4e4M4fD4XB4H7jekk2k3jIM92QuVXvLfEPEnTkcDofD+8D1lmzO31uWvtyp0FuWN0HcmcPhcDi8D1xvyeYcvaXkEaCNvaVsoePOHA6Hw+F94HpLNkf0ltIHlVfwqbfUWta4M4fD4XB4M1y1yKYT/Pmq8QuXIz45HA6Hw+HNcb3lYLxua+lmLHA4HA6H5zL6S9vm+B+ytzinFkdgxwAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">600 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1738,7 +1736,7 @@ Required packages and data for this tutorial
 </table>
 
 </div>
-<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.1.4 (<a href="https://www.r-project.org/">R</a> version 4.5.0)<br>2025-08-28</p>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.1.4 (<a href="https://www.r-project.org/">R</a> version 4.5.1)<br>2025-09-08</p>
 </div>
 </div>
 </div>
@@ -1907,7 +1905,7 @@ Using summarytools in Quarto or RMarkdown
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">594 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQPw2yvGAAABXklEQVR42u3dUU6DQBRAUTHssXvQ9egeukr9HQ0knHTaYrznr5A+yA0zv7N8vUS8PvsF/pqCoYKhdfzxiRva+7J19eMpU2T2tv0nvg1T1p+3Lpt/uG5ev+4++nJ4xrwp9obHn/h7ynpk0J45X8E9zX/Dm4LpN/N487/HNn1UMHTTkpzj/Dvh6ATBzr8TjlqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYGgZzyrUQ4X/i/FQ4aVGpiWJCoYKhr4B3FMen0W1XykAAAA9dEVYdGljYzpjb3B5cmlnaHQAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC6eZtwpAAAAI3RFWHRpY2M6ZGVzY3JpcHRpb24AR2VuZXJpYyBSR0IgUHJvZmlsZRqnOI4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAFfSURBVHja7d1LbsIwAEDBpsrpOAE9IZyA69GtKyUSI8yn4s2OIBzryTZLL9eviO9XT+C/KRgqGFrHDyc80I7L1tPzhFF0DJvhtv13/gyjrH+/Omz+4LL5/LL76sPNY+yPIjPxGdo7R+stA+2ZtQ4eZ/4M7wpma+YV5q/HDn1UMHTXlpzj/U/C0RsEm/H/9jxtSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDC0jHcV6qXCn2K8VHipkWlLooKhgqFfElYe2M4UWtgAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">594 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1931,7 +1929,7 @@ Using summarytools in Quarto or RMarkdown
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">48 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQPw2yvGAAABiUlEQVR42u3cXU7CQBhAUWvYo3vQ9eAeXKW+VkORS6Y/6DlvxESGqzMlfpbp84niee8FPBrBIsGi0/zBtPGTn68eoG9bL2fRfJmnu7/LEC+LX/nYd2GLbMlIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLDo5r/pP8bAYv1VhiHIfQOL88aj9bXHKhtMjR5vMnSNMywSLBIsGnSGbX20j/bL+mdX10HBtjzY1/nh3PoKdv7finVf3BoOHOyY2/zAwZZ+j/Z99+YqGQkWCRYd+Awbb8Rl5F8FG/F2xJaMBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLvt3YcMwb7o7lx50gf+sjE9ZgS0aCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkXTfBT5bi550evsk4InjRpbMhIsEiz6AtJgIgCZ2hAkAAAAPXRFWHRpY2M6Y29weXJpZ2h0AENvcHlyaWdodCAyMDA3IEFwcGxlIEluYy4sIGFsbCByaWdodHMgcmVzZXJ2ZWQunmbcKQAAACN0RVh0aWNjOmRlc2NyaXB0aW9uAEdlbmVyaWMgUkdCIFByb2ZpbGUapziOAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAGISURBVHja7dxdTsJAGEBRa1idK9AVygrcnr5WYxsOmf6g97wRExmuzpT4WabPp4jnoxfwaAqGCoYu8wd7n2fX1Sd8nXavsWC+kMvd32WIl8WvfBy7sEVtSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMHTz3/QfY2Cx/SphCHLfwOK68yhq67HKDlOjx5sMrekMQwVDBUODzrC9j/bR1tf/Nru6Dgq258G+zQ/n1ldw8P9WbPvitnDiYOfc5icOtvR7dOy7t66SqGCoYOjEZ9h4Iy4j/yrYiLcjbUlUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDD07caGc95wdy4/7gT5Wx+ZsIW2JCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGJrmo8j35pK/mn9S8FQj05ZEBUMFQ1/cRCLe4BqJMwAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">594 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1955,7 +1953,7 @@ Using summarytools in Quarto or RMarkdown
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">22 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAAmJLR0QA/4ePzL8AAAAHdElNRQfpCBwPDQPw2yvGAAABo0lEQVR42u3dUU7CQBRAUTHs0T3oenAPrlJ/MWECp1Jaxnv+NEbqDVP7hoqH75eI160P4NkUDBUMHc8/OGx9NFedhqfcjxUP/vxBj4u/y0beLn7262GP35JEBUMFQwVDBUMFQwVDBUMFQwVDBUNPN0uOXB7L7z+STxPs0lC+xkjekkQFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQ7u9VeC0078a222wx90tYVqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYGjz4XuvuxIjmwfb/o0VTEsSFQwVDBUMFQwVDBUMFQwVDBUMFQw9bJZ8tiF75IHD93MN2SMtSbSD7Z01jU4Ey98xZfJg9z8NtCRRwVDBUMFQwdAKvyVnuaa/bJXLin3eznsfLUlUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDD0h92KubdxRv60vTPHS7OmJYkKhiZ/IXdk+X8QuSnYfKf35ZvoNz7DZt6lN7+CzfdMMsOf/2ypHs6/5vOfBxt5HwXLdV1WoIKhgqEfsZwloJ6eMwsAAAA9dEVYdGljYzpjb3B5cmlnaHQAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC6eZtwpAAAAI3RFWHRpY2M6ZGVzY3JpcHRpb24AR2VuZXJpYyBSR0IgUHJvZmlsZRqnOI4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kJCAc5Juz9tLYAAAGiSURBVHja7d1RTsJAFEBRMazOFegKZQVuT38x6UQOUFrGe/40BvCGVztTq4fvl4jXrV/AsykYKhg6nn+w/+PZafgS3w/rPev5Qx+vfpSNvC1+9uthz99IooKhgqGCoYKhgqGCoYKhgqGCoYKhp1tLjiwvy++/JJ8m2NKifI0leSOJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoZ2+qsCp93eY7HTYNvfwDDSSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhzRff+92XWLZ5sMfdw3EfjSQqGCoYKhgqGCoYKhgqGCoYKhgqGHrYWvLZFtkjD1x87/Xiv2kk0Q62d9Y0OhBc/xdTJg92/8NAI4kKhgqGCoYKhlb4KTnLOf2yVU4rnuvCmWkkUcFQwVDBUMFQwVDBUMFQwVDBUMFQwVDB0A27FXNv44zctL0zx6VZ00iigqHJL+SOXP8fRC4KNt/h/fpN9AvfYTPv0ptfweZ7J5nR9/9xNqqH86/5/OfBRobB8rdOK1DBUMHQD7c6JpErmElbAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">594 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1963,7 +1961,7 @@ Using summarytools in Quarto or RMarkdown
 </table>
 
 </div>
-<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.1.4 (<a href="https://www.r-project.org/">R</a> version 4.5.0)<br>2025-08-28</p>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.1.4 (<a href="https://www.r-project.org/">R</a> version 4.5.1)<br>2025-09-08</p>
 </div>
 </div>
 </div>
@@ -1981,242 +1979,239 @@ Using summarytools in Quarto or RMarkdown
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
-    const isCodeAnnotation = (el) => {
-      for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
-          return true;
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
       }
-      return false;
-    }
-    const onCopySuccess = function(e) {
-      // button target
-      const button = e.trigger;
-      // don't keep focus
-      button.blur();
-      // flash "checked"
-      button.classList.add('code-copy-button-checked');
-      var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
-      let tooltip;
-      if (window.bootstrap) {
-        button.setAttribute("data-bs-toggle", "tooltip");
-        button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
-            customClass: "code-copy-button-tooltip",
-            offset: [0, -8]});
-        tooltip.show();    
-      }
-      setTimeout(function() {
-        if (tooltip) {
-          tooltip.hide();
-          button.removeAttribute("data-bs-title");
-          button.removeAttribute("data-bs-toggle");
-          button.removeAttribute("data-bs-placement");
-        }
-        button.setAttribute("title", currentTitle);
-        button.classList.remove('code-copy-button-checked');
-      }, 1000);
-      // clear code selection
-      e.clearSelection();
-    }
-    const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
-        }
-        return codeEl.innerText;
-    }
-    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-      text: getTextToCopy
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
-    clipboard.on('success', onCopySuccess);
-    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-        text: getTextToCopy,
-        container: window.document.getElementById('quarto-embedded-source-code-modal')
-      });
-      clipboardModal.on('success', onCopySuccess);
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
-      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
-      var isInternal = (href) => {
-          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-      }
-      // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-      for (var i=0; i<links.length; i++) {
-        const link = links[i];
-        if (!isInternal(link.href)) {
-          // undo the damage that might have been done by quarto-nav.js in the case of
-          // links that we want to consider external
-          if (link.dataset.originalHref !== undefined) {
-            link.href = link.dataset.originalHref;
-          }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
         }
       }
-    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-      const config = {
-        allowHTML: true,
-        maxWidth: 500,
-        delay: 100,
-        arrow: false,
-        appendTo: function(el) {
-            return el.parentElement;
-        },
-        interactive: true,
-        interactiveBorder: 10,
-        theme: 'quarto',
-        placement: 'bottom-start',
-      };
-      if (contentFn) {
-        config.content = contentFn;
-      }
-      if (onTriggerFn) {
-        config.onTrigger = onTriggerFn;
-      }
-      if (onUntriggerFn) {
-        config.onUntrigger = onUntriggerFn;
-      }
-      window.tippy(el, config); 
     }
-    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-    for (var i=0; i<noterefs.length; i++) {
-      const ref = noterefs[i];
-      tippyHover(ref, function() {
-        // use id or data attribute instead here
-        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-        try { href = new URL(href).hash; } catch {}
-        const id = href.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note) {
-          return note.innerHTML;
-        } else {
-          return "";
-        }
-      });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
     }
-    const xrefs = window.document.querySelectorAll('a.quarto-xref');
-    const processXRef = (id, note) => {
-      // Strip column container classes
-      const stripColumnClz = (el) => {
-        el.classList.remove("page-full", "page-columns");
-        if (el.children) {
-          for (const child of el.children) {
-            stripColumnClz(child);
-          }
-        }
-      }
-      stripColumnClz(note)
-      if (id === null || id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children && note.children.length > 2) {
-          container.appendChild(note.children[0].cloneNode(true));
-          for (let i = 1; i < note.children.length; i++) {
-            const child = note.children[i];
-            if (child.tagName === "P" && child.innerText === "") {
-              continue;
-            } else {
-              container.appendChild(child.cloneNode(true));
-              break;
-            }
-          }
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(container);
-          }
-          return container.innerHTML
-        } else {
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(note);
-          }
-          return note.innerHTML;
-        }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
       } else {
-        // Remove any anchor links if they are present
-        const anchorLink = note.querySelector('a.anchorjs-link');
-        if (anchorLink) {
-          anchorLink.remove();
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
         }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        if (note.classList.contains("callout")) {
-          return note.outerHTML;
-        } else {
-          return note.innerHTML;
-        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
       }
     }
-    for (var i=0; i<xrefs.length; i++) {
-      const xref = xrefs[i];
-      tippyHover(xref, undefined, function(instance) {
-        instance.disable();
-        let url = xref.getAttribute('href');
-        let hash = undefined; 
-        if (url.startsWith('#')) {
-          hash = url;
-        } else {
-          try { hash = new URL(url).hash; } catch {}
-        }
-        if (hash) {
-          const id = hash.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note !== null) {
-            try {
-              const html = processXRef(id, note.cloneNode(true));
-              instance.setContent(html);
-            } finally {
-              instance.enable();
-              instance.show();
-            }
-          } else {
-            // See if we can fetch this
-            fetch(url.split('#')[0])
-            .then(res => res.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const htmlDoc = parser.parseFromString(html, "text/html");
-              const note = htmlDoc.getElementById(id);
-              if (note !== null) {
-                const html = processXRef(id, note);
-                instance.setContent(html);
-              } 
-            }).finally(() => {
-              instance.enable();
-              instance.show();
-            });
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
           }
         } else {
-          // See if we can fetch a full url (with no hash to target)
-          // This is a special case and we should probably do some content thinning / targeting
-          fetch(url)
+          // See if we can fetch this
+          fetch(url.split('#')[0])
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.querySelector('main.content');
+            const note = htmlDoc.getElementById(id);
             if (note !== null) {
-              // This should only happen for chapter cross references
-              // (since there is no id in the URL)
-              // remove the first header
-              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-                note.children[0].remove();
-              }
-              const html = processXRef(null, note);
+              const html = processXRef(id, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -2224,161 +2219,185 @@ Using summarytools in Quarto or RMarkdown
             instance.show();
           });
         }
-      }, function(instance) {
-      });
-    }
-        let selectedAnnoteEl;
-        const selectorForAnnotation = ( cell, annotation) => {
-          let cellAttr = 'data-code-cell="' + cell + '"';
-          let lineAttr = 'data-code-annotation="' +  annotation + '"';
-          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-          return selector;
-        }
-        const selectCodeLines = (annoteEl) => {
-          const doc = window.document;
-          const targetCell = annoteEl.getAttribute("data-target-cell");
-          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-          const lineIds = lines.map((line) => {
-            return targetCell + "-" + line;
-          })
-          let top = null;
-          let height = null;
-          let parent = null;
-          if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
-            }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
-            }
-            selectedAnnoteEl = annoteEl;
-          }
-        };
-        const unselectCodeLines = () => {
-          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-          elementsIds.forEach((elId) => {
-            const div = window.document.getElementById(elId);
-            if (div) {
-              div.remove();
-            }
-          });
-          selectedAnnoteEl = undefined;
-        };
-          // Handle positioning of the toggle
-      window.addEventListener(
-        "resize",
-        throttle(() => {
-          elRect = undefined;
-          if (selectedAnnoteEl) {
-            selectCodeLines(selectedAnnoteEl);
-          }
-        }, 10)
-      );
-      function throttle(fn, ms) {
-      let throttle = false;
-      let timer;
-        return (...args) => {
-          if(!throttle) { // first call gets through
-              fn.apply(this, args);
-              throttle = true;
-          } else { // all the others get throttled
-              if(timer) clearTimeout(timer); // cancel #2
-              timer = setTimeout(() => {
-                fn.apply(this, args);
-                timer = throttle = false;
-              }, ms);
-          }
-        };
-      }
-        // Attach click handler to the DT
-        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-        for (const annoteDlNode of annoteDls) {
-          annoteDlNode.addEventListener('click', (event) => {
-            const clickedEl = event.target;
-            if (clickedEl !== selectedAnnoteEl) {
-              unselectCodeLines();
-              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-              if (activeEl) {
-                activeEl.classList.remove('code-annotation-active');
-              }
-              selectCodeLines(clickedEl);
-              clickedEl.classList.add('code-annotation-active');
-            } else {
-              // Unselect the line
-              unselectCodeLines();
-              clickedEl.classList.remove('code-annotation-active');
-            }
-          });
-        }
-    const findCites = (el) => {
-      const parentEl = el.parentElement;
-      if (parentEl) {
-        const cites = parentEl.dataset.cites;
-        if (cites) {
-          return {
-            el,
-            cites: cites.split(' ')
-          };
-        } else {
-          return findCites(el.parentElement)
-        }
       } else {
-        return undefined;
-      }
-    };
-    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-    for (var i=0; i<bibliorefs.length; i++) {
-      const ref = bibliorefs[i];
-      const citeInfo = findCites(ref);
-      if (citeInfo) {
-        tippyHover(citeInfo.el, function() {
-          var popup = window.document.createElement('div');
-          citeInfo.cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
             }
-            popup.appendChild(citeDiv);
-          });
-          return popup.innerHTML;
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
         });
       }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
     }
-  });
-  </script>
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../analysis/techniques/index.html" class="pagination-link" aria-label="Techniques">

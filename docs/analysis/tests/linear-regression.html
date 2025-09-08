@@ -380,7 +380,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../analysis/tests/t-test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">t-test</span></a>
+ <span class="menu-text">The t-test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -902,7 +902,7 @@ Standardized coefficients
 
 </div>
 </div>
-<p>If we look at the first model, we see a significant effect of <code>news_consumption</code> on <code>trust_t1</code> (<span class="math inline">\(b = 0.07\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). However, when we include the <code>age</code> variable in the model, we see that the effect of <code>news_consumption</code> becomes much smaller (<span class="math inline">\(b = 0.03\)</span>, <span class="math inline">\(p &lt; 0.05\)</span>). This suggests that the effect of <code>news_consumption</code> on <code>trust_t1</code> we saw before is for a large part <em>explained</em> by <code>age</code>.</p>
+<p>If we look at the first model (on the left), we see a significant effect of <code>news_consumption</code> on <code>trust_t1</code> (<span class="math inline">\(b = 0.07\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). However, when we include the <code>age</code> variable in the model, we see that the effect of <code>news_consumption</code> becomes much smaller (<span class="math inline">\(b = 0.03\)</span>, <span class="math inline">\(p &lt; 0.05\)</span>). This suggests that the effect of <code>news_consumption</code> on <code>trust_t1</code> we saw in the first model is for a large part <em>explained</em> by <code>age</code>.</p>
 <p>What we’re witnessing here is a form of <strong>confounding</strong>. There is a relation between the <code>news_consumption</code> and <code>trust_t1</code> variables, but a part of this relation is <strong>spurious</strong>. <code>age</code> has an effect on both <code>news_consumption</code> and <code>trust_t1</code>: older people consume more news, and have more trust in journalists. By controlling for <code>age</code>, we can see the real effect of <code>news_consumption</code> on <code>trust_t1</code> (though we can never be sure that we’ve controlled for all possible confounders). For a more detailed explanation of confounding, see the <a href="../../analysis/techniques/controlling.html">confounding tutorial</a>.</p>
 <section id="standardized-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="standardized-coefficients">Standardized coefficients</h4>

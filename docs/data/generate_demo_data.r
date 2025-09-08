@@ -38,18 +38,14 @@ news_consumption = round(news_consumption)
 # plot(news_consumption ~ as.factor(np_subscription))
 
 
-left_odds = exp(-0.10*age + 5)
-right_odds = exp(0.02*age)
-center_odds = (left_odds + right_odds) / 2
-political_orientation = sapply(1:n, function(i) sample(c("left", "center", "right"), 1, prob = c(left_odds[i], center_odds[i], right_odds[i])))
+political_orientation = sample(c("left", "center", "right"), n, replace = TRUE, prob = c(0.3, 0.4, 0.34))
 political_interest = rnorm(n, mean = 5, sd = 2.5) |> rescale(1,7)
-
 
 # simulate trust_t1.
 is_left = political_orientation == "left"
 is_right = political_orientation == "right"
 
-trust_t1 <- rnorm(n, mean = 3 + 0.02 * age + news_consumption*0.07 + political_interest*0.1 +  is_left*-0.2 + is_left*political_interest*0.2 + is_right*0.35 + is_right*political_interest*-0.3, sd = 1)
+trust_t1 <- rnorm(n, mean = 3 + 0.03*age  + news_consumption*0.05 +  political_interest*0.1 +  is_left*-0.2 + is_left*political_interest*0.2 + is_right*0.35 + is_right*political_interest*-0.3, sd = 1)
 trust_t1[trust_t1 < 1] <- 1
 trust_t1[trust_t1 > 10] <- 10
 # plot(age, trust_t1)
@@ -121,6 +117,7 @@ t2_items_alligned$trust_t2_item3 = 11 - t2_items_alligned$trust_t2_item3
 ## create scales using only items 1,3,4,5.
 scale_items = c('trust_t1_item1', 'trust_t1_item3', 'trust_t1_item4', 'trust_t1_item5')
 new_trust_t1 = rowMeans(t1_items_alligned[, scale_items])
+scale_items = c('trust_t2_item1', 'trust_t2_item3', 'trust_t2_item4', 'trust_t2_item5')
 new_trust_t2 = rowMeans(t2_items_alligned[, scale_items])
 
 ## check if the correlations are still there
@@ -197,4 +194,4 @@ i = sample(1:n, 4)
 ## we need the specific birthyears to be deterministic for the tutorials
 ds$age[i] = c(1987, 1970, 1967, 17)
 
-write_csv(ds, "data/fake_demo_data.csv")
+write_csv(ds, "data/practice_data.csv")

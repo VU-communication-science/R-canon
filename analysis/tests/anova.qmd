@@ -1,6 +1,6 @@
 ---
 title: ANOVA
-summary: Analysis of variance
+subtitle: Analysis of variance
 format:
   html:
     df-print: paged
