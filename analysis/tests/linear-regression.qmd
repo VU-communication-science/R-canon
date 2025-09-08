@@ -328,7 +328,7 @@ ci_age = confint(m)[2,] |> round(2)
 This is not very meaningful in this case, because we don't have any people with an age of zero in our data.
 * The coefficient for `age` tells us how much `trust_t1` changes for every *unit increase* in `age`.
   * Our `age` variable is in years, so the coefficient `r b_age` tells us that for every year of age, trust in journalists increases on average by `r b_age` points.
-  * The p-value of `.210` tells us that this effect is not statistically.
+  * The p-value < 0.001 tells us that this effect is statistically significant.
   * The confidence interval tells us that we are 95% confident that the true effect of `age` on `trust_t1` is between `r ci_age[1]` and `r ci_age[2]`.
 
 We also get the $R^2$ value, which tells us how well the model fits the data.
