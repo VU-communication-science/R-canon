@@ -411,13 +411,9 @@ r2_2 = summary(m2)$r.squared |> round(3)
 ```
 
 
-If we look at the first model, we see a significant effect of `news_consumption` on `trust_t1` ($b = `r b_nc_1`$, $p < 0.05$).
-The $R^2$ value of `r r2_1` suggests that `news_consumption` explains `r r2_1*100`% of the variance in `trust_t1`.
-
-However, when we include the `age` variable in the model, we see that the effect of `news_consumption` becomes much weaker ($b = `r b_nc_2`$, $p = `r p_nc_2`$).
-Also, notice that the explained variance ($R^2 = `r r2_2`$) isn't much higher than in the model with just the `age` variable that we saw earlier.
-This suggests that the effect of `news_consumption` on `trust_t1` is partially explained by `age`.
-
+If we look at the first model (on the left), we see a significant effect of `news_consumption` on `trust_t1` ($b = `r b_nc_1`$, $p < 0.001$).
+However, when we include the `age` variable in the model, we see that the effect of `news_consumption` becomes much smaller ($b = `r b_nc_2`$, $p < 0.05$).
+This suggests that the effect of `news_consumption` on `trust_t1` we saw in the first model is for a large part *explained* by `age`.
 
 What we're witnessing here is a form of **confounding**.
 There is a relation between the `news_consumption` and `trust_t1` variables, but a part of this relation is **spurious**.

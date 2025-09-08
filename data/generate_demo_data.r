@@ -45,7 +45,7 @@ political_interest = rnorm(n, mean = 5, sd = 2.5) |> rescale(1,7)
 is_left = political_orientation == "left"
 is_right = political_orientation == "right"
 
-trust_t1 <- rnorm(n, mean = 3 + 0.02*age + news_consumption*0.07 + political_interest*0.1 +  is_left*-0.2 + is_left*political_interest*0.2 + is_right*0.35 + is_right*political_interest*-0.3, sd = 1)
+trust_t1 <- rnorm(n, mean = 3 + 0.03*age  + news_consumption*0.05 +  political_interest*0.1 +  is_left*-0.2 + is_left*political_interest*0.2 + is_right*0.35 + is_right*political_interest*-0.3, sd = 1)
 trust_t1[trust_t1 < 1] <- 1
 trust_t1[trust_t1 > 10] <- 10
 # plot(age, trust_t1)

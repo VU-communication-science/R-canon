@@ -737,13 +737,13 @@ Spoiler
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.32</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.05&nbsp;–&nbsp;3.60</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.20</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.93&nbsp;–&nbsp;3.46</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">age</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.02</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.03</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.02&nbsp;–&nbsp;0.03</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
@@ -753,7 +753,7 @@ Spoiler
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.071 / 0.070</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.114 / 0.112</td>
 </tr>
 
 </tbody></table>
@@ -804,12 +804,12 @@ Confidence intervalls without tab_model
 <li>The coefficient for the <code>intercept</code> tells us the predicted value of <code>trust_t1</code> when <code>age</code> is zero. This is not very meaningful in this case, because we don’t have any people with an age of zero in our data.</li>
 <li>The coefficient for <code>age</code> tells us how much <code>trust_t1</code> changes for every <em>unit increase</em> in <code>age</code>.
 <ul>
-<li>Our <code>age</code> variable is in years, so the coefficient 0.02 tells us that for every year of age, trust in journalists increases on average by 0.02 points.</li>
+<li>Our <code>age</code> variable is in years, so the coefficient 0.03 tells us that for every year of age, trust in journalists increases on average by 0.03 points.</li>
 <li>The p-value &lt; 0.001 tells us that this effect is statistically significant.</li>
 <li>The confidence interval tells us that we are 95% confident that the true effect of <code>age</code> on <code>trust_t1</code> is between 0.02 and 0.03.</li>
 </ul></li>
 </ul>
-<p>We also get the <span class="math inline">\(R^2\)</span> value, which tells us how well the model fits the data. Here we see that the <span class="math inline">\(R^2\)</span> is 0.071, which means that 7.1% of the variance in <code>trust_t1</code> can be explained by the variance in <code>age</code>.</p>
+<p>We also get the <span class="math inline">\(R^2\)</span> value, which tells us how well the model fits the data. Here we see that the <span class="math inline">\(R^2\)</span> is 0.114, which means that 11.4% of the variance in <code>trust_t1</code> can be explained by the variance in <code>age</code>.</p>
 <p>In conclusion, this model shows that (in our simulated data) there is no significant effect of <code>age</code> on <code>trust_t1</code>.</p>
 </section>
 <section id="multiple-regression" class="level2">
@@ -862,21 +862,21 @@ Standardized coefficients
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.19</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.00</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.35</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.00</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.94</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.96</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.00</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">news consumption</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.07</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.25</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.23</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.04</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.15</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.03</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.09</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>0.040</strong></td>
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">age</td>
@@ -884,7 +884,7 @@ Standardized coefficients
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.02</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.19</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.29</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
@@ -894,20 +894,19 @@ Standardized coefficients
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.060 / 0.059</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.089 / 0.086</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.055 / 0.053</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.120 / 0.117</td>
 </tr>
 
 </tbody></table>
 
 </div>
 </div>
-<p>If we look at the first model, we see a significant effect of <code>news_consumption</code> on <code>trust_t1</code> (<span class="math inline">\(b = 0.07\)</span>, <span class="math inline">\(p &lt; 0.05\)</span>). The <span class="math inline">\(R^2\)</span> value of 0.06 suggests that <code>news_consumption</code> explains 6% of the variance in <code>trust_t1</code>.</p>
-<p>However, when we include the <code>age</code> variable in the model, we see that the effect of <code>news_consumption</code> becomes much weaker (<span class="math inline">\(b = 0.04\)</span>, <span class="math inline">\(p = 0.001\)</span>). Also, notice that the explained variance (<span class="math inline">\(R^2 = 0.089\)</span>) isn’t much higher than in the model with just the <code>age</code> variable that we saw earlier. This suggests that the effect of <code>news_consumption</code> on <code>trust_t1</code> is partially explained by <code>age</code>.</p>
+<p>If we look at the first model, we see a significant effect of <code>news_consumption</code> on <code>trust_t1</code> (<span class="math inline">\(b = 0.07\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). However, when we include the <code>age</code> variable in the model, we see that the effect of <code>news_consumption</code> becomes much smaller (<span class="math inline">\(b = 0.03\)</span>, <span class="math inline">\(p &lt; 0.05\)</span>). This suggests that the effect of <code>news_consumption</code> on <code>trust_t1</code> we saw before is for a large part <em>explained</em> by <code>age</code>.</p>
 <p>What we’re witnessing here is a form of <strong>confounding</strong>. There is a relation between the <code>news_consumption</code> and <code>trust_t1</code> variables, but a part of this relation is <strong>spurious</strong>. <code>age</code> has an effect on both <code>news_consumption</code> and <code>trust_t1</code>: older people consume more news, and have more trust in journalists. By controlling for <code>age</code>, we can see the real effect of <code>news_consumption</code> on <code>trust_t1</code> (though we can never be sure that we’ve controlled for all possible confounders). For a more detailed explanation of confounding, see the <a href="../../analysis/techniques/controlling.html">confounding tutorial</a>.</p>
 <section id="standardized-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="standardized-coefficients">Standardized coefficients</h4>
-<p>In the second model we now have two significant effects: <code>age</code> and <code>news_consumption</code>. So how can we tell which effect is stronger? If we look at the regular coefficients, we see that <code>age</code> (0.02) is quite similar to <code>news_consumption</code> (0.04). However, this is not a good way to compare the effects, because the variables are on different scales. A 1 unit increase in <code>age</code> is not the same as a 1 unit increase in <code>news_consumption</code>. By standardizing the variables, we can compare the effects in terms of standard deviations instead. For every standard deviation increase in <code>age</code>, <code>trust_t1</code> increases by 0.19 standard deviations. For every standard deviation increase in <code>news_consumption</code>, <code>trust_t1</code> increases by 0.15 standard deviations. So this suggests that the effect of <code>age</code> is stronger.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>In the second model we now have two significant effects: <code>age</code> and <code>news_consumption</code>. So how can we tell which effect is stronger? If we look at the regular coefficients, we see that <code>age</code> (0.02) is quite similar to <code>news_consumption</code> (0.03). However, this is not a good way to compare the effects, because the variables are on different scales. A 1 unit increase in <code>age</code> is not the same as a 1 unit increase in <code>news_consumption</code>. By standardizing the variables, we can compare the effects in terms of standard deviations instead. For every standard deviation increase in <code>age</code>, <code>trust_t1</code> increases by 0.29 standard deviations. For every standard deviation increase in <code>news_consumption</code>, <code>trust_t1</code> increases by 0.09 standard deviations. So this suggests that the effect of <code>age</code> is stronger.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 </section>
 <section id="adjusted-r2" class="level4">
 <h4 class="anchored" data-anchor-id="adjusted-r2">Adjusted <span class="math inline">\(R^2\)</span></h4>
@@ -942,8 +941,8 @@ Standardized coefficients
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.98</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.89&nbsp;–&nbsp;4.08</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.10</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.00&nbsp;–&nbsp;4.19</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
@@ -958,7 +957,7 @@ Standardized coefficients
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.123 / 0.121</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.120 / 0.119</td>
 </tr>
 
 </tbody></table>
@@ -994,8 +993,8 @@ So in this case, the intercept (`3.83`) is the predicted trust in journalists fo
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.31</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.19&nbsp;–&nbsp;4.43</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.42</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.30&nbsp;–&nbsp;4.54</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
@@ -1006,8 +1005,8 @@ So in this case, the intercept (`3.83`) is the predicted trust in journalists fo
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">political orientation<br>[right]</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.72</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.90&nbsp;–&nbsp;-0.54</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.71</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.89&nbsp;–&nbsp;-0.53</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
@@ -1016,7 +1015,7 @@ So in this case, the intercept (`3.83`) is the predicted trust in journalists fo
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.203 / 0.200</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.198 / 0.196</td>
 </tr>
 
 </tbody></table>
@@ -1051,7 +1050,7 @@ So in this case, the intercept (`3.83`) is the predicted trust in journalists fo
 </tbody>
 </table>
 <p>The <code>center</code> category is now the <strong>reference category</strong>. Recall that the intercept is the predicted value of the dependent variable when the independent variables are zero. In this model, the intercept therefore represents the predicted value of <code>trust_t1</code> for people in the <code>center</code> category.</p>
-<p>The effects of the <code>left</code> and <code>right</code> categories only tell us how much the trust in journalists changes for people in these categories <strong>compared to people in the reference category</strong>. So the <code>political_orientation [left]</code> coefficient tells us that <code>trust</code> is for people in the <code>left</code> category is 0.5 points higher than for people in the <code>center</code> category. The <code>political_orientation [right]</code> coefficient tells us that <code>trust</code> is for people in the <code>right</code> category is -0.72 points lower than for people in the <code>center</code> category. Based on this model, we cannot directly compare the <code>left</code> and <code>right</code> categories, because the <code>center</code> category is the reference category.</p>
+<p>The effects of the <code>left</code> and <code>right</code> categories only tell us how much the trust in journalists changes for people in these categories <strong>compared to people in the reference category</strong>. So the <code>political_orientation [left]</code> coefficient tells us that <code>trust</code> is for people in the <code>left</code> category is 0.5 points higher than for people in the <code>center</code> category. The <code>political_orientation [right]</code> coefficient tells us that <code>trust</code> is for people in the <code>right</code> category is -0.71 points lower than for people in the <code>center</code> category. Based on this model, we cannot directly compare the <code>left</code> and <code>right</code> categories, because the <code>center</code> category is the reference category.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Determining what reference category to use">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1084,8 +1083,8 @@ Determining what reference category to use
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.81</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.67&nbsp;–&nbsp;4.96</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.92</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.78&nbsp;–&nbsp;5.07</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
@@ -1096,8 +1095,8 @@ Determining what reference category to use
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">political orientation<br>[right]</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-1.22</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-1.42&nbsp;–&nbsp;-1.03</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-1.21</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-1.41&nbsp;–&nbsp;-1.02</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
@@ -1106,7 +1105,7 @@ Determining what reference category to use
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.203 / 0.200</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.198 / 0.196</td>
 </tr>
 
 </tbody></table>
@@ -1150,61 +1149,61 @@ Determining what reference category to use
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.93</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.01</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.09</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.66</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.71</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.09</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.100</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.108</td>
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">pol ori [left]</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.50</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.47</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.10</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.14</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.47</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.780</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.692</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8"><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">pol ori [right]</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.73</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.69</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.68</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.52</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.67</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.144</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.55</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.66</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.122</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8"><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">pol int</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.10</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.10</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.008</strong></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.17</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.17</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>0.004</strong></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8"><strong>0.004</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.11</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.11</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.004</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.19</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.18</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>0.002</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8"><strong>0.002</strong></td>
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">pol ori [left] × pol int</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.11</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.10</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.243</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.243</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.09</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.09</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.299</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.299</td>
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">pol ori [right] × pol int</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.33</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.32</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.31</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8"><strong>&lt;0.001</strong></td>
 </tr>
@@ -1215,15 +1214,15 @@ Determining what reference category to use
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.212 / 0.208</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">0.241 / 0.235</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.209 / 0.205</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">0.238 / 0.232</td>
 </tr>
 
 </tbody></table>
 
 </div>
 </div>
-<p>In the first model we see roughly the same effects as before for <code>political_orientation</code>. We also see that <code>political_interest</code> has a significant effect on <code>trust_t1</code> (<span class="math inline">\(b = 0.1\)</span>, <span class="math inline">\(p &lt; 0.01\)</span>).</p>
+<p>In the first model we see roughly the same effects as before for <code>political_orientation</code>. We also see that <code>political_interest</code> has a significant effect on <code>trust_t1</code> (<span class="math inline">\(b = 0.11\)</span>, <span class="math inline">\(p &lt; 0.01\)</span>).</p>
 <p>In the second model we added the interaction terms. One important thing to note is that this changes the interpretation of the main effects. When you add an interaction term, the main effects of the variables are now the effect of the variable <strong>when the other variable is zero</strong>. This doesn’t always make sense. For instance, the effect of <code>pol ori [left]</code> now tells us the effect of <code>political_orientation</code> when <code>political_interest</code> is zero, but this is impossible because <code>political_interest</code> is measured on a scale from 1 to 7. Often, we therefore don’t report the main effects when we have an interaction term. We’ll also skip this for now (but see the optional block if you’re interested)</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Interpreting main effects with interaction terms">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
