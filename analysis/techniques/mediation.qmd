@@ -178,28 +178,37 @@ b <- summary(m2)$coef[3,1] |> round(3)
 $$a \times b = `r a` \times `r b` = `r round(a*b,2)`$$
 
 
-::: {.callout-warning title="Testing the significance of the indirect effect using PROCESS" collapse="true"}
 
-The indirect effect consists of two parts: **a** and **b**.
-We have shown that we can calculate the indirect effect by multiplying these two parts.
-But how can we calculate the confidence interval for this indirect effect, and test if it is significant?
+::: {.callout-warning title="Testing the significance of the indirect effect with the Sobel test" collapse="true"}
 
-Calculating the required confidence interval for the indirect effect properly is not straightforward, and requires more advanced techniques like *bootstrapping* or *Monte Carlo simulations*, that we won't cover here.
-Instead, we will show you how to use **PROCESS** in R, using the `bruceR` package.
-This will basically perform the same steps we did above, fitting three regression models to calculate the total, direct, and indirect effects.
-But in addition, it will also provide a confidence intervals based on bootstrapping.
+A  method to test whether the indirect effect is statistically significant is the **Sobel test**. It is a rather outdated method, but we do include it here for educational purposes. Calculating the correct confidence interval for an indirect effect is not as straightforward and is better handled with more advanced methods such as *bootstrapping* or *Monte Carlo simulations*. There are packages in R that can do this (such as `bruceR` or `lavaan`), but we will not cover them at this point.
 
-To use `PROCESS`, you simply provide the data frame, and specify the column names for the dependent variable (`y = "Y"`), the independent variable (`x = "X"`), and the mediator (`meds = "M"`).
-The output might seem overwhelming at first, but if you look through it you should recognize the same components as we discussed before.
-The **Model Summary** shows the three regression models.
-The **Part 2. Mediation/Moderation Effect Estimate** shows the total (**c**), direct (**c'**) and indirect (**a * b**) effects.
-If you compare the effect sizes with the ones we calculated manually, you will see that they are the same.
-But the confidence intervalls are different, and we also get a confidence interval for the indirect effect.
+The Sobel test computes a *z*-statistic based on the regression coefficients (**a** and **b**) and their standard errors (**s<sub>a</sub>** and **s<sub>b</sub>**):
 
-```{r, message=F}
-library(bruceR)
+$$
+z = \frac{a \times b}{\sqrt{b^2 \times s_a^2 \;+\; a^2 \times s_b^2}}
+$$
 
-PROCESS(d, y="Y", x="X", meds="M")
+We can implement this in R using the results from our earlier regression models:
+
+```{r}
+# Extract coefficients and standard errors
+a  <- summary(m1)$coef[2,1]   # effect of X on M
+sa <- summary(m1)$coef[2,2]   # SE of a
+b  <- summary(m2)$coef[3,1]   # effect of M on Y
+sb <- summary(m2)$coef[3,2]   # SE of b
+
+# Sobel test
+
+## Formula for z-score
+sobel_z <- (a * b) / sqrt((b^2 * sa^2) + (a^2 * sb^2)) 
+
+## Corresponding p-value
+p_value <- 2 * (1 - pnorm(abs(sobel_z)))
+
+## Printing the results
+cat("Sobel z-score:", round(sobel_z, 3), "\n",
+    "p-value:", signif(p_value, 3))
 ```
 
 :::
