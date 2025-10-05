@@ -9,14 +9,6 @@
     ]
   },
   {
-    "listing": "/analysis/concepts/index.html",
-    "items": [
-      "/analysis/concepts/hypotheses.html",
-      "/analysis/concepts/covariance-and-correlation.html",
-      "/analysis/concepts/causality.html"
-    ]
-  },
-  {
     "listing": "/analysis/techniques/index.html",
     "items": [
       "/analysis/techniques/data-cleaning.html",
@@ -25,6 +17,14 @@
       "/analysis/techniques/controlling.html",
       "/analysis/techniques/mediation.html",
       "/analysis/techniques/standardization.html"
+    ]
+  },
+  {
+    "listing": "/analysis/concepts/index.html",
+    "items": [
+      "/analysis/concepts/hypotheses.html",
+      "/analysis/concepts/covariance-and-correlation.html",
+      "/analysis/concepts/causality.html"
     ]
   }
 ]
